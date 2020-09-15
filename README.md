@@ -1,0 +1,1 @@
+# Majora-s-Mask-Randomizer
