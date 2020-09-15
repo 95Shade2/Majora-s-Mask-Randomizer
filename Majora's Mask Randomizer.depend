@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1595533798 source:e:\shade\gaming\n64\shadymizer - c++\majora's mask randomizer\main.cpp
+	<iostream>
+	<map>
+	<fstream>
+	<vector>
+	<algorithm>
+	<stdexcept>
+	<random>
+	<ctime>
+	<cstdlib>
+
+1575146788 source:e:\shade\gaming\n64\shadymizer - c++\majora's mask randomizer\kafei.cpp
+	<iostream>
+

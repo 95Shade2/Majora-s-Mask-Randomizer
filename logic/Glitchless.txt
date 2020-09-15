@@ -1,0 +1,352 @@
+//	Item Name {
+//		each line is an array of items needed to get the item
+//		item 1 item 2 etc
+//	}
+
+Bombs {
+	Bomb Bag
+	Big Bomb Bag
+	Biggest Bomb Bag
+}
+
+Quiver {
+	Bow
+	Large Quiver
+	Largest Quiver
+}
+
+Nuts {
+	Deku Nuts
+	Deku Nuts (10)
+}
+
+Adult Wallet {
+	
+}
+
+All-Night Mask {
+	Adult Wallet
+	Giant Wallet
+}
+
+Big Bomb Bag {
+	
+}
+
+Big Poe {
+	Gibdo Mask, Magic Beans, Bombs, Nuts, Hookshot, Garo Mask, Goron Mask
+	Bombs, Captain's Hat, Goron Mask
+	Captain's Hat, Goron Mask, Powder Keg, Quiver
+	Captain's Hat, Goron Mask, Powder Keg, Hookshot
+}
+
+Biggest Bomb Bag {
+	Goron Mask
+}
+
+Blast Mask {
+	
+}
+
+Blue Potion {
+	
+}
+
+Bomb Bag {
+	
+}
+
+Bomber's Notebook {
+	Zora Mask
+	Quiver
+	Deku Mask
+	Hookshot
+}
+
+Bow {
+	Deku Mask, Hookshot
+	Deku Mask, Deku Stick
+	Deku Mask, Quiver
+}
+
+Bremen Mask {
+
+}
+
+Bugs {
+
+}
+
+Bunny Hood {
+	Bremen Mask
+}
+
+Captain's Hat {
+	Goron Mask, Bombs, Deku Mask
+}
+
+Chateau Romani {
+	Romani's Mask
+}
+
+Circus Leader's Mask {
+	Goron Mask, Zora Mask, Deku Mask, Romani's Mask
+}
+
+Couple's Mask {
+	Pendant of Memories, Letter to Kafei, Goron Mask, Bombs
+	Pendant of Memories, Letter to Kafei, Goron Mask, Powder Keg
+}
+
+Deku Mask {
+	
+}
+
+Deku Nuts {
+	
+}
+
+Deku Nuts (10) {
+	
+}
+
+Deku Princess {
+	Deku Mask, Quiver
+}
+
+Deku Stick {
+	
+}
+
+Don Gero's Mask {
+	Goron Mask, Quiver, Fire Arrow
+	Goron Mask, Hot Spring Water, Deku Stick, Quiver
+}
+
+Fairy {
+	
+}
+
+Fierce Deity Mask {
+	Deku Mask, Zora Mask, Goron Mask, Quiver, Fire Arrow, Ice Arrow, Light Arrow, Zora Egg, Powder Keg, Garo Mask, Hookshot, Mirror Shield, Bombs
+}
+
+Fire Arrow {
+	Goron Mask, Hot Spring Water, Bombs
+	Goron Mask, Quiver, Fire Arrow, Bombs
+}
+
+Fish {
+	
+}
+
+Express Letter to Mama {
+	Letter to Kafei
+}
+
+Garo Mask {
+	Goron Mask, Powder Keg
+}
+
+Giant Wallet {
+	Goron Mask, Bombs, Deku Stick, Hookshot
+}
+
+Giant's Mask {
+//	Goron Mask, Bombs, Garo Mask, Hookshot, Mirror Shield, Quiver, Fire Arrow, Powder Keg, 
+}
+
+Gibdo Mask {
+	Bombs
+}
+
+Gilded Sword {
+	Gilded Sword
+	Gold Dust
+}
+
+Gold Dust {
+	Goron Mask, Quiver, Fire Arrow, Bombs
+}
+
+Goron Mask {
+	Lens of Truth, Bombs
+}
+
+Great Fairy's Mask {
+	Deku Mask
+}
+
+Great Fairy's Sword {
+	Quiver, Light Arrow, Bombs, Fire Arrow
+}
+
+Green Potion {
+	
+}
+
+Hero's Shield {
+
+}
+
+Hookshot {
+	Zora Mask, Bombs, Quiver
+	Zora Mask, Bombs, Deku Mask
+	Zora Mask, Hookshot, Quiver
+	Zora Mask, Hookshot, Deku Mask
+	Zora Mask, Goron Mask, Quiver
+	Zora Mask, Goron Mask, Deku Mask
+}
+
+Hot Spring Water {
+	Bombs
+}
+
+Ice Arrow {
+	Zora Mask, Zora Egg
+}
+
+Kafei's Mask {
+	
+}
+
+Kamaro's Mask {
+	
+}
+
+Keaton Mask {
+
+}
+
+Kokiri Sword {
+	Kokiri Sword
+}
+
+Land Title Deed {
+	Moon's Tear
+}
+
+Large Quiver {
+	Quiver
+}
+
+Largest Quiver {
+	Quiver
+}
+
+Lens of Truth {
+	Bombs
+	Goron Mask
+}
+
+Letter to Kafei {
+	Kafei's Mask
+}
+
+Light Arrow {
+	Bombs, Hookshot
+	Bombs, Deku Mask
+}
+
+Magic Beans {
+	
+}
+
+Mask of Scents {
+	Deku Princess
+}
+
+Mask of Truth {
+	Bugs, Hookshot, Deku Stick
+	Bugs, Hookshot, Quiver, Fire Arrow
+	Bugs, Zora Mask, Deku Stick
+	Bugs, Zora Mask, Quiver, Fire Arrow
+}
+
+Milk {
+	
+}
+
+Mirror Shield {
+	Bombs, Hookshot, Fire Arrow, Quiver
+	Bombs, Light Arrow, Fire Arrow, Quiver
+	Gibdo Mask, Magic Beans, Fish, Milk, Big Poe, Quiver, Fire Arrow, Bombs
+}
+
+Moon's Tear {
+
+}
+
+Mountain Title Deed {
+	Swamp Title Deed, Deku Mask
+}
+
+Mushroom {
+	Mask of Scents
+}
+
+Ocean Title Deed {
+	Mountain Title Deed, Goron Mask
+}
+
+Pendant of Memories {
+	Letter to Kafei
+}
+
+Pictograph Box {
+	Red Potion
+	Blue Potion
+}
+
+Postman's Hat {
+	Express Letter to Mama
+}
+
+Powder Keg {
+	Goron Mask, Fire Arrow, Quiver
+}
+
+Razor Sword {
+	Razor Sword
+	Bombs
+	Goron Mask
+}
+
+Red Potion {
+	
+}
+
+Romani's Mask {
+	Quiver
+}
+
+Room Key {
+	
+}
+
+Seahorse {
+	Pictograph Box
+}
+
+Spring Water {
+	
+}
+
+Stone Mask {
+	Lens of Truth, Red Potion
+	Lens of Truth, Blue Potion
+}
+
+Swamp Title Deed {
+	Land Title Deed
+}
+
+Zora Egg {
+	Zora Mask
+}
+
+Zora Mask {
+	Bombs
+	Fierce Deity Mask
+	Blast Mask
+}
