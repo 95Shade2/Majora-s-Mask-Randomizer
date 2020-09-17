@@ -1,0 +1,10 @@
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\bin\Debug\Majora's Mask Randomizer GUI.exe.config
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\bin\Debug\Majora's Mask Randomizer GUI.exe
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\bin\Debug\Majora's Mask Randomizer GUI.pdb
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora_s_Mask_Randomizer_GUI.Main_Window.resources
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora_s_Mask_Randomizer_GUI.Properties.Resources.resources
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.csproj.GenerateResource.Cache
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.csproj.CoreCompileInputs.cache
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.exe
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.pdb
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.csprojResolveAssemblyReference.cache
