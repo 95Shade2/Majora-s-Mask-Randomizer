@@ -4232,7 +4232,8 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     Write_Cutscene_Rom(37946092, "great_fairy_magic_1");    //shorten Magic CS
     //Write_Cutscene_Rom(37971580, "great_fairy_magic_1");    //shorten Magic CS on same cycle
     Write_Cutscene_Rom(38007244, "great_fairy_magic_2");    //shorten phase 2 of the magic cs
-    Write_To_Rom(38092857, "04");                       //remove the tatl text trigger in the fountain
+    //Write_To_Rom(38092857, "04");
+    Remove_Actor("2454000", 4);  //remove the tatl text trigger in the fountain
 
     //Write_To_Rom(44659663, "00");                   //make mountain village intro cs 0 frames
 

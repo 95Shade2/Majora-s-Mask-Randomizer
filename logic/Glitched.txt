@@ -1,6 +1,6 @@
 //	Item Name {
 //		each line is an array of items needed to get the item
-//		item 1 item 2 etc
+//		item 1, item 2, etc
 //	}
 
 Adult Wallet {
