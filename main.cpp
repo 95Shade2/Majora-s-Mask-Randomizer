@@ -4225,12 +4225,13 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     Write_Cutscene_Rom(46245304, "lullaby_intro2"); //other days opposite angle
 
     //Great Fairy in Clock Town
-    Write_Cutscene_Rom(38001628, "great_fairy_ct");     //Shorten Great Fairy Mask + Magic CS
-    Write_To_Rom(38004153, Items[GFM].Text_ID);         //fix the text id
-    Write_Cutscene_Rom(38011356, "great_fairy_ct");     //shorten Great Fairy Mask on same cycle
-    Write_To_Rom(38013881, Items[GFM].Text_ID);         //fix the text id
-    Write_Cutscene_Rom(37946092, "great_fairy_ct0");    //shorten Magic CS
-    Write_Cutscene_Rom(37971580, "great_fairy_ct0");    //shorten Magic CS on same cycle
+    Write_Cutscene_Rom(38001628, "great_fairy_magic_mask");     //Shorten Great Fairy Mask + Magic CS
+    Write_To_Rom(38005181, Items[GFM].Text_ID);         //fix the text id
+    Write_Cutscene_Rom(38011356, "great_fairy_mask");     //shorten Great Fairy Mask on same cycle
+    Write_To_Rom(38014181, Items[GFM].Text_ID);         //fix the text id
+    Write_Cutscene_Rom(37946092, "great_fairy_magic_1");    //shorten Magic CS
+    //Write_Cutscene_Rom(37971580, "great_fairy_magic_1");    //shorten Magic CS on same cycle
+    Write_Cutscene_Rom(38007244, "great_fairy_magic_2");    //shorten phase 2 of the magic cs
     Write_To_Rom(38092857, "04");                       //remove the tatl text trigger in the fountain
 
     //Write_To_Rom(44659663, "00");                   //make mountain village intro cs 0 frames
