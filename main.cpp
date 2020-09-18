@@ -4288,7 +4288,7 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
 
     //Zora Mask
     Write_Cutscene_Rom(40631980, "zora_mask");      //shorten zora mask cs
-    Write_To_Rom(40633889, Items[Zora].Text_ID);    //Fix zora mask text
+    Write_To_Rom(40633689, Items[Zora].Text_ID);    //Fix zora mask text
 
     //Goron Lullaby
     Write_Cutscene_Rom(40087880, "goron_lullaby");  //shorten goron lullaby cs
