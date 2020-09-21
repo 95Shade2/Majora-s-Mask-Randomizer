@@ -3346,15 +3346,107 @@ void Change_Deku(string Tunic_Color) {
     }
 }
 
-void Change_Tunics(string Tunic_Color) {
+void Change_Link_Color(string color) {
     vector<string> Link_Locations = {"0116639C", "011668C4", "01166DCC", "01166FA4", "01167064", "0116766C", "01167AE4", "01167D1C", "011681EC"};
     string RGB;
 
     //change kokiri tunic color
-    RGB = Color_To_Hex(Tunic_Color);
+    RGB = Color_To_Hex(color);
     for (int i = 0; i < Link_Locations.size(); i++) {
         Write_To_Rom(hex_to_decimal(Link_Locations[i]), RGB);
     }
+}
+
+void Change_Item_Screen(string color) {
+    string RGB;
+    string RG;
+    string B;
+
+    RGB = Color_To_Hex(color);
+    RG = RGB.substr(0, 4);
+    B = RGB.substr(4, 2);
+    Write_To_Rom(13225082, RG);
+    Write_To_Rom(13226478, RG);
+    Write_To_Rom(13225086, B);
+    Write_To_Rom(13226482, B);
+}
+
+void Change_Map_Screen(string color) {
+    string RGB;
+    string RG;
+    string B;
+
+    RGB = Color_To_Hex(color);
+    RG = RGB.substr(0, 4);
+    B = RGB.substr(4, 2);
+    Write_To_Rom(13225378, RG);
+    Write_To_Rom(13226762, RG);
+    Write_To_Rom(13225382, B);
+    Write_To_Rom(13226766, B);
+}
+
+void Change_Status_Screen(string color) {
+    string RGB;
+    string RG;
+    string B;
+
+    RGB = Color_To_Hex(color);
+    RG = RGB.substr(0, 4);
+    B = RGB.substr(4, 2);
+    Write_To_Rom(13225802, RG);
+    Write_To_Rom(13227490, RG);
+    Write_To_Rom(13225806, B);
+    Write_To_Rom(13227494, B);
+}
+
+void Change_Mask_Screen(string color) {
+    string RGB;
+    string RG;
+    string B;
+
+    RGB = Color_To_Hex(color);
+    RG = RGB.substr(0, 4);
+    B = RGB.substr(4, 2);
+    Write_To_Rom(13226134, RG);
+    Write_To_Rom(13227802, RG);
+    Write_To_Rom(13226138, B);
+    Write_To_Rom(13227806, B);
+}
+
+void Change_Nameplate(string color) {
+    string RGB;
+    string RG;
+    string B;
+
+    RGB = Color_To_Hex(color);
+    RG = RGB.substr(0, 4);
+    B = RGB.substr(4, 2);
+    Write_To_Rom(13230330, RG); //nameplate
+    Write_To_Rom(13230466, RG); //Highlighted Z
+    Write_To_Rom(13230578, RG); //Highlighted R
+    Write_To_Rom(13230334, B);  //nameplate
+    Write_To_Rom(13230486, B);  //Highlighted Z
+    Write_To_Rom(13230582, B);  //Highlighted R
+}
+
+void Change_Colors(map<string, string> colors) {
+    Change_Link_Color(colors["Link"]);
+    Change_Deku(colors["Deku"]);
+    Change_Goron(colors["Goron"]);
+    Change_Zora(colors["Zora"]);
+    Change_FD(colors["FD"]);
+
+    Change_Item_Screen(colors["Item"]);
+    Change_Map_Screen(colors["Map"]);
+    Change_Status_Screen(colors["Quest"]);
+    Change_Mask_Screen(colors["Mask"]);
+    Change_Nameplate(colors["Name"]);
+}
+
+void Change_Tunics(string Tunic_Color) {
+
+    //change kokiri tunic color
+    Change_Link_Color(Tunic_Color);
 
     //change deku link color
     Change_Deku(Tunic_Color);
@@ -4787,7 +4879,7 @@ int main()
 
     //change tunic colors
     cout << "\nChanging tunic colors\n";
-    Change_Tunics(Settings["settings"]["Tunic"]);
+    Change_Colors(Settings["colors"]);
 
     //making link kafei
     if (Settings["settings"]["Kafei"] == "True") {
