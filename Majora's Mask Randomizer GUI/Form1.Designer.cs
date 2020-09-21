@@ -397,6 +397,7 @@
                         this.playAsKafeiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.removeCutscenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.gCHudToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                        this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.tabControl2.SuspendLayout();
                         this.tabPage8.SuspendLayout();
                         this.tabControl3.SuspendLayout();
@@ -3014,6 +3015,7 @@
                         this.Tunic_Label.Size = new System.Drawing.Size(66, 13);
                         this.Tunic_Label.TabIndex = 71;
                         this.Tunic_Label.Text = "Tunic Colors";
+                        this.Tunic_Label.Visible = false;
                         // 
                         // Tunic_ColorDialog
                         // 
@@ -3027,6 +3029,7 @@
                         this.Tunic_Button.Size = new System.Drawing.Size(22, 23);
                         this.Tunic_Button.TabIndex = 72;
                         this.Tunic_Button.UseVisualStyleBackColor = false;
+                        this.Tunic_Button.Visible = false;
                         this.Tunic_Button.Click += new System.EventHandler(this.Tunic_Button_Click);
                         // 
                         // Clocktown_Map
@@ -4352,7 +4355,8 @@
                         // 
                         this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
                         this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.pauseMenuColorsToolStripMenuItem});
                         this.menuStrip1.Location = new System.Drawing.Point(0, 0);
                         this.menuStrip1.Name = "menuStrip1";
                         this.menuStrip1.Size = new System.Drawing.Size(702, 24);
@@ -4406,6 +4410,13 @@
                         this.gCHudToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
                         this.gCHudToolStripMenuItem.Text = "GC Hud";
                         this.gCHudToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+                        // 
+                        // pauseMenuColorsToolStripMenuItem
+                        // 
+                        this.pauseMenuColorsToolStripMenuItem.Name = "pauseMenuColorsToolStripMenuItem";
+                        this.pauseMenuColorsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+                        this.pauseMenuColorsToolStripMenuItem.Text = "Colors";
+                        this.pauseMenuColorsToolStripMenuItem.Click += new System.EventHandler(this.pauseMenuColorsToolStripMenuItem_Click);
                         // 
                         // Main_Window
                         // 
@@ -4852,6 +4863,7 @@
                 private System.Windows.Forms.ToolStripMenuItem playAsKafeiToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem removeCutscenesToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem gCHudToolStripMenuItem;
+                private System.Windows.Forms.ToolStripMenuItem pauseMenuColorsToolStripMenuItem;
         }
 }
 

@@ -27,6 +27,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Dictionary<int, string> Preset_Keys;
                 Process Rando;
 
+                public Dictionary<string, Color> Game_Colors;
+
                 public Main_Window()
                 {
                         InitializeComponent();
@@ -45,6 +47,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Checkbox_List = new Dictionary<string, CheckBox>();
                         Presets = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
                         Preset_Keys = new Dictionary<int, string>();
+                        Game_Colors = Default_Pause();
 
                         Item_Pools_Keys.Add(0, "Items");
 
@@ -89,6 +92,29 @@ namespace Majora_s_Mask_Randomizer_GUI
                         //Scrub_Sells_Beans_Tooltip.SetToolTip(Scrub_Sells_Beans_Checkbox, "If checked, the deku scrub salesman in Swamp will sell you\nMagic Beans instead if what they are randomized to (He still\nchecks to see if you have Magic Beans in inventory before selling)");
 
                         Tunic_Button.BackColor = Tunic_ColorDialog.Color;
+                }
+
+                private Dictionary<string, Color>  Default_Pause()
+                {
+                        Dictionary<string, Color> default_colors = new Dictionary<string, Color>();
+                        Color default_color = Rgb_Color(180, 180, 120);
+                        Color name = Rgb_Color(150, 140, 90);
+                        Color def_green = Rgb_Color(30, 105, 27);
+
+                        default_colors.Add("Item", default_color);
+                        default_colors.Add("Map", default_color);
+                        default_colors.Add("Quest", default_color);
+                        default_colors.Add("Mask", default_color);
+                        default_colors.Add("Name", name);
+                        default_colors.Add("Z", name);
+                        default_colors.Add("R", name);
+                        default_colors.Add("Link", def_green);
+                        default_colors.Add("Deku", def_green);
+                        default_colors.Add("Goron", def_green);
+                        default_colors.Add("Zora", def_green);
+                        default_colors.Add("FD", def_green);
+
+                        return default_colors;
                 }
 
                 private void Load_Logic()
@@ -1065,7 +1091,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         }
                 }
 
-                private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true)
+                private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true)
                 {
                         string Text = "";
                         if (items) {
@@ -1120,11 +1146,32 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                                 Text += "ScrubBeans=" + swampScrubSalesBeansToolStripMenuItem.Checked + "\n";       //whether or not the scrub in swamp sells magic beans or what they're randomized to
 
-                                Text += "Tunic=" + Get_Color_Tunic() + "\n";     //color of the tunics
+                                //Text += "Tunic=" + Get_Color_Tunic() + "\n";     //color of the tunics
 
                                 Text += "Remove_Cutscenes=" + removeCutscenesToolStripMenuItem.Checked + "\n";  //whether or not to remove the cutscenes
 
                                 Text += "GC_Hud=" + gCHudToolStripMenuItem.Checked + "\n";      //use or not use the GC Hud
+                        }
+
+                        if (colors)
+                        {
+                                Text += "[colors]\n";
+
+                                //tunic colors
+                                Text += "Link=" + Color_To_String(Game_Colors["Link"]) + "\n";
+                                Text += "Deku=" + Color_To_String(Game_Colors["Deku"]) + "\n";
+                                Text += "Goron=" + Color_To_String(Game_Colors["Goron"]) + "\n";
+                                Text += "Zora=" + Color_To_String(Game_Colors["Zora"]) + "\n";
+                                Text += "FD=" + Color_To_String(Game_Colors["FD"]) + "\n";
+
+                                //pause menu colors
+                                Text += "Item=" + Color_To_String(Game_Colors["Item"]) + "\n";
+                                Text += "Map=" + Color_To_String(Game_Colors["Map"]) + "\n";
+                                Text += "Quest=" + Color_To_String(Game_Colors["Quest"]) + "\n";
+                                Text += "Mask=" + Color_To_String(Game_Colors["Mask"]) + "\n";
+                                Text += "Name=" + Color_To_String(Game_Colors["Name"]) + "\n";
+                                Text += "Z=" + Color_To_String(Game_Colors["Z"]) + "\n";
+                                Text += "R=" + Color_To_String(Game_Colors["R"]) + "\n";
                         }
 
                         if (pools)
@@ -1147,6 +1194,18 @@ namespace Majora_s_Mask_Randomizer_GUI
                         int red = tunic.R;
                         int blue = tunic.B;
                         int green = tunic.G;
+
+                        color = "[R=" + red.ToString() + ", G=" + green.ToString() + ", B=" + blue.ToString() + "]";
+
+                        return color;
+                }
+
+                public string Color_To_String(Color clr)
+                {
+                        string color = "";
+                        int red = clr.R;
+                        int blue = clr.B;
+                        int green = clr.G;
 
                         color = "[R=" + red.ToString() + ", G=" + green.ToString() + ", B=" + blue.ToString() + "]";
 
@@ -1266,12 +1325,79 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Update_Pool_List();
                         Update_Items(Selected_Preset["items"]);
                         Update_Settings(Selected_Preset["settings"]);
+                        if (Selected_Preset.ContainsKey("colors")) {
+                                Update_Colors(Selected_Preset["colors"]);
+                        }
+                        else
+                        {
+                                Game_Colors = Default_Pause();
+                        }
 
                         Presets_Combobox.Text = "";
                         
                         //make sure the change and remove combobox are blank now
                         Change_Pool_Name_Combobox.Text = "";
                         Remove_Pool_Combobox.Text = "";
+                }
+
+                private void Update_Colors(Dictionary<string, string> colors)
+                {
+                        if (colors == null || colors.Count == 0)
+                        {
+                                return;
+                        }
+
+                        //get the tunic colors
+                        if (colors.ContainsKey("Link"))
+                        {
+                                Game_Colors["Link"] = String_To_Color(colors["Link"]);
+                        }
+                        if (colors.ContainsKey("Deku"))
+                        {
+                                Game_Colors["Deku"] = String_To_Color(colors["Deku"]);
+                        }
+                        if (colors.ContainsKey("Goron"))
+                        {
+                                Game_Colors["Goron"] = String_To_Color(colors["Goron"]);
+                        }
+                        if (colors.ContainsKey("Zora"))
+                        {
+                                Game_Colors["Zora"] = String_To_Color(colors["Zora"]);
+                        }
+                        if (colors.ContainsKey("FD"))
+                        {
+                                Game_Colors["FD"] = String_To_Color(colors["FD"]);
+                        }
+
+                        //get the pause menu colors
+                        if (colors.ContainsKey("Item"))
+                        {
+                                Game_Colors["Item"] = String_To_Color(colors["Item"]);
+                        }
+                        if (colors.ContainsKey("Mask"))
+                        {
+                                Game_Colors["Mask"] = String_To_Color(colors["Mask"]);
+                        }
+                        if (colors.ContainsKey("Status"))
+                        {
+                                Game_Colors["Status"] = String_To_Color(colors["Status"]);
+                        }
+                        if (colors.ContainsKey("Map"))
+                        {
+                                Game_Colors["Map"] = String_To_Color(colors["Map"]);
+                        }
+                        if (colors.ContainsKey("Name"))
+                        {
+                                Game_Colors["Name"] = String_To_Color(colors["Name"]);
+                        }
+                        if (colors.ContainsKey("Z"))
+                        {
+                                Game_Colors["Z"] = String_To_Color(colors["Z"]);
+                        }
+                        if (colors.ContainsKey("R"))
+                        {
+                                Game_Colors["R"] = String_To_Color(colors["R"]);
+                        }
                 }
 
                 private void Update_Settings(Dictionary<string, string> settings)
@@ -1311,9 +1437,9 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                         if (settings.ContainsKey("Tunic"))
                         {
-                                Color tunic_color = String_To_Color(settings["Tunic"]);
-                                Tunic_ColorDialog.Color = tunic_color;
-                                Tunic_Button.BackColor = tunic_color;
+                                //Color tunic_color = String_To_Color(settings["Tunic"]);
+                                //Tunic_ColorDialog.Color = tunic_color;
+                                //Tunic_Button.BackColor = tunic_color;
                         }
 
                         if (settings.ContainsKey("Remove_Cutscenes") && settings["Remove_Cutscenes"] == "True")
@@ -1363,7 +1489,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         return new_color;
                 }
 
-                private Color Rgb_Color(int red, int green, int blue)
+                public Color Rgb_Color(int red, int green, int blue)
                 {
                         int color;
 
@@ -1869,6 +1995,14 @@ namespace Majora_s_Mask_Randomizer_GUI
                 {
                         ToolStripMenuItem item = (sender as ToolStripMenuItem);
                         item.Checked = !item.Checked;
+                }
+
+                private void pauseMenuColorsToolStripMenuItem_Click(object sender, EventArgs e)
+                {
+                        pmc pause_menu_form = new pmc();
+
+                        pause_menu_form.parent = this;
+                        pause_menu_form.Show();
                 }
         }
 }

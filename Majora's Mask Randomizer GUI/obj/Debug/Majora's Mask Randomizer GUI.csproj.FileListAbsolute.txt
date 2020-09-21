@@ -8,3 +8,4 @@ C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomize
 C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.exe
 C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.pdb
 C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora's Mask Randomizer GUI.csprojResolveAssemblyReference.cache
+C:\Users\Shade\source\repos\Majora's Mask Randomizer GUI\Majora's Mask Randomizer GUI\obj\Debug\Majora_s_Mask_Randomizer_GUI.pmc.resources
