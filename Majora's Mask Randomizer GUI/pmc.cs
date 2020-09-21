@@ -26,8 +26,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Quest_Button.BackColor = parent.Game_Colors["Quest"];
                         MaskScreen_Button.BackColor = parent.Game_Colors["Mask"];
                         NamePlate_Button.BackColor = parent.Game_Colors["Name"];
-                        Z_Button.BackColor = parent.Game_Colors["Z"];
-                        R_Button.BackColor = parent.Game_Colors["R"];
                         LinkColor_Button.BackColor = parent.Game_Colors["Link"];
                         DekuColor_Button.BackColor = parent.Game_Colors["Deku"];
                         GoronColor_Button.BackColor = parent.Game_Colors["Goron"];
@@ -66,8 +64,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                         parent.Game_Colors["Quest"] = Quest_Button.BackColor;
                         parent.Game_Colors["Mask"] = MaskScreen_Button.BackColor;
                         parent.Game_Colors["Name"] = NamePlate_Button.BackColor;
-                        parent.Game_Colors["Z"] = Z_Button.BackColor;
-                        parent.Game_Colors["R"] = R_Button.BackColor;
                         parent.Game_Colors["Link"] = LinkColor_Button.BackColor;
                         parent.Game_Colors["Deku"] = DekuColor_Button.BackColor;
                         parent.Game_Colors["Goron"] = GoronColor_Button.BackColor;
@@ -82,19 +78,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         NamePlate_BolorBox.ShowDialog();
                         NamePlate_Button.BackColor = NamePlate_BolorBox.Color;
                 }
-
-                private void Z_Button_Click(object sender, EventArgs e)
-                {
-                        Z_ColorBox.ShowDialog();
-                        Z_Button.BackColor = Z_ColorBox.Color;
-                }
-
-                private void R_Button_Click(object sender, EventArgs e)
-                {
-                        R_ColorBox.ShowDialog();
-                        R_Button.BackColor = R_ColorBox.Color;
-                }
-
+                
                 private void LinkColor_Button_Click(object sender, EventArgs e)
                 {
                         LinkColor_ColorBox.ShowDialog();

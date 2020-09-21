@@ -106,8 +106,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                         default_colors.Add("Quest", default_color);
                         default_colors.Add("Mask", default_color);
                         default_colors.Add("Name", name);
-                        default_colors.Add("Z", name);
-                        default_colors.Add("R", name);
                         default_colors.Add("Link", def_green);
                         default_colors.Add("Deku", def_green);
                         default_colors.Add("Goron", def_green);
@@ -1170,8 +1168,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                                 Text += "Quest=" + Color_To_String(Game_Colors["Quest"]) + "\n";
                                 Text += "Mask=" + Color_To_String(Game_Colors["Mask"]) + "\n";
                                 Text += "Name=" + Color_To_String(Game_Colors["Name"]) + "\n";
-                                Text += "Z=" + Color_To_String(Game_Colors["Z"]) + "\n";
-                                Text += "R=" + Color_To_String(Game_Colors["R"]) + "\n";
                         }
 
                         if (pools)
@@ -1389,14 +1385,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                         if (colors.ContainsKey("Name"))
                         {
                                 Game_Colors["Name"] = String_To_Color(colors["Name"]);
-                        }
-                        if (colors.ContainsKey("Z"))
-                        {
-                                Game_Colors["Z"] = String_To_Color(colors["Z"]);
-                        }
-                        if (colors.ContainsKey("R"))
-                        {
-                                Game_Colors["R"] = String_To_Color(colors["R"]);
                         }
                 }
 

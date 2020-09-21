@@ -42,14 +42,8 @@
                         this.MaskScreen_ColorBox = new System.Windows.Forms.ColorDialog();
                         this.Confirm_Button = new System.Windows.Forms.Button();
                         this.label5 = new System.Windows.Forms.Label();
-                        this.label6 = new System.Windows.Forms.Label();
-                        this.label7 = new System.Windows.Forms.Label();
                         this.NamePlate_BolorBox = new System.Windows.Forms.ColorDialog();
-                        this.Z_ColorBox = new System.Windows.Forms.ColorDialog();
-                        this.R_ColorBox = new System.Windows.Forms.ColorDialog();
                         this.NamePlate_Button = new System.Windows.Forms.Button();
-                        this.Z_Button = new System.Windows.Forms.Button();
-                        this.R_Button = new System.Windows.Forms.Button();
                         this.groupBox1 = new System.Windows.Forms.GroupBox();
                         this.groupBox2 = new System.Windows.Forms.GroupBox();
                         this.label8 = new System.Windows.Forms.Label();
@@ -73,7 +67,7 @@
                         // 
                         // ItemSelect_Button
                         // 
-                        this.ItemSelect_Button.Location = new System.Drawing.Point(170, 12);
+                        this.ItemSelect_Button.Location = new System.Drawing.Point(111, 11);
                         this.ItemSelect_Button.Name = "ItemSelect_Button";
                         this.ItemSelect_Button.Size = new System.Drawing.Size(23, 23);
                         this.ItemSelect_Button.TabIndex = 0;
@@ -85,22 +79,22 @@
                         this.label1.AutoSize = true;
                         this.label1.Location = new System.Drawing.Point(6, 16);
                         this.label1.Name = "label1";
-                        this.label1.Size = new System.Drawing.Size(152, 13);
+                        this.label1.Size = new System.Drawing.Size(91, 13);
                         this.label1.TabIndex = 1;
-                        this.label1.Text = "Item Screen Background Color";
+                        this.label1.Text = "Item Screen Color";
                         // 
                         // label2
                         // 
                         this.label2.AutoSize = true;
                         this.label2.Location = new System.Drawing.Point(6, 46);
                         this.label2.Name = "label2";
-                        this.label2.Size = new System.Drawing.Size(153, 13);
+                        this.label2.Size = new System.Drawing.Size(92, 13);
                         this.label2.TabIndex = 2;
-                        this.label2.Text = "Map Screen Background Color";
+                        this.label2.Text = "Map Screen Color";
                         // 
                         // MapScreen_Button
                         // 
-                        this.MapScreen_Button.Location = new System.Drawing.Point(170, 41);
+                        this.MapScreen_Button.Location = new System.Drawing.Point(111, 40);
                         this.MapScreen_Button.Name = "MapScreen_Button";
                         this.MapScreen_Button.Size = new System.Drawing.Size(23, 23);
                         this.MapScreen_Button.TabIndex = 3;
@@ -112,13 +106,13 @@
                         this.label3.AutoSize = true;
                         this.label3.Location = new System.Drawing.Point(6, 75);
                         this.label3.Name = "label3";
-                        this.label3.Size = new System.Drawing.Size(160, 13);
+                        this.label3.Size = new System.Drawing.Size(99, 13);
                         this.label3.TabIndex = 4;
-                        this.label3.Text = "Quest Screen Background Color";
+                        this.label3.Text = "Quest Screen Color";
                         // 
                         // Quest_Button
                         // 
-                        this.Quest_Button.Location = new System.Drawing.Point(170, 70);
+                        this.Quest_Button.Location = new System.Drawing.Point(111, 69);
                         this.Quest_Button.Name = "Quest_Button";
                         this.Quest_Button.Size = new System.Drawing.Size(23, 23);
                         this.Quest_Button.TabIndex = 5;
@@ -130,13 +124,13 @@
                         this.label4.AutoSize = true;
                         this.label4.Location = new System.Drawing.Point(6, 104);
                         this.label4.Name = "label4";
-                        this.label4.Size = new System.Drawing.Size(158, 13);
+                        this.label4.Size = new System.Drawing.Size(97, 13);
                         this.label4.TabIndex = 6;
-                        this.label4.Text = "Mask Screen Background Color";
+                        this.label4.Text = "Mask Screen Color";
                         // 
                         // MaskScreen_Button
                         // 
-                        this.MaskScreen_Button.Location = new System.Drawing.Point(170, 99);
+                        this.MaskScreen_Button.Location = new System.Drawing.Point(111, 98);
                         this.MaskScreen_Button.Name = "MaskScreen_Button";
                         this.MaskScreen_Button.Size = new System.Drawing.Size(23, 23);
                         this.MaskScreen_Button.TabIndex = 7;
@@ -145,7 +139,7 @@
                         // 
                         // Confirm_Button
                         // 
-                        this.Confirm_Button.Location = new System.Drawing.Point(12, 241);
+                        this.Confirm_Button.Location = new System.Drawing.Point(12, 180);
                         this.Confirm_Button.Name = "Confirm_Button";
                         this.Confirm_Button.Size = new System.Drawing.Size(75, 23);
                         this.Confirm_Button.TabIndex = 8;
@@ -162,70 +156,30 @@
                         this.label5.TabIndex = 9;
                         this.label5.Text = "Nameplate Color";
                         // 
-                        // label6
-                        // 
-                        this.label6.AutoSize = true;
-                        this.label6.Location = new System.Drawing.Point(6, 162);
-                        this.label6.Name = "label6";
-                        this.label6.Size = new System.Drawing.Size(41, 13);
-                        this.label6.TabIndex = 10;
-                        this.label6.Text = "Z Color";
-                        // 
-                        // label7
-                        // 
-                        this.label7.AutoSize = true;
-                        this.label7.Location = new System.Drawing.Point(6, 191);
-                        this.label7.Name = "label7";
-                        this.label7.Size = new System.Drawing.Size(42, 13);
-                        this.label7.TabIndex = 11;
-                        this.label7.Text = "R Color";
-                        // 
                         // NamePlate_Button
                         // 
-                        this.NamePlate_Button.Location = new System.Drawing.Point(170, 128);
+                        this.NamePlate_Button.Location = new System.Drawing.Point(111, 127);
                         this.NamePlate_Button.Name = "NamePlate_Button";
                         this.NamePlate_Button.Size = new System.Drawing.Size(23, 23);
                         this.NamePlate_Button.TabIndex = 12;
                         this.NamePlate_Button.UseVisualStyleBackColor = true;
                         this.NamePlate_Button.Click += new System.EventHandler(this.NamePlate_Button_Click);
                         // 
-                        // Z_Button
-                        // 
-                        this.Z_Button.Location = new System.Drawing.Point(170, 157);
-                        this.Z_Button.Name = "Z_Button";
-                        this.Z_Button.Size = new System.Drawing.Size(23, 23);
-                        this.Z_Button.TabIndex = 13;
-                        this.Z_Button.UseVisualStyleBackColor = true;
-                        this.Z_Button.Click += new System.EventHandler(this.Z_Button_Click);
-                        // 
-                        // R_Button
-                        // 
-                        this.R_Button.Location = new System.Drawing.Point(170, 186);
-                        this.R_Button.Name = "R_Button";
-                        this.R_Button.Size = new System.Drawing.Size(23, 23);
-                        this.R_Button.TabIndex = 14;
-                        this.R_Button.UseVisualStyleBackColor = true;
-                        this.R_Button.Click += new System.EventHandler(this.R_Button_Click);
-                        // 
                         // groupBox1
                         // 
                         this.groupBox1.Controls.Add(this.label1);
-                        this.groupBox1.Controls.Add(this.R_Button);
                         this.groupBox1.Controls.Add(this.ItemSelect_Button);
-                        this.groupBox1.Controls.Add(this.Z_Button);
                         this.groupBox1.Controls.Add(this.label2);
                         this.groupBox1.Controls.Add(this.NamePlate_Button);
                         this.groupBox1.Controls.Add(this.MapScreen_Button);
-                        this.groupBox1.Controls.Add(this.label7);
                         this.groupBox1.Controls.Add(this.label3);
-                        this.groupBox1.Controls.Add(this.label6);
                         this.groupBox1.Controls.Add(this.Quest_Button);
                         this.groupBox1.Controls.Add(this.label5);
                         this.groupBox1.Controls.Add(this.label4);
                         this.groupBox1.Controls.Add(this.MaskScreen_Button);
                         this.groupBox1.Location = new System.Drawing.Point(128, 12);
                         this.groupBox1.Name = "groupBox1";
-                        this.groupBox1.Size = new System.Drawing.Size(204, 223);
+                        this.groupBox1.Size = new System.Drawing.Size(146, 162);
                         this.groupBox1.TabIndex = 15;
                         this.groupBox1.TabStop = false;
                         this.groupBox1.Text = "Pause Menu";
@@ -244,7 +198,7 @@
                         this.groupBox2.Controls.Add(this.label8);
                         this.groupBox2.Location = new System.Drawing.Point(12, 12);
                         this.groupBox2.Name = "groupBox2";
-                        this.groupBox2.Size = new System.Drawing.Size(110, 223);
+                        this.groupBox2.Size = new System.Drawing.Size(110, 162);
                         this.groupBox2.TabIndex = 16;
                         this.groupBox2.TabStop = false;
                         this.groupBox2.Text = "Tunics";
@@ -343,7 +297,7 @@
                         // 
                         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                        this.ClientSize = new System.Drawing.Size(343, 276);
+                        this.ClientSize = new System.Drawing.Size(283, 213);
                         this.Controls.Add(this.groupBox2);
                         this.Controls.Add(this.groupBox1);
                         this.Controls.Add(this.Confirm_Button);
@@ -374,14 +328,8 @@
                 private System.Windows.Forms.ColorDialog MaskScreen_ColorBox;
                 private System.Windows.Forms.Button Confirm_Button;
                 private System.Windows.Forms.Label label5;
-                private System.Windows.Forms.Label label6;
-                private System.Windows.Forms.Label label7;
                 private System.Windows.Forms.ColorDialog NamePlate_BolorBox;
-                private System.Windows.Forms.ColorDialog Z_ColorBox;
-                private System.Windows.Forms.ColorDialog R_ColorBox;
                 private System.Windows.Forms.Button NamePlate_Button;
-                private System.Windows.Forms.Button Z_Button;
-                private System.Windows.Forms.Button R_Button;
                 private System.Windows.Forms.GroupBox groupBox1;
                 private System.Windows.Forms.GroupBox groupBox2;
                 private System.Windows.Forms.Label label8;
