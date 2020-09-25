@@ -4757,6 +4757,9 @@ int main()
     //FD anywhere
     Write_To_Rom(12220113, "00");
 
+    //FD can use transformations masks
+    Write_To_Rom(12945794, "010101");   //enables deku, goron, and zora
+
     //Quick Text - softlock at couple's mask - this actually was not responsible for the softlock
     //Write_To_Rom(12523072, "1000");
     //Write_To_Rom(13065591, "30");
