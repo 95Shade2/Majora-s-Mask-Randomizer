@@ -4384,7 +4384,10 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
 
     //Goron Lullaby
     Write_Cutscene_Rom(40087880, "goron_lullaby");  //shorten goron lullaby cs
-    Write_To_Rom(40088601, Items[Lullaby].Text_ID); //fix lullaby text
+    Write_To_Rom(40091500, "5E20");                 //skip phase 2 of the cs
+    Write_Cutscene_Rom(40088936, "goron_lullaby2");  //shorten goron lullaby cs phase 3
+    Write_To_Rom(16480271, "68");                   //make zfg stay asleep on frame 0x68 in the phase 3 cutscene
+    Write_To_Rom(40090225, Items[Lullaby].Text_ID); //fix lullaby text
     if (Songs_Same_Pool) {
         Write_To_Rom(40088625, Items[Lullaby].Song1_ID);    //fix lullaby display song
         Write_To_Rom(40088649, Items[Lullaby].Song2_ID);    //fix lullaby play song
