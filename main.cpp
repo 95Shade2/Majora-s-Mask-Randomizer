@@ -4508,6 +4508,16 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     }
 
     Shorten_Igos_CS();  //shorten the Igos cs
+
+    //shorten sakon hideout cutscene
+    Write_Cutscene_Rom(44548416, "sakon_hideout");  //shorten the starting cs
+    Write_To_Rom(44552390, "003C");                 //shorten the doorway cs
+    Write_To_Rom(44553062, "003C");                 //shorten the switch cs
+    //Write_To_Rom(33777332, "07");                   //shorten the number of points for kafei leaving
+    Write_To_Rom(33777332, "04");                   //shorten the number of points for kafei leaving
+    //Write_To_Rom(33777164, "0909FF601273 09B8FF60113B 09B1FF440FE2 0945FF1F0F01 087FFEF20E54 07D7FEE80DD0 0705FEE50D3E"); //update the points
+    //Write_To_Rom(33777164, "0909FF601273 09B1FF440FE2 087FFEF20E54 0705FEE50D3E"); //update the points
+    Write_To_Rom(33777164, "0909FF60127309B1FF440FE2087FFEF20E540705FEE50D3E"); //update the points
 }
 
 void Write_File_To_Rom(string filename, string rom_offset) {
