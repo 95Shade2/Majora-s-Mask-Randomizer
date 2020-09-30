@@ -28,6 +28,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Process Rando;
 
                 public Dictionary<string, Color> Game_Colors;
+                public Dictionary<string, int> Wallet_Sizes;
 
                 public Main_Window()
                 {
@@ -48,6 +49,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Presets = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
                         Preset_Keys = new Dictionary<int, string>();
                         Game_Colors = Default_Pause();
+                        Wallet_Sizes = Default_Wallets();
 
                         Item_Pools_Keys.Add(0, "Items");
 
@@ -92,6 +94,17 @@ namespace Majora_s_Mask_Randomizer_GUI
                         //Scrub_Sells_Beans_Tooltip.SetToolTip(Scrub_Sells_Beans_Checkbox, "If checked, the deku scrub salesman in Swamp will sell you\nMagic Beans instead if what they are randomized to (He still\nchecks to see if you have Magic Beans in inventory before selling)");
 
                         Tunic_Button.BackColor = Tunic_ColorDialog.Color;
+                }
+
+                private Dictionary<string, int> Default_Wallets()
+                {
+                        Dictionary<string, int> wall = new Dictionary<string, int>();
+
+                        wall.Add("small", 99);
+                        wall.Add("medium", 200);
+                        wall.Add("large", 500);
+
+                        return wall;
                 }
 
                 private Dictionary<string, Color>  Default_Pause()
@@ -1089,7 +1102,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         }
                 }
 
-                private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true)
+                private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true)
                 {
                         string Text = "";
                         if (items) {
@@ -1168,6 +1181,16 @@ namespace Majora_s_Mask_Randomizer_GUI
                                 Text += "Quest=" + Color_To_String(Game_Colors["Quest"]) + "\n";
                                 Text += "Mask=" + Color_To_String(Game_Colors["Mask"]) + "\n";
                                 Text += "Name=" + Color_To_String(Game_Colors["Name"]) + "\n";
+                        }
+
+                        if (wallets)
+                        {
+                                Text += "[wallets]\n";
+
+                                //wallet sizes
+                                Text += "Small=" + Wallet_Sizes["small"] + "\n";
+                                Text += "Medium=" + Wallet_Sizes["medium"] + "\n";
+                                Text += "Large=" + Wallet_Sizes["large"] + "\n";
                         }
 
                         if (pools)
@@ -1321,6 +1344,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Update_Pool_List();
                         Update_Items(Selected_Preset["items"]);
                         Update_Settings(Selected_Preset["settings"]);
+
                         if (Selected_Preset.ContainsKey("colors")) {
                                 Update_Colors(Selected_Preset["colors"]);
                         }
@@ -1329,11 +1353,29 @@ namespace Majora_s_Mask_Randomizer_GUI
                                 Game_Colors = Default_Pause();
                         }
 
+                        if (Selected_Preset.ContainsKey("wallets"))
+                        {
+                                Update_Wallets(Selected_Preset["wallets"]);
+                        }
+                        else
+                        {
+                                Wallet_Sizes = Default_Wallets();
+                        }
+
                         Presets_Combobox.Text = "";
                         
                         //make sure the change and remove combobox are blank now
                         Change_Pool_Name_Combobox.Text = "";
                         Remove_Pool_Combobox.Text = "";
+                }
+
+                private void Update_Wallets(Dictionary<string, string> wallet_sizes)
+                {
+                        Wallet_Sizes = new Dictionary<string, int>();
+
+                        Wallet_Sizes.Add("small", String_To_Int(wallet_sizes["Small"]));
+                        Wallet_Sizes.Add("medium", String_To_Int(wallet_sizes["Medium"]));
+                        Wallet_Sizes.Add("large", String_To_Int(wallet_sizes["Large"]));
                 }
 
                 private void Update_Colors(Dictionary<string, string> colors)
@@ -1483,6 +1525,8 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                         //      alpha
                         color = (255 << 24) | (red << 16) | (green << 8) | blue;
+
+
                         
                         return Color.FromArgb(color);
                 }
@@ -1991,6 +2035,14 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                         pause_menu_form.parent = this;
                         pause_menu_form.Show();
+                }
+
+                private void walletToolStripMenuItem_Click(object sender, EventArgs e)
+                {
+                        wallets_form WalletForm = new wallets_form();
+
+                        WalletForm.parent = this;
+                        WalletForm.Show();
                 }
         }
 }
