@@ -1311,30 +1311,76 @@ void Place_Items(map<string, Item> &Items, bool Songs_Same_Pool) {
     }
 }
 
-void Change_Rupees() {
+void Update_Wallet(int location, string wallet_amount) {
+    int wallet_int = string_to_dec(wallet_amount);
+    string wallet_hexL = dec_to_hex(wallet_int >> 8);   //left byte
+    string wallet_hexR = dec_to_hex(wallet_int);        //right byte
+    string wallet_size = wallet_hexL + wallet_hexR;
+
+    Write_To_Rom(location, wallet_size);
+}
+
+void Change_Rupees(map<string, string> wallet_amounts) {
+    int small_digits = wallet_amounts["Small"].size();
+    int med_digits = wallet_amounts["Medium"].size();
+    int large_digits = wallet_amounts["Large"].size();
+
+    if (small_digits > 3) {
+        small_digits = 3;
+    }
+    if (med_digits > 3) {
+        med_digits = 3;
+    }
+    if (large_digits > 3) {
+        large_digits = 3;
+    }
+
+
+    //small
     //write padding for small wallet
-    Write_To_Rom(12935772, "0000");
+    Write_To_Rom(12935772, "000" + dec_to_string(3 - small_digits));
 
-    //write number of digits for small wallet to 3
-    Write_To_Rom(12935780, "0003");
+    //write number of digits for small wallet
+    Write_To_Rom(12935780, "000" + dec_to_string(small_digits));
 
-    //write number of digits for giant wallet to 5 - nvm, it looks bad :(
-    //Write_To_Rom(12935784, "0005");
+    //write the small wallet amount
+    Update_Wallet(12944236, wallet_amounts["Small"]);
 
-    //change wallet size from 99 to 200
-    Write_To_Rom(12944236, "00C8");
 
-    //change adult wallet size from 200 to 999
-    Write_To_Rom(12944238, "03E7");
+    //adult
+    //write padding for adult wallet
+    Write_To_Rom(12935774, "000" + dec_to_string(3 - med_digits));
 
-    //change text for adult wallet to 999
-    Write_To_Rom(11342393, "393939");
+    //write number of digits for adult wallet
+    Write_To_Rom(12935782, "000" + dec_to_string(med_digits));
 
-    //change giant wallet size from 500 to 65535
-    Write_To_Rom(12944240, "FFFF");
+    //write the adult wallet amount
+    Update_Wallet(12944238, wallet_amounts["Medium"]);
 
-    //change text for giant wallet
-    Write_To_Rom(11342482, "01363535333520527570656573002EBF00000000");
+    //update the text for adult wallet
+    string plurarl = "s";
+    if (string_to_dec(wallet_amounts["Medium"]) == 1) {
+        plurarl = "";
+    }
+    Write_To_Rom(11342319, string_to_hex("You can now carry ") + "06" + string_to_hex(wallet_amounts["Medium"]) + "00" + string_to_hex(" Rupee" + plurarl) + "002EBF");
+
+
+    //giant
+    //write padding for giant wallet
+    Write_To_Rom(12935776, "000" + dec_to_string(3 - large_digits));
+
+    //write number of digits for giant wallet
+    Write_To_Rom(12935784, "000" + dec_to_string(large_digits));
+
+    //write the giant wallet amount
+    Update_Wallet(12944240, wallet_amounts["Large"]);
+
+    //update the text for giant wallet
+    plurarl = "s";
+    if (string_to_dec(wallet_amounts["Large"]) == 1) {
+        plurarl = "";
+    }
+    Write_To_Rom(11342482, "01" + string_to_hex(wallet_amounts["Large"] + " Rupee" + plurarl) + "002EBF");
 }
 
 string Even_Hex(string hex) {
@@ -4760,7 +4806,7 @@ int main()
     cout << "\nChanging Rupees\n";
 
     //Change max rupee amounts
-    Change_Rupees();
+    Change_Rupees(Settings["wallets"]);
 
     cout << "\nGiving Starting Items\n";
 
