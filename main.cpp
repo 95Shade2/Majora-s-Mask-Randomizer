@@ -4604,7 +4604,7 @@ void Gamecube_Hud() {
     Write_To_Rom(12245206, "0078"); //blue
 
     //Change Z button in pause screen to L
-    Write_File_To_Rom(".\\files\\l", "A7B7CC");
+    Write_File_To_Rom(".\\files\\l.yaz0", "A7B7CC");
 }
 
 string Vector_To_String(vector<string> data, string separator) {
@@ -4645,6 +4645,40 @@ void Write_Log(string seed) {
     }
 
     //outFile << Log;
+}
+
+void Bingo_Water() {
+    //bingo water
+    //get item text
+    Write_To_Rom(11352237, string_to_hex("Bingo Water") + "002118111F000A5573652004B20020746F20706F7572206974206F6E207768617465766572116D6179206E6565642069742EBF");
+
+    //sign next to water under witch's potion shop
+    Write_To_Rom(11376723, string_to_hex("Bingo Water") + "20686F6D65207769746820796F752E11002020");
+
+    //Ikana cave sign
+    Write_To_Rom(11379624, string_to_hex("Bingo Water") + "20436176651100456E7472792070726F686962697465642064756520746F2067686F7374117369676874696E677321BF");
+
+    //Sharp talking about flat and the cave?
+    Write_To_Rom(11568975, string_to_hex("Bingo Water") + "2063617665002E19BF");
+
+    //pause menu text
+    Write_To_Rom(11608680, string_to_hex("Bingo Water") + "1100547279207573696E67206974207769746820B2206F6E207468696E67731174686174206E656564207761746572696E672EBF");
+
+    //write bingo water image for bottom of pause menu
+    Write_File_To_Rom(".\\files\\BW.yaz0", "A2A6D4");
+
+    //hot bingo water
+    //get item text
+    Write_To_Rom(11352345, string_to_hex("Bingo Water") + "002118111F000A55736520697420776974682004B200206265666F726520697420636F6F6C732EBF");
+
+    //goron text next to goron gravewyard
+    Write_To_Rom(11507742, string_to_hex("Bingo Water") + "00204920666F756E64207768656E1149207761732064696767696E6720746865206865726F27732067726176652E19BF");
+
+    //pause menu text
+    Write_To_Rom(11608760, string_to_hex("Bingo Water") + "1100557365206974207769746820B2206265666F726520697420636F6F6C732EBF");
+
+    //write hot bingo water image for bottom of pause menu
+    Write_File_To_Rom(".\\files\\HBW.yaz0", "A2A8A4");
 }
 
 int main()
@@ -4948,6 +4982,11 @@ int main()
         cout << "\nMaking link Kafei @Purpletissuebox\n";
         Change_Link_Kafei();
         Change_Kafei_Color(Settings["settings"]["Tunic"]);
+    }
+
+    //change water to bingo water if secret is active
+    if (Settings["settings"]["BingoWater"] == "True") {
+        Bingo_Water();
     }
 
     //compress rom and create wad
