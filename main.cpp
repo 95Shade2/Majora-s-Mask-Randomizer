@@ -4564,6 +4564,8 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     //Write_To_Rom(33777164, "0909FF601273 09B8FF60113B 09B1FF440FE2 0945FF1F0F01 087FFEF20E54 07D7FEE80DD0 0705FEE50D3E"); //update the points
     //Write_To_Rom(33777164, "0909FF601273 09B1FF440FE2 087FFEF20E54 0705FEE50D3E"); //update the points
     Write_To_Rom(33777164, "0909FF60127309B1FF440FE2087FFEF20E540705FEE50D3E"); //update the points
+
+    Write_Cutscene_Rom(42835544, "great_bay_temple_ye_holds");  //shorten ye who holds remains cs in gbt
 }
 
 void Write_File_To_Rom(string filename, string rom_offset) {
