@@ -4568,6 +4568,7 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     Write_Cutscene_Rom(42835544, "great_bay_temple_ye_holds");      //shorten ye who holds remains cs in gbt
     Write_To_Rom(16165132, "00000000");                             //skip the goht room entrance cs
     Write_Cutscene_Rom(34878820, "stone_tower_temple_ye_holds");    //shorten ye who hold remains cs in stt
+    Write_To_Rom(44042848, "9260");                                 //shorten evan hp cs
 }
 
 void Write_File_To_Rom(string filename, string rom_offset) {
