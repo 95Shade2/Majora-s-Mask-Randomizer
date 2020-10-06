@@ -4565,8 +4565,9 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     //Write_To_Rom(33777164, "0909FF601273 09B1FF440FE2 087FFEF20E54 0705FEE50D3E"); //update the points
     //Write_To_Rom(33777164, "0909FF60127309B1FF440FE2087FFEF20E540705FEE50D3E"); //update the points
 
-    Write_Cutscene_Rom(42835544, "great_bay_temple_ye_holds");  //shorten ye who holds remains cs in gbt
-    Write_To_Rom(16165132, "00000000");                         //skip the goht room entrance cs
+    Write_Cutscene_Rom(42835544, "great_bay_temple_ye_holds");      //shorten ye who holds remains cs in gbt
+    Write_To_Rom(16165132, "00000000");                             //skip the goht room entrance cs
+    Write_Cutscene_Rom(34878820, "stone_tower_temple_ye_holds");    //shorten ye who hold remains cs in stt
 }
 
 void Write_File_To_Rom(string filename, string rom_offset) {
