@@ -50,6 +50,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Preset_Keys = new Dictionary<int, string>();
                         Game_Colors = Default_Pause();
                         Wallet_Sizes = Default_Wallets();
+                        BlastMaskFrames_Num.Value = 310;
 
                         Item_Pools_Keys.Add(0, "Items");
 
@@ -1162,6 +1163,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                                 Text += "Remove_Cutscenes=" + removeCutscenesToolStripMenuItem.Checked + "\n";  //whether or not to remove the cutscenes
 
                                 Text += "GC_Hud=" + gCHudToolStripMenuItem.Checked + "\n";      //use or not use the GC Hud
+
+                                Text += "BlastMask_Cooldown=" + BlastMaskFrames_Num.Value + "\n";      //the blast mask cooldown
                         }
 
                         if (colors)
@@ -1464,14 +1467,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                         {
                                 swampScrubSalesBeansToolStripMenuItem.Checked = true;
                         }
-
-                        if (settings.ContainsKey("Tunic"))
-                        {
-                                //Color tunic_color = String_To_Color(settings["Tunic"]);
-                                //Tunic_ColorDialog.Color = tunic_color;
-                                //Tunic_Button.BackColor = tunic_color;
-                        }
-
+                        
                         if (settings.ContainsKey("Remove_Cutscenes") && settings["Remove_Cutscenes"] == "True")
                         {
                                 removeCutscenesToolStripMenuItem.Checked = true;
@@ -1480,6 +1476,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                         if (settings.ContainsKey("GC_Hud") && settings["GC_Hud"] == "True")
                         {
                                 gCHudToolStripMenuItem.Checked = true;
+                        }
+
+                        if (settings.ContainsKey("BlastMask_Cooldown"))
+                        {
+                                BlastMaskFrames_Num.Value = String_To_Int(settings["BlastMask_Cooldown"]);
+                        }
+                        else
+                        {
+                                BlastMaskFrames_Num.Value = 310;
                         }
                 }
 
@@ -2043,6 +2048,14 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                         WalletForm.parent = this;
                         WalletForm.Show();
+                }
+
+                private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+                {
+                        int frames = (int)BlastMaskFrames_Num.Value;
+                        double seconds = frames / 20.0;
+                        
+                        BlastMaskSeconds_Label.Text = "Seconds: " + seconds;
                 }
         }
 }

@@ -399,6 +399,10 @@
                         this.gCHudToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.walletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                        this.label5 = new System.Windows.Forms.Label();
+                        this.label6 = new System.Windows.Forms.Label();
+                        this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
+                        this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
                         this.tabControl2.SuspendLayout();
                         this.tabPage8.SuspendLayout();
                         this.tabControl3.SuspendLayout();
@@ -418,6 +422,7 @@
                         this.tabPage1.SuspendLayout();
                         this.tabPage10.SuspendLayout();
                         this.menuStrip1.SuspendLayout();
+                        ((System.ComponentModel.ISupportInitialize)(this.BlastMaskFrames_Num)).BeginInit();
                         this.SuspendLayout();
                         // 
                         // All_Night_Mask
@@ -4427,12 +4432,56 @@
                         this.walletToolStripMenuItem.Text = "Wallets";
                         this.walletToolStripMenuItem.Click += new System.EventHandler(this.walletToolStripMenuItem_Click);
                         // 
+                        // label5
+                        // 
+                        this.label5.AutoSize = true;
+                        this.label5.Location = new System.Drawing.Point(417, 298);
+                        this.label5.Name = "label5";
+                        this.label5.Size = new System.Drawing.Size(109, 13);
+                        this.label5.TabIndex = 94;
+                        this.label5.Text = "Blast Mask Cooldown";
+                        // 
+                        // label6
+                        // 
+                        this.label6.AutoSize = true;
+                        this.label6.Location = new System.Drawing.Point(414, 320);
+                        this.label6.Name = "label6";
+                        this.label6.Size = new System.Drawing.Size(44, 13);
+                        this.label6.TabIndex = 95;
+                        this.label6.Text = "Frames:";
+                        // 
+                        // BlastMaskFrames_Num
+                        // 
+                        this.BlastMaskFrames_Num.Location = new System.Drawing.Point(459, 318);
+                        this.BlastMaskFrames_Num.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+                        this.BlastMaskFrames_Num.Name = "BlastMaskFrames_Num";
+                        this.BlastMaskFrames_Num.Size = new System.Drawing.Size(67, 20);
+                        this.BlastMaskFrames_Num.TabIndex = 96;
+                        this.BlastMaskFrames_Num.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+                        // 
+                        // BlastMaskSeconds_Label
+                        // 
+                        this.BlastMaskSeconds_Label.AutoSize = true;
+                        this.BlastMaskSeconds_Label.Location = new System.Drawing.Point(414, 344);
+                        this.BlastMaskSeconds_Label.Name = "BlastMaskSeconds_Label";
+                        this.BlastMaskSeconds_Label.Size = new System.Drawing.Size(55, 13);
+                        this.BlastMaskSeconds_Label.TabIndex = 97;
+                        this.BlastMaskSeconds_Label.Text = "Seconds: ";
+                        // 
                         // Main_Window
                         // 
                         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                         this.BackColor = System.Drawing.SystemColors.Control;
                         this.ClientSize = new System.Drawing.Size(702, 461);
+                        this.Controls.Add(this.BlastMaskSeconds_Label);
+                        this.Controls.Add(this.BlastMaskFrames_Num);
+                        this.Controls.Add(this.label6);
+                        this.Controls.Add(this.label5);
                         this.Controls.Add(this.tabControl2);
                         this.Controls.Add(this.Tunic_Button);
                         this.Controls.Add(this.Tunic_Label);
@@ -4498,6 +4547,7 @@
                         this.tabPage10.PerformLayout();
                         this.menuStrip1.ResumeLayout(false);
                         this.menuStrip1.PerformLayout();
+                        ((System.ComponentModel.ISupportInitialize)(this.BlastMaskFrames_Num)).EndInit();
                         this.ResumeLayout(false);
                         this.PerformLayout();
 
@@ -4874,6 +4924,10 @@
                 private System.Windows.Forms.ToolStripMenuItem gCHudToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem pauseMenuColorsToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem walletToolStripMenuItem;
+                private System.Windows.Forms.Label label5;
+                private System.Windows.Forms.Label label6;
+                private System.Windows.Forms.NumericUpDown BlastMaskFrames_Num;
+                private System.Windows.Forms.Label BlastMaskSeconds_Label;
         }
 }
 
