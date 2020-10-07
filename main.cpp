@@ -4686,6 +4686,23 @@ void Bingo_Water() {
     Write_File_To_Rom(".\\files\\HBW.yaz0", "A2A8A4");
 }
 
+string Leading_Zeroes(string hex, int total_length) {
+    while (hex.size() < total_length) {
+        hex = "0" + hex;
+    }
+
+    return hex;
+}
+
+void Change_BlastMask(map<string, string> custom_settings) {
+    int frames = string_to_dec(custom_settings["BlastMask_Cooldown"]);
+    string frames_hex = dec_to_hex(frames);
+
+    frames_hex = Leading_Zeroes(frames_hex, 4);
+
+    Write_To_Rom(13280870, frames_hex);
+}
+
 int main()
 {
     err_file.open("Error.txt");
@@ -4993,6 +5010,9 @@ int main()
     if (Settings["settings"]["BingoWater"] == "True") {
         Bingo_Water();
     }
+
+    //change blast mask cooldown
+    Change_BlastMask(Settings["settings"]);
 
     //compress rom and create wad
     if (Settings["settings"]["Wad"] == "True") {
