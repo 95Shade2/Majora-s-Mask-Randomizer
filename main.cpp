@@ -12,6 +12,9 @@ using namespace std;
 
 ofstream err_file;
 
+template<typename value>
+bool Vector_Has(vector<value>, value);
+
 void Error(string Error_Message) {
     cout << Error_Message;
     err_file << Error_Message;
@@ -141,10 +144,13 @@ class Item {
         vector<string> Song2_Locatinos;
         vector<string> Show_Item_ID_Address;
         vector<string> Items_Needed;    //the items that the logic used to determine the item is obtainable
+        vector<string> Item_Count_Locations;
+        vector<string> Item_Count_Locations2;
 
         string Pool;
 
         string Item_ID;
+        string Item_ID2;
         string Get_Item_ID;
         string Text_ID;
         string Flag;
@@ -155,6 +161,8 @@ class Item {
         string Song1_ID;
         string Song2_ID;
         string Show_Item_ID;
+        string Item_Count;
+        string Item_Count2;
 
         vector<Time> Time_Setup;
         vector<Time> Time_Get;
@@ -171,6 +179,7 @@ class Item {
             Name = nam;
 
             Item_ID = id;
+            Item_ID2 = id;
             Get_Item_ID = get_id;
             Text_ID = text;
             Flag = flg;
@@ -188,12 +197,100 @@ class Item {
             can_get = false;
 
             value = 0;
+
+            Item_Count = "00";
+        }
+
+        Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, string item_count, vector<string> item_count_locs) {
+            Name = nam;
+
+            Item_ID = id;
+            Item_ID2 = id;
+            Get_Item_ID = get_id;
+            Text_ID = text;
+            Flag = flg;
+            Obj = ob;
+            Get_Item_Model = get_item_model;
+
+            Pool = pol;
+
+            Address_Get = add_get_table;
+            Address_Item_ID = add_item_id;
+
+            Time_Get = time_available;
+
+            gives_item = false;
+            can_get = false;
+
+            value = 0;
+
+            Item_Count = "00";
+
+            Item_Count = item_count;
+            Item_Count_Locations = item_count_locs;
+        }
+
+        Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, string inv_id, vector<string> add_get_table, vector<string> add_item_id, string item_count, vector<string> item_count_locations) {
+            Name = nam;
+
+            Item_ID = id;
+            Item_ID2 = inv_id;
+            Get_Item_ID = get_id;
+            Text_ID = text;
+            Flag = flg;
+            Obj = ob;
+            Get_Item_Model = get_item_model;
+
+            Pool = pol;
+
+            Address_Get = add_get_table;
+            Address_Item_ID = add_item_id;
+
+            Time_Get = time_available;
+
+            gives_item = false;
+            can_get = false;
+
+            value = 0;
+
+            Item_Count = item_count;
+            Item_Count_Locations = item_count_locations;
+        }
+
+        Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, string inv_id, vector<string> add_get_table, vector<string> add_item_id, string item_count, vector<string> item_count_locations, string item_count2, vector<string> item_count2_locations) {
+            Name = nam;
+
+            Item_ID = id;
+            Item_ID2 = inv_id;
+            Get_Item_ID = get_id;
+            Text_ID = text;
+            Flag = flg;
+            Obj = ob;
+            Get_Item_Model = get_item_model;
+
+            Pool = pol;
+
+            Address_Get = add_get_table;
+            Address_Item_ID = add_item_id;
+
+            Time_Get = time_available;
+
+            gives_item = false;
+            can_get = false;
+
+            value = 0;
+
+            Item_Count = item_count;
+            Item_Count_Locations = item_count_locations;
+            Item_Count2 = item_count2;
+            Item_Count_Locations2 = item_count2_locations;
         }
 
         Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, vector<string> add_text_id) {
             Name = nam;
 
             Item_ID = id;
+            Item_ID2 = id;
             Get_Item_ID = get_id;
             Text_ID = text;
             Flag = flg;
@@ -212,12 +309,43 @@ class Item {
             can_get = false;
 
             value = 0;
+
+            Item_Count = "00";
+        }
+
+        Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, vector<string> add_text_id, string item_count, vector<string> item_count_locations, int just_overlading) {
+            Name = nam;
+
+            Item_ID = id;
+            Item_ID2 = id;
+            Get_Item_ID = get_id;
+            Text_ID = text;
+            Flag = flg;
+            Obj = ob;
+            Get_Item_Model = get_item_model;
+
+            Pool = pol;
+
+            Address_Get = add_get_table;
+            Address_Item_ID = add_item_id;
+            Address_Text_ID = add_text_id;
+
+            Time_Get = time_available;
+
+            gives_item = false;
+            can_get = false;
+
+            value = 0;
+
+            Item_Count = item_count;
+            Item_Count_Locations = item_count_locations;
         }
 
         Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, vector<string> add_text_id, vector<string> add_get_item_id) {
             Name = nam;
 
             Item_ID = id;
+            Item_ID2 = id;
             Get_Item_ID = get_id;
             Text_ID = text;
             Flag = flg;
@@ -237,12 +365,15 @@ class Item {
             can_get = false;
 
             value = 0;
+
+            Item_Count = "00";
         }
 
         Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, vector<string> add_text_id, vector<string> add_get_item_id, vector<string> Inverted_Song_Locations) {
             Name = nam;
 
             Item_ID = id;
+            Item_ID2 = id;
             Get_Item_ID = get_id;
             Text_ID = text;
             Flag = flg;
@@ -264,12 +395,15 @@ class Item {
             can_get = false;
 
             value = 0;
+
+            Item_Count = "00";
         }
 
         Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, vector<string> add_text_id, vector<string> add_get_item_id, vector<string> Inverted_Song_Locations, string songid1, string songid2, vector<string> song1_loc, vector<string> song2_loc) {
             Name = nam;
 
             Item_ID = id;
+            Item_ID2 = id;
             Get_Item_ID = get_id;
             Text_ID = text;
             Flag = flg;
@@ -296,6 +430,44 @@ class Item {
             can_get = false;
 
             value = 0;
+
+            Item_Count = "00";
+        }
+
+        Item(vector<Time> time_available, string nam, string id, string get_id, string text, string flg, string ob, string get_item_model, string pol, vector<string> add_get_table, vector<string> add_item_id, vector<string> add_text_id, vector<string> add_get_item_id, vector<string> Inverted_Song_Locations, string songid1, string songid2, vector<string> song1_loc, vector<string> song2_loc, string item_count, vector<string> item_count_locations) {
+            Name = nam;
+
+            Item_ID = id;
+            Item_ID2 = id;
+            Get_Item_ID = get_id;
+            Text_ID = text;
+            Flag = flg;
+            Obj = ob;
+            Get_Item_Model = get_item_model;
+
+            Pool = pol;
+
+            Address_Get = add_get_table;
+            Address_Item_ID = add_item_id;
+            Address_Get_Item_ID = add_get_item_id;
+            Address_Text_ID = add_text_id;
+
+            ID_Minus_61_Locations = Inverted_Song_Locations;
+
+            Time_Get = time_available;
+
+            Song1_ID = songid1;
+            Song2_ID = songid2;
+            Song1_Locatinos = song1_loc;
+            Song2_Locatinos = song2_loc;
+
+            gives_item = false;
+            can_get = false;
+
+            value = 0;
+
+            Item_Count = item_count;
+            Item_Count_Locations = item_count_locations;
         }
 
         /*
@@ -1180,7 +1352,6 @@ string Item_Get(Item it) {
 
     data = it.Item_ID + it.Flag + it.Get_Item_Model + it.Text_ID + it.Obj;
 
-
     return data;
 }
 
@@ -1418,33 +1589,212 @@ string Bits_Or(string bits_1, string bits_2) {
             }
         }
     }
+}
 
+//clears the bit at index bit_index of a byte
+string Bit_Clear(string byte, int bit_index) {
+    string new_byte = "";
+
+    for (int b = 0; b < byte.size(); b++) {
+        if (b != bit_index) {
+            new_byte += byte[b];
+        }
+        else {
+            new_byte += "0";
+        }
+    }
+
+    return new_byte;
 }
 
 void Give_Starting_Items() {
     vector<string> Start_Sources = {"Deku Mask", "Song of Healing"};
     //vector<string> Start_Sources = {"Deku Mask"};
     string hex;
+    string location;
+    string Count_Location;
     string Start_Item;
     vector<string> Song_Names = {"Song of Time", "Song of Healing", "Song of Soaring", "Epona's Song", "Song of Storms", "Sonata of Awakening", "Goron Lullaby", "New Wave Bossa Nova", "Elegy of Emptiness", "Oath to Order"};
     vector<string> Song_Bit_Values = {"00010000", "00100000", "10000000", "01000000", "00000001", "01000000", "10000000", "00000001", "00000010", "00000100"};
-    string Songs_Bit_1 = "00000000";   //C5CE71 12963441
-    string Songs_Bit_2 = "00010000";   //C5CE72 12963442    always start out with Song of Time
-    string Songs_Bit_3 = "00000000";   //C5CE73 12963443
+    //string Songs_Bit_1 = "00000000";   //C5CE71 12963441
+    //string Songs_Bit_2 = "00010000";   //C5CE72 12963442    always start out with Song of Time
+    //string Songs_Bit_3 = "00000000";   //C5CE73 12963443
+    map<string, int> Item_Counts;
+    vector<string> Item_C_Locations;
+    map<string, string> Item_Flags;
+    vector<string> Item_F_Locations;
+    string songs_1 = "C5CE71";
+    string songs_2 = "C5CE72";
+    string songs_3 = "C5CE73";
+    string HC = "C5CDE9";
+    string Health = "C5CDEB";
+    string wallet = "C5CE6E";
+    string sword_shield = "C5CE21";
 
     //give ocarina
     Write_To_Rom(12963364, "00");
+
+    Item_Flags[songs_1] = "00000000";
+    Item_Flags[songs_2] = "00010000";    //start out with Song of Time
+    Item_Flags[songs_3] = "00000000";
+    Item_Flags[wallet] = "00010000";    //start out with small wallet
+    Item_Flags[sword_shield] = "00010001";    //start out with sword and shield
+    Item_F_Locations.push_back(songs_1);
+    Item_F_Locations.push_back(songs_2);
+    Item_F_Locations.push_back(songs_3);
+    Item_F_Locations.push_back(wallet);
+    Item_F_Locations.push_back(sword_shield);
+
+    //start out with 3 hearts
+    Item_Counts[HC] = hex_to_decimal("30");
+    Item_Counts[Health] = hex_to_decimal("30");
+    Item_C_Locations.push_back(HC);
+    Item_C_Locations.push_back(Health);
 
     //give song of time and song of healing
     //Write_To_Rom(12963442, "30");
 
     //replace each starting item with the new item
     for (int i = 0; i < Start_Sources.size(); i++) {
-    Start_Item = Start_Sources[i];
+        Start_Item = Start_Sources[i];
 
-    hex = Items[Items[Start_Item].Name].Item_ID;
-    hex = Even_Hex(hex);
+        hex = Items[Items[Start_Item].Name].Item_ID2;
+        hex = Even_Hex(hex);
 
+        //if there is any locations for the item ids
+        if (Items[Items[Start_Item].Name].Address_Item_ID.size() > 0) {
+            location = Items[Items[Start_Item].Name].Address_Item_ID[0];
+
+            //if there is a location in the inventory to place the item id
+            if (location.size() > 0) {
+                Write_To_Rom(hex_to_decimal(location), hex);
+            }
+        }
+
+        //if there is a location in the inventory to place the item count, then add to it the count of the current item
+        if (Items[Items[Start_Item].Name].Item_Count_Locations.size() > 0) {
+            for (int l = 0; l < Items[Items[Start_Item].Name].Item_Count_Locations.size(); l++) {
+                Count_Location = Items[Items[Start_Item].Name].Item_Count_Locations[l];
+
+                string key = Count_Location;
+                string count_str = Items[Items[Start_Item].Name].Item_Count;
+                int Count;
+
+                if (count_str[1] == '_') {
+                    //this is a flag, not an item count. Or the item is a tier 3 item
+                    if (count_str[0] == 'F' || count_str[0] == '3') {
+                        count_str = count_str.substr(2);
+
+                        //or the bits in the same byte
+                        if (Vector_Has(Item_F_Locations, key)) {
+                            Item_Flags[key] = Bits_Or(Item_Flags[key], count_str);
+                        }
+                        else {
+                            Item_Flags[key] = count_str;
+                            Item_F_Locations.push_back(Count_Location);
+                        }
+                    }
+                    //this is a set value, the byte can be from one item or another, is not ored together or added. one or the other
+                    else if (count_str[0] == 'S') {
+                        count_str = count_str.substr(2);
+
+                        if (!Vector_Has(Item_F_Locations, key)) {
+                            Item_F_Locations.push_back(Count_Location);
+                        }
+                        Item_Flags[key] = count_str;
+                    }
+                    else if (count_str[0] == '1') {
+                        count_str = count_str.substr(2);
+
+                        if (Vector_Has(Item_F_Locations, key)) {
+                            int ignore_bit = IndexOf_S(count_str, "1") - 1; //gets the bit that is for tier 2
+                            count_str = Bits_Or(count_str, Item_Flags[key]);
+                            count_str = Bit_Clear(count_str, ignore_bit);   //clears the tier 2 bit
+                        }
+                        else {
+                            Item_F_Locations.push_back(Count_Location);
+                        }
+
+                        Item_Flags[key] = count_str;
+                    }
+                    //tier two upgrade item
+                    else if (count_str[0] == '2') {
+                        count_str = count_str.substr(2);
+
+                        if (Vector_Has(Item_F_Locations, key)) {
+                            int ignore_bit = IndexOf_S(count_str, "1") + 1; //gets the bit that is for tier 1 and 3 to make sure it's not set
+                            count_str = Bits_Or(count_str, Item_Flags[key]);
+                            count_str = Bit_Clear(count_str, ignore_bit);   //clears the lower/upper tier bit
+                        }
+                        else {
+                            Item_F_Locations.push_back(Count_Location);
+                        }
+
+                        Item_Flags[key] = count_str;
+                    }
+                    else {
+                        count_str = count_str.substr(2);
+
+                        Count = hex_to_decimal(count_str);
+
+                        if (Vector_Has(Item_C_Locations, key)) {
+                            Item_Counts[key] += Count;
+                        }
+                        else {
+                            Item_Counts[key] = Count;
+                            Item_C_Locations.push_back(Count_Location);
+                        }
+                    }
+                }
+                else {
+                    Count = hex_to_decimal(count_str);
+
+                    if (Vector_Has(Item_C_Locations, key)) {
+                        Item_Counts[key] += Count;
+                    }
+                    else {
+                        Item_Counts[key] = Count;
+                        Item_C_Locations.push_back(Count_Location);
+                    }
+                }
+            }
+        }
+
+        //these counts dont get added together
+        if (Items[Items[Start_Item].Name].Item_Count_Locations2.size() > 0) {
+            location = Items[Items[Start_Item].Name].Item_Count_Locations2[0];
+            string key = location;
+
+            if (location.size() > 0) {
+                int Count = hex_to_decimal(Items[Items[Start_Item].Name].Item_Count2);
+
+                if (!Vector_Has(Item_C_Locations, key)) {
+                    Item_C_Locations.push_back(location);
+                }
+                Item_Counts[key] = Count;
+            }
+        }
+    }
+
+    //write the counts from each item to the locations
+    for (int c = 0; c < Item_C_Locations.size(); c++) {
+        string key = Item_C_Locations[c];
+        string location = Item_C_Locations[c];
+        int Count = Item_Counts[key];
+
+        Write_To_Rom(hex_to_decimal(location), dec_to_hex(Count));
+    }
+
+    //write the flag bits from each item to the locations
+    for (int c = 0; c < Item_F_Locations.size(); c++) {
+        string key = Item_F_Locations[c];
+        string location = Item_F_Locations[c];
+        string Flag = Item_Flags[key];
+
+        Write_To_Rom(hex_to_decimal(location), binary_to_hex(Flag));
+    }
+
+    /*
     if (Items[Start_Item].Name == "Adult Wallet") {
         Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]), "10");
     }
@@ -1546,11 +1896,12 @@ void Give_Starting_Items() {
         Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]), hex);
     }
     }
+    */
 
     //write the songs to the file
-    Write_To_Rom(12963441, binary_to_hex(Songs_Bit_1));
-    Write_To_Rom(12963442, binary_to_hex(Songs_Bit_2));
-    Write_To_Rom(12963443, binary_to_hex(Songs_Bit_3));
+    //Write_To_Rom(12963441, binary_to_hex(Songs_Bit_1));
+    //Write_To_Rom(12963442, binary_to_hex(Songs_Bit_2));
+    //Write_To_Rom(12963443, binary_to_hex(Songs_Bit_3));
 
 }
 
@@ -4709,58 +5060,59 @@ int main()
 
     outFile.open("Spoiler Log.txt");
 
-    Items["Adult Wallet"] = Item({Time(1,false,0,3,true,12)}, "Adult Wallet", "5A", "08", "08", "A0", "00A8", "21", "", {"CD688E"}, {"C5CE6E"});
+    //name    item id     get item id   text id     flag   object   get item model  pool = ""   get item locations  item id locations   text id locations
+    Items["Adult Wallet"] = Item({Time(1,false,0,3,true,12)}, "Adult Wallet", "5A", "08", "08", "A0", "00A8", "21", "", {"CD688E"}, {}, "1_00010000", {"C5CE6E"});
     Items["All-Night Mask"] = Item({Time(3,true,4,3,false,12,"KillSakon")}, "All-Night Mask", "38", "7E", "7E", "A0", "0265", "11", "", {"CD6B52"}, {"C5CE3D"});
-    Items["Big Bomb Bag"] = Item({Time(3,true,4,3,false,12,"KillSakon")}, "Big Bomb Bag", "57", "1C", "1C", "A0", "0098", "19", "", {"CD6906"}, {"C5CE2A"}); //C5CE6F bomb slot
-    Items["Biggest Bomb Bag"] = Item({Time(1,false,0,3,true,12)},"Biggest Bomb Bag", "58", "1D", "1D", "A0", "0098", "1A", "", {"CD690C"}, {"C5CE2A"}); //C5CE6F bomb slot
+    Items["Big Bomb Bag"] = Item({Time(3,true,4,3,false,12,"KillSakon")}, "Big Bomb Bag", "57", "1C", "1C", "A0", "0098", "19", "", "06", {"CD6906"}, {"C5CE2A"}, "2_00010000", {"C5CE6F"}, "1E", {"C5CE5A"}); //C5CE6F bomb slot
+    Items["Biggest Bomb Bag"] = Item({Time(1,false,0,3,true,12)},"Biggest Bomb Bag", "58", "1D", "1D", "A0", "0098", "1A", "", "06", {"CD690C"}, {"C5CE2A"}, "3_00011000", {"C5CE6F"}, "28", {"C5CE5A"}); //C5CE6F bomb slot
     Items["Blast Mask"] = Item({Time(1,false,0,3,true,12,"","KillSakon")},"Blast Mask", "47", "8D", "8D", "A0", "026D", "3B", "", {"CD6BAC"}, {"C5CE3E"});
-    Items["Bomb Bag"] = Item({Time(1,false,0,3,true,12)}, "Bomb Bag", "56", "1B", "1B", "A0", "0098", "18", "", {"CD6900"}, {"C5CE2A"});
-    Items["Bomber's Notebook"] = Item({Time(1,false,0,3,true,12)}, "Bomber's Notebook", "6D", "50", "50", "80", "0253", "0C", "", {"CD6A3E"}, {"C5CE71"});
-    Items["Bow"] = Item({Time(1,false,0,3,true,12)}, "Bow", "01", "22", "22", "A0", "00BF", "2F", "", {"CD692A"}, {"C5CE25"});    //C5CE6F = quiver slot
+    Items["Bomb Bag"] = Item({Time(1,false,0,3,true,12)}, "Bomb Bag", "56", "1B", "1B", "A0", "0098", "18", "", "06", {"CD6900"}, {"C5CE2A"}, "1_00001000", {"C5CE6F"}, "14", {"C5CE5A"});
+    Items["Bomber's Notebook"] = Item({Time(1,false,0,3,true,12)}, "Bomber's Notebook", "6D", "50", "50", "80", "0253", "0C", "", {"CD6A3E"}, {}, "F_00000100", {"C5CE71"});
+    Items["Bow"] = Item({Time(1,false,0,3,true,12)}, "Bow", "01", "22", "22", "A0", "00BF", "2F", "", "01", {"CD692A"}, {"C5CE25"}, "1_00000001", {"C5CE6F"}, "1E", {"C5CE55"});    //C5CE6F = quiver slot
     Items["Bremen Mask"] = Item({Time(1,true,0,1,true,12), Time(2,true,0,2,true,12)}, "Bremen Mask", "46", "8C", "8C", "A0", "025A", "10", "", {"CD6BA6"}, {"C5CE43"});
     Items["Bunny Hood"] = Item({Time(1,false,0,3,true,12)}, "Bunny Hood", "39", "7F", "7F", "A0", "0103", "3F", "", {"CD6B58"}, {"C5CE44"});
     Items["Captain's Hat"] = Item({Time(1,false,0,3,true,12)}, "Captain's Hat", "44", "7C", "7C", "A0", "0102", "3E", "", {"CD6B46"}, {"C5CE51"});
     Items["Circus Leader's Mask"] = Item({Time(1,true,0,2, true,12), Time(2,true,0,2,true,12)}, "Circus Leader's Mask", "3D", "83", "83", "A0", "0259", "0F", "", {"CD6B70"}, {"C5CE49"});
     Items["Couple's Mask"] = Item({Time(3,true,11,3,true,12, "NoKillSakon")}, "Couple's Mask", "3F", "85", "85", "A0", "0282", "04", "", {"CD6B7C"}, {"C5CE4B", "F125C3"}, {"2C7CBD5"});
-    Items["Deku Nuts"] = Item({Time(1,false,0,3,true,12)}, "Deku Nuts", "09", "28", "28", "0C", "0094", "EE", "", {"CD694E"}, {"C5CE2D"});
-    Items["Deku Nuts (10)"] = Item({Time(1,false,0,3,true,12)}, "Deku Nuts (10)", "8E", "2A", "2A", "0C", "0094", "EE", "", {"CD695A"}, {"C5CE2D"});
-    Items["Deku Stick"] = Item({Time(1,false,0,3,true,12)}, "Deku Stick", "08", "19", "19", "0D", "009F", "E5", "", {"CD68F4"}, {"C5CE2C"});
+    Items["Deku Nuts"] = Item({Time(1,false,0,3,true,12)}, "Deku Nuts", "09", "28", "28", "0C", "0094", "EE", "", {"CD694E"}, {"C5CE2D"}, "01", {"C5CE5D"});
+    Items["Deku Nuts (10)"] = Item({Time(1,false,0,3,true,12)}, "Deku Nuts (10)", "8E", "2A", "2A", "0C", "0094", "EE", "", "09", {"CD695A"}, {"C5CE2D"}, "0A", {"C5CE5D"});
+    Items["Deku Stick"] = Item({Time(1,false,0,3,true,12)}, "Deku Stick", "08", "19", "19", "0D", "009F", "E5", "", "08", {"CD68F4"}, {"C5CE2C"}, "01", {"C5CE5C"});
     Items["Don Gero's Mask"] = Item({Time(1,false,0,3,true,12)}, "Don Gero's Mask", "42", "88", "88", "A0", "0266", "23", "", {"CD6B8E"}, {"C5CE45"});
     Items["Express Letter to Mama"] = Item({Time(3,false,0,3,true,4,"NoKillSakon")}, "Express Letter to Mama", "2E", "A1", "A1", "80", "0245", "37", "", {"CD6C24"}, {"C5CE2F"});
     Items["Fierce Deity Mask"] = Item({Time(3,true,12,3,true,12)},"Fierce Deity Mask", "35", "7B", "7B", "A0", "0242", "76", "", {"CD6B40"}, {"C5CE53"});
     Items["Fire Arrow"] = Item({Time(1,false,0,3,true,12)},"Fire Arrow", "02", "25", "25", "A0", "0121", "48", "", {"CD693C"}, {"C5CE26"});
     Items["Garo Mask"] = Item({Time(1,false,0,1,false,12)},"Garo Mask", "3B", "81", "81", "A0", "0209", "6A", "", {"CD6B64"}, {"C5CE50"});
-    Items["Giant Wallet"] = Item({Time(1,false,0,3,true,12)}, "Giant Wallet", "5B", "09", "09", "A0", "00A8", "22", "", {"CD6894"}, {"C5CE6E"});
+    Items["Giant Wallet"] = Item({Time(1,false,0,3,true,12)}, "Giant Wallet", "5B", "09", "09", "A0", "00A8", "22", "", {"CD6894"}, {}, "2_00100000", {"C5CE6E"});
     Items["Giant's Mask"] = Item({Time(1,false,0,3,true,12)}, "Giant's Mask", "49", "7D", "7D", "A0", "0226", "73", "", {"CD6B4C"}, {"C5CE52"});
     Items["Gibdo Mask"] = Item({Time(1,false,0,3,true,12)}, "Gibdo Mask", "41", "87", "87", "A0", "020B", "6C", "", {"CD6B88"}, {"C5CE4F", "F12C7F"}, {"2B4A569"});
-    Items["Gilded Sword"] = Item({Time(3,false,0,3,false,12)}, "Gilded Sword", "4F", "39", "39", "A0", "01FA", "68", "", {"CD69B4", "CD6C12"}, {"C5CE00"}); //C5CE21 Inv sword/shield
+    Items["Gilded Sword"] = Item({Time(3,false,0,3,false,12)}, "Gilded Sword", "4F", "39", "39", "A0", "01FA", "68", "", {"CD69B4", "CD6C12"}, {"C5CE00"}, "3_00000011", {"C5CE21"}); //C5CE21 Inv sword/shield
     Items["Great Fairy's Mask"] = Item({Time(1,false,0,3,true,12)}, "Great Fairy's Mask", "40", "86", "86", "A0", "020A", "6B", "", {"CD6B82"}, {"C5CE40", "EA3F53", "EA40FB"}, {"243F195", "24415CD"});
     Items["Great Fairy's Sword"] = Item({Time(1,false,0,3,true,12)}, "Great Fairy's Sword", "10", "3B", "3B", "A0", "01FB", "69", "", {"CD69C0", "CD6C00"}, {"C5CE34", "EA3F8B"}, {"243413D"});
-    Items["Hero's Shield"] = Item({Time(1,false,0,3,true,12)}, "Hero's Shield", "51", "32", "32", "A0", "00B3", "D8", "", {"CD698A", "CD6C18"}, {"C5CE21"});
+    Items["Hero's Shield"] = Item({Time(1,false,0,3,true,12)}, "Hero's Shield", "51", "32", "32", "A0", "00B3", "D8", "", {"CD698A", "CD6C18"}, {}, "1_00010000", {"C5CE21"});
     Items["Hookshot"] = Item({Time(1,false,0,3,true,12)}, "Hookshot", "0F", "41", "41", "A0", "00B4", "29", "", {"CD69E4"}, {"C5CE33"});
     Items["Ice Arrow"] = Item({Time(1,false,0,3,true,12)}, "Ice Arrow", "03", "26", "26", "A0", "0121", "49", "", {"CD6942"}, {"C5CE27"});
     Items["Kafei's Mask"] = Item({Time(1,false,2,1,false,12), Time(2,false,2,2,false,12)}, "Kafei's Mask", "37", "8F", "8F", "A0", "0258", "0E", "", {"CD6BB8"}, {"C5CE4A"});
     Items["Kamaro's Mask"] = Item({Time(1,true,6,1,true,12), Time(2,true,6,2,true,12), Time(3,true,6,3,true,12)}, "Kamaro's Mask", "43", "89", "89", "A0", "027D", "03", "", {"CD6B94"}, {"C5CE4E"});
     Items["Keaton Mask"] = Item({Time(3,false,0,3,true,12)}, "Keaton Mask", "3A", "80", "80", "A0", "0100", "2D", "", {"CD6B5E"}, {"C5CE42"});
-    Items["Kokiri Sword"] = Item({Time(1,true,4,1,true,12), Time(2,true,4,2,true,12), Time(3,true,4,3,true,12)}, "Kokiri Sword", "4D", "37", "9C", "A0", "0148", "56", "", {"CD69A8", "CD6C06"}, {"C5CE00", "CBA4AF"}, {"CBA4E3"}); //C5CE21 Inv sword/shield
+    Items["Kokiri Sword"] = Item({Time(1,true,4,1,true,12), Time(2,true,4,2,true,12), Time(3,true,4,3,true,12)}, "Kokiri Sword", "4D", "37", "9C", "A0", "0148", "56", "", {"CD69A8", "CD6C06"}, {"C5CE00", "CBA4AF"}, {"CBA4E3"}, "1_00000001", {"C5CE21"}, 0); //C5CE21 Inv sword/shield
     Items["Land Title Deed"] = Item({Time(1,false,0,3,true,12)}, "Land Title Deed", "29", "97", "97", "80", "01B2", "5B", "", {"CD6BE8"}, {"C5CE29"});
-    Items["Large Quiver"] = Item({Time(1,false,0,3,true,12)}, "Large Quiver", "54", "23", "23", "A0", "0097", "16", "", {"CD6930"}, {"C5CE25"}); //C5CE6F = quiver slot
-    Items["Largest Quiver"] = Item({Time(1,false,0,3,true,12)}, "Largest Quiver", "55", "24", "24", "A0", "0097", "17", "", {"CD6936"}, {"C5CE25"}); //C5CE6F = quiver slot
+    Items["Large Quiver"] = Item({Time(1,false,0,3,true,12)}, "Large Quiver", "54", "23", "23", "A0", "0097", "16", "", "01", {"CD6930"}, {"C5CE25"}, "2_00000010", {"C5CE6F"}, "28", {"C5CE55"}); //C5CE6F = quiver slot
+    Items["Largest Quiver"] = Item({Time(1,false,0,3,true,12)}, "Largest Quiver", "55", "24", "24", "A0", "0097", "17", "", "01", {"CD6936"}, {"C5CE25"}, "3_00000011", {"C5CE6F"}, "32", {"C5CE55"}); //C5CE6F = quiver slot
     Items["Lens of Truth"] = Item({Time(1,false,0,3,true,12)}, "Lens of Truth", "0E", "42", "42", "A0", "00C0", "30", "", {"CD69EA"}, {"C5CE32"});
     Items["Letter to Kafei"] = Item({Time(1,true,6,1,true,12)}, "Letter to Kafei", "2F", "AA", "AA", "80", "0210", "6E", "", {"CD6C5A"}, {"C5CE35"});
     Items["Light Arrow"] = Item({Time(1,false,0,3,true,12)}, "Light Arrow", "04", "27", "27", "A0", "0121", "4A", "", {"CD6948"}, {"C5CE28"});
-    Items["Magic Beans"] = Item({Time(1,false,0,3,true,12)}, "Magic Beans", "0A", "35", "35", "80", "00C6", "CB", "", {"CD699C"}, {"C5CE2E"});  //get item id of what is given instead is 4F
+    Items["Magic Beans"] = Item({Time(1,false,0,3,true,12)}, "Magic Beans", "0A", "35", "35", "80", "00C6", "CB", "", {"CD699C"}, {"C5CE2E"}, "01", {"C5CE5E"});  //get item id of what is given instead is 4F
     Items["Mask of Scents"] = Item({Time(1,false,0,3,true,12)}, "Mask of Scents", "48", "8E", "8E", "A0", "027E", "3D", "", {"CD6BB2"}, {"C5CE46"});
     Items["Mask of Truth"] = Item({Time(1,false,0,1,true,12)}, "Mask of Truth", "36", "8A", "8A", "A0", "0104", "40", "", {"CD6B9A"}, {"C5CE4C"});
-    Items["Mirror Shield"] = Item({Time(1,false,0,3,true,12)}, "Mirror Shield", "52", "33", "33", "A0", "00C3", "34", "", {"CD6990"}, {"C5CE21"});
+    Items["Mirror Shield"] = Item({Time(1,false,0,3,true,12)}, "Mirror Shield", "52", "33", "33", "A0", "00C3", "34", "", {"CD6990"}, {}, "2_00100000", {"C5CE21"});
     Items["Moon's Tear"] = Item({Time(1,false,0,3,true,12)}, "Moon's Tear", "28", "96", "96", "80", "01B1", "5A", "", {"CD6BE2"}, {"C5CE29"});  //CD7646 - another moon's tear for show item
     Items["Mountain Title Deed"] = Item({Time(1,false,0,3,true,12)}, "Mountain Title Deed", "2B", "99", "99", "80", "01B2", "42", "", {"CD6BF4"}, {"C5CE29"});
     Items["Ocean Title Deed"] = Item({Time(1,false,0,3,true,12)}, "Ocean Title Deed", "2C", "9A", "9A", "80", "01B2", "44", "", {"CD6BFA"}, {"C5CE29"});
     Items["Pendant of Memories"] = Item({Time(2,false,10,2,true,4)}, "Pendant of Memories", "30", "AB", "AB", "80", "0215", "6F", "", {"CD6C60"}, {"C5CE35"});  //other show items: CD764B, CD764C, and CD764D
     Items["Pictograph Box"] = Item({Time(1,false,0,3,true,12)}, "Pictograph Box", "0D", "43", "43", "A0", "0228", "75", "", {"CD69F0"}, {"C5CE31"});
     Items["Postman's Hat"] = Item({Time(3,true,0,3,true,12)}, "Postman's Hat", "3E", "84", "84", "A0", "0225", "72", "", {"CD6B76"}, {"C5CE3C"});
-    Items["Powder Keg"] = Item({Time(1,false,0,3,true,12)}, "Powder Keg", "0C", "34", "34", "80", "01CA", "5E", "", {"CD6996"}, {"C5CE30"});
-    Items["Razor Sword"] = Item({Time(2,false,0,2,false,12), Time(3,false,0,3,false,12)}, "Razor Sword", "4E", "38", "38", "A0", "01F9", "67", "", {"CD69AE", "CD6C0C"}, {"C5CE00"}); //C5CE21 Inv sword/shield
+    Items["Powder Keg"] = Item({Time(1,false,0,3,true,12)}, "Powder Keg", "0C", "34", "34", "80", "01CA", "5E", "", {"CD6996"}, {"C5CE30"}, "01", {"C5CE60"});
+    Items["Razor Sword"] = Item({Time(2,false,0,2,false,12), Time(3,false,0,3,false,12)}, "Razor Sword", "4E", "38", "38", "A0", "01F9", "67", "", {"CD69AE", "CD6C0C"}, {"C5CE00"}, "2_00000010", {"C5CE21"}); //C5CE21 Inv sword/shield
     Items["Romani's Mask"] = Item({Time(2,false,0,2,true,1, "SaveAliens")}, "Romani's Mask", "3C", "82", "82", "A0", "021F", "71", "", {"CD6B6A"}, {"C5CE48"});
     Items["Room Key"] = Item({Time(1,false,6,1,false,8)}, "Room Key", "2D", "A0", "A0", "80", "020F", "6D", "", {"CD6C1E"}, {"C5CE2F"});
     Items["Stone Mask"] = Item({Time(1,false,0,3,true,12)}, "Stone Mask", "45", "8B", "8B", "A0", "0254", "0D", "", {"CD6BA0"}, {"C5CE3F"});
@@ -4790,12 +5142,12 @@ int main()
 
     //Cant start out with a map? - maybe can, when getting a map, it does nothing for some reason
     //change the item ids for the map from 31 to the get item id so that my custom function can determine which map to give
-    Items["Clocktown Map"] = Item({Time(1,false,0,3,true,12)}, "Clocktown Map", "B4", "B4", "B4", "A0", "024D", "2E", "", {"CD6C96"}, {""});
-    Items["Woodfall Map"] = Item({Time(1,false,0,3,true,12)}, "Woodfall Map", "B5", "B5", "B5", "A0", "024D", "2E", "", {"CD6C9C"}, {""});
-    Items["Snowhead Map"] = Item({Time(1,false,0,3,true,12)}, "Snowhead Map", "B6", "B6", "B6", "A0", "024D", "2E", "", {"CD6CA2"}, {""});
-    Items["Romani Ranch Map"] = Item({Time(1,false,0,3,true,12)}, "Romani Ranch Map", "B7", "B7", "B7", "A0", "024D", "2E", "", {"CD6CA8"}, {""});
-    Items["Great Bay Map"] = Item({Time(1,false,0,3,true,12)}, "Great Bay Map", "B8", "B8", "B8", "A0", "024D", "2E", "", {"CD6CAE"}, {""});
-    Items["Stone Tower Map"] = Item({Time(1,false,0,3,true,12)}, "Stone Tower Map", "B9", "B9", "B9", "A0", "024D", "2E", "", {"CD6CB4"}, {""});
+    Items["Clocktown Map"] = Item({Time(1,false,0,3,true,12)}, "Clocktown Map", "B4", "B4", "B4", "A0", "024D", "2E", "", {"CD6C96"}, {});
+    Items["Woodfall Map"] = Item({Time(1,false,0,3,true,12)}, "Woodfall Map", "B5", "B5", "B5", "A0", "024D", "2E", "", {"CD6C9C"}, {});
+    Items["Snowhead Map"] = Item({Time(1,false,0,3,true,12)}, "Snowhead Map", "B6", "B6", "B6", "A0", "024D", "2E", "", {"CD6CA2"}, {});
+    Items["Romani Ranch Map"] = Item({Time(1,false,0,3,true,12)}, "Romani Ranch Map", "B7", "B7", "B7", "A0", "024D", "2E", "", {"CD6CA8"}, {});
+    Items["Great Bay Map"] = Item({Time(1,false,0,3,true,12)}, "Great Bay Map", "B8", "B8", "B8", "A0", "024D", "2E", "", {"CD6CAE"}, {});
+    Items["Stone Tower Map"] = Item({Time(1,false,0,3,true,12)}, "Stone Tower Map", "B9", "B9", "B9", "A0", "024D", "2E", "", {"CD6CB4"}, {});
 
     //Items["Green Rupee"] = Item({Time(1,false,0,3,true,12)}, "Green Rupee", "84", "01", "C4", "00", "013F", "B0", "", {"CD6864"}, {"C5CDEF"}, {}, {}, {"C55FE1"}, "01", {"CD6864"}, "84");
     //Items["Blue Rupee"] = Item({Time(1,false,0,3,true,12)}, "Blue Rupee", "85", "02", "02", "01", "013F", "AF", "", {"CD686A"}, {"C5CDEF"}, {}, {}, {"C55FE3"}, "05", {"CD686A"}, "85");
@@ -4804,20 +5156,33 @@ int main()
     //Items["Silver Rupee"] = Item({Time(1,false,0,3,true,12)}, "Silver Rupee", "89", "06", "06", "14", "013F", "AB", "", {"CD6882"}, {"C5CDEF"}, {}, {}, {"C55FEB"}, "64", {"CD6882"}, "89");
     //Items["Gold Rupee"] = Item({Time(1,false,0,3,true,12)}, "Gold Rupee", "8A", "07", "07", "13", "013F", "BD", "", {"CD6888"}, {"C5CDEF"}, {}, {}, {"C55FED"}, "C8", {"CD6888"}, "8A");
 
-    Items["Sonata of Awakening"] = Item({Time(1,false,0,3,true,12)}, "Sonata of Awakening", "61", "53", "73", "00", "008F", "08", "", {"CD6A50"}, {"C5CE72", "F1B4AF"}, {"277A2A5"}, {}, {"C661F9"}, "02", "12", {"277A275"}, {"277A28D"});
-    Items["Goron Lullaby"] = Item({Time(1,false,0,3,true,12)}, "Goron Lullaby", "62", "54", "74", "00", "008F", "08", "", {"CD6A56"}, {"C5CE72"}, {"263BC31"}, {}, {"C661FB"}, "03", "13", {"263B4F9"}, {"263B511"});
-    Items["New Wave Bossa Nova"] = Item({Time(1,false,0,3,true,12)}, "New Wave Bossa Nova", "63", "71", "75", "00", "008F", "08", "", {"CD6B04"}, {"C5CE72", "DCCC8F"}, {"2602241"}, {}, {"C661FD"}, "04", "14", {}, {"2602229"});
-    Items["Elegy of Emptiness"] = Item({Time(1,false,0,3,true,12)}, "Elegy of Emptiness", "64", "72", "76", "00", "008F", "08", "", {"CD6B0A"}, {"C5CE72"}, {"2B71639"}, {}, {"C661FF"}, "05", "15", {"2B71609"}, {"2B71621"});
-    Items["Oath to Order"] = Item({Time(1,false,0,3,true,12)}, "Oath to Order", "65", "73", "77", "00", "008F", "08", "", {"CD6B10"}, {"C5CE72"}, {"2D83A0D"}, {}, {"C66201"}, "06", "16", {"2D839DD"}, {"2D839F5"});
+    Items["Sonata of Awakening"] = Item({Time(1,false,0,3,true,12)}, "Sonata of Awakening", "61", "53", "73", "00", "008F", "08", "", {"CD6A50"}, {"", "F1B4AF"}, {"277A2A5"}, {}, {"C661F9"}, "02", "12", {"277A275"}, {"277A28D"}, "F_01000000", {"C5CE73"});
+    Items["Goron Lullaby"] = Item({Time(1,false,0,3,true,12)}, "Goron Lullaby", "62", "54", "74", "00", "008F", "08", "", {"CD6A56"}, {}, {"263BC31"}, {}, {"C661FB"}, "03", "13", {"263B4F9"}, {"263B511"}, "F_10000000", {"C5CE73"});
+    Items["New Wave Bossa Nova"] = Item({Time(1,false,0,3,true,12)}, "New Wave Bossa Nova", "63", "71", "75", "00", "008F", "08", "", {"CD6B04"}, {"", "DCCC8F"}, {"2602241"}, {}, {"C661FD"}, "04", "14", {}, {"2602229"}, "F_00000001", {"C5CE72"});
+    Items["Elegy of Emptiness"] = Item({Time(1,false,0,3,true,12)}, "Elegy of Emptiness", "64", "72", "76", "00", "008F", "08", "", {"CD6B0A"}, {}, {"2B71639"}, {}, {"C661FF"}, "05", "15", {"2B71609"}, {"2B71621"}, "F_00000010", {"C5CE72"});
+    Items["Oath to Order"] = Item({Time(1,false,0,3,true,12)}, "Oath to Order", "65", "73", "77", "00", "008F", "08", "", {"CD6B10"}, {}, {"2D83A0D"}, {}, {"C66201"}, "06", "16", {"2D839DD"}, {"2D839F5"}, "F_00000100", {"C5CE72"});
     //Items["Oath to Order"] = Item({Time(1,false,0,3,true,12)}, "Oath to Order", "65", "73", "77", "00", "008F", "08", "", {"CD6B10"}, {"C5CE72"}, {"2D83A0D"}, {}, {"C66201"}, "06", "16", {"2D83941"}, {"2D83959"});
     //Items["Song of Time"] = Item({Time(1,false,0,3,true,12)}, "Song of Time", "67", "74", "00", "00", "008F", "08", "", {"CD6B16"}, {"C5CE72"});    //song of time minus 61 location C66203
-    Items["Song of Healing"] = Item({Time(1,false,0,3,true,12)}, "Song of Healing", "68", "75", "94", "00", "008F", "08", "", {"CD6B1C"}, {"C5CE72"}, {}, {}, {"C66207"}, "09", "19", {"2CCFB99"}, {"2CCFBB1"});
-    Items["Epona's Song"] = Item({Time(1,false,0,3,true,12)}, "Epona's Song", "69", "76", "70", "00", "008F", "08", "", {"CD6A50"}, {"C5CE72"}, {"269141D"}, {}, {"C66209"}, "0A", "1A", {"26913ED"}, {"2691405"});
-    Items["Song of Soaring"] = Item({Time(1,false,0,3,true,12)}, "Song of Soaring", "6A", "A2", "71", "00", "008F", "08", "", {"CD6C2A"}, {"C5CE72", "F2FB7B"}, {"2825EAD"}, {}, {"C6620B"}, "0B", "1B", {"2825E7D"}, {"2825E95"});
-    Items["Song of Storms"] = Item({Time(1,false,0,3,true,12)}, "Song of Storms", "6B", "A3", "72", "00", "008F", "08", "", {"CD6C30"}, {"C5CE72"}, {"1F82BC5"}, {}, {"C6620D"}, "0C", "1C", {"1F82BA1"}, {"1F82BAD"});
+    //Items["Song of Healing"] = Item({Time(1,false,0,3,true,12)}, "Song of Healing", "68", "75", "94", "00", "008F", "08", "", {"CD6B1C"}, {"C5CE72"}, {}, {}, {"C66207"}, "09", "19", {"2CCFB99"}, {"2CCFBB1"});
+    Items["Song of Healing"] = Item({Time(1,false,0,3,true,12)}, "Song of Healing", "68", "75", "94", "00", "008F", "08", "", {"CD6B1C"}, {}, {}, {}, {"C66207"}, "09", "19", {"2CCFB99"}, {"2CCFBB1"}, "F_00100000", {"C5CE72"});
+    Items["Epona's Song"] = Item({Time(1,false,0,3,true,12)}, "Epona's Song", "69", "76", "70", "00", "008F", "08", "", {"CD6A50"}, {}, {"269141D"}, {}, {"C66209"}, "0A", "1A", {"26913ED"}, {"2691405"}, "F_01000000", {"C5CE72"});
+    Items["Song of Soaring"] = Item({Time(1,false,0,3,true,12)}, "Song of Soaring", "6A", "A2", "71", "00", "008F", "08", "", {"CD6C2A"}, {"", "F2FB7B"}, {"2825EAD"}, {}, {"C6620B"}, "0B", "1B", {"2825E7D"}, {"2825E95"}, "F_10000000", {"C5CE72"});
+    Items["Song of Storms"] = Item({Time(1,false,0,3,true,12)}, "Song of Storms", "6B", "A3", "72", "00", "008F", "08", "", {"CD6C30"}, {}, {"1F82BC5"}, {}, {"C6620D"}, "0C", "1C", {"1F82BA1"}, {"1F82BAD"}, "F_00000001", {"C5CE71"});
 
-    Items["Heart Piece"] = Item({Time(1,false,0,3,true,12)}, "Heart Piece", "7B", "0C", "0C", "A0", "0096", "14", "", {"CD68A6"}, {});
-    Items["Heart Container"] = Item({Time(1,false,0,3,true,12)}, "Heart Container", "6F", "0D", "0D", "A0", "0096", "13", "", {"CD68AC"}, {});
+    //vector<string> Song_Names = {   "Song of Time", "Song of Healing", "Song of Soaring", "Epona's Song", "Song of Storms", "Sonata of Awakening", "Goron Lullaby", "New Wave Bossa Nova", "Elegy of Emptiness", "Oath to Order"};
+    //vector<string> Song_Bit_Values = {"00010000",      "00100000",         "10000000",       "01000000",     "00000001",         "01000000",         "10000000",        "00000001",             "00000010",          "00000100"};
+    //string Songs_Bit_1 = "00000000";   //C5CE71 12963441
+    //string Songs_Bit_2 = "00010000";   //C5CE72 12963442
+    //string Songs_Bit_3 = "00000000";   //C5CE73 12963443
+
+    Items["Heart Piece"] = Item({Time(1,false,0,3,true,12)}, "Heart Piece", "7B", "0C", "0C", "A0", "0096", "14", "", {"CD68A6"}, {}, "10", {"C5CE70"});
+    Items["Heart Container"] = Item({Time(1,false,0,3,true,12)}, "Heart Container", "6F", "0D", "0D", "A0", "0096", "13", "", {"CD68AC"}, {}, "10", {"C5CDE9", "C5CDEB"});
+
+    Items["Bombchu"] = Item({Time(1,false,0,3,true,12)}, "Bombchu", "99", "36", "36", "C0", "00B0", "D9", "", "07", {"CD69A2"}, {"C5CE2B"}, "01", {});
+    Items["Bombchus (5)"] = Item({Time(1,false,0,3,true,12)}, "Bombchus (5)", "9A", "3A", "3A", "C0", "00B0", "D9", "", "07", {"CD69BA"}, {"C5CE2B"}, "05", {});
+    Items["Bombchus (10)"] = Item({Time(1,false,0,3,true,12)}, "Bombchus (10)", "98", "1A", "1A", "C0", "00B0", "D9", "", "07", {"CD68FA"}, {"C5CE2B"}, "0A", {});
+    //Items["Bombchus (20)"] = Item({Time(1,false,0,3,true,12)}, "Bombchus (20)", "97", "2E", "2E", "C0", "00B0", "D9", "", "07", {"CD6972"}, {"C5CE2B"}, "14", {});
+    //name    item id     get item id   text id     flag   object   get item model  pool = ""   get item locations  item id locations   item count  item count locations
 
     //Items["Odalwa's Remains"] = Item({Time(1,false,0,3,true,12)}, "Odalwa's Remains", "5D", "55", "55", "80", "0097", "5D", "", {"CD6A5C"}, {});
 

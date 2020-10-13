@@ -902,3 +902,32 @@ Heart Container {
 	Song of Soaring, Large Quiver, Deku Stick, Elegy of Emptiness, Light Arrow, Hookshot
 	Song of Soaring, Largest Quiver, Deku Stick, Elegy of Emptiness, Light Arrow, Hookshot
 }
+
+Bombchu {
+
+}
+
+Bombchus (5) {
+	Blast Mask
+	Bomb Bag
+	Big Bomb Bag
+	Biggest Bomb Bag
+}
+
+Bombchus (10) {
+	Bomb Bag
+	Big Bomb Bag
+	Biggest Bomb Bag
+	Magic Beans, Spring Water, Elegy of Emptiness, Hookshot, Goron Mask, Garo Mask, Bow, Light Arrow
+	Magic Beans, Spring Water, Elegy of Emptiness, Hookshot, Goron Mask, Garo Mask, Large Quiver, Light Arrow
+	Magic Beans, Spring Water, Elegy of Emptiness, Hookshot, Goron Mask, Garo Mask, Largest Quiver, Light Arrow
+	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Goron Mask, Garo Mask, Bow, Light Arrow
+	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Goron Mask, Garo Mask, Large Quiver, Light Arrow
+	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Goron Mask, Garo Mask, Largest Quiver, Light Arrow
+	Magic Beans, Spring Water, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Bow, Light Arrow
+	Magic Beans, Spring Water, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Large Quiver, Light Arrow
+	Magic Beans, Spring Water, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Largest Quiver, Light Arrow
+	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Bow, Light Arrow
+	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Large Quiver, Light Arrow
+	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Largest Quiver, Light Arrow
+}
