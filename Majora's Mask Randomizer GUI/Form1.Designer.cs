@@ -403,6 +403,15 @@
                         this.label6 = new System.Windows.Forms.Label();
                         this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
                         this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
+                        this.Bombchu_Pool = new System.Windows.Forms.ComboBox();
+                        this.Bombchu_Gives = new System.Windows.Forms.ComboBox();
+                        this.Bombchu = new System.Windows.Forms.CheckBox();
+                        this.Bombchus_5_Pool = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_5_Gives = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_5 = new System.Windows.Forms.CheckBox();
+                        this.Bombchus_10_Pool = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_10_Gives = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_10 = new System.Windows.Forms.CheckBox();
                         this.tabControl2.SuspendLayout();
                         this.tabPage8.SuspendLayout();
                         this.tabControl3.SuspendLayout();
@@ -689,7 +698,7 @@
                         // 
                         this.Bombers_Notebook_Gives.Enabled = false;
                         this.Bombers_Notebook_Gives.FormattingEnabled = true;
-                        this.Bombers_Notebook_Gives.Location = new System.Drawing.Point(221, 128);
+                        this.Bombers_Notebook_Gives.Location = new System.Drawing.Point(221, 209);
                         this.Bombers_Notebook_Gives.Name = "Bombers_Notebook_Gives";
                         this.Bombers_Notebook_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Bombers_Notebook_Gives.TabIndex = 33;
@@ -699,7 +708,7 @@
                         // 
                         this.Bombers_Notebook_Pool.Enabled = false;
                         this.Bombers_Notebook_Pool.FormattingEnabled = true;
-                        this.Bombers_Notebook_Pool.Location = new System.Drawing.Point(143, 128);
+                        this.Bombers_Notebook_Pool.Location = new System.Drawing.Point(143, 209);
                         this.Bombers_Notebook_Pool.Name = "Bombers_Notebook_Pool";
                         this.Bombers_Notebook_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Bombers_Notebook_Pool.TabIndex = 32;
@@ -708,7 +717,7 @@
                         // Bombers_Notebook
                         // 
                         this.Bombers_Notebook.AutoSize = true;
-                        this.Bombers_Notebook.Location = new System.Drawing.Point(6, 130);
+                        this.Bombers_Notebook.Location = new System.Drawing.Point(6, 211);
                         this.Bombers_Notebook.Name = "Bombers_Notebook";
                         this.Bombers_Notebook.Size = new System.Drawing.Size(119, 17);
                         this.Bombers_Notebook.TabIndex = 31;
@@ -720,7 +729,7 @@
                         // 
                         this.Bow_Gives.Enabled = false;
                         this.Bow_Gives.FormattingEnabled = true;
-                        this.Bow_Gives.Location = new System.Drawing.Point(221, 155);
+                        this.Bow_Gives.Location = new System.Drawing.Point(221, 236);
                         this.Bow_Gives.Name = "Bow_Gives";
                         this.Bow_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Bow_Gives.TabIndex = 36;
@@ -730,7 +739,7 @@
                         // 
                         this.Bow_Pool.Enabled = false;
                         this.Bow_Pool.FormattingEnabled = true;
-                        this.Bow_Pool.Location = new System.Drawing.Point(143, 155);
+                        this.Bow_Pool.Location = new System.Drawing.Point(143, 236);
                         this.Bow_Pool.Name = "Bow_Pool";
                         this.Bow_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Bow_Pool.TabIndex = 35;
@@ -739,7 +748,7 @@
                         // Bow
                         // 
                         this.Bow.AutoSize = true;
-                        this.Bow.Location = new System.Drawing.Point(6, 157);
+                        this.Bow.Location = new System.Drawing.Point(6, 238);
                         this.Bow.Name = "Bow";
                         this.Bow.Size = new System.Drawing.Size(47, 17);
                         this.Bow.TabIndex = 34;
@@ -906,7 +915,7 @@
                         // 
                         this.Deku_Nuts_Gives.Enabled = false;
                         this.Deku_Nuts_Gives.FormattingEnabled = true;
-                        this.Deku_Nuts_Gives.Location = new System.Drawing.Point(221, 182);
+                        this.Deku_Nuts_Gives.Location = new System.Drawing.Point(221, 263);
                         this.Deku_Nuts_Gives.Name = "Deku_Nuts_Gives";
                         this.Deku_Nuts_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Deku_Nuts_Gives.TabIndex = 54;
@@ -916,7 +925,7 @@
                         // 
                         this.Deku_Nuts_Pool.Enabled = false;
                         this.Deku_Nuts_Pool.FormattingEnabled = true;
-                        this.Deku_Nuts_Pool.Location = new System.Drawing.Point(143, 182);
+                        this.Deku_Nuts_Pool.Location = new System.Drawing.Point(143, 263);
                         this.Deku_Nuts_Pool.Name = "Deku_Nuts_Pool";
                         this.Deku_Nuts_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Deku_Nuts_Pool.TabIndex = 53;
@@ -925,7 +934,7 @@
                         // Deku_Nuts
                         // 
                         this.Deku_Nuts.AutoSize = true;
-                        this.Deku_Nuts.Location = new System.Drawing.Point(6, 184);
+                        this.Deku_Nuts.Location = new System.Drawing.Point(6, 265);
                         this.Deku_Nuts.Name = "Deku_Nuts";
                         this.Deku_Nuts.Size = new System.Drawing.Size(77, 17);
                         this.Deku_Nuts.TabIndex = 52;
@@ -1061,7 +1070,7 @@
                         // 
                         this.Deku_Stick_Gives.Enabled = false;
                         this.Deku_Stick_Gives.FormattingEnabled = true;
-                        this.Deku_Stick_Gives.Location = new System.Drawing.Point(221, 236);
+                        this.Deku_Stick_Gives.Location = new System.Drawing.Point(221, 47);
                         this.Deku_Stick_Gives.Name = "Deku_Stick_Gives";
                         this.Deku_Stick_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Deku_Stick_Gives.TabIndex = 73;
@@ -1071,7 +1080,7 @@
                         // 
                         this.Deku_Stick_Pool.Enabled = false;
                         this.Deku_Stick_Pool.FormattingEnabled = true;
-                        this.Deku_Stick_Pool.Location = new System.Drawing.Point(143, 236);
+                        this.Deku_Stick_Pool.Location = new System.Drawing.Point(143, 47);
                         this.Deku_Stick_Pool.Name = "Deku_Stick_Pool";
                         this.Deku_Stick_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Deku_Stick_Pool.TabIndex = 72;
@@ -1080,7 +1089,7 @@
                         // Deku_Stick
                         // 
                         this.Deku_Stick.AutoSize = true;
-                        this.Deku_Stick.Location = new System.Drawing.Point(6, 238);
+                        this.Deku_Stick.Location = new System.Drawing.Point(6, 49);
                         this.Deku_Stick.Name = "Deku_Stick";
                         this.Deku_Stick.Size = new System.Drawing.Size(79, 17);
                         this.Deku_Stick.TabIndex = 71;
@@ -1123,7 +1132,7 @@
                         // 
                         this.Deku_Nuts_10_Gives.Enabled = false;
                         this.Deku_Nuts_10_Gives.FormattingEnabled = true;
-                        this.Deku_Nuts_10_Gives.Location = new System.Drawing.Point(221, 209);
+                        this.Deku_Nuts_10_Gives.Location = new System.Drawing.Point(221, 20);
                         this.Deku_Nuts_10_Gives.Name = "Deku_Nuts_10_Gives";
                         this.Deku_Nuts_10_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Deku_Nuts_10_Gives.TabIndex = 67;
@@ -1133,7 +1142,7 @@
                         // 
                         this.Deku_Nuts_10_Pool.Enabled = false;
                         this.Deku_Nuts_10_Pool.FormattingEnabled = true;
-                        this.Deku_Nuts_10_Pool.Location = new System.Drawing.Point(143, 209);
+                        this.Deku_Nuts_10_Pool.Location = new System.Drawing.Point(143, 20);
                         this.Deku_Nuts_10_Pool.Name = "Deku_Nuts_10_Pool";
                         this.Deku_Nuts_10_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Deku_Nuts_10_Pool.TabIndex = 66;
@@ -1142,7 +1151,7 @@
                         // Deku_Nuts_10
                         // 
                         this.Deku_Nuts_10.AutoSize = true;
-                        this.Deku_Nuts_10.Location = new System.Drawing.Point(6, 211);
+                        this.Deku_Nuts_10.Location = new System.Drawing.Point(6, 22);
                         this.Deku_Nuts_10.Name = "Deku_Nuts_10";
                         this.Deku_Nuts_10.Size = new System.Drawing.Size(98, 17);
                         this.Deku_Nuts_10.TabIndex = 65;
@@ -1185,7 +1194,7 @@
                         // 
                         this.Express_Letter_To_Mama_Gives.Enabled = false;
                         this.Express_Letter_To_Mama_Gives.FormattingEnabled = true;
-                        this.Express_Letter_To_Mama_Gives.Location = new System.Drawing.Point(221, 263);
+                        this.Express_Letter_To_Mama_Gives.Location = new System.Drawing.Point(221, 74);
                         this.Express_Letter_To_Mama_Gives.Name = "Express_Letter_To_Mama_Gives";
                         this.Express_Letter_To_Mama_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Express_Letter_To_Mama_Gives.TabIndex = 76;
@@ -1215,7 +1224,7 @@
                         // 
                         this.Express_Letter_To_Mama_Pool.Enabled = false;
                         this.Express_Letter_To_Mama_Pool.FormattingEnabled = true;
-                        this.Express_Letter_To_Mama_Pool.Location = new System.Drawing.Point(143, 263);
+                        this.Express_Letter_To_Mama_Pool.Location = new System.Drawing.Point(143, 74);
                         this.Express_Letter_To_Mama_Pool.Name = "Express_Letter_To_Mama_Pool";
                         this.Express_Letter_To_Mama_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Express_Letter_To_Mama_Pool.TabIndex = 75;
@@ -1235,7 +1244,7 @@
                         // Express_Letter_To_Mama
                         // 
                         this.Express_Letter_To_Mama.AutoSize = true;
-                        this.Express_Letter_To_Mama.Location = new System.Drawing.Point(6, 265);
+                        this.Express_Letter_To_Mama.Location = new System.Drawing.Point(6, 76);
                         this.Express_Letter_To_Mama.Name = "Express_Letter_To_Mama";
                         this.Express_Letter_To_Mama.Size = new System.Drawing.Size(137, 17);
                         this.Express_Letter_To_Mama.TabIndex = 74;
@@ -1391,7 +1400,7 @@
                         // 
                         this.Fire_Arrow_Pool.Enabled = false;
                         this.Fire_Arrow_Pool.FormattingEnabled = true;
-                        this.Fire_Arrow_Pool.Location = new System.Drawing.Point(143, 20);
+                        this.Fire_Arrow_Pool.Location = new System.Drawing.Point(143, 101);
                         this.Fire_Arrow_Pool.Name = "Fire_Arrow_Pool";
                         this.Fire_Arrow_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Fire_Arrow_Pool.TabIndex = 81;
@@ -1442,7 +1451,7 @@
                         // Giant_Wallet
                         // 
                         this.Giant_Wallet.AutoSize = true;
-                        this.Giant_Wallet.Location = new System.Drawing.Point(6, 49);
+                        this.Giant_Wallet.Location = new System.Drawing.Point(6, 130);
                         this.Giant_Wallet.Name = "Giant_Wallet";
                         this.Giant_Wallet.Size = new System.Drawing.Size(84, 17);
                         this.Giant_Wallet.TabIndex = 86;
@@ -1474,7 +1483,7 @@
                         // 
                         this.Giant_Wallet_Gives.Enabled = false;
                         this.Giant_Wallet_Gives.FormattingEnabled = true;
-                        this.Giant_Wallet_Gives.Location = new System.Drawing.Point(221, 47);
+                        this.Giant_Wallet_Gives.Location = new System.Drawing.Point(221, 128);
                         this.Giant_Wallet_Gives.Name = "Giant_Wallet_Gives";
                         this.Giant_Wallet_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Giant_Wallet_Gives.TabIndex = 88;
@@ -1504,7 +1513,7 @@
                         // 
                         this.Giant_Wallet_Pool.Enabled = false;
                         this.Giant_Wallet_Pool.FormattingEnabled = true;
-                        this.Giant_Wallet_Pool.Location = new System.Drawing.Point(143, 47);
+                        this.Giant_Wallet_Pool.Location = new System.Drawing.Point(143, 128);
                         this.Giant_Wallet_Pool.Name = "Giant_Wallet_Pool";
                         this.Giant_Wallet_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Giant_Wallet_Pool.TabIndex = 87;
@@ -1513,7 +1522,7 @@
                         // Fire_Arrow
                         // 
                         this.Fire_Arrow.AutoSize = true;
-                        this.Fire_Arrow.Location = new System.Drawing.Point(6, 22);
+                        this.Fire_Arrow.Location = new System.Drawing.Point(6, 103);
                         this.Fire_Arrow.Name = "Fire_Arrow";
                         this.Fire_Arrow.Size = new System.Drawing.Size(73, 17);
                         this.Fire_Arrow.TabIndex = 80;
@@ -1568,7 +1577,7 @@
                         // 
                         this.Gilded_Sword_Pool.Enabled = false;
                         this.Gilded_Sword_Pool.FormattingEnabled = true;
-                        this.Gilded_Sword_Pool.Location = new System.Drawing.Point(143, 74);
+                        this.Gilded_Sword_Pool.Location = new System.Drawing.Point(143, 155);
                         this.Gilded_Sword_Pool.Name = "Gilded_Sword_Pool";
                         this.Gilded_Sword_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Gilded_Sword_Pool.TabIndex = 96;
@@ -1599,7 +1608,7 @@
                         // 
                         this.Fire_Arrow_Gives.Enabled = false;
                         this.Fire_Arrow_Gives.FormattingEnabled = true;
-                        this.Fire_Arrow_Gives.Location = new System.Drawing.Point(221, 20);
+                        this.Fire_Arrow_Gives.Location = new System.Drawing.Point(221, 101);
                         this.Fire_Arrow_Gives.Name = "Fire_Arrow_Gives";
                         this.Fire_Arrow_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Fire_Arrow_Gives.TabIndex = 82;
@@ -1609,7 +1618,7 @@
                         // 
                         this.Gilded_Sword_Gives.Enabled = false;
                         this.Gilded_Sword_Gives.FormattingEnabled = true;
-                        this.Gilded_Sword_Gives.Location = new System.Drawing.Point(221, 74);
+                        this.Gilded_Sword_Gives.Location = new System.Drawing.Point(221, 155);
                         this.Gilded_Sword_Gives.Name = "Gilded_Sword_Gives";
                         this.Gilded_Sword_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Gilded_Sword_Gives.TabIndex = 97;
@@ -1638,7 +1647,7 @@
                         // Gilded_Sword
                         // 
                         this.Gilded_Sword.AutoSize = true;
-                        this.Gilded_Sword.Location = new System.Drawing.Point(6, 76);
+                        this.Gilded_Sword.Location = new System.Drawing.Point(6, 157);
                         this.Gilded_Sword.Name = "Gilded_Sword";
                         this.Gilded_Sword.Size = new System.Drawing.Size(89, 17);
                         this.Gilded_Sword.TabIndex = 95;
@@ -1650,7 +1659,7 @@
                         // 
                         this.Large_Quiver_Gives.Enabled = false;
                         this.Large_Quiver_Gives.FormattingEnabled = true;
-                        this.Large_Quiver_Gives.Location = new System.Drawing.Point(221, 263);
+                        this.Large_Quiver_Gives.Location = new System.Drawing.Point(221, 74);
                         this.Large_Quiver_Gives.Name = "Large_Quiver_Gives";
                         this.Large_Quiver_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Large_Quiver_Gives.TabIndex = 115;
@@ -1670,7 +1679,7 @@
                         // 
                         this.Large_Quiver_Pool.Enabled = false;
                         this.Large_Quiver_Pool.FormattingEnabled = true;
-                        this.Large_Quiver_Pool.Location = new System.Drawing.Point(143, 263);
+                        this.Large_Quiver_Pool.Location = new System.Drawing.Point(143, 74);
                         this.Large_Quiver_Pool.Name = "Large_Quiver_Pool";
                         this.Large_Quiver_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Large_Quiver_Pool.TabIndex = 114;
@@ -1679,7 +1688,7 @@
                         // Large_Quiver
                         // 
                         this.Large_Quiver.AutoSize = true;
-                        this.Large_Quiver.Location = new System.Drawing.Point(6, 265);
+                        this.Large_Quiver.Location = new System.Drawing.Point(6, 76);
                         this.Large_Quiver.Name = "Large_Quiver";
                         this.Large_Quiver.Size = new System.Drawing.Size(87, 17);
                         this.Large_Quiver.TabIndex = 113;
@@ -1701,7 +1710,7 @@
                         // 
                         this.Land_Title_Deed_Gives.Enabled = false;
                         this.Land_Title_Deed_Gives.FormattingEnabled = true;
-                        this.Land_Title_Deed_Gives.Location = new System.Drawing.Point(221, 236);
+                        this.Land_Title_Deed_Gives.Location = new System.Drawing.Point(221, 47);
                         this.Land_Title_Deed_Gives.Name = "Land_Title_Deed_Gives";
                         this.Land_Title_Deed_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Land_Title_Deed_Gives.TabIndex = 112;
@@ -1711,7 +1720,7 @@
                         // 
                         this.Land_Title_Deed_Pool.Enabled = false;
                         this.Land_Title_Deed_Pool.FormattingEnabled = true;
-                        this.Land_Title_Deed_Pool.Location = new System.Drawing.Point(143, 236);
+                        this.Land_Title_Deed_Pool.Location = new System.Drawing.Point(143, 47);
                         this.Land_Title_Deed_Pool.Name = "Land_Title_Deed_Pool";
                         this.Land_Title_Deed_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Land_Title_Deed_Pool.TabIndex = 111;
@@ -1720,7 +1729,7 @@
                         // Land_Title_Deed
                         // 
                         this.Land_Title_Deed.AutoSize = true;
-                        this.Land_Title_Deed.Location = new System.Drawing.Point(6, 238);
+                        this.Land_Title_Deed.Location = new System.Drawing.Point(6, 49);
                         this.Land_Title_Deed.Name = "Land_Title_Deed";
                         this.Land_Title_Deed.Size = new System.Drawing.Size(102, 17);
                         this.Land_Title_Deed.TabIndex = 110;
@@ -1732,7 +1741,7 @@
                         // 
                         this.Kokiri_Sword_Gives.Enabled = false;
                         this.Kokiri_Sword_Gives.FormattingEnabled = true;
-                        this.Kokiri_Sword_Gives.Location = new System.Drawing.Point(221, 209);
+                        this.Kokiri_Sword_Gives.Location = new System.Drawing.Point(221, 20);
                         this.Kokiri_Sword_Gives.Name = "Kokiri_Sword_Gives";
                         this.Kokiri_Sword_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Kokiri_Sword_Gives.TabIndex = 109;
@@ -1753,7 +1762,7 @@
                         // 
                         this.Kokiri_Sword_Pool.Enabled = false;
                         this.Kokiri_Sword_Pool.FormattingEnabled = true;
-                        this.Kokiri_Sword_Pool.Location = new System.Drawing.Point(143, 209);
+                        this.Kokiri_Sword_Pool.Location = new System.Drawing.Point(143, 20);
                         this.Kokiri_Sword_Pool.Name = "Kokiri_Sword_Pool";
                         this.Kokiri_Sword_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Kokiri_Sword_Pool.TabIndex = 108;
@@ -1762,7 +1771,7 @@
                         // Kokiri_Sword
                         // 
                         this.Kokiri_Sword.AutoSize = true;
-                        this.Kokiri_Sword.Location = new System.Drawing.Point(6, 211);
+                        this.Kokiri_Sword.Location = new System.Drawing.Point(6, 22);
                         this.Kokiri_Sword.Name = "Kokiri_Sword";
                         this.Kokiri_Sword.Size = new System.Drawing.Size(85, 17);
                         this.Kokiri_Sword.TabIndex = 107;
@@ -1815,7 +1824,7 @@
                         // 
                         this.Great_Fairys_Sword_Pool.Enabled = false;
                         this.Great_Fairys_Sword_Pool.FormattingEnabled = true;
-                        this.Great_Fairys_Sword_Pool.Location = new System.Drawing.Point(143, 101);
+                        this.Great_Fairys_Sword_Pool.Location = new System.Drawing.Point(143, 182);
                         this.Great_Fairys_Sword_Pool.Name = "Great_Fairys_Sword_Pool";
                         this.Great_Fairys_Sword_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Great_Fairys_Sword_Pool.TabIndex = 102;
@@ -1825,7 +1834,7 @@
                         // 
                         this.Great_Fairys_Sword_Gives.Enabled = false;
                         this.Great_Fairys_Sword_Gives.FormattingEnabled = true;
-                        this.Great_Fairys_Sword_Gives.Location = new System.Drawing.Point(221, 101);
+                        this.Great_Fairys_Sword_Gives.Location = new System.Drawing.Point(221, 182);
                         this.Great_Fairys_Sword_Gives.Name = "Great_Fairys_Sword_Gives";
                         this.Great_Fairys_Sword_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Great_Fairys_Sword_Gives.TabIndex = 103;
@@ -1855,7 +1864,7 @@
                         // Great_Fairys_Sword
                         // 
                         this.Great_Fairys_Sword.AutoSize = true;
-                        this.Great_Fairys_Sword.Location = new System.Drawing.Point(6, 103);
+                        this.Great_Fairys_Sword.Location = new System.Drawing.Point(6, 184);
                         this.Great_Fairys_Sword.Name = "Great_Fairys_Sword";
                         this.Great_Fairys_Sword.Size = new System.Drawing.Size(117, 17);
                         this.Great_Fairys_Sword.TabIndex = 101;
@@ -1898,7 +1907,7 @@
                         // 
                         this.Ice_Arrow_Gives.Enabled = false;
                         this.Ice_Arrow_Gives.FormattingEnabled = true;
-                        this.Ice_Arrow_Gives.Location = new System.Drawing.Point(221, 182);
+                        this.Ice_Arrow_Gives.Location = new System.Drawing.Point(221, 263);
                         this.Ice_Arrow_Gives.Name = "Ice_Arrow_Gives";
                         this.Ice_Arrow_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Ice_Arrow_Gives.TabIndex = 97;
@@ -1908,7 +1917,7 @@
                         // 
                         this.Ice_Arrow_Pool.Enabled = false;
                         this.Ice_Arrow_Pool.FormattingEnabled = true;
-                        this.Ice_Arrow_Pool.Location = new System.Drawing.Point(143, 182);
+                        this.Ice_Arrow_Pool.Location = new System.Drawing.Point(143, 263);
                         this.Ice_Arrow_Pool.Name = "Ice_Arrow_Pool";
                         this.Ice_Arrow_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Ice_Arrow_Pool.TabIndex = 96;
@@ -1917,7 +1926,7 @@
                         // Ice_Arrow
                         // 
                         this.Ice_Arrow.AutoSize = true;
-                        this.Ice_Arrow.Location = new System.Drawing.Point(6, 184);
+                        this.Ice_Arrow.Location = new System.Drawing.Point(6, 265);
                         this.Ice_Arrow.Name = "Ice_Arrow";
                         this.Ice_Arrow.Size = new System.Drawing.Size(71, 17);
                         this.Ice_Arrow.TabIndex = 95;
@@ -1960,7 +1969,7 @@
                         // 
                         this.Hookshot_Gives.Enabled = false;
                         this.Hookshot_Gives.FormattingEnabled = true;
-                        this.Hookshot_Gives.Location = new System.Drawing.Point(221, 155);
+                        this.Hookshot_Gives.Location = new System.Drawing.Point(221, 236);
                         this.Hookshot_Gives.Name = "Hookshot_Gives";
                         this.Hookshot_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Hookshot_Gives.TabIndex = 91;
@@ -1970,7 +1979,7 @@
                         // 
                         this.Hookshot_Pool.Enabled = false;
                         this.Hookshot_Pool.FormattingEnabled = true;
-                        this.Hookshot_Pool.Location = new System.Drawing.Point(143, 155);
+                        this.Hookshot_Pool.Location = new System.Drawing.Point(143, 236);
                         this.Hookshot_Pool.Name = "Hookshot_Pool";
                         this.Hookshot_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Hookshot_Pool.TabIndex = 90;
@@ -1979,7 +1988,7 @@
                         // Hookshot
                         // 
                         this.Hookshot.AutoSize = true;
-                        this.Hookshot.Location = new System.Drawing.Point(6, 157);
+                        this.Hookshot.Location = new System.Drawing.Point(6, 238);
                         this.Hookshot.Name = "Hookshot";
                         this.Hookshot.Size = new System.Drawing.Size(72, 17);
                         this.Hookshot.TabIndex = 89;
@@ -1991,7 +2000,7 @@
                         // 
                         this.Heros_Shield_Gives.Enabled = false;
                         this.Heros_Shield_Gives.FormattingEnabled = true;
-                        this.Heros_Shield_Gives.Location = new System.Drawing.Point(221, 128);
+                        this.Heros_Shield_Gives.Location = new System.Drawing.Point(221, 209);
                         this.Heros_Shield_Gives.Name = "Heros_Shield_Gives";
                         this.Heros_Shield_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Heros_Shield_Gives.TabIndex = 88;
@@ -2001,7 +2010,7 @@
                         // 
                         this.Heros_Shield_Pool.Enabled = false;
                         this.Heros_Shield_Pool.FormattingEnabled = true;
-                        this.Heros_Shield_Pool.Location = new System.Drawing.Point(143, 128);
+                        this.Heros_Shield_Pool.Location = new System.Drawing.Point(143, 209);
                         this.Heros_Shield_Pool.Name = "Heros_Shield_Pool";
                         this.Heros_Shield_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Heros_Shield_Pool.TabIndex = 87;
@@ -2010,7 +2019,7 @@
                         // Heros_Shield
                         // 
                         this.Heros_Shield.AutoSize = true;
-                        this.Heros_Shield.Location = new System.Drawing.Point(6, 130);
+                        this.Heros_Shield.Location = new System.Drawing.Point(6, 211);
                         this.Heros_Shield.Name = "Heros_Shield";
                         this.Heros_Shield.Size = new System.Drawing.Size(88, 17);
                         this.Heros_Shield.TabIndex = 86;
@@ -2032,7 +2041,7 @@
                         // 
                         this.Lens_Of_Truth_Gives.Enabled = false;
                         this.Lens_Of_Truth_Gives.FormattingEnabled = true;
-                        this.Lens_Of_Truth_Gives.Location = new System.Drawing.Point(221, 47);
+                        this.Lens_Of_Truth_Gives.Location = new System.Drawing.Point(221, 128);
                         this.Lens_Of_Truth_Gives.Name = "Lens_Of_Truth_Gives";
                         this.Lens_Of_Truth_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Lens_Of_Truth_Gives.TabIndex = 121;
@@ -2063,7 +2072,7 @@
                         // 
                         this.Lens_Of_Truth_Pool.Enabled = false;
                         this.Lens_Of_Truth_Pool.FormattingEnabled = true;
-                        this.Lens_Of_Truth_Pool.Location = new System.Drawing.Point(143, 47);
+                        this.Lens_Of_Truth_Pool.Location = new System.Drawing.Point(143, 128);
                         this.Lens_Of_Truth_Pool.Name = "Lens_Of_Truth_Pool";
                         this.Lens_Of_Truth_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Lens_Of_Truth_Pool.TabIndex = 120;
@@ -2073,7 +2082,7 @@
                         // 
                         this.Mountain_Title_Deed_Gives.Enabled = false;
                         this.Mountain_Title_Deed_Gives.FormattingEnabled = true;
-                        this.Mountain_Title_Deed_Gives.Location = new System.Drawing.Point(221, 209);
+                        this.Mountain_Title_Deed_Gives.Location = new System.Drawing.Point(221, 20);
                         this.Mountain_Title_Deed_Gives.Name = "Mountain_Title_Deed_Gives";
                         this.Mountain_Title_Deed_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Mountain_Title_Deed_Gives.TabIndex = 118;
@@ -2083,7 +2092,7 @@
                         // 
                         this.Mountain_Title_Deed_Pool.Enabled = false;
                         this.Mountain_Title_Deed_Pool.FormattingEnabled = true;
-                        this.Mountain_Title_Deed_Pool.Location = new System.Drawing.Point(143, 209);
+                        this.Mountain_Title_Deed_Pool.Location = new System.Drawing.Point(143, 20);
                         this.Mountain_Title_Deed_Pool.Name = "Mountain_Title_Deed_Pool";
                         this.Mountain_Title_Deed_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Mountain_Title_Deed_Pool.TabIndex = 117;
@@ -2092,7 +2101,7 @@
                         // Lens_Of_Truth
                         // 
                         this.Lens_Of_Truth.AutoSize = true;
-                        this.Lens_Of_Truth.Location = new System.Drawing.Point(6, 49);
+                        this.Lens_Of_Truth.Location = new System.Drawing.Point(6, 130);
                         this.Lens_Of_Truth.Name = "Lens_Of_Truth";
                         this.Lens_Of_Truth.Size = new System.Drawing.Size(89, 17);
                         this.Lens_Of_Truth.TabIndex = 119;
@@ -2103,7 +2112,7 @@
                         // Mountain_Title_Deed
                         // 
                         this.Mountain_Title_Deed.AutoSize = true;
-                        this.Mountain_Title_Deed.Location = new System.Drawing.Point(6, 211);
+                        this.Mountain_Title_Deed.Location = new System.Drawing.Point(6, 22);
                         this.Mountain_Title_Deed.Name = "Mountain_Title_Deed";
                         this.Mountain_Title_Deed.Size = new System.Drawing.Size(122, 17);
                         this.Mountain_Title_Deed.TabIndex = 116;
@@ -2115,7 +2124,7 @@
                         // 
                         this.Moons_Tear_Gives.Enabled = false;
                         this.Moons_Tear_Gives.FormattingEnabled = true;
-                        this.Moons_Tear_Gives.Location = new System.Drawing.Point(221, 182);
+                        this.Moons_Tear_Gives.Location = new System.Drawing.Point(221, 263);
                         this.Moons_Tear_Gives.Name = "Moons_Tear_Gives";
                         this.Moons_Tear_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Moons_Tear_Gives.TabIndex = 115;
@@ -2125,7 +2134,7 @@
                         // 
                         this.Moons_Tear_Pool.Enabled = false;
                         this.Moons_Tear_Pool.FormattingEnabled = true;
-                        this.Moons_Tear_Pool.Location = new System.Drawing.Point(143, 182);
+                        this.Moons_Tear_Pool.Location = new System.Drawing.Point(143, 263);
                         this.Moons_Tear_Pool.Name = "Moons_Tear_Pool";
                         this.Moons_Tear_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Moons_Tear_Pool.TabIndex = 114;
@@ -2134,7 +2143,7 @@
                         // Moons_Tear
                         // 
                         this.Moons_Tear.AutoSize = true;
-                        this.Moons_Tear.Location = new System.Drawing.Point(6, 184);
+                        this.Moons_Tear.Location = new System.Drawing.Point(6, 265);
                         this.Moons_Tear.Name = "Moons_Tear";
                         this.Moons_Tear.Size = new System.Drawing.Size(85, 17);
                         this.Moons_Tear.TabIndex = 113;
@@ -2156,7 +2165,7 @@
                         // 
                         this.Largest_Quiver_Gives.Enabled = false;
                         this.Largest_Quiver_Gives.FormattingEnabled = true;
-                        this.Largest_Quiver_Gives.Location = new System.Drawing.Point(221, 20);
+                        this.Largest_Quiver_Gives.Location = new System.Drawing.Point(221, 101);
                         this.Largest_Quiver_Gives.Name = "Largest_Quiver_Gives";
                         this.Largest_Quiver_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Largest_Quiver_Gives.TabIndex = 118;
@@ -2176,7 +2185,7 @@
                         // 
                         this.Largest_Quiver_Pool.Enabled = false;
                         this.Largest_Quiver_Pool.FormattingEnabled = true;
-                        this.Largest_Quiver_Pool.Location = new System.Drawing.Point(143, 20);
+                        this.Largest_Quiver_Pool.Location = new System.Drawing.Point(143, 101);
                         this.Largest_Quiver_Pool.Name = "Largest_Quiver_Pool";
                         this.Largest_Quiver_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Largest_Quiver_Pool.TabIndex = 117;
@@ -2185,7 +2194,7 @@
                         // Largest_Quiver
                         // 
                         this.Largest_Quiver.AutoSize = true;
-                        this.Largest_Quiver.Location = new System.Drawing.Point(6, 22);
+                        this.Largest_Quiver.Location = new System.Drawing.Point(6, 103);
                         this.Largest_Quiver.Name = "Largest_Quiver";
                         this.Largest_Quiver.Size = new System.Drawing.Size(95, 17);
                         this.Largest_Quiver.TabIndex = 116;
@@ -2208,7 +2217,7 @@
                         // 
                         this.Mirror_Shield_Gives.Enabled = false;
                         this.Mirror_Shield_Gives.FormattingEnabled = true;
-                        this.Mirror_Shield_Gives.Location = new System.Drawing.Point(221, 155);
+                        this.Mirror_Shield_Gives.Location = new System.Drawing.Point(221, 236);
                         this.Mirror_Shield_Gives.Name = "Mirror_Shield_Gives";
                         this.Mirror_Shield_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Mirror_Shield_Gives.TabIndex = 109;
@@ -2218,7 +2227,7 @@
                         // 
                         this.Mirror_Shield_Pool.Enabled = false;
                         this.Mirror_Shield_Pool.FormattingEnabled = true;
-                        this.Mirror_Shield_Pool.Location = new System.Drawing.Point(143, 155);
+                        this.Mirror_Shield_Pool.Location = new System.Drawing.Point(143, 236);
                         this.Mirror_Shield_Pool.Name = "Mirror_Shield_Pool";
                         this.Mirror_Shield_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Mirror_Shield_Pool.TabIndex = 108;
@@ -2227,7 +2236,7 @@
                         // Mirror_Shield
                         // 
                         this.Mirror_Shield.AutoSize = true;
-                        this.Mirror_Shield.Location = new System.Drawing.Point(6, 157);
+                        this.Mirror_Shield.Location = new System.Drawing.Point(6, 238);
                         this.Mirror_Shield.Name = "Mirror_Shield";
                         this.Mirror_Shield.Size = new System.Drawing.Size(84, 17);
                         this.Mirror_Shield.TabIndex = 107;
@@ -2301,7 +2310,7 @@
                         // 
                         this.Magic_Beans_Gives.Enabled = false;
                         this.Magic_Beans_Gives.FormattingEnabled = true;
-                        this.Magic_Beans_Gives.Location = new System.Drawing.Point(221, 128);
+                        this.Magic_Beans_Gives.Location = new System.Drawing.Point(221, 209);
                         this.Magic_Beans_Gives.Name = "Magic_Beans_Gives";
                         this.Magic_Beans_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Magic_Beans_Gives.TabIndex = 100;
@@ -2311,7 +2320,7 @@
                         // 
                         this.Magic_Beans_Pool.Enabled = false;
                         this.Magic_Beans_Pool.FormattingEnabled = true;
-                        this.Magic_Beans_Pool.Location = new System.Drawing.Point(143, 128);
+                        this.Magic_Beans_Pool.Location = new System.Drawing.Point(143, 209);
                         this.Magic_Beans_Pool.Name = "Magic_Beans_Pool";
                         this.Magic_Beans_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Magic_Beans_Pool.TabIndex = 99;
@@ -2320,7 +2329,7 @@
                         // Magic_Beans
                         // 
                         this.Magic_Beans.AutoSize = true;
-                        this.Magic_Beans.Location = new System.Drawing.Point(6, 130);
+                        this.Magic_Beans.Location = new System.Drawing.Point(6, 211);
                         this.Magic_Beans.Name = "Magic_Beans";
                         this.Magic_Beans.Size = new System.Drawing.Size(88, 17);
                         this.Magic_Beans.TabIndex = 98;
@@ -2332,7 +2341,7 @@
                         // 
                         this.Light_Arrow_Gives.Enabled = false;
                         this.Light_Arrow_Gives.FormattingEnabled = true;
-                        this.Light_Arrow_Gives.Location = new System.Drawing.Point(221, 101);
+                        this.Light_Arrow_Gives.Location = new System.Drawing.Point(221, 182);
                         this.Light_Arrow_Gives.Name = "Light_Arrow_Gives";
                         this.Light_Arrow_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Light_Arrow_Gives.TabIndex = 97;
@@ -2342,7 +2351,7 @@
                         // 
                         this.Light_Arrow_Pool.Enabled = false;
                         this.Light_Arrow_Pool.FormattingEnabled = true;
-                        this.Light_Arrow_Pool.Location = new System.Drawing.Point(143, 101);
+                        this.Light_Arrow_Pool.Location = new System.Drawing.Point(143, 182);
                         this.Light_Arrow_Pool.Name = "Light_Arrow_Pool";
                         this.Light_Arrow_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Light_Arrow_Pool.TabIndex = 96;
@@ -2351,7 +2360,7 @@
                         // Light_Arrow
                         // 
                         this.Light_Arrow.AutoSize = true;
-                        this.Light_Arrow.Location = new System.Drawing.Point(6, 103);
+                        this.Light_Arrow.Location = new System.Drawing.Point(6, 184);
                         this.Light_Arrow.Name = "Light_Arrow";
                         this.Light_Arrow.Size = new System.Drawing.Size(79, 17);
                         this.Light_Arrow.TabIndex = 95;
@@ -2363,7 +2372,7 @@
                         // 
                         this.Letter_To_Kafei_Gives.Enabled = false;
                         this.Letter_To_Kafei_Gives.FormattingEnabled = true;
-                        this.Letter_To_Kafei_Gives.Location = new System.Drawing.Point(221, 74);
+                        this.Letter_To_Kafei_Gives.Location = new System.Drawing.Point(221, 155);
                         this.Letter_To_Kafei_Gives.Name = "Letter_To_Kafei_Gives";
                         this.Letter_To_Kafei_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Letter_To_Kafei_Gives.TabIndex = 94;
@@ -2373,7 +2382,7 @@
                         // 
                         this.Letter_To_Kafei_Pool.Enabled = false;
                         this.Letter_To_Kafei_Pool.FormattingEnabled = true;
-                        this.Letter_To_Kafei_Pool.Location = new System.Drawing.Point(143, 74);
+                        this.Letter_To_Kafei_Pool.Location = new System.Drawing.Point(143, 155);
                         this.Letter_To_Kafei_Pool.Name = "Letter_To_Kafei_Pool";
                         this.Letter_To_Kafei_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Letter_To_Kafei_Pool.TabIndex = 93;
@@ -2382,7 +2391,7 @@
                         // Letter_To_Kafei
                         // 
                         this.Letter_To_Kafei.AutoSize = true;
-                        this.Letter_To_Kafei.Location = new System.Drawing.Point(6, 76);
+                        this.Letter_To_Kafei.Location = new System.Drawing.Point(6, 157);
                         this.Letter_To_Kafei.Name = "Letter_To_Kafei";
                         this.Letter_To_Kafei.Size = new System.Drawing.Size(92, 17);
                         this.Letter_To_Kafei.TabIndex = 92;
@@ -2404,7 +2413,7 @@
                         // 
                         this.Pendant_Of_Memories_Gives.Enabled = false;
                         this.Pendant_Of_Memories_Gives.FormattingEnabled = true;
-                        this.Pendant_Of_Memories_Gives.Location = new System.Drawing.Point(221, 263);
+                        this.Pendant_Of_Memories_Gives.Location = new System.Drawing.Point(221, 74);
                         this.Pendant_Of_Memories_Gives.Name = "Pendant_Of_Memories_Gives";
                         this.Pendant_Of_Memories_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Pendant_Of_Memories_Gives.TabIndex = 127;
@@ -2435,7 +2444,7 @@
                         // 
                         this.Pendant_Of_Memories_Pool.Enabled = false;
                         this.Pendant_Of_Memories_Pool.FormattingEnabled = true;
-                        this.Pendant_Of_Memories_Pool.Location = new System.Drawing.Point(143, 263);
+                        this.Pendant_Of_Memories_Pool.Location = new System.Drawing.Point(143, 74);
                         this.Pendant_Of_Memories_Pool.Name = "Pendant_Of_Memories_Pool";
                         this.Pendant_Of_Memories_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Pendant_Of_Memories_Pool.TabIndex = 126;
@@ -2464,7 +2473,7 @@
                         // Pendant_Of_Memories
                         // 
                         this.Pendant_Of_Memories.AutoSize = true;
-                        this.Pendant_Of_Memories.Location = new System.Drawing.Point(6, 265);
+                        this.Pendant_Of_Memories.Location = new System.Drawing.Point(6, 76);
                         this.Pendant_Of_Memories.Name = "Pendant_Of_Memories";
                         this.Pendant_Of_Memories.Size = new System.Drawing.Size(126, 17);
                         this.Pendant_Of_Memories.TabIndex = 125;
@@ -2487,7 +2496,7 @@
                         // 
                         this.Room_Key_Gives.Enabled = false;
                         this.Room_Key_Gives.FormattingEnabled = true;
-                        this.Room_Key_Gives.Location = new System.Drawing.Point(221, 101);
+                        this.Room_Key_Gives.Location = new System.Drawing.Point(221, 182);
                         this.Room_Key_Gives.Name = "Room_Key_Gives";
                         this.Room_Key_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Room_Key_Gives.TabIndex = 121;
@@ -2497,7 +2506,7 @@
                         // 
                         this.Ocean_Title_Deed_Gives.Enabled = false;
                         this.Ocean_Title_Deed_Gives.FormattingEnabled = true;
-                        this.Ocean_Title_Deed_Gives.Location = new System.Drawing.Point(221, 236);
+                        this.Ocean_Title_Deed_Gives.Location = new System.Drawing.Point(221, 47);
                         this.Ocean_Title_Deed_Gives.Name = "Ocean_Title_Deed_Gives";
                         this.Ocean_Title_Deed_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Ocean_Title_Deed_Gives.TabIndex = 124;
@@ -2507,7 +2516,7 @@
                         // 
                         this.Room_Key_Pool.Enabled = false;
                         this.Room_Key_Pool.FormattingEnabled = true;
-                        this.Room_Key_Pool.Location = new System.Drawing.Point(143, 101);
+                        this.Room_Key_Pool.Location = new System.Drawing.Point(143, 182);
                         this.Room_Key_Pool.Name = "Room_Key_Pool";
                         this.Room_Key_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Room_Key_Pool.TabIndex = 120;
@@ -2516,7 +2525,7 @@
                         // Room_Key
                         // 
                         this.Room_Key.AutoSize = true;
-                        this.Room_Key.Location = new System.Drawing.Point(6, 103);
+                        this.Room_Key.Location = new System.Drawing.Point(6, 184);
                         this.Room_Key.Name = "Room_Key";
                         this.Room_Key.Size = new System.Drawing.Size(75, 17);
                         this.Room_Key.TabIndex = 119;
@@ -2548,7 +2557,7 @@
                         // 
                         this.Ocean_Title_Deed_Pool.Enabled = false;
                         this.Ocean_Title_Deed_Pool.FormattingEnabled = true;
-                        this.Ocean_Title_Deed_Pool.Location = new System.Drawing.Point(143, 236);
+                        this.Ocean_Title_Deed_Pool.Location = new System.Drawing.Point(143, 47);
                         this.Ocean_Title_Deed_Pool.Name = "Ocean_Title_Deed_Pool";
                         this.Ocean_Title_Deed_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Ocean_Title_Deed_Pool.TabIndex = 123;
@@ -2557,7 +2566,7 @@
                         // Ocean_Title_Deed
                         // 
                         this.Ocean_Title_Deed.AutoSize = true;
-                        this.Ocean_Title_Deed.Location = new System.Drawing.Point(6, 238);
+                        this.Ocean_Title_Deed.Location = new System.Drawing.Point(6, 49);
                         this.Ocean_Title_Deed.Name = "Ocean_Title_Deed";
                         this.Ocean_Title_Deed.Size = new System.Drawing.Size(110, 17);
                         this.Ocean_Title_Deed.TabIndex = 122;
@@ -2611,7 +2620,7 @@
                         // 
                         this.Razor_Sword_Gives.Enabled = false;
                         this.Razor_Sword_Gives.FormattingEnabled = true;
-                        this.Razor_Sword_Gives.Location = new System.Drawing.Point(221, 74);
+                        this.Razor_Sword_Gives.Location = new System.Drawing.Point(221, 155);
                         this.Razor_Sword_Gives.Name = "Razor_Sword_Gives";
                         this.Razor_Sword_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Razor_Sword_Gives.TabIndex = 112;
@@ -2621,7 +2630,7 @@
                         // 
                         this.Razor_Sword_Pool.Enabled = false;
                         this.Razor_Sword_Pool.FormattingEnabled = true;
-                        this.Razor_Sword_Pool.Location = new System.Drawing.Point(143, 74);
+                        this.Razor_Sword_Pool.Location = new System.Drawing.Point(143, 155);
                         this.Razor_Sword_Pool.Name = "Razor_Sword_Pool";
                         this.Razor_Sword_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Razor_Sword_Pool.TabIndex = 111;
@@ -2630,7 +2639,7 @@
                         // Razor_Sword
                         // 
                         this.Razor_Sword.AutoSize = true;
-                        this.Razor_Sword.Location = new System.Drawing.Point(6, 76);
+                        this.Razor_Sword.Location = new System.Drawing.Point(6, 157);
                         this.Razor_Sword.Name = "Razor_Sword";
                         this.Razor_Sword.Size = new System.Drawing.Size(87, 17);
                         this.Razor_Sword.TabIndex = 110;
@@ -2642,7 +2651,7 @@
                         // 
                         this.Powder_Keg_Gives.Enabled = false;
                         this.Powder_Keg_Gives.FormattingEnabled = true;
-                        this.Powder_Keg_Gives.Location = new System.Drawing.Point(221, 47);
+                        this.Powder_Keg_Gives.Location = new System.Drawing.Point(221, 128);
                         this.Powder_Keg_Gives.Name = "Powder_Keg_Gives";
                         this.Powder_Keg_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Powder_Keg_Gives.TabIndex = 109;
@@ -2652,7 +2661,7 @@
                         // 
                         this.Powder_Keg_Pool.Enabled = false;
                         this.Powder_Keg_Pool.FormattingEnabled = true;
-                        this.Powder_Keg_Pool.Location = new System.Drawing.Point(143, 47);
+                        this.Powder_Keg_Pool.Location = new System.Drawing.Point(143, 128);
                         this.Powder_Keg_Pool.Name = "Powder_Keg_Pool";
                         this.Powder_Keg_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Powder_Keg_Pool.TabIndex = 108;
@@ -2661,7 +2670,7 @@
                         // Powder_Keg
                         // 
                         this.Powder_Keg.AutoSize = true;
-                        this.Powder_Keg.Location = new System.Drawing.Point(6, 49);
+                        this.Powder_Keg.Location = new System.Drawing.Point(6, 130);
                         this.Powder_Keg.Name = "Powder_Keg";
                         this.Powder_Keg.Size = new System.Drawing.Size(84, 17);
                         this.Powder_Keg.TabIndex = 107;
@@ -2735,7 +2744,7 @@
                         // 
                         this.Pictograph_Box_Gives.Enabled = false;
                         this.Pictograph_Box_Gives.FormattingEnabled = true;
-                        this.Pictograph_Box_Gives.Location = new System.Drawing.Point(221, 20);
+                        this.Pictograph_Box_Gives.Location = new System.Drawing.Point(221, 101);
                         this.Pictograph_Box_Gives.Name = "Pictograph_Box_Gives";
                         this.Pictograph_Box_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Pictograph_Box_Gives.TabIndex = 100;
@@ -2745,7 +2754,7 @@
                         // 
                         this.Pictograph_Box_Pool.Enabled = false;
                         this.Pictograph_Box_Pool.FormattingEnabled = true;
-                        this.Pictograph_Box_Pool.Location = new System.Drawing.Point(143, 20);
+                        this.Pictograph_Box_Pool.Location = new System.Drawing.Point(143, 101);
                         this.Pictograph_Box_Pool.Name = "Pictograph_Box_Pool";
                         this.Pictograph_Box_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Pictograph_Box_Pool.TabIndex = 99;
@@ -2754,7 +2763,7 @@
                         // Pictograph_Box
                         // 
                         this.Pictograph_Box.AutoSize = true;
-                        this.Pictograph_Box.Location = new System.Drawing.Point(6, 22);
+                        this.Pictograph_Box.Location = new System.Drawing.Point(6, 103);
                         this.Pictograph_Box.Name = "Pictograph_Box";
                         this.Pictograph_Box.Size = new System.Drawing.Size(98, 17);
                         this.Pictograph_Box.TabIndex = 98;
@@ -2766,7 +2775,7 @@
                         // 
                         this.Swamp_Title_Deed_Gives.Enabled = false;
                         this.Swamp_Title_Deed_Gives.FormattingEnabled = true;
-                        this.Swamp_Title_Deed_Gives.Location = new System.Drawing.Point(221, 128);
+                        this.Swamp_Title_Deed_Gives.Location = new System.Drawing.Point(221, 209);
                         this.Swamp_Title_Deed_Gives.Name = "Swamp_Title_Deed_Gives";
                         this.Swamp_Title_Deed_Gives.Size = new System.Drawing.Size(155, 21);
                         this.Swamp_Title_Deed_Gives.TabIndex = 133;
@@ -2786,7 +2795,7 @@
                         // 
                         this.Swamp_Title_Deed_Pool.Enabled = false;
                         this.Swamp_Title_Deed_Pool.FormattingEnabled = true;
-                        this.Swamp_Title_Deed_Pool.Location = new System.Drawing.Point(143, 128);
+                        this.Swamp_Title_Deed_Pool.Location = new System.Drawing.Point(143, 209);
                         this.Swamp_Title_Deed_Pool.Name = "Swamp_Title_Deed_Pool";
                         this.Swamp_Title_Deed_Pool.Size = new System.Drawing.Size(72, 21);
                         this.Swamp_Title_Deed_Pool.TabIndex = 132;
@@ -2805,7 +2814,7 @@
                         // Swamp_Title_Deed
                         // 
                         this.Swamp_Title_Deed.AutoSize = true;
-                        this.Swamp_Title_Deed.Location = new System.Drawing.Point(6, 130);
+                        this.Swamp_Title_Deed.Location = new System.Drawing.Point(6, 211);
                         this.Swamp_Title_Deed.Name = "Swamp_Title_Deed";
                         this.Swamp_Title_Deed.Size = new System.Drawing.Size(113, 17);
                         this.Swamp_Title_Deed.TabIndex = 131;
@@ -3262,39 +3271,39 @@
                         // 
                         // tabPage11
                         // 
-                        this.tabPage11.Controls.Add(this.Deku_Stick_Gives);
+                        this.tabPage11.Controls.Add(this.Bombchus_10_Pool);
+                        this.tabPage11.Controls.Add(this.Bombchus_10_Gives);
+                        this.tabPage11.Controls.Add(this.Bombchus_5_Pool);
+                        this.tabPage11.Controls.Add(this.Bombchus_10);
+                        this.tabPage11.Controls.Add(this.Bombchus_5_Gives);
+                        this.tabPage11.Controls.Add(this.Bombchu_Pool);
+                        this.tabPage11.Controls.Add(this.Bombchus_5);
+                        this.tabPage11.Controls.Add(this.Bombchu_Gives);
                         this.tabPage11.Controls.Add(this.label23);
-                        this.tabPage11.Controls.Add(this.Deku_Stick_Pool);
-                        this.tabPage11.Controls.Add(this.Express_Letter_To_Mama_Pool);
-                        this.tabPage11.Controls.Add(this.Express_Letter_To_Mama);
-                        this.tabPage11.Controls.Add(this.Deku_Stick);
+                        this.tabPage11.Controls.Add(this.Bombchu);
                         this.tabPage11.Controls.Add(this.Bomb_Bag);
-                        this.tabPage11.Controls.Add(this.Express_Letter_To_Mama_Gives);
                         this.tabPage11.Controls.Add(this.label24);
                         this.tabPage11.Controls.Add(this.Bomb_Bag_Pool);
                         this.tabPage11.Controls.Add(this.label25);
                         this.tabPage11.Controls.Add(this.Bomb_Bag_Gives);
-                        this.tabPage11.Controls.Add(this.Deku_Nuts_10_Gives);
                         this.tabPage11.Controls.Add(this.Adult_Wallet_Pool);
-                        this.tabPage11.Controls.Add(this.Deku_Nuts_10_Pool);
-                        this.tabPage11.Controls.Add(this.Deku_Nuts_10);
                         this.tabPage11.Controls.Add(this.Adult_Wallet_Gives);
                         this.tabPage11.Controls.Add(this.Adult_Wallet);
                         this.tabPage11.Controls.Add(this.Big_Bomb_Bag_Pool);
                         this.tabPage11.Controls.Add(this.Big_Bomb_Bag_Gives);
+                        this.tabPage11.Controls.Add(this.Bow_Pool);
                         this.tabPage11.Controls.Add(this.Big_Bomb_Bag);
                         this.tabPage11.Controls.Add(this.Biggest_Bomb_Bag_Pool);
-                        this.tabPage11.Controls.Add(this.Biggest_Bomb_Bag_Gives);
-                        this.tabPage11.Controls.Add(this.Bow_Pool);
-                        this.tabPage11.Controls.Add(this.Biggest_Bomb_Bag);
                         this.tabPage11.Controls.Add(this.Bow_Gives);
+                        this.tabPage11.Controls.Add(this.Biggest_Bomb_Bag_Gives);
+                        this.tabPage11.Controls.Add(this.Biggest_Bomb_Bag);
                         this.tabPage11.Controls.Add(this.Bombers_Notebook_Pool);
-                        this.tabPage11.Controls.Add(this.Bow);
                         this.tabPage11.Controls.Add(this.Bombers_Notebook_Gives);
-                        this.tabPage11.Controls.Add(this.Deku_Nuts_Gives);
-                        this.tabPage11.Controls.Add(this.Bombers_Notebook);
-                        this.tabPage11.Controls.Add(this.Deku_Nuts_Pool);
                         this.tabPage11.Controls.Add(this.Deku_Nuts);
+                        this.tabPage11.Controls.Add(this.Deku_Nuts_Pool);
+                        this.tabPage11.Controls.Add(this.Bombers_Notebook);
+                        this.tabPage11.Controls.Add(this.Deku_Nuts_Gives);
+                        this.tabPage11.Controls.Add(this.Bow);
                         this.tabPage11.Location = new System.Drawing.Point(4, 22);
                         this.tabPage11.Name = "tabPage11";
                         this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
@@ -3332,29 +3341,26 @@
                         // 
                         // tabPage12
                         // 
-                        this.tabPage12.Controls.Add(this.Large_Quiver_Gives);
+                        this.tabPage12.Controls.Add(this.Deku_Stick_Gives);
                         this.tabPage12.Controls.Add(this.label26);
                         this.tabPage12.Controls.Add(this.label27);
                         this.tabPage12.Controls.Add(this.label28);
                         this.tabPage12.Controls.Add(this.Fire_Arrow_Pool);
+                        this.tabPage12.Controls.Add(this.Express_Letter_To_Mama_Pool);
                         this.tabPage12.Controls.Add(this.Fire_Arrow_Gives);
-                        this.tabPage12.Controls.Add(this.Large_Quiver_Pool);
-                        this.tabPage12.Controls.Add(this.Kokiri_Sword_Gives);
+                        this.tabPage12.Controls.Add(this.Deku_Stick_Pool);
                         this.tabPage12.Controls.Add(this.Fire_Arrow);
                         this.tabPage12.Controls.Add(this.Giant_Wallet_Pool);
-                        this.tabPage12.Controls.Add(this.Kokiri_Sword_Pool);
-                        this.tabPage12.Controls.Add(this.Large_Quiver);
-                        this.tabPage12.Controls.Add(this.Kokiri_Sword);
+                        this.tabPage12.Controls.Add(this.Express_Letter_To_Mama);
                         this.tabPage12.Controls.Add(this.Giant_Wallet_Gives);
                         this.tabPage12.Controls.Add(this.Giant_Wallet);
                         this.tabPage12.Controls.Add(this.Gilded_Sword_Pool);
                         this.tabPage12.Controls.Add(this.Gilded_Sword);
+                        this.tabPage12.Controls.Add(this.Express_Letter_To_Mama_Gives);
                         this.tabPage12.Controls.Add(this.Gilded_Sword_Gives);
-                        this.tabPage12.Controls.Add(this.Land_Title_Deed_Pool);
-                        this.tabPage12.Controls.Add(this.Land_Title_Deed);
+                        this.tabPage12.Controls.Add(this.Deku_Stick);
                         this.tabPage12.Controls.Add(this.Great_Fairys_Sword_Pool);
                         this.tabPage12.Controls.Add(this.Great_Fairys_Sword);
-                        this.tabPage12.Controls.Add(this.Land_Title_Deed_Gives);
                         this.tabPage12.Controls.Add(this.Great_Fairys_Sword_Gives);
                         this.tabPage12.Controls.Add(this.Heros_Shield_Pool);
                         this.tabPage12.Controls.Add(this.Heros_Shield);
@@ -3364,7 +3370,10 @@
                         this.tabPage12.Controls.Add(this.Ice_Arrow_Pool);
                         this.tabPage12.Controls.Add(this.Ice_Arrow);
                         this.tabPage12.Controls.Add(this.Hookshot);
+                        this.tabPage12.Controls.Add(this.Deku_Nuts_10_Gives);
                         this.tabPage12.Controls.Add(this.Hookshot_Gives);
+                        this.tabPage12.Controls.Add(this.Deku_Nuts_10);
+                        this.tabPage12.Controls.Add(this.Deku_Nuts_10_Pool);
                         this.tabPage12.Location = new System.Drawing.Point(4, 22);
                         this.tabPage12.Name = "tabPage12";
                         this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
@@ -3402,39 +3411,39 @@
                         // 
                         // tabPage14
                         // 
+                        this.tabPage14.Controls.Add(this.Large_Quiver_Gives);
                         this.tabPage14.Controls.Add(this.Lens_Of_Truth_Gives);
                         this.tabPage14.Controls.Add(this.label29);
-                        this.tabPage14.Controls.Add(this.Pendant_Of_Memories_Gives);
                         this.tabPage14.Controls.Add(this.label30);
                         this.tabPage14.Controls.Add(this.Lens_Of_Truth_Pool);
                         this.tabPage14.Controls.Add(this.Moons_Tear_Gives);
                         this.tabPage14.Controls.Add(this.Moons_Tear_Pool);
                         this.tabPage14.Controls.Add(this.Moons_Tear);
                         this.tabPage14.Controls.Add(this.label31);
-                        this.tabPage14.Controls.Add(this.Mountain_Title_Deed_Gives);
                         this.tabPage14.Controls.Add(this.Lens_Of_Truth);
+                        this.tabPage14.Controls.Add(this.Kokiri_Sword_Gives);
                         this.tabPage14.Controls.Add(this.Mirror_Shield_Gives);
-                        this.tabPage14.Controls.Add(this.Pendant_Of_Memories_Pool);
+                        this.tabPage14.Controls.Add(this.Large_Quiver_Pool);
                         this.tabPage14.Controls.Add(this.Largest_Quiver_Pool);
                         this.tabPage14.Controls.Add(this.Mirror_Shield_Pool);
                         this.tabPage14.Controls.Add(this.Mirror_Shield);
-                        this.tabPage14.Controls.Add(this.Mountain_Title_Deed_Pool);
                         this.tabPage14.Controls.Add(this.Largest_Quiver);
+                        this.tabPage14.Controls.Add(this.Kokiri_Sword_Pool);
                         this.tabPage14.Controls.Add(this.Largest_Quiver_Gives);
-                        this.tabPage14.Controls.Add(this.Mountain_Title_Deed);
                         this.tabPage14.Controls.Add(this.Letter_To_Kafei_Pool);
                         this.tabPage14.Controls.Add(this.Letter_To_Kafei);
-                        this.tabPage14.Controls.Add(this.Pendant_Of_Memories);
+                        this.tabPage14.Controls.Add(this.Kokiri_Sword);
                         this.tabPage14.Controls.Add(this.Letter_To_Kafei_Gives);
                         this.tabPage14.Controls.Add(this.Light_Arrow_Pool);
-                        this.tabPage14.Controls.Add(this.Ocean_Title_Deed_Pool);
                         this.tabPage14.Controls.Add(this.Light_Arrow);
+                        this.tabPage14.Controls.Add(this.Large_Quiver);
                         this.tabPage14.Controls.Add(this.Light_Arrow_Gives);
-                        this.tabPage14.Controls.Add(this.Ocean_Title_Deed);
                         this.tabPage14.Controls.Add(this.Magic_Beans_Gives);
                         this.tabPage14.Controls.Add(this.Magic_Beans_Pool);
-                        this.tabPage14.Controls.Add(this.Ocean_Title_Deed_Gives);
                         this.tabPage14.Controls.Add(this.Magic_Beans);
+                        this.tabPage14.Controls.Add(this.Land_Title_Deed_Gives);
+                        this.tabPage14.Controls.Add(this.Land_Title_Deed);
+                        this.tabPage14.Controls.Add(this.Land_Title_Deed_Pool);
                         this.tabPage14.Location = new System.Drawing.Point(4, 22);
                         this.tabPage14.Name = "tabPage14";
                         this.tabPage14.Size = new System.Drawing.Size(382, 308);
@@ -3473,6 +3482,7 @@
                         // 
                         this.tabPage15.Controls.Add(this.Swamp_Title_Deed_Gives);
                         this.tabPage15.Controls.Add(this.label32);
+                        this.tabPage15.Controls.Add(this.Pendant_Of_Memories_Gives);
                         this.tabPage15.Controls.Add(this.Swamp_Title_Deed_Pool);
                         this.tabPage15.Controls.Add(this.label33);
                         this.tabPage15.Controls.Add(this.Swamp_Title_Deed);
@@ -3481,6 +3491,7 @@
                         this.tabPage15.Controls.Add(this.Room_Key_Pool);
                         this.tabPage15.Controls.Add(this.Room_Key);
                         this.tabPage15.Controls.Add(this.Pictograph_Box_Pool);
+                        this.tabPage15.Controls.Add(this.Mountain_Title_Deed_Gives);
                         this.tabPage15.Controls.Add(this.Pictograph_Box);
                         this.tabPage15.Controls.Add(this.Pictograph_Box_Gives);
                         this.tabPage15.Controls.Add(this.Razor_Sword_Gives);
@@ -3489,6 +3500,13 @@
                         this.tabPage15.Controls.Add(this.Razor_Sword);
                         this.tabPage15.Controls.Add(this.Powder_Keg);
                         this.tabPage15.Controls.Add(this.Powder_Keg_Gives);
+                        this.tabPage15.Controls.Add(this.Pendant_Of_Memories_Pool);
+                        this.tabPage15.Controls.Add(this.Ocean_Title_Deed_Pool);
+                        this.tabPage15.Controls.Add(this.Pendant_Of_Memories);
+                        this.tabPage15.Controls.Add(this.Mountain_Title_Deed);
+                        this.tabPage15.Controls.Add(this.Ocean_Title_Deed);
+                        this.tabPage15.Controls.Add(this.Ocean_Title_Deed_Gives);
+                        this.tabPage15.Controls.Add(this.Mountain_Title_Deed_Pool);
                         this.tabPage15.Location = new System.Drawing.Point(4, 22);
                         this.tabPage15.Name = "tabPage15";
                         this.tabPage15.Size = new System.Drawing.Size(382, 308);
@@ -4472,6 +4490,99 @@
                         this.BlastMaskSeconds_Label.TabIndex = 97;
                         this.BlastMaskSeconds_Label.Text = "10:01";
                         // 
+                        // Bombchu_Pool
+                        // 
+                        this.Bombchu_Pool.Enabled = false;
+                        this.Bombchu_Pool.FormattingEnabled = true;
+                        this.Bombchu_Pool.Location = new System.Drawing.Point(143, 128);
+                        this.Bombchu_Pool.Name = "Bombchu_Pool";
+                        this.Bombchu_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Bombchu_Pool.TabIndex = 99;
+                        this.Bombchu_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Bombchu_Gives
+                        // 
+                        this.Bombchu_Gives.Enabled = false;
+                        this.Bombchu_Gives.FormattingEnabled = true;
+                        this.Bombchu_Gives.Location = new System.Drawing.Point(221, 128);
+                        this.Bombchu_Gives.Name = "Bombchu_Gives";
+                        this.Bombchu_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Bombchu_Gives.TabIndex = 100;
+                        this.Bombchu_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Bombchu
+                        // 
+                        this.Bombchu.AutoSize = true;
+                        this.Bombchu.Location = new System.Drawing.Point(6, 130);
+                        this.Bombchu.Name = "Bombchu";
+                        this.Bombchu.Size = new System.Drawing.Size(71, 17);
+                        this.Bombchu.TabIndex = 98;
+                        this.Bombchu.Text = "Bombchu";
+                        this.Bombchu.UseVisualStyleBackColor = true;
+                        this.Bombchu.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Bombchus_5_Pool
+                        // 
+                        this.Bombchus_5_Pool.Enabled = false;
+                        this.Bombchus_5_Pool.FormattingEnabled = true;
+                        this.Bombchus_5_Pool.Location = new System.Drawing.Point(143, 155);
+                        this.Bombchus_5_Pool.Name = "Bombchus_5_Pool";
+                        this.Bombchus_5_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Bombchus_5_Pool.TabIndex = 102;
+                        this.Bombchus_5_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Bombchus_5_Gives
+                        // 
+                        this.Bombchus_5_Gives.Enabled = false;
+                        this.Bombchus_5_Gives.FormattingEnabled = true;
+                        this.Bombchus_5_Gives.Location = new System.Drawing.Point(221, 155);
+                        this.Bombchus_5_Gives.Name = "Bombchus_5_Gives";
+                        this.Bombchus_5_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Bombchus_5_Gives.TabIndex = 103;
+                        this.Bombchus_5_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Bombchus_5
+                        // 
+                        this.Bombchus_5.AutoSize = true;
+                        this.Bombchus_5.Location = new System.Drawing.Point(6, 157);
+                        this.Bombchus_5.Name = "Bombchus_5";
+                        this.Bombchus_5.Size = new System.Drawing.Size(91, 17);
+                        this.Bombchus_5.TabIndex = 101;
+                        this.Bombchus_5.Text = "Bombchus (5)";
+                        this.Bombchus_5.UseVisualStyleBackColor = true;
+                        this.Bombchus_5.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Bombchus_10_Pool
+                        // 
+                        this.Bombchus_10_Pool.Enabled = false;
+                        this.Bombchus_10_Pool.FormattingEnabled = true;
+                        this.Bombchus_10_Pool.Location = new System.Drawing.Point(143, 182);
+                        this.Bombchus_10_Pool.Name = "Bombchus_10_Pool";
+                        this.Bombchus_10_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Bombchus_10_Pool.TabIndex = 105;
+                        this.Bombchus_10_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Bombchus_10_Gives
+                        // 
+                        this.Bombchus_10_Gives.Enabled = false;
+                        this.Bombchus_10_Gives.FormattingEnabled = true;
+                        this.Bombchus_10_Gives.Location = new System.Drawing.Point(221, 182);
+                        this.Bombchus_10_Gives.Name = "Bombchus_10_Gives";
+                        this.Bombchus_10_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Bombchus_10_Gives.TabIndex = 106;
+                        this.Bombchus_10_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Bombchus_10
+                        // 
+                        this.Bombchus_10.AutoSize = true;
+                        this.Bombchus_10.Location = new System.Drawing.Point(6, 184);
+                        this.Bombchus_10.Name = "Bombchus_10";
+                        this.Bombchus_10.Size = new System.Drawing.Size(97, 17);
+                        this.Bombchus_10.TabIndex = 104;
+                        this.Bombchus_10.Text = "Bombchus (10)";
+                        this.Bombchus_10.UseVisualStyleBackColor = true;
+                        this.Bombchus_10.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
                         // Main_Window
                         // 
                         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4928,6 +5039,15 @@
                 private System.Windows.Forms.Label label6;
                 private System.Windows.Forms.NumericUpDown BlastMaskFrames_Num;
                 private System.Windows.Forms.Label BlastMaskSeconds_Label;
+                private System.Windows.Forms.ComboBox Bombchu_Pool;
+                private System.Windows.Forms.ComboBox Bombchu_Gives;
+                private System.Windows.Forms.CheckBox Bombchu;
+                private System.Windows.Forms.ComboBox Bombchus_5_Pool;
+                private System.Windows.Forms.ComboBox Bombchus_5_Gives;
+                private System.Windows.Forms.CheckBox Bombchus_5;
+                private System.Windows.Forms.ComboBox Bombchus_10_Pool;
+                private System.Windows.Forms.ComboBox Bombchus_10_Gives;
+                private System.Windows.Forms.CheckBox Bombchus_10;
         }
 }
 

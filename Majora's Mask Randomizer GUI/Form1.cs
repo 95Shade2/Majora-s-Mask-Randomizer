@@ -307,6 +307,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Blast_Mask_Pool.Items.Add(Pool);
                         Blue_Potion_Pool.Items.Add(Pool);
                         Bomb_Bag_Pool.Items.Add(Pool);
+                        Bombchu_Pool.Items.Add(Pool);
+                        Bombchus_5_Pool.Items.Add(Pool);
+                        Bombchus_10_Pool.Items.Add(Pool);
                         Bombers_Notebook_Pool.Items.Add(Pool);
                         Bow_Pool.Items.Add(Pool);
                         Bremen_Mask_Pool.Items.Add(Pool);
@@ -409,6 +412,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Item_Names.Add(index++, "Blast Mask");
                         Item_Names.Add(index++, "Blue Potion");
                         Item_Names.Add(index++, "Bomb Bag");
+                        Item_Names.Add(index++, "Bombchu");
+                        Item_Names.Add(index++, "Bombchus (5)");
+                        Item_Names.Add(index++, "Bombchus (10)");
                         Item_Names.Add(index++, "Bomber's Notebook");
                         Item_Names.Add(index++, "Bow");
                         Item_Names.Add(index++, "Bremen Mask");
@@ -508,6 +514,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Checkboxes_Names.Add(index++, "Blast_Mask");
                         Checkboxes_Names.Add(index++, "Blue_Potion");
                         Checkboxes_Names.Add(index++, "Bomb_Bag");
+                        Checkboxes_Names.Add(index++, "Bombchu");
+                        Checkboxes_Names.Add(index++, "Bombchus_5");
+                        Checkboxes_Names.Add(index++, "Bombchus_10");
                         Checkboxes_Names.Add(index++, "Bombers_Notebook");
                         Checkboxes_Names.Add(index++, "Bow");
                         Checkboxes_Names.Add(index++, "Bremen_Mask");
@@ -605,6 +614,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Checkbox_To_Combobox.Add("Blast_Mask", Blast_Mask_Pool);
                         Checkbox_To_Combobox.Add("Blue_Potion", Blue_Potion_Pool);
                         Checkbox_To_Combobox.Add("Bomb_Bag", Bomb_Bag_Pool);
+                        Checkbox_To_Combobox.Add("Bombchu", Bombchu_Pool);
+                        Checkbox_To_Combobox.Add("Bombchus_5", Bombchus_5_Pool);
+                        Checkbox_To_Combobox.Add("Bombchus_10", Bombchus_10_Pool);
                         Checkbox_To_Combobox.Add("Bombers_Notebook", Bombers_Notebook_Pool);
                         Checkbox_To_Combobox.Add("Bow", Bow_Pool);
                         Checkbox_To_Combobox.Add("Bremen_Mask", Bremen_Mask_Pool);
@@ -699,6 +711,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Checkbox_To_Combobox2.Add("Blast_Mask", Blast_Mask_Gives);
                         Checkbox_To_Combobox2.Add("Blue_Potion", Blue_Potion_Gives);
                         Checkbox_To_Combobox2.Add("Bomb_Bag", Bomb_Bag_Gives);
+                        Checkbox_To_Combobox2.Add("Bombchu", Bombchu_Gives);
+                        Checkbox_To_Combobox2.Add("Bombchus_5", Bombchus_5_Gives);
+                        Checkbox_To_Combobox2.Add("Bombchus_10", Bombchus_10_Gives);
                         Checkbox_To_Combobox2.Add("Bombers_Notebook", Bombers_Notebook_Gives);
                         Checkbox_To_Combobox2.Add("Bow", Bow_Gives);
                         Checkbox_To_Combobox2.Add("Bremen_Mask", Bremen_Mask_Gives);
@@ -804,6 +819,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Combo_To_Item.Add("Blast_Mask_Pool", "Blast Mask");
                         Combo_To_Item.Add("Blue_Potion_Pool", "Blue Potion");
                         Combo_To_Item.Add("Bomb_Bag_Pool", "Bomb Bag");
+                        Combo_To_Item.Add("Bombchu_Pool", "Bombchu");
+                        Combo_To_Item.Add("Bombchus_5_Pool", "Bombchus (5)");
+                        Combo_To_Item.Add("Bombchus_10_Pool", "Bombchus (10)");
                         Combo_To_Item.Add("Bombers_Notebook_Pool", "Bomber's Notebook");
                         Combo_To_Item.Add("Bow_Pool", "Bow");
                         Combo_To_Item.Add("Bremen_Mask_Pool", "Bremen Mask");
@@ -901,6 +919,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Checkbox_List.Add("Blast_Mask", Blast_Mask);
                         Checkbox_List.Add("Blue_Potion", Blue_Potion);
                         Checkbox_List.Add("Bomb_Bag", Bomb_Bag);
+                        Checkbox_List.Add("Bombchu", Bombchu);
+                        Checkbox_List.Add("Bombchus_5", Bombchus_5);
+                        Checkbox_List.Add("Bombchus_10", Bombchus_10);
                         Checkbox_List.Add("Bombers_Notebook", Bombers_Notebook);
                         Checkbox_List.Add("Bow", Bow);
                         Checkbox_List.Add("Bremen_Mask", Bremen_Mask);
