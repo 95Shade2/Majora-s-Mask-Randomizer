@@ -1637,7 +1637,7 @@ void Give_Starting_Items() {
     Item_Flags[songs_1] = "00000000";
     Item_Flags[songs_2] = "00010000";    //start out with Song of Time
     Item_Flags[songs_3] = "00000000";
-    Item_Flags[wallet] = "00010000";    //start out with small wallet
+    Item_Flags[wallet] = "00000000";    //start out with small wallet
     Item_Flags[sword_shield] = "00010001";    //start out with sword and shield
     Item_F_Locations.push_back(songs_1);
     Item_F_Locations.push_back(songs_2);
