@@ -4466,11 +4466,11 @@
                         // BlastMaskSeconds_Label
                         // 
                         this.BlastMaskSeconds_Label.AutoSize = true;
-                        this.BlastMaskSeconds_Label.Location = new System.Drawing.Point(414, 344);
+                        this.BlastMaskSeconds_Label.Location = new System.Drawing.Point(456, 341);
                         this.BlastMaskSeconds_Label.Name = "BlastMaskSeconds_Label";
-                        this.BlastMaskSeconds_Label.Size = new System.Drawing.Size(55, 13);
+                        this.BlastMaskSeconds_Label.Size = new System.Drawing.Size(34, 13);
                         this.BlastMaskSeconds_Label.TabIndex = 97;
-                        this.BlastMaskSeconds_Label.Text = "Seconds: ";
+                        this.BlastMaskSeconds_Label.Text = "10:01";
                         // 
                         // Main_Window
                         // 

@@ -2049,13 +2049,196 @@ namespace Majora_s_Mask_Randomizer_GUI
                         WalletForm.parent = this;
                         WalletForm.Show();
                 }
+                
+                private int Num_Digits(double number)
+                {
+                        int num_int = (int)number;
+                        int num_digs = 0;
+
+                        while (num_int != 0)
+                        {
+                                num_int /= 10;
+                                num_digs++;
+                        }
+
+                        number *= 10;
+                        while (number != 0)
+                        {
+                                number -= (int)number;
+                                number *= 10;
+                                num_digs++;
+                        }
+
+                        return num_digs;
+                }
+
+                private int[] Dec_To_DigitArray(double num)
+                {
+                        int num_int = (int)num;
+                        int[] num_ints;
+                        int digits;
+
+                        if (num == 0)
+                        {
+                                num_ints = new int[1];
+                                num_ints[0] = 0;
+                        }
+                        else
+                        {
+                                digits = Num_Digits(num);
+                                num_ints = new int[digits];
+
+                                for (int i = 0; i < digits; i++)
+                                {
+                                        num_int = (int)num;
+                                        num_ints[i] = num_int;
+                                        num = (num - num_int) * 10;
+                                }
+                        }
+
+                        return num_ints;
+                }
+
+                private double Round(double dec, int places)
+                {
+                        int right_shifts = 0;
+                        int[] numbers;
+
+                        //12.34 => 0.1234
+                        while ((int)dec != 0)
+                        {
+                                dec /= 10;
+                                right_shifts++;
+                        }
+
+                        //0.1234 => 1.234
+                        if (right_shifts > 0)
+                        {
+                                dec *= 10;
+                                right_shifts--;
+                        }
+
+                        numbers = Dec_To_DigitArray(dec);
+
+                        //dec = Round(numbers, places, right_shifts);
+                        
+                        //12.34 => 0.1234
+                        while (right_shifts > 0)
+                        {
+                                dec *= 10;
+                                right_shifts--;
+                        }
+
+                        return dec;
+                }
+
+                private int Divide(int num, int den)
+                {
+                        return (int)Divide(num, (double)den);
+                }
+
+                private double Divide(int num, double d_den)
+                {
+                        double quo = 0;
+                        int den = (int)d_den;
+                        int rem;
+                        int left_shifts = 0;
+
+                        if (den == 0)
+                        {
+                                return 0;
+                        }
+
+                        quo += num / den;
+                        rem = num % den;
+                        
+                        while (rem != 0)
+                        {
+                                num = rem * 10;
+                                rem = num % den;
+
+                                quo *= 10;
+                                left_shifts++;
+                                quo += num / den;
+                        }
+
+                        while (left_shifts != 0)
+                        {
+                                quo /= 10.0;
+                                left_shifts--;
+                        }
+
+                        return quo;
+                }
+
+                private void BlastMask_Center(int left, int right)
+                {
+                        int width = BlastMaskSeconds_Label.Width;
+                        int middle = (left + right) / 2;
+                        int x = middle - (width / 2);
+                        int y = BlastMaskSeconds_Label.Location.Y;
+                        BlastMaskSeconds_Label.Location = new Point(x, y);
+                }
+
+                private double Minus(double num1, int num2)
+                {
+                        double num1_NoDec = num1;
+                        double num1_int = (int)num1_NoDec;
+                        int left_shifts = 0;
+
+                        //12.34 => 1234
+                        while (num1_NoDec - num1_int != 0)
+                        {
+                                num1_NoDec *= 10;
+                                num2 *= 10;
+                                num1_int = (int)num1_NoDec;
+                                left_shifts++;
+                        }
+
+                        num1_NoDec -= num2;
+
+                        for (int i = 0; i < left_shifts; i++)
+                        {
+                                num1_NoDec /= 10;
+                        }
+
+                        return num1_NoDec;
+                }
+
+                private double Mod(double num, int den)
+                {
+                        int num_int = (int)num;
+                        num = Minus(num, num_int);
+                        num_int = num_int % den;
+                        num += num_int;
+                        return num;
+                }
 
                 private void numericUpDown1_ValueChanged(object sender, EventArgs e)
                 {
                         int frames = (int)BlastMaskFrames_Num.Value;
-                        double seconds = frames / 20.0;
-                        
-                        BlastMaskSeconds_Label.Text = "Seconds: " + seconds;
+                        double seconds = Divide(frames, 20.0);
+                        int minutes = (int)(seconds / 60);
+                        string seconds_str = "";
+
+                        seconds = Mod(seconds, 60);
+
+                        if (seconds < 10 && minutes > 0)
+                        {
+                                seconds_str += "0";
+                        }
+                        seconds_str += seconds;
+
+                        if (minutes > 0)
+                        {
+                                BlastMaskSeconds_Label.Text = minutes + ":" + seconds_str;
+                        }
+                        else
+                        {
+                                BlastMaskSeconds_Label.Text = seconds_str;
+                        }
+
+                        BlastMask_Center(411, 532);
                 }
         }
 }
