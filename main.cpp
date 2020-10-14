@@ -1732,6 +1732,17 @@ void Give_Starting_Items() {
 
                         Item_Flags[key] = count_str;
                     }
+                    //map
+                    else if (count_str[0] == 'M') {
+                        count_str = count_str.substr(2);
+                        Count_Location = Items[Items[Start_Item].Name].Item_Count_Locations[i];
+                        key = Count_Location;
+
+                        Item_Flags[key] = count_str;
+                        Item_F_Locations.push_back(Count_Location);
+
+                        l++;
+                    }
                     else {
                         count_str = count_str.substr(2);
 
@@ -4012,6 +4023,8 @@ void Make_Bottles_Work() {
 void Fix_Tingle_Maps() {
     int Pass = 12227676;
     int Maps = 12342348;
+    string starting_maps_add = "C1CAD4";
+
     vector<string> Pass_New = {
         "00000000",
         "2401006D",
@@ -4184,11 +4197,45 @@ void Fix_Tingle_Maps() {
         "00000000"
     };
 
+    vector<string> starting_maps_func = {
+        "27BDFFC0",
+        "AFA70018",
+        "AFBF0014",
+        "0C051224",
+        "00000000",
+        "0C061972",
+        "27BDFFC0",
+        "0C061978",
+        "27BDFFC0",
+        "8FA70018",
+        "8FBF0014",
+        "03E00008",
+        "27BD0040",
+
+        "AFBF0014",
+        "0C04BBC3",
+        "24070000", //deku mask map id
+        "8FBF0014",
+        "03E00008",
+        "27BD0040",
+        "AFBF0014",
+        "0C04BBC3",
+        "24070000", //song of healing map id
+        "8FBF0014",
+        "03E00008",
+        "27BD0040"
+    };
+
     for (int i = 0; i < Pass_New.size(); i++) {
         Write_To_Rom(Pass + (i*4), Pass_New[i]);
     }
     for (int i = 0; i < Maps_Fun.size(); i++) {
         Write_To_Rom(Maps + (i*4), Maps_Fun[i]);
+    }
+
+    Write_To_Rom(hex_to_decimal("BDD008"), "0C061965"); //jump to starting tingle maps custom function in the creation of a new file
+    for (int i = 0; i < starting_maps_func.size(); i++) {   //custom starting tingle maps
+        Write_To_Rom(hex_to_decimal(starting_maps_add) + (i*4), starting_maps_func[i]);
     }
 }
 
@@ -5054,6 +5101,25 @@ void Change_BlastMask(map<string, string> custom_settings) {
     Write_To_Rom(13280870, frames_hex);
 }
 
+void Fix_Swords() {
+    int address = 12228012;
+    vector<string> commands = {
+        "10800004", //BEQ	A0, R0, FD	Skip saving to b button if FD
+        "A518006C", //SH	T8, 0x006C (T0)	Save sword to inv
+        "93AE0047", //LBU	T6, 0x0047 (SP)	Load Sword Item ID
+        "01007821", //ADDU	T7, T0, R0	Move T0 to T7
+        "A1EE004C", //SB	T6, 0x003C (T7)	Save sword to B button
+        "00000000", //NOPs
+        "00000000", //
+        "00000000", //
+        "00000000"  //
+    };
+
+    for (int c = 0; c < commands.size(); c++) {
+        Write_To_Rom(address + (c*4), commands[c]);
+    }
+}
+
 int main()
 {
     err_file.open("Error.txt");
@@ -5142,12 +5208,12 @@ int main()
 
     //Cant start out with a map? - maybe can, when getting a map, it does nothing for some reason
     //change the item ids for the map from 31 to the get item id so that my custom function can determine which map to give
-    Items["Clocktown Map"] = Item({Time(1,false,0,3,true,12)}, "Clocktown Map", "B4", "B4", "B4", "A0", "024D", "2E", "", {"CD6C96"}, {});
-    Items["Woodfall Map"] = Item({Time(1,false,0,3,true,12)}, "Woodfall Map", "B5", "B5", "B5", "A0", "024D", "2E", "", {"CD6C9C"}, {});
-    Items["Snowhead Map"] = Item({Time(1,false,0,3,true,12)}, "Snowhead Map", "B6", "B6", "B6", "A0", "024D", "2E", "", {"CD6CA2"}, {});
-    Items["Romani Ranch Map"] = Item({Time(1,false,0,3,true,12)}, "Romani Ranch Map", "B7", "B7", "B7", "A0", "024D", "2E", "", {"CD6CA8"}, {});
-    Items["Great Bay Map"] = Item({Time(1,false,0,3,true,12)}, "Great Bay Map", "B8", "B8", "B8", "A0", "024D", "2E", "", {"CD6CAE"}, {});
-    Items["Stone Tower Map"] = Item({Time(1,false,0,3,true,12)}, "Stone Tower Map", "B9", "B9", "B9", "A0", "024D", "2E", "", {"CD6CB4"}, {});
+    Items["Clocktown Map"] = Item({Time(1,false,0,3,true,12)}, "Clocktown Map", "B4", "B4", "B4", "A0", "024D", "2E", "", {"CD6C96"}, {}, "M_10110100", {"C1CB13", "C1CB2B"});
+    Items["Woodfall Map"] = Item({Time(1,false,0,3,true,12)}, "Woodfall Map", "B5", "B5", "B5", "A0", "024D", "2E", "", {"CD6C9C"}, {}, "M_10110101", {"C1CB13", "C1CB2B"});
+    Items["Snowhead Map"] = Item({Time(1,false,0,3,true,12)}, "Snowhead Map", "B6", "B6", "B6", "A0", "024D", "2E", "", {"CD6CA2"}, {}, "M_10110110", {"C1CB13", "C1CB2B"});
+    Items["Romani Ranch Map"] = Item({Time(1,false,0,3,true,12)}, "Romani Ranch Map", "B7", "B7", "B7", "A0", "024D", "2E", "", {"CD6CA8"}, {}, "M_10110111", {"C1CB13", "C1CB2B"});
+    Items["Great Bay Map"] = Item({Time(1,false,0,3,true,12)}, "Great Bay Map", "B8", "B8", "B8", "A0", "024D", "2E", "", {"CD6CAE"}, {}, "M_10111000", {"C1CB13", "C1CB2B"});
+    Items["Stone Tower Map"] = Item({Time(1,false,0,3,true,12)}, "Stone Tower Map", "B9", "B9", "B9", "A0", "024D", "2E", "", {"CD6CB4"}, {}, "M_10111001", {"C1CB13", "C1CB2B"});
 
     //Items["Green Rupee"] = Item({Time(1,false,0,3,true,12)}, "Green Rupee", "84", "01", "C4", "00", "013F", "B0", "", {"CD6864"}, {"C5CDEF"}, {}, {}, {"C55FE1"}, "01", {"CD6864"}, "84");
     //Items["Blue Rupee"] = Item({Time(1,false,0,3,true,12)}, "Blue Rupee", "85", "02", "02", "01", "013F", "AF", "", {"CD686A"}, {"C5CDEF"}, {}, {}, {"C55FE3"}, "05", {"CD686A"}, "85");
@@ -5231,9 +5297,6 @@ int main()
 
     cout << "\nGiving Starting Items\n";
 
-    //Give the player the starting items
-    Give_Starting_Items();
-
     //FD anywhere
     Write_To_Rom(12220113, "00");
 
@@ -5308,6 +5371,9 @@ int main()
     //input the function to give tingle map branch to it in the get item passive function
     Fix_Tingle_Maps();
 
+    //Give the player the starting items
+    Give_Starting_Items();
+
     //Set the number of frames of the hms cs when you enter clock tower to 0
     //Write_To_Rom(46981670, "0000");
 
@@ -5317,8 +5383,8 @@ int main()
     Write_To_Rom(15953540, "24020001");
     Write_To_Rom(15955712, "24020001");
 
-    //fix getting razor sword or gilded sword as a transformation mask
-    Write_To_Rom(12228040, "01007821");
+    //fix getting the swords as transformation masks
+    Fix_Swords();
 
     //change the give song passive to work with just raw ids, nevermind, this might effect other things so gonna just write diff values
     //Write_To_Rom(12500416, "00000000");
