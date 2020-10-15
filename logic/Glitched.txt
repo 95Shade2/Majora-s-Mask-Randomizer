@@ -345,7 +345,18 @@ Green Potion {
 }
 
 Hero's Shield {
-
+	80 Rupees
+	Hero's Shield, Bomb Bag
+	Hero's Shield, Big Bomb Bag
+	Hero's Shield, Biggest Bomb Bag
+	Hero's Shield, Blast Mask
+	Hero's Shield, Epona's Song
+	Hero's Shield, Bow, Song of Soaring, Deku Stick
+	Hero's Shield, Large Quiver, Song of Soaring, Deku Stick
+	Hero's Shield, Largest Quiver, Song of Soaring, Deku Stick
+	Hero's Shield, Fire Arrow, Song of Soaring, Deku Stick
+	Hero's Shield, Ice Arrow, Song of Soaring, Deku Stick
+	Hero's Shield, Light Arrow, Song of Soaring, Deku Stick
 }
 
 Hookshot {
