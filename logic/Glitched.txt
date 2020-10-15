@@ -4,16 +4,15 @@
 //	}
 
 Adult Wallet {
-	
+	1 Rupees
 }
 
 All-Night Mask {
-	Adult Wallet
-	Giant Wallet
+	500 Rupees
 }
 
 Big Bomb Bag {
-	
+	90 Rupees
 }
 
 Big Poe {
@@ -27,7 +26,7 @@ Big Poe {
 }
 
 Biggest Bomb Bag {
-	Goron Mask
+	Goron Mask, 200 Rupees
 }
 
 Blast Mask {
@@ -53,7 +52,7 @@ Blue Rupee {
 }
 
 Bomb Bag {
-	
+	50 Rupees
 }
 
 Bomber's Notebook {
@@ -93,8 +92,12 @@ Captain's Hat {
 }
 
 Chateau Romani {
-	Romani's Mask
-	Express Letter to Mama
+	Romani's Mask, 200 Rupees
+	Romani's Mask, Express Letter to Mama
+	Express Letter to Mama, Bomb Bag
+	Express Letter to Mama, Big Bomb Bag
+	Express Letter to Mama, Biggest Bomb Bag
+	Express Letter to Mama, Blast Mask
 }
 
 Circus Leader's Mask {
@@ -276,24 +279,14 @@ Gibdo Mask {
 }
 
 Gilded Sword {
-	Gilded Sword, Bow
-	Gilded Sword, Large Quiver
-	Gilded Sword, Largest Quiver
-	Gold Dust, Goron Mask, Bow, Fire Arrow
-	Gold Dust, Goron Mask, Large Quiver, Fire Arrow
-	Gold Dust, Goron Mask, Largest Quiver, Fire Arrow
-	Gold Dust, Bomb Bag, Bow, Fire Arrow
-	Gold Dust, Bomb Bag, Large Quiver, Fire Arrow
-	Gold Dust, Bomb Bag, Largest Quiver, Fire Arrow
-	Gold Dust, Big Bomb Bag, Bow, Fire Arrow
-	Gold Dust, Big Bomb Bag, Large Quiver, Fire Arrow
-	Gold Dust, Big Bomb Bag, Largest Quiver, Fire Arrow
-	Gold Dust, Biggest Bomb Bag, Bow, Fire Arrow
-	Gold Dust, Biggest Bomb Bag, Large Quiver, Fire Arrow
-	Gold Dust, Biggest Bomb Bag, Largest Quiver, Fire Arrow
-	Gold Dust, Bow, Deku Stick, Song of Soaring, Fire Arrow
-	Gold Dust, Large Quiver, Deku Stick, Song of Soaring, Fire Arrow
-	Gold Dust, Largest Quiver, Deku Stick, Song of Soaring, Fire Arrow
+	Gilded Sword, Bow, 50 Rupees
+	Gilded Sword, Large Quiver, 50 Rupees
+	Gilded Sword, Largest Quiver, 50 Rupees
+	Gold Dust, Razor Sword, Bow, Fire Arrow
+	Gold Dust, Razor Sword, Large Quiver, Fire Arrow
+	Gold Dust, Razor Sword, Largest Quiver, Fire Arrow
+	Gold Dust, Razor Sword, Hot Spring Water
+	Gold Dust, Razor Sword, Bow, Deku Stick
 }
 
 Gold Dust {
@@ -342,17 +335,13 @@ Great Fairy's Sword {
 	Bow, Light Arrow, Biggest Bomb Bag, Fire Arrow
 	Large Quiver, Light Arrow, Biggest Bomb Bag, Fire Arrow
 	Largest Quiver, Light Arrow, Biggest Bomb Bag, Fire Arrow
-	Great Fairy's Sword, Bow
-	Great Fairy's Sword, Large Quiver
-	Great Fairy's Sword, Largest Quiver
+	Great Fairy's Sword, Bow, 100 Rupees
+	Great Fairy's Sword, Large Quiver, 100 Rupees
+	Great Fairy's Sword, Largest Quiver, 100 Rupees
 }
 
 Green Potion {
-	
-}
-
-Green Rupee {
-	
+	10 Rupees
 }
 
 Hero's Shield {
@@ -418,9 +407,9 @@ Keaton Mask {
 }
 
 Kokiri Sword {
-	Bow
-	Large Quiver
-	Largest Quiver
+	Bow, 50 Rupees
+	Large Quiver, 50 Rupees
+	Largest Quiver, 50 Rupees
 	Razor Sword
 }
 
@@ -493,7 +482,32 @@ Mask of Truth {
 }
 
 Milk {
-	
+	50 Rupees
+	20 Rupees, Romani's Mask
+	Epona's Song, Powder Keg, Goron Mask
+	Epona's Song, Bomb Bag
+	Epona's Song, Big Bomb Bag
+	Epona's Song, Biggest Bomb Bag
+	Epona's Song, Fierce Deity Mask
+	Epona's Song, Blast Mask
+	Bow, Powder Keg, Goron Mask
+	Bow, Bomb Bag
+	Bow, Big Bomb Bag
+	Bow, Biggest Bomb Bag
+	Bow, Fierce Deity Mask
+	Bow, Blast Mask
+	Large Quiver, Powder Keg, Goron Mask
+	Large Quiver, Bomb Bag
+	Large Quiver, Big Bomb Bag
+	Large Quiver, Biggest Bomb Bag
+	Large Quiver, Fierce Deity Mask
+	Large Quiver, Blast Mask
+	Largest Quiver, Powder Keg, Goron Mask
+	Largest Quiver, Bomb Bag
+	Largest Quiver, Big Bomb Bag
+	Largest Quiver, Biggest Bomb Bag
+	Largest Quiver, Fierce Deity Mask
+	Largest Quiver, Blast Mask
 }
 
 Mirror Shield {
@@ -581,9 +595,9 @@ Purple Rupee {
 }
 
 Razor Sword {
-	Razor Sword, Bow
-	Razor Sword, Large Quiver
-	Razor Sword, Largest Quiver
+	Razor Sword, Bow, 50 Rupees
+	Razor Sword, Large Quiver, 50 Rupees
+	Razor Sword, Largest Quiver, 50 Rupees
 	Bomb Bag, Bow, Fire Arrow
 	Bomb Bag, Large Quiver, Fire Arrow
 	Bomb Bag, Largest Quiver, Fire Arrow
@@ -599,7 +613,7 @@ Razor Sword {
 }
 
 Red Potion {
-	
+	20 Rupees
 }
 
 Red Rupee {
@@ -674,80 +688,80 @@ Zora Mask {
 }
 
 Clocktown Map {
-	Bow
-	Large Quiver
-	Largest Quiver
-	Deku Mask
-	Zora Mask
-	Hookshot
-	Great Fairy Sword
-	Fierce Deity Mask
+	Bow, 5 Rupees
+	Large Quiver, 5 Rupees
+	Largest Quiver, 5 Rupees
+	Deku Mask, 5 Rupees
+	Zora Mask, 5 Rupees
+	Hookshot, 5 Rupees
+	Great Fairy Sword, 5 Rupees
+	Fierce Deity Mask, 5 Rupees
 }
 
 Woodfall Map {
-	Bow
-	Large Quiver
-	Largest Quiver
-	Deku Mask
-	Zora Mask
-	Hookshot
-	Great Fairy Sword
-	Fierce Deity Mask
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
+	Bow, 20 Rupees
+	Large Quiver, 20 Rupees
+	Largest Quiver, 20 Rupees
+	Deku Mask, 20 Rupees
+	Zora Mask, 20 Rupees
+	Hookshot, 20 Rupees
+	Great Fairy Sword, 20 Rupees
+	Fierce Deity Mask, 20 Rupees
+	Bomb Bag, 20 Rupees
+	Big Bomb Bag, 20 Rupees
+	Biggest Bomb Bag, 20 Rupees
 }
 
 Snowhead Map {
-	Bow
-	Large Quiver
-	Largest Quiver
-	Deku Mask
-	Zora Mask
-	Hookshot
-	Fierce Deity Mask
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
+	Bow, 20 Rupees
+	Large Quiver, 20 Rupees
+	Largest Quiver, 20 Rupees
+	Deku Mask, 20 Rupees
+	Zora Mask, 20 Rupees
+	Hookshot, 20 Rupees
+	Fierce Deity Mask, 20 Rupees
+	Bomb Bag, 20 Rupees
+	Big Bomb Bag, 20 Rupees
+	Biggest Bomb Bag, 20 Rupees
 }
 
 Romani Ranch Map {
-	Bow
-	Large Quiver
-	Largest Quiver
-	Deku Mask
-	Zora Mask
-	Hookshot
-	Fierce Deity Mask
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
+	Bow, 20 Rupees
+	Large Quiver, 20 Rupees
+	Largest Quiver, 20 Rupees
+	Deku Mask, 20 Rupees
+	Zora Mask, 20 Rupees
+	Hookshot, 20 Rupees
+	Fierce Deity Mask, 20 Rupees
+	Bomb Bag, 20 Rupees
+	Big Bomb Bag, 20 Rupees
+	Biggest Bomb Bag, 20 Rupees
 }
 
 Great Bay Map {
-	Bow
-	Large Quiver
-	Largest Quiver
-	Deku Mask
-	Zora Mask
-	Hookshot
-	Fierce Deity Mask
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
+	Bow, 20 Rupees
+	Large Quiver, 20 Rupees
+	Largest Quiver, 20 Rupees
+	Deku Mask, 20 Rupees
+	Zora Mask, 20 Rupees
+	Hookshot, 20 Rupees
+	Fierce Deity Mask, 20 Rupees
+	Bomb Bag, 20 Rupees
+	Big Bomb Bag, 20 Rupees
+	Biggest Bomb Bag, 20 Rupees
 }
 
 Stone Tower Map {
-	Bow, Epona's Song
-	Large Quiver, Epona's Song
-	Largest Quiver, Epona's Song
-	Hookshot, Epona's Song
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
-	Bow, Song of Soaring, Deku Stick
-	Large Quiver, Song of Soaring, Deku Stick
-	Largest Quiver, Song of Soaring, Deku Stick
+	Bow, Epona's Song, 20 Rupees
+	Large Quiver, Epona's Song, 20 Rupees
+	Largest Quiver, Epona's Song, 20 Rupees
+	Hookshot, Epona's Song, 20 Rupees
+	Bomb Bag, 20 Rupees
+	Big Bomb Bag, 20 Rupees
+	Biggest Bomb Bag, 20 Rupees
+	Bow, Song of Soaring, Deku Stick, 20 Rupees
+	Large Quiver, Song of Soaring, Deku Stick, 20 Rupees
+	Largest Quiver, Song of Soaring, Deku Stick, 20 Rupees
 }
 
 Song of Healing {

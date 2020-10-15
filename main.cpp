@@ -2675,7 +2675,40 @@ void Fix_Shuffled(map<string, Item> &Items, string Seed, string Logic_File, int 
     }
 }
 
-vector<string> Get_Items_Aval(map<string, Item> &Items, map<string, vector<vector<string>>> Items_Needed, vector<string> &Items_Gotten) {
+///Gets the word at index 'word_index' from 'text' (0 based)
+string Get_Word(string text, int word_index) {
+    vector<string> words = Split(text, " ");
+
+    if (words.size() > word_index) {
+        return words[word_index];
+    }
+    else {
+        return "";
+    }
+}
+
+///Gets the wallet size (nothing, adult, or giant) needed to have the 'rupees_needed' amount of rupees
+string Get_Wallet_Needed(int rupees_needed, map<string, string> wallet_sizes) {
+    vector<string> wallet_keys = {"Small", "Medium", "Large"};
+    vector<string> wallets = {"", "Adult Wallet", "Giant Wallet"};
+
+    for (int w = 0; w < wallets.size(); w++) {
+        string key = wallet_keys[w];
+        string Size = wallets[w];
+        string rupees_str = wallet_sizes[key];
+        int max_rupees = string_to_dec(rupees_str);
+
+        //this is the wallet that is needed
+        if (max_rupees >= rupees_needed) {
+            return Size;
+        }
+    }
+
+    //the player cannot buy the item ever
+    return "Error";
+}
+
+vector<string> Get_Items_Aval(map<string, Item> &Items, map<string, vector<vector<string>>> Items_Needed, vector<string> &Items_Gotten, map<string, string> wallets) {
     vector<string> items;
     vector<string> Items_Aval;
     bool Can_Get_Item = false;
@@ -2693,8 +2726,22 @@ vector<string> Get_Items_Aval(map<string, Item> &Items, map<string, vector<vecto
             for (int in = 0; in < Cur_List.size(); in++) {
                 string item_needed = Cur_List[in];
 
+                //if this is a rupee amount
+                if (IndexOf_S(item_needed, "Rupees") != -1) {
+                    string rupees_str = Get_Word(item_needed, 0);   //gets the first word (gets the rupee amount)
+                    int rupees = string_to_dec(rupees_str);
+                    string Needed_Wallet = Get_Wallet_Needed(rupees, wallets);
+
+                    //if the player needs a wallet (too many rupees for the starting wallet)
+                    if (Needed_Wallet != "") {
+                        //if the player does not have the wallet needed
+                        if (IndexOf(Items_Gotten, Needed_Wallet) == -1) {
+                            Have_All = false;
+                        }
+                    }
+                }
                 //if an item is not obtained, then that means the player cannot get the item with the current list we're checking
-                if (IndexOf(Items_Gotten, item_needed) == -1) {
+                else if (IndexOf(Items_Gotten, item_needed) == -1) {
                     Have_All = false;
                 }
             }
@@ -2899,7 +2946,7 @@ bool Check_Curiosity_Items(string Cur_Item) {
 string Global_Log = "";
 int highest_items = 0;
 
-bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, vector<vector<string>>> &Items_Needed, vector<string> &Items_Gotten, vector<string> Items_Last = {}) {
+bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, vector<vector<string>>> &Items_Needed, vector<string> &Items_Gotten, map<string, string> wallets, vector<string> Items_Last = {}) {
     vector<string> items;
     vector<string> Items_Aval;  //item locations that the player is able to get to currently according to logic
     vector<string> Items_This;
@@ -2908,7 +2955,7 @@ bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, ve
 
     items = Get_Keys(Items);
 
-    Items_Aval = Get_Items_Aval(Items, Items_Needed, Items_Gotten);
+    Items_Aval = Get_Items_Aval(Items, Items_Needed, Items_Gotten, wallets);
 
     //place an item at each available spot
     for (int ia = 0; ia < Items_Aval.size(); ia++) {
@@ -2963,7 +3010,7 @@ bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, ve
                 }
 
                 if (Items_Needed.size() > 0) {
-                    if (Check_Curiosity_Items(Cur_Item) && Randomize(New_Log, Items, Seed, Items_Needed, Items_Gotten, Items_This)) {
+                    if (Check_Curiosity_Items(Cur_Item) && Randomize(New_Log, Items, Seed, Items_Needed, Items_Gotten, wallets, Items_This)) {
                         return true;
                     }
                     else {
@@ -2975,7 +3022,7 @@ bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, ve
                     }
                 }
                 else {
-                    return Randomize(New_Log, Items, Seed, Items_Needed, Items_Gotten, Items_This);
+                    return Randomize(New_Log, Items, Seed, Items_Needed, Items_Gotten, wallets, Items_This);
                 }
             }
         }
@@ -2997,7 +3044,7 @@ bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, ve
                 }
             }
 
-            return Randomize(Log, Items, Seed, Items_Needed, Items_Gotten, Items_This);
+            return Randomize(Log, Items, Seed, Items_Needed, Items_Gotten, wallets, Items_This);
         }
     }
 
@@ -3018,7 +3065,7 @@ bool Randomize(string Log, map<string, Item> &Items, string Seed, map<string, ve
 
         //keep going if haven't placed all items, and using no logic
         if (!Placed_All && Items_Needed.size() == 0)  {
-            return Randomize(Log, Items, Seed, Items_Needed, Items_Gotten, Items_This);
+            return Randomize(Log, Items, Seed, Items_Needed, Items_Gotten, wallets, Items_This);
         }
         //cannot get all items somehow?
         else if (!Placed_All) {
@@ -3096,10 +3143,14 @@ void Setup_Item_Values(map<string, vector<vector<string>>> Items_Needed) {
     }
 }
 
-void Randomize(map<string, Item> &Items, string &Seed, string Logic_File) {
+//void Randomize(map<string, Item> &Items, string &Seed, string Logic_File) {
+  void Randomize(map<string, Item> &Items, map<string, map<string, string> > Custom_Settings) {
     map<string, vector<vector<string>>> Items_Needed;
     vector<string> Items_Gotten;
     string Log = "";
+
+    string &Seed = Custom_Settings["settings"]["Seed"];
+    string Logic_File = Custom_Settings["settings"]["Logic"];
 
     if (Logic_File != "" && Logic_File != "None") {
         Items_Needed = Get_Logic(Logic_File);
@@ -3118,7 +3169,7 @@ void Randomize(map<string, Item> &Items, string &Seed, string Logic_File) {
         srand(hex_to_decimal(string_to_hex(Seed)));
     }
 
-    Randomize(Log, Items, Seed, Items_Needed, Items_Gotten);
+    Randomize(Log, Items, Seed, Items_Needed, Items_Gotten, Custom_Settings["wallets"]);
 
     return;
 }
@@ -5268,7 +5319,8 @@ int main()
 
     //randomize items according to logic, if any logic was chosen
     cout << "Randomizing Items...\n";
-    Randomize(Items, Settings["settings"]["Seed"], Settings["settings"]["Logic"]);
+    //Randomize(Items, Settings["settings"]["Seed"], Settings["settings"]["Logic"]);
+    Randomize(Items, Settings);
 
     //write spoiler log
     Write_Log(Settings["settings"]["Seed"]);
