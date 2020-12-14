@@ -1496,20 +1496,20 @@ void Change_Rupees(map<string, string> wallet_amounts) {
     int med_digits = wallet_amounts["Medium"].size();
     int large_digits = wallet_amounts["Large"].size();
 
-    if (small_digits > 3) {
-        small_digits = 3;
+    if (small_digits > 5) {
+        small_digits = 5;
     }
-    if (med_digits > 3) {
-        med_digits = 3;
+    if (med_digits > 5) {
+        med_digits = 5;
     }
-    if (large_digits > 3) {
-        large_digits = 3;
+    if (large_digits > 5) {
+        large_digits = 5;
     }
 
 
     //small
     //write padding for small wallet
-    Write_To_Rom(12935772, "000" + dec_to_string(3 - small_digits));
+    Write_To_Rom(12935772, "000" + dec_to_string(5 - small_digits));
 
     //write number of digits for small wallet
     Write_To_Rom(12935780, "000" + dec_to_string(small_digits));
@@ -1520,7 +1520,7 @@ void Change_Rupees(map<string, string> wallet_amounts) {
 
     //adult
     //write padding for adult wallet
-    Write_To_Rom(12935774, "000" + dec_to_string(3 - med_digits));
+    Write_To_Rom(12935774, "000" + dec_to_string(5 - med_digits));
 
     //write number of digits for adult wallet
     Write_To_Rom(12935782, "000" + dec_to_string(med_digits));
@@ -1538,7 +1538,7 @@ void Change_Rupees(map<string, string> wallet_amounts) {
 
     //giant
     //write padding for giant wallet
-    Write_To_Rom(12935776, "000" + dec_to_string(3 - large_digits));
+    Write_To_Rom(12935776, "000" + dec_to_string(5 - large_digits));
 
     //write number of digits for giant wallet
     Write_To_Rom(12935784, "000" + dec_to_string(large_digits));
@@ -1552,6 +1552,15 @@ void Change_Rupees(map<string, string> wallet_amounts) {
         plurarl = "";
     }
     Write_To_Rom(11342482, "01" + string_to_hex(wallet_amounts["Large"] + " Rupee" + plurarl) + "002EBF");
+
+    //fix max wallet not being green with bigger wallet
+    Write_To_Rom(12281248, "9462003A");
+
+    //fix from going over max capacity when capacity is really high
+    Write_To_Rom(12286660, "9503003A");
+
+    //write jimmie's 5 digit function :)
+    Write_To_Rom(12280768, "3C02801F9442F6AA0002702534180006340F000A29C10001142000080000000001CF001A00000000000070120000181003B8C821A32302B71000FFF52318FFFF0000702503B8C821A32E02B82B0100011020FFFA00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003C19801F3C0E801C8DCE1DD08F39F7283C0F801C91EF1E08032EC0248623027201F81006000210403C08801C3C0C801C0102402101826021286100B58508FD1C14200002858CFD24240300B41980009200004825306B00FF8E0502A03C0EE7002406000824B90008AE1902A0ACA00004ACAE00008E0502A03C0FFA002519000124B80008AE1802A0ACAB0004ACAF000003B9702191CE02B8");
 }
 
 string Even_Hex(string hex) {
@@ -1971,7 +1980,7 @@ void Remove_Item_Checks() {
     Write_To_Rom(14439692, "9318360301CF182300031C003301004014010004");
     Write_To_Rom(13334652, "00000000");
     Write_To_Rom(13334692, "10000016");
-    Write_To_Rom(15512024, "1000000F");
+    //Write_To_Rom(15512024, "1000000F");
     Write_To_Rom(15511648, "00000000");   //this makes it where tingle doesnt write the map data
     //Write_To_Rom(17100472, "904E3F6831CF0008");   //this also caused the softlock to happen at couple's mask
     Write_To_Rom(15562996, "90783F85");
@@ -1982,8 +1991,6 @@ void Remove_Item_Checks() {
     Write_To_Rom(17229352, "90593F6E");
     Write_To_Rom(17229364, "33280001");
     Write_To_Rom(17168980, "10000007");
-    Write_To_Rom(12962932, "00000020");
-    Write_To_Rom(12963012, "00000000");
     Write_To_Rom(12962936, "00003000");
     Write_To_Rom(12962908, "0C000000");
     Write_To_Rom(14893212, "90683F82");
@@ -2015,6 +2022,7 @@ void Remove_Item_Checks() {
     Write_To_Rom(15204429, "000C0000");
     Write_To_Rom(16479968, "906E3F79");
     Write_To_Rom(16479980, "31CF0004");
+
     Write_To_Rom(12962878, "000C");
     Write_To_Rom(12962882, "0000");
     Write_To_Rom(16566324, "10000004");
@@ -2046,7 +2054,6 @@ void Remove_Item_Checks() {
     Write_To_Rom(13334668, "00000000");
     //Write_To_Rom(15723008, "240100AD");   //this made the game softlock after beaver hp
     Write_To_Rom(12228768, "0000000000000000");
-    Write_To_Rom(12961392, "00000000");
 
     //Make witch always gives you bottled red potion, so I removed it so she gives you bottle and then whatever is randomized to red potion - in mystery woods
     //Write_To_Rom(15964788, "90693F733C014396316C0002");
@@ -2058,7 +2065,7 @@ void Remove_Item_Checks() {
     //Write_To_Rom(15678556, "90CB3F733C014396316C0002");
 
     Write_To_Rom(16479984, "10000003");
-    Write_To_Rom(12961148, "00000C00");
+    //Write_To_Rom(12961148, "00000C00"); this was making peahat and dodongo grotto hps not respawn
     Write_To_Rom(11835848, "8EE6038884C700002408000E1107000A00000000240900331127001500000000240A00661147001200000000240200FF03E000080000000084CC001C318D00FF2408000C110D000A000000002409000D112D000700000000240A0017114D000400000000240200FF03E00008000000003C05801F240800081104000D00000000240900091124000D00000000240A008D1144000A00000000240B008E1164000700000000240200FF03E000080000000090A2F6E803E000080000000090A2F6E903E0000800000000");
     Write_To_Rom(13857020, "00000000");
     Write_To_Rom(15678584, "2406005B");
@@ -5018,6 +5025,9 @@ void Remove_Cutscenes(bool Songs_Same_Pool) {
     Write_To_Rom(16165132, "00000000");                             //skip the goht room entrance cs
     Write_Cutscene_Rom(34878820, "stone_tower_temple_ye_holds");    //shorten ye who hold remains cs in stt
     Write_To_Rom(44042848, "9260");                                 //shorten evan hp cs
+    Write_To_Rom(34403946, "FF");                                   //remove stt intro cs
+    Write_To_Rom(34881666, "FF");                                   //remove istt intro cs
+    Write_To_Rom(45831950, "FF");                                   //remove ist ontro cs
 }
 
 void Write_File_To_Rom(string filename, string rom_offset) {
@@ -5169,6 +5179,58 @@ void Fix_Swords() {
     for (int c = 0; c < commands.size(); c++) {
         Write_To_Rom(address + (c*4), commands[c]);
     }
+}
+
+///Makes it where you can get each HP once per cycle
+void RespawnHPs() {
+    Write_To_Rom(12962814, "00");   //remove SoT flag mask for hp in south clock town 1
+    Write_To_Rom(12962063, "00");   //remove SoT flag mask for hp in the tree in road to swamp  2
+    Write_To_Rom(12962140, "00");   //remove SoT flag mask for swamp scrub hp   3
+    Write_To_Rom(12961340, "00");   //remove SoT flag mask for ikana scrub hp   4
+    Write_To_Rom(12961148, "00000000");   //remove SoT flag mask for Peahat Grotto HP (0x80), Dodongo Grotto HP (0x40), and zora grotto hp (0x4)    5, 6, 7
+    Write_To_Rom(12963012, "00000000"); //make business scrub and gossip stones hp flag unset on SoT 8, 9
+    Write_To_Rom(12961724, "00");   //remove SoT flag mask for deku palace hp   10
+    Write_To_Rom(12961228, "00");   //remove SoT flag mask for grave night 2 hp 11
+    Write_To_Rom(12961711, "00");   //remove SoT flag mask for deku trial hp    12
+    Write_To_Rom(12962047, "00");   //remove SoT flag for goron trial hp    13
+    Write_To_Rom(12962175, "00");   //remove SoT flag for zora trial hp 14
+    Write_To_Rom(12962671, "00");   //remove SoT flag for human trial hp  15
+    Write_To_Rom(12962932, "00000020"); //remove grandma sot flags  16, 17
+    //bank hp already gives once per cycle  18
+    Write_To_Rom(12962798, "00");   //remove SoT flag for North Clock Town Tree HP  19
+    Write_To_Rom(12961392, "00000000"); //remove SoT flag for treasure chest minigame hp    20
+    //Honey and Darling already gives once per cycle    21
+    Write_To_Rom(17100479, "08"); //make mayor give hp once per cycle   22
+    //town archery hp gives infinite hps per cycle  23
+    //swamp archery hp gives infinite hps per cycle  24
+    //witch shooting hp already gives once per cycle 25
+    //jump minigame hp always gives you a hp    26
+    Write_To_Rom(12961919, "02");   //remove SoT flag for great bay coast wall hp (not sure what the 2 here is for, so I am leaving it) 27
+    //beaver hp already gives once per cycle    28
+    Write_To_Rom(12962252, "00");   //remove SoT flag for zora hall scrub hp    29
+    Write_To_Rom(12962268, "00");   //remove SoT flag for goron village scrub hp    30
+    Write_To_Rom(12962494, "00");   //remove SoT flag for path to snowhead hp   31
+    //Poe hut hp already gives once per cycle   32
+    Write_To_Rom(12193012, "00052C0303E00008000000000000000000000000"); //make ??? ignore if already gave the player the hp 33
+    //Kamaro mask dancing hp already gives once per cycle   34
+    Write_To_Rom(12961502, "00");   //remove SoT flag for ikana castle hp   35
+    Write_To_Rom(12962527, "00");   //remove SoT flag for chest hp in path to goron village 36
+    //Postman minigame hp gives infinite per cycle  37
+    //Postbox hp gives infinite per cycle   38
+    Write_To_Rom(12961676, "00");   //remove SoT flag for oceanside spider house hp 39
+    Write_To_Rom(12962158, "00");   //remove SoT flag for woodfall chest hp 40
+    //Marine lab fish hp already gives once per cycle   41
+    Write_To_Rom(16519940, "10000004"); //make pinnacle rock seahorse always give hp    42
+    Write_To_Rom(12961598, "00");   //remove SoT flag for pirate's fortress sewer hp    43
+    //Evan already gives the hp once per cycle  44
+    //Frog hps gives infinite   45
+    //Keaton Mask HP already gives once per cycle   46
+    //Dog race hp gives infinite    47
+    //Swordsman school gives infinite   48
+    //Deku Playground hp already gives once per cycle   49
+    //Picto hp gives infinite   50
+    Write_To_Rom(12961935, "00");   //remove SoT flag for Zora Cape likelike hp 51
+    Write_To_Rom(12962574, "00");   //remove SoT flag for secret shrine hp  52
 }
 
 int main()
@@ -5336,8 +5398,6 @@ int main()
 
     bool Songs_Same_Pool = All_Songs_Same_Pool();
 
-    cout << "\nSongs in Same Pool: " << Songs_Same_Pool << endl;
-
     cout << "\nPlacing Items\n";
 
     Place_Items(Items, Songs_Same_Pool);
@@ -5346,8 +5406,6 @@ int main()
 
     //Change max rupee amounts
     Change_Rupees(Settings["wallets"]);
-
-    cout << "\nGiving Starting Items\n";
 
     //FD anywhere
     Write_To_Rom(12220113, "00");
@@ -5423,6 +5481,8 @@ int main()
     //input the function to give tingle map branch to it in the get item passive function
     Fix_Tingle_Maps();
 
+    cout << "\nGiving Starting Items\n";
+
     //Give the player the starting items
     Give_Starting_Items();
 
@@ -5496,6 +5556,11 @@ int main()
 
     //change blast mask cooldown
     Change_BlastMask(Settings["settings"]);
+
+    //change water to bingo water if secret is active
+    //if (Settings["settings"]["RespawnHPs"] == "True") {
+      //  RespawnHPs();
+    //}
 
     //compress rom and create wad
     if (Settings["settings"]["Wad"] == "True") {
