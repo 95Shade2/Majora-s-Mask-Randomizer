@@ -1980,22 +1980,11 @@ void Remove_Item_Checks() {
     Write_To_Rom(14439692, "9318360301CF182300031C003301004014010004");
     Write_To_Rom(13334652, "00000000");
     Write_To_Rom(13334692, "10000016");
-    //Write_To_Rom(15512024, "1000000F");
+    Write_To_Rom(15512024, "1000000F");
     Write_To_Rom(15511648, "00000000");   //this makes it where tingle doesnt write the map data
-    //Write_To_Rom(17100472, "904E3F6831CF0008");   //this also caused the softlock to happen at couple's mask
-    Write_To_Rom(15562996, "90783F85");
-    Write_To_Rom(15563008, "33190040");
-    Write_To_Rom(17175348, "10000005");
-    Write_To_Rom(16304652, "91CE35EF");
-    Write_To_Rom(16304664, "31CF0080");
-    Write_To_Rom(17229352, "90593F6E");
-    Write_To_Rom(17229364, "33280001");
+    //Write_To_Rom(17100472, "904E3F6831CF0008");   //this caused a softlock to happen at couple's mask
     Write_To_Rom(17168980, "10000007");
     Write_To_Rom(12962936, "00003000");
-    Write_To_Rom(12962908, "0C000000");
-    Write_To_Rom(14893212, "90683F82");
-    Write_To_Rom(14893224, "31090002");
-    Write_To_Rom(12962940, "00000000");
     Write_To_Rom(16968828, "10000009");
     Write_To_Rom(14442228, "10000009");
     Write_To_Rom(17054436, "00000000");
@@ -2005,12 +1994,9 @@ void Remove_Item_Checks() {
     Write_To_Rom(16876332, "1000000E");
     Write_To_Rom(16365624, "10000005");
     Write_To_Rom(16019572, "10000010");
-    Write_To_Rom(15445332, "000D0000");
+    Write_To_Rom(15445332, "000D0000"); //always give pictograph box
     Write_To_Rom(16124449, "003E0000");
     Write_To_Rom(17059293, "39080000");
-    Write_To_Rom(15445618, "1A400000");
-    Write_To_Rom(15521640, "00000000");
-    Write_To_Rom(15521792, "00000000");
     Write_To_Rom(16833748, "10000007");
     Write_To_Rom(16449840, "1000000C");
     Write_To_Rom(14085672, "10000006");
@@ -2018,28 +2004,20 @@ void Remove_Item_Checks() {
     Write_To_Rom(16732804, "1000000A");
     Write_To_Rom(17113652, "10000003");
     Write_To_Rom(17113676, "10000004");
+    Write_To_Rom(15521640, "00000000"); //remove banker check for already gotten wallet
     Write_To_Rom(15204407, "000C0000");
     Write_To_Rom(15204429, "000C0000");
     Write_To_Rom(16479968, "906E3F79");
     Write_To_Rom(16479980, "31CF0004");
-
     Write_To_Rom(12962878, "000C");
-    Write_To_Rom(12962882, "0000");
     Write_To_Rom(16566324, "10000004");
-    Write_To_Rom(17274152, "10000008");
     Write_To_Rom(15573992, "10000004");
     Write_To_Rom(16567248, "10000006");
-    Write_To_Rom(13757064, "10000005");
-    Write_To_Rom(16040735, "57040000");
-    Write_To_Rom(16040792, "57040000");
-    Write_To_Rom(16041129, "57040000");
-    Write_To_Rom(14508924, "00000000");
-    Write_To_Rom(16058812, "00000000");
-    Write_To_Rom(14914316, "00000000");
-    Write_To_Rom(14914340, "00000000");
-    Write_To_Rom(14914416, "0000000000000000");
-    Write_To_Rom(14913628, "00000000");
-    Write_To_Rom(14913744, "0000000000000000");
+    Write_To_Rom(14914328, "24060023"); //make clock town archery give large quiver
+    Write_To_Rom(14914340, "00000000"); //make clock town archery guy ignore if you've already gotten the quiver from him
+    Write_To_Rom(14913640, "24060024"); //make swamp archery give largest quiver
+    Write_To_Rom(14913652, "00000000"); //make swamp archery guy ignore if you've already gotten the quiver from him
+    Write_To_Rom(14913688, "24060024"); //make swamp archery guy gives quiver instead of 20 rupees
     Write_To_Rom(13334300, "10220006");
     Write_To_Rom(16805032, "904A3F7B314B0004");
     Write_To_Rom(16805048, "100B0006");
@@ -2083,8 +2061,6 @@ void Remove_Item_Checks() {
     Write_To_Rom(13492708, "15000003");
     Write_To_Rom(13492732, "15000003");
 
-    Write_To_Rom(14914328, "24060023"); //make clock town archery give large quiver
-    Write_To_Rom(14913640, "24060024"); //make swamp archery give largest quiver
     Write_To_Rom(13513644, "10000004"); //make giant's mask chest not check for giant's mask so that it always gives you the item
     Write_To_Rom(15521648, "24180000"); //make banker never check which wallet you have
     Write_To_Rom(16565908, "24060009"); //make giant wallet ignore what wallet you have
@@ -5196,39 +5172,61 @@ void RespawnHPs() {
     Write_To_Rom(12962175, "00");   //remove SoT flag for zora trial hp 14
     Write_To_Rom(12962671, "00");   //remove SoT flag for human trial hp  15
     Write_To_Rom(12962932, "00000020"); //remove grandma sot flags  16, 17
-    //bank hp already gives once per cycle  18
+    Write_To_Rom(15521792, "00000000"); //make banker ignore if you've gotten the hp    18
     Write_To_Rom(12962798, "00");   //remove SoT flag for North Clock Town Tree HP  19
     Write_To_Rom(12961392, "00000000"); //remove SoT flag for treasure chest minigame hp    20
-    //Honey and Darling already gives once per cycle    21
+    Write_To_Rom(14508924, "00000000");   //Make honey and darling ignore if you've already gotten the hp   21
     Write_To_Rom(17100479, "08"); //make mayor give hp once per cycle   22
-    //town archery hp gives infinite hps per cycle  23
-    //swamp archery hp gives infinite hps per cycle  24
-    //witch shooting hp already gives once per cycle 25
-    //jump minigame hp always gives you a hp    26
+    //make town archery hp once per cycle   23
+    Write_To_Rom(14914415, "08");
+    Write_To_Rom(14914227, "08");
+    Write_To_Rom(14914235, "08");
+    //make swamp archery hp once per cycle  24
+    Write_To_Rom(14913743, "08");
+    Write_To_Rom(14913543, "08");
+    Write_To_Rom(14913559, "08");
+    Write_To_Rom(14913544, "00000000");
+    //make witch swamp archery gives hp once per cycle  25
+    Write_To_Rom(15445676, "80");
+    Write_To_Rom(15445619, "80");
+    //make jump minigame hp gives once per cycle    26
+    Write_To_Rom(17274148, "33190020");
+    Write_To_Rom(17274104, "344F0020");
     Write_To_Rom(12961919, "02");   //remove SoT flag for great bay coast wall hp (not sure what the 2 here is for, so I am leaving it) 27
-    //beaver hp already gives once per cycle    28
+    Write_To_Rom(12962882, "0000"); //make beaver hp once per cycle 28
     Write_To_Rom(12962252, "00");   //remove SoT flag for zora hall scrub hp    29
     Write_To_Rom(12962268, "00");   //remove SoT flag for goron village scrub hp    30
     Write_To_Rom(12962494, "00");   //remove SoT flag for path to snowhead hp   31
-    //Poe hut hp already gives once per cycle   32
-    Write_To_Rom(12193012, "00052C0303E00008000000000000000000000000"); //make ??? ignore if already gave the player the hp 33
-    //Kamaro mask dancing hp already gives once per cycle   34
+    Write_To_Rom(12962940, "00000000"); //pow hut hp gives once per cycle   32
+    Write_To_Rom(17182338, "0C"); //make ??? give hp instead of blue rupee after flag is set    33
+    Write_To_Rom(17175348, "10000005"); //rosa sisters ignores hp flag  34
     Write_To_Rom(12961502, "00");   //remove SoT flag for ikana castle hp   35
     Write_To_Rom(12962527, "00");   //remove SoT flag for chest hp in path to goron village 36
-    //Postman minigame hp gives infinite per cycle  37
-    //Postbox hp gives infinite per cycle   38
+    Write_To_Rom(12962987, "00");   //remove SoT flag for postman minigame hp   37
+    Write_To_Rom(12962995, "00");   //remove SoT flag for postbox hp    38
     Write_To_Rom(12961676, "00");   //remove SoT flag for oceanside spider house hp 39
     Write_To_Rom(12962158, "00");   //remove SoT flag for woodfall chest hp 40
-    //Marine lab fish hp already gives once per cycle   41
+    Write_To_Rom(12962945, "00");   //remove SoT flag for marine fish lab hp    41
     Write_To_Rom(16519940, "10000004"); //make pinnacle rock seahorse always give hp    42
     Write_To_Rom(12961598, "00");   //remove SoT flag for pirate's fortress sewer hp    43
-    //Evan already gives the hp once per cycle  44
-    //Frog hps gives infinite   45
-    //Keaton Mask HP already gives once per cycle   46
-    //Dog race hp gives infinite    47
-    //Swordsman school gives infinite   48
-    //Deku Playground hp already gives once per cycle   49
-    //Picto hp gives infinite   50
+    Write_To_Rom(12962908, "0C000000"); //remove SoT flag for Evan hp   44
+    //Make frog hp give once per cycle   45
+    Write_To_Rom(13757063, "40");
+    Write_To_Rom(13757111, "40");
+    //Make keaton mask give hp once per cycle   46
+    Write_To_Rom(17229367, "40");
+    Write_To_Rom(17229335, "40");
+    //Dog race hp gives once per cycle    47
+    Write_To_Rom(14893171, "10");
+    Write_To_Rom(14893179, "10");
+    Write_To_Rom(14893227, "10");
+    //Swordsman school gives once per cycle   48
+    Write_To_Rom(16304667, "10");
+    Write_To_Rom(16304839, "10");
+    Write_To_Rom(16058812, "00000000"); //Deku Playground hp gives once per cycle   49
+    //Picto hp gives once per cycle   50
+    Write_To_Rom(16040736, "02");
+    Write_To_Rom(16040751, "02");
     Write_To_Rom(12961935, "00");   //remove SoT flag for Zora Cape likelike hp 51
     Write_To_Rom(12962574, "00");   //remove SoT flag for secret shrine hp  52
 }
@@ -5557,10 +5555,10 @@ int main()
     //change blast mask cooldown
     Change_BlastMask(Settings["settings"]);
 
-    //change water to bingo water if secret is active
-    //if (Settings["settings"]["RespawnHPs"] == "True") {
-      //  RespawnHPs();
-    //}
+    //respawn hps once per cycle
+    if (Settings["settings"]["RespawnHPs"] == "True") {
+        RespawnHPs();
+    }
 
     //compress rom and create wad
     if (Settings["settings"]["Wad"] == "True") {

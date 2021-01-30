@@ -25,6 +25,30 @@ Big Poe {
 	Biggest Bomb Bag
 }
 
+Poe {
+	Bow, Light Arrow, Bomb Bag
+	Large Quiver, Light Arrow, Bomb Bag
+	Largest Quiver, Light Arrow, Bomb Bag
+	Bow, Light Arrow, Big Bomb Bag
+	Large Quiver, Light Arrow, Big Bomb Bag
+	Largest Quiver, Light Arrow, Big Bomb Bag
+	Bow, Light Arrow, Biggest Bomb Bag
+	Large Quiver, Light Arrow, Biggest Bomb Bag
+	Largest Quiver, Light Arrow, Biggest Bomb Bag
+	Bow, Light Arrow, Song of Soaring, Deku Stick
+	Large Quiver, Light Arrow, Song of Soaring, Deku Stick
+	Largest Quiver, Light Arrow, Song of Soaring, Deku Stick
+	Bow, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
+	Large Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
+	Largest Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
+	Bow, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
+	Large Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
+	Largest Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
+	Bow, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
+	Large Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
+	Largest Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
+}
+
 Biggest Bomb Bag {
 	Goron Mask, 200 Rupees
 }
@@ -470,7 +494,12 @@ Light Arrow {
 }
 
 Magic Beans {
-	
+	Deku Mask
+	Red Potion
+	Goron Mask
+	Bomb Bag
+	Big Bomb Bag
+	Biggest Bomb Bag
 }
 
 Mask of Scents {
