@@ -29,6 +29,8 @@ endif()
 
 add_executable(randomizer
   src/main.cpp
-  src/error.cpp)
+  src/logging.cpp
+  src/color.cpp
+  src/utils.cpp)
 target_include_directories(randomizer PUBLIC
   include)

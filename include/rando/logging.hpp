@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <vector>
 
 // bad shade!
 using namespace std;
@@ -10,5 +11,7 @@ using namespace std;
 extern ofstream err_file;
 
 void Error(const string& Error_Message);
+
+void log(const vector<string> &stuff);
 
 #endif
