@@ -286,7 +286,7 @@ string Bit_Clear(const string &byte, int bit_index)
     return new_byte;
 }
 
-string Hex_Minus(const string& hex, const string& hex_2)
+string Hex_Minus(const string &hex, const string &hex_2)
 {
     string New_Hex;
     int Hex_Dec = hex_to_decimal(hex);
@@ -311,4 +311,64 @@ string Hex_Minus(const string& hex, const string& hex_2)
     }
 
     return New_Hex;
+}
+
+/// Gets the word at index 'word_index' from 'text' (0 based)
+string Get_Word(string text, int word_index)
+{
+    vector<string> words = Split(text, " ");
+
+    if (words.size() > word_index)
+    {
+        return words[word_index];
+    }
+    else
+    {
+        return "";
+    }
+}
+
+vector<string> Split(string line, string Splitter)
+{
+    vector<string> List;
+
+    // while the line contains the splitter
+    while (IndexOf_S(line, Splitter) != -1)
+    {
+        List.push_back(line.substr(0, IndexOf_S(line, Splitter)));
+        line = line.substr(IndexOf_S(line, Splitter) + Splitter.size());
+    }
+    List.push_back(line);
+
+    return List;
+}
+
+string Remove_Whitespace(string text)
+{
+    text = RemoveAll(text, ' ');
+    text = RemoveAll(text, '\t');
+
+    return text;
+}
+
+vector<string> String_Split(string text, int split)
+{
+    vector<string> Data;
+
+    for (int i = 0; i < text.size(); i += split)
+    {
+        Data.push_back(text.substr(i, split));
+    }
+
+    return Data;
+}
+
+string Leading_Zeroes(string hex, int total_length)
+{
+    while (hex.size() < total_length)
+    {
+        hex = "0" + hex;
+    }
+
+    return hex;
 }

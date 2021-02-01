@@ -36,6 +36,7 @@ add_executable(randomizer
   src/inventory.cpp
   src/time.cpp
   src/item.cpp
+  src/kafei.cpp
   src/utils.cpp)
 target_include_directories(randomizer PUBLIC
   include)

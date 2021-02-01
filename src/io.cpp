@@ -55,3 +55,18 @@ void Open_File(const string &filename, fstream &file)
         exit(0);
     }
 }
+
+void Print_Vector(const vector<string> &Items,
+                  const string &separator,
+                  const string &preString)
+{
+    for (int i = 0; i < Items.size(); i++)
+    {
+        if (i > 0)
+        {
+            cout << separator;
+        }
+
+        cout << preString << Items[i];
+    }
+}

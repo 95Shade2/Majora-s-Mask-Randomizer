@@ -1,9 +1,9 @@
 #ifndef RANDO_UTILS_HPP
 #define RANDO_UTILS_HPP
 
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 // bad shade!
 using namespace std;
@@ -89,4 +89,24 @@ std::vector<std::string> Get_Keys(std::map<std::string, value> data)
 
     return keys;
 }
+
+template <typename vec_type, typename var_type, typename Func>
+void forEach(vector<vec_type> vec, Func f, var_type var1)
+{
+    for (int i = 0; i < vec.size(); i++)
+    {
+        f(vec[i], var1);
+    }
+}
+
+string Get_Word(string text, int word_index);
+
+vector<string> Split(string line, string Splitter);
+
+string Remove_Whitespace(string text);
+
+vector<string> String_Split(string text, int split);
+
+string Leading_Zeroes(string hex, int total_length);
+
 #endif
