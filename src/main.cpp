@@ -4,6 +4,8 @@
 #include "rando/time.hpp"
 #include "rando/utils.hpp"
 #include "rando/color.hpp"
+#include "rando/io.hpp"
+#include "rando/rom.hpp"
 
 #include <algorithm>
 #include <cstdlib>
@@ -19,8 +21,6 @@
 using namespace std;
 
 ofstream err_file;
-
-template <typename value> bool Vector_Has(vector<value>, value);
 
 fstream inFile;
 ofstream outFile;
@@ -47,39 +47,6 @@ int Random(int min, int max)
     number = number % max + min;
 
     return number;
-}
-
-/*
-template <typename value>
-void shuffle(vector<value> &vec) {
-    vector<value> Shuffled;
-    int index = 0;
-    int stop = vec.size()-1;
-
-    for (index = 0; index < stop; index++) {
-        int number = Random(0, vec.size());
-
-        Shuffled.push_back(vec[number]);
-        vec.erase(vec.begin() + number);
-    }
-
-    Shuffled.push_back(vec[0]);
-
-    vec = Shuffled;
-}
-*/
-
-template <typename big, typename small> int IndexOf(big Data, small Text)
-{
-    for (int i = 0; i < Data.size(); i++)
-    {
-        if (Data[i] == Text)
-        {
-            return i;
-        }
-    }
-
-    return -1;
 }
 
 void shuffle(map<string, Item> &Items, string &Seed, int Seed_Increase = 0)
@@ -233,39 +200,6 @@ void shuffle(map<string, Item> &Items, string &Seed, int Seed_Increase = 0)
     };
 }
 
-void Open_File(string filename, fstream &file)
-{
-    file.open(filename.c_str(), fstream::binary | fstream::out | fstream::in);
-
-    if (!file)
-    {
-        cout << "\nError - opening\t" + filename;
-        exit(0);
-    }
-}
-
-void Write_To_Rom(int address, string hex)
-{
-    try
-    {
-        if (Contains(hex, ' '))
-        {
-            hex = RemoveAll(hex, ' ');
-        }
-
-        inFile.open(Rom_Location, fstream::binary | fstream::out | fstream::in);
-        inFile.seekg(address);
-        inFile.write(hex_to_string(hex).c_str(), hex.length() / 2);
-        inFile.close();
-    }
-    catch (exception e)
-    {
-        err_file << "Error writing to the decompressed rom";
-        err_file.close();
-        exit(0);
-    }
-}
-
 string Item_Get(Item it)
 {
     string data = "";
@@ -273,45 +207,6 @@ string Item_Get(Item it)
     data = it.Item_ID + it.Flag + it.Get_Item_Model + it.Text_ID + it.Obj;
 
     return data;
-}
-
-string Hex_Minus(string hex, string hex_2)
-{
-    string New_Hex;
-    int Hex_Dec = hex_to_decimal(hex);
-    int Hex_2_Dec = hex_to_decimal(hex_2);
-    int New_Hex_Dec = Hex_Dec - Hex_2_Dec;
-
-    // if it's negative then get FFFF - the value
-    if (New_Hex_Dec < 0)
-    {
-        New_Hex_Dec *= -1; // make it positive
-        New_Hex_Dec -=
-          1; // if it goes over 100, then the game ignores the 1 and only looks at the 00,
-             // but it's 1 too high, so doing this fixes it to give the correct item
-        New_Hex = dec_to_hex(New_Hex_Dec); // convert back to hex
-        New_Hex = hex_to_binary(New_Hex);  // convert the new hex to binary
-        New_Hex = invert_binary(New_Hex);  // invert the binary
-        New_Hex = binary_to_hex(New_Hex);  // convert the inverted binary to hex
-    }
-    else
-    {
-        New_Hex = dec_to_hex(New_Hex_Dec); // convert from positive number back to hex
-    }
-
-    return New_Hex;
-}
-
-template <typename value> vector<string> Get_Keys(map<string, value> data)
-{
-    vector<string> keys;
-
-    for (const auto &kv : data)
-    {
-        keys.push_back(kv.first);
-    }
-
-    return keys;
 }
 
 string Get_Source(string item)
@@ -522,76 +417,6 @@ void Change_Rupees(map<string, string> wallet_amounts)
       "826021286100B58508FD1C14200002858CFD24240300B41980009200004825306B00FF8E0502A03C0E"
       "E7002406000824B90008AE1902A0ACA00004ACAE00008E0502A03C0FFA002519000124B80008AE1802"
       "A0ACAB0004ACAF000003B9702191CE02B8");
-}
-
-string Even_Hex(string hex)
-{
-    if (hex.size() / 2 == 0)
-    {
-        return "0" + hex;
-    }
-    else
-    {
-        return hex;
-    }
-}
-
-string Bits_Or(string bits_1, string bits_2)
-{
-    if (bits_1.length() == 0 && bits_2.length() == 0)
-    {
-        return "";
-    }
-    else if (bits_1.length() == 0)
-    {
-        return bits_2;
-    }
-    else if (bits_2.length() == 0)
-    {
-        return bits_1;
-    }
-    else
-    {
-        if (bits_1.length() > bits_2.length())
-        {
-            return bits_1[0] + Bits_Or(bits_1.substr(1), bits_2);
-        }
-        else if (bits_1.length() < bits_2.length())
-        {
-            return bits_2[0] + Bits_Or(bits_1, bits_2.substr(1));
-        }
-        else
-        {
-            if (bits_1[0] == '1' || bits_2[0] == '1')
-            {
-                return "1" + Bits_Or(bits_1.substr(1), bits_2.substr(1));
-            }
-            else
-            {
-                return "0" + Bits_Or(bits_1.substr(1), bits_2.substr(1));
-            }
-        }
-    }
-}
-
-// clears the bit at index bit_index of a byte
-string Bit_Clear(string byte, int bit_index)
-{
-    string new_byte = "";
-
-    for (int b = 0; b < byte.size(); b++)
-    {
-        if (b != bit_index)
-        {
-            new_byte += byte[b];
-        }
-        else
-        {
-            new_byte += "0";
-        }
-    }
-
-    return new_byte;
 }
 
 void Give_Starting_Items()
@@ -1188,45 +1013,6 @@ void Remove_Item_Checks()
                                         // getting magic (and have deku mask of course)
 }
 
-map<string, map<string, string>> OpenAsIni(string filename)
-{
-    ifstream file;
-    string line = "";
-    string key = "";
-    string value = "";
-    string section = "";
-    map<string, map<string, string>> File_Contents;
-
-    file.open(filename.c_str());
-
-    if (!file)
-    {
-        err_file << "Error opening " << filename.substr(2);
-        err_file.close();
-        exit(0);
-    }
-
-    // get each item
-    while (getline(file, line) && line != "")
-    {
-        if (section == "" || line[0] == '[')
-        {
-            section = line.substr(1, IndexOf(line, ']') - 1);
-        }
-        else
-        {
-            key = line.substr(0, IndexOf(line, '='));
-            value = line.substr(IndexOf(line, '=') + 1);
-
-            File_Contents[section][key] = value;
-        }
-    }
-
-    file.close();
-
-    return File_Contents;
-}
-
 void Print_Map(ostream &out, map<string, map<string, string>> data)
 {
     vector<string> keys;
@@ -1484,19 +1270,6 @@ bool Has_Items(Inventory Inv, vector<string> Items, int depth = 0)
     {
         return (Inv.Items[Items[depth]] && Has_Items(Inv, Items, ++depth));
     }
-}
-
-template <typename value> bool Vector_Has(vector<value> vect, value val)
-{
-    for (int i = 0; i < vect.size(); i++)
-    {
-        if (vect[i] == val)
-        {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 bool Update_Inventory(Inventory &Inv,
@@ -2227,10 +2000,7 @@ bool Check_Curiosity_Items(string Cur_Item)
             }
         }
     }
-    else
-    {
-        return true;
-    }
+    return true;
 }
 
 string Global_Log = "";

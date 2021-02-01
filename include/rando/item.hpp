@@ -52,7 +52,7 @@ class Item
 
     bool gives_item; // whether or not the item gives something yet (if an item has been
                      // placed here or not)
-    bool can_get; // whether or not another item (or itself) gives this item
+    bool can_get;    // whether or not another item (or itself) gives this item
     int value; // how valuable the item is, the more other items that can be obtained from
                // using this item, the higher the number
 
@@ -70,32 +70,7 @@ class Item
          string get_item_model,
          string pol,
          vector<string> add_get_table,
-         vector<string> add_item_id)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = "00";
-    }
+         vector<string> add_item_id);
 
     Item(vector<Time> time_available,
          string nam,
@@ -109,35 +84,7 @@ class Item
          vector<string> add_get_table,
          vector<string> add_item_id,
          string item_count,
-         vector<string> item_count_locs)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = "00";
-
-        Item_Count = item_count;
-        Item_Count_Locations = item_count_locs;
-    }
+         vector<string> item_count_locs);
 
     Item(vector<Time> time_available,
          string nam,
@@ -152,33 +99,7 @@ class Item
          vector<string> add_get_table,
          vector<string> add_item_id,
          string item_count,
-         vector<string> item_count_locations)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = inv_id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = item_count;
-        Item_Count_Locations = item_count_locations;
-    }
+         vector<string> item_count_locations);
 
     Item(vector<Time> time_available,
          string nam,
@@ -195,35 +116,7 @@ class Item
          string item_count,
          vector<string> item_count_locations,
          string item_count2,
-         vector<string> item_count2_locations)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = inv_id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = item_count;
-        Item_Count_Locations = item_count_locations;
-        Item_Count2 = item_count2;
-        Item_Count_Locations2 = item_count2_locations;
-    }
+         vector<string> item_count2_locations);
 
     Item(vector<Time> time_available,
          string nam,
@@ -236,33 +129,7 @@ class Item
          string pol,
          vector<string> add_get_table,
          vector<string> add_item_id,
-         vector<string> add_text_id)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Text_ID = add_text_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = "00";
-    }
+         vector<string> add_text_id);
 
     Item(vector<Time> time_available,
          string nam,
@@ -278,34 +145,7 @@ class Item
          vector<string> add_text_id,
          string item_count,
          vector<string> item_count_locations,
-         int just_overlading)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Text_ID = add_text_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = item_count;
-        Item_Count_Locations = item_count_locations;
-    }
+         int just_overlading);
 
     Item(vector<Time> time_available,
          string nam,
@@ -319,34 +159,7 @@ class Item
          vector<string> add_get_table,
          vector<string> add_item_id,
          vector<string> add_text_id,
-         vector<string> add_get_item_id)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Get_Item_ID = add_get_item_id;
-        Address_Text_ID = add_text_id;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = "00";
-    }
+         vector<string> add_get_item_id);
 
     Item(vector<Time> time_available,
          string nam,
@@ -361,36 +174,7 @@ class Item
          vector<string> add_item_id,
          vector<string> add_text_id,
          vector<string> add_get_item_id,
-         vector<string> Inverted_Song_Locations)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Get_Item_ID = add_get_item_id;
-        Address_Text_ID = add_text_id;
-
-        ID_Minus_61_Locations = Inverted_Song_Locations;
-
-        Time_Get = time_available;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = "00";
-    }
+         vector<string> Inverted_Song_Locations);
 
     Item(vector<Time> time_available,
          string nam,
@@ -409,41 +193,7 @@ class Item
          string songid1,
          string songid2,
          vector<string> song1_loc,
-         vector<string> song2_loc)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Get_Item_ID = add_get_item_id;
-        Address_Text_ID = add_text_id;
-
-        ID_Minus_61_Locations = Inverted_Song_Locations;
-
-        Time_Get = time_available;
-
-        Song1_ID = songid1;
-        Song2_ID = songid2;
-        Song1_Locatinos = song1_loc;
-        Song2_Locatinos = song2_loc;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = "00";
-    }
+         vector<string> song2_loc);
 
     Item(vector<Time> time_available,
          string nam,
@@ -464,42 +214,7 @@ class Item
          vector<string> song1_loc,
          vector<string> song2_loc,
          string item_count,
-         vector<string> item_count_locations)
-    {
-        Name = nam;
-
-        Item_ID = id;
-        Item_ID2 = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Get_Item_ID = add_get_item_id;
-        Address_Text_ID = add_text_id;
-
-        ID_Minus_61_Locations = Inverted_Song_Locations;
-
-        Time_Get = time_available;
-
-        Song1_ID = songid1;
-        Song2_ID = songid2;
-        Song1_Locatinos = song1_loc;
-        Song2_Locatinos = song2_loc;
-
-        gives_item = false;
-        can_get = false;
-
-        value = 0;
-
-        Item_Count = item_count;
-        Item_Count_Locations = item_count_locations;
-    }
+         vector<string> item_count_locations);
 
     /*
     Item(vector<Time> time_available, string nam, string id, string get_id, string text,

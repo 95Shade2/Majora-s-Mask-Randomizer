@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void Error(const string &Error_Message)
+[[noreturn]] void Error(const string &Error_Message)
 {
     cout << Error_Message;
     err_file << Error_Message;

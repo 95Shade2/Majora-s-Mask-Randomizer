@@ -10,7 +10,7 @@ using namespace std;
 
 extern ofstream err_file;
 
-void Error(const string& Error_Message);
+[[noreturn]] void Error(const string &Error_Message);
 
 void log(const vector<string> &stuff);
 

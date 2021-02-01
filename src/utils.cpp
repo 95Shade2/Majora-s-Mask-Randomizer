@@ -216,3 +216,99 @@ int IndexOf_S(const string &Data, const string &Text)
 
     return -1;
 }
+
+string Even_Hex(const string &hex)
+{
+    if (hex.size() / 2 == 0)
+    {
+        return "0" + hex;
+    }
+    else
+    {
+        return hex;
+    }
+}
+
+string Bits_Or(const string &bits_1, const string &bits_2)
+{
+    if (bits_1.length() == 0 && bits_2.length() == 0)
+    {
+        return "";
+    }
+    else if (bits_1.length() == 0)
+    {
+        return bits_2;
+    }
+    else if (bits_2.length() == 0)
+    {
+        return bits_1;
+    }
+    else
+    {
+        if (bits_1.length() > bits_2.length())
+        {
+            return bits_1[0] + Bits_Or(bits_1.substr(1), bits_2);
+        }
+        else if (bits_1.length() < bits_2.length())
+        {
+            return bits_2[0] + Bits_Or(bits_1, bits_2.substr(1));
+        }
+        else
+        {
+            if (bits_1[0] == '1' || bits_2[0] == '1')
+            {
+                return "1" + Bits_Or(bits_1.substr(1), bits_2.substr(1));
+            }
+            else
+            {
+                return "0" + Bits_Or(bits_1.substr(1), bits_2.substr(1));
+            }
+        }
+    }
+}
+
+string Bit_Clear(const string &byte, int bit_index)
+{
+    string new_byte = "";
+
+    for (int b = 0; b < byte.size(); b++)
+    {
+        if (b != bit_index)
+        {
+            new_byte += byte[b];
+        }
+        else
+        {
+            new_byte += "0";
+        }
+    }
+
+    return new_byte;
+}
+
+string Hex_Minus(const string& hex, const string& hex_2)
+{
+    string New_Hex;
+    int Hex_Dec = hex_to_decimal(hex);
+    int Hex_2_Dec = hex_to_decimal(hex_2);
+    int New_Hex_Dec = Hex_Dec - Hex_2_Dec;
+
+    // if it's negative then get FFFF - the value
+    if (New_Hex_Dec < 0)
+    {
+        New_Hex_Dec *= -1; // make it positive
+        New_Hex_Dec -=
+          1; // if it goes over 100, then the game ignores the 1 and only looks at the 00,
+             // but it's 1 too high, so doing this fixes it to give the correct item
+        New_Hex = dec_to_hex(New_Hex_Dec); // convert back to hex
+        New_Hex = hex_to_binary(New_Hex);  // convert the new hex to binary
+        New_Hex = invert_binary(New_Hex);  // invert the binary
+        New_Hex = binary_to_hex(New_Hex);  // convert the inverted binary to hex
+    }
+    else
+    {
+        New_Hex = dec_to_hex(New_Hex_Dec); // convert from positive number back to hex
+    }
+
+    return New_Hex;
+}

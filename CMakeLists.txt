@@ -31,6 +31,11 @@ add_executable(randomizer
   src/main.cpp
   src/logging.cpp
   src/color.cpp
+  src/io.cpp
+  src/rom.cpp
+  src/inventory.cpp
+  src/time.cpp
+  src/item.cpp
   src/utils.cpp)
 target_include_directories(randomizer PUBLIC
   include)
