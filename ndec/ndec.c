@@ -131,8 +131,8 @@ int main(int argc, char * argv[])
 		puts("Could not find file table.");
 		return -1;
     }
-    ftab1 = (void *)romd + ftable_offset;
-    ftab2 = (void *)outd + ftable_offset;
+    ftab1 = (char *)romd + ftable_offset;
+    ftab2 = (char *)outd + ftable_offset;
     ftabsize = get_file_data(2).vend - get_file_data(2).vstart;
     ftabnum = ftabsize/16;
     printf("Filesystem: %X ~ %X\n", get_file_data(2).vstart, get_file_data(2).vend);
@@ -160,10 +160,14 @@ int main(int argc, char * argv[])
         }
         if(current_file.pend == 0x00000000) // Need to move the file (already decompressed)
             //memcpy ( void * destination, const void * source, size_t num );
-            memcpy((void*)outd + current_file.vstart, (void*)romd + current_file.pstart, current_file.vend - current_file.vstart);
+            memcpy((char *)outd + current_file.vstart,
+                   (char *)romd + current_file.pstart,
+                   current_file.vend - current_file.vstart);
         else                                // Need to decompress to a new location
             //yaz0_decode (u8 *src, u8 *dst, int uncompressedSize)
-            yaz0_decode((void*)romd + current_file.pstart, (void*)outd + current_file.vstart, current_file.vend - current_file.vstart);
+            yaz0_decode((char *)romd + current_file.pstart,
+                        (char *)outd + current_file.vstart,
+                        current_file.vend - current_file.vstart);
         current_file.pstart = current_file.vstart;
         current_file.pend   = 0;
         set_file_data(i, current_file);

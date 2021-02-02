@@ -12,7 +12,7 @@ using namespace std;
 
 string hex_to_binary(const string &hex);
 
-string dec_to_hex(int number);
+string dec_to_hex(unsigned number);
 
 std::string string_to_hex(const std::string &input);
 

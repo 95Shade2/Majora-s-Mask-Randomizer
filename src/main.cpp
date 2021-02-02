@@ -2280,7 +2280,7 @@ void Randomize(map<string, Item> &Items,
         Seed = dec_to_string(time(0));
         (*Custom_Settings)["settings"]["Seed"] = Seed;
     }
-    srand(hex_to_decimal(string_to_hex(Seed)));
+    srand(atoll(Seed.c_str()));
 
     Randomize(Log,
               Items,
@@ -3433,7 +3433,7 @@ string Char_To_String(char chr[], int size)
 
 void Write_Cutscene_Rom(int address, string filename)
 {
-    int limit = 2;
+    constexpr int limit = 2;
     char data[limit + 1];
     string String_Data = "";
     ifstream file;
@@ -4033,7 +4033,7 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 
 void Write_File_To_Rom(string filename, string rom_offset)
 {
-    int limit = 2;
+    constexpr int limit = 2;
     char data[limit + 1];
     string String_Data = "";
     ifstream file;
@@ -5624,12 +5624,12 @@ int main()
 
     // decompress rom
     cout << "\nDecompressing rom\n";
-    if (system(("ndec\\ndec.exe \"" + Settings["settings"]["Rom"] + "\" " + Rom_Location)
+    if (system(("ndec.exe \"" + Settings["settings"]["Rom"] + "\" " + Rom_Location)
                  .c_str()) != 0)
     {
         // if failed to decompress file
         err_file << "Failed to decompress " << Settings["settings"]["Rom"]
-                 << " - Might be missing \"ndec\" folder";
+                 << " - Might be missing \"ndec.exe\"";
         err_file.close();
         exit(0);
     }

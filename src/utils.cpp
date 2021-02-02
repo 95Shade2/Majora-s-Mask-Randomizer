@@ -5,6 +5,7 @@
 #include <ios>
 #include <sstream>
 #include <stdexcept>
+#include <iomanip>
 
 string hex_to_binary(const string &hex)
 {
@@ -47,32 +48,57 @@ string hex_to_binary(const string &hex)
             binary << "1001";
             break;
         case 'A':
+        case 'a':
             binary << "1010";
             break;
         case 'B':
+        case 'b':
             binary << "1011";
             break;
         case 'C':
+        case 'c':
             binary << "1100";
             break;
         case 'D':
+        case 'd':
             binary << "1101";
             break;
         case 'E':
+        case 'e':
             binary << "1110";
             break;
         case 'F':
+        case 'f':
             binary << "1111";
             break;
+        default:
+            throw std::runtime_error("unexpected");
         }
     }
     return binary.str();
 }
 
-string dec_to_hex(int number)
+string dec_to_hex(unsigned number)
 {
     std::stringstream hex;
-    hex << std::hex << number;
+    hex << std::hex << std::setfill('0'); 
+    if (number <= 0xff)
+    {
+        hex << std::setw(2);
+    }
+    else if (number <= 0xffff)
+    {
+        hex << std::setw(4);
+    }
+    else if (number <= 0xffffff)
+    {
+        hex << std::setw(6);
+    }
+    else
+    {
+        hex << std::setw(8);
+    }
+    hex << number;
     return hex.str();
 }
 
@@ -94,7 +120,6 @@ std::string string_to_hex(const std::string &input)
 
 std::string hex_to_string(const std::string &input)
 {
-    static const char *const lut = "0123456789ABCDEF";
     size_t len = input.length();
     if (len & 1)
         throw std::invalid_argument("odd length");
@@ -103,17 +128,8 @@ std::string hex_to_string(const std::string &input)
     output.reserve(len / 2);
     for (size_t i = 0; i < len; i += 2)
     {
-        char a = input[i];
-        const char *p = std::lower_bound(lut, lut + 16, a);
-        if (*p != a)
-            throw std::invalid_argument("not a hex digit");
-
-        char b = input[i + 1];
-        const char *q = std::lower_bound(lut, lut + 16, b);
-        if (*q != b)
-            throw std::invalid_argument("not a hex digit");
-
-        output.push_back(((p - lut) << 4) | (q - lut));
+        char val = atoi(input.substr(i, 2).c_str());
+        output.push_back(val);
     }
     return output;
 }
@@ -121,7 +137,11 @@ std::string hex_to_string(const std::string &input)
 // converts a hexadecimal string to a decimal integer
 int hex_to_decimal(const string &hex)
 {
-    return std::stoi(hex, 0, 16);
+    if (hex.empty())
+    {
+        return 0;
+    }
+    return std::stoi(hex, nullptr, 16);
 }
 
 int string_to_dec(const string &text)
@@ -145,9 +165,11 @@ string binary_to_hex(const std::string &binary)
         throw std::runtime_error("input binary string not a multiple of 4");
     }
 
+    hex << std::hex;
+
     for (int i = 0; i < binary.size(); i += 4)
     {
-        hex << std::stoi(binary.substr(i, 4));
+        hex << std::stoi(binary.substr(i, 4), nullptr, 2);
     }
 
     return hex.str();
@@ -193,28 +215,12 @@ string invert_binary(const string &binary)
 
 int IndexOf_S(const string &Data, const string &Text)
 {
-    for (int i = 0; i < Data.size(); i++)
+    size_t pos = Data.find(Text);
+    if (pos == std::string::npos)
     {
-        int a = i;
-        bool same = true;
-
-        for (int b = 0; b < Text.size(); b++)
-        {
-            if (Data[a] != Text[b])
-            {
-                same = false;
-            }
-
-            a++;
-        }
-
-        if (same)
-        {
-            return i;
-        }
+        return -1;
     }
-
-    return -1;
+    return pos;
 }
 
 string Even_Hex(const string &hex)

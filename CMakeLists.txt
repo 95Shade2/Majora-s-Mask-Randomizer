@@ -35,7 +35,7 @@ function(SYMLINK_FILES)
   foreach(s IN LISTS ARGN)
     if(NOT IS_ABSOLUTE "${s}")
       get_filename_component(sabs "${s}" ABSOLUTE)
-	    file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/release/${s}" SYMBOLIC)
+	  file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/release/${s}" SYMBOLIC)
       file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/debug/${s}" SYMBOLIC)
       file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/minsizerel/${s}" SYMBOLIC)
       file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/relwithdebinfo/${s}" SYMBOLIC)
@@ -44,6 +44,52 @@ function(SYMLINK_FILES)
     endif()
   endforeach()
 endfunction()
+
+macro(configure_files srcDir)
+	if(NOT IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}")
+		configure_file(
+				"${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}"
+				${PROJECT_BINARY_DIR}/release/${srcDir}
+				COPYONLY)
+		configure_file(
+				"${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}"
+				${PROJECT_BINARY_DIR}/debug/${srcDir}
+				COPYONLY)
+		configure_file(
+				"${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}"
+				${PROJECT_BINARY_DIR}/minsizerel/${srcDir}
+				COPYONLY)
+		configure_file(
+				"${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}"
+				${PROJECT_BINARY_DIR}/relwithdebinfo/${srcDir}
+				COPYONLY)
+	else()
+		file(GLOB templateFiles RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}" "${CMAKE_CURRENT_SOURCE_DIR}/${srcDir}/*")
+		message(STATUS "template files: ${templateFiles}")
+		foreach(templateFile ${templateFiles})
+			set(srcTemplatePath ${srcDir}/${templateFile})
+			if(NOT IS_DIRECTORY ${srcTemplatePath})
+				message(STATUS "Configuring file ${templateFile}")
+				configure_file(
+						${srcTemplatePath}
+						${PROJECT_BINARY_DIR}/release/${srcTemplatePath}
+						COPYONLY)
+				configure_file(
+						${srcTemplatePath}
+						${PROJECT_BINARY_DIR}/debug/${srcTemplatePath}
+						COPYONLY)
+				configure_file(
+						${srcTemplatePath}
+						${PROJECT_BINARY_DIR}/minsizerel/${srcTemplatePath}
+						COPYONLY)
+				configure_file(
+						${srcTemplatePath}
+						${PROJECT_BINARY_DIR}/relwithdebinfo/${srcTemplatePath}
+						COPYONLY)
+			endif(NOT IS_DIRECTORY ${srcTemplatePath})
+		endforeach(templateFile)
+	endif()
+endmacro(configure_files)
 
 function(SETUP_EXECUTABLE name)
   set_target_properties("${name}"
@@ -91,11 +137,76 @@ add_executable(ndec
 
 SETUP_EXECUTABLE(ndec)
 
-# symlink important directories
-SYMLINK_FILES("_create-rom.bat"
-  "_create-roms.bat"
-  "_create-roms"
-  "cutscenes"
-  "files"
-  "logic"
-  "presets")
+configure_files("_create-rom.bat")
+configure_files("_create-roms.bat")
+configure_files("_create-roms")
+configure_files("cutscenes")
+configure_files("files")
+configure_files("logic")
+configure_files("presets")
+
+project(mm_rando_gui VERSION "1.0.0" LANGUAGES CSharp)
+
+include(CSharpUtilities)
+
+add_executable(mm_rando_gui
+	"Majora's Mask Randomizer GUI/App.config"
+
+	"Majora's Mask Randomizer GUI/Program.cs"
+
+	"Majora's Mask Randomizer GUI/Form1.cs"
+	"Majora's Mask Randomizer GUI/Form1.Designer.cs"
+	"Majora's Mask Randomizer GUI/Form1.resx"
+	
+	"Majora's Mask Randomizer GUI/pmc.cs"
+	"Majora's Mask Randomizer GUI/pmc.Designer.cs"
+	"Majora's Mask Randomizer GUI/pmc.resx"
+
+	"Majora's Mask Randomizer GUI/wallets_form.cs"
+	"Majora's Mask Randomizer GUI/wallets_form.Designer.cs"
+	"Majora's Mask Randomizer GUI/wallets_form.resx"
+	
+	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
+	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
+	"Majora's Mask Randomizer GUI/Properties/Resources.resx"
+	"Majora's Mask Randomizer GUI/Properties/Settings.Designer.cs"
+	"Majora's Mask Randomizer GUI/Properties/Settings.settings"
+)
+
+csharp_set_windows_forms_properties(
+	"Majora's Mask Randomizer GUI/Form1.cs"
+	"Majora's Mask Randomizer GUI/Form1.Designer.cs"
+	"Majora's Mask Randomizer GUI/Form1.resx"
+	
+	"Majora's Mask Randomizer GUI/pmc.cs"
+	"Majora's Mask Randomizer GUI/pmc.Designer.cs"
+	"Majora's Mask Randomizer GUI/pmc.resx"
+
+	"Majora's Mask Randomizer GUI/wallets_form.cs"
+	"Majora's Mask Randomizer GUI/wallets_form.Designer.cs"
+	"Majora's Mask Randomizer GUI/wallets_form.resx"
+	
+	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
+	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
+	"Majora's Mask Randomizer GUI/Properties/Resources.resx"
+	"Majora's Mask Randomizer GUI/Properties/Settings.Designer.cs"
+	"Majora's Mask Randomizer GUI/Properties/Settings.settings"
+)
+
+set_target_properties(mm_rando_gui PROPERTIES WIN32_EXECUTABLE TRUE)
+
+SETUP_EXECUTABLE(mm_rando_gui)
+
+set_property(TARGET mm_rando_gui PROPERTY VS_DOTNET_REFERENCES
+	"System"
+	"System.Core"
+	"System.Xml.Linq"
+	"System.Data.DataSetExtensions"
+	"Microsoft.CSharp"
+	"System.Data"
+	"System.Deployment"
+	"System.Drawing"
+	"System.Net.Http"
+	"System.Windows.Forms"
+	"System.Xml"
+	)
