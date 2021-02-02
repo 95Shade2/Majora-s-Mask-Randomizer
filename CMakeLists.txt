@@ -35,20 +35,38 @@ function(SYMLINK_FILES)
   foreach(s IN LISTS ARGN)
     if(NOT IS_ABSOLUTE "${s}")
       get_filename_component(sabs "${s}" ABSOLUTE)
-	    file(CREATE_LINK "${sabs}" "${CMAKE_CURRENT_BINARY_DIR}/release/${s}" SYMBOLIC)
-      file(CREATE_LINK "${sabs}" "${CMAKE_CURRENT_BINARY_DIR}/debug/${s}" SYMBOLIC)
-      file(CREATE_LINK "${sabs}" "${CMAKE_CURRENT_BINARY_DIR}/minsizerel/${s}" SYMBOLIC)
-      file(CREATE_LINK "${sabs}" "${CMAKE_CURRENT_BINARY_DIR}/relwithdebinfo/${s}" SYMBOLIC)
+	    file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/release/${s}" SYMBOLIC)
+      file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/debug/${s}" SYMBOLIC)
+      file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/minsizerel/${s}" SYMBOLIC)
+      file(CREATE_LINK "${sabs}" "${PROJECT_BINARY_DIR}/relwithdebinfo/${s}" SYMBOLIC)
 	  else()
 	    message(ERROR "can't call SYMLINK_FILES with an absolute path")
     endif()
   endforeach()
 endfunction()
 
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/release")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/debug")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/minsizerel")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/relwithdebinfo")
+function(SETUP_EXECUTABLE name)
+  set_target_properties("${name}"
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PROJECT_BINARY_DIR}/release")
+
+  set_target_properties("${name}"
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PROJECT_BINARY_DIR}/debug")
+
+  set_target_properties("${name}"
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PROJECT_BINARY_DIR}/minsizerel")
+
+  set_target_properties("${name}"
+    PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBUGINFO "${PROJECT_BINARY_DIR}/relwithdebuginfo")
+endfunction()
+
+file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/release")
+file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/debug")
+file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/minsizerel")
+file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/relwithdebinfo")
 
 add_executable(randomizer
   src/main.cpp
@@ -65,41 +83,13 @@ add_executable(randomizer
 target_include_directories(randomizer PUBLIC
   include)
 
-set_target_properties(randomizer
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PROJECT_BINARY_DIR}/release")
-
-set_target_properties(randomizer
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PROJECT_BINARY_DIR}/debug")
-
-set_target_properties(randomizer
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PROJECT_BINARY_DIR}/minsizerel")
-
-set_target_properties(randomizer
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBUGINFO "${PROJECT_BINARY_DIR}/relwithdebuginfo")
+SETUP_EXECUTABLE(randomizer)
 
 add_executable(ndec
   ndec/ndec.c
   )
 
-set_target_properties(ndec
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PROJECT_BINARY_DIR}/release")
-
-set_target_properties(ndec
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PROJECT_BINARY_DIR}/debug")
-
-set_target_properties(ndec
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PROJECT_BINARY_DIR}/minsizerel")
-
-set_target_properties(ndec
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBUGINFO "${PROJECT_BINARY_DIR}/relwithdebuginfo")
+SETUP_EXECUTABLE(ndec)
 
 # symlink important directories
 SYMLINK_FILES("_create-rom.bat"
