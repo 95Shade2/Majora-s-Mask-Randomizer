@@ -10,43 +10,43 @@ using namespace std;
 
 // number stuff
 
-string hex_to_binary(const string &hex);
+string hex_to_binary(string hex);
 
-string dec_to_hex(unsigned number);
+string dec_to_hex(int number);
 
 std::string string_to_hex(const std::string &input);
 
 std::string hex_to_string(const std::string &input);
 
-int hex_to_decimal(const string &hex);
+int hex_to_decimal( string hex);
 
-int string_to_dec(const string &text);
+int string_to_dec( string text);
 
-string dec_to_string(int dec);
+string dec_to_string(int dec, int depth = 0);
 
-string binary_to_hex(const string &binary);
+string binary_to_hex(string binary);
 
 string decimal_to_hex(int dec);
 
 // replace each 1 with a 0, and each 0 with a 1
-string invert_binary(const string &binary);
+string invert_binary(string binary);
 
-bool isNumber(const string &text);
+bool isNumber(string text);
 
 // string stuff
 
-bool Contains(const string &text, char chr);
+bool Contains(string text, char chr);
 
-string RemoveAll(const string &text, char chr);
+string RemoveAll(string text, char chr);
 
-int IndexOf_S(const string &Data, const string &Text);
+int IndexOf_S(string Data, string Text);
 
-string Even_Hex(const string &hex);
+string Even_Hex(string hex);
 
-string Bits_Or(const string &bits_1, const string &bits_2);
+string Bits_Or(string bits_1, string bits_2);
 
 // clears the bit at index bit_index of a byte
-string Bit_Clear(const string &byte, int bit_index);
+string Bit_Clear(string byte, int bit_index);
 
 template <typename big, typename small> int IndexOf(big Data, small Text)
 {
@@ -75,7 +75,7 @@ bool Vector_Has(const std::vector<value> &vect, const value &val)
     return false;
 }
 
-string Hex_Minus(const string &hex, const string &hex_2);
+string Hex_Minus(string hex, string hex_2);
 
 template <typename value>
 std::vector<std::string> Get_Keys(std::map<std::string, value> data)
@@ -108,5 +108,7 @@ string Remove_Whitespace(string text);
 vector<string> String_Split(string text, int split);
 
 string Leading_Zeroes(string hex, int total_length);
+
+string Replace(string bigger_text, string smaller_text, string new_smaller_text);
 
 #endif

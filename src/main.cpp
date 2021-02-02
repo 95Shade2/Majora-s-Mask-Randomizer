@@ -1060,39 +1060,6 @@ void Update_Pools(map<string, Item> &Items)
     }
 }
 
-string Replace(string bigger_text, string smaller_text, string new_smaller_text)
-{
-    string new_text = "";
-    for (int a = 0; a < bigger_text.size(); a++)
-    {
-        int c = a;
-        int b = 0;
-
-        for (b = 0; b < smaller_text.size(); b++)
-        {
-            // not equal
-            if (bigger_text[c] != smaller_text[b])
-            {
-                b = smaller_text.size();
-            }
-            c++;
-        }
-        // found a match
-        if (b == smaller_text.size())
-        {
-            new_text += new_smaller_text; // get the replacement
-            a += smaller_text.size() -
-                 1; // skip passed the old text (-1 cause for loop will increase it by 1)
-        }
-        else
-        {
-            new_text += bigger_text[a];
-        }
-    }
-
-    return new_text;
-}
-
 vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
                                         map<string, vector<string>> *Invalid_Items,
                                         string Item_Name)
