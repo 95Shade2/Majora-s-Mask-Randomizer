@@ -1100,13 +1100,13 @@ namespace Majora_s_Mask_Randomizer_GUI
                 {
                         try
                         {
-                                Rando = Process.Start(".\\Majora's Mask Randomizer.exe");
+                                Rando = Process.Start("randomizer.exe");
                                 Rando.EnableRaisingEvents = true;
                                 Rando.Exited += new EventHandler(Rando_Process_Exited);
                         }
                         catch(Exception e)
                         {
-                                Error("Cannot find \"Majora's Mask Randomizer.exe\" Make sure it's in the same directory");
+                                Error("Cannot find \"randomizer.exe\" Make sure it's in the same directory");
                         }
                 }
                 

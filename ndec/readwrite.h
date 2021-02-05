@@ -14,9 +14,9 @@ union {uint32_t u; float f;} __u32_f32_union__;
 #define S16(x)  ((int16_t)(U16(x)))
 #define F32(x)  ( ( (__u32_f32_union__.u = U32(x)) & 0) + __u32_f32_union__.f)
 
-#define W32(x, v)	{*(uint8_t*)( (void*)x ) = ((v) & 0xFF);\
-			*(uint8_t*)( ((void*)x) + 1 ) = (((v) >> 8) & 0xFF);\
-			*(uint8_t*)( ((void*)x) + 2 ) = (((v) >> 16) & 0xFF);\
-			*(uint8_t*)( ((void*)x) + 3 ) = (((v) >> 24) & 0xFF);}
+#define W32(x, v)	{*(uint8_t*)( (char*)x ) = ((v) & 0xFF);\
+			*(uint8_t*)( ((char*)x) + 1 ) = (((v) >> 8) & 0xFF);\
+			*(uint8_t*)( ((char*)x) + 2 ) = (((v) >> 16) & 0xFF);\
+			*(uint8_t*)( ((char*)x) + 3 ) = (((v) >> 24) & 0xFF);}
 
 #endif
