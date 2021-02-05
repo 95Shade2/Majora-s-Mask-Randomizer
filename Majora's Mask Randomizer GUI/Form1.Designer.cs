@@ -310,7 +310,16 @@
                         this.tabPage8 = new System.Windows.Forms.TabPage();
                         this.tabControl3 = new System.Windows.Forms.TabControl();
                         this.tabPage11 = new System.Windows.Forms.TabPage();
+                        this.Bombchus_10_Pool = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_10_Gives = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_5_Pool = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_10 = new System.Windows.Forms.CheckBox();
+                        this.Bombchus_5_Gives = new System.Windows.Forms.ComboBox();
+                        this.Bombchu_Pool = new System.Windows.Forms.ComboBox();
+                        this.Bombchus_5 = new System.Windows.Forms.CheckBox();
+                        this.Bombchu_Gives = new System.Windows.Forms.ComboBox();
                         this.label23 = new System.Windows.Forms.Label();
+                        this.Bombchu = new System.Windows.Forms.CheckBox();
                         this.label24 = new System.Windows.Forms.Label();
                         this.label25 = new System.Windows.Forms.Label();
                         this.tabPage12 = new System.Windows.Forms.TabPage();
@@ -403,15 +412,7 @@
                         this.label6 = new System.Windows.Forms.Label();
                         this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
                         this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
-                        this.Bombchu_Pool = new System.Windows.Forms.ComboBox();
-                        this.Bombchu_Gives = new System.Windows.Forms.ComboBox();
-                        this.Bombchu = new System.Windows.Forms.CheckBox();
-                        this.Bombchus_5_Pool = new System.Windows.Forms.ComboBox();
-                        this.Bombchus_5_Gives = new System.Windows.Forms.ComboBox();
-                        this.Bombchus_5 = new System.Windows.Forms.CheckBox();
-                        this.Bombchus_10_Pool = new System.Windows.Forms.ComboBox();
-                        this.Bombchus_10_Gives = new System.Windows.Forms.ComboBox();
-                        this.Bombchus_10 = new System.Windows.Forms.CheckBox();
+                        this.respawnHPsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.tabControl2.SuspendLayout();
                         this.tabPage8.SuspendLayout();
                         this.tabControl3.SuspendLayout();
@@ -3312,6 +3313,88 @@
                         this.tabPage11.Text = "Page 1";
                         this.tabPage11.UseVisualStyleBackColor = true;
                         // 
+                        // Bombchus_10_Pool
+                        // 
+                        this.Bombchus_10_Pool.Enabled = false;
+                        this.Bombchus_10_Pool.FormattingEnabled = true;
+                        this.Bombchus_10_Pool.Location = new System.Drawing.Point(143, 182);
+                        this.Bombchus_10_Pool.Name = "Bombchus_10_Pool";
+                        this.Bombchus_10_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Bombchus_10_Pool.TabIndex = 105;
+                        this.Bombchus_10_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Bombchus_10_Gives
+                        // 
+                        this.Bombchus_10_Gives.Enabled = false;
+                        this.Bombchus_10_Gives.FormattingEnabled = true;
+                        this.Bombchus_10_Gives.Location = new System.Drawing.Point(221, 182);
+                        this.Bombchus_10_Gives.Name = "Bombchus_10_Gives";
+                        this.Bombchus_10_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Bombchus_10_Gives.TabIndex = 106;
+                        this.Bombchus_10_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Bombchus_5_Pool
+                        // 
+                        this.Bombchus_5_Pool.Enabled = false;
+                        this.Bombchus_5_Pool.FormattingEnabled = true;
+                        this.Bombchus_5_Pool.Location = new System.Drawing.Point(143, 155);
+                        this.Bombchus_5_Pool.Name = "Bombchus_5_Pool";
+                        this.Bombchus_5_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Bombchus_5_Pool.TabIndex = 102;
+                        this.Bombchus_5_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Bombchus_10
+                        // 
+                        this.Bombchus_10.AutoSize = true;
+                        this.Bombchus_10.Location = new System.Drawing.Point(6, 184);
+                        this.Bombchus_10.Name = "Bombchus_10";
+                        this.Bombchus_10.Size = new System.Drawing.Size(97, 17);
+                        this.Bombchus_10.TabIndex = 104;
+                        this.Bombchus_10.Text = "Bombchus (10)";
+                        this.Bombchus_10.UseVisualStyleBackColor = true;
+                        this.Bombchus_10.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Bombchus_5_Gives
+                        // 
+                        this.Bombchus_5_Gives.Enabled = false;
+                        this.Bombchus_5_Gives.FormattingEnabled = true;
+                        this.Bombchus_5_Gives.Location = new System.Drawing.Point(221, 155);
+                        this.Bombchus_5_Gives.Name = "Bombchus_5_Gives";
+                        this.Bombchus_5_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Bombchus_5_Gives.TabIndex = 103;
+                        this.Bombchus_5_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Bombchu_Pool
+                        // 
+                        this.Bombchu_Pool.Enabled = false;
+                        this.Bombchu_Pool.FormattingEnabled = true;
+                        this.Bombchu_Pool.Location = new System.Drawing.Point(143, 128);
+                        this.Bombchu_Pool.Name = "Bombchu_Pool";
+                        this.Bombchu_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Bombchu_Pool.TabIndex = 99;
+                        this.Bombchu_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Bombchus_5
+                        // 
+                        this.Bombchus_5.AutoSize = true;
+                        this.Bombchus_5.Location = new System.Drawing.Point(6, 157);
+                        this.Bombchus_5.Name = "Bombchus_5";
+                        this.Bombchus_5.Size = new System.Drawing.Size(91, 17);
+                        this.Bombchus_5.TabIndex = 101;
+                        this.Bombchus_5.Text = "Bombchus (5)";
+                        this.Bombchus_5.UseVisualStyleBackColor = true;
+                        this.Bombchus_5.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Bombchu_Gives
+                        // 
+                        this.Bombchu_Gives.Enabled = false;
+                        this.Bombchu_Gives.FormattingEnabled = true;
+                        this.Bombchu_Gives.Location = new System.Drawing.Point(221, 128);
+                        this.Bombchu_Gives.Name = "Bombchu_Gives";
+                        this.Bombchu_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Bombchu_Gives.TabIndex = 100;
+                        this.Bombchu_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
                         // label23
                         // 
                         this.label23.AutoSize = true;
@@ -3320,6 +3403,17 @@
                         this.label23.Size = new System.Drawing.Size(42, 13);
                         this.label23.TabIndex = 24;
                         this.label23.Text = "Manual";
+                        // 
+                        // Bombchu
+                        // 
+                        this.Bombchu.AutoSize = true;
+                        this.Bombchu.Location = new System.Drawing.Point(6, 130);
+                        this.Bombchu.Name = "Bombchu";
+                        this.Bombchu.Size = new System.Drawing.Size(71, 17);
+                        this.Bombchu.TabIndex = 98;
+                        this.Bombchu.Text = "Bombchu";
+                        this.Bombchu.UseVisualStyleBackColor = true;
+                        this.Bombchu.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
                         // 
                         // label24
                         // 
@@ -4395,7 +4489,8 @@
             this.swampScrubSalesBeansToolStripMenuItem,
             this.playAsKafeiToolStripMenuItem,
             this.removeCutscenesToolStripMenuItem,
-            this.gCHudToolStripMenuItem});
+            this.gCHudToolStripMenuItem,
+            this.respawnHPsToolStripMenuItem});
                         this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
                         this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
                         this.settingsToolStripMenuItem.Text = "Settings";
@@ -4490,98 +4585,12 @@
                         this.BlastMaskSeconds_Label.TabIndex = 97;
                         this.BlastMaskSeconds_Label.Text = "10:01";
                         // 
-                        // Bombchu_Pool
+                        // respawnHPsToolStripMenuItem
                         // 
-                        this.Bombchu_Pool.Enabled = false;
-                        this.Bombchu_Pool.FormattingEnabled = true;
-                        this.Bombchu_Pool.Location = new System.Drawing.Point(143, 128);
-                        this.Bombchu_Pool.Name = "Bombchu_Pool";
-                        this.Bombchu_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Bombchu_Pool.TabIndex = 99;
-                        this.Bombchu_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Bombchu_Gives
-                        // 
-                        this.Bombchu_Gives.Enabled = false;
-                        this.Bombchu_Gives.FormattingEnabled = true;
-                        this.Bombchu_Gives.Location = new System.Drawing.Point(221, 128);
-                        this.Bombchu_Gives.Name = "Bombchu_Gives";
-                        this.Bombchu_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Bombchu_Gives.TabIndex = 100;
-                        this.Bombchu_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Bombchu
-                        // 
-                        this.Bombchu.AutoSize = true;
-                        this.Bombchu.Location = new System.Drawing.Point(6, 130);
-                        this.Bombchu.Name = "Bombchu";
-                        this.Bombchu.Size = new System.Drawing.Size(71, 17);
-                        this.Bombchu.TabIndex = 98;
-                        this.Bombchu.Text = "Bombchu";
-                        this.Bombchu.UseVisualStyleBackColor = true;
-                        this.Bombchu.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Bombchus_5_Pool
-                        // 
-                        this.Bombchus_5_Pool.Enabled = false;
-                        this.Bombchus_5_Pool.FormattingEnabled = true;
-                        this.Bombchus_5_Pool.Location = new System.Drawing.Point(143, 155);
-                        this.Bombchus_5_Pool.Name = "Bombchus_5_Pool";
-                        this.Bombchus_5_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Bombchus_5_Pool.TabIndex = 102;
-                        this.Bombchus_5_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Bombchus_5_Gives
-                        // 
-                        this.Bombchus_5_Gives.Enabled = false;
-                        this.Bombchus_5_Gives.FormattingEnabled = true;
-                        this.Bombchus_5_Gives.Location = new System.Drawing.Point(221, 155);
-                        this.Bombchus_5_Gives.Name = "Bombchus_5_Gives";
-                        this.Bombchus_5_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Bombchus_5_Gives.TabIndex = 103;
-                        this.Bombchus_5_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Bombchus_5
-                        // 
-                        this.Bombchus_5.AutoSize = true;
-                        this.Bombchus_5.Location = new System.Drawing.Point(6, 157);
-                        this.Bombchus_5.Name = "Bombchus_5";
-                        this.Bombchus_5.Size = new System.Drawing.Size(91, 17);
-                        this.Bombchus_5.TabIndex = 101;
-                        this.Bombchus_5.Text = "Bombchus (5)";
-                        this.Bombchus_5.UseVisualStyleBackColor = true;
-                        this.Bombchus_5.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Bombchus_10_Pool
-                        // 
-                        this.Bombchus_10_Pool.Enabled = false;
-                        this.Bombchus_10_Pool.FormattingEnabled = true;
-                        this.Bombchus_10_Pool.Location = new System.Drawing.Point(143, 182);
-                        this.Bombchus_10_Pool.Name = "Bombchus_10_Pool";
-                        this.Bombchus_10_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Bombchus_10_Pool.TabIndex = 105;
-                        this.Bombchus_10_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Bombchus_10_Gives
-                        // 
-                        this.Bombchus_10_Gives.Enabled = false;
-                        this.Bombchus_10_Gives.FormattingEnabled = true;
-                        this.Bombchus_10_Gives.Location = new System.Drawing.Point(221, 182);
-                        this.Bombchus_10_Gives.Name = "Bombchus_10_Gives";
-                        this.Bombchus_10_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Bombchus_10_Gives.TabIndex = 106;
-                        this.Bombchus_10_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Bombchus_10
-                        // 
-                        this.Bombchus_10.AutoSize = true;
-                        this.Bombchus_10.Location = new System.Drawing.Point(6, 184);
-                        this.Bombchus_10.Name = "Bombchus_10";
-                        this.Bombchus_10.Size = new System.Drawing.Size(97, 17);
-                        this.Bombchus_10.TabIndex = 104;
-                        this.Bombchus_10.Text = "Bombchus (10)";
-                        this.Bombchus_10.UseVisualStyleBackColor = true;
-                        this.Bombchus_10.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        this.respawnHPsToolStripMenuItem.Name = "respawnHPsToolStripMenuItem";
+                        this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+                        this.respawnHPsToolStripMenuItem.Text = "Respawn HPs";
+                        this.respawnHPsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
                         // 
                         // Main_Window
                         // 
@@ -5048,6 +5057,7 @@
                 private System.Windows.Forms.ComboBox Bombchus_10_Pool;
                 private System.Windows.Forms.ComboBox Bombchus_10_Gives;
                 private System.Windows.Forms.CheckBox Bombchus_10;
+                private System.Windows.Forms.ToolStripMenuItem respawnHPsToolStripMenuItem;
         }
 }
 

@@ -1186,6 +1186,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                                 Text += "GC_Hud=" + gCHudToolStripMenuItem.Checked + "\n";      //use or not use the GC Hud
 
                                 Text += "BlastMask_Cooldown=" + BlastMaskFrames_Num.Value + "\n";      //the blast mask cooldown
+
+                                Text += "RespawnHPs=" + respawnHPsToolStripMenuItem.Checked + "\n";       //whether or not to respawn the hps every cycle
                         }
 
                         if (colors)
