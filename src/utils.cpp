@@ -689,28 +689,12 @@ string RemoveAll(string text, char chr)
 
 int IndexOf_S(string Data, string Text)
 {
-    for (int i = 0; i < Data.size(); i++)
+    size_t pos = Data.find(Text);
+    if (pos == std::string::npos)
     {
-        int a = i;
-        bool same = true;
-
-        for (int b = 0; b < Text.size(); b++)
-        {
-            if (Data[a] != Text[b])
-            {
-                same = false;
-            }
-
-            a++;
-        }
-
-        if (same)
-        {
-            return i;
-        }
+        return -1;
     }
-
-    return -1;
+    return pos;
 }
 
 /// Gets the word at index 'word_index' from 'text' (0 based)
