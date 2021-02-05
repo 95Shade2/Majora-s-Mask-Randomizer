@@ -7,282 +7,108 @@
 #include <stdexcept>
 #include <iomanip>
 
-string Single_Hex(int number)
+string hex_to_binary(const string& hex)
 {
-    if (number == 0)
-    {
-        return "0";
-    }
-    else if (number == 1)
-    {
-        return "1";
-    }
-    else if (number == 2)
-    {
-        return "2";
-    }
-    else if (number == 3)
-    {
-        return "3";
-    }
-    else if (number == 4)
-    {
-        return "4";
-    }
-    else if (number == 5)
-    {
-        return "5";
-    }
-    else if (number == 6)
-    {
-        return "6";
-    }
-    else if (number == 7)
-    {
-        return "7";
-    }
-    else if (number == 8)
-    {
-        return "8";
-    }
-    else if (number == 9)
-    {
-        return "9";
-    }
-    else if (number == 10)
-    {
-        return "A";
-    }
-    else if (number == 11)
-    {
-        return "B";
-    }
-    else if (number == 12)
-    {
-        return "C";
-    }
-    else if (number == 13)
-    {
-        return "D";
-    }
-    else if (number == 14)
-    {
-        return "E";
-    }
-    else if (number == 15)
-    {
-        return "F";
-    }
-    else
-    {
-        return "";
-    }
-}
-
-string hex_to_binary(string hex)
-{
-    string binary = "";
-    string solo_hex;
+    std::stringstream binary;
 
     for (int i = 0; i < hex.size(); i++)
     {
-        solo_hex = hex[i];
-
-        if (solo_hex == "0")
+        switch (hex[i])
         {
-            binary += "0000";
-        }
-        else if (solo_hex == "1")
-        {
-            binary += "0001";
-        }
-        else if (solo_hex == "2")
-        {
-            binary += "0010";
-        }
-        else if (solo_hex == "3")
-        {
-            binary += "0011";
-        }
-        else if (solo_hex == "4")
-        {
-            binary += "0100";
-        }
-        else if (solo_hex == "5")
-        {
-            binary += "0101";
-        }
-        else if (solo_hex == "6")
-        {
-            binary += "0110";
-        }
-        else if (solo_hex == "7")
-        {
-            binary += "0111";
-        }
-        else if (solo_hex == "8")
-        {
-            binary += "1000";
-        }
-        else if (solo_hex == "9")
-        {
-            binary += "1001";
-        }
-        else if (solo_hex == "A")
-        {
-            binary += "1010";
-        }
-        else if (solo_hex == "B")
-        {
-            binary += "1011";
-        }
-        else if (solo_hex == "C")
-        {
-            binary += "1100";
-        }
-        else if (solo_hex == "D")
-        {
-            binary += "1101";
-        }
-        else if (solo_hex == "E")
-        {
-            binary += "1110";
-        }
-        else if (solo_hex == "F")
-        {
-            binary += "1111";
+        case '0':
+            binary << "0000";
+            break;
+        case '1':
+            binary << "0001";
+            break;
+        case '2':
+            binary << "0010";
+            break;
+        case '3':
+            binary << "0011";
+            break;
+        case '4':
+            binary << "0100";
+            break;
+        case '5':
+            binary << "0101";
+            break;
+        case '6':
+            binary << "0110";
+            break;
+        case '7':
+            binary << "0111";
+            break;
+        case '8':
+            binary << "1000";
+            break;
+        case '9':
+            binary << "1001";
+            break;
+        case 'A':
+        case 'a':
+            binary << "1010";
+            break;
+        case 'B':
+        case 'b':
+            binary << "1011";
+            break;
+        case 'C':
+        case 'c':
+            binary << "1100";
+            break;
+        case 'D':
+        case 'd':
+            binary << "1101";
+            break;
+        case 'E':
+        case 'e':
+            binary << "1110";
+            break;
+        case 'F':
+        case 'f':
+            binary << "1111";
+            break;
+        default:
+            throw std::runtime_error("Invalid character");
         }
     }
 
-    return binary;
+    return binary.str();
 }
 
 string dec_to_hex(int number)
 {
-    string hex = "";
-    string binary = "";
-    int power;
-    char bin;
-    int value = 0;
-
     number %= 256;
 
-    // get the binary form of the numbers
-    for (int i = 8; i > 0; i--)
-    {
-        power = pow(2, i) / 2;
+    std::stringstream hex;
 
-        if (number >= power)
-        {
-            number -= power;
-            binary += "1";
-        }
-        else
-        {
-            binary += "0";
-        }
-    }
+    hex << std::setw(2) << std::setfill('0') << std::uppercase << std::hex << number;
 
-    // convert the binary form to the hex form
-    for (int i = 0; i < binary.size() / 2; i++)
-    {
-        bin = binary[i];
-        power = pow(2, 4 - i) / 2;
-
-        if (bin == '1')
-        {
-            value += power;
-        }
-    }
-
-    hex = Single_Hex(value);
-    value = 0;
-
-    // convert the last four binary
-    for (int i = 0; i < binary.size() / 2; i++)
-    {
-        bin = binary[i + 4];
-        power = pow(2, 4 - i) / 2;
-
-        if (bin == '1')
-        {
-            value += power;
-        }
-    }
-
-    hex += Single_Hex(value);
-
-    return hex;
+    return hex.str();
 }
+
+#include <iostream>
 
 std::string hex_to_string(const std::string &input)
 {
-    static const char *const lut = "0123456789ABCDEF";
-    size_t len = input.length();
-    if (len & 1)
-        throw std::invalid_argument("odd length");
-
-    string output;
-    output.reserve(len / 2);
-    for (size_t i = 0; i < len; i += 2)
+    std::stringstream output;
+    for (size_t i = 0; i < input.size(); i += 2)
     {
-        char a = input[i];
-        const char *p = std::lower_bound(lut, lut + 16, a);
-        if (*p != a)
-            throw std::invalid_argument("not a hex digit");
-
-        char b = input[i + 1];
-        const char *q = std::lower_bound(lut, lut + 16, b);
-        if (*q != b)
-            throw std::invalid_argument("not a hex digit");
-
-        output.push_back(((p - lut) << 4) | (q - lut));
+        output << static_cast<unsigned char>(stoi(input.substr(i, 2), 0, 16));
     }
-    return output;
+    return output.str();
 }
 
 
 // converts a hexadecimal string to a decimal integer
-int hex_to_decimal(string hex)
+int hex_to_decimal(const std::string& hex)
 {
-    int number = 0;
-
-    for (int i = 0; i < hex.size(); i++)
+    if (hex.empty())
     {
-        number *= 16;
-        char h = hex[i];
-
-        if (h == 'A')
-        {
-            number += 10;
-        }
-        else if (h == 'B')
-        {
-            number += 11;
-        }
-        else if (h == 'C')
-        {
-            number += 12;
-        }
-        else if (h == 'D')
-        {
-            number += 13;
-        }
-        else if (h == 'E')
-        {
-            number += 14;
-        }
-        else if (h == 'F')
-        {
-            number += 15;
-        }
-        else
-        {
-            number += (h - '0');
-        }
+        return 0;
     }
-
-    return number;
+    return std::stoul(hex, 0, 16);
 }
 
 int string_to_dec(string text)

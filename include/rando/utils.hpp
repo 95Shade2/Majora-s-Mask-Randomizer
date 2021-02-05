@@ -10,7 +10,7 @@ using namespace std;
 
 // number stuff
 
-string hex_to_binary(string hex);
+string hex_to_binary(const string& hex);
 
 string dec_to_hex(int number);
 
@@ -18,7 +18,7 @@ std::string string_to_hex(const std::string &input);
 
 std::string hex_to_string(const std::string &input);
 
-int hex_to_decimal( string hex);
+int hex_to_decimal(const std::string& hex);
 
 int string_to_dec( string text);
 
