@@ -125,7 +125,6 @@ Chateau Romani {
 	Express Letter to Mama, Big Bomb Bag
 	Express Letter to Mama, Biggest Bomb Bag
 	Express Letter to Mama, Blast Mask
-	#Gold Dust, Letter to Kafei, Pendant of Memories
 }
 
 Circus Leader's Mask {
@@ -266,27 +265,27 @@ Giant Wallet {
 }
 
 Giant's Mask {
-	Light Arrow, Bow, Bomb Bag
-	Light Arrow, Large Quiver, Bomb Bag
-	Light Arrow, Largest Quiver, Bomb Bag
-	Light Arrow, Bow, Big Bomb Bag
-	Light Arrow, Large Quiver, Big Bomb Bag
-	Light Arrow, Largest Quiver, Big Bomb Bag
-	Light Arrow, Bow, Biggest Bomb Bag
-	Light Arrow, Large Quiver, Biggest Bomb Bag
-	Light Arrow, Largest Quiver, Biggest Bomb Bag
-	Light Arrow, Bow, Song of Soaring, Deku Stick
-	Light Arrow, Large Quiver, Song of Soaring, Deku Stick
-	Light Arrow, Largest Quiver, Song of Soaring, Deku Stick
-	Light Arrow, Bow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
-	Light Arrow, Large Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
-	Light Arrow, Largest Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
-	Light Arrow, Bow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
-	Light Arrow, Large Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
-	Light Arrow, Largest Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
-	Light Arrow, Bow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
-	Light Arrow, Large Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
-	Light Arrow, Largest Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
+	Bow, Light Arrow, Bomb Bag
+	Large Quiver, Light Arrow, Bomb Bag
+	Largest Quiver, Light Arrow, Bomb Bag
+	Bow, Light Arrow, Big Bomb Bag
+	Large Quiver, Light Arrow, Big Bomb Bag
+	Largest Quiver, Light Arrow, Big Bomb Bag
+	Bow, Light Arrow, Biggest Bomb Bag
+	Large Quiver, Light Arrow, Biggest Bomb Bag
+	Largest Quiver, Light Arrow, Biggest Bomb Bag
+	Bow, Light Arrow, Song of Soaring, Deku Stick
+	Large Quiver, Light Arrow, Song of Soaring, Deku Stick
+	Largest Quiver, Light Arrow, Song of Soaring, Deku Stick
+	Bow, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
+	Large Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
+	Largest Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Goron Mask
+	Bow, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
+	Large Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
+	Largest Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
+	Bow, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
+	Large Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
+	Largest Quiver, Light Arrow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
 }
 
 Gibdo Mask {
@@ -321,21 +320,21 @@ Gilded Sword {
 }
 
 Gold Dust {
-	Goron Mask, Fire Arrow, Bow, Bomb Bag
-	Goron Mask, Fire Arrow, Large Quiver, Bomb Bag
-	Goron Mask, Fire Arrow, Largest Quiver, Bomb Bag
-	Goron Mask, Fire Arrow, Bow, Big Bomb Bag
-	Goron Mask, Fire Arrow, Large Quiver, Big Bomb Bag
-	Goron Mask, Fire Arrow, Largest Quiver, Big Bomb Bag
-	Goron Mask, Fire Arrow, Bow, Biggest Bomb Bag
-	Goron Mask, Fire Arrow, Large Quiver, Biggest Bomb Bag
-	Goron Mask, Fire Arrow, Largest Quiver, Biggest Bomb Bag
-	Goron Mask, Fire Arrow, Bow, Powder Keg
-	Goron Mask, Fire Arrow, Large Quiver, Powder Keg
-	Goron Mask, Fire Arrow, Largest Quiver, Powder Keg
-	Goron Mask, Fire Arrow, Bow, Hookshot
-	Goron Mask, Fire Arrow, Large Quiver, Hookshot
-	Goron Mask, Fire Arrow, Largest Quiver, Hookshot
+	Goron Mask, Bow, Fire Arrow, Bomb Bag
+	Goron Mask, Large Quiver, Fire Arrow, Bomb Bag
+	Goron Mask, Largest Quiver, Fire Arrow, Bomb Bag
+	Goron Mask, Bow, Fire Arrow, Big Bomb Bag
+	Goron Mask, Large Quiver, Fire Arrow, Big Bomb Bag
+	Goron Mask, Largest Quiver, Fire Arrow, Big Bomb Bag
+	Goron Mask, Bow, Fire Arrow, Biggest Bomb Bag
+	Goron Mask, Large Quiver, Fire Arrow, Biggest Bomb Bag
+	Goron Mask, Largest Quiver, Fire Arrow, Biggest Bomb Bag
+	Goron Mask, Bow, Fire Arrow, Powder Keg
+	Goron Mask, Large Quiver, Fire Arrow, Powder Keg
+	Goron Mask, Largest Quiver, Fire Arrow, Powder Keg
+	Goron Mask, Bow, Fire Arrow, Hookshot
+	Goron Mask, Large Quiver, Fire Arrow, Hookshot
+	Goron Mask, Largest Quiver, Fire Arrow, Hookshot
 }
 
 Gold Rupee {
@@ -343,13 +342,13 @@ Gold Rupee {
 }
 
 Goron Mask {
-	Song of Heaking, Lens of Truth, Bomb Bag
-	Song of Heaking, Lens of Truth, Big Bomb Bag
-	Song of Heaking, Lens of Truth, Biggest Bomb Bag
-	Song of Heaking, Lens of Truth, Goron Mask
-	Song of Heaking, Lens of Truth, Bow, Deku Stick, Song of Soaring
-	Song of Heaking, Lens of Truth, Large Quiver, Deku Stick, Song of Soaring
-	Song of Heaking, Lens of Truth, Largest Quiver, Deku Stick, Song of Soaring
+	Song of Healing, Lens of Truth, Bomb Bag
+	Song of Healing, Lens of Truth, Big Bomb Bag
+	Song of Healing, Lens of Truth, Biggest Bomb Bag
+	Song of Healing, Lens of Truth, Goron Mask
+	Song of Healing, Lens of Truth, Bow, Deku Stick, Song of Soaring
+	Song of Healing, Lens of Truth, Large Quiver, Deku Stick, Song of Soaring
+	Song of Healing, Lens of Truth, Largest Quiver, Deku Stick, Song of Soaring
 }
 
 Great Fairy's Mask {
@@ -446,7 +445,6 @@ Keaton Mask {
 	Biggest Bomb Bag
 	Zora Mask
 	Fierce Deity Mask
-	#Gold Dust, Letter to Kafei
 }
 
 Kokiri Sword {
@@ -502,12 +500,7 @@ Light Arrow {
 }
 
 Magic Beans {
-	Deku Mask
-	Red Potion
-	Goron Mask
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
+	
 }
 
 Mask of Scents {
@@ -613,10 +606,10 @@ Mushroom {
 }
 
 Ocean Title Deed {
-	Mountain Title Deed, Goron Maks, Zora Mask
-	Mountain Title Deed, Goron Maks, Bomb Bag
-	Mountain Title Deed, Goron Maks, Big Bomb Bag
-	Mountain Title Deed, Goron Maks, Biggest Bomb Bag
+	Mountain Title Deed, Goron Mask, Zora Mask
+	Mountain Title Deed, Goron Mask, Bomb Bag
+	Mountain Title Deed, Goron Mask, Big Bomb Bag
+	Mountain Title Deed, Goron Mask, Biggest Bomb Bag
 }
 
 Pendant of Memories {
@@ -630,7 +623,6 @@ Pictograph Box {
 
 Postman's Hat {
 	Express Letter to Mama
-	#Letter to Kafei, Pendant of Memories, Gold Dust
 }
 
 Powder Keg {
