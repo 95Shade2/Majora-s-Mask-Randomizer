@@ -1,6 +1,6 @@
 #include "rando/item.hpp"
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -27,8 +27,6 @@ Item::Item(vector<Time> time_available,
     Address_Get = add_get_table;
     Address_Item_ID = add_item_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -37,7 +35,7 @@ Item::Item(vector<Time> time_available,
     Item_Count = "00";
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -66,8 +64,6 @@ Item::Item(vector<Time> time_available,
     Address_Get = add_get_table;
     Address_Item_ID = add_item_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -79,7 +75,7 @@ Item::Item(vector<Time> time_available,
     Item_Count_Locations = item_count_locs;
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -109,8 +105,6 @@ Item::Item(vector<Time> time_available,
     Address_Get = add_get_table;
     Address_Item_ID = add_item_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -120,7 +114,7 @@ Item::Item(vector<Time> time_available,
     Item_Count_Locations = item_count_locations;
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -152,8 +146,6 @@ Item::Item(vector<Time> time_available,
     Address_Get = add_get_table;
     Address_Item_ID = add_item_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -165,7 +157,7 @@ Item::Item(vector<Time> time_available,
     Item_Count_Locations2 = item_count2_locations;
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -194,8 +186,6 @@ Item::Item(vector<Time> time_available,
     Address_Item_ID = add_item_id;
     Address_Text_ID = add_text_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -204,7 +194,7 @@ Item::Item(vector<Time> time_available,
     Item_Count = "00";
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -236,8 +226,6 @@ Item::Item(vector<Time> time_available,
     Address_Item_ID = add_item_id;
     Address_Text_ID = add_text_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -247,7 +235,7 @@ Item::Item(vector<Time> time_available,
     Item_Count_Locations = item_count_locations;
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -278,8 +266,6 @@ Item::Item(vector<Time> time_available,
     Address_Get_Item_ID = add_get_item_id;
     Address_Text_ID = add_text_id;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -288,7 +274,7 @@ Item::Item(vector<Time> time_available,
     Item_Count = "00";
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -322,8 +308,6 @@ Item::Item(vector<Time> time_available,
 
     ID_Minus_61_Locations = Inverted_Song_Locations;
 
-    Time_Get = time_available;
-
     gives_item = false;
     can_get = false;
 
@@ -332,7 +316,7 @@ Item::Item(vector<Time> time_available,
     Item_Count = "00";
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -370,8 +354,6 @@ Item::Item(vector<Time> time_available,
 
     ID_Minus_61_Locations = Inverted_Song_Locations;
 
-    Time_Get = time_available;
-
     Song1_ID = songid1;
     Song2_ID = songid2;
     Song1_Locatinos = song1_loc;
@@ -385,7 +367,7 @@ Item::Item(vector<Time> time_available,
     Item_Count = "00";
 }
 
-Item::Item(vector<Time> time_available,
+Item::Item(
            string nam,
            string id,
            string get_id,
@@ -424,8 +406,6 @@ Item::Item(vector<Time> time_available,
     Address_Text_ID = add_text_id;
 
     ID_Minus_61_Locations = Inverted_Song_Locations;
-
-    Time_Get = time_available;
 
     Song1_ID = songid1;
     Song2_ID = songid2;

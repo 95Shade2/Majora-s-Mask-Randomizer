@@ -60,7 +60,7 @@ class Item
     {
     }
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -72,7 +72,7 @@ class Item
          vector<string> add_get_table,
          vector<string> add_item_id);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -86,7 +86,7 @@ class Item
          string item_count,
          vector<string> item_count_locs);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -101,7 +101,7 @@ class Item
          string item_count,
          vector<string> item_count_locations);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -118,7 +118,7 @@ class Item
          string item_count2,
          vector<string> item_count2_locations);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -131,7 +131,7 @@ class Item
          vector<string> add_item_id,
          vector<string> add_text_id);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -147,7 +147,7 @@ class Item
          vector<string> item_count_locations,
          int just_overlading);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -161,7 +161,7 @@ class Item
          vector<string> add_text_id,
          vector<string> add_get_item_id);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -176,7 +176,7 @@ class Item
          vector<string> add_get_item_id,
          vector<string> Inverted_Song_Locations);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -195,7 +195,7 @@ class Item
          vector<string> song1_loc,
          vector<string> song2_loc);
 
-    Item(vector<Time> time_available,
+    Item(
          string nam,
          string id,
          string get_id,
@@ -216,34 +216,6 @@ class Item
          string item_count,
          vector<string> item_count_locations);
 
-    /*
-    Item(vector<Time> time_available, string nam, string id, string get_id, string text,
-    string flg, string ob, string get_item_model, string pol, vector<string>
-    add_get_table, vector<string> add_item_id, vector<string> add_text_id, vector<string>
-    add_get_item_id, vector<string> Locations, string Locations_Data, vector<string>
-    Locations2, string Locations_Data2) { Name = nam;
-
-        Item_ID = id;
-        Get_Item_ID = get_id;
-        Text_ID = text;
-        Flag = flg;
-        Obj = ob;
-        Get_Item_Model = get_item_model;
-
-        Pool = pol;
-
-        Address_Get = add_get_table;
-        Address_Item_ID = add_item_id;
-        Address_Get_Item_ID = add_get_item_id;
-        Address_Text_ID = add_text_id;
-        Other_Locations = Locations;
-        Other_locations_Data = Locations_Data;
-        Other_Locations2 = Locations2;
-        Other_locations_Data2 = Locations_Data2;
-
-        Time_Get = time_available;
-    }
-    */
 };
 
 #endif

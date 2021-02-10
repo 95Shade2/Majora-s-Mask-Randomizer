@@ -34,7 +34,6 @@ vector<string> TMask_Names;
 vector<string> TMask_Keys;
 string Rom_Location = "mm2.z64"; // location of the decompressed rom
 map<string, map<string, string>> Settings;
-vector<string> Tried_Items; // for when swapping items when checking logic
 
 int Random(int min, int max)
 {
@@ -48,157 +47,6 @@ int Random(int min, int max)
     number = number % max + min;
 
     return number;
-}
-
-void shuffle(map<string, Item> &Items, string &Seed, int Seed_Increase = 0)
-{
-    vector<string> Item_Names;
-    vector<string> Item_Keys;
-    vector<string> Same_Pool;
-    vector<string> Same_Pool_2;
-    vector<string> Shuffled;
-    vector<string> manual;
-    string Pool_Name = "";
-    int index = -1;
-    int stop = 0;
-
-    // create random seed if no seed is specified
-    if (Seed == "")
-    {
-        Seed = dec_to_string(time(0));
-    }
-
-    // save the seed in the spoiler log (only if this is the first time through
-    // randomizing items)
-    if (Seed_Increase == 0)
-    {
-        outFile << "Seed: " << Seed << endl << endl;
-    }
-
-    // if Seed has characters
-    if (!isNumber(Seed))
-    {
-        srand(hex_to_decimal(string_to_hex(Seed)) + Seed_Increase);
-    }
-    // if string is only numbers
-    else
-    {
-        srand(string_to_dec(Seed) + Seed_Increase);
-    }
-
-    // Get keys
-    for (const auto &kv : Items)
-    {
-        // only add item to be randomized if in a pool (not equal to "")
-        if (Items[kv.first].Pool != "")
-        {
-            Item_Names.push_back(kv.first);
-            Item_Keys.push_back(kv.first);
-        }
-    }
-
-    // Shuffle every pool
-    while (Item_Names.size() > 0)
-    {
-        // Get items in same pool
-        for (int i = 0; i < Item_Names.size(); i++)
-        {
-            // item is manually inserted into a different spot
-            if (Contains(Items[Item_Names[i]].Pool, '#'))
-            {
-                manual.push_back(Item_Names[i]);
-            }
-            // if this item is randomized
-            else if (Items[Item_Names[i]].Pool != "")
-            {
-                // get the pool name
-                if (Pool_Name == "")
-                {
-                    Pool_Name = Items[Item_Names[i]].Pool;
-                }
-
-                // if this item is in the same pool, then add it to the pool list
-                if (Items[Item_Names[i]].Pool == Pool_Name)
-                {
-                    Same_Pool.push_back(Item_Names[i]);
-                }
-            }
-        }
-
-        // if there are manually inserted items
-        if (manual.size() > 0)
-        {
-            for (int i = 0; i < manual.size(); i++)
-            {
-                // update item
-                Items[manual[i]].Name = Items[manual[i]].Pool.substr(
-                  1); // removes '#' and makes name = the text that is left (what this
-                      // item gives instead)
-
-                // get index of the item
-                index = IndexOf(Item_Names, manual[i]);
-
-                // remove item
-                if (index != -1)
-                {
-                    Item_Names.erase(Item_Names.begin() + index);
-                }
-                else
-                {
-                    cout << "Error\nCouldn't find " << manual[i] << " in "
-                         << "Item_Names" << endl;
-                }
-            }
-        }
-
-        // Remove items in the current pool from the names list
-        for (int i = 0; i < Same_Pool.size(); i++)
-        {
-            // get index of the item
-            index = IndexOf(Item_Names, Same_Pool[i]);
-            // remove item
-            if (index != -1)
-            {
-                Item_Names.erase(Item_Names.begin() + index);
-            }
-            else
-            {
-                cout << "Error\nCouldn't find " << Same_Pool[i] << " in "
-                     << "Item_Names" << endl;
-            }
-        }
-
-        // shuffle the items in the current pool
-        stop = Same_Pool.size() - 1;
-        Same_Pool_2 = Same_Pool;
-
-        // shuffle the items in the same pool
-        for (int i = 0; i < stop; i++)
-        {
-            int number = Random(0, Same_Pool_2.size());
-
-            Shuffled.push_back(Same_Pool_2[number]);
-            Same_Pool_2.erase(Same_Pool_2.begin() + number);
-        }
-        // add the last item in the pool to the shuffled list
-        if (Same_Pool_2.size() > 0)
-        {
-            Shuffled.push_back(Same_Pool_2[0]);
-        }
-
-        // Replace Name in Items with item to be put there instead
-        for (int i = 0; i <= stop; i++)
-        {
-            Items[Same_Pool[i]].Name = Shuffled[i];
-        }
-
-        // clear the pool for the next one
-        Same_Pool.clear();
-        Same_Pool_2.clear();
-        Shuffled.clear();
-        manual.clear();
-        Pool_Name = "";
-    };
 }
 
 string Item_Get(Item it)
@@ -675,174 +523,6 @@ void Give_Starting_Items()
         Write_To_Rom(hex_to_decimal(location), binary_to_hex(Flag));
     }
 
-    /*
-    if (Items[Start_Item].Name == "Adult Wallet") {
-        Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]),
-    "10");
-    }
-    else if (Items[Start_Item].Name == "Giant Wallet") {
-        Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]),
-    "20");
-    }
-    //bomber's notebook is in the same byte as the first songs list
-    else if (Items[Start_Item].Name == "Bomber's Notebook") {
-        Songs_Bit_1 = Bits_Or(Songs_Bit_1, "00000100");
-    }
-    else if (Items[Start_Item].Name == "Big Bomb Bag") {
-        Write_To_Rom(hex_to_decimal("C5CE6F"), "10");   //bomb bag slot
-        Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]),
-    "06");  //bomb slot Write_To_Rom(hex_to_decimal("C5CE5A"), "1E");   //bomb count
-    }
-    else if (Items[Start_Item].Name == "Biggest Bomb Bag") {
-        Write_To_Rom(hex_to_decimal("C5CE6F"), "18");
-        Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]),
-    "06"); Write_To_Rom(hex_to_decimal("C5CE5A"), "28");
-    }
-    else if (Items[Start_Item].Name == "Bomb Bag") {
-        Write_To_Rom(hex_to_decimal("C5CE6F"), "08");
-        Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]),
-    "06"); Write_To_Rom(hex_to_decimal("C5CE5A"), "14");
-    }
-    else if (Items[Start_Item].Name == "Large Quiver") {
-        Write_To_Rom(hex_to_decimal("C5CE25"), "01");   //bow slot
-        Write_To_Rom(hex_to_decimal("C5CE6F"), "02");   //quiver slot
-        Write_To_Rom(hex_to_decimal("C5CE55"), "28");   //arrow count
-    }
-    else if (Items[Start_Item].Name == "Largest Quiver") {
-        Write_To_Rom(hex_to_decimal("C5CE25"), "01");
-        Write_To_Rom(hex_to_decimal("C5CE6F"), "03");
-        Write_To_Rom(hex_to_decimal("C5CE55"), "32");
-    }
-    else if (Items[Start_Item].Name == "Hero's Shield") {
-        Write_To_Rom(hex_to_decimal("C5CE21"), "11");
-    }
-    else if (Items[Start_Item].Name == "Mirror Shield") {
-        Write_To_Rom(hex_to_decimal("C5CE21"), "21");
-    }
-    else if (Items[Start_Item].Name == "Heart Piece") {
-        Write_To_Rom(12963440, "10");
-    }
-    else if (Items[Start_Item].Name == "Heart Container") {
-        Write_To_Rom(12963305, "40");   //Max Hearts
-        Write_To_Rom(12963307, "40");   //Current Hearts
-    }
-    //if cannot start with this item then dont start with anything
-    else if (Items[Items[Start_Item].Name].Address_Item_ID[0] == "") {
-        cout << Start_Item << " gives " << Items[Start_Item].Name << endl;
-    }
-    //if this starting item is a song
-    else if (IndexOf(Song_Names, Items[Start_Item].Name) != -1) {
-        int Song_Index = IndexOf(Song_Names, Items[Start_Item].Name);
-
-        //song of storms
-        if (Song_Index == 4) {
-            Songs_Bit_1 = Bits_Or(Songs_Bit_1, Song_Bit_Values[Song_Index]);
-        }
-        //every other song except sonata and lullaby
-        else if (Song_Index < 4 || Song_Index > 6) {
-            Songs_Bit_2 = Bits_Or(Songs_Bit_2, Song_Bit_Values[Song_Index]);
-        }
-        //sonata or lullaby
-        else {
-            Songs_Bit_3 = Bits_Or(Songs_Bit_3, Song_Bit_Values[Song_Index]);
-        }
-    }
-    else {
-        //Get the items in the inventory
-        if (Items[Start_Item].Name == "Bow") {
-            Write_To_Rom(hex_to_decimal("C5CE6F"), "01");   //quiver slot
-            Write_To_Rom(hex_to_decimal("C5CE55"), "1E");   //arrow count
-        }
-        else if (Items[Start_Item].Name == "Razor Sword") {
-            Write_To_Rom(hex_to_decimal("C5CE21"), "12");   //inventory slot
-            Write_To_Rom(hex_to_decimal("C5CDF1"), "64");   //durability
-        }
-        else if (Items[Start_Item].Name == "Gilded Sword") {
-            Write_To_Rom(hex_to_decimal("C5CE21"), "13");
-        }
-        else if (Items[Start_Item].Name == "Deku Nuts") {
-            Write_To_Rom(hex_to_decimal("C5CE5D"), "01");
-        }
-        else if (Items[Start_Item].Name == "Deku Nuts (10)") {
-            Write_To_Rom(hex_to_decimal("C5CE5D"), "0A");
-        }
-        else if (Items[Start_Item].Name == "Deku Stick") {
-            Write_To_Rom(hex_to_decimal("C5CE5C"), "01");
-        }
-        else if (Items[Start_Item].Name == "Magic Beans") {
-            Write_To_Rom(hex_to_decimal("C5CE5E"), "01");
-        }
-        else if (Items[Start_Item].Name == "Powder Keg") {
-            Write_To_Rom(hex_to_decimal("C5CE60"), "01");
-        }
-
-        Write_To_Rom(hex_to_decimal(Items[Items[Start_Item].Name].Address_Item_ID[0]),
-    hex);
-    }
-    }
-    */
-
-    // write the songs to the file
-    // Write_To_Rom(12963441, binary_to_hex(Songs_Bit_1));
-    // Write_To_Rom(12963442, binary_to_hex(Songs_Bit_2));
-    // Write_To_Rom(12963443, binary_to_hex(Songs_Bit_3));
-}
-
-void Apply_Mod(string filename)
-{
-    fstream mod;
-    filename = "mods/" + filename;
-    Open_File(filename, mod);
-    string file;
-    string File_Hex = "";
-    string End = "FF";
-    string C = "";
-
-    cout << endl << filename << endl;
-
-    while (mod >> hex >> file)
-    {
-        File_Hex += string_to_hex(file);
-        File_Hex +=
-          "0C"; // 0C is removed when using this method, so have to add it back, OC might
-                // be the thing that it checks for the end of a line or something
-    }
-
-    int base = 0;
-    do
-    {
-        C = "00";
-        string address = "";
-        for (int i = base; i < base + 8; i++)
-        {
-            address += File_Hex[i];
-        }
-
-        string length;
-        int len;
-        for (int i = base + 8; i < base + 16; i++)
-        {
-            length += File_Hex[i];
-        }
-        len = hex_to_decimal(length) * 2;
-
-        string data;
-        for (int i = base + 16; i < base + 16 + len; i++)
-        {
-            data += File_Hex[i];
-        }
-        data = Even_Hex(data);
-
-        cout << data << endl;
-
-        Write_To_Rom(hex_to_decimal(address), data);
-
-        base = base + 16 + len;
-        C[0] = File_Hex[base];
-        C[1] = File_Hex[base + 1];
-    } while (C != End);
-
-    mod.close();
 }
 
 void Remove_Item_Checks()
@@ -853,8 +533,6 @@ void Remove_Item_Checks()
     Write_To_Rom(15512024, "1000000F");
     Write_To_Rom(15511648,
                  "00000000"); // this makes it where tingle doesnt write the map data
-    // Write_To_Rom(17100472, "904E3F6831CF0008");   //this caused a softlock to happen at
-    // couple's mask
     Write_To_Rom(17168980, "10000007");
     Write_To_Rom(12962936, "00003000");
     Write_To_Rom(16968828, "10000009");
@@ -905,23 +583,9 @@ void Remove_Item_Checks()
     Write_To_Rom(15349324, "904F3F7C31F800400200202510180005");
     Write_To_Rom(15348816, "904F3F6F31F8000850180006");
     Write_To_Rom(13334668, "00000000");
-    // Write_To_Rom(15723008, "240100AD");   //this made the game softlock after beaver hp
     Write_To_Rom(12228768, "0000000000000000");
 
-    // Make witch always gives you bottled red potion, so I removed it so she gives you
-    // bottle and then whatever is randomized to red potion - in mystery woods
-    // Write_To_Rom(15964788, "90693F733C014396316C0002");
-    // Write_To_Rom(15964788, "90693F73");
-    // Write_To_Rom(15964796, "312A0002");
-    // Write_To_Rom(15964816, "24060059");
-
-    // Make witch always gives you bottled red potion, so I removed it so she gives you
-    // bottle and then whatever is randomized to red potion Write_To_Rom(15678556,
-    // "90CB3F733C014396316C0002");
-
     Write_To_Rom(16479984, "10000003");
-    // Write_To_Rom(12961148, "00000C00"); this was making peahat and dodongo grotto hps
-    // not respawn
     Write_To_Rom(
       11835848,
       "8EE6038884C700002408000E1107000A00000000240900331127001500000000240A00661147001200"
@@ -950,8 +614,6 @@ void Remove_Item_Checks()
     Write_To_Rom(15521648, "24180000"); // make banker never check which wallet you have
     Write_To_Rom(16565908, "24060009"); // make giant wallet ignore what wallet you have
 
-    // there are 2 places of the same 4 commands close by, maybe one for each day/night or
-    // something? Gonna replace each one
     Write_To_Rom(13492684,
                  "24020000"); // make bomb shop guy let you always buy big bomb bag
     Write_To_Rom(13492812, "24020000");
@@ -990,8 +652,6 @@ void Remove_Item_Checks()
     Write_To_Rom(12233316,
                  "240400FF"); // Make the game always give GFS from a randomized item
     Write_To_Rom(15923616, "24020000"); // always give song of soaring
-    // Write_To_Rom(12100280, "24020000"); //always give Epona's Song - haha, makes Epona
-    // not spawn :)))))
     Write_To_Rom(12509920, "24020000"); // always give Epona's Song
 
     // elder goron ignores if you have lullaby and intro
@@ -1012,6 +672,8 @@ void Remove_Item_Checks()
     Write_To_Rom(13838164, "24040000"); // always spawn twinmold's remains
     Write_To_Rom(15349096, "240F00FF"); // make gf always give gfm item after already
                                         // getting magic (and have deku mask of course)
+    Write_To_Rom(13492260, "10000003");	// Remove check when buying Hero's Shield
+
 }
 
 void Print_Map(ostream &out, map<string, map<string, string>> data)
@@ -1045,8 +707,6 @@ void Update_Pools(map<string, Item> &Items)
 {
     vector<string> keys;
     vector<string> values;
-
-    // Print_Map(cout, Settings);
 
     for (const auto &kv : Settings["items"])
     {
@@ -1205,86 +865,6 @@ map<string, vector<vector<string>>> Get_Logic(string Logic_Location,
     return Logic;
 }
 
-bool Has_Items(Inventory Inv, vector<string> Items, int depth = 0)
-{
-    if (depth == Items.size())
-    {
-        return true;
-    }
-    else
-    {
-        return (Inv.Items[Items[depth]] && Has_Items(Inv, Items, ++depth));
-    }
-}
-
-bool Update_Inventory(Inventory &Inv,
-                      map<string, Item> Items,
-                      map<string, vector<vector<string>>> Logic,
-                      vector<string> &Items_Checked)
-{
-    vector<string> keys;
-    bool Can_Get = false;
-    bool Possible = true;
-    bool Got_Item = false; // whether or not got an item in this run through
-    bool free = true;      // whether or not you dont need items for the current item
-
-    for (const auto &kv : Logic)
-    {
-        keys.push_back(kv.first);
-    }
-
-    string bbomb = "Bombs";
-    // not actual items, so no need to check them
-    if (!Vector_Has(Items_Checked, bbomb))
-    {
-        Items_Checked.push_back("Bombs");
-        Items_Checked.push_back("Quiver");
-        Items_Checked.push_back("Nuts");
-    }
-
-    for (int i = 0; i < keys.size(); i++)
-    {
-        Can_Get = false;
-        Possible = true;
-        free = true;
-
-        // if haven't checked item
-        if (!Vector_Has(Items_Checked, keys[i]))
-        {
-            for (int a = 0; a < Logic[keys[i]].size(); a++)
-            {
-                // if it makes it into this loop, then that means you need items to get
-                // this item
-                if (free)
-                {
-                    free = false;
-                }
-
-                for (int b = 0; b < Logic[keys[i]][a].size(); b++)
-                {
-                    Possible = Has_Items(Inv, Logic[keys[i]][a]);
-
-                    if (Possible)
-                    {
-                        Can_Get = true;
-                    }
-                }
-            }
-
-            if (Can_Get || free)
-            {
-                Inv.Add_Item(Items[keys[i]].Name);
-                Got_Item = true;
-                Items_Checked.push_back(keys[i]);
-                // cout << "Checked " << keys[i] << " and got " << Items[keys[i]].Name <<
-                // endl;
-            }
-        }
-    }
-
-    return Got_Item;
-}
-
 bool Locked_Trade_Item(map<string, Item> Items)
 {
     vector<string> Deeds = {"Moon's Tear",
@@ -1349,108 +929,7 @@ string Get_Pool(string item)
     return Items[item].Pool;
 }
 
-void Swap(string item1, string item2)
-{
-    string Get_Item;
-
-    cout << "Swapped " << Items[item1].Name << " and " << Items[item2].Name << endl;
-
-    Get_Item = Items[item1].Name;
-    Items[item1].Name = Items[item2].Name;
-    Items[item2].Name = Get_Item;
-}
-
-string Get_New_Location(string item, string pool)
-{
-    vector<string> keys;
-    int index;
-
-    keys = Get_Keys(Items);
-
-    // find a random item in the same pool
-    do
-    {
-        index = Random(0, keys.size());
-    } while (Items[keys[index]].Pool != pool);
-
-    return keys[index];
-}
-
-// returns the most common missing item needed for the list of missing items
-string Most_Common(vector<string> Missing_Items_Source,
-                   vector<string> Missing_Items,
-                   map<string, vector<vector<string>>> Logic,
-                   Inventory Inv,
-                   int index)
-{
-    string Item;
-    map<string, int> Items_Count; // how may items a certain item can help get
-    map<string, bool>
-      Items_Need; // if an item was found in one of the ways to get the item, this is to
-                  // prevent from counting the item more than once for each item
-    string Cur_Item; // current item
-    string Miss_Item;
-
-    for (int i = 0; i < Missing_Items.size(); i++)
-    {
-        Items_Count[Missing_Items[i]] = 0;
-        Items_Need[Missing_Items[i]] = false;
-    }
-
-    for (int i = 0; i < Missing_Items_Source.size(); i++)
-    {
-        Cur_Item = Missing_Items_Source[i];
-
-        // each list of needed items
-        for (int j = 0; j < Logic[Cur_Item].size(); j++)
-        {
-            // each item needed
-            for (int k = 0; k < Logic[Cur_Item][j].size(); k++)
-            {
-                Miss_Item = Logic[Cur_Item][j][k];
-
-                // if this item is not obtained
-                if (!Inv.Items[Miss_Item])
-                {
-                    Items_Need[Miss_Item] = true;
-                }
-            }
-        }
-
-        for (int j = 0; j < Missing_Items.size(); j++)
-        {
-            Miss_Item = Missing_Items[j];
-
-            if (Items_Need[Miss_Item])
-            {
-                Items_Count[Miss_Item]++; // increase the count of the item
-
-                Items_Need[Miss_Item] = false;
-            }
-        }
-    }
-
-    Item = Get_Key_Max(Items_Count, index);
-
-    return Item;
-}
-
-bool Start_Map(map<string, Item> Items)
-{
-    // if (Items["Deku Mask"].Address_Item_ID[0] == "" || Items["Song of
-    // Time"].Address_Item_ID[0] == "" || Items["Song of Healing"].Address_Item_ID[0] ==
-    // "") {
-    if (Items["Deku Mask"].Address_Item_ID[0] == "" ||
-        Items["Song of Healing"].Address_Item_ID[0] == "")
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
+///Returns a vector of strings of all the pool names
 vector<string> Get_All_Pools(map<string, Item> Items)
 {
     vector<string> Pools;
@@ -1479,125 +958,6 @@ vector<string> Get_All_Pools(map<string, Item> Items)
     return Pools;
 }
 
-void Fix_Shuffled(map<string, Item> &Items,
-                  string Seed,
-                  string Logic_File,
-                  int Seed_Increase = 1)
-{
-    cout << "\nFix Shuffled!";
-    exit(0);
-
-    Inventory Inv;
-    map<string, vector<vector<string>>> Logic;
-    vector<string> Items_Checked;
-    vector<string> Pools; // for pools of the missing items
-    string pool;
-    string New_Location;
-    string Common_Missing_Item;   // the item that can get the most of the missing items
-    vector<string> Missing_Items; // items that are missing
-    vector<string> Missing_Items_Source; // the source of the missing items, (zora mask =>
-                                         // deku mask, it would be the zora mask)
-    string Common_Missing_Item_Source;
-    int tries = 100; // number of times the randomizer tries to make a seed possible
-    string Second_Item;
-    string source;
-
-    // Logic = Get_Logic(Logic_File, );
-
-    // while the 2nd curiosity shop item overwrites the first
-    while (Locked_Trade_Item(Items))
-    {
-        // swap the 2nd with a random item
-        Second_Item = Items["Express Letter to Mama"].Name;
-        pool = Get_Pool(Second_Item);
-        source = Get_Source(Second_Item);
-        New_Location = Get_New_Location(Common_Missing_Item, pool);
-        Swap(source, New_Location);
-    }
-
-    // while deku mask or healing give a map (cannot start with map cause the dev is not
-    // smart enough to figure out how)
-    while (Start_Map(Items))
-    {
-        // swap deku mask with a random item
-        Second_Item = Items["Deku Mask"].Name;
-        pool = Get_Pool(Second_Item);
-        source = Get_Source(Second_Item);
-        New_Location = Get_New_Location(Common_Missing_Item, pool);
-        Swap(source, New_Location);
-    }
-
-    // if curiosity shop guy 2nd item doesn't overwrite 1st item
-    // and if deku mask does not give map
-    // if (!Locked_Trade_Item(Items) && !Start_Map(Items)) {
-    // get all items possible
-    // while (Update_Inventory(Inv, Items, Logic, Items_Checked)) {
-
-    //  }
-    //}
-
-    // run the update inv function until it does not get at least one item on a
-    // run-through
-    while (Update_Inventory(Inv, Items, Logic, Items_Checked))
-    {
-    }
-
-    if (!Inv.All(Items))
-    {
-        // Print_Vector(Inv.Get_Missing_Items(), "\n", "\t");
-
-        // only try to fix the logic x times before quitting (stops infinite loop if
-        // current pools/items are impossible no matter what)
-        if (Seed_Increase <= tries)
-        {
-            cout << "Failed to randomize items with logic, trying again\n";
-
-            // Replace a random item with the most common useful missing item
-            Missing_Items = Inv.Get_Missing_Items();
-
-            if (Missing_Items.size() <= Tried_Items.size())
-            {
-                Tried_Items.clear();
-            }
-
-            Missing_Items_Source = Inv.Get_Missing_Items_Source(Missing_Items, Items);
-            Common_Missing_Item = Most_Common(
-              Missing_Items_Source, Missing_Items, Logic, Inv, Tried_Items.size());
-            pool = Get_Pool(Common_Missing_Item);
-
-            Tried_Items.push_back(Common_Missing_Item);
-
-            // bombs, quiver, or nuts
-            if (pool == "")
-            {
-                if (Common_Missing_Item == "Bombs")
-                {
-                    pool = Get_Pool("Bomb Bag");
-                }
-                else if (Common_Missing_Item == "Quiver")
-                {
-                    pool = Get_Pool("Bow");
-                }
-                else if (Common_Missing_Item == "Nuts")
-                {
-                    pool = Get_Pool("Deku Nuts");
-                }
-            }
-
-            New_Location = Get_New_Location(Common_Missing_Item, pool);
-            Common_Missing_Item_Source = Get_Source(Common_Missing_Item);
-            Swap(Common_Missing_Item_Source, New_Location);
-
-            // see if all items are possible now
-            Fix_Shuffled(Items, Seed, Logic_File, ++Seed_Increase);
-        }
-        else
-        {
-            Error("Failed to create rom with the current settings and logic");
-        }
-    }
-}
-
 /// Gets the wallet size (nothing, adult, or giant) needed to have the 'rupees_needed'
 /// amount of rupees
 string Get_Wallet_Needed(int rupees_needed, map<string, string> wallet_sizes)
@@ -1623,6 +983,7 @@ string Get_Wallet_Needed(int rupees_needed, map<string, string> wallet_sizes)
     return "Error";
 }
 
+///Returns a vector of strings of the items that the player can get with the current equipment according to the logic
 vector<string> Get_Items_Aval(map<string, Item> &Items,
                               map<string, vector<vector<string>>> Items_Needed,
                               vector<string> &Items_Gotten,
@@ -1695,6 +1056,7 @@ vector<string> Get_Items_Aval(map<string, Item> &Items,
     return Items_Aval;
 }
 
+///Returns a vector of strings of the items that are left in a given pool
 vector<string> Get_Items_Left_Pool(string pool)
 {
     vector<string> Items_Pool;
@@ -1718,22 +1080,7 @@ vector<string> Get_Items_Left_Pool(string pool)
     return Items_Pool;
 }
 
-void Remove_All_Items_Last(vector<string> &Items_Last, vector<string> &Items_Gotten)
-{
-    // remove all items gotten from last run-through
-    for (int ri = 0; ri < Items_Last.size(); ri++)
-    {
-        // remove from gotten vector
-        string Item_Remove = Items_Last[ri];
-        int Index_Remove = IndexOf(Items_Gotten, Item_Remove);
-        Items_Gotten.erase(Items_Gotten.begin() + Index_Remove);
-
-        // update the item gives flag that gave it
-        string Item_Source = Get_Source(Item_Remove);
-        Items[Item_Source].gives_item = false;
-    }
-}
-
+///Returns a vector of strings of items the player has that was needed for an item
 vector<string> Get_First_Items_List(string item,
                                     map<string, vector<vector<string>>> Items_Needed,
                                     vector<string> &Items_Gotten)
@@ -1752,6 +1099,7 @@ vector<string> Get_First_Items_List(string item,
 
             items.push_back(Item_Needed);
 
+	    //if have not obtained this item
             if (IndexOf(Items_Gotten, Item_Needed) == -1)
             {
                 yes = false;
@@ -1809,6 +1157,7 @@ vector<string> Sort_Value(vector<string> Items_Pool)
     return Sorted_List;
 }
 
+///Returns a string of item locations not yet checked
 string Get_Missing_Items(vector<string> &Items_Gotten)
 {
     string miss_items = "\t";
@@ -1834,6 +1183,7 @@ string Get_Missing_Items(vector<string> &Items_Gotten)
     return miss_items;
 }
 
+///Returns a string of item locations that cannot be checked yet
 string Get_Missing_Locations(map<string, vector<vector<string>>> &Items_Needed,
                              vector<string> &Items_Gotten)
 {
@@ -1878,6 +1228,7 @@ string Get_Missing_Locations(map<string, vector<vector<string>>> &Items_Needed,
     return miss_loc;
 }
 
+///Checks whether or not Curiosity shop guy gives 2 items in the same slot (this prevents the user from using the first item given)
 bool Check_Curiosity_Items(string Cur_Item)
 {
     vector<string> deeds = {"Moon's Tear",
@@ -1920,9 +1271,7 @@ bool Check_Curiosity_Items(string Cur_Item)
     return true;
 }
 
-string Global_Log = "";
-int highest_items = 0;
-
+///Randomize the items
 bool Randomize(string Log,
                map<string, Item> &Items,
                string Seed,
@@ -2021,7 +1370,6 @@ bool Randomize(string Log,
                     }
                 }
 
-                // New_Log += Cur_Item + " => " + New_Item + "\n";
                 if (Items_Needed.size() > 0)
                 {
                     vector<string> IN =
@@ -2122,8 +1470,6 @@ bool Randomize(string Log,
     // can get all items, or no logic
     if (Has_All || Items_Needed.size() == 0)
     {
-        // Global_Log = Log;
-
         // keep going if haven't placed all items, and using no logic
         if (!Placed_All && Items_Needed.size() == 0)
         {
@@ -2153,6 +1499,7 @@ bool Randomize(string Log,
     }
 }
 
+///Sets up the non randomized items
 void Setup_NonRandom_Items(map<string, Item> &Items, string *Log)
 {
     vector<string> items;
@@ -2186,6 +1533,7 @@ void Setup_NonRandom_Items(map<string, Item> &Items, string *Log)
     return;
 }
 
+///Sets up how useful an item is according to how many other item checks it could open up
 void Setup_Item_Values(map<string, vector<vector<string>>> Items_Needed)
 {
     vector<string> items;
@@ -2218,8 +1566,8 @@ void Setup_Item_Values(map<string, vector<vector<string>>> Items_Needed)
     }
 }
 
-// void Randomize(map<string, Item> &Items, string &Seed, string Logic_File) {
-void Randomize(map<string, Item> &Items,
+///Sets things up before randomizing items
+void Randomize_Setup(map<string, Item> &Items,
                map<string, map<string, string>> *Custom_Settings)
 {
     map<string, vector<vector<string>>> Items_Needed;
@@ -2260,6 +1608,7 @@ void Randomize(map<string, Item> &Items,
     return;
 }
 
+///Change FD tunic color
 void Change_FD(string Tunic_Color)
 {
     string Original_FD =
@@ -2357,6 +1706,7 @@ void Change_FD(string Tunic_Color)
     Write_To_Rom(hex_to_decimal(FD_Location), Data);
 }
 
+///Change Zora Tunic Color
 void Change_Zora(string Tunic_Color)
 {
     // tunic and back of head - 1, 2, 3
@@ -2683,6 +2033,7 @@ void Change_Zora(string Tunic_Color)
     }
 }
 
+///Change Goron Tunic Color
 void Change_Goron(string Tunic_Color)
 {
     map<string, double> HSL;
@@ -2798,6 +2149,7 @@ void Change_Goron(string Tunic_Color)
     }
 }
 
+///Change Deku Tunic Color
 void Change_Deku(string Tunic_Color)
 {
     vector<string> Deku_Locations = {"011A9092",
@@ -2894,6 +2246,7 @@ void Change_Deku(string Tunic_Color)
     }
 }
 
+///Change Link's Tunic Color
 void Change_Link_Color(string color)
 {
     vector<string> Link_Locations = {"0116639C",
@@ -2915,6 +2268,7 @@ void Change_Link_Color(string color)
     }
 }
 
+///Change the item subscreen color
 void Change_Item_Screen(string color)
 {
     string RGB;
@@ -2930,6 +2284,7 @@ void Change_Item_Screen(string color)
     Write_To_Rom(13226482, B);
 }
 
+///Change the map subscreen color
 void Change_Map_Screen(string color)
 {
     string RGB;
@@ -2945,6 +2300,7 @@ void Change_Map_Screen(string color)
     Write_To_Rom(13226766, B);
 }
 
+///Change the status subscreen color
 void Change_Status_Screen(string color)
 {
     string RGB;
@@ -2960,6 +2316,7 @@ void Change_Status_Screen(string color)
     Write_To_Rom(13227494, B);
 }
 
+///Change the mask subscreen color
 void Change_Mask_Screen(string color)
 {
     string RGB;
@@ -2975,6 +2332,7 @@ void Change_Mask_Screen(string color)
     Write_To_Rom(13227806, B);
 }
 
+///Change the nameplate, L, and R in the pause menu
 void Change_Nameplate(string color)
 {
     string RGB;
@@ -2992,6 +2350,7 @@ void Change_Nameplate(string color)
     Write_To_Rom(13230582, B);  // Highlighted R
 }
 
+///Change the colors
 void Change_Colors(map<string, string> colors)
 {
     Change_Link_Color(colors["Link"]);
@@ -3007,25 +2366,7 @@ void Change_Colors(map<string, string> colors)
     Change_Nameplate(colors["Name"]);
 }
 
-void Change_Tunics(string Tunic_Color)
-{
-
-    // change kokiri tunic color
-    Change_Link_Color(Tunic_Color);
-
-    // change deku link color
-    Change_Deku(Tunic_Color);
-
-    // change goron link color
-    Change_Goron(Tunic_Color);
-
-    // change zora link color
-    Change_Zora(Tunic_Color);
-
-    // change FD link color
-    Change_FD(Tunic_Color);
-}
-
+///Make the bottles able to catch non-bottle items
 void Make_Bottles_Work()
 {
     string Jump_Function = "0C061912";
@@ -3059,6 +2400,7 @@ void Make_Bottles_Work()
     }
 }
 
+///Make tingle maps able to be gotten with a get item id value
 void Fix_Tingle_Maps()
 {
     int Pass = 12227676;
@@ -3157,6 +2499,7 @@ void Fix_Tingle_Maps()
     }
 }
 
+///Change the song text ids so that they only need one byte
 void Fix_Song_Text()
 {
     // Sonata of Awakening first byte of the text id
@@ -3184,6 +2527,7 @@ void Fix_Song_Text()
     Write_To_Rom(33041348, "00");
 }
 
+///Makes a get song text
 string Get_Song_Text(string song)
 {
     string text = "";
@@ -3199,6 +2543,7 @@ string Get_Song_Text(string song)
     return text;
 }
 
+///Writes the new songs text to free places in the text area
 void Songs_Text_Offset()
 {
     vector<string> Songs_Text = {
@@ -3249,6 +2594,7 @@ void Songs_Text_Offset()
     Write_To_Rom(12965142, "3B8A"); // 95    (94 is same offset as before)
 }
 
+///Make zfg check if intro is in inventory, and play the cutscene if it is
 void Fix_Goron_Lullaby()
 {
     vector<string> Code = {
@@ -3269,6 +2615,7 @@ void Fix_Goron_Lullaby()
     }
 }
 
+///Make it where link holds up the correct item when showing an item to someone
 void Fix_Showing_Items()
 {
     map<string, string> Index;
@@ -3355,6 +2702,7 @@ void Fix_Showing_Items()
     }
 }
 
+///Check if all the songs are in the same pool
 bool All_Songs_Same_Pool()
 {
     vector<string> Songs = {"Song of Healing",
@@ -3385,19 +2733,7 @@ bool All_Songs_Same_Pool()
     return true;
 }
 
-string Char_To_String(char chr[], int size)
-{
-    string str = "";
-    int index = 0;
-
-    for (index = 0; index < size; index++)
-    {
-        str += chr[index];
-    }
-
-    return str;
-}
-
+///Writes a cutscene from a file to the rom
 void Write_Cutscene_Rom(int address, string filename)
 {
     constexpr int limit = 2;
@@ -3423,6 +2759,7 @@ void Write_Cutscene_Rom(int address, string filename)
     Write_To_Rom(address, string_to_hex(String_Data));
 }
 
+///Makes the giant cutscene (the cs atre oath) instant
 void Write_Short_Giant()
 {
     vector<string> instructions = {"27BDFFD8",
@@ -3478,6 +2815,7 @@ void Write_Short_Giant()
     Write_To_Rom(15923780, data);
 }
 
+///Gets data from the rom
 string Open_From_Rom(int address, int size)
 {
     // int address = string_to_dec(start);
@@ -3500,6 +2838,7 @@ string Open_From_Rom(int address, int size)
     return string_to_hex(Char_To_String(data, size));
 }
 
+///Romeves an actor from a room
 void Remove_Actor(string room_offset, int actor_index)
 {
     string header = "";
@@ -3551,6 +2890,7 @@ void Remove_Actor(string room_offset, int actor_index)
     }
 }
 
+///Makes the frames shorter for the Igos cutscene
 void Shorten_Igos_CS()
 {
     Write_To_Rom(14857239, "0A"); // Frames of first camera angle
@@ -3570,6 +2910,7 @@ void Shorten_Igos_CS()
     Write_To_Rom(14860252, "10000006"); // remove Igos mouth from moving in third angle
 }
 
+///Shortens and remove cutscenes
 void Remove_Cutscenes(bool Songs_Same_Pool)
 {
     string Sonata = Items["Sonata of Awakening"].Name;
@@ -3585,55 +2926,30 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     string Gibdo = Items["Gibdo Mask"].Name;
     string Elegy = Items["Elegy of Emptiness"].Name;
 
-    // Write_To_Rom(47995767, "00");           //make the east clock town intro cs 0
-    // frames
-
     // remove the east clock town into cs from the entrances
     Write_To_Rom(47996414, "FF");
     Write_To_Rom(47996422, "FF");
     Write_To_Rom(47996430, "FF");
 
-    // Write_To_Rom(48354523, "00");           //make the north clock town intro cs 0
-    // frames
-
     // remove the north clock town into cs from the entrances
     Write_To_Rom(48354914, "FF");
     Write_To_Rom(48354922, "FF");
-
-    // Write_To_Rom(48223863, "00");           //make the west clock town intro cs 0
-    // frames
 
     // remove the west clock town into cs from the entrances
     Write_To_Rom(48224334, "FF");
     Write_To_Rom(48224342, "FF");
 
-    // Write_To_Rom(39388527, "00");           //make the west termina field intro cs 0
-    // frames Write_To_Rom(39389279, "00");           //make the north termina field intro
-    // cs 0 frames Write_To_Rom(39389807, "00");           //make the east termina field
-    // intro cs 0 frames Write_To_Rom(39390335, "00");           //make the south termina
-    // field intro cs 0 frames
-
     // remove the termina field intro cs from the entrances
-    // Write_To_Rom(39390846, "FF"); this one's flag is FE, might be a credits cs or
-    // something Write_To_Rom(39390878, "FF"); this one's flag is FE, might be a credits cs
-    // or something
     Write_To_Rom(39390886, "FF");
     Write_To_Rom(39390894, "FF");
     Write_To_Rom(39390902, "FF");
     Write_To_Rom(39390910, "FF");
 
-    // Write_To_Rom(39606036, "E000");         //change the termina field skull kid
-    // cutscene actor to link spawn point actor to make it do nothing
-
     // remove actor that spawns the skull kid cs
     Remove_Actor("025C5000", 103);
 
-    // Write_To_Rom(42098403, "00");           //make the southern swamp intro cs 0 frames
-
     // remove southern swamp intro cs from the entrance
     Write_To_Rom(42098938, "FF");
-
-    // Write_To_Rom(39011735, "00");           //make the deku palace intro cs 0 frames
 
     // remove the daku palace intro cs from the entrance
     Write_To_Rom(39012318, "FF");
@@ -3662,16 +2978,10 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_To_Rom(47001604, "FFFF"); // make 2nd cs not jump to another
     Write_To_Rom(46991505, Items[Deku_Mask].Text_ID); // fix deku mask text
 
-    // Write_To_Rom(42439947, "00");                       //make the woodfall intro cs 0
-    // frames
-
     // remove woodfall intro cs from the entrance
     Write_To_Rom(42440514, "FF");
 
     Write_Cutscene_Rom(42439444, "woodfall_rising"); // shorten the woodfall rising cs
-
-    // Write_To_Rom(35501459, "00");                       //make the woodfall temple
-    // intro cs 0 frames
 
     // remove the woodfall temple intro cs
     Write_To_Rom(35504954, "FF");
@@ -3686,12 +2996,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(39383720,
                        "tear_falling"); // shorten the tear falling for final hours
 
-    // roof
-    // Write_To_Rom(35258981, "39");   //change the rooftop first audio to the same as the
-    // 2nd one Write_To_Rom(35258983, "00");   //the frame the music starts
-    // Write_To_Rom(35254918, "000A"); //make the cs last 0 frames
-
-    // Remove_Actor("21B8000", 1);
     // prevent the skull kid cs from playing on the clock tower roof
     Write_To_Rom(15758392, "00000000"); // removes the cs
     Write_To_Rom(35246095, "38");       // fixes the background music
@@ -3699,9 +3003,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 
     // moon
     Write_Short_Giant(); // remove the giants moon cs
-
-    // Write_To_Rom(41857440, "E00B"); //make cucco shack not crash by replacing the 1AB
-    // actor with dodongo actor
 
     // remove the cucco shack 1AB actor to prevent a crash that occurs because of the
     // giant's cs skip
@@ -3723,8 +3024,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
                                             // the songs that are actually played
     }
 
-    // Write_Cutscene_Rom(35496572, "woodfall_tatl_end");  //shorten tatl cs after beating
-    // woodfall to 0 frames, and remove the motion blur
     Write_To_Rom(35492834, "0000"); // remove the deku princess cs after beating woodfall
     Write_Cutscene_Rom(
       42455024,
@@ -3755,32 +3054,18 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
                        "great_fairy_mask");     // shorten Great Fairy Mask on same cycle
     Write_To_Rom(38014181, Items[GFM].Text_ID); // fix the text id
     Write_Cutscene_Rom(37946092, "great_fairy_magic_1"); // shorten Magic CS
-    // Write_Cutscene_Rom(37971580, "great_fairy_magic_1");    //shorten Magic CS on same
-    // cycle
     Write_Cutscene_Rom(38007244, "great_fairy_magic_2"); // shorten phase 2 of the magic
                                                          // cs
-    // Write_To_Rom(38092857, "04");
     Remove_Actor("2454000", 4); // remove the tatl text trigger in the fountain
-
-    // Write_To_Rom(44659663, "00");                   //make mountain village intro cs 0
-    // frames
 
     // remove the mountain village intro cs from the entrance
     Write_To_Rom(44669566, "FF");
 
-    // Write_To_Rom(40090815, "00");                   //make goron shrine intro cs 0
-    // frames
-
     // remove the goron shrine into cs from the entrance
     Write_To_Rom(40091518, "FF");
 
-    // Write_To_Rom(46177479, "00");                   //make snowhead intro cs 0 frames
-
     // remove the snowhead intro cs from the entrance
     Write_To_Rom(46178166, "FF");
-
-    // Write_To_Rom(36492391, "00");                   //make snowhead temple intro cs 0
-    // frames
 
     // remove the snowhead temple intro cs from the entrance
     Write_To_Rom(36496622, "FF");
@@ -3788,12 +3073,8 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(46175216,
                        "goron_sleep"); // make the giant goron in snowhead sleep faster
 
-    // Write_To_Rom(40638227, "00");                   //make great bay intro cs 0 frames
-
     // remove the great bay coast into cs from the entrance
     Write_To_Rom(40639162, "FF");
-
-    // Write_To_Rom(40231683, "00");                   //make zora hall intro cs 0 frames
 
     // remove the zora hall intro cs from the entrances
     Write_To_Rom(40232106, "FF");
@@ -3801,18 +3082,13 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 
     Write_Cutscene_Rom(40879224, "turtle"); // shorten the turtle rising cs
     Write_To_Rom(40892756, "8C10");         // skip pirate cs altogether when entering gbt
-    // Write_To_Rom(42834238, "0000");                 //make great bay temple intro cs 0
-    // frames
-
+    
     // remove the great bay temple intro cs from the entrances
     Write_To_Rom(42838550, "FF");
     Write_To_Rom(42838542, "FF");
 
     Write_To_Rom(40887446, "0001"); // make riding the turtle into gbt 1 frame
     Write_To_Rom(40887983, "01");   // shorten the 2nd time entering gbt with turtle
-
-    // Write_To_Rom(42833486, "0000");                 //shorten the 2nd gbt intro cs
-    // Write_To_Rom(43429603, "00");                   //make waterfall rapids cs 0 frames
 
     // Goron Mask
     Write_Cutscene_Rom(44479080, "goron_mask");   // shorten the goron mask cs
@@ -3860,9 +3136,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(37958316, "gfs");        // shorten the great fairy sword cs
     Write_To_Rom(37960501, Items[GFS].Text_ID); // fix the shorter gfs text
 
-    // Write_To_Rom(35631340, "0005");                             //skip the tatl text
-    // inside the main woodfall room
-
     // remove the actor that plays the tatl text cs inside the 2nd room in woodfall temple
     Remove_Actor("21FB000", 8);
 
@@ -3873,33 +3146,19 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(
       36492872,
       "snowhead_temple_ye_holds"); // shorten the boss warp cs in snowhead temple
-    // Write_To_Rom(41157064, "0022");                             //remove intro cs for
-    // pirate's fortress entrance
-
+ 
     // remove the actor that plays the intro cs in pirate's fortress exterior
     Remove_Actor("02740000", 23);
-
-    // Write_To_Rom(34146119, "00");                               //remove intro cs for
-    // pirate's fortress outside
 
     // remove the intro cs for pirate's fortress from the entrance
     Write_To_Rom(34146526, "FF");
 
-    // Write_To_Rom(37269916, "0022");                             //remove cs of bee
-    // flying to it's nest in PF
-
     // remove the actor that plays the bee entering the beehive cs
     Remove_Actor("238B000", 20);
-
-    // Write_To_Rom(47791535, "00");                               //make the gormon track
-    // intro cs 0 frames
 
     // remove the gorman racetrack intro cs from the entrances
     Write_To_Rom(47792614, "FF");
     Write_To_Rom(47792622, "FF");
-
-    // Write_To_Rom(40443715, "00");                               //make the ranch intro
-    // cs 0 frames
 
     // remove the ranch intro cs from the entrance
     Write_To_Rom(40446482, "FF");
@@ -3912,13 +3171,8 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(
       47789736, "kart_ride"); // remove the text for kart ride to speed it up a little
 
-    // Write_To_Rom(41889291, "00");                       //make Ikana graveyard intro cs
-    // 0 frames
-
     // remove the ikana graveyard intro cs from the entrance
     Write_To_Rom(41889786, "FF");
-
-    // address of start for the iron knuckle dying thing where flats shoes up 1F81190
 
     // sharp sos cs
     Write_Cutscene_Rom(
@@ -3933,8 +3187,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_To_Rom(45391773,
                  Items[Gibdo].Text_ID); // update the shortened cs's gibdo mask text
 
-    // Write_To_Rom(33796819, "00");   //make ikana canyon intro cs 0 frames
-
     // remove the ikana canyon intro cs from the entrance
     Write_To_Rom(33797642, "FF");
 
@@ -3942,8 +3194,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_To_Rom(34301875, "00"); // make the first 3 cutscenes 0 frames long (it plays
                                   // the same one three times)
     Write_Cutscene_Rom(34300444, "clm"); // shorten the circus leader's mask cs
-
-    // Write_To_Rom(36495599, "00");           //make snowhead main room cs 0 frames
 
     // remove the actor that starts the cs in the main room in snowhead temple
     Remove_Actor("230C000", 70);
@@ -3979,13 +3229,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(44548416, "sakon_hideout"); // shorten the starting cs
     Write_To_Rom(44552390, "003C");                // shorten the doorway cs
     Write_To_Rom(44553062, "003C");                // shorten the switch cs
-    // Write_To_Rom(33777332, "07");                   //shorten the number of points for
-    // kafei leaving Write_To_Rom(33777332, "04");                   //shorten the number
-    // of points for kafei leaving Write_To_Rom(33777164, "0909FF601273 09B8FF60113B
-    // 09B1FF440FE2 0945FF1F0F01 087FFEF20E54 07D7FEE80DD0 0705FEE50D3E"); //update the
-    // points Write_To_Rom(33777164, "0909FF601273 09B1FF440FE2 087FFEF20E54
-    // 0705FEE50D3E"); //update the points Write_To_Rom(33777164,
-    // "0909FF60127309B1FF440FE2087FFEF20E540705FEE50D3E"); //update the points
 
     Write_Cutscene_Rom(
       42835544, "great_bay_temple_ye_holds"); // shorten ye who holds remains cs in gbt
@@ -3996,8 +3239,16 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_To_Rom(34403946, "FF");               // remove stt intro cs
     Write_To_Rom(34881666, "FF");               // remove istt intro cs
     Write_To_Rom(45831950, "FF");               // remove ist ontro cs
+
+    // remove the actor that plays the hms cs inside the clock tower
+    // make hms think you already watched the cs
+    Remove_Actor("2CD6000", 11);
+    Write_To_Rom(15953540, "24020001");
+    Write_To_Rom(15955712, "24020001");
+
 }
 
+///Writes data from a file to the rom
 void Write_File_To_Rom(string filename, string rom_offset)
 {
     constexpr int limit = 2;
@@ -4022,6 +3273,7 @@ void Write_File_To_Rom(string filename, string rom_offset)
     Write_To_Rom(address, string_to_hex(String_Data));
 }
 
+///Activate the GC HUD
 void Gamecube_Hud()
 {
     // A Button
@@ -4042,23 +3294,7 @@ void Gamecube_Hud()
     Write_File_To_Rom(".\\files\\l.yaz0", "A7B7CC");
 }
 
-string Vector_To_String(vector<string> data, string separator)
-{
-    string string_data = "";
-
-    for (int d = 0; d < data.size(); d++)
-    {
-        if (d > 0)
-        {
-            string_data += separator;
-        }
-
-        string_data += data[d];
-    }
-
-    return string_data;
-}
-
+///Writes the spoiler log to log.txt
 void Write_Log(string seed)
 {
     vector<string> items = Get_Keys(Items);
@@ -4089,6 +3325,7 @@ void Write_Log(string seed)
     // outFile << Log;
 }
 
+///Change all the references of spring water to bingo water
 void Bingo_Water()
 {
     // bingo water
@@ -4142,6 +3379,7 @@ void Bingo_Water()
     Write_File_To_Rom(".\\files\\HBW.yaz0", "A2A8A4");
 }
 
+///Changes the blast mask cooldown
 void Change_BlastMask(map<string, string> custom_settings)
 {
     int frames = string_to_dec(custom_settings["BlastMask_Cooldown"]);
@@ -4152,6 +3390,7 @@ void Change_BlastMask(map<string, string> custom_settings)
     Write_To_Rom(13280870, frames_hex);
 }
 
+///Fixes swords from getting on transformations B buttons
 void Fix_Swords()
 {
     int address = 12228012;
@@ -4267,7 +3506,7 @@ int main()
 
     // name    item id     get item id   text id     flag   object   get item model  pool
     // = ""   get item locations  item id locations   text id locations
-    Items["Adult Wallet"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Adult Wallet"] = Item(
                                  "Adult Wallet",
                                  "5A",
                                  "08",
@@ -4280,7 +3519,7 @@ int main()
                                  {},
                                  "1_00010000",
                                  {"C5CE6E"});
-    Items["All-Night Mask"] = Item({Time(3, true, 4, 3, false, 12, "KillSakon")},
+    Items["All-Night Mask"] = Item(
                                    "All-Night Mask",
                                    "38",
                                    "7E",
@@ -4291,7 +3530,7 @@ int main()
                                    "",
                                    {"CD6B52"},
                                    {"C5CE3D"});
-    Items["Big Bomb Bag"] = Item({Time(3, true, 4, 3, false, 12, "KillSakon")},
+    Items["Big Bomb Bag"] = Item(
                                  "Big Bomb Bag",
                                  "57",
                                  "1C",
@@ -4307,7 +3546,7 @@ int main()
                                  {"C5CE6F"},
                                  "1E",
                                  {"C5CE5A"}); // C5CE6F bomb slot
-    Items["Biggest Bomb Bag"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Biggest Bomb Bag"] = Item(
                                      "Biggest Bomb Bag",
                                      "58",
                                      "1D",
@@ -4323,7 +3562,7 @@ int main()
                                      {"C5CE6F"},
                                      "28",
                                      {"C5CE5A"}); // C5CE6F bomb slot
-    Items["Blast Mask"] = Item({Time(1, false, 0, 3, true, 12, "", "KillSakon")},
+    Items["Blast Mask"] = Item(
                                "Blast Mask",
                                "47",
                                "8D",
@@ -4334,7 +3573,7 @@ int main()
                                "",
                                {"CD6BAC"},
                                {"C5CE3E"});
-    Items["Bomb Bag"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bomb Bag"] = Item(
                              "Bomb Bag",
                              "56",
                              "1B",
@@ -4350,20 +3589,20 @@ int main()
                              {"C5CE6F"},
                              "14",
                              {"C5CE5A"});
-    Items["Bomber's Notebook"] = Item({Time(1, false, 0, 3, true, 12)},
-                                      "Bomber's Notebook",
-                                      "6D",
-                                      "50",
-                                      "50",
-                                      "80",
-                                      "0253",
-                                      "0C",
-                                      "",
-                                      {"CD6A3E"},
-                                      {},
-                                      "F_00000100",
-                                      {"C5CE71"});
-    Items["Bow"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bomber's Notebook"] = Item(
+				      "Bomber's Notebook",
+				      "6D",
+				      "50",
+				      "50",
+				      "80",
+				      "0253",
+				      "0C",
+				      "",
+				      {"CD6A3E"},
+				      {},
+				      "F_00000100",
+				      {"C5CE71"});
+    Items["Bow"] = Item(
                         "Bow",
                         "01",
                         "22",
@@ -4380,7 +3619,7 @@ int main()
                         "1E",
                         {"C5CE55"}); // C5CE6F = quiver slot
     Items["Bremen Mask"] =
-      Item({Time(1, true, 0, 1, true, 12), Time(2, true, 0, 2, true, 12)},
+      Item(
            "Bremen Mask",
            "46",
            "8C",
@@ -4391,7 +3630,7 @@ int main()
            "",
            {"CD6BA6"},
            {"C5CE43"});
-    Items["Bunny Hood"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bunny Hood"] = Item(
                                "Bunny Hood",
                                "39",
                                "7F",
@@ -4402,7 +3641,7 @@ int main()
                                "",
                                {"CD6B58"},
                                {"C5CE44"});
-    Items["Captain's Hat"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Captain's Hat"] = Item(
                                   "Captain's Hat",
                                   "44",
                                   "7C",
@@ -4414,7 +3653,7 @@ int main()
                                   {"CD6B46"},
                                   {"C5CE51"});
     Items["Circus Leader's Mask"] =
-      Item({Time(1, true, 0, 2, true, 12), Time(2, true, 0, 2, true, 12)},
+      Item(
            "Circus Leader's Mask",
            "3D",
            "83",
@@ -4425,7 +3664,7 @@ int main()
            "",
            {"CD6B70"},
            {"C5CE49"});
-    Items["Couple's Mask"] = Item({Time(3, true, 11, 3, true, 12, "NoKillSakon")},
+    Items["Couple's Mask"] = Item(
                                   "Couple's Mask",
                                   "3F",
                                   "85",
@@ -4437,7 +3676,7 @@ int main()
                                   {"CD6B7C"},
                                   {"C5CE4B", "F125C3"},
                                   {"2C7CBD5"});
-    Items["Deku Nuts"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Deku Nuts"] = Item(
                               "Deku Nuts",
                               "09",
                               "28",
@@ -4450,7 +3689,7 @@ int main()
                               {"C5CE2D"},
                               "01",
                               {"C5CE5D"});
-    Items["Deku Nuts (10)"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Deku Nuts (10)"] = Item(
                                    "Deku Nuts (10)",
                                    "8E",
                                    "2A",
@@ -4464,7 +3703,7 @@ int main()
                                    {"C5CE2D"},
                                    "0A",
                                    {"C5CE5D"});
-    Items["Deku Stick"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Deku Stick"] = Item(
                                "Deku Stick",
                                "08",
                                "19",
@@ -4478,7 +3717,7 @@ int main()
                                {"C5CE2C"},
                                "01",
                                {"C5CE5C"});
-    Items["Don Gero's Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Don Gero's Mask"] = Item(
                                     "Don Gero's Mask",
                                     "42",
                                     "88",
@@ -4489,7 +3728,7 @@ int main()
                                     "",
                                     {"CD6B8E"},
                                     {"C5CE45"});
-    Items["Express Letter to Mama"] = Item({Time(3, false, 0, 3, true, 4, "NoKillSakon")},
+    Items["Express Letter to Mama"] = Item(
                                            "Express Letter to Mama",
                                            "2E",
                                            "A1",
@@ -4500,7 +3739,7 @@ int main()
                                            "",
                                            {"CD6C24"},
                                            {"C5CE2F"});
-    Items["Fierce Deity Mask"] = Item({Time(3, true, 12, 3, true, 12)},
+    Items["Fierce Deity Mask"] = Item(
                                       "Fierce Deity Mask",
                                       "35",
                                       "7B",
@@ -4511,7 +3750,7 @@ int main()
                                       "",
                                       {"CD6B40"},
                                       {"C5CE53"});
-    Items["Fire Arrow"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Fire Arrow"] = Item(
                                "Fire Arrow",
                                "02",
                                "25",
@@ -4522,7 +3761,7 @@ int main()
                                "",
                                {"CD693C"},
                                {"C5CE26"});
-    Items["Garo Mask"] = Item({Time(1, false, 0, 1, false, 12)},
+    Items["Garo Mask"] = Item(
                               "Garo Mask",
                               "3B",
                               "81",
@@ -4533,7 +3772,7 @@ int main()
                               "",
                               {"CD6B64"},
                               {"C5CE50"});
-    Items["Giant Wallet"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Giant Wallet"] = Item(
                                  "Giant Wallet",
                                  "5B",
                                  "09",
@@ -4546,7 +3785,7 @@ int main()
                                  {},
                                  "2_00100000",
                                  {"C5CE6E"});
-    Items["Giant's Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Giant's Mask"] = Item(
                                  "Giant's Mask",
                                  "49",
                                  "7D",
@@ -4557,7 +3796,7 @@ int main()
                                  "",
                                  {"CD6B4C"},
                                  {"C5CE52"});
-    Items["Gibdo Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Gibdo Mask"] = Item(
                                "Gibdo Mask",
                                "41",
                                "87",
@@ -4569,7 +3808,7 @@ int main()
                                {"CD6B88"},
                                {"C5CE4F", "F12C7F"},
                                {"2B4A569"});
-    Items["Gilded Sword"] = Item({Time(3, false, 0, 3, false, 12)},
+    Items["Gilded Sword"] = Item(
                                  "Gilded Sword",
                                  "4F",
                                  "39",
@@ -4582,7 +3821,7 @@ int main()
                                  {"C5CE00"},
                                  "3_00000011",
                                  {"C5CE21"}); // C5CE21 Inv sword/shield
-    Items["Great Fairy's Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Great Fairy's Mask"] = Item(
                                        "Great Fairy's Mask",
                                        "40",
                                        "86",
@@ -4594,7 +3833,7 @@ int main()
                                        {"CD6B82"},
                                        {"C5CE40", "EA3F53", "EA40FB"},
                                        {"243F195", "24415CD"});
-    Items["Great Fairy's Sword"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Great Fairy's Sword"] = Item(
                                         "Great Fairy's Sword",
                                         "10",
                                         "3B",
@@ -4606,7 +3845,7 @@ int main()
                                         {"CD69C0", "CD6C00"},
                                         {"C5CE34", "EA3F8B"},
                                         {"243413D"});
-    Items["Hero's Shield"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Hero's Shield"] = Item(
                                   "Hero's Shield",
                                   "51",
                                   "32",
@@ -4619,7 +3858,7 @@ int main()
                                   {},
                                   "1_00010000",
                                   {"C5CE21"});
-    Items["Hookshot"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Hookshot"] = Item(
                              "Hookshot",
                              "0F",
                              "41",
@@ -4630,7 +3869,7 @@ int main()
                              "",
                              {"CD69E4"},
                              {"C5CE33"});
-    Items["Ice Arrow"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Ice Arrow"] = Item(
                               "Ice Arrow",
                               "03",
                               "26",
@@ -4642,7 +3881,7 @@ int main()
                               {"CD6942"},
                               {"C5CE27"});
     Items["Kafei's Mask"] =
-      Item({Time(1, false, 2, 1, false, 12), Time(2, false, 2, 2, false, 12)},
+      Item(
            "Kafei's Mask",
            "37",
            "8F",
@@ -4653,9 +3892,7 @@ int main()
            "",
            {"CD6BB8"},
            {"C5CE4A"});
-    Items["Kamaro's Mask"] = Item({Time(1, true, 6, 1, true, 12),
-                                   Time(2, true, 6, 2, true, 12),
-                                   Time(3, true, 6, 3, true, 12)},
+    Items["Kamaro's Mask"] = Item(
                                   "Kamaro's Mask",
                                   "43",
                                   "89",
@@ -4666,7 +3903,7 @@ int main()
                                   "",
                                   {"CD6B94"},
                                   {"C5CE4E"});
-    Items["Keaton Mask"] = Item({Time(3, false, 0, 3, true, 12)},
+    Items["Keaton Mask"] = Item(
                                 "Keaton Mask",
                                 "3A",
                                 "80",
@@ -4677,9 +3914,7 @@ int main()
                                 "",
                                 {"CD6B5E"},
                                 {"C5CE42"});
-    Items["Kokiri Sword"] = Item({Time(1, true, 4, 1, true, 12),
-                                  Time(2, true, 4, 2, true, 12),
-                                  Time(3, true, 4, 3, true, 12)},
+    Items["Kokiri Sword"] = Item(
                                  "Kokiri Sword",
                                  "4D",
                                  "37",
@@ -4694,7 +3929,7 @@ int main()
                                  "1_00000001",
                                  {"C5CE21"},
                                  0); // C5CE21 Inv sword/shield
-    Items["Land Title Deed"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Land Title Deed"] = Item(
                                     "Land Title Deed",
                                     "29",
                                     "97",
@@ -4705,7 +3940,7 @@ int main()
                                     "",
                                     {"CD6BE8"},
                                     {"C5CE29"});
-    Items["Large Quiver"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Large Quiver"] = Item(
                                  "Large Quiver",
                                  "54",
                                  "23",
@@ -4721,7 +3956,7 @@ int main()
                                  {"C5CE6F"},
                                  "28",
                                  {"C5CE55"}); // C5CE6F = quiver slot
-    Items["Largest Quiver"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Largest Quiver"] = Item(
                                    "Largest Quiver",
                                    "55",
                                    "24",
@@ -4737,7 +3972,7 @@ int main()
                                    {"C5CE6F"},
                                    "32",
                                    {"C5CE55"}); // C5CE6F = quiver slot
-    Items["Lens of Truth"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Lens of Truth"] = Item(
                                   "Lens of Truth",
                                   "0E",
                                   "42",
@@ -4748,7 +3983,7 @@ int main()
                                   "",
                                   {"CD69EA"},
                                   {"C5CE32"});
-    Items["Letter to Kafei"] = Item({Time(1, true, 6, 1, true, 12)},
+    Items["Letter to Kafei"] = Item(
                                     "Letter to Kafei",
                                     "2F",
                                     "AA",
@@ -4759,7 +3994,7 @@ int main()
                                     "",
                                     {"CD6C5A"},
                                     {"C5CE35"});
-    Items["Light Arrow"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Light Arrow"] = Item(
                                 "Light Arrow",
                                 "04",
                                 "27",
@@ -4770,7 +4005,7 @@ int main()
                                 "",
                                 {"CD6948"},
                                 {"C5CE28"});
-    Items["Magic Beans"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Magic Beans"] = Item(
                                 "Magic Beans",
                                 "0A",
                                 "35",
@@ -4783,7 +4018,7 @@ int main()
                                 {"C5CE2E"},
                                 "01",
                                 {"C5CE5E"}); // get item id of what is given instead is 4F
-    Items["Mask of Scents"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Mask of Scents"] = Item(
                                    "Mask of Scents",
                                    "48",
                                    "8E",
@@ -4794,7 +4029,7 @@ int main()
                                    "",
                                    {"CD6BB2"},
                                    {"C5CE46"});
-    Items["Mask of Truth"] = Item({Time(1, false, 0, 1, true, 12)},
+    Items["Mask of Truth"] = Item(
                                   "Mask of Truth",
                                   "36",
                                   "8A",
@@ -4805,7 +4040,7 @@ int main()
                                   "",
                                   {"CD6B9A"},
                                   {"C5CE4C"});
-    Items["Mirror Shield"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Mirror Shield"] = Item(
                                   "Mirror Shield",
                                   "52",
                                   "33",
@@ -4818,7 +4053,7 @@ int main()
                                   {},
                                   "2_00100000",
                                   {"C5CE21"});
-    Items["Moon's Tear"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Moon's Tear"] = Item(
                                 "Moon's Tear",
                                 "28",
                                 "96",
@@ -4829,7 +4064,7 @@ int main()
                                 "",
                                 {"CD6BE2"},
                                 {"C5CE29"}); // CD7646 - another moon's tear for show item
-    Items["Mountain Title Deed"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Mountain Title Deed"] = Item(
                                         "Mountain Title Deed",
                                         "2B",
                                         "99",
@@ -4840,7 +4075,7 @@ int main()
                                         "",
                                         {"CD6BF4"},
                                         {"C5CE29"});
-    Items["Ocean Title Deed"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Ocean Title Deed"] = Item(
                                      "Ocean Title Deed",
                                      "2C",
                                      "9A",
@@ -4852,7 +4087,7 @@ int main()
                                      {"CD6BFA"},
                                      {"C5CE29"});
     Items["Pendant of Memories"] =
-      Item({Time(2, false, 10, 2, true, 4)},
+      Item(
            "Pendant of Memories",
            "30",
            "AB",
@@ -4863,7 +4098,7 @@ int main()
            "",
            {"CD6C60"},
            {"C5CE35"}); // other show items: CD764B, CD764C, and CD764D
-    Items["Pictograph Box"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Pictograph Box"] = Item(
                                    "Pictograph Box",
                                    "0D",
                                    "43",
@@ -4874,7 +4109,7 @@ int main()
                                    "",
                                    {"CD69F0"},
                                    {"C5CE31"});
-    Items["Postman's Hat"] = Item({Time(3, true, 0, 3, true, 12)},
+    Items["Postman's Hat"] = Item(
                                   "Postman's Hat",
                                   "3E",
                                   "84",
@@ -4885,7 +4120,7 @@ int main()
                                   "",
                                   {"CD6B76"},
                                   {"C5CE3C"});
-    Items["Powder Keg"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Powder Keg"] = Item(
                                "Powder Keg",
                                "0C",
                                "34",
@@ -4899,7 +4134,7 @@ int main()
                                "01",
                                {"C5CE60"});
     Items["Razor Sword"] =
-      Item({Time(2, false, 0, 2, false, 12), Time(3, false, 0, 3, false, 12)},
+      Item(
            "Razor Sword",
            "4E",
            "38",
@@ -4912,7 +4147,7 @@ int main()
            {"C5CE00"},
            "2_00000010",
            {"C5CE21"}); // C5CE21 Inv sword/shield
-    Items["Romani's Mask"] = Item({Time(2, false, 0, 2, true, 1, "SaveAliens")},
+    Items["Romani's Mask"] = Item(
                                   "Romani's Mask",
                                   "3C",
                                   "82",
@@ -4923,7 +4158,7 @@ int main()
                                   "",
                                   {"CD6B6A"},
                                   {"C5CE48"});
-    Items["Room Key"] = Item({Time(1, false, 6, 1, false, 8)},
+    Items["Room Key"] = Item(
                              "Room Key",
                              "2D",
                              "A0",
@@ -4934,7 +4169,7 @@ int main()
                              "",
                              {"CD6C1E"},
                              {"C5CE2F"});
-    Items["Stone Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Stone Mask"] = Item(
                                "Stone Mask",
                                "45",
                                "8B",
@@ -4945,7 +4180,7 @@ int main()
                                "",
                                {"CD6BA0"},
                                {"C5CE3F"});
-    Items["Swamp Title Deed"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Swamp Title Deed"] = Item(
                                      "Swamp Title Deed",
                                      "2A",
                                      "98",
@@ -4957,7 +4192,7 @@ int main()
                                      {"CD6BEE"},
                                      {"C5CE29"});
 
-    Items["Deku Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Deku Mask"] = Item(
                               "Deku Mask",
                               "32",
                               "78",
@@ -4969,7 +4204,7 @@ int main()
                               {"CD6B2E"},
                               {"C5CE41", "F11247"},
                               {"2CD0FF9"});
-    Items["Goron Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Goron Mask"] = Item(
                                "Goron Mask",
                                "33",
                                "79",
@@ -4981,7 +4216,7 @@ int main()
                                {"CD6B34"},
                                {"C5CE47", "F12A5F"},
                                {"2A6BE19"});
-    Items["Zora Mask"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Zora Mask"] = Item(
                               "Zora Mask",
                               "34",
                               "7A",
@@ -4994,7 +4229,7 @@ int main()
                               {"C5CE4D", "F12B73"},
                               {"26C128D"});
 
-    Items["Big Poe"] = Item({Time(3, false, 0, 3, true, 12)},
+    Items["Big Poe"] = Item(
                             "Big Poe",
                             "1E",
                             "66",
@@ -5006,7 +4241,7 @@ int main()
                             {"CD6AC2"},
                             {"C5CE36", "CD7C53"},
                             {"CD7C55"});
-    Items["Blue Potion"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Blue Potion"] = Item(
                                 "Blue Potion",
                                 "15",
                                 "5D",
@@ -5017,7 +4252,7 @@ int main()
                                 "",
                                 {"CD6A8C"},
                                 {"C5CE36", "CDE5BB"});
-    Items["Bugs"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bugs"] = Item(
                          "Bugs",
                          "1B",
                          "63",
@@ -5029,9 +4264,7 @@ int main()
                          {"CD6AB0"},
                          {"C5CE36", "CD7C17", "CD7C1D"},
                          {"CD7C19", "CD7C1F"});
-    Items["Chateau Romani"] = Item({Time(1, true, 4, 1, true, 12),
-                                    Time(2, true, 4, 2, true, 12),
-                                    Time(3, true, 4, 3, true, 12)},
+    Items["Chateau Romani"] = Item(
                                    "Chateau Romani",
                                    "25",
                                    "6F",
@@ -5042,7 +4275,7 @@ int main()
                                    "",
                                    {"CD6AF8", "CD6BC4"},
                                    {"C5CE36"});
-    Items["Deku Princess"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Deku Princess"] = Item(
                                   "Deku Princess",
                                   "17",
                                   "5F",
@@ -5054,7 +4287,7 @@ int main()
                                   {"CD6A98"},
                                   {"C5CE36", "CD7C3B"},
                                   {"CD7C3D"});
-    Items["Fairy"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Fairy"] = Item(
                           "Fairy",
                           "16",
                           "5E",
@@ -5066,7 +4299,7 @@ int main()
                           {"CD6A92"},
                           {"C5CE36", "CD7C0B", "CDE5CF"},
                           {"CD7C0D"});
-    Items["Fish"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Fish"] = Item(
                          "Fish",
                          "1A",
                          "62",
@@ -5078,7 +4311,7 @@ int main()
                          {"CD6AAA"},
                          {"C5CE36", "CD7C11"},
                          {"CD7C13"});
-    Items["Gold Dust"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Gold Dust"] = Item(
                               "Gold Dust",
                               "22",
                               "6A",
@@ -5089,7 +4322,7 @@ int main()
                               "",
                               {"CD6ADA", "CD6BD0"},
                               {"C5CE36"});
-    Items["Green Potion"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Green Potion"] = Item(
                                  "Green Potion",
                                  "14",
                                  "5C",
@@ -5100,7 +4333,7 @@ int main()
                                  "",
                                  {"CD6A86"},
                                  {"C5CE36", "CDE5A7"});
-    Items["Hot Spring Water"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Hot Spring Water"] = Item(
                                      "Hot Spring Water",
                                      "20",
                                      "68",
@@ -5112,7 +4345,7 @@ int main()
                                      {"CD6ACE"},
                                      {"C5CE36", "CD7C29", "CD7C2F"},
                                      {"CD7C2B", "CD7C31"});
-    Items["Milk"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Milk"] = Item(
                          "Milk",
                          "18",
                          "92",
@@ -5123,7 +4356,7 @@ int main()
                          "",
                          {"CD6A9E", "CD6BCA"},
                          {"C5CE36"});
-    Items["Mushroom"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Mushroom"] = Item(
                              "Mushroom",
                              "23",
                              "6B",
@@ -5135,7 +4368,7 @@ int main()
                              {"CD6AE0"},
                              {"C5CE36", "CD7C47"},
                              {"CD7C49"});
-    Items["Poe"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Poe"] = Item(
                         "Poe",
                         "1D",
                         "65",
@@ -5147,7 +4380,7 @@ int main()
                         {"CD6ABC"},
                         {"C5CE36", "CD7C4D"},
                         {"CD7C4F"});
-    Items["Red Potion"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Red Potion"] = Item(
                                "Red Potion",
                                "13",
                                "5B",
@@ -5158,7 +4391,7 @@ int main()
                                "",
                                {"CD6A80"},
                                {"C5CE36", "CDE593"});
-    Items["Seahorse"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Seahorse"] = Item(
                              "Seahorse",
                              "24",
                              "6E",
@@ -5169,7 +4402,7 @@ int main()
                              "",
                              {"CD6BDC"},
                              {"C5CE36"});
-    Items["Spring Water"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Spring Water"] = Item(
                                  "Spring Water",
                                  "1F",
                                  "67",
@@ -5181,7 +4414,7 @@ int main()
                                  {"CD6AC8"},
                                  {"C5CE36", "CD7C23"},
                                  {"CD7C25"});
-    Items["Zora Egg"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Zora Egg"] = Item(
                              "Zora Egg",
                              "21",
                              "69",
@@ -5193,11 +4426,7 @@ int main()
                              {"CD6AD4"},
                              {"C5CE36", "CD7C35"},
                              {"CD7C37"});
-
-    // Cant start out with a map? - maybe can, when getting a map, it does nothing for
-    // some reason change the item ids for the map from 31 to the get item id so that my
-    // custom function can determine which map to give
-    Items["Clocktown Map"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Clocktown Map"] = Item(
                                   "Clocktown Map",
                                   "B4",
                                   "B4",
@@ -5210,7 +4439,7 @@ int main()
                                   {},
                                   "M_10110100",
                                   {"C1CB13", "C1CB2B"});
-    Items["Woodfall Map"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Woodfall Map"] = Item(
                                  "Woodfall Map",
                                  "B5",
                                  "B5",
@@ -5223,7 +4452,7 @@ int main()
                                  {},
                                  "M_10110101",
                                  {"C1CB13", "C1CB2B"});
-    Items["Snowhead Map"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Snowhead Map"] = Item(
                                  "Snowhead Map",
                                  "B6",
                                  "B6",
@@ -5236,7 +4465,7 @@ int main()
                                  {},
                                  "M_10110110",
                                  {"C1CB13", "C1CB2B"});
-    Items["Romani Ranch Map"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Romani Ranch Map"] = Item(
                                      "Romani Ranch Map",
                                      "B7",
                                      "B7",
@@ -5249,7 +4478,7 @@ int main()
                                      {},
                                      "M_10110111",
                                      {"C1CB13", "C1CB2B"});
-    Items["Great Bay Map"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Great Bay Map"] = Item(
                                   "Great Bay Map",
                                   "B8",
                                   "B8",
@@ -5262,7 +4491,7 @@ int main()
                                   {},
                                   "M_10111000",
                                   {"C1CB13", "C1CB2B"});
-    Items["Stone Tower Map"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Stone Tower Map"] = Item(
                                     "Stone Tower Map",
                                     "B9",
                                     "B9",
@@ -5275,23 +4504,7 @@ int main()
                                     {},
                                     "M_10111001",
                                     {"C1CB13", "C1CB2B"});
-
-    // Items["Green Rupee"] = Item({Time(1,false,0,3,true,12)}, "Green Rupee", "84", "01",
-    // "C4", "00", "013F", "B0", "", {"CD6864"}, {"C5CDEF"}, {}, {}, {"C55FE1"}, "01",
-    // {"CD6864"}, "84"); Items["Blue Rupee"] = Item({Time(1,false,0,3,true,12)}, "Blue
-    // Rupee", "85", "02", "02", "01", "013F", "AF", "", {"CD686A"}, {"C5CDEF"}, {}, {},
-    // {"C55FE3"}, "05", {"CD686A"}, "85"); Items["Red Rupee"] =
-    // Item({Time(1,false,0,3,true,12)}, "Red Rupee", "87", "04", "04", "02", "013F", "AE",
-    // "", {"CD6876"}, {"C5CDEF"}, {}, {}, {"C55FE7"}, "14", {"CD6876"}, "87");
-    // Items["Purple Rupee"] = Item({Time(1,false,0,3,true,12)}, "Purple Rupee", "88",
-    // "05", "05", "14", "013F", "AC", "", {"CD687C"}, {"C5CDEF"}, {}, {}, {"C55FE9"},
-    // "32", {"CD687C"}, "88"); Items["Silver Rupee"] = Item({Time(1,false,0,3,true,12)},
-    // "Silver Rupee", "89", "06", "06", "14", "013F", "AB", "", {"CD6882"}, {"C5CDEF"},
-    // {}, {}, {"C55FEB"}, "64", {"CD6882"}, "89"); Items["Gold Rupee"] =
-    // Item({Time(1,false,0,3,true,12)}, "Gold Rupee", "8A", "07", "07", "13", "013F",
-    // "BD", "", {"CD6888"}, {"C5CDEF"}, {}, {}, {"C55FED"}, "C8", {"CD6888"}, "8A");
-
-    Items["Sonata of Awakening"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Sonata of Awakening"] = Item(
                                         "Sonata of Awakening",
                                         "61",
                                         "53",
@@ -5311,7 +4524,7 @@ int main()
                                         {"277A28D"},
                                         "F_01000000",
                                         {"C5CE73"});
-    Items["Goron Lullaby"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Goron Lullaby"] = Item(
                                   "Goron Lullaby",
                                   "62",
                                   "54",
@@ -5331,7 +4544,7 @@ int main()
                                   {"263B511"},
                                   "F_10000000",
                                   {"C5CE73"});
-    Items["New Wave Bossa Nova"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["New Wave Bossa Nova"] = Item(
                                         "New Wave Bossa Nova",
                                         "63",
                                         "71",
@@ -5351,7 +4564,7 @@ int main()
                                         {"2602229"},
                                         "F_00000001",
                                         {"C5CE72"});
-    Items["Elegy of Emptiness"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Elegy of Emptiness"] = Item(
                                        "Elegy of Emptiness",
                                        "64",
                                        "72",
@@ -5371,7 +4584,7 @@ int main()
                                        {"2B71621"},
                                        "F_00000010",
                                        {"C5CE72"});
-    Items["Oath to Order"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Oath to Order"] = Item(
                                   "Oath to Order",
                                   "65",
                                   "73",
@@ -5391,15 +4604,7 @@ int main()
                                   {"2D839F5"},
                                   "F_00000100",
                                   {"C5CE72"});
-    // Items["Oath to Order"] = Item({Time(1,false,0,3,true,12)}, "Oath to Order", "65",
-    // "73", "77", "00", "008F", "08", "", {"CD6B10"}, {"C5CE72"}, {"2D83A0D"}, {},
-    // {"C66201"}, "06", "16", {"2D83941"}, {"2D83959"}); Items["Song of Time"] =
-    // Item({Time(1,false,0,3,true,12)}, "Song of Time", "67", "74", "00", "00", "008F",
-    // "08", "", {"CD6B16"}, {"C5CE72"});    //song of time minus 61 location C66203
-    // Items["Song of Healing"] = Item({Time(1,false,0,3,true,12)}, "Song of Healing",
-    // "68", "75", "94", "00", "008F", "08", "", {"CD6B1C"}, {"C5CE72"}, {}, {},
-    // {"C66207"}, "09", "19", {"2CCFB99"}, {"2CCFBB1"});
-    Items["Song of Healing"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Song of Healing"] = Item(
                                     "Song of Healing",
                                     "68",
                                     "75",
@@ -5419,7 +4624,7 @@ int main()
                                     {"2CCFBB1"},
                                     "F_00100000",
                                     {"C5CE72"});
-    Items["Epona's Song"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Epona's Song"] = Item(
                                  "Epona's Song",
                                  "69",
                                  "76",
@@ -5439,7 +4644,7 @@ int main()
                                  {"2691405"},
                                  "F_01000000",
                                  {"C5CE72"});
-    Items["Song of Soaring"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Song of Soaring"] = Item(
                                     "Song of Soaring",
                                     "6A",
                                     "A2",
@@ -5459,7 +4664,7 @@ int main()
                                     {"2825E95"},
                                     "F_10000000",
                                     {"C5CE72"});
-    Items["Song of Storms"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Song of Storms"] = Item(
                                    "Song of Storms",
                                    "6B",
                                    "A3",
@@ -5479,17 +4684,7 @@ int main()
                                    {"1F82BAD"},
                                    "F_00000001",
                                    {"C5CE71"});
-
-    // vector<string> Song_Names = {   "Song of Time", "Song of Healing", "Song of
-    // Soaring", "Epona's Song", "Song of Storms", "Sonata of Awakening", "Goron Lullaby",
-    // "New Wave Bossa Nova", "Elegy of Emptiness", "Oath to Order"}; vector<string>
-    // Song_Bit_Values = {"00010000",      "00100000",         "10000000", "01000000",
-    // "00000001",         "01000000",         "10000000",        "00000001", "00000010",
-    // "00000100"}; string Songs_Bit_1 = "00000000";   //C5CE71 12963441 string Songs_Bit_2
-    // = "00010000";   //C5CE72 12963442 string Songs_Bit_3 = "00000000";   //C5CE73
-    // 12963443
-
-    Items["Heart Piece"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Heart Piece"] = Item(
                                 "Heart Piece",
                                 "7B",
                                 "0C",
@@ -5502,7 +4697,7 @@ int main()
                                 {},
                                 "10",
                                 {"C5CE70"});
-    Items["Heart Container"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Heart Container"] = Item(
                                     "Heart Container",
                                     "6F",
                                     "0D",
@@ -5516,7 +4711,7 @@ int main()
                                     "10",
                                     {"C5CDE9", "C5CDEB"});
 
-    Items["Bombchu"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bombchu"] = Item(
                             "Bombchu",
                             "99",
                             "36",
@@ -5530,7 +4725,7 @@ int main()
                             {"C5CE2B"},
                             "01",
                             {});
-    Items["Bombchus (5)"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bombchus (5)"] = Item(
                                  "Bombchus (5)",
                                  "9A",
                                  "3A",
@@ -5544,7 +4739,7 @@ int main()
                                  {"C5CE2B"},
                                  "05",
                                  {});
-    Items["Bombchus (10)"] = Item({Time(1, false, 0, 3, true, 12)},
+    Items["Bombchus (10)"] = Item(
                                   "Bombchus (10)",
                                   "98",
                                   "1A",
@@ -5558,13 +4753,6 @@ int main()
                                   {"C5CE2B"},
                                   "0A",
                                   {});
-    // Items["Bombchus (20)"] = Item({Time(1,false,0,3,true,12)}, "Bombchus (20)", "97",
-    // "2E", "2E", "C0", "00B0", "D9", "", "07", {"CD6972"}, {"C5CE2B"}, "14", {}); name
-    // item id     get item id   text id     flag   object   get item model  pool = "" get
-    // item locations  item id locations   item count  item count locations
-
-    // Items["Odalwa's Remains"] = Item({Time(1,false,0,3,true,12)}, "Odalwa's Remains",
-    // "5D", "55", "55", "80", "0097", "5D", "", {"CD6A5C"}, {});
 
     // get the settings from the settings file
     Settings = OpenAsIni("./settings.ini");
@@ -5572,19 +4760,9 @@ int main()
     // update the item pools according to the settings
     Update_Pools(Items);
 
-    // cout << "Shuffling items\n";
-    // shuffle(Items, Settings["settings"]["Seed"]);
-
-    // make sure able to get all items if using logic
-    // if (Settings["settings"]["Logic"] != "" && Settings["settings"]["Logic"] != "None")
-    // {
-    //  Fix_Shuffled(Items, Settings["settings"]["Seed"], Settings["settings"]["Logic"]);
-    //}
-
     // randomize items according to logic, if any logic was chosen
     cout << "Randomizing Items...\n";
-    // Randomize(Items, Settings["settings"]["Seed"], Settings["settings"]["Logic"]);
-    Randomize(Items, &Settings);
+    Randomize_Setup(Items, &Settings);
 
     // write spoiler log
     Write_Log(Settings["settings"]["Seed"]);
@@ -5604,12 +4782,10 @@ int main()
     bool Songs_Same_Pool = All_Songs_Same_Pool();
 
     cout << "\nPlacing Items\n";
-
     Place_Items(Items, Songs_Same_Pool);
 
-    cout << "\nChanging Rupees\n";
-
     // Change max rupee amounts
+    cout << "\nChanging Rupees\n";
     Change_Rupees(Settings["wallets"]);
 
     // FD anywhere
@@ -5618,19 +4794,12 @@ int main()
     // FD can use transformations masks
     Write_To_Rom(12945794, "010101"); // enables deku, goron, and zora
 
-    // Quick Text - softlock at couple's mask - this actually was not responsible for the
-    // softlock Write_To_Rom(12523072, "1000"); Write_To_Rom(13065591, "30");
-
-    // quick text 2
+    // quick text
     Write_To_Rom(12482776, "00000000");
     Write_To_Rom(13065591, "30");
 
-    // Remove check when buying Hero's Shield
-    Write_To_Rom(13492260, "10000003");
-
-    cout << "\nRemoving Item Checks\n";
-
     // Remove Item Checks
+    cout << "\nRemoving Item Checks\n";
     Remove_Item_Checks();
 
     // change starting scene to clock town
@@ -5641,29 +4810,6 @@ int main()
     Write_To_Rom(48476396, "0000000200000001");
     Write_To_Rom(48476404, "0000009A000000010001000100020002");
     Write_To_Rom(48476420, "00000096000000010021000100020002");
-
-    // Fix tear and deeds - dont need this, can change what the showing item shows to be
-    // correct for every item
-    /*Write_To_Rom(17217455, "40"); //moon's tear
-    Write_To_Rom(11857915, "46"); //land title deed
-    Write_To_Rom(15994819, "46"); //land title deed (needs to match)
-    Write_To_Rom(17112975, "47"); //swamp title deed
-    Write_To_Rom(17112983, "48"); //mountain title deed
-    Write_To_Rom(17112991, "49"); //ocean title deed
-
-    //Fix Key and Express Mail
-    Write_To_Rom(16505383, "4A");
-    Write_To_Rom(16019723, "4B");
-
-    //Fix Letter to Kafei and Pendant
-    Write_To_Rom(16505708, "4D");
-    Write_To_Rom(13454571, "4E");
-    Write_To_Rom(11857907, "4E");
-
-    //fix Magic Beans
-    Write_To_Rom(14439987, "4F");   //bean man
-    Write_To_Rom(45912662, "59FF");    //bean chest
-    */
 
     // make scrub salesman always sell beans
     if (Settings["settings"]["ScrubBeans"] == "True")
@@ -5680,34 +4826,18 @@ int main()
     // fix turning deku when SoT - stay as link
     Write_To_Rom(47286973, "0A");
 
-    // Make catching bottle contents use the passive get item function instead of whatever
-    // it was already using Write_To_Rom(12296876, "0C044BA0");   -   this made infinite
-    // bottles and other errors make bottles work with bottle contents and items
+    // Make it where if a bottle catch is not a bottle item, then it runs the normal item give function. Otherwise it runs the normal bottle catch function
     Make_Bottles_Work();
 
     // input the function to give tingle map branch to it in the get item passive function
     Fix_Tingle_Maps();
 
-    cout << "\nGiving Starting Items\n";
-
     // Give the player the starting items
+    cout << "\nGiving Starting Items\n";
     Give_Starting_Items();
-
-    // Set the number of frames of the hms cs when you enter clock tower to 0
-    // Write_To_Rom(46981670, "0000");
-
-    // remove the actor that plays the hms cs inside the clock tower
-    // make hms think you already watched the cs
-    Remove_Actor("2CD6000", 11);
-    Write_To_Rom(15953540, "24020001");
-    Write_To_Rom(15955712, "24020001");
 
     // fix getting the swords as transformation masks
     Fix_Swords();
-
-    // change the give song passive to work with just raw ids, nevermind, this might
-    // effect other things so gonna just write diff values Write_To_Rom(12500416,
-    // "00000000");
 
     // fix the song text ids for when it is loaded and displayed
     Fix_Song_Text();
@@ -5717,9 +4847,6 @@ int main()
 
     // input the songs text and fix the text offsets
     Songs_Text_Offset();
-
-    // give new wave from the thing with the offset so that it works from song of storms
-    // Write_To_Rom(12500392, "00000000");
 
     // make new wave bossa nova give the song only once
     if (Songs_Same_Pool)
@@ -5803,12 +4930,11 @@ int main()
     }
 
     // rename the rom to include the seed
-    /*if (system(("rename \"Legend of Zelda, The - Majoras Mask - Randomizer (U).z64\"
-    \"Legend of Zelda, The - Majoras Mask - Randomizer (U)_" +
-    Settings["settings"]["Seed"] + ".z64\"").c_str()) != 0) {
+    /*if (system(("rename \"Legend of Zelda, The - Majora's Mask - Randomizer (U).z64\" \"Legend of Zelda, The - Majora's Mask - Randomizer (U)_"
+	    + Settings["settings"]["Seed"] + ".z64\"").c_str()) != 0) {
         //couldn't find the compressed rom
-        err_file << "Compressing the rom failed - might be missing \"_create-roms\"
-    folder"; err_file.close(); exit(0);
+        err_file << "Renaming the rom failed";
+	err_file.close(); exit(0);
     }*/
 
     // Delete decompressed rom since it is no longer needed

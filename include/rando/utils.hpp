@@ -111,4 +111,10 @@ string Leading_Zeroes(string hex, int total_length);
 
 string Replace(string bigger_text, string smaller_text, string new_smaller_text);
 
+///Converts a char array to a string
+string Char_To_String(char chr[], int size);
+
+///Converts a vector to a string
+string Vector_To_String(vector<string> data, string separator);
+
 #endif

@@ -559,3 +559,33 @@ string Leading_Zeroes(string hex, int total_length)
 
     return hex;
 }
+
+string Char_To_String(char chr[], int size)
+{
+	string str = "";
+	int index = 0;
+
+	for (index = 0; index < size; index++)
+	{
+		str += chr[index];
+	}
+
+	return str;
+}
+
+string Vector_To_String(vector<string> data, string separator)
+{
+	string string_data = "";
+
+	for (int d = 0; d < data.size(); d++)
+	{
+		if (d > 0)
+		{
+			string_data += separator;
+		}
+
+		string_data += data[d];
+	}
+
+	return string_data;
+}
