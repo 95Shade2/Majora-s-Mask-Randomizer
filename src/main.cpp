@@ -2,7 +2,6 @@
 #include "rando/kafei.hpp"
 #include "rando/inventory.hpp"
 #include "rando/item.hpp"
-#include "rando/time.hpp"
 #include "rando/utils.hpp"
 #include "rando/color.hpp"
 #include "rando/io.hpp"
@@ -2366,7 +2365,7 @@ void Change_Colors(map<string, string> colors)
     Change_Nameplate(colors["Name"]);
 }
 
-///Make the bottles able to catch non-bottle items
+///Make the bottles able to catch non-bottle items, also fixes new bottles from never being obtained after 6 bottles
 void Make_Bottles_Work()
 {
     string Jump_Function = "0C061912";
@@ -2391,12 +2390,51 @@ void Make_Bottles_Work()
       "27BD0018", // ADDIU	SP, SP, 0x0018  Put the SP back to where it was
       "03E00008"  // JR	RA              Return
     };
+    vector<string> Max_Bottles = {
+	    "27BDFFE0",
+	    "AFBF0000",
+	    "AFA40004",
+	    "AFA20008",
+	    "AFB9000C",
+	    "AFA50010",
+	    "AFA60014",
+	    "34050000",
+	    "34060012",
+	    "00821821",
+	    "90790070",
+	    "240200FF",
+	    "54D90004",
+	    "24A50001",
+	    "10000007",
+	    "00000000",
+	    "24A50001",
+	    "30A500FF",
+	    "28A10006",
+	    "1420FFF5",
+	    "00A01025",
+	    "34830000",
+	    "8FBF0000",
+	    "8FA40004",
+	    "8FA20008",
+	    "8FB9000C",
+	    "8FA50010",
+	    "8FA60014",
+	    "27FFFFDC",
+	    "03E00008",
+	    "27BD0020"
+    };
 
     Write_To_Rom(12296876, Jump_Function);
-
     for (int i = 0; i < New_Function.size(); i++)
     {
         Write_To_Rom(12700040 + (i * 4), New_Function[i]);
+    }
+
+
+    Write_To_Rom(12231952, "0C02CCB330020000");
+    for (int i = 0; i < Max_Bottles.size(); i++)
+    {
+	    Write_To_Rom(11835404 + (i * 4), Max_Bottles[i]);
     }
 }
 
