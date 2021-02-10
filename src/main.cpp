@@ -4942,7 +4942,9 @@ int main()
     }
 
     //Make likelikes able to eat mirror shields (but they still spit out hero's shield, this is only here to make the no shield goal in bingo easier)
-    Write_To_Rom(14108508, "13200008");
+    if (Settings["settings"]["LikeLikeMirror"] == "True") {
+	    Write_To_Rom(14108508, "13200008");
+    }
 
     // compress rom and create wad
     if (Settings["settings"]["Wad"] == "True")

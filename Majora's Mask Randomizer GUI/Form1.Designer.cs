@@ -406,13 +406,14 @@
                         this.playAsKafeiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.removeCutscenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.gCHudToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                        this.respawnHPsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.walletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.label5 = new System.Windows.Forms.Label();
                         this.label6 = new System.Windows.Forms.Label();
                         this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
                         this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
-                        this.respawnHPsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                        this.edibleMirrorShieldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.tabControl2.SuspendLayout();
                         this.tabPage8.SuspendLayout();
                         this.tabControl3.SuspendLayout();
@@ -4490,7 +4491,8 @@
             this.playAsKafeiToolStripMenuItem,
             this.removeCutscenesToolStripMenuItem,
             this.gCHudToolStripMenuItem,
-            this.respawnHPsToolStripMenuItem});
+            this.respawnHPsToolStripMenuItem,
+            this.edibleMirrorShieldToolStripMenuItem});
                         this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
                         this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
                         this.settingsToolStripMenuItem.Text = "Settings";
@@ -4530,6 +4532,13 @@
                         this.gCHudToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
                         this.gCHudToolStripMenuItem.Text = "GC Hud";
                         this.gCHudToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+                        // 
+                        // respawnHPsToolStripMenuItem
+                        // 
+                        this.respawnHPsToolStripMenuItem.Name = "respawnHPsToolStripMenuItem";
+                        this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+                        this.respawnHPsToolStripMenuItem.Text = "Respawn HPs";
+                        this.respawnHPsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
                         // 
                         // pauseMenuColorsToolStripMenuItem
                         // 
@@ -4585,12 +4594,12 @@
                         this.BlastMaskSeconds_Label.TabIndex = 97;
                         this.BlastMaskSeconds_Label.Text = "10:01";
                         // 
-                        // respawnHPsToolStripMenuItem
+                        // edibleMirrorShieldToolStripMenuItem
                         // 
-                        this.respawnHPsToolStripMenuItem.Name = "respawnHPsToolStripMenuItem";
-                        this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-                        this.respawnHPsToolStripMenuItem.Text = "Respawn HPs";
-                        this.respawnHPsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+                        this.edibleMirrorShieldToolStripMenuItem.Name = "edibleMirrorShieldToolStripMenuItem";
+                        this.edibleMirrorShieldToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+                        this.edibleMirrorShieldToolStripMenuItem.Text = "Edible Mirror Shield";
+                        this.edibleMirrorShieldToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
                         // 
                         // Main_Window
                         // 
@@ -5058,6 +5067,7 @@
                 private System.Windows.Forms.ComboBox Bombchus_10_Gives;
                 private System.Windows.Forms.CheckBox Bombchus_10;
                 private System.Windows.Forms.ToolStripMenuItem respawnHPsToolStripMenuItem;
+                private System.Windows.Forms.ToolStripMenuItem edibleMirrorShieldToolStripMenuItem;
         }
 }
 

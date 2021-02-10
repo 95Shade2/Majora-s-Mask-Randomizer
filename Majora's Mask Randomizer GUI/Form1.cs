@@ -1188,6 +1188,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                                 Text += "BlastMask_Cooldown=" + BlastMaskFrames_Num.Value + "\n";      //the blast mask cooldown
 
                                 Text += "RespawnHPs=" + respawnHPsToolStripMenuItem.Checked + "\n";       //whether or not to respawn the hps every cycle
+
+                                Text += "LikeLikeMirror=" + edibleMirrorShieldToolStripMenuItem.Checked + "\n";       //whether or not a likelike can eat the mirror shield
                         }
 
                         if (colors)
