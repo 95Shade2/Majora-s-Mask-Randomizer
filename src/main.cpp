@@ -4900,6 +4900,9 @@ int main()
     // dont let sonata give item twice
     Write_To_Rom(15840424, "00000000");
 
+    //don't let song of soaring give item twice
+    Write_To_Rom(15924108, "00000000");
+
     // Use Gamecube HUD
     if (Settings["settings"]["GC_Hud"] == "True")
     {
