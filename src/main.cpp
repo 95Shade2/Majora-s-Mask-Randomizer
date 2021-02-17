@@ -172,7 +172,7 @@ void Update_Wallet(int location, string wallet_amount)
 {
     int wallet_int = string_to_dec(wallet_amount);
     string wallet_hexL = dec_to_hex(wallet_int >> 8); // left byte
-    string wallet_hexR = dec_to_hex(wallet_int);      // right byte
+    string wallet_hexR = dec_to_hex(wallet_int & 0xFF);      // right byte
     string wallet_size = wallet_hexL + wallet_hexR;
 
     Write_To_Rom(location, wallet_size);
@@ -365,9 +365,6 @@ void Give_Starting_Items()
     Item_Counts[Health] = hex_to_decimal("30");
     Item_C_Locations.push_back(HC);
     Item_C_Locations.push_back(Health);
-
-    // give song of time and song of healing
-    // Write_To_Rom(12963442, "30");
 
     // replace each starting item with the new item
     for (int i = 0; i < Start_Sources.size(); i++)
@@ -4891,6 +4888,67 @@ int main()
 				{},
 				"01",
 				{"C5CDEF"});
+    Items["Blue Rupee"] = Item("Blue Rupee",
+	    "85",
+	    "02",
+	    "02",
+	    "01",
+	    "013F",
+	    "AF",
+	    "",
+	    { "CD686A" },
+	    {},
+	    "05",
+	    { "C5CDEF" });
+    Items["Red Rupee"] = Item("Red Rupee",
+	    "87",
+	    "04",
+	    "04",
+	    "02",
+	    "013F",
+	    "AE",
+	    "",
+	    { "CD6876" },
+	    {},
+	    "14",
+	    { "C5CDEF" });
+    Items["Purple Rupee"] = Item("Purple Rupee",
+	    "88",
+	    "05",
+	    "05",
+	    "14",
+	    "013F",
+	    "AC",
+	    "",
+	    { "CD687C" },
+	    {},
+	    "32",
+	    { "C5CDEF" });
+    Items["Silver Rupee"] = Item("Silver Rupee",
+	    "89",
+	    "06",
+	    "06",
+	    "14",
+	    "013F",
+	    "AB",
+	    "",
+	    { "CD6882" },
+	    {},
+	    "64",
+	    { "C5CDEF" });
+    Items["Gold Rupee"] = Item("Gold Rupee",
+	    "8A",
+	    "07",
+	    "07",
+	    "13",
+	    "013F",
+	    "BD",
+	    "",
+	    { "CD6888" },
+	    {},
+	    "C8",
+	    { "C5CDEF" });
+
 
     // get the settings from the settings file
     Settings = OpenAsIni("./settings.ini");
