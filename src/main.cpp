@@ -3536,6 +3536,37 @@ void RespawnHPs()
     Write_To_Rom(12962574, "00"); // remove SoT flag for secret shrine hp  52
 }
 
+void Fix_Couples_Mask() {
+	vector<string> Flag_Checker = {
+		"27BDFFE0",
+		"AFBF0004",
+		"AFA50008",
+		"AFA6000C",
+		"AFA70010",
+		"3C06803F",
+		"80C78994",
+		"30E50040",
+		"54A00005",
+		"8FBF0004",
+		"34E50040",
+		"A0C58994",
+		"3C1F8011",
+		"27FF2E80",
+		"8FA50008",
+		"8FA6000C",
+		"8FA70010",
+		"27BD0020",
+		"03E00008",
+		"8FBFFFE4"
+	};
+
+	Write_To_Rom(15803856, "0C02CCD2");
+	for (int c = 0; c < Flag_Checker.size(); c++)
+	{
+		Write_To_Rom(11835528 + (c * 4), Flag_Checker[c]);
+	}
+}
+
 int main()
 {
     err_file.open("Error.txt");
@@ -4902,6 +4933,9 @@ int main()
 
     //don't let song of soaring give item twice
     Write_To_Rom(15924108, "00000000");
+
+    //Make couple's mask only give once in the normal cutscene
+    Fix_Couples_Mask();
 
     // Use Gamecube HUD
     if (Settings["settings"]["GC_Hud"] == "True")
