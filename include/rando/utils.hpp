@@ -14,6 +14,8 @@ string hex_to_binary(const string& hex);
 
 string dec_to_hex(int number);
 
+string dec_to_hex_work(int number);
+
 std::string string_to_hex(const std::string &input);
 
 std::string hex_to_string(const std::string &input);

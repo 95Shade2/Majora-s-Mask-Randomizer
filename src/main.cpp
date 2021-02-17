@@ -509,6 +509,18 @@ void Give_Starting_Items()
         string location = Item_C_Locations[c];
         int Count = Item_Counts[key];
 
+
+	//if the count is more than one byte
+	if (Item_Counts[key] > 255) {
+		int High_Count = Count > 4;	//right shift count to only have the left byte
+		string High_C_Loc = Hex_Minus(key, "01");	//make a new location right before the current byte to hold the high byte
+
+		Item_Counts[High_C_Loc] = High_Count;
+		Item_C_Locations.push_back(High_C_Loc);
+
+		Count = Count & 0xFF;	//make Count the low byte only
+	}
+
         Write_To_Rom(hex_to_decimal(location), dec_to_hex(Count));
     }
 
@@ -4808,8 +4820,7 @@ int main()
                                  {"C5CE2B"},
                                  "05",
                                  {});
-    Items["Bombchus (10)"] = Item(
-                                  "Bombchus (10)",
+    Items["Bombchus (10)"] = Item("Bombchus (10)",
                                   "98",
                                   "1A",
                                   "1A",
@@ -4822,6 +4833,20 @@ int main()
                                   {"C5CE2B"},
                                   "0A",
                                   {});
+
+    //Rupees
+    Items["Green Rupee"] = Item("Green Rupee",
+				"84",
+				"01",
+				"C4",
+				"00",
+				"013F",
+				"B0",
+				"",
+				{"CD6864"},
+				{},
+				"C8",
+				{"C5CDEF"});
 
     // get the settings from the settings file
     Settings = OpenAsIni("./settings.ini");

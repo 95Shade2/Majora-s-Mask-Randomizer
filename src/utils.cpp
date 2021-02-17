@@ -6,6 +6,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <iomanip>
+#include <iostream>
 
 string hex_to_binary(const string& hex)
 {
@@ -77,18 +78,30 @@ string hex_to_binary(const string& hex)
     return binary.str();
 }
 
-string dec_to_hex(int number)
-{
-    number %= 256;
+string dec_to_hex(int number) {
+	string num_hex = "";
+	string hex = "";
+	int num_byte = 0;
 
-    std::stringstream hex;
+	do {
+		num_byte = number % 256;	//gets the last byte of the number data
+		num_hex = dec_to_hex_work(num_byte) + num_hex;
+		number = number >> 8;	//right shifts to get rid of the last byte
+	} while (number > 0);
 
-    hex << std::setw(2) << std::setfill('0') << std::uppercase << std::hex << number;
-
-    return hex.str();
+	return num_hex;
 }
 
-#include <iostream>
+string dec_to_hex_work(int number)
+{
+	number %= 256;
+
+	std::stringstream hex;
+
+	hex << std::setw(2) << std::setfill('0') << std::uppercase << std::hex << number;
+
+	return hex.str();
+}
 
 std::string hex_to_string(const std::string &input)
 {
