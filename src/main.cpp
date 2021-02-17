@@ -267,10 +267,46 @@ void Change_Rupees(map<string, string> wallet_amounts)
       "A0ACAB0004ACAF000003B9702191CE02B8");
 }
 
+///returns a pointer to an array of the wallet sizes
+vector<int> Get_Wallet_Sizes() {
+	vector<int> sizes = { 0, 0, 0 };
+
+	sizes[0] = string_to_dec(Settings["wallets"]["Small"]);
+	sizes[1] = string_to_dec(Settings["wallets"]["Medium"]);
+	sizes[2] = string_to_dec(Settings["wallets"]["Large"]);
+
+	return sizes;
+}
+
+///returns which wallet the players starts with, 0 for child, 1 for adult, and 2 for giant
+int Get_Starting_Wallet() {
+
+	//if the player starts with giant wallet
+	if (Items["Song of Healing"].Name == "Giant Wallet" || Items["Deku Mask"].Name == "Giant Wallet") {
+		return 2;
+	}
+	//if the player starts with adult wallet
+	if (Items["Song of Healing"].Name == "Adult Wallet" || Items["Deku Mask"].Name == "Adult Wallet") {
+		return 1;
+	}
+	//the player starts out with child wallet
+	else {
+		return 0;
+	}
+}
+
+///Returns the max amount of rupees according to the starting items
+int Get_Wallet_Max() {
+	vector<int> wallets = Get_Wallet_Sizes();
+	int Start_Wallet = Get_Starting_Wallet();
+	int max = wallets[Start_Wallet];
+
+	return max;
+}
+
 void Give_Starting_Items()
 {
     vector<string> Start_Sources = {"Deku Mask", "Song of Healing"};
-    // vector<string> Start_Sources = {"Deku Mask"};
     string hex;
     string location;
     string Count_Location;
@@ -509,9 +545,18 @@ void Give_Starting_Items()
         string location = Item_C_Locations[c];
         int Count = Item_Counts[key];
 
+	//if at least one rupee is a starting item
+	if (location == "C5CDEF") {
+		int Max_Rupees = Get_Wallet_Max();
+
+		//Don't go over the max number of rupees
+		if (Count > Max_Rupees) {
+			Count = Max_Rupees;
+		}
+	}
 
 	//if the count is more than one byte
-	if (Item_Counts[key] > 255) {
+	if (Count > 255) {
 		int High_Count = Count > 4;	//right shift count to only have the left byte
 		string High_C_Loc = Hex_Minus(key, "01");	//make a new location right before the current byte to hold the high byte
 
@@ -533,7 +578,6 @@ void Give_Starting_Items()
 
         Write_To_Rom(hex_to_decimal(location), binary_to_hex(Flag));
     }
-
 }
 
 void Remove_Item_Checks()
@@ -4845,7 +4889,7 @@ int main()
 				"",
 				{"CD6864"},
 				{},
-				"C8",
+				"FFFF",
 				{"C5CDEF"});
 
     // get the settings from the settings file
