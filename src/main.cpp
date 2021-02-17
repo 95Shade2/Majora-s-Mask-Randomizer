@@ -4889,7 +4889,7 @@ int main()
 				"",
 				{"CD6864"},
 				{},
-				"FFFF",
+				"01",
 				{"C5CDEF"});
 
     // get the settings from the settings file
