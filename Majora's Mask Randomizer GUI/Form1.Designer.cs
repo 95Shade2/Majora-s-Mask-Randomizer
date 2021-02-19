@@ -372,6 +372,55 @@
                         this.Song_Of_Soaring = new System.Windows.Forms.CheckBox();
                         this.Song_Of_Soaring_Gives = new System.Windows.Forms.ComboBox();
                         this.tabPage10 = new System.Windows.Forms.TabPage();
+                        this.Gold_Rupee = new System.Windows.Forms.CheckBox();
+                        this.Gold_Rupee_Gives = new System.Windows.Forms.ComboBox();
+                        this.Gold_Rupee_Pool = new System.Windows.Forms.ComboBox();
+                        this.Purple_Rupee = new System.Windows.Forms.CheckBox();
+                        this.Purple_Rupee_Gives = new System.Windows.Forms.ComboBox();
+                        this.Purple_Rupee_Pool = new System.Windows.Forms.ComboBox();
+                        this.Silver_Rupee = new System.Windows.Forms.CheckBox();
+                        this.Silver_Rupee_Gives = new System.Windows.Forms.ComboBox();
+                        this.Silver_Rupee_Pool = new System.Windows.Forms.ComboBox();
+                        this.Red_Rupee = new System.Windows.Forms.CheckBox();
+                        this.Red_Rupee_Gives = new System.Windows.Forms.ComboBox();
+                        this.Red_Rupee_Pool = new System.Windows.Forms.ComboBox();
+                        this.Blue_Rupee = new System.Windows.Forms.CheckBox();
+                        this.Blue_Rupee_Gives = new System.Windows.Forms.ComboBox();
+                        this.Blue_Rupee_Pool = new System.Windows.Forms.ComboBox();
+                        this.label7 = new System.Windows.Forms.Label();
+                        this.Green_Rupee = new System.Windows.Forms.CheckBox();
+                        this.label8 = new System.Windows.Forms.Label();
+                        this.Green_Rupee_Gives = new System.Windows.Forms.ComboBox();
+                        this.Green_Rupee_Pool = new System.Windows.Forms.ComboBox();
+                        this.label9 = new System.Windows.Forms.Label();
+                        this.tabPage2 = new System.Windows.Forms.TabPage();
+                        this.Heart_Container = new System.Windows.Forms.CheckBox();
+                        this.label22 = new System.Windows.Forms.Label();
+                        this.Snowhead_Map_Gives = new System.Windows.Forms.ComboBox();
+                        this.Heart_Container_Pool = new System.Windows.Forms.ComboBox();
+                        this.Snowhead_Map = new System.Windows.Forms.CheckBox();
+                        this.Snowhead_Map_Pool = new System.Windows.Forms.ComboBox();
+                        this.Heart_Container_Gives = new System.Windows.Forms.ComboBox();
+                        this.Woodfall_Map = new System.Windows.Forms.CheckBox();
+                        this.Romani_Ranch_Map_Gives = new System.Windows.Forms.ComboBox();
+                        this.Heart_Piece = new System.Windows.Forms.CheckBox();
+                        this.Romani_Ranch_Map_Pool = new System.Windows.Forms.ComboBox();
+                        this.Woodfall_Map_Gives = new System.Windows.Forms.ComboBox();
+                        this.Heart_Piece_Pool = new System.Windows.Forms.ComboBox();
+                        this.Romani_Ranch_Map = new System.Windows.Forms.CheckBox();
+                        this.Woodfall_Map_Pool = new System.Windows.Forms.ComboBox();
+                        this.Heart_Piece_Gives = new System.Windows.Forms.ComboBox();
+                        this.Clocktown_Map = new System.Windows.Forms.CheckBox();
+                        this.Great_Bay_Map_Gives = new System.Windows.Forms.ComboBox();
+                        this.label1 = new System.Windows.Forms.Label();
+                        this.Great_Bay_Map_Pool = new System.Windows.Forms.ComboBox();
+                        this.Clocktown_Map_Gives = new System.Windows.Forms.ComboBox();
+                        this.Stone_Tower_Map = new System.Windows.Forms.CheckBox();
+                        this.Great_Bay_Map = new System.Windows.Forms.CheckBox();
+                        this.Clocktown_Map_Pool = new System.Windows.Forms.ComboBox();
+                        this.label21 = new System.Windows.Forms.Label();
+                        this.Stone_Tower_Map_Gives = new System.Windows.Forms.ComboBox();
+                        this.Stone_Tower_Map_Pool = new System.Windows.Forms.ComboBox();
                         this.menuStrip1 = new System.Windows.Forms.MenuStrip();
                         this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
                         this.createWadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -387,55 +436,6 @@
                         this.label6 = new System.Windows.Forms.Label();
                         this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
                         this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
-                        this.tabPage2 = new System.Windows.Forms.TabPage();
-                        this.Snowhead_Map_Gives = new System.Windows.Forms.ComboBox();
-                        this.Snowhead_Map = new System.Windows.Forms.CheckBox();
-                        this.Snowhead_Map_Pool = new System.Windows.Forms.ComboBox();
-                        this.Woodfall_Map = new System.Windows.Forms.CheckBox();
-                        this.Romani_Ranch_Map_Gives = new System.Windows.Forms.ComboBox();
-                        this.Romani_Ranch_Map_Pool = new System.Windows.Forms.ComboBox();
-                        this.Woodfall_Map_Gives = new System.Windows.Forms.ComboBox();
-                        this.Romani_Ranch_Map = new System.Windows.Forms.CheckBox();
-                        this.Woodfall_Map_Pool = new System.Windows.Forms.ComboBox();
-                        this.Clocktown_Map = new System.Windows.Forms.CheckBox();
-                        this.Great_Bay_Map_Gives = new System.Windows.Forms.ComboBox();
-                        this.Great_Bay_Map_Pool = new System.Windows.Forms.ComboBox();
-                        this.Clocktown_Map_Gives = new System.Windows.Forms.ComboBox();
-                        this.Great_Bay_Map = new System.Windows.Forms.CheckBox();
-                        this.Clocktown_Map_Pool = new System.Windows.Forms.ComboBox();
-                        this.label22 = new System.Windows.Forms.Label();
-                        this.Stone_Tower_Map_Gives = new System.Windows.Forms.ComboBox();
-                        this.Stone_Tower_Map_Pool = new System.Windows.Forms.ComboBox();
-                        this.label21 = new System.Windows.Forms.Label();
-                        this.Stone_Tower_Map = new System.Windows.Forms.CheckBox();
-                        this.label1 = new System.Windows.Forms.Label();
-                        this.Heart_Piece_Gives = new System.Windows.Forms.ComboBox();
-                        this.Heart_Piece_Pool = new System.Windows.Forms.ComboBox();
-                        this.Heart_Piece = new System.Windows.Forms.CheckBox();
-                        this.Heart_Container_Gives = new System.Windows.Forms.ComboBox();
-                        this.Heart_Container_Pool = new System.Windows.Forms.ComboBox();
-                        this.Heart_Container = new System.Windows.Forms.CheckBox();
-                        this.label7 = new System.Windows.Forms.Label();
-                        this.GreenRupee = new System.Windows.Forms.CheckBox();
-                        this.label8 = new System.Windows.Forms.Label();
-                        this.GreenRupee_Gives = new System.Windows.Forms.ComboBox();
-                        this.GreenRupee_Pool = new System.Windows.Forms.ComboBox();
-                        this.label9 = new System.Windows.Forms.Label();
-                        this.BlueRupee = new System.Windows.Forms.CheckBox();
-                        this.BlueRupee_Gives = new System.Windows.Forms.ComboBox();
-                        this.BlueRupee_Pool = new System.Windows.Forms.ComboBox();
-                        this.RedRupee = new System.Windows.Forms.CheckBox();
-                        this.RedRupee_Gives = new System.Windows.Forms.ComboBox();
-                        this.RedRupee_Pool = new System.Windows.Forms.ComboBox();
-                        this.SilverRupee = new System.Windows.Forms.CheckBox();
-                        this.SilverRupee_Gives = new System.Windows.Forms.ComboBox();
-                        this.SilverRupee_Pool = new System.Windows.Forms.ComboBox();
-                        this.PurpleRupee = new System.Windows.Forms.CheckBox();
-                        this.PurpleRupee_Gives = new System.Windows.Forms.ComboBox();
-                        this.PurpleRupee_Pool = new System.Windows.Forms.ComboBox();
-                        this.GoldRupee = new System.Windows.Forms.CheckBox();
-                        this.GoldRupee_Gives = new System.Windows.Forms.ComboBox();
-                        this.GoldRupee_Pool = new System.Windows.Forms.ComboBox();
                         this.tabControl2.SuspendLayout();
                         this.tabPage8.SuspendLayout();
                         this.tabControl3.SuspendLayout();
@@ -454,9 +454,9 @@
                         this.tabPage20.SuspendLayout();
                         this.tabPage1.SuspendLayout();
                         this.tabPage10.SuspendLayout();
+                        this.tabPage2.SuspendLayout();
                         this.menuStrip1.SuspendLayout();
                         ((System.ComponentModel.ISupportInitialize)(this.BlastMaskFrames_Num)).BeginInit();
-                        this.tabPage2.SuspendLayout();
                         this.SuspendLayout();
                         // 
                         // All_Night_Mask
@@ -4185,26 +4185,26 @@
                         // 
                         // tabPage10
                         // 
-                        this.tabPage10.Controls.Add(this.GoldRupee);
-                        this.tabPage10.Controls.Add(this.GoldRupee_Gives);
-                        this.tabPage10.Controls.Add(this.GoldRupee_Pool);
-                        this.tabPage10.Controls.Add(this.PurpleRupee);
-                        this.tabPage10.Controls.Add(this.PurpleRupee_Gives);
-                        this.tabPage10.Controls.Add(this.PurpleRupee_Pool);
-                        this.tabPage10.Controls.Add(this.SilverRupee);
-                        this.tabPage10.Controls.Add(this.SilverRupee_Gives);
-                        this.tabPage10.Controls.Add(this.SilverRupee_Pool);
-                        this.tabPage10.Controls.Add(this.RedRupee);
-                        this.tabPage10.Controls.Add(this.RedRupee_Gives);
-                        this.tabPage10.Controls.Add(this.RedRupee_Pool);
-                        this.tabPage10.Controls.Add(this.BlueRupee);
-                        this.tabPage10.Controls.Add(this.BlueRupee_Gives);
-                        this.tabPage10.Controls.Add(this.BlueRupee_Pool);
+                        this.tabPage10.Controls.Add(this.Gold_Rupee);
+                        this.tabPage10.Controls.Add(this.Gold_Rupee_Gives);
+                        this.tabPage10.Controls.Add(this.Gold_Rupee_Pool);
+                        this.tabPage10.Controls.Add(this.Purple_Rupee);
+                        this.tabPage10.Controls.Add(this.Purple_Rupee_Gives);
+                        this.tabPage10.Controls.Add(this.Purple_Rupee_Pool);
+                        this.tabPage10.Controls.Add(this.Silver_Rupee);
+                        this.tabPage10.Controls.Add(this.Silver_Rupee_Gives);
+                        this.tabPage10.Controls.Add(this.Silver_Rupee_Pool);
+                        this.tabPage10.Controls.Add(this.Red_Rupee);
+                        this.tabPage10.Controls.Add(this.Red_Rupee_Gives);
+                        this.tabPage10.Controls.Add(this.Red_Rupee_Pool);
+                        this.tabPage10.Controls.Add(this.Blue_Rupee);
+                        this.tabPage10.Controls.Add(this.Blue_Rupee_Gives);
+                        this.tabPage10.Controls.Add(this.Blue_Rupee_Pool);
                         this.tabPage10.Controls.Add(this.label7);
-                        this.tabPage10.Controls.Add(this.GreenRupee);
+                        this.tabPage10.Controls.Add(this.Green_Rupee);
                         this.tabPage10.Controls.Add(this.label8);
-                        this.tabPage10.Controls.Add(this.GreenRupee_Gives);
-                        this.tabPage10.Controls.Add(this.GreenRupee_Pool);
+                        this.tabPage10.Controls.Add(this.Green_Rupee_Gives);
+                        this.tabPage10.Controls.Add(this.Green_Rupee_Pool);
                         this.tabPage10.Controls.Add(this.label9);
                         this.tabPage10.Location = new System.Drawing.Point(4, 22);
                         this.tabPage10.Name = "tabPage10";
@@ -4212,6 +4212,530 @@
                         this.tabPage10.TabIndex = 2;
                         this.tabPage10.Text = "Rupees";
                         this.tabPage10.UseVisualStyleBackColor = true;
+                        // 
+                        // Gold_Rupee
+                        // 
+                        this.Gold_Rupee.AutoSize = true;
+                        this.Gold_Rupee.Location = new System.Drawing.Point(6, 157);
+                        this.Gold_Rupee.Name = "Gold_Rupee";
+                        this.Gold_Rupee.Size = new System.Drawing.Size(83, 17);
+                        this.Gold_Rupee.TabIndex = 94;
+                        this.Gold_Rupee.Text = "Gold Rupee";
+                        this.Gold_Rupee.UseVisualStyleBackColor = true;
+                        this.Gold_Rupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Gold_Rupee_Gives
+                        // 
+                        this.Gold_Rupee_Gives.Enabled = false;
+                        this.Gold_Rupee_Gives.FormattingEnabled = true;
+                        this.Gold_Rupee_Gives.Location = new System.Drawing.Point(226, 155);
+                        this.Gold_Rupee_Gives.Name = "Gold_Rupee_Gives";
+                        this.Gold_Rupee_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Gold_Rupee_Gives.TabIndex = 96;
+                        this.Gold_Rupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Gold_Rupee_Pool
+                        // 
+                        this.Gold_Rupee_Pool.Enabled = false;
+                        this.Gold_Rupee_Pool.FormattingEnabled = true;
+                        this.Gold_Rupee_Pool.Location = new System.Drawing.Point(148, 155);
+                        this.Gold_Rupee_Pool.Name = "Gold_Rupee_Pool";
+                        this.Gold_Rupee_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Gold_Rupee_Pool.TabIndex = 95;
+                        this.Gold_Rupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Purple_Rupee
+                        // 
+                        this.Purple_Rupee.AutoSize = true;
+                        this.Purple_Rupee.Location = new System.Drawing.Point(6, 103);
+                        this.Purple_Rupee.Name = "Purple_Rupee";
+                        this.Purple_Rupee.Size = new System.Drawing.Size(91, 17);
+                        this.Purple_Rupee.TabIndex = 91;
+                        this.Purple_Rupee.Text = "Purple Rupee";
+                        this.Purple_Rupee.UseVisualStyleBackColor = true;
+                        this.Purple_Rupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Purple_Rupee_Gives
+                        // 
+                        this.Purple_Rupee_Gives.Enabled = false;
+                        this.Purple_Rupee_Gives.FormattingEnabled = true;
+                        this.Purple_Rupee_Gives.Location = new System.Drawing.Point(226, 101);
+                        this.Purple_Rupee_Gives.Name = "Purple_Rupee_Gives";
+                        this.Purple_Rupee_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Purple_Rupee_Gives.TabIndex = 93;
+                        this.Purple_Rupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Purple_Rupee_Pool
+                        // 
+                        this.Purple_Rupee_Pool.Enabled = false;
+                        this.Purple_Rupee_Pool.FormattingEnabled = true;
+                        this.Purple_Rupee_Pool.Location = new System.Drawing.Point(148, 101);
+                        this.Purple_Rupee_Pool.Name = "Purple_Rupee_Pool";
+                        this.Purple_Rupee_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Purple_Rupee_Pool.TabIndex = 92;
+                        this.Purple_Rupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Silver_Rupee
+                        // 
+                        this.Silver_Rupee.AutoSize = true;
+                        this.Silver_Rupee.Location = new System.Drawing.Point(6, 130);
+                        this.Silver_Rupee.Name = "Silver_Rupee";
+                        this.Silver_Rupee.Size = new System.Drawing.Size(87, 17);
+                        this.Silver_Rupee.TabIndex = 88;
+                        this.Silver_Rupee.Text = "Silver Rupee";
+                        this.Silver_Rupee.UseVisualStyleBackColor = true;
+                        this.Silver_Rupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Silver_Rupee_Gives
+                        // 
+                        this.Silver_Rupee_Gives.Enabled = false;
+                        this.Silver_Rupee_Gives.FormattingEnabled = true;
+                        this.Silver_Rupee_Gives.Location = new System.Drawing.Point(226, 128);
+                        this.Silver_Rupee_Gives.Name = "Silver_Rupee_Gives";
+                        this.Silver_Rupee_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Silver_Rupee_Gives.TabIndex = 90;
+                        this.Silver_Rupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Silver_Rupee_Pool
+                        // 
+                        this.Silver_Rupee_Pool.Enabled = false;
+                        this.Silver_Rupee_Pool.FormattingEnabled = true;
+                        this.Silver_Rupee_Pool.Location = new System.Drawing.Point(148, 128);
+                        this.Silver_Rupee_Pool.Name = "Silver_Rupee_Pool";
+                        this.Silver_Rupee_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Silver_Rupee_Pool.TabIndex = 89;
+                        this.Silver_Rupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Red_Rupee
+                        // 
+                        this.Red_Rupee.AutoSize = true;
+                        this.Red_Rupee.Location = new System.Drawing.Point(6, 76);
+                        this.Red_Rupee.Name = "Red_Rupee";
+                        this.Red_Rupee.Size = new System.Drawing.Size(81, 17);
+                        this.Red_Rupee.TabIndex = 85;
+                        this.Red_Rupee.Text = "Red Rupee";
+                        this.Red_Rupee.UseVisualStyleBackColor = true;
+                        this.Red_Rupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Red_Rupee_Gives
+                        // 
+                        this.Red_Rupee_Gives.Enabled = false;
+                        this.Red_Rupee_Gives.FormattingEnabled = true;
+                        this.Red_Rupee_Gives.Location = new System.Drawing.Point(226, 74);
+                        this.Red_Rupee_Gives.Name = "Red_Rupee_Gives";
+                        this.Red_Rupee_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Red_Rupee_Gives.TabIndex = 87;
+                        this.Red_Rupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Red_Rupee_Pool
+                        // 
+                        this.Red_Rupee_Pool.Enabled = false;
+                        this.Red_Rupee_Pool.FormattingEnabled = true;
+                        this.Red_Rupee_Pool.Location = new System.Drawing.Point(148, 74);
+                        this.Red_Rupee_Pool.Name = "Red_Rupee_Pool";
+                        this.Red_Rupee_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Red_Rupee_Pool.TabIndex = 86;
+                        this.Red_Rupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Blue_Rupee
+                        // 
+                        this.Blue_Rupee.AutoSize = true;
+                        this.Blue_Rupee.Location = new System.Drawing.Point(6, 49);
+                        this.Blue_Rupee.Name = "Blue_Rupee";
+                        this.Blue_Rupee.Size = new System.Drawing.Size(82, 17);
+                        this.Blue_Rupee.TabIndex = 82;
+                        this.Blue_Rupee.Text = "Blue Rupee";
+                        this.Blue_Rupee.UseVisualStyleBackColor = true;
+                        this.Blue_Rupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Blue_Rupee_Gives
+                        // 
+                        this.Blue_Rupee_Gives.Enabled = false;
+                        this.Blue_Rupee_Gives.FormattingEnabled = true;
+                        this.Blue_Rupee_Gives.Location = new System.Drawing.Point(226, 47);
+                        this.Blue_Rupee_Gives.Name = "Blue_Rupee_Gives";
+                        this.Blue_Rupee_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Blue_Rupee_Gives.TabIndex = 84;
+                        this.Blue_Rupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Blue_Rupee_Pool
+                        // 
+                        this.Blue_Rupee_Pool.Enabled = false;
+                        this.Blue_Rupee_Pool.FormattingEnabled = true;
+                        this.Blue_Rupee_Pool.Location = new System.Drawing.Point(148, 47);
+                        this.Blue_Rupee_Pool.Name = "Blue_Rupee_Pool";
+                        this.Blue_Rupee_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Blue_Rupee_Pool.TabIndex = 83;
+                        this.Blue_Rupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // label7
+                        // 
+                        this.label7.AutoSize = true;
+                        this.label7.Location = new System.Drawing.Point(36, 6);
+                        this.label7.Name = "label7";
+                        this.label7.Size = new System.Drawing.Size(27, 13);
+                        this.label7.TabIndex = 76;
+                        this.label7.Text = "Item";
+                        // 
+                        // Green_Rupee
+                        // 
+                        this.Green_Rupee.AutoSize = true;
+                        this.Green_Rupee.Location = new System.Drawing.Point(6, 22);
+                        this.Green_Rupee.Name = "Green_Rupee";
+                        this.Green_Rupee.Size = new System.Drawing.Size(90, 17);
+                        this.Green_Rupee.TabIndex = 79;
+                        this.Green_Rupee.Text = "Green Rupee";
+                        this.Green_Rupee.UseVisualStyleBackColor = true;
+                        this.Green_Rupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // label8
+                        // 
+                        this.label8.AutoSize = true;
+                        this.label8.Location = new System.Drawing.Point(282, 4);
+                        this.label8.Name = "label8";
+                        this.label8.Size = new System.Drawing.Size(42, 13);
+                        this.label8.TabIndex = 78;
+                        this.label8.Text = "Manual";
+                        // 
+                        // Green_Rupee_Gives
+                        // 
+                        this.Green_Rupee_Gives.Enabled = false;
+                        this.Green_Rupee_Gives.FormattingEnabled = true;
+                        this.Green_Rupee_Gives.Location = new System.Drawing.Point(226, 20);
+                        this.Green_Rupee_Gives.Name = "Green_Rupee_Gives";
+                        this.Green_Rupee_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Green_Rupee_Gives.TabIndex = 81;
+                        this.Green_Rupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Green_Rupee_Pool
+                        // 
+                        this.Green_Rupee_Pool.Enabled = false;
+                        this.Green_Rupee_Pool.FormattingEnabled = true;
+                        this.Green_Rupee_Pool.Location = new System.Drawing.Point(148, 20);
+                        this.Green_Rupee_Pool.Name = "Green_Rupee_Pool";
+                        this.Green_Rupee_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Green_Rupee_Pool.TabIndex = 80;
+                        this.Green_Rupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // label9
+                        // 
+                        this.label9.AutoSize = true;
+                        this.label9.Location = new System.Drawing.Point(171, 3);
+                        this.label9.Name = "label9";
+                        this.label9.Size = new System.Drawing.Size(28, 13);
+                        this.label9.TabIndex = 77;
+                        this.label9.Text = "Pool";
+                        // 
+                        // tabPage2
+                        // 
+                        this.tabPage2.Controls.Add(this.Heart_Container);
+                        this.tabPage2.Controls.Add(this.label22);
+                        this.tabPage2.Controls.Add(this.Snowhead_Map_Gives);
+                        this.tabPage2.Controls.Add(this.Heart_Container_Pool);
+                        this.tabPage2.Controls.Add(this.Snowhead_Map);
+                        this.tabPage2.Controls.Add(this.Snowhead_Map_Pool);
+                        this.tabPage2.Controls.Add(this.Heart_Container_Gives);
+                        this.tabPage2.Controls.Add(this.Woodfall_Map);
+                        this.tabPage2.Controls.Add(this.Romani_Ranch_Map_Gives);
+                        this.tabPage2.Controls.Add(this.Heart_Piece);
+                        this.tabPage2.Controls.Add(this.Romani_Ranch_Map_Pool);
+                        this.tabPage2.Controls.Add(this.Woodfall_Map_Gives);
+                        this.tabPage2.Controls.Add(this.Heart_Piece_Pool);
+                        this.tabPage2.Controls.Add(this.Romani_Ranch_Map);
+                        this.tabPage2.Controls.Add(this.Woodfall_Map_Pool);
+                        this.tabPage2.Controls.Add(this.Heart_Piece_Gives);
+                        this.tabPage2.Controls.Add(this.Clocktown_Map);
+                        this.tabPage2.Controls.Add(this.Great_Bay_Map_Gives);
+                        this.tabPage2.Controls.Add(this.label1);
+                        this.tabPage2.Controls.Add(this.Great_Bay_Map_Pool);
+                        this.tabPage2.Controls.Add(this.Clocktown_Map_Gives);
+                        this.tabPage2.Controls.Add(this.Stone_Tower_Map);
+                        this.tabPage2.Controls.Add(this.Great_Bay_Map);
+                        this.tabPage2.Controls.Add(this.Clocktown_Map_Pool);
+                        this.tabPage2.Controls.Add(this.label21);
+                        this.tabPage2.Controls.Add(this.Stone_Tower_Map_Gives);
+                        this.tabPage2.Controls.Add(this.Stone_Tower_Map_Pool);
+                        this.tabPage2.Location = new System.Drawing.Point(4, 22);
+                        this.tabPage2.Name = "tabPage2";
+                        this.tabPage2.Size = new System.Drawing.Size(402, 343);
+                        this.tabPage2.TabIndex = 5;
+                        this.tabPage2.Text = "Maps/Others";
+                        this.tabPage2.UseVisualStyleBackColor = true;
+                        // 
+                        // Heart_Container
+                        // 
+                        this.Heart_Container.AutoSize = true;
+                        this.Heart_Container.Location = new System.Drawing.Point(6, 211);
+                        this.Heart_Container.Name = "Heart_Container";
+                        this.Heart_Container.Size = new System.Drawing.Size(100, 17);
+                        this.Heart_Container.TabIndex = 94;
+                        this.Heart_Container.Text = "Heart Container";
+                        this.Heart_Container.UseVisualStyleBackColor = true;
+                        this.Heart_Container.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // label22
+                        // 
+                        this.label22.AutoSize = true;
+                        this.label22.Location = new System.Drawing.Point(36, 6);
+                        this.label22.Name = "label22";
+                        this.label22.Size = new System.Drawing.Size(27, 13);
+                        this.label22.TabIndex = 22;
+                        this.label22.Text = "Item";
+                        // 
+                        // Snowhead_Map_Gives
+                        // 
+                        this.Snowhead_Map_Gives.Enabled = false;
+                        this.Snowhead_Map_Gives.FormattingEnabled = true;
+                        this.Snowhead_Map_Gives.Location = new System.Drawing.Point(226, 74);
+                        this.Snowhead_Map_Gives.Name = "Snowhead_Map_Gives";
+                        this.Snowhead_Map_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Snowhead_Map_Gives.TabIndex = 81;
+                        this.Snowhead_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Heart_Container_Pool
+                        // 
+                        this.Heart_Container_Pool.Enabled = false;
+                        this.Heart_Container_Pool.FormattingEnabled = true;
+                        this.Heart_Container_Pool.Location = new System.Drawing.Point(148, 209);
+                        this.Heart_Container_Pool.Name = "Heart_Container_Pool";
+                        this.Heart_Container_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Heart_Container_Pool.TabIndex = 95;
+                        this.Heart_Container_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Snowhead_Map
+                        // 
+                        this.Snowhead_Map.AutoSize = true;
+                        this.Snowhead_Map.Location = new System.Drawing.Point(6, 76);
+                        this.Snowhead_Map.Name = "Snowhead_Map";
+                        this.Snowhead_Map.Size = new System.Drawing.Size(101, 17);
+                        this.Snowhead_Map.TabIndex = 79;
+                        this.Snowhead_Map.Text = "Snowhead Map";
+                        this.Snowhead_Map.UseVisualStyleBackColor = true;
+                        this.Snowhead_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Snowhead_Map_Pool
+                        // 
+                        this.Snowhead_Map_Pool.Enabled = false;
+                        this.Snowhead_Map_Pool.FormattingEnabled = true;
+                        this.Snowhead_Map_Pool.Location = new System.Drawing.Point(148, 74);
+                        this.Snowhead_Map_Pool.Name = "Snowhead_Map_Pool";
+                        this.Snowhead_Map_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Snowhead_Map_Pool.TabIndex = 80;
+                        this.Snowhead_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Heart_Container_Gives
+                        // 
+                        this.Heart_Container_Gives.Enabled = false;
+                        this.Heart_Container_Gives.FormattingEnabled = true;
+                        this.Heart_Container_Gives.Location = new System.Drawing.Point(226, 209);
+                        this.Heart_Container_Gives.Name = "Heart_Container_Gives";
+                        this.Heart_Container_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Heart_Container_Gives.TabIndex = 96;
+                        this.Heart_Container_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Woodfall_Map
+                        // 
+                        this.Woodfall_Map.AutoSize = true;
+                        this.Woodfall_Map.Location = new System.Drawing.Point(6, 49);
+                        this.Woodfall_Map.Name = "Woodfall_Map";
+                        this.Woodfall_Map.Size = new System.Drawing.Size(92, 17);
+                        this.Woodfall_Map.TabIndex = 76;
+                        this.Woodfall_Map.Text = "Woodfall Map";
+                        this.Woodfall_Map.UseVisualStyleBackColor = true;
+                        this.Woodfall_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Romani_Ranch_Map_Gives
+                        // 
+                        this.Romani_Ranch_Map_Gives.Enabled = false;
+                        this.Romani_Ranch_Map_Gives.FormattingEnabled = true;
+                        this.Romani_Ranch_Map_Gives.Location = new System.Drawing.Point(226, 101);
+                        this.Romani_Ranch_Map_Gives.Name = "Romani_Ranch_Map_Gives";
+                        this.Romani_Ranch_Map_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Romani_Ranch_Map_Gives.TabIndex = 84;
+                        this.Romani_Ranch_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Heart_Piece
+                        // 
+                        this.Heart_Piece.AutoSize = true;
+                        this.Heart_Piece.Location = new System.Drawing.Point(6, 184);
+                        this.Heart_Piece.Name = "Heart_Piece";
+                        this.Heart_Piece.Size = new System.Drawing.Size(82, 17);
+                        this.Heart_Piece.TabIndex = 91;
+                        this.Heart_Piece.Text = "Heart Piece";
+                        this.Heart_Piece.UseVisualStyleBackColor = true;
+                        this.Heart_Piece.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Romani_Ranch_Map_Pool
+                        // 
+                        this.Romani_Ranch_Map_Pool.Enabled = false;
+                        this.Romani_Ranch_Map_Pool.FormattingEnabled = true;
+                        this.Romani_Ranch_Map_Pool.Location = new System.Drawing.Point(148, 101);
+                        this.Romani_Ranch_Map_Pool.Name = "Romani_Ranch_Map_Pool";
+                        this.Romani_Ranch_Map_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Romani_Ranch_Map_Pool.TabIndex = 83;
+                        this.Romani_Ranch_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Woodfall_Map_Gives
+                        // 
+                        this.Woodfall_Map_Gives.Enabled = false;
+                        this.Woodfall_Map_Gives.FormattingEnabled = true;
+                        this.Woodfall_Map_Gives.Location = new System.Drawing.Point(226, 47);
+                        this.Woodfall_Map_Gives.Name = "Woodfall_Map_Gives";
+                        this.Woodfall_Map_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Woodfall_Map_Gives.TabIndex = 78;
+                        this.Woodfall_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Heart_Piece_Pool
+                        // 
+                        this.Heart_Piece_Pool.Enabled = false;
+                        this.Heart_Piece_Pool.FormattingEnabled = true;
+                        this.Heart_Piece_Pool.Location = new System.Drawing.Point(148, 182);
+                        this.Heart_Piece_Pool.Name = "Heart_Piece_Pool";
+                        this.Heart_Piece_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Heart_Piece_Pool.TabIndex = 92;
+                        this.Heart_Piece_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Romani_Ranch_Map
+                        // 
+                        this.Romani_Ranch_Map.AutoSize = true;
+                        this.Romani_Ranch_Map.Location = new System.Drawing.Point(6, 103);
+                        this.Romani_Ranch_Map.Name = "Romani_Ranch_Map";
+                        this.Romani_Ranch_Map.Size = new System.Drawing.Size(121, 17);
+                        this.Romani_Ranch_Map.TabIndex = 82;
+                        this.Romani_Ranch_Map.Text = "Romani Ranch Map";
+                        this.Romani_Ranch_Map.UseVisualStyleBackColor = true;
+                        this.Romani_Ranch_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Woodfall_Map_Pool
+                        // 
+                        this.Woodfall_Map_Pool.Enabled = false;
+                        this.Woodfall_Map_Pool.FormattingEnabled = true;
+                        this.Woodfall_Map_Pool.Location = new System.Drawing.Point(148, 47);
+                        this.Woodfall_Map_Pool.Name = "Woodfall_Map_Pool";
+                        this.Woodfall_Map_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Woodfall_Map_Pool.TabIndex = 77;
+                        this.Woodfall_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Heart_Piece_Gives
+                        // 
+                        this.Heart_Piece_Gives.Enabled = false;
+                        this.Heart_Piece_Gives.FormattingEnabled = true;
+                        this.Heart_Piece_Gives.Location = new System.Drawing.Point(226, 182);
+                        this.Heart_Piece_Gives.Name = "Heart_Piece_Gives";
+                        this.Heart_Piece_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Heart_Piece_Gives.TabIndex = 93;
+                        this.Heart_Piece_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Clocktown_Map
+                        // 
+                        this.Clocktown_Map.AutoSize = true;
+                        this.Clocktown_Map.Location = new System.Drawing.Point(6, 22);
+                        this.Clocktown_Map.Name = "Clocktown_Map";
+                        this.Clocktown_Map.Size = new System.Drawing.Size(100, 17);
+                        this.Clocktown_Map.TabIndex = 73;
+                        this.Clocktown_Map.Text = "Clocktown Map";
+                        this.Clocktown_Map.UseVisualStyleBackColor = true;
+                        this.Clocktown_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Great_Bay_Map_Gives
+                        // 
+                        this.Great_Bay_Map_Gives.Enabled = false;
+                        this.Great_Bay_Map_Gives.FormattingEnabled = true;
+                        this.Great_Bay_Map_Gives.Location = new System.Drawing.Point(226, 128);
+                        this.Great_Bay_Map_Gives.Name = "Great_Bay_Map_Gives";
+                        this.Great_Bay_Map_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Great_Bay_Map_Gives.TabIndex = 87;
+                        this.Great_Bay_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // label1
+                        // 
+                        this.label1.AutoSize = true;
+                        this.label1.Location = new System.Drawing.Point(282, 4);
+                        this.label1.Name = "label1";
+                        this.label1.Size = new System.Drawing.Size(42, 13);
+                        this.label1.TabIndex = 24;
+                        this.label1.Text = "Manual";
+                        // 
+                        // Great_Bay_Map_Pool
+                        // 
+                        this.Great_Bay_Map_Pool.Enabled = false;
+                        this.Great_Bay_Map_Pool.FormattingEnabled = true;
+                        this.Great_Bay_Map_Pool.Location = new System.Drawing.Point(148, 128);
+                        this.Great_Bay_Map_Pool.Name = "Great_Bay_Map_Pool";
+                        this.Great_Bay_Map_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Great_Bay_Map_Pool.TabIndex = 86;
+                        this.Great_Bay_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // Clocktown_Map_Gives
+                        // 
+                        this.Clocktown_Map_Gives.Enabled = false;
+                        this.Clocktown_Map_Gives.FormattingEnabled = true;
+                        this.Clocktown_Map_Gives.Location = new System.Drawing.Point(226, 20);
+                        this.Clocktown_Map_Gives.Name = "Clocktown_Map_Gives";
+                        this.Clocktown_Map_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Clocktown_Map_Gives.TabIndex = 75;
+                        this.Clocktown_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Stone_Tower_Map
+                        // 
+                        this.Stone_Tower_Map.AutoSize = true;
+                        this.Stone_Tower_Map.Location = new System.Drawing.Point(6, 157);
+                        this.Stone_Tower_Map.Name = "Stone_Tower_Map";
+                        this.Stone_Tower_Map.Size = new System.Drawing.Size(111, 17);
+                        this.Stone_Tower_Map.TabIndex = 88;
+                        this.Stone_Tower_Map.Text = "Stone Tower Map";
+                        this.Stone_Tower_Map.UseVisualStyleBackColor = true;
+                        this.Stone_Tower_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Great_Bay_Map
+                        // 
+                        this.Great_Bay_Map.AutoSize = true;
+                        this.Great_Bay_Map.Location = new System.Drawing.Point(6, 130);
+                        this.Great_Bay_Map.Name = "Great_Bay_Map";
+                        this.Great_Bay_Map.Size = new System.Drawing.Size(97, 17);
+                        this.Great_Bay_Map.TabIndex = 85;
+                        this.Great_Bay_Map.Text = "Great Bay Map";
+                        this.Great_Bay_Map.UseVisualStyleBackColor = true;
+                        this.Great_Bay_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+                        // 
+                        // Clocktown_Map_Pool
+                        // 
+                        this.Clocktown_Map_Pool.Enabled = false;
+                        this.Clocktown_Map_Pool.FormattingEnabled = true;
+                        this.Clocktown_Map_Pool.Location = new System.Drawing.Point(148, 20);
+                        this.Clocktown_Map_Pool.Name = "Clocktown_Map_Pool";
+                        this.Clocktown_Map_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Clocktown_Map_Pool.TabIndex = 74;
+                        this.Clocktown_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+                        // 
+                        // label21
+                        // 
+                        this.label21.AutoSize = true;
+                        this.label21.Location = new System.Drawing.Point(171, 3);
+                        this.label21.Name = "label21";
+                        this.label21.Size = new System.Drawing.Size(28, 13);
+                        this.label21.TabIndex = 23;
+                        this.label21.Text = "Pool";
+                        // 
+                        // Stone_Tower_Map_Gives
+                        // 
+                        this.Stone_Tower_Map_Gives.Enabled = false;
+                        this.Stone_Tower_Map_Gives.FormattingEnabled = true;
+                        this.Stone_Tower_Map_Gives.Location = new System.Drawing.Point(226, 155);
+                        this.Stone_Tower_Map_Gives.Name = "Stone_Tower_Map_Gives";
+                        this.Stone_Tower_Map_Gives.Size = new System.Drawing.Size(155, 21);
+                        this.Stone_Tower_Map_Gives.TabIndex = 90;
+                        this.Stone_Tower_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+                        // 
+                        // Stone_Tower_Map_Pool
+                        // 
+                        this.Stone_Tower_Map_Pool.Enabled = false;
+                        this.Stone_Tower_Map_Pool.FormattingEnabled = true;
+                        this.Stone_Tower_Map_Pool.Location = new System.Drawing.Point(148, 155);
+                        this.Stone_Tower_Map_Pool.Name = "Stone_Tower_Map_Pool";
+                        this.Stone_Tower_Map_Pool.Size = new System.Drawing.Size(72, 21);
+                        this.Stone_Tower_Map_Pool.TabIndex = 89;
+                        this.Stone_Tower_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
                         // 
                         // menuStrip1
                         // 
@@ -4344,530 +4868,6 @@
                         this.BlastMaskSeconds_Label.TabIndex = 97;
                         this.BlastMaskSeconds_Label.Text = "10:01";
                         // 
-                        // tabPage2
-                        // 
-                        this.tabPage2.Controls.Add(this.Heart_Container);
-                        this.tabPage2.Controls.Add(this.label22);
-                        this.tabPage2.Controls.Add(this.Snowhead_Map_Gives);
-                        this.tabPage2.Controls.Add(this.Heart_Container_Pool);
-                        this.tabPage2.Controls.Add(this.Snowhead_Map);
-                        this.tabPage2.Controls.Add(this.Snowhead_Map_Pool);
-                        this.tabPage2.Controls.Add(this.Heart_Container_Gives);
-                        this.tabPage2.Controls.Add(this.Woodfall_Map);
-                        this.tabPage2.Controls.Add(this.Romani_Ranch_Map_Gives);
-                        this.tabPage2.Controls.Add(this.Heart_Piece);
-                        this.tabPage2.Controls.Add(this.Romani_Ranch_Map_Pool);
-                        this.tabPage2.Controls.Add(this.Woodfall_Map_Gives);
-                        this.tabPage2.Controls.Add(this.Heart_Piece_Pool);
-                        this.tabPage2.Controls.Add(this.Romani_Ranch_Map);
-                        this.tabPage2.Controls.Add(this.Woodfall_Map_Pool);
-                        this.tabPage2.Controls.Add(this.Heart_Piece_Gives);
-                        this.tabPage2.Controls.Add(this.Clocktown_Map);
-                        this.tabPage2.Controls.Add(this.Great_Bay_Map_Gives);
-                        this.tabPage2.Controls.Add(this.label1);
-                        this.tabPage2.Controls.Add(this.Great_Bay_Map_Pool);
-                        this.tabPage2.Controls.Add(this.Clocktown_Map_Gives);
-                        this.tabPage2.Controls.Add(this.Stone_Tower_Map);
-                        this.tabPage2.Controls.Add(this.Great_Bay_Map);
-                        this.tabPage2.Controls.Add(this.Clocktown_Map_Pool);
-                        this.tabPage2.Controls.Add(this.label21);
-                        this.tabPage2.Controls.Add(this.Stone_Tower_Map_Gives);
-                        this.tabPage2.Controls.Add(this.Stone_Tower_Map_Pool);
-                        this.tabPage2.Location = new System.Drawing.Point(4, 22);
-                        this.tabPage2.Name = "tabPage2";
-                        this.tabPage2.Size = new System.Drawing.Size(402, 343);
-                        this.tabPage2.TabIndex = 5;
-                        this.tabPage2.Text = "Maps/Others";
-                        this.tabPage2.UseVisualStyleBackColor = true;
-                        // 
-                        // Snowhead_Map_Gives
-                        // 
-                        this.Snowhead_Map_Gives.Enabled = false;
-                        this.Snowhead_Map_Gives.FormattingEnabled = true;
-                        this.Snowhead_Map_Gives.Location = new System.Drawing.Point(226, 74);
-                        this.Snowhead_Map_Gives.Name = "Snowhead_Map_Gives";
-                        this.Snowhead_Map_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Snowhead_Map_Gives.TabIndex = 81;
-                        this.Snowhead_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Snowhead_Map
-                        // 
-                        this.Snowhead_Map.AutoSize = true;
-                        this.Snowhead_Map.Location = new System.Drawing.Point(6, 76);
-                        this.Snowhead_Map.Name = "Snowhead_Map";
-                        this.Snowhead_Map.Size = new System.Drawing.Size(101, 17);
-                        this.Snowhead_Map.TabIndex = 79;
-                        this.Snowhead_Map.Text = "Snowhead Map";
-                        this.Snowhead_Map.UseVisualStyleBackColor = true;
-                        this.Snowhead_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Snowhead_Map_Pool
-                        // 
-                        this.Snowhead_Map_Pool.Enabled = false;
-                        this.Snowhead_Map_Pool.FormattingEnabled = true;
-                        this.Snowhead_Map_Pool.Location = new System.Drawing.Point(148, 74);
-                        this.Snowhead_Map_Pool.Name = "Snowhead_Map_Pool";
-                        this.Snowhead_Map_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Snowhead_Map_Pool.TabIndex = 80;
-                        this.Snowhead_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Woodfall_Map
-                        // 
-                        this.Woodfall_Map.AutoSize = true;
-                        this.Woodfall_Map.Location = new System.Drawing.Point(6, 49);
-                        this.Woodfall_Map.Name = "Woodfall_Map";
-                        this.Woodfall_Map.Size = new System.Drawing.Size(92, 17);
-                        this.Woodfall_Map.TabIndex = 76;
-                        this.Woodfall_Map.Text = "Woodfall Map";
-                        this.Woodfall_Map.UseVisualStyleBackColor = true;
-                        this.Woodfall_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Romani_Ranch_Map_Gives
-                        // 
-                        this.Romani_Ranch_Map_Gives.Enabled = false;
-                        this.Romani_Ranch_Map_Gives.FormattingEnabled = true;
-                        this.Romani_Ranch_Map_Gives.Location = new System.Drawing.Point(226, 101);
-                        this.Romani_Ranch_Map_Gives.Name = "Romani_Ranch_Map_Gives";
-                        this.Romani_Ranch_Map_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Romani_Ranch_Map_Gives.TabIndex = 84;
-                        this.Romani_Ranch_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Romani_Ranch_Map_Pool
-                        // 
-                        this.Romani_Ranch_Map_Pool.Enabled = false;
-                        this.Romani_Ranch_Map_Pool.FormattingEnabled = true;
-                        this.Romani_Ranch_Map_Pool.Location = new System.Drawing.Point(148, 101);
-                        this.Romani_Ranch_Map_Pool.Name = "Romani_Ranch_Map_Pool";
-                        this.Romani_Ranch_Map_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Romani_Ranch_Map_Pool.TabIndex = 83;
-                        this.Romani_Ranch_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Woodfall_Map_Gives
-                        // 
-                        this.Woodfall_Map_Gives.Enabled = false;
-                        this.Woodfall_Map_Gives.FormattingEnabled = true;
-                        this.Woodfall_Map_Gives.Location = new System.Drawing.Point(226, 47);
-                        this.Woodfall_Map_Gives.Name = "Woodfall_Map_Gives";
-                        this.Woodfall_Map_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Woodfall_Map_Gives.TabIndex = 78;
-                        this.Woodfall_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Romani_Ranch_Map
-                        // 
-                        this.Romani_Ranch_Map.AutoSize = true;
-                        this.Romani_Ranch_Map.Location = new System.Drawing.Point(6, 103);
-                        this.Romani_Ranch_Map.Name = "Romani_Ranch_Map";
-                        this.Romani_Ranch_Map.Size = new System.Drawing.Size(121, 17);
-                        this.Romani_Ranch_Map.TabIndex = 82;
-                        this.Romani_Ranch_Map.Text = "Romani Ranch Map";
-                        this.Romani_Ranch_Map.UseVisualStyleBackColor = true;
-                        this.Romani_Ranch_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Woodfall_Map_Pool
-                        // 
-                        this.Woodfall_Map_Pool.Enabled = false;
-                        this.Woodfall_Map_Pool.FormattingEnabled = true;
-                        this.Woodfall_Map_Pool.Location = new System.Drawing.Point(148, 47);
-                        this.Woodfall_Map_Pool.Name = "Woodfall_Map_Pool";
-                        this.Woodfall_Map_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Woodfall_Map_Pool.TabIndex = 77;
-                        this.Woodfall_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Clocktown_Map
-                        // 
-                        this.Clocktown_Map.AutoSize = true;
-                        this.Clocktown_Map.Location = new System.Drawing.Point(6, 22);
-                        this.Clocktown_Map.Name = "Clocktown_Map";
-                        this.Clocktown_Map.Size = new System.Drawing.Size(100, 17);
-                        this.Clocktown_Map.TabIndex = 73;
-                        this.Clocktown_Map.Text = "Clocktown Map";
-                        this.Clocktown_Map.UseVisualStyleBackColor = true;
-                        this.Clocktown_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Great_Bay_Map_Gives
-                        // 
-                        this.Great_Bay_Map_Gives.Enabled = false;
-                        this.Great_Bay_Map_Gives.FormattingEnabled = true;
-                        this.Great_Bay_Map_Gives.Location = new System.Drawing.Point(226, 128);
-                        this.Great_Bay_Map_Gives.Name = "Great_Bay_Map_Gives";
-                        this.Great_Bay_Map_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Great_Bay_Map_Gives.TabIndex = 87;
-                        this.Great_Bay_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Great_Bay_Map_Pool
-                        // 
-                        this.Great_Bay_Map_Pool.Enabled = false;
-                        this.Great_Bay_Map_Pool.FormattingEnabled = true;
-                        this.Great_Bay_Map_Pool.Location = new System.Drawing.Point(148, 128);
-                        this.Great_Bay_Map_Pool.Name = "Great_Bay_Map_Pool";
-                        this.Great_Bay_Map_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Great_Bay_Map_Pool.TabIndex = 86;
-                        this.Great_Bay_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Clocktown_Map_Gives
-                        // 
-                        this.Clocktown_Map_Gives.Enabled = false;
-                        this.Clocktown_Map_Gives.FormattingEnabled = true;
-                        this.Clocktown_Map_Gives.Location = new System.Drawing.Point(226, 20);
-                        this.Clocktown_Map_Gives.Name = "Clocktown_Map_Gives";
-                        this.Clocktown_Map_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Clocktown_Map_Gives.TabIndex = 75;
-                        this.Clocktown_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Great_Bay_Map
-                        // 
-                        this.Great_Bay_Map.AutoSize = true;
-                        this.Great_Bay_Map.Location = new System.Drawing.Point(6, 130);
-                        this.Great_Bay_Map.Name = "Great_Bay_Map";
-                        this.Great_Bay_Map.Size = new System.Drawing.Size(97, 17);
-                        this.Great_Bay_Map.TabIndex = 85;
-                        this.Great_Bay_Map.Text = "Great Bay Map";
-                        this.Great_Bay_Map.UseVisualStyleBackColor = true;
-                        this.Great_Bay_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Clocktown_Map_Pool
-                        // 
-                        this.Clocktown_Map_Pool.Enabled = false;
-                        this.Clocktown_Map_Pool.FormattingEnabled = true;
-                        this.Clocktown_Map_Pool.Location = new System.Drawing.Point(148, 20);
-                        this.Clocktown_Map_Pool.Name = "Clocktown_Map_Pool";
-                        this.Clocktown_Map_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Clocktown_Map_Pool.TabIndex = 74;
-                        this.Clocktown_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // label22
-                        // 
-                        this.label22.AutoSize = true;
-                        this.label22.Location = new System.Drawing.Point(36, 6);
-                        this.label22.Name = "label22";
-                        this.label22.Size = new System.Drawing.Size(27, 13);
-                        this.label22.TabIndex = 22;
-                        this.label22.Text = "Item";
-                        // 
-                        // Stone_Tower_Map_Gives
-                        // 
-                        this.Stone_Tower_Map_Gives.Enabled = false;
-                        this.Stone_Tower_Map_Gives.FormattingEnabled = true;
-                        this.Stone_Tower_Map_Gives.Location = new System.Drawing.Point(226, 155);
-                        this.Stone_Tower_Map_Gives.Name = "Stone_Tower_Map_Gives";
-                        this.Stone_Tower_Map_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Stone_Tower_Map_Gives.TabIndex = 90;
-                        this.Stone_Tower_Map_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Stone_Tower_Map_Pool
-                        // 
-                        this.Stone_Tower_Map_Pool.Enabled = false;
-                        this.Stone_Tower_Map_Pool.FormattingEnabled = true;
-                        this.Stone_Tower_Map_Pool.Location = new System.Drawing.Point(148, 155);
-                        this.Stone_Tower_Map_Pool.Name = "Stone_Tower_Map_Pool";
-                        this.Stone_Tower_Map_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Stone_Tower_Map_Pool.TabIndex = 89;
-                        this.Stone_Tower_Map_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // label21
-                        // 
-                        this.label21.AutoSize = true;
-                        this.label21.Location = new System.Drawing.Point(171, 3);
-                        this.label21.Name = "label21";
-                        this.label21.Size = new System.Drawing.Size(28, 13);
-                        this.label21.TabIndex = 23;
-                        this.label21.Text = "Pool";
-                        // 
-                        // Stone_Tower_Map
-                        // 
-                        this.Stone_Tower_Map.AutoSize = true;
-                        this.Stone_Tower_Map.Location = new System.Drawing.Point(6, 157);
-                        this.Stone_Tower_Map.Name = "Stone_Tower_Map";
-                        this.Stone_Tower_Map.Size = new System.Drawing.Size(111, 17);
-                        this.Stone_Tower_Map.TabIndex = 88;
-                        this.Stone_Tower_Map.Text = "Stone Tower Map";
-                        this.Stone_Tower_Map.UseVisualStyleBackColor = true;
-                        this.Stone_Tower_Map.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // label1
-                        // 
-                        this.label1.AutoSize = true;
-                        this.label1.Location = new System.Drawing.Point(282, 4);
-                        this.label1.Name = "label1";
-                        this.label1.Size = new System.Drawing.Size(42, 13);
-                        this.label1.TabIndex = 24;
-                        this.label1.Text = "Manual";
-                        // 
-                        // Heart_Piece_Gives
-                        // 
-                        this.Heart_Piece_Gives.Enabled = false;
-                        this.Heart_Piece_Gives.FormattingEnabled = true;
-                        this.Heart_Piece_Gives.Location = new System.Drawing.Point(226, 182);
-                        this.Heart_Piece_Gives.Name = "Heart_Piece_Gives";
-                        this.Heart_Piece_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Heart_Piece_Gives.TabIndex = 93;
-                        this.Heart_Piece_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Heart_Piece_Pool
-                        // 
-                        this.Heart_Piece_Pool.Enabled = false;
-                        this.Heart_Piece_Pool.FormattingEnabled = true;
-                        this.Heart_Piece_Pool.Location = new System.Drawing.Point(148, 182);
-                        this.Heart_Piece_Pool.Name = "Heart_Piece_Pool";
-                        this.Heart_Piece_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Heart_Piece_Pool.TabIndex = 92;
-                        this.Heart_Piece_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Heart_Piece
-                        // 
-                        this.Heart_Piece.AutoSize = true;
-                        this.Heart_Piece.Location = new System.Drawing.Point(6, 184);
-                        this.Heart_Piece.Name = "Heart_Piece";
-                        this.Heart_Piece.Size = new System.Drawing.Size(82, 17);
-                        this.Heart_Piece.TabIndex = 91;
-                        this.Heart_Piece.Text = "Heart Piece";
-                        this.Heart_Piece.UseVisualStyleBackColor = true;
-                        this.Heart_Piece.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // Heart_Container_Gives
-                        // 
-                        this.Heart_Container_Gives.Enabled = false;
-                        this.Heart_Container_Gives.FormattingEnabled = true;
-                        this.Heart_Container_Gives.Location = new System.Drawing.Point(226, 209);
-                        this.Heart_Container_Gives.Name = "Heart_Container_Gives";
-                        this.Heart_Container_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.Heart_Container_Gives.TabIndex = 96;
-                        this.Heart_Container_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // Heart_Container_Pool
-                        // 
-                        this.Heart_Container_Pool.Enabled = false;
-                        this.Heart_Container_Pool.FormattingEnabled = true;
-                        this.Heart_Container_Pool.Location = new System.Drawing.Point(148, 209);
-                        this.Heart_Container_Pool.Name = "Heart_Container_Pool";
-                        this.Heart_Container_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.Heart_Container_Pool.TabIndex = 95;
-                        this.Heart_Container_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // Heart_Container
-                        // 
-                        this.Heart_Container.AutoSize = true;
-                        this.Heart_Container.Location = new System.Drawing.Point(6, 211);
-                        this.Heart_Container.Name = "Heart_Container";
-                        this.Heart_Container.Size = new System.Drawing.Size(100, 17);
-                        this.Heart_Container.TabIndex = 94;
-                        this.Heart_Container.Text = "Heart Container";
-                        this.Heart_Container.UseVisualStyleBackColor = true;
-                        this.Heart_Container.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // label7
-                        // 
-                        this.label7.AutoSize = true;
-                        this.label7.Location = new System.Drawing.Point(36, 6);
-                        this.label7.Name = "label7";
-                        this.label7.Size = new System.Drawing.Size(27, 13);
-                        this.label7.TabIndex = 76;
-                        this.label7.Text = "Item";
-                        // 
-                        // GreenRupee
-                        // 
-                        this.GreenRupee.AutoSize = true;
-                        this.GreenRupee.Location = new System.Drawing.Point(6, 22);
-                        this.GreenRupee.Name = "GreenRupee";
-                        this.GreenRupee.Size = new System.Drawing.Size(90, 17);
-                        this.GreenRupee.TabIndex = 79;
-                        this.GreenRupee.Text = "Green Rupee";
-                        this.GreenRupee.UseVisualStyleBackColor = true;
-                        this.GreenRupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // label8
-                        // 
-                        this.label8.AutoSize = true;
-                        this.label8.Location = new System.Drawing.Point(282, 4);
-                        this.label8.Name = "label8";
-                        this.label8.Size = new System.Drawing.Size(42, 13);
-                        this.label8.TabIndex = 78;
-                        this.label8.Text = "Manual";
-                        // 
-                        // GreenRupee_Gives
-                        // 
-                        this.GreenRupee_Gives.Enabled = false;
-                        this.GreenRupee_Gives.FormattingEnabled = true;
-                        this.GreenRupee_Gives.Location = new System.Drawing.Point(226, 20);
-                        this.GreenRupee_Gives.Name = "GreenRupee_Gives";
-                        this.GreenRupee_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.GreenRupee_Gives.TabIndex = 81;
-                        this.GreenRupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // GreenRupee_Pool
-                        // 
-                        this.GreenRupee_Pool.Enabled = false;
-                        this.GreenRupee_Pool.FormattingEnabled = true;
-                        this.GreenRupee_Pool.Location = new System.Drawing.Point(148, 20);
-                        this.GreenRupee_Pool.Name = "GreenRupee_Pool";
-                        this.GreenRupee_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.GreenRupee_Pool.TabIndex = 80;
-                        this.GreenRupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // label9
-                        // 
-                        this.label9.AutoSize = true;
-                        this.label9.Location = new System.Drawing.Point(171, 3);
-                        this.label9.Name = "label9";
-                        this.label9.Size = new System.Drawing.Size(28, 13);
-                        this.label9.TabIndex = 77;
-                        this.label9.Text = "Pool";
-                        // 
-                        // BlueRupee
-                        // 
-                        this.BlueRupee.AutoSize = true;
-                        this.BlueRupee.Location = new System.Drawing.Point(6, 49);
-                        this.BlueRupee.Name = "BlueRupee";
-                        this.BlueRupee.Size = new System.Drawing.Size(82, 17);
-                        this.BlueRupee.TabIndex = 82;
-                        this.BlueRupee.Text = "Blue Rupee";
-                        this.BlueRupee.UseVisualStyleBackColor = true;
-                        this.BlueRupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // BlueRupee_Gives
-                        // 
-                        this.BlueRupee_Gives.Enabled = false;
-                        this.BlueRupee_Gives.FormattingEnabled = true;
-                        this.BlueRupee_Gives.Location = new System.Drawing.Point(226, 47);
-                        this.BlueRupee_Gives.Name = "BlueRupee_Gives";
-                        this.BlueRupee_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.BlueRupee_Gives.TabIndex = 84;
-                        this.BlueRupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // BlueRupee_Pool
-                        // 
-                        this.BlueRupee_Pool.Enabled = false;
-                        this.BlueRupee_Pool.FormattingEnabled = true;
-                        this.BlueRupee_Pool.Location = new System.Drawing.Point(148, 47);
-                        this.BlueRupee_Pool.Name = "BlueRupee_Pool";
-                        this.BlueRupee_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.BlueRupee_Pool.TabIndex = 83;
-                        this.BlueRupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // RedRupee
-                        // 
-                        this.RedRupee.AutoSize = true;
-                        this.RedRupee.Location = new System.Drawing.Point(6, 76);
-                        this.RedRupee.Name = "RedRupee";
-                        this.RedRupee.Size = new System.Drawing.Size(81, 17);
-                        this.RedRupee.TabIndex = 85;
-                        this.RedRupee.Text = "Red Rupee";
-                        this.RedRupee.UseVisualStyleBackColor = true;
-                        this.RedRupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // RedRupee_Gives
-                        // 
-                        this.RedRupee_Gives.Enabled = false;
-                        this.RedRupee_Gives.FormattingEnabled = true;
-                        this.RedRupee_Gives.Location = new System.Drawing.Point(226, 74);
-                        this.RedRupee_Gives.Name = "RedRupee_Gives";
-                        this.RedRupee_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.RedRupee_Gives.TabIndex = 87;
-                        this.RedRupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // RedRupee_Pool
-                        // 
-                        this.RedRupee_Pool.Enabled = false;
-                        this.RedRupee_Pool.FormattingEnabled = true;
-                        this.RedRupee_Pool.Location = new System.Drawing.Point(148, 74);
-                        this.RedRupee_Pool.Name = "RedRupee_Pool";
-                        this.RedRupee_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.RedRupee_Pool.TabIndex = 86;
-                        this.RedRupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // SilverRupee
-                        // 
-                        this.SilverRupee.AutoSize = true;
-                        this.SilverRupee.Location = new System.Drawing.Point(6, 130);
-                        this.SilverRupee.Name = "SilverRupee";
-                        this.SilverRupee.Size = new System.Drawing.Size(87, 17);
-                        this.SilverRupee.TabIndex = 88;
-                        this.SilverRupee.Text = "Silver Rupee";
-                        this.SilverRupee.UseVisualStyleBackColor = true;
-                        this.SilverRupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // SilverRupee_Gives
-                        // 
-                        this.SilverRupee_Gives.Enabled = false;
-                        this.SilverRupee_Gives.FormattingEnabled = true;
-                        this.SilverRupee_Gives.Location = new System.Drawing.Point(226, 128);
-                        this.SilverRupee_Gives.Name = "SilverRupee_Gives";
-                        this.SilverRupee_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.SilverRupee_Gives.TabIndex = 90;
-                        this.SilverRupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // SilverRupee_Pool
-                        // 
-                        this.SilverRupee_Pool.Enabled = false;
-                        this.SilverRupee_Pool.FormattingEnabled = true;
-                        this.SilverRupee_Pool.Location = new System.Drawing.Point(148, 128);
-                        this.SilverRupee_Pool.Name = "SilverRupee_Pool";
-                        this.SilverRupee_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.SilverRupee_Pool.TabIndex = 89;
-                        this.SilverRupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // PurpleRupee
-                        // 
-                        this.PurpleRupee.AutoSize = true;
-                        this.PurpleRupee.Location = new System.Drawing.Point(6, 103);
-                        this.PurpleRupee.Name = "PurpleRupee";
-                        this.PurpleRupee.Size = new System.Drawing.Size(91, 17);
-                        this.PurpleRupee.TabIndex = 91;
-                        this.PurpleRupee.Text = "Purple Rupee";
-                        this.PurpleRupee.UseVisualStyleBackColor = true;
-                        this.PurpleRupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // PurpleRupee_Gives
-                        // 
-                        this.PurpleRupee_Gives.Enabled = false;
-                        this.PurpleRupee_Gives.FormattingEnabled = true;
-                        this.PurpleRupee_Gives.Location = new System.Drawing.Point(226, 101);
-                        this.PurpleRupee_Gives.Name = "PurpleRupee_Gives";
-                        this.PurpleRupee_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.PurpleRupee_Gives.TabIndex = 93;
-                        this.PurpleRupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // PurpleRupee_Pool
-                        // 
-                        this.PurpleRupee_Pool.Enabled = false;
-                        this.PurpleRupee_Pool.FormattingEnabled = true;
-                        this.PurpleRupee_Pool.Location = new System.Drawing.Point(148, 101);
-                        this.PurpleRupee_Pool.Name = "PurpleRupee_Pool";
-                        this.PurpleRupee_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.PurpleRupee_Pool.TabIndex = 92;
-                        this.PurpleRupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
-                        // GoldRupee
-                        // 
-                        this.GoldRupee.AutoSize = true;
-                        this.GoldRupee.Location = new System.Drawing.Point(6, 157);
-                        this.GoldRupee.Name = "GoldRupee";
-                        this.GoldRupee.Size = new System.Drawing.Size(83, 17);
-                        this.GoldRupee.TabIndex = 94;
-                        this.GoldRupee.Text = "Gold Rupee";
-                        this.GoldRupee.UseVisualStyleBackColor = true;
-                        this.GoldRupee.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-                        // 
-                        // GoldRupee_Gives
-                        // 
-                        this.GoldRupee_Gives.Enabled = false;
-                        this.GoldRupee_Gives.FormattingEnabled = true;
-                        this.GoldRupee_Gives.Location = new System.Drawing.Point(226, 155);
-                        this.GoldRupee_Gives.Name = "GoldRupee_Gives";
-                        this.GoldRupee_Gives.Size = new System.Drawing.Size(155, 21);
-                        this.GoldRupee_Gives.TabIndex = 96;
-                        this.GoldRupee_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-                        // 
-                        // GoldRupee_Pool
-                        // 
-                        this.GoldRupee_Pool.Enabled = false;
-                        this.GoldRupee_Pool.FormattingEnabled = true;
-                        this.GoldRupee_Pool.Location = new System.Drawing.Point(148, 155);
-                        this.GoldRupee_Pool.Name = "GoldRupee_Pool";
-                        this.GoldRupee_Pool.Size = new System.Drawing.Size(72, 21);
-                        this.GoldRupee_Pool.TabIndex = 95;
-                        this.GoldRupee_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-                        // 
                         // Main_Window
                         // 
                         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4941,11 +4941,11 @@
                         this.tabPage1.PerformLayout();
                         this.tabPage10.ResumeLayout(false);
                         this.tabPage10.PerformLayout();
+                        this.tabPage2.ResumeLayout(false);
+                        this.tabPage2.PerformLayout();
                         this.menuStrip1.ResumeLayout(false);
                         this.menuStrip1.PerformLayout();
                         ((System.ComponentModel.ISupportInitialize)(this.BlastMaskFrames_Num)).EndInit();
-                        this.tabPage2.ResumeLayout(false);
-                        this.tabPage2.PerformLayout();
                         this.ResumeLayout(false);
                         this.PerformLayout();
 
@@ -5312,10 +5312,10 @@
                 private System.Windows.Forms.ToolStripMenuItem edibleMirrorShieldToolStripMenuItem;
                 private System.Windows.Forms.TabPage tabPage2;
                 private System.Windows.Forms.Label label7;
-                private System.Windows.Forms.CheckBox GreenRupee;
+                private System.Windows.Forms.CheckBox Green_Rupee;
                 private System.Windows.Forms.Label label8;
-                private System.Windows.Forms.ComboBox GreenRupee_Gives;
-                private System.Windows.Forms.ComboBox GreenRupee_Pool;
+                private System.Windows.Forms.ComboBox Green_Rupee_Gives;
+                private System.Windows.Forms.ComboBox Green_Rupee_Pool;
                 private System.Windows.Forms.Label label9;
                 private System.Windows.Forms.CheckBox Heart_Container;
                 private System.Windows.Forms.Label label22;
@@ -5344,21 +5344,21 @@
                 private System.Windows.Forms.Label label21;
                 private System.Windows.Forms.ComboBox Stone_Tower_Map_Gives;
                 private System.Windows.Forms.ComboBox Stone_Tower_Map_Pool;
-                private System.Windows.Forms.CheckBox BlueRupee;
-                private System.Windows.Forms.ComboBox BlueRupee_Gives;
-                private System.Windows.Forms.ComboBox BlueRupee_Pool;
-                private System.Windows.Forms.CheckBox RedRupee;
-                private System.Windows.Forms.ComboBox RedRupee_Gives;
-                private System.Windows.Forms.ComboBox RedRupee_Pool;
-                private System.Windows.Forms.CheckBox SilverRupee;
-                private System.Windows.Forms.ComboBox SilverRupee_Gives;
-                private System.Windows.Forms.ComboBox SilverRupee_Pool;
-                private System.Windows.Forms.CheckBox PurpleRupee;
-                private System.Windows.Forms.ComboBox PurpleRupee_Gives;
-                private System.Windows.Forms.ComboBox PurpleRupee_Pool;
-                private System.Windows.Forms.CheckBox GoldRupee;
-                private System.Windows.Forms.ComboBox GoldRupee_Gives;
-                private System.Windows.Forms.ComboBox GoldRupee_Pool;
+                private System.Windows.Forms.CheckBox Blue_Rupee;
+                private System.Windows.Forms.ComboBox Blue_Rupee_Gives;
+                private System.Windows.Forms.ComboBox Blue_Rupee_Pool;
+                private System.Windows.Forms.CheckBox Red_Rupee;
+                private System.Windows.Forms.ComboBox Red_Rupee_Gives;
+                private System.Windows.Forms.ComboBox Red_Rupee_Pool;
+                private System.Windows.Forms.CheckBox Silver_Rupee;
+                private System.Windows.Forms.ComboBox Silver_Rupee_Gives;
+                private System.Windows.Forms.ComboBox Silver_Rupee_Pool;
+                private System.Windows.Forms.CheckBox Purple_Rupee;
+                private System.Windows.Forms.ComboBox Purple_Rupee_Gives;
+                private System.Windows.Forms.ComboBox Purple_Rupee_Pool;
+                private System.Windows.Forms.CheckBox Gold_Rupee;
+                private System.Windows.Forms.ComboBox Gold_Rupee_Gives;
+                private System.Windows.Forms.ComboBox Gold_Rupee_Pool;
         }
 }
 

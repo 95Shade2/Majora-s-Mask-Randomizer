@@ -988,3 +988,49 @@ Bombchus (10) {
 	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Large Quiver, Light Arrow
 	Magic Beans, Song of Storms, Elegy of Emptiness, Hookshot, Zora Mask, Garo Mask, Largest Quiver, Light Arrow
 }
+
+Green Rupee {
+	Postman's Hat
+}
+
+Blue Rupee {
+
+}
+
+Red Rupee {
+
+}
+
+Purple Rupee {
+	
+}
+
+Silver Rupee {
+	Bomb Bag
+	Big Bomb Bag
+	Biggest Bomb Bag
+	Blast Mask
+	Stone Mask, Zora Mask, Hookshot
+	Stone Mask, Zora Mask, Goron Mask
+	Stone Mask, Zora Mask, Fierce Deity Mask
+	Bow, Light Arrow, Garo Mask, Hookshot
+	Large Quiver, Light Arrow, Garo Mask, Hookshot
+	Largest Quiver, Light Arrow, Garo Mask, Hookshot
+	Bow, Light Arrow, Song of Soaring, Deku Stick
+	Large Quiver, Light Arrow, Song of Soaring, Deku Stick
+	Largest Quiver, Light Arrow, Song of Soaring, Deku Stick
+}
+
+Gold Rupee {
+	Ocean Title Deed, Zora Mask, Bomb Bag
+	Ocean Title Deed, Zora Mask, Gibdo Mask, Hookshot
+	Ocean Title Deed, Zora Mask, Song of Soaring, Deku Stick, Bow
+	Ocean Title Deed, Zora Mask, Song of Soaring, Deku Stick, Large Quiver
+	Ocean Title Deed, Zora Mask, Song of Soaring, Deku Stick, Largest Quiver
+	Ocean Title Deed, Zora Mask, Song of Soaring, Deku Stick, Fire Arrow
+	Ocean Title Deed, Zora Mask, Song of Soaring, Deku Stick, Ice Arrow
+	Ocean Title Deed, Zora Mask, Song of Soaring, Deku Stick, Light Arrow
+	Gold Dust
+	Big Poe
+	Chateau Romani
+}
