@@ -4949,6 +4949,56 @@ int main()
 	    "C8",
 	    { "C5CDEF" });
 
+    //Remains
+    //Odolwa's remains GI ID: 5D, Obj ID: 01CC - Need to figure out how to make this work
+    Items["Odolwa's Remains"] = Item("Odolwa's Remains",
+	    "5D",
+	    "55",
+	    "55",
+	    "80",
+	    "0000",
+	    "00",	//5D => 00 because it won't work
+	    "",
+	    { "CD6A5C" },
+	    {},
+	    "F_00000001",
+	    { "C5CE73" });
+    Items["Goht's Remains"] = Item("Goht's Remains",
+	    "5E",
+	    "56",
+	    "56",
+	    "80",
+	    "0000",
+	    "00",	//64 => 00
+	    "",
+	    { "CD6A62" },
+	    {},
+	    "F_00000010",
+	    { "C5CE73" });
+    Items["Gyorg's Remains"] = Item("Gyorg's Remains",
+	    "5F",
+	    "57",
+	    "57",
+	    "80",
+	    "0000",
+	    "00",	//65 => 00
+	    "",
+	    { "CD6A68" },
+	    {},
+	    "F_00000100",
+	    { "C5CE73" });
+    Items["Twinmold's Remains"] = Item("Twinmold's Remains",
+	    "60",
+	    "58",
+	    "58",
+	    "80",
+	    "0000",
+	    "00",	//66 => 0
+	    "",
+	    { "CD6A6E" },
+	    {},
+	    "F_00001000",
+	    { "C5CE73" });
 
     // get the settings from the settings file
     Settings = OpenAsIni("./settings.ini");
@@ -5063,6 +5113,9 @@ int main()
 
     //Make couple's mask only give once in the normal cutscene
     Fix_Couples_Mask();
+
+    //Don't get more than one item from a boss remains
+    Write_To_Rom(13844604, "00000000");
 
     // Use Gamecube HUD
     if (Settings["settings"]["GC_Hud"] == "True")
