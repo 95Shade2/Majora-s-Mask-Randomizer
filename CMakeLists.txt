@@ -121,7 +121,6 @@ add_executable(randomizer
   src/io.cpp
   src/rom.cpp
   src/inventory.cpp
-  src/time.cpp
   src/item.cpp
   src/kafei.cpp
   src/utils.cpp)
