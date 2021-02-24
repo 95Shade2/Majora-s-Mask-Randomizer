@@ -47,9 +47,6 @@ Poe {
 	Light Arrow, Bow, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
 	Light Arrow, Large Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
 	Light Arrow, Largest Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Zora Mask
-	Light Arrow, Bow, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
-	Light Arrow, Large Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
-	Light Arrow, Largest Quiver, Elegy of Emptiness, Garo Mask, Hookshot, Deku Mask
 }
 
 Biggest Bomb Bag {
@@ -61,16 +58,17 @@ Blast Mask {
 }
 
 Blue Potion {
-	Bomb Bag
-	Big Bomb Bag
-	Biggest Bomb Bag
-	Deku Stick, Bow, Song of Soaring
-	Deku Stick, Large Quiver, Song of Soaring
-	Deku Stick, Largest Quiver, Song of Soaring
-	Deku Stick, Fire Arrow, Song of Soaring
-	Deku Stick, Ice Arrow, Song of Soaring
-	Deku Stick, Light Arrow, Song of Soaring
-	Garo Mask, Hookshot, Song of Soaring
+	Bomb Bag, 100 Rupees
+	Big Bomb Bag, 100 Rupees
+	Biggest Bomb Bag, 100 Rupees
+	Blast Mask, 100 Rupees
+	Deku Stick, Bow, Song of Soaring, 100 Rupees
+	Deku Stick, Large Quiver, Song of Soaring, 100 Rupees
+	Deku Stick, Largest Quiver, Song of Soaring, 100 Rupees
+	Deku Stick, Fire Arrow, Song of Soaring, 100 Rupees
+	Deku Stick, Ice Arrow, Song of Soaring, 100 Rupees
+	Deku Stick, Light Arrow, Song of Soaring, 100 Rupees
+	Garo Mask, Hookshot, Song of Soaring, 100 Rupees
 	Mushroom
 }
 
@@ -97,6 +95,9 @@ Bow {
 	Deku Mask, Biggest Bomb Bag, Sonata of Awakening
 	Deku Mask, Deku Stick, Sonata of Awakening
 	Deku Mask, Hookshot, Sonata of Awakening
+	Deku Mask, Bow, Sonata of Awakening
+	Deku Mask, Large Quiver, Sonata of Awakening
+	Deku Mask, Largest Quiver, Sonata of Awakening
 }
 
 Bremen Mask {
@@ -201,15 +202,7 @@ Fairy {
 }
 
 Fierce Deity Mask {
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Bomb Bag, Bow, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Bomb Bag, Large Quiver, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Bomb Bag, Largest Quiver, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Big Bomb Bag, Bow, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Big Bomb Bag, Large Quiver, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Big Bomb Bag, Largest Quiver, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Biggest Bomb Bag, Bow, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Biggest Bomb Bag, Large Quiver, Fire Arrow, Light Arrow
-	Sonata of Awakening, New Wave Bossa Nova, Deku Mask, Zora Mask, Biggest Bomb Bag, Largest Quiver, Fire Arrow, Light Arrow
+	Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Oath to Order
 	#Pendant of Memories, Red Potion, Fish, Gold Dust, Blue Potion, Zora Egg, Milk, Big Poe, Swamp Title Deed, Land Title Deed, Mountain Title Deed, Ocean Title Deed, Room Key, Letter to Kafei, Express Letter to Mama, Deku Princess, Bugs, Hot Spring Water, Seahorse, Moon's Tear
 }
 
@@ -1033,4 +1026,58 @@ Gold Rupee {
 	Gold Dust
 	Big Poe
 	Chateau Romani
+}
+
+Odolwa's Remains {
+	Deku Mask, Sonata of Awakening, Bow
+	Deku Mask, Sonata of Awakening, Large Quiver
+	Deku Mask, Sonata of Awakening, Largest Quiver
+	Deku Mask, Sonata of Awakening, Bomb Bag
+	Deku Mask, Sonata of Awakening, Big Bomb Bag
+	Deku Mask, Sonata of Awakening, Biggest Bomb Bag
+	Deku Mask, Sonata of Awakening, Deku Stick, Fierce Deity Mask
+}
+
+Goht's Remains {
+	Goron Mask, Goron Lullaby, Fire Arrow, Bow
+	Goron Mask, Goron Lullaby, Fire Arrow, Large Quiver
+	Goron Mask, Goron Lullaby, Fire Arrow, Largest Quiver
+	Bomb Bag, Fire Arrow, Bow
+	Big Bomb Bag Bag, Fire Arrow, Bow
+	Biggest Bomb Bag Bag, Fire Arrow, Bow
+	Bomb Bag, Fire Arrow, Large Quiver
+	Big Bomb Bag Bag, Fire Arrow, Large Quiver
+	Biggest Bomb Bag Bag, Fire Arrow, Large Quiver
+	Bomb Bag, Fire Arrow, Largest Quiver
+	Big Bomb Bag Bag, Fire Arrow, Largest Quiver
+	Biggest Bomb Bag Bag, Fire Arrow, Largest Quiver
+}
+
+Gyorg's Remains {
+	Zora Mask, New Wave Bossa Nova, Bomb Bag
+	Zora Mask, New Wave Bossa Nova, Big Bomb Bag
+	Zora Mask, New Wave Bossa Nova, Biggest Bomb Bag
+	Zora Mask, New Wave Bossa Nova, Hookshot, Ice Arrow, Bow
+	Zora Mask, New Wave Bossa Nova, Hookshot, Ice Arrow, Large Quiver
+	Zora Mask, New Wave Bossa Nova, Hookshot, Ice Arrow, Largest Quiver
+}
+
+Twinmold's Remains {
+	Bow, Light Arrow, Bomb Bag
+	Large Quiver, Light Arrow, Bomb Bag
+	Largest Quiver, Light Arrow, Bomb Bag
+	Bow, Light Arrow, Big Bomb Bag
+	Large Quiver, Light Arrow, Big Bomb Bag
+	Largest Quiver, Light Arrow, Big Bomb Bag
+	Bow, Light Arrow, Biggest Bomb Bag
+	Large Quiver, Light Arrow, Biggest Bomb Bag
+	Largest Quiver, Light Arrow, Biggest Bomb Bag
+	Bow, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Goron Mask
+	Large Quiver, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Goron Mask
+	Largest Quiver, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Goron Mask
+	Bow, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask
+	Large Quiver, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask
+	Largest Quiver, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask
+	Bow, Light Arrow, Song of Soaring, Deku Stick, Fairy, Hookshot
+	Bow, Light Arrow, Song of Soaring, Deku Stick, Elegy of Emptiness, Hookshot
 }
