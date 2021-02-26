@@ -88,18 +88,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                 Pool_Tabs.TabPages.Add(New_Tab);
             }
-
-            //create the item names
-            //Update_Item_Names();
-            //create the checkbox names
-            //Update_Check_Names();
-            //create the combobox to item name relationship
-            //Update_Combo();
-            //create the checkbox name to comboboxes relationship
-            //Update_Check_To_Combo();
-            //create a list of the textboxes
-            //Update_Checkbox_List();
-
+            
             //update the presets combobox
             Load_Presets();
 
@@ -165,12 +154,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             for (i = 0; i < Item_Names.Length; i++)
             {
                 string item = Item_Names[i];
-                item = Replace_All(item, ' ', '_');
-                item = Replace_All(item, '-', '_');
-                item = Remove_All(item, '\'');
-                item = Remove_All(item, '(');
-                item = Remove_All(item, ')');
                 bool found = false;
+
+                item = Text_To_Checkbox(item);
 
                 for (int p = 0; p < pages.Count; p++)
                 {
@@ -198,6 +184,16 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             return The_Items;
+        }
+
+        private string Text_To_Checkbox(string text)
+        {
+            text = Replace_All(text, ' ', '_');
+            text = Replace_All(text, '-', '_');
+            text = Remove_All(text, '\'');
+            text = Remove_All(text, '(');
+            text = Remove_All(text, ')');
+            return text;
         }
 
         private void Create_Item_Gives()
@@ -322,7 +318,11 @@ namespace Majora_s_Mask_Randomizer_GUI
                 "Heart Container",
                 "Bombchu",
                 "Bombchus (5)",
-                "Bombchus (10)"
+                "Bombchus (10)",
+                "Odolwa's Remains",
+                "Goht's Remains",
+                "Gyorg's Remains",
+                "Twinmold's Remains"
             };
 
             //sort the item names
@@ -622,109 +622,13 @@ namespace Majora_s_Mask_Randomizer_GUI
         ///</summery>
         private void Add_Pools(string Pool)
         {
-            Adult_Wallet_Pool.Items.Add(Pool);
-            All_Night_Mask_Pool.Items.Add(Pool);
-            Big_Bomb_Bag_Pool.Items.Add(Pool);
-            Big_Poe_Pool.Items.Add(Pool);
-            Biggest_Bomb_Bag_Pool.Items.Add(Pool);
-            Blast_Mask_Pool.Items.Add(Pool);
-            Blue_Potion_Pool.Items.Add(Pool);
-            Bomb_Bag_Pool.Items.Add(Pool);
-            Bombchu_Pool.Items.Add(Pool);
-            Bombchus_5_Pool.Items.Add(Pool);
-            Bombchus_10_Pool.Items.Add(Pool);
-            Bombers_Notebook_Pool.Items.Add(Pool);
-            Bow_Pool.Items.Add(Pool);
-            Bremen_Mask_Pool.Items.Add(Pool);
-            Bugs_Pool.Items.Add(Pool);
-            Bunny_Hood_Pool.Items.Add(Pool);
-            Captains_Hat_Pool.Items.Add(Pool);
-            Chateau_Romani_Pool.Items.Add(Pool);
-            Circus_Leaders_Mask_Pool.Items.Add(Pool);
-            Couples_Mask_Pool.Items.Add(Pool);
-            Deku_Mask_Pool.Items.Add(Pool);
-            Deku_Nuts_Pool.Items.Add(Pool);
-            Deku_Nuts_10_Pool.Items.Add(Pool);
-            Deku_Princess_Pool.Items.Add(Pool);
-            Deku_Stick_Pool.Items.Add(Pool);
-            Don_Geros_Mask_Pool.Items.Add(Pool);
-            Elegy_Of_Emptiness_Pool.Items.Add(Pool);
-            Eponas_Song_Pool.Items.Add(Pool);
-            Express_Letter_To_Mama_Pool.Items.Add(Pool);
-            Fairy_Pool.Items.Add(Pool);
-            Fierce_Deity_Mask_Pool.Items.Add(Pool);
-            Fire_Arrow_Pool.Items.Add(Pool);
-            Fish_Pool.Items.Add(Pool);
-            Garo_Mask_Pool.Items.Add(Pool);
-            Giant_Wallet_Pool.Items.Add(Pool);
-            Giants_Mask_Pool.Items.Add(Pool);
-            Gibdo_Mask_Pool.Items.Add(Pool);
-            Gilded_Sword_Pool.Items.Add(Pool);
-            Gold_Dust_Pool.Items.Add(Pool);
-            Goron_Lullaby_Pool.Items.Add(Pool);
-            Goron_Mask_Pool.Items.Add(Pool);
-            Great_Fairys_Mask_Pool.Items.Add(Pool);
-            Great_Fairys_Sword_Pool.Items.Add(Pool);
-            Green_Potion_Pool.Items.Add(Pool);
-            Heart_Container_Pool.Items.Add(Pool);
-            Heart_Piece_Pool.Items.Add(Pool);
-            Heros_Shield_Pool.Items.Add(Pool);
-            Hookshot_Pool.Items.Add(Pool);
-            Hot_Spring_Water_Pool.Items.Add(Pool);
-            Ice_Arrow_Pool.Items.Add(Pool);
-            Kafeis_Mask_Pool.Items.Add(Pool);
-            Kamaros_Mask_Pool.Items.Add(Pool);
-            Keaton_Mask_Pool.Items.Add(Pool);
-            Kokiri_Sword_Pool.Items.Add(Pool);
-            Land_Title_Deed_Pool.Items.Add(Pool);
-            Large_Quiver_Pool.Items.Add(Pool);
-            Largest_Quiver_Pool.Items.Add(Pool);
-            Lens_Of_Truth_Pool.Items.Add(Pool);
-            Letter_To_Kafei_Pool.Items.Add(Pool);
-            Light_Arrow_Pool.Items.Add(Pool);
-            Magic_Beans_Pool.Items.Add(Pool);
-            Mask_Of_Scents_Pool.Items.Add(Pool);
-            Mask_Of_Truth_Pool.Items.Add(Pool);
-            Milk_Pool.Items.Add(Pool);
-            Mirror_Shield_Pool.Items.Add(Pool);
-            Moons_Tear_Pool.Items.Add(Pool);
-            Mountain_Title_Deed_Pool.Items.Add(Pool);
-            Mushroom_Pool.Items.Add(Pool);
-            New_Wave_Bossa_Nova_Pool.Items.Add(Pool);
-            Oath_To_Order_Pool.Items.Add(Pool);
-            Ocean_Title_Deed_Pool.Items.Add(Pool);
-            Pendant_Of_Memories_Pool.Items.Add(Pool);
-            Pictograph_Box_Pool.Items.Add(Pool);
-            Poe_Pool.Items.Add(Pool);
-            Postmans_Hat_Pool.Items.Add(Pool);
-            Powder_Keg_Pool.Items.Add(Pool);
-            Razor_Sword_Pool.Items.Add(Pool);
-            Red_Potion_Pool.Items.Add(Pool);
-            Romanis_Mask_Pool.Items.Add(Pool);
-            Room_Key_Pool.Items.Add(Pool);
-            Seahorse_Pool.Items.Add(Pool);
-            Sonata_Of_Awakening_Pool.Items.Add(Pool);
-            Song_Of_Healing_Pool.Items.Add(Pool);
-            Song_Of_Soaring_Pool.Items.Add(Pool);
-            Song_Of_Storms_Pool.Items.Add(Pool);
-            Spring_Water_Pool.Items.Add(Pool);
-            Stone_Mask_Pool.Items.Add(Pool);
-            Swamp_Title_Deed_Pool.Items.Add(Pool);
-            Zora_Egg_Pool.Items.Add(Pool);
-            Zora_Mask_Pool.Items.Add(Pool);
-            Clocktown_Map_Pool.Items.Add(Pool);
-            Woodfall_Map_Pool.Items.Add(Pool);
-            Snowhead_Map_Pool.Items.Add(Pool);
-            Romani_Ranch_Map_Pool.Items.Add(Pool);
-            Great_Bay_Map_Pool.Items.Add(Pool);
-            Stone_Tower_Map_Pool.Items.Add(Pool);
-            Green_Rupee_Pool.Items.Add(Pool);
-            Blue_Rupee_Pool.Items.Add(Pool);
-            Red_Rupee_Pool.Items.Add(Pool);
-            Purple_Rupee_Pool.Items.Add(Pool);
-            Silver_Rupee_Pool.Items.Add(Pool);
-            Gold_Rupee_Pool.Items.Add(Pool);
-
+            for (int i = 0; i < Item_Names.Length; i++)
+            {
+                string Item_Name = Item_Names[i];
+                ComboBox PoolBox = Item_Objects[Item_Name].Get_Pool();
+                PoolBox.Items.Add(Pool);
+            }
+            
             Change_Pool_Name_Combobox.Items.Add(Pool);
             Remove_Pool_Combobox.Items.Add(Pool);
         }
@@ -1386,6 +1290,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 //Captilize first letter of each word
                 Item = Uppercase(key);
 
+                /*
                 //Keaton Mask => Keaton_Mask (replace spaces)
                 while (Item.Contains(' '))
                 {
@@ -1412,7 +1317,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                 while (Item.Contains(')'))
                 {
                     Item = Item.Remove(Item.IndexOf(')'), 1);
-                }
+                }*/
+
+                Item = Text_To_Checkbox(Item);
 
                 //check the checkbox
                 CheckBox check = Item_Objects[key].Get_Checkbox();
