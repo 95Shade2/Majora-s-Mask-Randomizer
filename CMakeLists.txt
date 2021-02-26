@@ -165,6 +165,8 @@ add_executable(mm_rando_gui
 	"Majora's Mask Randomizer GUI/wallets_form.Designer.cs"
 	"Majora's Mask Randomizer GUI/wallets_form.resx"
 	
+	"Majora's Mask Randomizer GUI/Item.cs"
+	
 	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
 	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
 	"Majora's Mask Randomizer GUI/Properties/Resources.resx"

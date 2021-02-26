@@ -72,10 +72,6 @@ Blue Potion {
 	Mushroom
 }
 
-Blue Rupee {
-	
-}
-
 Bomb Bag {
 	50 Rupees
 }
@@ -328,10 +324,6 @@ Gold Dust {
 	Goron Mask, Bow, Fire Arrow, Hookshot
 	Goron Mask, Large Quiver, Fire Arrow, Hookshot
 	Goron Mask, Largest Quiver, Fire Arrow, Hookshot
-}
-
-Gold Rupee {
-	
 }
 
 Goron Mask {
@@ -624,10 +616,6 @@ Powder Keg {
 	Goron Mask, Fire Arrow, Largest Quiver
 }
 
-Purple Rupee {
-	
-}
-
 Razor Sword {
 	Razor Sword, Bow, 50 Rupees
 	Razor Sword, Large Quiver, 50 Rupees
@@ -649,10 +637,6 @@ Razor Sword {
 
 Red Potion {
 	20 Rupees
-}
-
-Red Rupee {
-	
 }
 
 Romani's Mask {
@@ -685,10 +669,6 @@ Seahorse {
 	Pictograph Box, Zora Mask, Bow, Deku Stick, Song of Soaring
 	Pictograph Box, Zora Mask, Large Quiver, Deku Stick, Song of Soaring
 	Pictograph Box, Zora Mask, Largest Quiver, Deku Stick, Song of Soaring
-}
-
-Silver Rupee {
-	
 }
 
 Spring Water {
