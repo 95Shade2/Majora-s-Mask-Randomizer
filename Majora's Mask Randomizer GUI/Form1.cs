@@ -1289,36 +1289,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                 //Captilize first letter of each word
                 Item = Uppercase(key);
-
-                /*
-                //Keaton Mask => Keaton_Mask (replace spaces)
-                while (Item.Contains(' '))
-                {
-                    Item = Item.Replace(' ', '_');
-                }
-
-                //Kafei's_Mask => Kafeis_Mask (remove ')
-                while (Item.Contains('\''))
-                {
-                    Item = Item.Remove(Item.IndexOf('\''), 1);
-                }
-
-                //All-Night_Mask => All_Night_Mask (replace '-' with '_')
-                while (Item.Contains('-'))
-                {
-                    Item = Item.Replace('-', '_');
-                }
-
-                //Deku_Nuts_(10) => Deku_Nuts_10 (Remove paranthasis)
-                while (Item.Contains('('))
-                {
-                    Item = Item.Remove(Item.IndexOf('('), 1);
-                }
-                while (Item.Contains(')'))
-                {
-                    Item = Item.Remove(Item.IndexOf(')'), 1);
-                }*/
-
+                
                 Item = Text_To_Checkbox(Item);
 
                 //check the checkbox

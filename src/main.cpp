@@ -615,14 +615,17 @@ void Remove_Item_Checks()
     Write_To_Rom(16566324, "10000004");
     Write_To_Rom(15573992, "10000004");
     Write_To_Rom(16567248, "10000006");
+
     Write_To_Rom(14914328, "24060023"); // make clock town archery give large quiver
-    Write_To_Rom(14914340, "00000000"); // make clock town archery guy ignore if you've
-                                        // already gotten the quiver from him
+    Write_To_Rom(14914340, "00000000"); // make clock town archery guy ignore if you've already gotten the quiver from him
+	Write_To_Rom(14914316, "00000000");	// make town archery ignore which quiver the player has
+	Write_To_Rom(14914408, "24060023");	// make town archery gold rupee give quiver (gold rupee is what you get after getting hp)
+
     Write_To_Rom(14913640, "24060024"); // make swamp archery give largest quiver
-    Write_To_Rom(14913652, "00000000"); // make swamp archery guy ignore if you've already
-                                        // gotten the quiver from him
-    Write_To_Rom(14913688,
-                 "24060024"); // make swamp archery guy gives quiver instead of 20 rupees
+    Write_To_Rom(14913688, "24060024"); // make swamp archery guy gives quiver instead of 20 rupees (red rupee is what you get after getting the quiver)
+	Write_To_Rom(14913736, "24060024");	// make swamp archery give quiver instead of purple rupee (purple rupee is what you get after getting the hp)
+	Write_To_Rom(14913628, "00000000");	// make swamp archery ignore which quiver the player has
+
     Write_To_Rom(13334300, "10220006");
     Write_To_Rom(16805032, "904A3F7B314B0004");
     Write_To_Rom(16805048, "100B0006");
@@ -3540,7 +3543,6 @@ void RespawnHPs()
     Write_To_Rom(14913743, "08");
     Write_To_Rom(14913543, "08");
     Write_To_Rom(14913559, "08");
-    Write_To_Rom(14913544, "00000000");
     // make witch swamp archery gives hp once per cycle  25
     Write_To_Rom(15445676, "80");
     Write_To_Rom(15445619, "80");
