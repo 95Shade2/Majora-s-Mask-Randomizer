@@ -5044,9 +5044,6 @@ int main()
     // write spoiler log
     Write_Log(Settings["settings"]["Seed"]);
 
-	system("pause");
-	return 0;
-
     // decompress rom
     cout << "\nDecompressing rom\n";
     if (system(("ndec.exe \"" + Settings["settings"]["Rom"] + "\" " + Rom_Location)
