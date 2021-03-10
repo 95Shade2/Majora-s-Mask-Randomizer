@@ -318,12 +318,9 @@ Gold Dust {
 	Goron Mask, Bow, Fire Arrow, Biggest Bomb Bag
 	Goron Mask, Large Quiver, Fire Arrow, Biggest Bomb Bag
 	Goron Mask, Largest Quiver, Fire Arrow, Biggest Bomb Bag
-	Goron Mask, Bow, Fire Arrow, Powder Keg
-	Goron Mask, Large Quiver, Fire Arrow, Powder Keg
-	Goron Mask, Largest Quiver, Fire Arrow, Powder Keg
-	Goron Mask, Bow, Fire Arrow, Hookshot
-	Goron Mask, Large Quiver, Fire Arrow, Hookshot
-	Goron Mask, Largest Quiver, Fire Arrow, Hookshot
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
 }
 
 Goron Mask {
@@ -906,19 +903,16 @@ Heart Container {
 	Biggest Bomb Bag, Bow, Fire Arrow
 	Biggest Bomb Bag, Large Quiver, Fire Arrow
 	Biggest Bomb Bag, Largest Quiver, Fire Arrow
-	Goron Mask, Goron Lullaby, Bow, Fire Arrow, Powder Keg
-	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow, Powder Keg
-	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow, Powder Keg
-	Goron Mask, Goron Lullaby, Bow, Fire Arrow, Hookshot
-	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow, Hookshot
-	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow, Hookshot
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
 	Zora Mask, New Wave Bossa Nova, Bomb Bag
 	Zora Mask, New Wave Bossa Nova, Big Bomb Bag
 	Zora Mask, New Wave Bossa Nova, Biggest Bomb Bag
-	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot
-	Zora Mask, New Wave Bossa Nova, Song of Soaring, Bow, Deku Stick, Hookshot
-	Zora Mask, New Wave Bossa Nova, Song of Soaring, Large Quiver, Deku Stick, Hookshot
-	Zora Mask, New Wave Bossa Nova, Song of Soaring, Largest Quiver, Deku Stick, Hookshot
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Ice Arrow
+	Zora Mask, New Wave Bossa Nova, Song of Soaring, Bow, Deku Stick, Hookshot, Ice Arrow
+	Zora Mask, New Wave Bossa Nova, Song of Soaring, Large Quiver, Deku Stick, Hookshot, Ice Arrow
+	Zora Mask, New Wave Bossa Nova, Song of Soaring, Largest Quiver, Deku Stick, Hookshot, Ice Arrow
 	Bomb Bag, Bow, Light Arrow
 	Bomb Bag, Large Quiver, Light Arrow
 	Bomb Bag, Largest Quiver, Light Arrow
@@ -931,6 +925,19 @@ Heart Container {
 	Song of Soaring, Bow, Deku Stick, Elegy of Emptiness, Light Arrow, Hookshot
 	Song of Soaring, Large Quiver, Deku Stick, Elegy of Emptiness, Light Arrow, Hookshot
 	Song of Soaring, Largest Quiver, Deku Stick, Elegy of Emptiness, Light Arrow, Hookshot
+	Deku Mask, Sonata of Awakening, Odolwa's Remains
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Epona's Song, Hookshot
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Epona's Song, Fierce Deity Mask
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Song of Soaring, Deku Stick, Bow, Hookshot
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Song of Soaring, Deku Stick, Large Quiver, Hookshot
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Song of Soaring, Deku Stick, Largest Quiver, Hookshot
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Song of Soaring, Deku Stick, Bow, Fierce Deity Mask
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Song of Soaring, Deku Stick, Large Quiver, Fierce Deity Mask
+	Zora Mask, New Wave Bossa Nova, Gyorg's Remains, Song of Soaring, Deku Stick, Largest Quiver, Fierce Deity Mask
+	Bow, Light Arrow, Twinmold's Remains, Song of Soaring, Deku Stick, Elegy of Emptiness
+	Bow, Light Arrow, Twinmold's Remains, Song of Soaring, Deku Stick, Fairy
+	Bow, Light Arrow, Twinmold's Remains, Garo Mask, Hookshot, Goron Mask, Elegy of Emptiness
+	Bow, Light Arrow, Twinmold's Remains, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness
 }
 
 Bombchu {
@@ -1016,6 +1023,7 @@ Odolwa's Remains {
 	Deku Mask, Sonata of Awakening, Big Bomb Bag
 	Deku Mask, Sonata of Awakening, Biggest Bomb Bag
 	Deku Mask, Sonata of Awakening, Deku Stick, Fierce Deity Mask
+	Deku Mask, Sonata of Awakening, Odolwa's Remains
 }
 
 Goht's Remains {
@@ -1040,6 +1048,8 @@ Gyorg's Remains {
 	Zora Mask, New Wave Bossa Nova, Hookshot, Ice Arrow, Bow
 	Zora Mask, New Wave Bossa Nova, Hookshot, Ice Arrow, Large Quiver
 	Zora Mask, New Wave Bossa Nova, Hookshot, Ice Arrow, Largest Quiver
+	Zora Mask, New Wave Bossa Nova, Hookshot, Gyorg's Remains
+	Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Gyorg's Remains
 }
 
 Twinmold's Remains {
@@ -1060,4 +1070,8 @@ Twinmold's Remains {
 	Largest Quiver, Light Arrow, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask
 	Bow, Light Arrow, Song of Soaring, Deku Stick, Fairy, Hookshot
 	Bow, Light Arrow, Song of Soaring, Deku Stick, Elegy of Emptiness, Hookshot
+	Bow, Light Arrow, Twinmold's Remains, Song of Soaring, Deku Stick, Elegy of Emptiness
+	Bow, Light Arrow, Twinmold's Remains, Song of Soaring, Deku Stick, Fairy
+	Bow, Light Arrow, Twinmold's Remains, Garo Mask, Hookshot, Goron Mask, Elegy of Emptiness
+	Bow, Light Arrow, Twinmold's Remains, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness
 }
