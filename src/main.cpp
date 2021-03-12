@@ -3362,6 +3362,8 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_To_Rom(15953540, "24020001");
     Write_To_Rom(15955712, "24020001");
 
+	//remove kafei running cs after saving sun's mask
+	Write_To_Rom(15374732, "1000001C24020002");
 }
 
 ///Writes data from a file to the rom
