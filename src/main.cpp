@@ -98,14 +98,14 @@ void Place_Items(map<string, Item> &Items, bool Songs_Same_Pool)
         // replace each get item entry
         if (Items[Old_Item].Address_Get.size() > 0)
         {
-            // cout << Items[Old_Item].Address_Get[0] << "\t" << Item_Get(Items[New_Item])
-            // << endl;
-
-            for (int i = 0; i < Items[Old_Item].Address_Get.size(); i++)
-            {
-                Write_To_Rom(hex_to_decimal(Items[Old_Item].Address_Get[i]),
-                             Item_Get(Items[New_Item]));
-            }
+			//only change the get item data if the current item is not vanilla
+			if (Old_Item != New_Item) {
+				for (int i = 0; i < Items[Old_Item].Address_Get.size(); i++)
+				{
+					Write_To_Rom(hex_to_decimal(Items[Old_Item].Address_Get[i]),
+						Item_Get(Items[New_Item]));
+				}
+			}
         }
 
         // replace each text id location
@@ -118,8 +118,7 @@ void Place_Items(map<string, Item> &Items, bool Songs_Same_Pool)
             }
         }
 
-        // place the other locations (for rupees, it's the rupees amount) - this makes
-        // rupees only randomizable with other rupees
+        // place the other locations - don't think this is ever used anymore, need to check before removing
         if (Items[Old_Item].Other_Locations.size() > 0)
         {
             for (int i = 0; i < Items[Old_Item].Other_Locations.size(); i++)
@@ -129,7 +128,7 @@ void Place_Items(map<string, Item> &Items, bool Songs_Same_Pool)
             }
         }
 
-        // making the get item give the rupee value of the correct rupee
+        // making the get item give the rupee value of the correct rupee - don't think this is ever used anymore, need to check before removing
         if (Items[Old_Item].Other_Locations2.size() > 0)
         {
             for (int i = 0; i < Items[Old_Item].Other_Locations2.size(); i++)
@@ -155,6 +154,7 @@ void Place_Items(map<string, Item> &Items, bool Songs_Same_Pool)
                              Items[New_Item].Song2_ID);
             }
         }
+
         // place the song ids minus 61 where they go
         else if (Items[Old_Item].ID_Minus_61_Locations.size() > 0)
         {
