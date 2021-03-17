@@ -3615,37 +3615,6 @@ void RespawnHPs()
     Write_To_Rom(12962574, "00"); // remove SoT flag for secret shrine hp  52
 }
 
-void Fix_Couples_Mask() {
-	vector<string> Flag_Checker = {
-		"27BDFFE0",
-		"AFBF0004",
-		"AFA50008",
-		"AFA6000C",
-		"AFA70010",
-		"3C06803F",
-		"80C78994",
-		"30E50040",
-		"54A00005",
-		"8FBF0004",
-		"34E50040",
-		"A0C58994",
-		"3C1F8011",
-		"27FF2E80",
-		"8FA50008",
-		"8FA6000C",
-		"8FA70010",
-		"27BD0020",
-		"03E00008",
-		"8FBFFFE4"
-	};
-
-	Write_To_Rom(15803856, "0C02CCD2");
-	for (int c = 0; c < Flag_Checker.size(); c++)
-	{
-		Write_To_Rom(11835528 + (c * 4), Flag_Checker[c]);
-	}
-}
-
 void Setup_Items() {
 
 	// name    item id     get item id   text id     flag   object   get item model  pool
@@ -5145,7 +5114,7 @@ int main()
     Write_To_Rom(15924108, "00000000");
 
     //Make couple's mask only give once in the normal cutscene
-    Fix_Couples_Mask();
+	Write_Cutscene_Rom(46642260, "couples_long");
 
     //Don't get more than one item from a boss remains
     Write_To_Rom(13844604, "00000000");
