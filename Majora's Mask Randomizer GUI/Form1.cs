@@ -826,6 +826,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Text += "LikeLikeMirror=" + edibleMirrorShieldToolStripMenuItem.Checked + "\n"; //whether or not a likelike can eat the mirror shield
 
                 Text += "KeepRazor=" + keepRazorSwordOnSoTToolStripMenuItem.Checked + "\n"; //whether or not the player keeps razor sword on Song of Time
+
+                Text += "OceanAnyDay=" + oceanSpiderHouseAnyDayToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
             }
 
             if (colors)
@@ -1200,6 +1202,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 keepRazorSwordOnSoTToolStripMenuItem.Checked = false;
+            }
+
+            if (settings.ContainsKey("OceanAnyDay") && settings["OceanAnyDay"] == "True")
+            {
+                oceanSpiderHouseAnyDayToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                oceanSpiderHouseAnyDayToolStripMenuItem.Checked = false;
             }
         }
 

@@ -449,6 +449,7 @@
             this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
             this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
             this.keepRazorSwordOnSoTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oceanSpiderHouseAnyDayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Items_Tab.SuspendLayout();
             this.Items_Items_Tab.SuspendLayout();
             this.Items_Sub_Tab.SuspendLayout();
@@ -4909,7 +4910,8 @@
             this.gCHudToolStripMenuItem,
             this.respawnHPsToolStripMenuItem,
             this.edibleMirrorShieldToolStripMenuItem,
-            this.keepRazorSwordOnSoTToolStripMenuItem});
+            this.keepRazorSwordOnSoTToolStripMenuItem,
+            this.oceanSpiderHouseAnyDayToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -4918,49 +4920,49 @@
             // createWadToolStripMenuItem
             // 
             this.createWadToolStripMenuItem.Name = "createWadToolStripMenuItem";
-            this.createWadToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.createWadToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.createWadToolStripMenuItem.Text = "Create Wad";
             this.createWadToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // swampScrubSalesBeansToolStripMenuItem
             // 
             this.swampScrubSalesBeansToolStripMenuItem.Name = "swampScrubSalesBeansToolStripMenuItem";
-            this.swampScrubSalesBeansToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.swampScrubSalesBeansToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.swampScrubSalesBeansToolStripMenuItem.Text = "Swamp Scrub Sales Beans";
             this.swampScrubSalesBeansToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // playAsKafeiToolStripMenuItem
             // 
             this.playAsKafeiToolStripMenuItem.Name = "playAsKafeiToolStripMenuItem";
-            this.playAsKafeiToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.playAsKafeiToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.playAsKafeiToolStripMenuItem.Text = "Play as Kafei";
             this.playAsKafeiToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // removeCutscenesToolStripMenuItem
             // 
             this.removeCutscenesToolStripMenuItem.Name = "removeCutscenesToolStripMenuItem";
-            this.removeCutscenesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.removeCutscenesToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.removeCutscenesToolStripMenuItem.Text = "Remove Cutscenes";
             this.removeCutscenesToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // gCHudToolStripMenuItem
             // 
             this.gCHudToolStripMenuItem.Name = "gCHudToolStripMenuItem";
-            this.gCHudToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.gCHudToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.gCHudToolStripMenuItem.Text = "GC Hud";
             this.gCHudToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // respawnHPsToolStripMenuItem
             // 
             this.respawnHPsToolStripMenuItem.Name = "respawnHPsToolStripMenuItem";
-            this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.respawnHPsToolStripMenuItem.Text = "Respawn HPs";
             this.respawnHPsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // edibleMirrorShieldToolStripMenuItem
             // 
             this.edibleMirrorShieldToolStripMenuItem.Name = "edibleMirrorShieldToolStripMenuItem";
-            this.edibleMirrorShieldToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.edibleMirrorShieldToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.edibleMirrorShieldToolStripMenuItem.Text = "Edible Mirror Shield";
             this.edibleMirrorShieldToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
@@ -5021,9 +5023,16 @@
             // keepRazorSwordOnSoTToolStripMenuItem
             // 
             this.keepRazorSwordOnSoTToolStripMenuItem.Name = "keepRazorSwordOnSoTToolStripMenuItem";
-            this.keepRazorSwordOnSoTToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.keepRazorSwordOnSoTToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.keepRazorSwordOnSoTToolStripMenuItem.Text = "Keep Razor Sword on SoT";
             this.keepRazorSwordOnSoTToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+            // 
+            // oceanSpiderHouseAnyDayToolStripMenuItem
+            // 
+            this.oceanSpiderHouseAnyDayToolStripMenuItem.Name = "oceanSpiderHouseAnyDayToolStripMenuItem";
+            this.oceanSpiderHouseAnyDayToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.oceanSpiderHouseAnyDayToolStripMenuItem.Text = "Ocean Spider House Any Day";
+            this.oceanSpiderHouseAnyDayToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // Main_Window
             // 
@@ -5529,6 +5538,7 @@
         private System.Windows.Forms.ComboBox Gyorgs_Remains_Pool;
         private System.Windows.Forms.ComboBox Gyorgs_Remains_Gives;
         private System.Windows.Forms.ToolStripMenuItem keepRazorSwordOnSoTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oceanSpiderHouseAnyDayToolStripMenuItem;
     }
 }
 

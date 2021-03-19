@@ -5198,6 +5198,11 @@ int main()
 		Write_To_Rom(12428980, "29A10002");
 	}
 
+	//make ocean spider house any day by making the guy think it's always day one
+	if (Settings["settings"]["OceanAnyDay"] == "True") {
+		Write_To_Rom(16565980, "24080001");
+	}
+
     // compress rom and create wad
     if (Settings["settings"]["Wad"] == "True")
     {
