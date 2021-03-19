@@ -25,3 +25,11 @@ void Write_To_Rom(int address, string hex)
     }
 }
 
+void Write_Function(int address, vector<string> function) {
+	string command;
+	
+	for (int c = 0; c < function.size(); c++) {
+		command = function[c];
+		Write_To_Rom(address + (c * 4), command);
+	}
+}

@@ -3026,6 +3026,31 @@ void Shorten_Igos_CS()
     Write_To_Rom(14860252, "10000006"); // remove Igos mouth from moving in third angle
 }
 
+void Remove_Clock_Tower_CS() {
+	vector<string> function = {
+		"27BDFFF0",
+		"AFA50004",
+		"AFA60008",
+		"AFBF000C",
+		"3C05801F",
+		"2406FFFC",
+		"ACA63320",
+		"8FA50004",
+		"8FA60008",
+		"8FBF000C",
+		"03E00008",
+		"27BD0010"
+	};
+
+	Write_Function(11835528, function);
+
+	//write the jump instruction to the function
+	Write_To_Rom(15387068, "0C02CCD2");
+
+	//make the game save link's cordinates to the correct place in memory to load it later
+	Write_To_Rom(15386940, "24050000");
+}
+
 ///Shortens and remove cutscenes
 void Remove_Cutscenes(bool Songs_Same_Pool)
 {
@@ -3364,6 +3389,9 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 
 	//remove kafei running cs after saving sun's mask
 	Write_To_Rom(15374732, "1000001C24020002");
+
+	//remove clock tower opening cs
+	Remove_Clock_Tower_CS();
 }
 
 ///Writes data from a file to the rom
