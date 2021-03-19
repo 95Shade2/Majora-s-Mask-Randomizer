@@ -1103,15 +1103,27 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Open_Base_Rom_Dialog.FileName = settings["Rom"];
                 Update_Rom_Text();
             }
+            else
+            {
+                Open_Base_Rom_Dialog.FileName = "";
+            }
 
             if (settings.ContainsKey("Seed") && settings["Seed"] != "")
             {
                 Seed_Textbox.Text = settings["Seed"];
             }
+            else
+            {
+                Seed_Textbox.Text = "";
+            }
 
             if (settings.ContainsKey("Wad") && settings["Wad"] == "True")
             {
                 createWadToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                createWadToolStripMenuItem.Checked = false;
             }
 
             if (settings.ContainsKey("Logic") && settings["Logic"] != "")
@@ -1120,25 +1132,45 @@ namespace Majora_s_Mask_Randomizer_GUI
                 log_index = Logic_Combobox.Items.IndexOf(settings["Logic"]);
                 Logic_Combobox.SelectedIndex = log_index;
             }
+            else
+            {
+                Logic_Combobox.SelectedIndex = -1;
+            }
 
             if (settings.ContainsKey("Kafei") && settings["Kafei"] == "True")
             {
                 playAsKafeiToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                playAsKafeiToolStripMenuItem.Checked = false;
             }
 
             if (settings.ContainsKey("ScrubBeans") && settings["ScrubBeans"] == "True")
             {
                 swampScrubSalesBeansToolStripMenuItem.Checked = true;
             }
+            else
+            {
+                swampScrubSalesBeansToolStripMenuItem.Checked = false;
+            }
 
             if (settings.ContainsKey("Remove_Cutscenes") && settings["Remove_Cutscenes"] == "True")
             {
                 removeCutscenesToolStripMenuItem.Checked = true;
             }
+            else
+            {
+                removeCutscenesToolStripMenuItem.Checked = false;
+            }
 
             if (settings.ContainsKey("GC_Hud") && settings["GC_Hud"] == "True")
             {
                 gCHudToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                gCHudToolStripMenuItem.Checked = false;
             }
 
             if (settings.ContainsKey("BlastMask_Cooldown"))
@@ -1148,6 +1180,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 BlastMaskFrames_Num.Value = 310;
+            }
+
+            if (settings.ContainsKey("LikeLikeMirror") && settings["LikeLikeMirror"] == "True")
+            {
+                edibleMirrorShieldToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                edibleMirrorShieldToolStripMenuItem.Checked = false;
             }
         }
 
