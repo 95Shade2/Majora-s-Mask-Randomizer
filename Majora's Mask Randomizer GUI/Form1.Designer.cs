@@ -394,6 +394,18 @@
             this.Green_Rupee_Pool = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.Other_Page = new System.Windows.Forms.TabPage();
+            this.Gyorgs_Remains = new System.Windows.Forms.CheckBox();
+            this.Gyorgs_Remains_Pool = new System.Windows.Forms.ComboBox();
+            this.Gyorgs_Remains_Gives = new System.Windows.Forms.ComboBox();
+            this.Twinmolds_Remains = new System.Windows.Forms.CheckBox();
+            this.Twinmolds_Remains_Pool = new System.Windows.Forms.ComboBox();
+            this.Twinmolds_Remains_Gives = new System.Windows.Forms.ComboBox();
+            this.Gohts_Remains = new System.Windows.Forms.CheckBox();
+            this.Gohts_Remains_Pool = new System.Windows.Forms.ComboBox();
+            this.Gohts_Remains_Gives = new System.Windows.Forms.ComboBox();
+            this.Odolwas_Remains = new System.Windows.Forms.CheckBox();
+            this.Odolwas_Remains_Pool = new System.Windows.Forms.ComboBox();
+            this.Odolwas_Remains_Gives = new System.Windows.Forms.ComboBox();
             this.Heart_Container = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
             this.Snowhead_Map_Gives = new System.Windows.Forms.ComboBox();
@@ -436,18 +448,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
             this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
-            this.Odolwas_Remains = new System.Windows.Forms.CheckBox();
-            this.Odolwas_Remains_Pool = new System.Windows.Forms.ComboBox();
-            this.Odolwas_Remains_Gives = new System.Windows.Forms.ComboBox();
-            this.Gohts_Remains = new System.Windows.Forms.CheckBox();
-            this.Gohts_Remains_Pool = new System.Windows.Forms.ComboBox();
-            this.Gohts_Remains_Gives = new System.Windows.Forms.ComboBox();
-            this.Twinmolds_Remains = new System.Windows.Forms.CheckBox();
-            this.Twinmolds_Remains_Pool = new System.Windows.Forms.ComboBox();
-            this.Twinmolds_Remains_Gives = new System.Windows.Forms.ComboBox();
-            this.Gyorgs_Remains = new System.Windows.Forms.CheckBox();
-            this.Gyorgs_Remains_Pool = new System.Windows.Forms.ComboBox();
-            this.Gyorgs_Remains_Gives = new System.Windows.Forms.ComboBox();
+            this.keepRazorSwordOnSoTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Items_Tab.SuspendLayout();
             this.Items_Items_Tab.SuspendLayout();
             this.Items_Sub_Tab.SuspendLayout();
@@ -4486,6 +4487,130 @@
             this.Other_Page.Text = "Maps/Others";
             this.Other_Page.UseVisualStyleBackColor = true;
             // 
+            // Gyorgs_Remains
+            // 
+            this.Gyorgs_Remains.AutoSize = true;
+            this.Gyorgs_Remains.Location = new System.Drawing.Point(6, 292);
+            this.Gyorgs_Remains.Name = "Gyorgs_Remains";
+            this.Gyorgs_Remains.Size = new System.Drawing.Size(105, 17);
+            this.Gyorgs_Remains.TabIndex = 106;
+            this.Gyorgs_Remains.Text = "Gyorg\'s Remains";
+            this.Gyorgs_Remains.UseVisualStyleBackColor = true;
+            this.Gyorgs_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // Gyorgs_Remains_Pool
+            // 
+            this.Gyorgs_Remains_Pool.Enabled = false;
+            this.Gyorgs_Remains_Pool.FormattingEnabled = true;
+            this.Gyorgs_Remains_Pool.Location = new System.Drawing.Point(148, 290);
+            this.Gyorgs_Remains_Pool.Name = "Gyorgs_Remains_Pool";
+            this.Gyorgs_Remains_Pool.Size = new System.Drawing.Size(72, 21);
+            this.Gyorgs_Remains_Pool.TabIndex = 107;
+            this.Gyorgs_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+            // 
+            // Gyorgs_Remains_Gives
+            // 
+            this.Gyorgs_Remains_Gives.Enabled = false;
+            this.Gyorgs_Remains_Gives.FormattingEnabled = true;
+            this.Gyorgs_Remains_Gives.Location = new System.Drawing.Point(226, 290);
+            this.Gyorgs_Remains_Gives.Name = "Gyorgs_Remains_Gives";
+            this.Gyorgs_Remains_Gives.Size = new System.Drawing.Size(155, 21);
+            this.Gyorgs_Remains_Gives.TabIndex = 108;
+            this.Gyorgs_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+            // 
+            // Twinmolds_Remains
+            // 
+            this.Twinmolds_Remains.AutoSize = true;
+            this.Twinmolds_Remains.Location = new System.Drawing.Point(6, 319);
+            this.Twinmolds_Remains.Name = "Twinmolds_Remains";
+            this.Twinmolds_Remains.Size = new System.Drawing.Size(122, 17);
+            this.Twinmolds_Remains.TabIndex = 103;
+            this.Twinmolds_Remains.Text = "Twinmold\'s Remains";
+            this.Twinmolds_Remains.UseVisualStyleBackColor = true;
+            this.Twinmolds_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // Twinmolds_Remains_Pool
+            // 
+            this.Twinmolds_Remains_Pool.Enabled = false;
+            this.Twinmolds_Remains_Pool.FormattingEnabled = true;
+            this.Twinmolds_Remains_Pool.Location = new System.Drawing.Point(148, 317);
+            this.Twinmolds_Remains_Pool.Name = "Twinmolds_Remains_Pool";
+            this.Twinmolds_Remains_Pool.Size = new System.Drawing.Size(72, 21);
+            this.Twinmolds_Remains_Pool.TabIndex = 104;
+            this.Twinmolds_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+            // 
+            // Twinmolds_Remains_Gives
+            // 
+            this.Twinmolds_Remains_Gives.Enabled = false;
+            this.Twinmolds_Remains_Gives.FormattingEnabled = true;
+            this.Twinmolds_Remains_Gives.Location = new System.Drawing.Point(226, 317);
+            this.Twinmolds_Remains_Gives.Name = "Twinmolds_Remains_Gives";
+            this.Twinmolds_Remains_Gives.Size = new System.Drawing.Size(155, 21);
+            this.Twinmolds_Remains_Gives.TabIndex = 105;
+            this.Twinmolds_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+            // 
+            // Gohts_Remains
+            // 
+            this.Gohts_Remains.AutoSize = true;
+            this.Gohts_Remains.Location = new System.Drawing.Point(6, 265);
+            this.Gohts_Remains.Name = "Gohts_Remains";
+            this.Gohts_Remains.Size = new System.Drawing.Size(100, 17);
+            this.Gohts_Remains.TabIndex = 100;
+            this.Gohts_Remains.Text = "Goht\'s Remains";
+            this.Gohts_Remains.UseVisualStyleBackColor = true;
+            this.Gohts_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // Gohts_Remains_Pool
+            // 
+            this.Gohts_Remains_Pool.Enabled = false;
+            this.Gohts_Remains_Pool.FormattingEnabled = true;
+            this.Gohts_Remains_Pool.Location = new System.Drawing.Point(148, 263);
+            this.Gohts_Remains_Pool.Name = "Gohts_Remains_Pool";
+            this.Gohts_Remains_Pool.Size = new System.Drawing.Size(72, 21);
+            this.Gohts_Remains_Pool.TabIndex = 101;
+            this.Gohts_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+            // 
+            // Gohts_Remains_Gives
+            // 
+            this.Gohts_Remains_Gives.Enabled = false;
+            this.Gohts_Remains_Gives.FormattingEnabled = true;
+            this.Gohts_Remains_Gives.Location = new System.Drawing.Point(226, 263);
+            this.Gohts_Remains_Gives.Name = "Gohts_Remains_Gives";
+            this.Gohts_Remains_Gives.Size = new System.Drawing.Size(155, 21);
+            this.Gohts_Remains_Gives.TabIndex = 102;
+            this.Gohts_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+            // 
+            // Odolwas_Remains
+            // 
+            this.Odolwas_Remains.AutoSize = true;
+            this.Odolwas_Remains.Location = new System.Drawing.Point(6, 238);
+            this.Odolwas_Remains.Name = "Odolwas_Remains";
+            this.Odolwas_Remains.Size = new System.Drawing.Size(113, 17);
+            this.Odolwas_Remains.TabIndex = 97;
+            this.Odolwas_Remains.Text = "Odolwa\'s Remains";
+            this.Odolwas_Remains.UseVisualStyleBackColor = true;
+            this.Odolwas_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // Odolwas_Remains_Pool
+            // 
+            this.Odolwas_Remains_Pool.Enabled = false;
+            this.Odolwas_Remains_Pool.FormattingEnabled = true;
+            this.Odolwas_Remains_Pool.Location = new System.Drawing.Point(148, 236);
+            this.Odolwas_Remains_Pool.Name = "Odolwas_Remains_Pool";
+            this.Odolwas_Remains_Pool.Size = new System.Drawing.Size(72, 21);
+            this.Odolwas_Remains_Pool.TabIndex = 98;
+            this.Odolwas_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
+            // 
+            // Odolwas_Remains_Gives
+            // 
+            this.Odolwas_Remains_Gives.Enabled = false;
+            this.Odolwas_Remains_Gives.FormattingEnabled = true;
+            this.Odolwas_Remains_Gives.Location = new System.Drawing.Point(226, 236);
+            this.Odolwas_Remains_Gives.Name = "Odolwas_Remains_Gives";
+            this.Odolwas_Remains_Gives.Size = new System.Drawing.Size(155, 21);
+            this.Odolwas_Remains_Gives.TabIndex = 99;
+            this.Odolwas_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+            // 
             // Heart_Container
             // 
             this.Heart_Container.AutoSize = true;
@@ -4783,7 +4908,8 @@
             this.removeCutscenesToolStripMenuItem,
             this.gCHudToolStripMenuItem,
             this.respawnHPsToolStripMenuItem,
-            this.edibleMirrorShieldToolStripMenuItem});
+            this.edibleMirrorShieldToolStripMenuItem,
+            this.keepRazorSwordOnSoTToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -4892,129 +5018,12 @@
             this.BlastMaskSeconds_Label.TabIndex = 97;
             this.BlastMaskSeconds_Label.Text = "10:01";
             // 
-            // Odolwas_Remains
+            // keepRazorSwordOnSoTToolStripMenuItem
             // 
-            this.Odolwas_Remains.AutoSize = true;
-            this.Odolwas_Remains.Location = new System.Drawing.Point(6, 238);
-            this.Odolwas_Remains.Name = "Odolwas_Remains";
-            this.Odolwas_Remains.Size = new System.Drawing.Size(113, 17);
-            this.Odolwas_Remains.TabIndex = 97;
-            this.Odolwas_Remains.Text = "Odolwa\'s Remains";
-            this.Odolwas_Remains.UseVisualStyleBackColor = true;
-            this.Odolwas_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // Odolwas_Remains_Pool
-            // 
-            this.Odolwas_Remains_Pool.Enabled = false;
-            this.Odolwas_Remains_Pool.FormattingEnabled = true;
-            this.Odolwas_Remains_Pool.Location = new System.Drawing.Point(148, 236);
-            this.Odolwas_Remains_Pool.Name = "Odolwas_Remains_Pool";
-            this.Odolwas_Remains_Pool.Size = new System.Drawing.Size(72, 21);
-            this.Odolwas_Remains_Pool.TabIndex = 98;
-            this.Odolwas_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-            // 
-            // Odolwas_Remains_Gives
-            // 
-            this.Odolwas_Remains_Gives.Enabled = false;
-            this.Odolwas_Remains_Gives.FormattingEnabled = true;
-            this.Odolwas_Remains_Gives.Location = new System.Drawing.Point(226, 236);
-            this.Odolwas_Remains_Gives.Name = "Odolwas_Remains_Gives";
-            this.Odolwas_Remains_Gives.Size = new System.Drawing.Size(155, 21);
-            this.Odolwas_Remains_Gives.TabIndex = 99;
-            this.Odolwas_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-            // 
-            // Gohts_Remains
-            // 
-            this.Gohts_Remains.AutoSize = true;
-            this.Gohts_Remains.Location = new System.Drawing.Point(6, 265);
-            this.Gohts_Remains.Name = "Gohts_Remains";
-            this.Gohts_Remains.Size = new System.Drawing.Size(100, 17);
-            this.Gohts_Remains.TabIndex = 100;
-            this.Gohts_Remains.Text = "Goht\'s Remains";
-            this.Gohts_Remains.UseVisualStyleBackColor = true;
-            this.Gohts_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // Gohts_Remains_Pool
-            // 
-            this.Gohts_Remains_Pool.Enabled = false;
-            this.Gohts_Remains_Pool.FormattingEnabled = true;
-            this.Gohts_Remains_Pool.Location = new System.Drawing.Point(148, 263);
-            this.Gohts_Remains_Pool.Name = "Gohts_Remains_Pool";
-            this.Gohts_Remains_Pool.Size = new System.Drawing.Size(72, 21);
-            this.Gohts_Remains_Pool.TabIndex = 101;
-            this.Gohts_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-            // 
-            // Gohts_Remains_Gives
-            // 
-            this.Gohts_Remains_Gives.Enabled = false;
-            this.Gohts_Remains_Gives.FormattingEnabled = true;
-            this.Gohts_Remains_Gives.Location = new System.Drawing.Point(226, 263);
-            this.Gohts_Remains_Gives.Name = "Gohts_Remains_Gives";
-            this.Gohts_Remains_Gives.Size = new System.Drawing.Size(155, 21);
-            this.Gohts_Remains_Gives.TabIndex = 102;
-            this.Gohts_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-            // 
-            // Twinmolds_Remains
-            // 
-            this.Twinmolds_Remains.AutoSize = true;
-            this.Twinmolds_Remains.Location = new System.Drawing.Point(6, 319);
-            this.Twinmolds_Remains.Name = "Twinmolds_Remains";
-            this.Twinmolds_Remains.Size = new System.Drawing.Size(122, 17);
-            this.Twinmolds_Remains.TabIndex = 103;
-            this.Twinmolds_Remains.Text = "Twinmold\'s Remains";
-            this.Twinmolds_Remains.UseVisualStyleBackColor = true;
-            this.Twinmolds_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // Twinmolds_Remains_Pool
-            // 
-            this.Twinmolds_Remains_Pool.Enabled = false;
-            this.Twinmolds_Remains_Pool.FormattingEnabled = true;
-            this.Twinmolds_Remains_Pool.Location = new System.Drawing.Point(148, 317);
-            this.Twinmolds_Remains_Pool.Name = "Twinmolds_Remains_Pool";
-            this.Twinmolds_Remains_Pool.Size = new System.Drawing.Size(72, 21);
-            this.Twinmolds_Remains_Pool.TabIndex = 104;
-            this.Twinmolds_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-            // 
-            // Twinmolds_Remains_Gives
-            // 
-            this.Twinmolds_Remains_Gives.Enabled = false;
-            this.Twinmolds_Remains_Gives.FormattingEnabled = true;
-            this.Twinmolds_Remains_Gives.Location = new System.Drawing.Point(226, 317);
-            this.Twinmolds_Remains_Gives.Name = "Twinmolds_Remains_Gives";
-            this.Twinmolds_Remains_Gives.Size = new System.Drawing.Size(155, 21);
-            this.Twinmolds_Remains_Gives.TabIndex = 105;
-            this.Twinmolds_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
-            // 
-            // Gyorgs_Remains
-            // 
-            this.Gyorgs_Remains.AutoSize = true;
-            this.Gyorgs_Remains.Location = new System.Drawing.Point(6, 292);
-            this.Gyorgs_Remains.Name = "Gyorgs_Remains";
-            this.Gyorgs_Remains.Size = new System.Drawing.Size(105, 17);
-            this.Gyorgs_Remains.TabIndex = 106;
-            this.Gyorgs_Remains.Text = "Gyorg\'s Remains";
-            this.Gyorgs_Remains.UseVisualStyleBackColor = true;
-            this.Gyorgs_Remains.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // Gyorgs_Remains_Pool
-            // 
-            this.Gyorgs_Remains_Pool.Enabled = false;
-            this.Gyorgs_Remains_Pool.FormattingEnabled = true;
-            this.Gyorgs_Remains_Pool.Location = new System.Drawing.Point(148, 290);
-            this.Gyorgs_Remains_Pool.Name = "Gyorgs_Remains_Pool";
-            this.Gyorgs_Remains_Pool.Size = new System.Drawing.Size(72, 21);
-            this.Gyorgs_Remains_Pool.TabIndex = 107;
-            this.Gyorgs_Remains_Pool.SelectedIndexChanged += new System.EventHandler(this.All_Night_Mask_Pool_SelectedIndexChanged);
-            // 
-            // Gyorgs_Remains_Gives
-            // 
-            this.Gyorgs_Remains_Gives.Enabled = false;
-            this.Gyorgs_Remains_Gives.FormattingEnabled = true;
-            this.Gyorgs_Remains_Gives.Location = new System.Drawing.Point(226, 290);
-            this.Gyorgs_Remains_Gives.Name = "Gyorgs_Remains_Gives";
-            this.Gyorgs_Remains_Gives.Size = new System.Drawing.Size(155, 21);
-            this.Gyorgs_Remains_Gives.TabIndex = 108;
-            this.Gyorgs_Remains_Gives.SelectedIndexChanged += new System.EventHandler(this.Adult_Wallet_Gives_SelectedIndexChanged);
+            this.keepRazorSwordOnSoTToolStripMenuItem.Name = "keepRazorSwordOnSoTToolStripMenuItem";
+            this.keepRazorSwordOnSoTToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.keepRazorSwordOnSoTToolStripMenuItem.Text = "Keep Razor Sword on SoT";
+            this.keepRazorSwordOnSoTToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // Main_Window
             // 
@@ -5519,6 +5528,7 @@
         private System.Windows.Forms.CheckBox Gyorgs_Remains;
         private System.Windows.Forms.ComboBox Gyorgs_Remains_Pool;
         private System.Windows.Forms.ComboBox Gyorgs_Remains_Gives;
+        private System.Windows.Forms.ToolStripMenuItem keepRazorSwordOnSoTToolStripMenuItem;
     }
 }
 

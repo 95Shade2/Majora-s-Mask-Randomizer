@@ -5193,6 +5193,11 @@ int main()
 	    Write_To_Rom(14108508, "13200008");
     }
 
+	//keep razor sword on song of time
+	if (Settings["settings"]["KeepRazor"] == "True") {
+		Write_To_Rom(12428980, "29A10002");
+	}
+
     // compress rom and create wad
     if (Settings["settings"]["Wad"] == "True")
     {

@@ -824,6 +824,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Text += "RespawnHPs=" + respawnHPsToolStripMenuItem.Checked + "\n"; //whether or not to respawn the hps every cycle
 
                 Text += "LikeLikeMirror=" + edibleMirrorShieldToolStripMenuItem.Checked + "\n"; //whether or not a likelike can eat the mirror shield
+
+                Text += "KeepRazor=" + keepRazorSwordOnSoTToolStripMenuItem.Checked + "\n"; //whether or not the player keeps razor sword on Song of Time
             }
 
             if (colors)
@@ -1189,6 +1191,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 edibleMirrorShieldToolStripMenuItem.Checked = false;
+            }
+
+            if (settings.ContainsKey("KeepRazor") && settings["KeepRazor"] == "True")
+            {
+                keepRazorSwordOnSoTToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                keepRazorSwordOnSoTToolStripMenuItem.Checked = false;
             }
         }
 
