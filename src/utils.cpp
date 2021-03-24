@@ -602,3 +602,13 @@ string Vector_To_String(vector<string> data, string separator)
 
 	return string_data;
 }
+
+int IndexOf_Last(string text, char chr) {
+	for (int c = text.size() - 1; c >= 0; c--) {
+		if (text[c] == chr) {
+			return c;
+		}
+	}
+
+	return -1;
+}

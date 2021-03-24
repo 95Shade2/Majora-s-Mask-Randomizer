@@ -16,6 +16,7 @@
 #include <random>
 #include <stdexcept>
 #include <vector>
+#include <filesystem>
 
 // bad shade!
 using namespace std;
@@ -5023,15 +5024,22 @@ void Setup_Items() {
 
 int main()
 {
+	string error_message;
+
     err_file.open("Error.txt");
+
+	// get the settings from the settings file
+	Settings = OpenAsIni("./settings.ini");
+
+	error_message = Valid_Rom(Settings["settings"]["Rom"]);
+	if (error_message != "") {
+		Error(error_message);
+	}
 
     outFile.open("Spoiler Log.txt");
 
 	//setup the item objects
 	Setup_Items();
-
-    // get the settings from the settings file
-    Settings = OpenAsIni("./settings.ini");
 
     // update the item pools according to the settings
     Update_Pools(Items);

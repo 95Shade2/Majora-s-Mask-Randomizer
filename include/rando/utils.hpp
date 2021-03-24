@@ -119,4 +119,6 @@ string Char_To_String(char chr[], int size);
 ///Converts a vector to a string
 string Vector_To_String(vector<string> data, string separator);
 
+int IndexOf_Last(string text, char chr);
+
 #endif
