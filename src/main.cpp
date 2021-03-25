@@ -5025,16 +5025,20 @@ void Setup_Items() {
 int main()
 {
 	string error_message;
+	string file_ext;
 
     err_file.open("Error.txt");
 
 	// get the settings from the settings file
 	Settings = OpenAsIni("./settings.ini");
 
-	error_message = Valid_Rom(Settings["settings"]["Rom"]);
+	error_message = Valid_Rom(Settings["settings"]["Rom"], &file_ext);
 	if (error_message != "") {
 		Error(error_message);
 	}
+
+	//convert other formats to z64 in a new file
+	Settings["settings"]["Rom"] = Convert_Z64(Settings["settings"]["Rom"], file_ext);
 
     outFile.open("Spoiler Log.txt");
 
