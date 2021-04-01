@@ -3371,6 +3371,7 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     Write_Cutscene_Rom(44548416, "sakon_hideout"); // shorten the starting cs
     Write_To_Rom(44552390, "003C");                // shorten the doorway cs
     Write_To_Rom(44553062, "003C");                // shorten the switch cs
+	Write_To_Rom(12482972, "24011471");			   // make the notebook kafei entry look for the 2nd text after saving sun mask
 
     Write_Cutscene_Rom(
       42835544, "great_bay_temple_ye_holds"); // shorten ye who holds remains cs in gbt

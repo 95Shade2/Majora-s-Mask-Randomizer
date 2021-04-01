@@ -128,7 +128,7 @@ Circus Leader's Mask {
 	Goron Mask, Zora Mask, Deku Mask, Bomb Bag
 	Goron Mask, Zora Mask, Deku Mask, Big Bomb Bag
 	Goron Mask, Zora Mask, Deku Mask, Biggest Bomb Bag
-	Goron Mask, Zora Mask, Deku Mask, Romani Mask
+	Goron Mask, Zora Mask, Deku Mask, Romani's Mask
 }
 
 Couple's Mask {
