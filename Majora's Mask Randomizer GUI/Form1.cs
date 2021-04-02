@@ -828,6 +828,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Text += "KeepRazor=" + keepRazorSwordOnSoTToolStripMenuItem.Checked + "\n"; //whether or not the player keeps razor sword on Song of Time
 
                 Text += "OceanAnyDay=" + oceanSpiderHouseAnyDayToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
+
+                Text += "RespawnHCs=" + respawnHCsToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
             }
 
             if (colors)
@@ -1211,6 +1213,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 oceanSpiderHouseAnyDayToolStripMenuItem.Checked = false;
+            }
+
+            if (settings.ContainsKey("RespawnHCs") && settings["RespawnHCs"] == "True")
+            {
+                respawnHCsToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                respawnHCsToolStripMenuItem.Checked = false;
             }
         }
 

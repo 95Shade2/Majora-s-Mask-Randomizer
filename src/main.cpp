@@ -649,7 +649,6 @@ void Remove_Item_Checks()
       "000700000000240A0017114D000400000000240200FF03E00008000000003C05801F24080008110400"
       "0D00000000240900091124000D00000000240A008D1144000A00000000240B008E1164000700000000"
       "240200FF03E000080000000090A2F6E803E000080000000090A2F6E903E0000800000000");
-    Write_To_Rom(13857020, "00000000");
     Write_To_Rom(15678584, "2406005B");
     Write_To_Rom(12962948, "00000CF0");
     Write_To_Rom(16134584, "91AD36023C01422031AE0004");
@@ -5023,10 +5022,163 @@ void Setup_Items() {
 
 }
 
+void RespawnHCs() {
+	Write_To_Rom(13857024, "2405001E");	//change saving bit flag
+	Write_To_Rom(13856764, "2405001E");	//change checking bit flag
+}
+
+void Apply_Settings(bool Songs_Same_Pool) {
+
+	// Change max rupee amounts
+	cout << "\nChanging Rupees\n";
+	Change_Rupees(Settings["wallets"]);
+
+	// make scrub salesman always sell beans
+	if (Settings["settings"]["ScrubBeans"] == "True")
+	{
+		string Bean_Source = Get_Source("Magic Beans");
+		string New_ID = Items[Bean_Source].Get_Item_ID;
+
+		Write_To_Rom(17113087, New_ID); // scrub salesman
+	}
+
+	// Use Gamecube HUD
+	if (Settings["settings"]["GC_Hud"] == "True")
+	{
+		cout << "\nApplying GC Hud\n";
+		Gamecube_Hud();
+	}
+
+	// remove the cutscenes
+	if (Settings["settings"]["Remove_Cutscenes"] == "True")
+	{
+		cout << "\nRemoving Cutscenes\n";
+		Remove_Cutscenes(Songs_Same_Pool);
+	}
+
+	// change tunic colors
+	cout << "\nChanging tunic colors\n";
+	Change_Colors(Settings["colors"]);
+
+	// making link kafei
+	if (Settings["settings"]["Kafei"] == "True")
+	{
+		cout << "\nMaking link Kafei @Purpletissuebox\n";
+		Change_Link_Kafei();
+		Change_Kafei_Color(Settings["settings"]["Tunic"]);
+	}
+
+	// change water to bingo water if secret is active
+	if (Settings["settings"]["BingoWater"] == "True")
+	{
+		Bingo_Water();
+	}
+
+	// change blast mask cooldown
+	Change_BlastMask(Settings["settings"]);
+
+	// respawn hps once per cycle
+	if (Settings["settings"]["RespawnHPs"] == "True")
+	{
+		RespawnHPs();
+	}
+
+	//Make likelikes able to eat mirror shields (but they still spit out hero's shield, this is only here to make the no shield goal in bingo easier)
+	if (Settings["settings"]["LikeLikeMirror"] == "True") {
+		Write_To_Rom(14108508, "13200008");
+	}
+
+	//keep razor sword on song of time
+	if (Settings["settings"]["KeepRazor"] == "True") {
+		Write_To_Rom(12428980, "29A10002");
+	}
+
+	//make ocean spider house any day by making the guy think it's always day one
+	if (Settings["settings"]["OceanAnyDay"] == "True") {
+		Write_To_Rom(16565980, "24080001");
+	}
+
+	//respawn hcs once per cycle
+	if (Settings["settings"]["RespawnHCs"] == "True") {
+		RespawnHCs();
+	}
+}
+
+void Fix_Things(bool Songs_Same_Pool) {
+
+	// FD anywhere
+	Write_To_Rom(12220113, "00");
+
+	// FD can use transformations masks
+	Write_To_Rom(12945794, "010101"); // enables deku, goron, and zora
+
+	// quick text
+	Write_To_Rom(12482776, "00000000");
+	Write_To_Rom(13065591, "30");
+
+	// change starting scene to clock town
+	Write_To_Rom(12433538, "D8");
+
+	// Give Tatl to Link in Clock Town CS, shorten cs to 1 frame, and set entered
+	// clocktown for the first time flag
+	Write_To_Rom(48476396, "0000000200000001");
+	Write_To_Rom(48476404, "0000009A000000010001000100020002");
+	Write_To_Rom(48476420, "00000096000000010021000100020002");
+
+	// fix getting false mask when SoT from tatl text in clocktown
+	Write_To_Rom(48611908, "E007");
+
+	// fix turning deku when SoT - stay as link
+	Write_To_Rom(47286973, "0A");
+
+	// Make it where if a bottle catch is not a bottle item, then it runs the normal item give function. Otherwise it runs the normal bottle catch function
+	Make_Bottles_Work();
+
+	// input the function to give tingle map branch to it in the get item passive function
+	Fix_Tingle_Maps();
+
+	// fix getting the swords as transformation masks
+	Fix_Swords();
+
+	// fix the song text ids for when it is loaded and displayed
+	Fix_Song_Text();
+
+	Write_To_Rom(13182652, "260DFFFA00000000"); // Fix song looks in inventory
+	Write_To_Rom(13184360, "260CFFFA00000000"); // fix playing songs in inventory
+
+	// input the songs text and fix the text offsets
+	Songs_Text_Offset();
+
+	// make new wave bossa nova give the song only once
+	if (Songs_Same_Pool)
+	{
+		string NWBN = Items["New Wave Bossa Nova"].Name;
+		Write_To_Rom(12500391, Hex_Minus(Items[NWBN].Item_ID, "61"));
+	}
+
+	Fix_Goron_Lullaby();
+
+	Fix_Showing_Items();
+
+	// dont let sonata give item twice
+	Write_To_Rom(15840424, "00000000");
+
+	//don't let song of soaring give item twice
+	Write_To_Rom(15924108, "00000000");
+
+	//Make couple's mask only give once in the normal cutscene
+	Write_Cutscene_Rom(46642260, "couples_long");
+
+	//Don't get more than one item from a boss remains
+	Write_To_Rom(13844604, "00000000");
+
+}
+
 int main()
 {
 	string error_message;
 	string file_ext;
+	bool Songs_Same_Pool;
 
     err_file.open("Error.txt");
 
@@ -5056,6 +5208,8 @@ int main()
     // write spoiler log
     Write_Log(Settings["settings"]["Seed"]);
 
+	Songs_Same_Pool = All_Songs_Same_Pool();
+
     // decompress rom
     cout << "\nDecompressing rom\n";
     if (system(("ndec.exe \"" + Settings["settings"]["Rom"] + "\" " + Rom_Location)
@@ -5068,153 +5222,22 @@ int main()
         exit(0);
     }
 
-    bool Songs_Same_Pool = All_Songs_Same_Pool();
-
     cout << "\nPlacing Items\n";
     Place_Items(Items, Songs_Same_Pool);
 
-    // Change max rupee amounts
-    cout << "\nChanging Rupees\n";
-    Change_Rupees(Settings["wallets"]);
+	//Apply custom settings from the user
+	Apply_Settings(Songs_Same_Pool);
 
-    // FD anywhere
-    Write_To_Rom(12220113, "00");
-
-    // FD can use transformations masks
-    Write_To_Rom(12945794, "010101"); // enables deku, goron, and zora
-
-    // quick text
-    Write_To_Rom(12482776, "00000000");
-    Write_To_Rom(13065591, "30");
+	//fix some item things and do some setups
+	Fix_Things(Songs_Same_Pool);
 
     // Remove Item Checks
     cout << "\nRemoving Item Checks\n";
     Remove_Item_Checks();
 
-    // change starting scene to clock town
-    Write_To_Rom(12433538, "D8");
-
-    // Give Tatl to Link in Clock Town CS, shorten cs to 1 frame, and set entered
-    // clocktown for the first time flag
-    Write_To_Rom(48476396, "0000000200000001");
-    Write_To_Rom(48476404, "0000009A000000010001000100020002");
-    Write_To_Rom(48476420, "00000096000000010021000100020002");
-
-    // make scrub salesman always sell beans
-    if (Settings["settings"]["ScrubBeans"] == "True")
-    {
-        string Bean_Source = Get_Source("Magic Beans");
-        string New_ID = Items[Bean_Source].Get_Item_ID;
-
-        Write_To_Rom(17113087, New_ID); // scrub salesman
-    }
-
-    // fix getting false mask when SoT from tatl text in clocktown
-    Write_To_Rom(48611908, "E007");
-
-    // fix turning deku when SoT - stay as link
-    Write_To_Rom(47286973, "0A");
-
-    // Make it where if a bottle catch is not a bottle item, then it runs the normal item give function. Otherwise it runs the normal bottle catch function
-    Make_Bottles_Work();
-
-    // input the function to give tingle map branch to it in the get item passive function
-    Fix_Tingle_Maps();
-
     // Give the player the starting items
     cout << "\nGiving Starting Items\n";
     Give_Starting_Items();
-
-    // fix getting the swords as transformation masks
-    Fix_Swords();
-
-    // fix the song text ids for when it is loaded and displayed
-    Fix_Song_Text();
-
-    Write_To_Rom(13182652, "260DFFFA00000000"); // Fix song looks in inventory
-    Write_To_Rom(13184360, "260CFFFA00000000"); // fix playing songs in inventory
-
-    // input the songs text and fix the text offsets
-    Songs_Text_Offset();
-
-    // make new wave bossa nova give the song only once
-    if (Songs_Same_Pool)
-    {
-        string NWBN = Items["New Wave Bossa Nova"].Name;
-        Write_To_Rom(12500391, Hex_Minus(Items[NWBN].Item_ID, "61"));
-    }
-
-    Fix_Goron_Lullaby();
-
-    Fix_Showing_Items();
-
-    // dont let sonata give item twice
-    Write_To_Rom(15840424, "00000000");
-
-    //don't let song of soaring give item twice
-    Write_To_Rom(15924108, "00000000");
-
-    //Make couple's mask only give once in the normal cutscene
-	Write_Cutscene_Rom(46642260, "couples_long");
-
-    //Don't get more than one item from a boss remains
-    Write_To_Rom(13844604, "00000000");
-
-    // Use Gamecube HUD
-    if (Settings["settings"]["GC_Hud"] == "True")
-    {
-        cout << "\nApplying GC Hud\n";
-        Gamecube_Hud();
-    }
-
-    // remove the cutscenes
-    if (Settings["settings"]["Remove_Cutscenes"] == "True")
-    {
-        cout << "\nRemoving Cutscenes\n";
-        Remove_Cutscenes(Songs_Same_Pool);
-    }
-
-    // change tunic colors
-    cout << "\nChanging tunic colors\n";
-    Change_Colors(Settings["colors"]);
-
-    // making link kafei
-    if (Settings["settings"]["Kafei"] == "True")
-    {
-        cout << "\nMaking link Kafei @Purpletissuebox\n";
-        Change_Link_Kafei();
-        Change_Kafei_Color(Settings["settings"]["Tunic"]);
-    }
-
-    // change water to bingo water if secret is active
-    if (Settings["settings"]["BingoWater"] == "True")
-    {
-        Bingo_Water();
-    }
-
-    // change blast mask cooldown
-    Change_BlastMask(Settings["settings"]);
-
-    // respawn hps once per cycle
-    if (Settings["settings"]["RespawnHPs"] == "True")
-    {
-        RespawnHPs();
-    }
-
-    //Make likelikes able to eat mirror shields (but they still spit out hero's shield, this is only here to make the no shield goal in bingo easier)
-    if (Settings["settings"]["LikeLikeMirror"] == "True") {
-	    Write_To_Rom(14108508, "13200008");
-    }
-
-	//keep razor sword on song of time
-	if (Settings["settings"]["KeepRazor"] == "True") {
-		Write_To_Rom(12428980, "29A10002");
-	}
-
-	//make ocean spider house any day by making the guy think it's always day one
-	if (Settings["settings"]["OceanAnyDay"] == "True") {
-		Write_To_Rom(16565980, "24080001");
-	}
 
     // compress rom and create wad
     if (Settings["settings"]["Wad"] == "True")
