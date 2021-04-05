@@ -31,6 +31,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         Process Rando;
         Dictionary<string,
         Item> Item_Objects;
+        string TARGETING;
 
         public Dictionary<string,
         Color> Game_Colors;
@@ -59,7 +60,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             string>();
             Game_Colors = Default_Pause();
             Wallet_Sizes = Default_Wallets();
+
             BlastMaskFrames_Num.Value = 310;
+            TARGETING = "";
 
             Create_Item_Names();
 
@@ -96,6 +99,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             Load_Logic();
 
             Tunic_Button.BackColor = Tunic_ColorDialog.Color;
+
+            //default targeting
+            Targeting_Switch.Select();
         }
 
         private Dictionary<string,
@@ -830,6 +836,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Text += "OceanAnyDay=" + oceanSpiderHouseAnyDayToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
 
                 Text += "RespawnHCs=" + respawnHCsToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
+
+                Text += "Targeting=" + TARGETING + "\n"; //Save the custom default targeting
             }
 
             if (colors)
@@ -1222,6 +1230,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 respawnHCsToolStripMenuItem.Checked = false;
+            }
+
+            if (settings.ContainsKey("Targeting") && settings["Targeting"] == "Hold")
+            {
+                Targeting_Hold.Select();
+            }
+            else
+            {
+                Targeting_Switch.Select();  //default targeting is switch
             }
         }
 
@@ -1964,6 +1981,14 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             BlastMask_Center(411, 532);
+        }
+
+        private void Targeting_Switch_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton button = ((RadioButton)sender);
+            if (button.Checked) {
+                TARGETING = button.Tag.ToString();
+           }
         }
     }
 }

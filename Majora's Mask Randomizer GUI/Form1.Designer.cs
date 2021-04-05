@@ -444,13 +444,15 @@
             this.edibleMirrorShieldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keepRazorSwordOnSoTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oceanSpiderHouseAnyDayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.respawnHCsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.walletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
             this.BlastMaskSeconds_Label = new System.Windows.Forms.Label();
-            this.respawnHCsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Targeting_Switch = new System.Windows.Forms.RadioButton();
+            this.Targeting_Hold = new System.Windows.Forms.RadioButton();
             this.Items_Tab.SuspendLayout();
             this.Items_Items_Tab.SuspendLayout();
             this.Items_Sub_Tab.SuspendLayout();
@@ -3065,7 +3067,7 @@
             // Tunic_Label
             // 
             this.Tunic_Label.AutoSize = true;
-            this.Tunic_Label.Location = new System.Drawing.Point(382, 60);
+            this.Tunic_Label.Location = new System.Drawing.Point(596, 26);
             this.Tunic_Label.Name = "Tunic_Label";
             this.Tunic_Label.Size = new System.Drawing.Size(66, 13);
             this.Tunic_Label.TabIndex = 71;
@@ -3079,7 +3081,7 @@
             // Tunic_Button
             // 
             this.Tunic_Button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(105)))), ((int)(((byte)(27)))));
-            this.Tunic_Button.Location = new System.Drawing.Point(452, 56);
+            this.Tunic_Button.Location = new System.Drawing.Point(666, 22);
             this.Tunic_Button.Name = "Tunic_Button";
             this.Tunic_Button.Size = new System.Drawing.Size(22, 23);
             this.Tunic_Button.TabIndex = 72;
@@ -4982,6 +4984,13 @@
             this.oceanSpiderHouseAnyDayToolStripMenuItem.Text = "Ocean Spider House Any Day";
             this.oceanSpiderHouseAnyDayToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
+            // respawnHCsToolStripMenuItem
+            // 
+            this.respawnHCsToolStripMenuItem.Name = "respawnHCsToolStripMenuItem";
+            this.respawnHCsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.respawnHCsToolStripMenuItem.Text = "Respawn HCs";
+            this.respawnHCsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+            // 
             // pauseMenuColorsToolStripMenuItem
             // 
             this.pauseMenuColorsToolStripMenuItem.Name = "pauseMenuColorsToolStripMenuItem";
@@ -5036,12 +5045,31 @@
             this.BlastMaskSeconds_Label.TabIndex = 97;
             this.BlastMaskSeconds_Label.Text = "10:01";
             // 
-            // respawnHCsToolStripMenuItem
+            // Targeting_Switch
             // 
-            this.respawnHCsToolStripMenuItem.Name = "respawnHCsToolStripMenuItem";
-            this.respawnHCsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.respawnHCsToolStripMenuItem.Text = "Respawn HCs";
-            this.respawnHCsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+            this.Targeting_Switch.AutoSize = true;
+            this.Targeting_Switch.Location = new System.Drawing.Point(405, 52);
+            this.Targeting_Switch.Name = "Targeting_Switch";
+            this.Targeting_Switch.Size = new System.Drawing.Size(105, 17);
+            this.Targeting_Switch.TabIndex = 98;
+            this.Targeting_Switch.TabStop = true;
+            this.Targeting_Switch.Tag = "Switch";
+            this.Targeting_Switch.Text = "Switch Targeting";
+            this.Targeting_Switch.UseVisualStyleBackColor = true;
+            this.Targeting_Switch.CheckedChanged += new System.EventHandler(this.Targeting_Switch_CheckedChanged);
+            // 
+            // Targeting_Hold
+            // 
+            this.Targeting_Hold.AutoSize = true;
+            this.Targeting_Hold.Location = new System.Drawing.Point(405, 70);
+            this.Targeting_Hold.Name = "Targeting_Hold";
+            this.Targeting_Hold.Size = new System.Drawing.Size(95, 17);
+            this.Targeting_Hold.TabIndex = 99;
+            this.Targeting_Hold.TabStop = true;
+            this.Targeting_Hold.Tag = "Hold";
+            this.Targeting_Hold.Text = "Hold Targeting";
+            this.Targeting_Hold.UseVisualStyleBackColor = true;
+            this.Targeting_Hold.CheckedChanged += new System.EventHandler(this.Targeting_Switch_CheckedChanged);
             // 
             // Main_Window
             // 
@@ -5049,6 +5077,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(700, 461);
+            this.Controls.Add(this.Targeting_Hold);
+            this.Controls.Add(this.Targeting_Switch);
             this.Controls.Add(this.BlastMaskSeconds_Label);
             this.Controls.Add(this.BlastMaskFrames_Num);
             this.Controls.Add(this.label6);
@@ -5549,6 +5579,8 @@
         private System.Windows.Forms.ToolStripMenuItem keepRazorSwordOnSoTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oceanSpiderHouseAnyDayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem respawnHCsToolStripMenuItem;
+        private System.Windows.Forms.RadioButton Targeting_Switch;
+        private System.Windows.Forms.RadioButton Targeting_Hold;
     }
 }
 
