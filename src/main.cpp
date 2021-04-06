@@ -3441,7 +3441,96 @@ void Gamecube_Hud()
     Write_File_To_Rom(".\\files\\l.yaz0", "A7B7CC");
 }
 
-///Writes the spoiler log to log.txt
+string Get_Log_Start(string seed) {
+	ifstream log_start;
+	string log_text = "";
+	string line = "";
+
+	log_start.open("./files/LogStart.html");
+	while (log_start >> line) {
+		log_text += line + "\n";
+	}
+	log_start.close();
+
+	log_text += seed;
+
+	log_start.open("./files/LogStart2.html");
+	while (log_start >> line) {
+		log_text += line + "\n";
+	}
+	log_start.close();
+
+	return log_text;
+}
+
+string Get_Log_End() {
+	ifstream log_end;
+	string log_text = "";
+	string line = "";
+
+	log_end.open("./files/LogEnd.html");
+
+	while (log_end >> line) {
+		log_text += line + "\n";
+	}
+
+	log_end.close();
+
+	return log_text;
+}
+
+//writes the spoiler log as html file
+void Write_HTML_Log(string seed) {
+	vector<string> items = Get_Keys(Items);
+	string item;
+	string new_item;
+	string html = "";
+	ofstream html_log;
+
+	html += Get_Log_Start(seed);
+
+	for (int i = 0; i < items.size(); i++)
+	{
+		item = items[i];
+		new_item = Items[item].Name;
+
+		html += "		<div class = \"item\" id = \"item_";
+		html += to_string(i);
+		html += "\">\n";
+		html += "			<div class = \"item_source\" id = \"item_source_" + to_string(i);
+		html += "\">\n";
+		html += "					" + item + "\n";
+		html += "			</div>\n";
+		html += "			<div class = \"button item_button\" id = \"button_" + to_string(i);;
+		html += "\" onclick = \"Cover(" + to_string(i);;
+		html += ");\"> \n";
+		html += "				>\n";
+		html += "			</div>\n";
+		html += "			<div class = \"item_give cover\" id = \"item_give_" + to_string(i);;
+		html += "\">\n";
+		html += "				" + new_item + "\n";
+		html += "			</div>\n";
+		html += "		</div>\n";
+	}
+
+	html += "<script type = \"text/javascript\">\n";
+	html += "		Total_Items = " + to_string(items.size());
+	html += ";\n";
+	html += "</script>\n";
+
+	html += Get_Log_End();
+
+	html_log.open("Spoiler Log.html");
+
+	html_log << html;
+
+	html_log.close();
+
+	system("copy \"files\\Log.js\" \"javascript.js\"");
+	system("copy \"files\\Log.css\" \"style.css\"");
+}
+
+//Writes the spoiler log as txt file
 void Write_Log(string seed)
 {
     vector<string> items = Get_Keys(Items);
@@ -3469,7 +3558,7 @@ void Write_Log(string seed)
         outFile << endl;
     }
 
-    // outFile << Log;
+	Write_HTML_Log(seed);
 }
 
 ///Change all the references of spring water to bingo water
