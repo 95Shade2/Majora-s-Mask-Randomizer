@@ -5635,7 +5635,14 @@ void Fix_Things(bool Songs_Same_Pool) {
 	//Don't get more than one item from a boss remains
 	Write_To_Rom(13844604, "00000000");
 
+	//deal with switch/hold default targeting
 	Setup_Targeting();
+
+	//fix FD softlock for bomber's
+	Write_To_Rom(17205600, "00000000");
+
+	//make clock town guard treat fd like link
+	Write_To_Rom(16044964, "00000000");
 }
 
 int main()
