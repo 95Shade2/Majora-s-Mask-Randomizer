@@ -157,6 +157,10 @@ add_executable(mm_rando_gui
 	"Majora's Mask Randomizer GUI/Form1.Designer.cs"
 	"Majora's Mask Randomizer GUI/Form1.resx"
 	
+	"Majora's Mask Randomizer GUI/LogicEditor.cs"
+	"Majora's Mask Randomizer GUI/LogicEditor.Designer.cs"
+	"Majora's Mask Randomizer GUI/LogicEditor.resx"
+	
 	"Majora's Mask Randomizer GUI/pmc.cs"
 	"Majora's Mask Randomizer GUI/pmc.Designer.cs"
 	"Majora's Mask Randomizer GUI/pmc.resx"
@@ -179,6 +183,10 @@ csharp_set_windows_forms_properties(
 	"Majora's Mask Randomizer GUI/Form1.Designer.cs"
 	"Majora's Mask Randomizer GUI/Form1.resx"
 	
+	"Majora's Mask Randomizer GUI/LogicEditor.cs"
+	"Majora's Mask Randomizer GUI/LogicEditor.Designer.cs"
+	"Majora's Mask Randomizer GUI/LogicEditor.resx"
+	
 	"Majora's Mask Randomizer GUI/pmc.cs"
 	"Majora's Mask Randomizer GUI/pmc.Designer.cs"
 	"Majora's Mask Randomizer GUI/pmc.resx"
@@ -186,6 +194,8 @@ csharp_set_windows_forms_properties(
 	"Majora's Mask Randomizer GUI/wallets_form.cs"
 	"Majora's Mask Randomizer GUI/wallets_form.Designer.cs"
 	"Majora's Mask Randomizer GUI/wallets_form.resx"
+	
+	"Majora's Mask Randomizer GUI/Item.cs"
 	
 	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
 	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"

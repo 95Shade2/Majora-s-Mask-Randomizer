@@ -447,6 +447,7 @@
             this.respawnHCsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.walletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.BlastMaskFrames_Num = new System.Windows.Forms.NumericUpDown();
@@ -4896,7 +4897,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.pauseMenuColorsToolStripMenuItem,
-            this.walletToolStripMenuItem});
+            this.walletToolStripMenuItem,
+            this.logicToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(700, 24);
@@ -5004,6 +5006,13 @@
             this.walletToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.walletToolStripMenuItem.Text = "Wallets";
             this.walletToolStripMenuItem.Click += new System.EventHandler(this.walletToolStripMenuItem_Click);
+            // 
+            // logicToolStripMenuItem
+            // 
+            this.logicToolStripMenuItem.Name = "logicToolStripMenuItem";
+            this.logicToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.logicToolStripMenuItem.Text = "Logic Editor";
+            this.logicToolStripMenuItem.Click += new System.EventHandler(this.logicToolStripMenuItem_Click);
             // 
             // label5
             // 
@@ -5581,6 +5590,7 @@
         private System.Windows.Forms.ToolStripMenuItem respawnHCsToolStripMenuItem;
         private System.Windows.Forms.RadioButton Targeting_Switch;
         private System.Windows.Forms.RadioButton Targeting_Hold;
+        private System.Windows.Forms.ToolStripMenuItem logicToolStripMenuItem;
     }
 }
 

@@ -21,7 +21,6 @@ namespace Majora_s_Mask_Randomizer_GUI
         string>> Item_Pools;
         Dictionary<string,
         RichTextBox> Pool_Tables;
-        string[] Item_Names;
         Dictionary<string,
         Dictionary<string,
         Dictionary<string,
@@ -37,6 +36,8 @@ namespace Majora_s_Mask_Randomizer_GUI
         Color> Game_Colors;
         public Dictionary<string,
         int> Wallet_Sizes;
+        public string[] Item_Names;
+        public LogicEditor logic_editor;
 
         public Main_Window()
         {
@@ -63,6 +64,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             BlastMaskFrames_Num.Value = 310;
             TARGETING = "";
+            logic_editor = new LogicEditor();
 
             Create_Item_Names();
 
@@ -391,8 +393,11 @@ namespace Majora_s_Mask_Randomizer_GUI
             return default_colors;
         }
 
-        private void Load_Logic()
+        public void Load_Logic()
         {
+            //make sure the logic combobox is empty
+            Logic_Combobox.Items.Clear();
+
             //create the logic folder if it does not exist
             if (!System.IO.Directory.Exists("./logic"))
             {
@@ -1120,6 +1125,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 Open_Base_Rom_Dialog.FileName = "";
+                Update_Rom_Text();
             }
 
             if (settings.ContainsKey("Seed") && settings["Seed"] != "")
@@ -1989,6 +1995,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             if (button.Checked) {
                 TARGETING = button.Tag.ToString();
            }
+        }
+
+        private void logicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!logic_editor.showing)
+            {
+                logic_editor.form = this;
+                logic_editor.Show();
+            }
         }
     }
 }

@@ -58,21 +58,43 @@ string Item_Get(Item it)
     return data;
 }
 
-string Get_Source(string item)
+string Get_Source(string item, int index = 0)
 {
-    vector<string> keys;
+	vector<string> keys;
 
-    keys = Get_Keys(Items);
+	keys = Get_Keys(Items);
 
-    for (int i = 0; i < keys.size(); i++)
-    {
-        if (Items[keys[i]].Name == item)
-        {
-            return keys[i];
-        }
-    }
+	for (int i = 0; i < keys.size(); i++)
+	{
+		if (Items[keys[i]].Name == item)
+		{
+			if (index == 0) {
+				return keys[i];
+			}
+			else {
+				index--;
+			}
+		}
+	}
 
-    return "";
+	return "";
+}
+
+//multiple items have the possibility of giving the same source, this returns a vector of the items that all give "item"
+vector<string> Get_Sources(string item) {
+	vector<string> sources;
+	string source = Get_Source(item);
+	int s = 0;
+
+	while (source != "") {
+		sources.push_back(source);
+
+		//gets the next source (if there are more)
+		s++;
+		source = Get_Source(item, s);
+	}
+
+	return sources;
 }
 
 void Place_Items(map<string, Item> &Items, bool Songs_Same_Pool)
@@ -733,104 +755,106 @@ void Remove_Item_Checks()
 
 void Print_Map(ostream &out, map<string, map<string, string>> data)
 {
-    vector<string> keys;
-    vector<string> keys2;
+vector<string> keys;
+vector<string> keys2;
 
-    for (const auto &kv : data)
-    {
-        keys.push_back(kv.first);
-    }
+for (const auto &kv : data)
+{
+	keys.push_back(kv.first);
+}
 
-    for (int i = 0; i < keys.size(); i++)
-    {
-        cout << keys[i] << endl;
+for (int i = 0; i < keys.size(); i++)
+{
+	cout << keys[i] << endl;
 
-        for (const auto &kv : data[keys[i]])
-        {
-            keys2.push_back(kv.first);
-        }
+	for (const auto &kv : data[keys[i]])
+	{
+		keys2.push_back(kv.first);
+	}
 
-        for (int ii = 0; ii < keys2.size(); ii++)
-        {
-            cout << "\t" << keys2[ii] << endl;
-            cout << "\t\t" << data[keys[i]][keys2[ii]] << endl;
-        }
-    }
+	for (int ii = 0; ii < keys2.size(); ii++)
+	{
+		cout << "\t" << keys2[ii] << endl;
+		cout << "\t\t" << data[keys[i]][keys2[ii]] << endl;
+	}
+}
 }
 
 void Update_Pools(map<string, Item> &Items)
 {
-    vector<string> keys;
-    vector<string> values;
+	vector<string> keys;
+	vector<string> values;
 
-    for (const auto &kv : Settings["items"])
-    {
-        keys.push_back(kv.first);
-        values.push_back(kv.second);
-    }
+	for (const auto &kv : Settings["items"])
+	{
+		keys.push_back(kv.first);
+		values.push_back(kv.second);
+	}
 
-    for (int i = 0; i < keys.size(); i++)
-    {
-        Items[keys[i]].Pool = values[i];
-    }
+	for (int i = 0; i < keys.size(); i++)
+	{
+		Items[keys[i]].Pool = values[i];
+	}
 }
 
 vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
-                                        map<string, vector<string>> *Invalid_Items,
-                                        string Item_Name)
+	map<string, vector<string>> *Invalid_Items,
+	string Item_Name)
 {
-    string line = "";
-    vector<vector<string>> Items_Needed;
-    vector<string> List;
-    vector<string> Cur_Invalid_Items;
+	string line = "";
+	string item = "";
+	vector<vector<string>> Items_Needed;
+	vector<string> List;
+	vector<string> words;
+	vector<string> Cur_Invalid_Items;
 
-    while (!Contains(line, '}'))
-    {
-        getline(Logic_File, line);
+	while (!Contains(line, '}'))
+	{
+		getline(Logic_File, line);
 
-        // clear the list
-        List.clear();
-        Cur_Invalid_Items.clear();
+		// clear the list
+		List.clear();
+		Cur_Invalid_Items.clear();
 
-        // remove comments on line if any
-        if (IndexOf_S(line, "//") != -1)
-        {
-            line = line.substr(0, IndexOf_S(line, "//"));
-        }
+		// remove comments on line if any
+		if (IndexOf_S(line, "//") != -1)
+		{
+			line = line.substr(0, IndexOf_S(line, "//"));
+		}
 
-        line = RemoveAll(line, '\t');
+		line = RemoveAll(line, '\t');
 
-        // list of invalid items to place here
-        if (line[0] == '#')
-        {
-            line = line.substr(1); // remove #
+		// list of invalid items to place here
+		if (line[0] == '#')
+		{
+			line = line.substr(1); // remove #
 
-            if (Contains(line, ','))
-            {
-                Cur_Invalid_Items = Split(line, ", ");
-            }
-            else if (line != "")
-            {
-                Cur_Invalid_Items.push_back(line);
-            }
-        }
-        // an item needed
-        else
-        {
-            if (Contains(line, ','))
-            {
-                List = Split(line, ", ");
-            }
-            else if (line != "")
-            {
-                List.push_back(line);
-            }
-        }
+			if (Contains(line, ','))
+			{
+				Cur_Invalid_Items = Split(line, ", ");
+			}
+			else if (line != "")
+			{
+				Cur_Invalid_Items.push_back(line);
+			}
+		}
+		// an item needed
+		else
+		{
+			if (Contains(line, ','))
+			{
+				List = Split(line, ", ");
+			}
+			else if (line != "")
+			{
+				List.push_back(line);
+			}
+		}
 
-        if (List.size() > 0)
-        {
-            if (!Contains(List[0], '}'))
-            {
+		if (List.size() > 0)
+		{
+			if (!Contains(List[0], '}'))
+			{
                 Items_Needed.push_back(List);
             }
         }
@@ -1038,7 +1062,65 @@ string Get_Wallet_Needed(int rupees_needed, map<string, string> wallet_sizes)
     return "Error";
 }
 
-///Returns a vector of strings of the items that the player can get with the current equipment according to the logic
+//looks at each string in "sources" and determines if that source gives an item, and returns a vector with only those that do (whether or not an item has been placed here)
+vector<string> Remove_Not_Giving(vector<string> sources) {
+	vector<string> removed;
+	string location;
+
+	for (int s = 0; s < sources.size(); s++) {
+		location = sources[s];
+
+		//add it to the list if this location gives an item
+		if (Items[location].gives_item) {
+			removed.push_back(location);
+		}
+	}
+
+	return removed;
+}
+
+//remove the item from the list if the item's flag isnt checked for being obtainable
+vector<string> Remove_Not_Obtainable(vector<string> sources) {
+	vector<string> locations;
+	string location;
+
+	for (int s = 0; s < sources.size(); s++) {
+		location = sources[s];
+
+		//add the location to the list if the player got an item from there
+		if (Items[location].Obtainable) {
+			locations.push_back(location);
+		}
+	}
+
+	return locations;
+}
+
+//gets the total count from each location in "locations" per cycle, 0 Means infinite
+int Get_Total_Count(vector<string> locations) {
+	int total = 0;
+	int count;
+	string location;
+
+	for (int l = 0; l < locations.size(); l++) {
+		location = locations[l];
+		count = Items[location].Count;
+
+		//add count of this item to the total
+		if (count > 0) {
+			total += count;
+		}
+		//infinite source, so make total 0 (for infinite) and leave loop
+		else {
+			total = 0;
+			l = locations.size();
+		}
+	}
+
+	return total;
+}
+
+//Returns a vector of strings of the items that the player can get with the current equipment according to the logic
 vector<string> Get_Items_Aval(map<string, Item> &Items,
                               map<string, vector<vector<string>>> Items_Needed,
                               vector<string> &Items_Gotten,
@@ -1047,6 +1129,12 @@ vector<string> Get_Items_Aval(map<string, Item> &Items,
     vector<string> items;
     vector<string> Items_Aval;
     bool Can_Get_Item = false;
+	vector<string> words;
+	int amount;
+	string item;
+	vector<string> Item_Sources;
+	int Total_Count;
+	int Prev_Count;
 
     items = Get_Keys(Items);
 
@@ -1055,40 +1143,163 @@ vector<string> Get_Items_Aval(map<string, Item> &Items,
         string Cur_Item = items[i];
         Can_Get_Item = false;
 
+		//for each item set
         for (int isn = 0; isn < Items_Needed[Cur_Item].size(); isn++)
         {
             vector<string> Cur_List = Items_Needed[Cur_Item][isn];
             bool Have_All = true;
 
+			//for each item in the set
             for (int in = 0; in < Cur_List.size(); in++)
             {
                 string item_needed = Cur_List[in];
+				words = Split(item_needed, " ");
 
-                // if this is a rupee amount
-                if (IndexOf_S(item_needed, "Rupees") != -1)
-                {
-                    string rupees_str = Get_Word(
-                      item_needed, 0); // gets the first word (gets the rupee amount)
-                    int rupees = string_to_dec(rupees_str);
-                    string Needed_Wallet = Get_Wallet_Needed(rupees, wallets);
+				//if the first word is a number
+				if (isNumber(words[0]) || words[0] == "Rupees") {
+					amount = string_to_dec(words[0]);
 
-                    // if the player needs a wallet (too many rupees for the starting
-                    // wallet)
-                    if (Needed_Wallet != "")
-                    {
-                        // if the player does not have the wallet needed
-                        if (IndexOf(Items_Gotten, Needed_Wallet) == -1)
-                        {
-                            Have_All = false;
-                        }
-                    }
-                }
-                // if an item is not obtained, then that means the player cannot get the
-                // item with the current list we're checking
-                else if (IndexOf(Items_Gotten, item_needed) == -1)
-                {
-                    Have_All = false;
-                }
+					//if this is a rupee amount
+					if (words[1] == "Rupees") {
+						string Needed_Wallet = Get_Wallet_Needed(amount, wallets);
+
+						// if the player needs a wallet (too many rupees for the starting
+						// wallet)
+						if (Needed_Wallet != "")
+						{
+							// if the player does not have the wallet needed
+							if (IndexOf(Items_Gotten, Needed_Wallet) == -1)
+							{
+								//the player doesn't have all the items for this item set
+								Have_All = false;
+							}
+						}
+					}
+					//not a rupee amount
+					else {
+						item = item_needed.substr(item_needed.find_first_of(' ') + 1);	//remove the amount from the item string to make it only the item name
+
+						//check if the player has gotten any bombchu source
+						if (item_needed == "Bombchus") {
+							if (IndexOf(Items_Gotten, "Bombchu") != -1 && IndexOf(Items_Gotten, "Bombchus (5)") != -1 && IndexOf(Items_Gotten, "Bombchus (10)") != -1) {
+								Have_All = false;
+							}
+						}
+						//check if the player has gotten any deku nut source
+						else if (item_needed == "Deku Nuts") {
+							if (IndexOf(Items_Gotten, "Deku Nuts") != -1 && IndexOf(Items_Gotten, "Deku Nuts (10)")) {
+								Have_All = false;
+							}
+						}
+						else {
+							// if an item is not obtained
+							if (IndexOf(Items_Gotten, item_needed) == -1)
+							{
+								Have_All = false;
+							}
+						}
+
+						//if the player has gotten the item at least once,
+						//then we need to compare it to how much of that item we need for this item in logic
+						if (Have_All) {
+							//we need a number of chus
+							if (item_needed == "Bombchus") {
+								Item_Sources = Get_Sources("Bombchu");	//bombchu because it's bombchu in the item list (not bombchus)
+								Item_Sources = Remove_Not_Giving(Item_Sources);
+								Item_Sources = Remove_Not_Obtainable(Item_Sources);
+								Total_Count = Get_Total_Count(Item_Sources);
+
+								//only keep doing the totals if these locations didn't give infinite
+								if (Total_Count > 0) {
+									Prev_Count = Total_Count;	//to determine if the next set as any 0's
+
+									Item_Sources = Get_Sources("Bombchus (5)");
+									Item_Sources = Remove_Not_Giving(Item_Sources);
+									Item_Sources = Remove_Not_Obtainable(Item_Sources);
+									Total_Count += Get_Total_Count(Item_Sources) * 5;	//add the amount for chus 5 * 5 to the total
+
+									//if this one is not infnite
+									if (Total_Count > Prev_Count) {
+										Prev_Count = Total_Count;	//to determine if the next set as any 0's
+
+										Item_Sources = Get_Sources("Bombchus (10)");
+										Item_Sources = Remove_Not_Giving(Item_Sources);
+										Item_Sources = Remove_Not_Obtainable(Item_Sources);
+										Total_Count += Get_Total_Count(Item_Sources) * 10;	//add the amount for chus 5 * 10 to the total
+
+										//if this one is not infnite
+										if (Total_Count > Prev_Count) {
+											//if the total count of chus that can be gotten at this time is not enough to get this item
+											if (Total_Count < amount) {
+												Have_All = false;
+											}
+										}
+									}
+								}
+							}
+							//we need a number of nuts
+							else if (item_needed == "Deku Nuts") {
+								Item_Sources = Get_Sources(item);
+								Item_Sources = Remove_Not_Giving(Item_Sources);
+								Item_Sources = Remove_Not_Obtainable(Item_Sources);
+								Total_Count = Get_Total_Count(Item_Sources);
+
+								//only keep doing the totals if these locations didn't give infinite
+								if (Total_Count > 0) {
+									Prev_Count = Total_Count;
+
+									Item_Sources = Get_Sources("Deku Nuts (10)");
+									Item_Sources = Remove_Not_Giving(Item_Sources);
+									Item_Sources = Remove_Not_Obtainable(Item_Sources);
+									Total_Count += Get_Total_Count(Item_Sources);	//add the amount for nuts 10 * 10 to the total
+
+									//if this one is not infnite
+									if (Total_Count > Prev_Count) {
+										//if the total count of nuts is not enough for this item in logic
+										if (Total_Count < amount) {
+											Have_All = false;
+										}
+									}
+								}
+							}
+							//we need a number of another item
+							else {
+								Item_Sources = Get_Sources(item);
+								Item_Sources = Remove_Not_Giving(Item_Sources);
+								Item_Sources = Remove_Not_Obtainable(Item_Sources);
+								Total_Count = Get_Total_Count(Item_Sources);
+
+								//if the player cannot get enough of the needed item for this location. 0 means infnite, so 0 means the player can get this item
+								if (Total_Count > 0 && Total_Count < amount) {
+									Have_All = false;
+								}
+							}
+						}
+					}
+				}
+				else {
+					//check if the player has gotten any bombchu source
+					if (item_needed == "Bombchus") {
+						if (IndexOf(Items_Gotten, "Bombchu") != -1 && IndexOf(Items_Gotten, "Bombchus (5)") != -1 && IndexOf(Items_Gotten, "Bombchus (10)") != -1) {
+							Have_All = false;
+						}
+					}
+					//check if the player has gotten any deku nut source
+					else if (item_needed == "Deku Nuts") {
+						if (IndexOf(Items_Gotten, "Deku Nuts") != -1 && IndexOf(Items_Gotten, "Deku Nuts (10)")) {
+							Have_All = false;
+						}
+					}
+					else {
+
+						// if an item is not obtained, then that means the player cannot get the
+						// item with the current list we're checking
+						if (IndexOf(Items_Gotten, item_needed) == -1)
+						{
+							Have_All = false;
+						}
+					}
+				}
             }
 
             // if the player has all items for a row of needed items, then the player can
@@ -1111,7 +1322,7 @@ vector<string> Get_Items_Aval(map<string, Item> &Items,
     return Items_Aval;
 }
 
-///Returns a vector of strings of the items that are left in a given pool
+//Returns a vector of strings of the items that are left in a given pool
 vector<string> Get_Items_Left_Pool(string pool)
 {
     vector<string> Items_Pool;
@@ -1135,7 +1346,7 @@ vector<string> Get_Items_Left_Pool(string pool)
     return Items_Pool;
 }
 
-///Returns a vector of strings of items the player has that was needed for an item
+//Returns a vector of strings of items the player has that was needed for an item
 vector<string> Get_First_Items_List(string item,
                                     map<string, vector<vector<string>>> Items_Needed,
                                     vector<string> &Items_Gotten)
@@ -1348,7 +1559,7 @@ bool Check_Curiosity_Items(string Cur_Item)
 	return true;
 }
 
-///Randomize the items
+//Randomize the items
 bool Randomize(string Log,
                map<string, Item> &Items,
                string Seed,
@@ -1417,6 +1628,7 @@ bool Randomize(string Log,
 
                 // make the player acquire the item that is now placed here
                 Items_Gotten.push_back(New_Item);
+				Items[Cur_Item].Obtainable = true;
 
                 // check whether or not this item is in the invalid list
                 if (Invalid_Items[Cur_Item].size() > 0)
@@ -1471,6 +1683,7 @@ bool Randomize(string Log,
                     {
                         int IG_Index = IndexOf(Items_Gotten, New_Item);
                         Items_Gotten.erase(Items_Gotten.begin() + IG_Index);
+						Items[Cur_Item].Obtainable = false;
                         Items[Cur_Item].Name = Cur_Item;
                         Items[Cur_Item].gives_item = false;
                         Items[New_Item].can_get = false;
@@ -1504,6 +1717,7 @@ bool Randomize(string Log,
 
             // make the player acquire the item that is now placed here
             Items_Gotten.push_back(Item_Name);
+			Items[Cur_Item].Obtainable = true;
 
             // Log += Cur_Item + " => " + Item_Name + "\n";
 
@@ -3735,9 +3949,10 @@ void RespawnHPs()
 
 void Setup_Items() {
 
-	// name    item id     get item id   text id     flag   object   get item model  pool
+	// number of times it can be gotten per cycle	name    item id     get item id   text id     flag   object   get item model  pool
 	// = ""   get item locations  item id locations   text id locations
 	Items["Adult Wallet"] = Item(
+		1,
 		"Adult Wallet",
 		"5A",
 		"08",
@@ -3751,6 +3966,7 @@ void Setup_Items() {
 		"1_00010000",
 		{ "C5CE6E" });
 	Items["All-Night Mask"] = Item(
+		1,
 		"All-Night Mask",
 		"38",
 		"7E",
@@ -3762,6 +3978,7 @@ void Setup_Items() {
 		{ "CD6B52" },
 		{ "C5CE3D" });
 	Items["Big Bomb Bag"] = Item(
+		0,
 		"Big Bomb Bag",
 		"57",
 		"1C",
@@ -3778,6 +3995,7 @@ void Setup_Items() {
 		"1E",
 		{ "C5CE5A" }); // C5CE6F bomb slot
 	Items["Biggest Bomb Bag"] = Item(
+		0,
 		"Biggest Bomb Bag",
 		"58",
 		"1D",
@@ -3794,6 +4012,7 @@ void Setup_Items() {
 		"28",
 		{ "C5CE5A" }); // C5CE6F bomb slot
 	Items["Blast Mask"] = Item(
+		1,
 		"Blast Mask",
 		"47",
 		"8D",
@@ -3805,6 +4024,7 @@ void Setup_Items() {
 		{ "CD6BAC" },
 		{ "C5CE3E" });
 	Items["Bomb Bag"] = Item(
+		0,
 		"Bomb Bag",
 		"56",
 		"1B",
@@ -3821,6 +4041,7 @@ void Setup_Items() {
 		"14",
 		{ "C5CE5A" });
 	Items["Bomber's Notebook"] = Item(
+		0,
 		"Bomber's Notebook",
 		"6D",
 		"50",
@@ -3834,6 +4055,7 @@ void Setup_Items() {
 		"F_00000100",
 		{ "C5CE71" });
 	Items["Bow"] = Item(
+		1,
 		"Bow",
 		"01",
 		"22",
@@ -3851,6 +4073,7 @@ void Setup_Items() {
 		{ "C5CE55" }); // C5CE6F = quiver slot
 	Items["Bremen Mask"] =
 		Item(
+			1,
 			"Bremen Mask",
 			"46",
 			"8C",
@@ -3862,6 +4085,7 @@ void Setup_Items() {
 			{ "CD6BA6" },
 			{ "C5CE43" });
 	Items["Bunny Hood"] = Item(
+		1,
 		"Bunny Hood",
 		"39",
 		"7F",
@@ -3873,6 +4097,7 @@ void Setup_Items() {
 		{ "CD6B58" },
 		{ "C5CE44" });
 	Items["Captain's Hat"] = Item(
+		1,
 		"Captain's Hat",
 		"44",
 		"7C",
@@ -3885,6 +4110,7 @@ void Setup_Items() {
 		{ "C5CE51" });
 	Items["Circus Leader's Mask"] =
 		Item(
+			1,
 			"Circus Leader's Mask",
 			"3D",
 			"83",
@@ -3896,6 +4122,7 @@ void Setup_Items() {
 			{ "CD6B70" },
 			{ "C5CE49" });
 	Items["Couple's Mask"] = Item(
+		1,
 		"Couple's Mask",
 		"3F",
 		"85",
@@ -3908,6 +4135,7 @@ void Setup_Items() {
 		{ "C5CE4B", "F125C3" },
 		{ "2C7CBD5" });
 	Items["Deku Nuts"] = Item(
+		0,
 		"Deku Nuts",
 		"09",
 		"28",
@@ -3921,6 +4149,7 @@ void Setup_Items() {
 		"01",
 		{ "C5CE5D" });
 	Items["Deku Nuts (10)"] = Item(
+		0,
 		"Deku Nuts (10)",
 		"8E",
 		"2A",
@@ -3935,6 +4164,7 @@ void Setup_Items() {
 		"0A",
 		{ "C5CE5D" });
 	Items["Deku Stick"] = Item(
+		0,
 		"Deku Stick",
 		"08",
 		"19",
@@ -3949,6 +4179,7 @@ void Setup_Items() {
 		"01",
 		{ "C5CE5C" });
 	Items["Don Gero's Mask"] = Item(
+		1,
 		"Don Gero's Mask",
 		"42",
 		"88",
@@ -3960,6 +4191,7 @@ void Setup_Items() {
 		{ "CD6B8E" },
 		{ "C5CE45" });
 	Items["Express Letter to Mama"] = Item(
+		1,
 		"Express Letter to Mama",
 		"2E",
 		"A1",
@@ -3971,6 +4203,7 @@ void Setup_Items() {
 		{ "CD6C24" },
 		{ "C5CE2F" });
 	Items["Fierce Deity Mask"] = Item(
+		1,
 		"Fierce Deity Mask",
 		"35",
 		"7B",
@@ -3982,6 +4215,7 @@ void Setup_Items() {
 		{ "CD6B40" },
 		{ "C5CE53" });
 	Items["Fire Arrow"] = Item(
+		1,
 		"Fire Arrow",
 		"02",
 		"25",
@@ -3993,6 +4227,7 @@ void Setup_Items() {
 		{ "CD693C" },
 		{ "C5CE26" });
 	Items["Garo Mask"] = Item(
+		1,
 		"Garo Mask",
 		"3B",
 		"81",
@@ -4004,6 +4239,7 @@ void Setup_Items() {
 		{ "CD6B64" },
 		{ "C5CE50" });
 	Items["Giant Wallet"] = Item(
+		1,
 		"Giant Wallet",
 		"5B",
 		"09",
@@ -4017,6 +4253,7 @@ void Setup_Items() {
 		"2_00100000",
 		{ "C5CE6E" });
 	Items["Giant's Mask"] = Item(
+		1,
 		"Giant's Mask",
 		"49",
 		"7D",
@@ -4028,6 +4265,7 @@ void Setup_Items() {
 		{ "CD6B4C" },
 		{ "C5CE52" });
 	Items["Gibdo Mask"] = Item(
+		1,
 		"Gibdo Mask",
 		"41",
 		"87",
@@ -4040,6 +4278,7 @@ void Setup_Items() {
 		{ "C5CE4F", "F12C7F" },
 		{ "2B4A569" });
 	Items["Gilded Sword"] = Item(
+		2,
 		"Gilded Sword",
 		"4F",
 		"39",
@@ -4053,6 +4292,7 @@ void Setup_Items() {
 		"3_00000011",
 		{ "C5CE21" }); // C5CE21 Inv sword/shield
 	Items["Great Fairy's Mask"] = Item(
+		1,
 		"Great Fairy's Mask",
 		"40",
 		"86",
@@ -4065,6 +4305,7 @@ void Setup_Items() {
 		{ "C5CE40", "EA3F53", "EA40FB" },
 		{ "243F195", "24415CD" });
 	Items["Great Fairy's Sword"] = Item(
+		2,
 		"Great Fairy's Sword",
 		"10",
 		"3B",
@@ -4077,6 +4318,7 @@ void Setup_Items() {
 		{ "C5CE34", "EA3F8B" },
 		{ "243413D" });
 	Items["Hero's Shield"] = Item(
+		0,
 		"Hero's Shield",
 		"51",
 		"32",
@@ -4090,6 +4332,7 @@ void Setup_Items() {
 		"1_00010000",
 		{ "C5CE21" });
 	Items["Hookshot"] = Item(
+		1,
 		"Hookshot",
 		"0F",
 		"41",
@@ -4101,6 +4344,7 @@ void Setup_Items() {
 		{ "CD69E4" },
 		{ "C5CE33" });
 	Items["Ice Arrow"] = Item(
+		1,
 		"Ice Arrow",
 		"03",
 		"26",
@@ -4113,6 +4357,7 @@ void Setup_Items() {
 		{ "C5CE27" });
 	Items["Kafei's Mask"] =
 		Item(
+			0,
 			"Kafei's Mask",
 			"37",
 			"8F",
@@ -4124,6 +4369,7 @@ void Setup_Items() {
 			{ "CD6BB8" },
 			{ "C5CE4A" });
 	Items["Kamaro's Mask"] = Item(
+		1,
 		"Kamaro's Mask",
 		"43",
 		"89",
@@ -4135,6 +4381,7 @@ void Setup_Items() {
 		{ "CD6B94" },
 		{ "C5CE4E" });
 	Items["Keaton Mask"] = Item(
+		1,
 		"Keaton Mask",
 		"3A",
 		"80",
@@ -4146,6 +4393,7 @@ void Setup_Items() {
 		{ "CD6B5E" },
 		{ "C5CE42" });
 	Items["Kokiri Sword"] = Item(
+		2,
 		"Kokiri Sword",
 		"4D",
 		"37",
@@ -4161,6 +4409,7 @@ void Setup_Items() {
 		{ "C5CE21" },
 		0); // C5CE21 Inv sword/shield
 	Items["Land Title Deed"] = Item(
+		1,
 		"Land Title Deed",
 		"29",
 		"97",
@@ -4172,6 +4421,7 @@ void Setup_Items() {
 		{ "CD6BE8" },
 		{ "C5CE29" });
 	Items["Large Quiver"] = Item(
+		1,
 		"Large Quiver",
 		"54",
 		"23",
@@ -4188,6 +4438,7 @@ void Setup_Items() {
 		"28",
 		{ "C5CE55" }); // C5CE6F = quiver slot
 	Items["Largest Quiver"] = Item(
+		1,
 		"Largest Quiver",
 		"55",
 		"24",
@@ -4204,6 +4455,7 @@ void Setup_Items() {
 		"32",
 		{ "C5CE55" }); // C5CE6F = quiver slot
 	Items["Lens of Truth"] = Item(
+		1,
 		"Lens of Truth",
 		"0E",
 		"42",
@@ -4215,6 +4467,7 @@ void Setup_Items() {
 		{ "CD69EA" },
 		{ "C5CE32" });
 	Items["Letter to Kafei"] = Item(
+		1,
 		"Letter to Kafei",
 		"2F",
 		"AA",
@@ -4226,6 +4479,7 @@ void Setup_Items() {
 		{ "CD6C5A" },
 		{ "C5CE35" });
 	Items["Light Arrow"] = Item(
+		1,
 		"Light Arrow",
 		"04",
 		"27",
@@ -4237,6 +4491,7 @@ void Setup_Items() {
 		{ "CD6948" },
 		{ "C5CE28" });
 	Items["Magic Beans"] = Item(
+		0,
 		"Magic Beans",
 		"0A",
 		"35",
@@ -4250,6 +4505,7 @@ void Setup_Items() {
 		"01",
 		{ "C5CE5E" }); // get item id of what is given instead is 4F
 	Items["Mask of Scents"] = Item(
+		1,
 		"Mask of Scents",
 		"48",
 		"8E",
@@ -4261,6 +4517,7 @@ void Setup_Items() {
 		{ "CD6BB2" },
 		{ "C5CE46" });
 	Items["Mask of Truth"] = Item(
+		1,
 		"Mask of Truth",
 		"36",
 		"8A",
@@ -4272,6 +4529,7 @@ void Setup_Items() {
 		{ "CD6B9A" },
 		{ "C5CE4C" });
 	Items["Mirror Shield"] = Item(
+		1,
 		"Mirror Shield",
 		"52",
 		"33",
@@ -4285,6 +4543,7 @@ void Setup_Items() {
 		"2_00100000",
 		{ "C5CE21" });
 	Items["Moon's Tear"] = Item(
+		1,
 		"Moon's Tear",
 		"28",
 		"96",
@@ -4296,6 +4555,7 @@ void Setup_Items() {
 		{ "CD6BE2" },
 		{ "C5CE29" }); // CD7646 - another moon's tear for show item
 	Items["Mountain Title Deed"] = Item(
+		1,
 		"Mountain Title Deed",
 		"2B",
 		"99",
@@ -4307,6 +4567,7 @@ void Setup_Items() {
 		{ "CD6BF4" },
 		{ "C5CE29" });
 	Items["Ocean Title Deed"] = Item(
+		1,
 		"Ocean Title Deed",
 		"2C",
 		"9A",
@@ -4319,6 +4580,7 @@ void Setup_Items() {
 		{ "C5CE29" });
 	Items["Pendant of Memories"] =
 		Item(
+			1,
 			"Pendant of Memories",
 			"30",
 			"AB",
@@ -4330,6 +4592,7 @@ void Setup_Items() {
 			{ "CD6C60" },
 			{ "C5CE35" }); // other show items: CD764B, CD764C, and CD764D
 	Items["Pictograph Box"] = Item(
+		1,
 		"Pictograph Box",
 		"0D",
 		"43",
@@ -4341,6 +4604,7 @@ void Setup_Items() {
 		{ "CD69F0" },
 		{ "C5CE31" });
 	Items["Postman's Hat"] = Item(
+		1,
 		"Postman's Hat",
 		"3E",
 		"84",
@@ -4352,6 +4616,7 @@ void Setup_Items() {
 		{ "CD6B76" },
 		{ "C5CE3C" });
 	Items["Powder Keg"] = Item(
+		0,
 		"Powder Keg",
 		"0C",
 		"34",
@@ -4366,6 +4631,7 @@ void Setup_Items() {
 		{ "C5CE60" });
 	Items["Razor Sword"] =
 		Item(
+			2,
 			"Razor Sword",
 			"4E",
 			"38",
@@ -4379,6 +4645,7 @@ void Setup_Items() {
 			"2_00000010",
 			{ "C5CE21" }); // C5CE21 Inv sword/shield
 	Items["Romani's Mask"] = Item(
+		1,
 		"Romani's Mask",
 		"3C",
 		"82",
@@ -4390,6 +4657,7 @@ void Setup_Items() {
 		{ "CD6B6A" },
 		{ "C5CE48" });
 	Items["Room Key"] = Item(
+		1,
 		"Room Key",
 		"2D",
 		"A0",
@@ -4401,6 +4669,7 @@ void Setup_Items() {
 		{ "CD6C1E" },
 		{ "C5CE2F" });
 	Items["Stone Mask"] = Item(
+		1,
 		"Stone Mask",
 		"45",
 		"8B",
@@ -4412,6 +4681,7 @@ void Setup_Items() {
 		{ "CD6BA0" },
 		{ "C5CE3F" });
 	Items["Swamp Title Deed"] = Item(
+		1,
 		"Swamp Title Deed",
 		"2A",
 		"98",
@@ -4424,6 +4694,7 @@ void Setup_Items() {
 		{ "C5CE29" });
 
 	Items["Deku Mask"] = Item(
+		0,
 		"Deku Mask",
 		"32",
 		"78",
@@ -4436,6 +4707,7 @@ void Setup_Items() {
 		{ "C5CE41", "F11247" },
 		{ "2CD0FF9" });
 	Items["Goron Mask"] = Item(
+		0,
 		"Goron Mask",
 		"33",
 		"79",
@@ -4448,6 +4720,7 @@ void Setup_Items() {
 		{ "C5CE47", "F12A5F" },
 		{ "2A6BE19" });
 	Items["Zora Mask"] = Item(
+		0,
 		"Zora Mask",
 		"34",
 		"7A",
@@ -4461,6 +4734,7 @@ void Setup_Items() {
 		{ "26C128D" });
 
 	Items["Big Poe"] = Item(
+		2,
 		"Big Poe",
 		"1E",
 		"66",
@@ -4473,6 +4747,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C53" },
 		{ "CD7C55" });
 	Items["Blue Potion"] = Item(
+		0,
 		"Blue Potion",
 		"15",
 		"5D",
@@ -4484,6 +4759,7 @@ void Setup_Items() {
 		{ "CD6A8C" },
 		{ "C5CE36", "CDE5BB" });
 	Items["Bugs"] = Item(
+		0,
 		"Bugs",
 		"1B",
 		"63",
@@ -4496,6 +4772,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C17", "CD7C1D" },
 		{ "CD7C19", "CD7C1F" });
 	Items["Chateau Romani"] = Item(
+		3,
 		"Chateau Romani",
 		"25",
 		"6F",
@@ -4507,6 +4784,7 @@ void Setup_Items() {
 		{ "CD6AF8", "CD6BC4" },
 		{ "C5CE36" });
 	Items["Deku Princess"] = Item(
+		1,
 		"Deku Princess",
 		"17",
 		"5F",
@@ -4519,6 +4797,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C3B" },
 		{ "CD7C3D" });
 	Items["Fairy"] = Item(
+		0,
 		"Fairy",
 		"16",
 		"5E",
@@ -4531,6 +4810,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C0B", "CDE5CF" },
 		{ "CD7C0D" });
 	Items["Fish"] = Item(
+		0,
 		"Fish",
 		"1A",
 		"62",
@@ -4543,6 +4823,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C11" },
 		{ "CD7C13" });
 	Items["Gold Dust"] = Item(
+		0,
 		"Gold Dust",
 		"22",
 		"6A",
@@ -4554,6 +4835,7 @@ void Setup_Items() {
 		{ "CD6ADA", "CD6BD0" },
 		{ "C5CE36" });
 	Items["Green Potion"] = Item(
+		0,
 		"Green Potion",
 		"14",
 		"5C",
@@ -4565,6 +4847,7 @@ void Setup_Items() {
 		{ "CD6A86" },
 		{ "C5CE36", "CDE5A7" });
 	Items["Hot Spring Water"] = Item(
+		0,
 		"Hot Spring Water",
 		"20",
 		"68",
@@ -4577,6 +4860,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C29", "CD7C2F" },
 		{ "CD7C2B", "CD7C31" });
 	Items["Milk"] = Item(
+		0,
 		"Milk",
 		"18",
 		"92",
@@ -4588,6 +4872,7 @@ void Setup_Items() {
 		{ "CD6A9E", "CD6BCA" },
 		{ "C5CE36" });
 	Items["Mushroom"] = Item(
+		0,
 		"Mushroom",
 		"23",
 		"6B",
@@ -4600,6 +4885,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C47" },
 		{ "CD7C49" });
 	Items["Poe"] = Item(
+		0,
 		"Poe",
 		"1D",
 		"65",
@@ -4612,6 +4898,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C4D" },
 		{ "CD7C4F" });
 	Items["Red Potion"] = Item(
+		0,
 		"Red Potion",
 		"13",
 		"5B",
@@ -4623,6 +4910,7 @@ void Setup_Items() {
 		{ "CD6A80" },
 		{ "C5CE36", "CDE593" });
 	Items["Seahorse"] = Item(
+		1,
 		"Seahorse",
 		"24",
 		"6E",
@@ -4634,6 +4922,7 @@ void Setup_Items() {
 		{ "CD6BDC" },
 		{ "C5CE36" });
 	Items["Spring Water"] = Item(
+		0,
 		"Spring Water",
 		"1F",
 		"67",
@@ -4646,6 +4935,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C23" },
 		{ "CD7C25" });
 	Items["Zora Egg"] = Item(
+		7,
 		"Zora Egg",
 		"21",
 		"69",
@@ -4658,6 +4948,7 @@ void Setup_Items() {
 		{ "C5CE36", "CD7C35" },
 		{ "CD7C37" });
 	Items["Clocktown Map"] = Item(
+		0,
 		"Clocktown Map",
 		"B4",
 		"B4",
@@ -4671,6 +4962,7 @@ void Setup_Items() {
 		"M_10110100",
 		{ "C1CB13", "C1CB2B" });
 	Items["Woodfall Map"] = Item(
+		0,
 		"Woodfall Map",
 		"B5",
 		"B5",
@@ -4684,6 +4976,7 @@ void Setup_Items() {
 		"M_10110101",
 		{ "C1CB13", "C1CB2B" });
 	Items["Snowhead Map"] = Item(
+		0,
 		"Snowhead Map",
 		"B6",
 		"B6",
@@ -4697,6 +4990,7 @@ void Setup_Items() {
 		"M_10110110",
 		{ "C1CB13", "C1CB2B" });
 	Items["Romani Ranch Map"] = Item(
+		0,
 		"Romani Ranch Map",
 		"B7",
 		"B7",
@@ -4710,6 +5004,7 @@ void Setup_Items() {
 		"M_10110111",
 		{ "C1CB13", "C1CB2B" });
 	Items["Great Bay Map"] = Item(
+		0,
 		"Great Bay Map",
 		"B8",
 		"B8",
@@ -4723,6 +5018,7 @@ void Setup_Items() {
 		"M_10111000",
 		{ "C1CB13", "C1CB2B" });
 	Items["Stone Tower Map"] = Item(
+		0,
 		"Stone Tower Map",
 		"B9",
 		"B9",
@@ -4736,6 +5032,7 @@ void Setup_Items() {
 		"M_10111001",
 		{ "C1CB13", "C1CB2B" });
 	Items["Sonata of Awakening"] = Item(
+		1,
 		"Sonata of Awakening",
 		"61",
 		"53",
@@ -4756,6 +5053,7 @@ void Setup_Items() {
 		"F_01000000",
 		{ "C5CE73" });
 	Items["Goron Lullaby"] = Item(
+		1,
 		"Goron Lullaby",
 		"62",
 		"54",
@@ -4776,6 +5074,7 @@ void Setup_Items() {
 		"F_10000000",
 		{ "C5CE73" });
 	Items["New Wave Bossa Nova"] = Item(
+		1,
 		"New Wave Bossa Nova",
 		"63",
 		"71",
@@ -4796,6 +5095,7 @@ void Setup_Items() {
 		"F_00000001",
 		{ "C5CE72" });
 	Items["Elegy of Emptiness"] = Item(
+		1,
 		"Elegy of Emptiness",
 		"64",
 		"72",
@@ -4816,6 +5116,7 @@ void Setup_Items() {
 		"F_00000010",
 		{ "C5CE72" });
 	Items["Oath to Order"] = Item(
+		0,
 		"Oath to Order",
 		"65",
 		"73",
@@ -4836,6 +5137,7 @@ void Setup_Items() {
 		"F_00000100",
 		{ "C5CE72" });
 	Items["Song of Healing"] = Item(
+		0,
 		"Song of Healing",
 		"68",
 		"75",
@@ -4856,6 +5158,7 @@ void Setup_Items() {
 		"F_00100000",
 		{ "C5CE72" });
 	Items["Epona's Song"] = Item(
+		0,
 		"Epona's Song",
 		"69",
 		"76",
@@ -4876,6 +5179,7 @@ void Setup_Items() {
 		"F_01000000",
 		{ "C5CE72" });
 	Items["Song of Soaring"] = Item(
+		0,
 		"Song of Soaring",
 		"6A",
 		"A2",
@@ -4896,6 +5200,7 @@ void Setup_Items() {
 		"F_10000000",
 		{ "C5CE72" });
 	Items["Song of Storms"] = Item(
+		0,
 		"Song of Storms",
 		"6B",
 		"A3",
@@ -4916,6 +5221,7 @@ void Setup_Items() {
 		"F_00000001",
 		{ "C5CE71" });
 	Items["Heart Piece"] = Item(
+		52,
 		"Heart Piece",
 		"7B",
 		"0C",
@@ -4929,6 +5235,7 @@ void Setup_Items() {
 		"10",
 		{ "C5CE70" });
 	Items["Heart Container"] = Item(
+		4,
 		"Heart Container",
 		"6F",
 		"0D",
@@ -4943,6 +5250,7 @@ void Setup_Items() {
 		{ "C5CDE9", "C5CDEB" });
 
 	Items["Bombchu"] = Item(
+		1,
 		"Bombchu",
 		"99",
 		"36",
@@ -4957,6 +5265,7 @@ void Setup_Items() {
 		"01",
 		{});
 	Items["Bombchus (5)"] = Item(
+		1,
 		"Bombchus (5)",
 		"9A",
 		"3A",
@@ -4970,7 +5279,9 @@ void Setup_Items() {
 		{ "C5CE2B" },
 		"05",
 		{});
-	Items["Bombchus (10)"] = Item("Bombchus (10)",
+	Items["Bombchus (10)"] = Item(
+		0,
+		"Bombchus (10)",
 		"98",
 		"1A",
 		"1A",
@@ -4985,7 +5296,9 @@ void Setup_Items() {
 		{});
 
 	//Rupees
-	Items["Green Rupee"] = Item("Green Rupee",
+	Items["Green Rupee"] = Item(
+		1,
+		"Green Rupee",
 		"84",
 		"01",
 		"C4",
@@ -4997,7 +5310,9 @@ void Setup_Items() {
 		{},
 		"01",
 		{ "C5CDEF" });
-	Items["Blue Rupee"] = Item("Blue Rupee",
+	Items["Blue Rupee"] = Item(
+		0,
+		"Blue Rupee",
 		"85",
 		"02",
 		"02",
@@ -5009,7 +5324,9 @@ void Setup_Items() {
 		{},
 		"05",
 		{ "C5CDEF" });
-	Items["Red Rupee"] = Item("Red Rupee",
+	Items["Red Rupee"] = Item(
+		0,
+		"Red Rupee",
 		"87",
 		"04",
 		"04",
@@ -5021,7 +5338,9 @@ void Setup_Items() {
 		{},
 		"14",
 		{ "C5CDEF" });
-	Items["Purple Rupee"] = Item("Purple Rupee",
+	Items["Purple Rupee"] = Item(
+		0,
+		"Purple Rupee",
 		"88",
 		"05",
 		"05",
@@ -5033,7 +5352,9 @@ void Setup_Items() {
 		{},
 		"32",
 		{ "C5CDEF" });
-	Items["Silver Rupee"] = Item("Silver Rupee",
+	Items["Silver Rupee"] = Item(
+		9,
+		"Silver Rupee",
 		"89",
 		"06",
 		"06",
@@ -5045,7 +5366,9 @@ void Setup_Items() {
 		{},
 		"64",
 		{ "C5CDEF" });
-	Items["Gold Rupee"] = Item("Gold Rupee",
+	Items["Gold Rupee"] = Item(
+		0,
+		"Gold Rupee",
 		"8A",
 		"07",
 		"07",
@@ -5060,7 +5383,9 @@ void Setup_Items() {
 
 	//Remains
 	//Odolwa's remains GI ID: 5D, Obj ID: 01CC - Need to figure out how to make this work
-	Items["Odolwa's Remains"] = Item("Odolwa's Remains",
+	Items["Odolwa's Remains"] = Item(
+		0,
+		"Odolwa's Remains",
 		"5D",
 		"55",
 		"55",
@@ -5072,7 +5397,9 @@ void Setup_Items() {
 		{},
 		"F_00000001",
 		{ "C5CE73" });
-	Items["Goht's Remains"] = Item("Goht's Remains",
+	Items["Goht's Remains"] = Item(
+		0,
+		"Goht's Remains",
 		"5E",
 		"56",
 		"56",
@@ -5084,7 +5411,9 @@ void Setup_Items() {
 		{},
 		"F_00000010",
 		{ "C5CE73" });
-	Items["Gyorg's Remains"] = Item("Gyorg's Remains",
+	Items["Gyorg's Remains"] = Item(
+		0,
+		"Gyorg's Remains",
 		"5F",
 		"57",
 		"57",
@@ -5096,7 +5425,9 @@ void Setup_Items() {
 		{},
 		"F_00000100",
 		{ "C5CE73" });
-	Items["Twinmold's Remains"] = Item("Twinmold's Remains",
+	Items["Twinmold's Remains"] = Item(
+		0,
+		"Twinmold's Remains",
 		"60",
 		"58",
 		"58",
