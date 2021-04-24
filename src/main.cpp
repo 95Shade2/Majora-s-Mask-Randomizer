@@ -5523,48 +5523,10 @@ void Apply_Settings(bool Songs_Same_Pool) {
 		RespawnHCs();
 	}
 
-	//change default targeting
+	//change default targeting to hold
 	if (Settings["settings"]["Targeting"] == "Hold") {
-		Write_To_Rom(12431016, "01");	//hold
+		Write_To_Rom(12438076, "A20D3F45");
 	}
-	else {
-		Write_To_Rom(12431016, "00");	//switch - default, that's why it's the else
-	}
-}
-
-//write function to set which targeting is the default
-void Setup_Targeting() {
-	vector<string> target_func = {
-		"27BDFFF0",
-		"AFA40000",
-		"AFA50004",
-		"AFA60008",
-		"AFBF000C",
-		"3C048014",
-		"80854968",
-		"10A0000C",
-		"3C048050",
-		"8C856BA0",
-		"14A00009",
-		"24050001",
-		"3C06A51D",
-		"24C60100",
-		"3C048050",
-		"AC866BA0",
-		"A4856BA4",
-		"3C04801F",
-		"AC8635B0",
-		"A48535B4",
-		"8FA40000",
-		"8FA50004",
-		"8FA60008",
-		"8FBF000C",
-		"0803FB24",
-		"27BD0010"
-	};
-
-	Write_Function(11835576, target_func);	//write function
-	Write_To_Rom(12438032, "0C02CCDE");	//write jump to function
 }
 
 void Fix_Things(bool Songs_Same_Pool) {
@@ -5634,9 +5596,6 @@ void Fix_Things(bool Songs_Same_Pool) {
 
 	//Don't get more than one item from a boss remains
 	Write_To_Rom(13844604, "00000000");
-
-	//deal with switch/hold default targeting
-	Setup_Targeting();
 
 	//fix FD softlock for bomber's
 	Write_To_Rom(17205600, "00000000");
