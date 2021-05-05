@@ -654,8 +654,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                 //if the item has a number in front of it
                 if (!EditItem_ComboBox.Items.Contains(item) && item != "")
                 {
-                    count = int.Parse(item.Substring(0, item.IndexOf(' ')));    //get the count of the item
-                    item = item.Substring(item.IndexOf(' ') + 1);   //remove the count and get just the item
+                    try
+                    {
+                        count = int.Parse(item.Substring(0, item.IndexOf(' ')));    //get the count of the item
+                        item = item.Substring(item.IndexOf(' ') + 1);   //remove the count and get just the item
+                    }
+                    catch
+                    {
+                        //not a number
+                    }
                 }
 
                 index = EditItem_ComboBox.Items.IndexOf(item);

@@ -707,7 +707,7 @@ Clocktown Map {
 	Deku Mask, 5 Rupees
 	Zora Mask, 5 Rupees
 	Hookshot, 5 Rupees
-	Great Fairy Sword, 5 Rupees
+	Great Fairy's Sword, 5 Rupees
 	Fierce Deity Mask, 5 Rupees
 }
 
@@ -718,7 +718,7 @@ Woodfall Map {
 	Deku Mask, 20 Rupees
 	Zora Mask, 20 Rupees
 	Hookshot, 20 Rupees
-	Great Fairy Sword, 20 Rupees
+	Great Fairy's Sword, 20 Rupees
 	Fierce Deity Mask, 20 Rupees
 	Bomb Bag, 20 Rupees
 	Big Bomb Bag, 20 Rupees
