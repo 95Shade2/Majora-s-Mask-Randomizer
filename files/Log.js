@@ -25,9 +25,14 @@ function Search() {
 			item_source = document.getElementById("item_source_" + i);
 			item_source_text = item_source.innerHTML.toLowerCase();
 			item_give_text = "";
+			item_gives = document.getElementById("item_give_" + i);
 
-			if (Shown) {
-				item_give_text = document.getElementById("item_give_" + i).innerHTML.toLowerCase();
+			//whether or not what this item gives is visible on screen
+			visible = !item_gives.classList.contains("cover");
+
+			//if it is seen, then also add it to the search
+			if (visible) {
+                item_give_text = item_gives.innerHTML.toLowerCase();
 			}
 
 			if (item_source_text.includes(text) || item_give_text.includes(text)) {
