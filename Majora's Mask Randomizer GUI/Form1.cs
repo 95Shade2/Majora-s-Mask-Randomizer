@@ -378,6 +378,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Color default_color = Rgb_Color(180, 180, 120);
             Color name = Rgb_Color(150, 140, 90);
             Color def_green = Rgb_Color(30, 105, 27);
+            Color def_FD = Rgb_Color(160, 168, 168);
 
             default_colors.Add("Item", default_color);
             default_colors.Add("Map", default_color);
@@ -388,7 +389,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             default_colors.Add("Deku", def_green);
             default_colors.Add("Goron", def_green);
             default_colors.Add("Zora", def_green);
-            default_colors.Add("FD", def_green);
+            default_colors.Add("FD", def_FD);
 
             return default_colors;
         }
