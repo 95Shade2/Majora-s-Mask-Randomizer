@@ -58,6 +58,7 @@
             this.NewInvalidItem_Button = new System.Windows.Forms.Button();
             this.SaveLogic_Button = new System.Windows.Forms.Button();
             this.CancelLogic_Button = new System.Windows.Forms.Button();
+            this.Duplicate_ItemSet_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.EditItem_Number)).BeginInit();
             this.SuspendLayout();
             // 
@@ -351,11 +352,22 @@
             this.CancelLogic_Button.UseVisualStyleBackColor = true;
             this.CancelLogic_Button.Click += new System.EventHandler(this.CancelLogic_Button_Click);
             // 
+            // Duplicate_ItemSet_Button
+            // 
+            this.Duplicate_ItemSet_Button.Location = new System.Drawing.Point(312, 233);
+            this.Duplicate_ItemSet_Button.Name = "Duplicate_ItemSet_Button";
+            this.Duplicate_ItemSet_Button.Size = new System.Drawing.Size(75, 23);
+            this.Duplicate_ItemSet_Button.TabIndex = 32;
+            this.Duplicate_ItemSet_Button.Text = "Duplicate";
+            this.Duplicate_ItemSet_Button.UseVisualStyleBackColor = true;
+            this.Duplicate_ItemSet_Button.Click += new System.EventHandler(this.Duplicate_ItemSet_Button_Click);
+            // 
             // LogicEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 376);
+            this.Controls.Add(this.Duplicate_ItemSet_Button);
             this.Controls.Add(this.CancelLogic_Button);
             this.Controls.Add(this.SaveLogic_Button);
             this.Controls.Add(this.NewInvalidItem_Button);
@@ -429,5 +441,6 @@
         private System.Windows.Forms.Button NewInvalidItem_Button;
         private System.Windows.Forms.Button SaveLogic_Button;
         private System.Windows.Forms.Button CancelLogic_Button;
+        private System.Windows.Forms.Button Duplicate_ItemSet_Button;
     }
 }

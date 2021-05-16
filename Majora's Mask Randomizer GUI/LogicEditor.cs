@@ -1057,7 +1057,19 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             return copy;
         }
-        
+
+        private Dictionary<int, int> Copy(Dictionary<int, int> original)
+        {
+            Dictionary<int, int> copy = new Dictionary<int, int>();
+
+            for (int i = 0; i < original.Count; i++)
+            {
+                copy[i] = original[i];
+            }
+
+            return copy;
+        }
+
         private void Save_Logic(string logic)
         {
             string File_Path = "./logic\\" + logic + ".txt";
@@ -1289,6 +1301,61 @@ namespace Majora_s_Mask_Randomizer_GUI
                 else
                 {
                     ItemGroups_ListBox.SelectedIndex = Set_Index - 1;
+                }
+            }
+        }
+
+        private void Duplicate_ItemSet_Button_Click(object sender, EventArgs e)
+        {
+            string logic;
+            string item;
+            int Item_Index;
+            int Item_Set_Index;
+            Dictionary<int, Dictionary<int, string>> Item_Sets;
+            Dictionary<int, Dictionary<int, int>> Count_Sets;
+            Dictionary<int, string> comments;
+            Dictionary<int, string> Item_Set;
+            Dictionary<int, int> Count_Set;
+            string comment;
+
+            //if a logic is selected
+            if (LogicFiles_ListBox.SelectedIndex != -1) {
+                logic = LogicFiles_ListBox.SelectedItem.ToString();
+                
+                //if an item is selected
+                if (Items_ListBox.SelectedIndex != -1)
+                {
+                    item = Items_ListBox.SelectedItem.ToString();
+                    Item_Index = Items_ListBox.SelectedIndex;
+
+                    //if an item set is selected
+                    if (ItemGroups_ListBox.SelectedIndex != -1)
+                    {
+                        Item_Set_Index = ItemGroups_ListBox.SelectedIndex;
+
+                        //copy the item set
+                        Item_Sets = Logic_Data[logic][item];
+                        Count_Sets = Count_Data[logic][item];
+                        comments = Comment_Data[logic][item];
+
+                        Item_Set = Copy(Item_Sets[Item_Set_Index]);
+                        Count_Set = Copy(Count_Sets[Item_Set_Index]);
+                        comment = comments[Item_Set_Index];
+
+                        //insert a duplicate of the item set right after
+                        Item_Sets = Insert(Item_Sets, Item_Set, Item_Set_Index + 1);
+                        Count_Sets = Insert(Count_Sets, Count_Set, Item_Set_Index + 1);
+                        comments = Insert(comments, comment, Item_Set_Index + 1);
+
+                        //update the data
+                        Logic_Data[logic][item] = Item_Sets;
+                        Count_Data[logic][item] = Count_Sets;
+                        Comment_Data[logic][item] = comments;
+
+                        //update the gui, and select the duplicate item set
+                        Items_ListBox_SelectedIndexChanged(Duplicate_ItemSet_Button, new EventArgs());
+                        ItemGroups_ListBox.SelectedIndex = Item_Set_Index + 1;
+                    }
                 }
             }
         }
