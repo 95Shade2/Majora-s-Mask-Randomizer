@@ -161,6 +161,10 @@ namespace Majora_s_Mask_Randomizer_GUI
                         //get the item location name, and remove "{"
                         location = line.Substring(0, line.IndexOf("{") - 1);
                         Create_New_Logic_Set(logic_name, location);
+
+                        //make an empty invalid item list by default
+                        Logic_Invalid[logic_name][location] = new Dictionary<int, string>();
+                        Logic_Invalid[logic_name][location].Add(0, "");
                     }
                     //end of item list for this location
                     else if (line == "}")
@@ -327,6 +331,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             EditItem_ComboBox.Enabled = enabled;
             EditItem_Number.Enabled = enabled;
             RemoveNeededItem_Button.Enabled = enabled;
+            Duplicate_ItemSet_Button.Enabled = enabled;
         }
 
         private void Setup_Item_Combobox()
