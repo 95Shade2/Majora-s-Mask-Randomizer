@@ -906,10 +906,10 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             logic = LogicFiles_ListBox.SelectedItem.ToString();
             item = Items_ListBox.SelectedItem.ToString();
-            index = InvalidItems_ListBox.SelectedIndex + 1;
+            index = InvalidItems_ListBox.Items.Count;
 
             //update the data
-            Logic_Invalid[logic][item].Add(index, "");
+            Logic_Invalid[logic][item].Add(index + 1, "");
 
             //update the gui
             InvalidItems_ListBox.Items.Add("");
