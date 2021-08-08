@@ -22,9 +22,13 @@
 using namespace std;
 
 ofstream err_file;
+ofstream log_file;
+
+bool DEBUG = true;
 
 fstream inFile;
 ofstream outFile;
+int Max_Percentage;
 map<string, Item> Items = {};
 vector<string> Item_Names;
 vector<string> Item_Keys;
@@ -32,8 +36,16 @@ vector<string> Bottle_Names;
 vector<string> Bottle_Keys;
 vector<string> TMask_Names;
 vector<string> TMask_Keys;
+map<string, int> Points;
 string Rom_Location = "mm2.z64"; // location of the decompressed rom
 map<string, map<string, string>> Settings;
+map < string,	//location
+	vector< //item set
+	vector<	//item index in set + 1 (0 = when item at location is given)
+	map < string,	//day or night
+	vector<bool>>>>>	//day or night 1, 2, and 3
+	Day_Data;
+
 
 int Random(int min, int max)
 {
@@ -318,11 +330,50 @@ int Get_Starting_Wallet() {
 	}
 }
 
-///Returns the max amount of rupees according to the starting items
-int Get_Wallet_Max() {
+///returns Giant Wallet, Adult Wallet, or Child Wallet
+string Get_Wallet(map<string, int> Items_Gotten) {
+	string wallet;
+
+	if (Items_Gotten["Giant Wallet"] >= 0) {
+		wallet = "Giant Wallet";
+	}
+	else if (Items_Gotten["Adult Wallet"] >= 0) {
+		wallet = "Adult Wallet";
+	}
+	else {
+		wallet = "Child Wallet";
+	}
+
+	return wallet;
+}
+
+///Returns the max amount of rupees the player can get according to the current wallet
+int Get_Wallet_Max(map<string, int> Items_Gotten = {}) {
 	vector<int> wallets = Get_Wallet_Sizes();
-	int Start_Wallet = Get_Starting_Wallet();
-	int max = wallets[Start_Wallet];
+	int Wal_Index;
+	int max;
+	string wallet;
+
+	Logger("Get_Wallet_Max()");
+
+	//get the wallet
+	wallet = Get_Wallet(Items_Gotten);
+	
+	//get the wallet index	
+	if (wallet == "Giant Wallet") {
+		Wal_Index = 2;
+	}
+	else if (wallet == "Adult Wallet") {
+		Wal_Index = 1;
+	}
+	else {
+		Wal_Index = 0;
+	}
+
+	//get the wallet's max rupee count
+	max = wallets[Wal_Index];
+
+	Logger("Returning from Get_Wallet_Max()");
 
 	return max;
 }
@@ -801,16 +852,25 @@ vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
 	map<string, vector<string>> *Invalid_Items,
 	string Item_Name)
 {
+	int Set_Index = -1;
+	int Line_Index = -1;
 	string line = "";
 	string item = "";
+	string Day_String;
 	vector<vector<string>> Items_Needed;
 	vector<string> List;
 	vector<string> words;
 	vector<string> Cur_Invalid_Items;
+	vector<string> Day_Array;
+	vector<map<string, vector<bool>>> Set_Day_Data;
+	vector<bool> Day_Night;
+	bool comment = false;
 
 	while (!Contains(line, '}'))
 	{
 		getline(Logic_File, line);
+		Line_Index++;
+		comment = false;
 
 		// clear the list
 		List.clear();
@@ -820,8 +880,10 @@ vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
 		if (IndexOf_S(line, "//") != -1)
 		{
 			line = line.substr(0, IndexOf_S(line, "//"));
+			comment = true;
 		}
 
+		//remove tabs to read the line easier
 		line = RemoveAll(line, '\t');
 
 		// list of invalid items to place here
@@ -838,9 +900,41 @@ vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
 				Cur_Invalid_Items.push_back(line);
 			}
 		}
-		// an item needed
-		else
+		//day data for the previous item set
+		else if (line[0] == '@') {
+			Day_String = line.substr(1);	//remove @ from the line
+			Day_Array = Split(Day_String, " ");
+
+			//there were no needed items for this location
+			if (Set_Index == -1) {
+				Set_Index = 0;
+			}
+
+			//index 0 is for when the item is given, the rest is each item in the set
+			for (int d = 0; d < Day_Array.size(); d++) {
+				Day_String = Day_Array[d];
+				//only continue if this is binary
+				if (isBinary(Day_String)) {
+					Day_Night = Binary_Str_To_Vec(Day_String);
+					
+					//make sure the binary string is long enough to get each day data
+					if (Day_Night.size() >= 3) {
+						Day_Data[Item_Name][Set_Index][d]["day"] = Sub_Vec(Day_Night, 0, 3);	//gets the day data
+						if (Day_Night.size() >= 6) {
+							Day_Data[Item_Name][Set_Index][d]["night"] = Sub_Vec(Day_Night, 3, 3);	//gets the night data
+							if (Day_Night.size() == 7) {
+								Day_Data[Item_Name][Set_Index][d]["moon"] = Sub_Vec(Day_Night, 6);	//gets the moon data
+							}
+						}
+					}
+				}
+			}
+		}
+		// an item set
+		else if (!comment)
 		{
+			Set_Index++;
+
 			if (Contains(line, ','))
 			{
 				List = Split(line, ", ");
@@ -849,15 +943,54 @@ vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
 			{
 				List.push_back(line);
 			}
+			//the location doesnt need any items
+			else {
+				Day_Data[Item_Name].push_back({
+{
+	{"day", { true, true, true }},
+	{"night", { true, true, true }},
+					{"moon", {false}}
+},
+{
+	{"day", { true, true, true }},
+	{"night", { true, true, true }},
+					{"moon", {false}}
+}
+					});
+			}
 		}
 
 		if (List.size() > 0)
 		{
+			//if this is not the closing bracket
 			if (!Contains(List[0], '}'))
 			{
-                Items_Needed.push_back(List);
-            }
+				//if this set has items
+				if (List[0] != "")
+				{
+					//add the item set
+					Items_Needed.push_back(List);
+
+					//make the default time for when the item at the location is given for the current item set
+					while (Set_Index >= Day_Data[Item_Name].size()) {
+						//set the default day data for when the item is given
+						Day_Data[Item_Name].push_back({
+		{
+			{"day", { true, true, true }},
+			{"night", { true, true, true }},
+					{"moon", {false}}
+		}
+							});
+					}
+
+
+					//setup default day data for the items in the set
+					for (int i = 0; i < List.size(); i++) {
+						Day_Data[Item_Name][Set_Index].push_back({ { "day", { true, true, true } }, { "night", { true, true, true } }, {"moon", { false } } });
+					}
+				}
         }
+		}
 
         if (Cur_Invalid_Items.size() > 0)
         {
@@ -919,7 +1052,7 @@ map<string, vector<vector<string>>> Get_Logic(string Logic_Location,
         Error("Could not find logic file: \"" + Logic_Location + "\"");
     }
 
-    getline(Logic_File, line);
+    //getline(Logic_File, line);
 
     while (getline(Logic_File, line))
     {
@@ -934,7 +1067,7 @@ map<string, vector<vector<string>>> Get_Logic(string Logic_Location,
             if (Contains(line, '{'))
             {
                 Item = line.substr(0, IndexOf(line, '{') - 1);
-                Logic[Item] = Get_Items_Needed(Logic_File, Invalid_Items, Item);
+				Logic[Item] = Get_Items_Needed(Logic_File, Invalid_Items, Item);
             }
         }
     }
@@ -1120,230 +1253,701 @@ int Get_Total_Count(vector<string> locations) {
 	return total;
 }
 
-//Returns a vector of strings of the items that the player can get with the current equipment according to the logic
-vector<string> Get_Items_Aval(map<string, Item> &Items,
-                              map<string, vector<vector<string>>> Items_Needed,
-                              vector<string> &Items_Gotten,
-                              map<string, string> wallets)
-{
-    vector<string> items;
-    vector<string> Items_Aval;
-    bool Can_Get_Item = false;
-	vector<string> words;
-	int amount;
-	string item;
-	vector<string> Item_Sources;
-	int Total_Count;
-	int Prev_Count;
+map<string, vector<vector<bool>>> Setup_Items_Setup(vector<string> items, map<string, vector<vector<string>>> Items_Needed) {
+	map<string, vector<vector<bool>>> Items_Setup;
+	string location;
 
-    items = Get_Keys(Items);
+	//cout << "items.size(): " << items.size() << endl;
 
-    for (int i = 0; i < items.size(); i++)
-    {
-        string Cur_Item = items[i];
-        Can_Get_Item = false;
-
+	//for each item location
+	for (int l = 0; l < items.size(); l++) {
+		location = items[l];
+		
 		//for each item set
-        for (int isn = 0; isn < Items_Needed[Cur_Item].size(); isn++)
-        {
-            vector<string> Cur_List = Items_Needed[Cur_Item][isn];
-            bool Have_All = true;
+		for (int s = 0; s < Items_Needed[location].size(); s++) {
+			//create the first (or the none item)
+			Items_Setup[location].push_back({ false });
 
 			//for each item in the set
-            for (int in = 0; in < Cur_List.size(); in++)
-            {
-                string item_needed = Cur_List[in];
-				words = Split(item_needed, " ");
+			for (int i = 1; i < Items_Needed[location][s].size(); i++) {
+				Items_Setup[location][s].push_back(false);	//set each item to false by default
+			}
+		}
+	}
 
-				//if the first word is a number
-				if (isNumber(words[0]) || words[0] == "Rupees") {
-					amount = string_to_dec(words[0]);
+	//cout << "Items_Setup.size(): " << Items_Setup.size() << endl;
 
-					//if this is a rupee amount
-					if (words[1] == "Rupees") {
-						string Needed_Wallet = Get_Wallet_Needed(amount, wallets);
+	return Items_Setup;
+}
 
-						// if the player needs a wallet (too many rupees for the starting
-						// wallet)
-						if (Needed_Wallet != "")
-						{
-							// if the player does not have the wallet needed
-							if (IndexOf(Items_Gotten, Needed_Wallet) == -1)
-							{
-								//the player doesn't have all the items for this item set
-								Have_All = false;
-							}
-						}
-					}
-					//not a rupee amount
-					else {
-						item = item_needed.substr(item_needed.find_first_of(' ') + 1);	//remove the amount from the item string to make it only the item name
+bool All_True(vector<bool> booleans) {
+	for (int b = 0; b < booleans.size(); b++) {
+		//found a false
+		if (!booleans[b]) {
+			return false;
+		}
+	}
 
-						//check if the player has gotten any bombchu source
-						if (item_needed == "Bombchus") {
-							if (IndexOf(Items_Gotten, "Bombchu") != -1 && IndexOf(Items_Gotten, "Bombchus (5)") != -1 && IndexOf(Items_Gotten, "Bombchus (10)") != -1) {
-								Have_All = false;
-							}
-						}
-						//check if the player has gotten any deku nut source
-						else if (item_needed == "Deku Nuts") {
-							if (IndexOf(Items_Gotten, "Deku Nuts") != -1 && IndexOf(Items_Gotten, "Deku Nuts (10)")) {
-								Have_All = false;
-							}
-						}
-						else {
-							// if an item is not obtained
-							if (IndexOf(Items_Gotten, item_needed) == -1)
-							{
-								Have_All = false;
-							}
-						}
+	//all are true
+	return true;
+}
 
-						//if the player has gotten the item at least once,
-						//then we need to compare it to how much of that item we need for this item in logic
-						if (Have_All) {
-							//we need a number of chus
-							if (item_needed == "Bombchus") {
-								Item_Sources = Get_Sources("Bombchu");	//bombchu because it's bombchu in the item list (not bombchus)
-								Item_Sources = Remove_Not_Giving(Item_Sources);
-								Item_Sources = Remove_Not_Obtainable(Item_Sources);
-								Total_Count = Get_Total_Count(Item_Sources);
+bool All_False(vector<bool> booleans) {
+	for (int b = 0; b < booleans.size(); b++) {
+		//found a false
+		if (booleans[b]) {
+			return false;
+		}
+	}
 
-								//only keep doing the totals if these locations didn't give infinite
-								if (Total_Count > 0) {
-									Prev_Count = Total_Count;	//to determine if the next set as any 0's
+	//all are true
+	return true;
+}
 
-									Item_Sources = Get_Sources("Bombchus (5)");
-									Item_Sources = Remove_Not_Giving(Item_Sources);
-									Item_Sources = Remove_Not_Obtainable(Item_Sources);
-									Total_Count += Get_Total_Count(Item_Sources) * 5;	//add the amount for chus 5 * 5 to the total
+//whether or not this location gives any items in the given vector
+bool Location_Gives_Items(string location, vector<string> items) {
+	bool gives = true;
 
-									//if this one is not infnite
-									if (Total_Count > Prev_Count) {
-										Prev_Count = Total_Count;	//to determine if the next set as any 0's
 
-										Item_Sources = Get_Sources("Bombchus (10)");
-										Item_Sources = Remove_Not_Giving(Item_Sources);
-										Item_Sources = Remove_Not_Obtainable(Item_Sources);
-										Total_Count += Get_Total_Count(Item_Sources) * 10;	//add the amount for chus 5 * 10 to the total
 
-										//if this one is not infnite
-										if (Total_Count > Prev_Count) {
-											//if the total count of chus that can be gotten at this time is not enough to get this item
-											if (Total_Count < amount) {
-												Have_All = false;
-											}
-										}
-									}
-								}
-							}
-							//we need a number of nuts
-							else if (item_needed == "Deku Nuts") {
-								Item_Sources = Get_Sources(item);
-								Item_Sources = Remove_Not_Giving(Item_Sources);
-								Item_Sources = Remove_Not_Obtainable(Item_Sources);
-								Total_Count = Get_Total_Count(Item_Sources);
+	return gives;
+}
 
-								//only keep doing the totals if these locations didn't give infinite
-								if (Total_Count > 0) {
-									Prev_Count = Total_Count;
+map<string, int> Set_Counts(vector<string> items, int count) {
+	map<string, int> counts;
+	string item;
 
-									Item_Sources = Get_Sources("Deku Nuts (10)");
-									Item_Sources = Remove_Not_Giving(Item_Sources);
-									Item_Sources = Remove_Not_Obtainable(Item_Sources);
-									Total_Count += Get_Total_Count(Item_Sources);	//add the amount for nuts 10 * 10 to the total
+	for (int i = 0; i < items.size(); i++) {
+		item = items[i];
+		counts[item] = count;
+	}
 
-									//if this one is not infnite
-									if (Total_Count > Prev_Count) {
-										//if the total count of nuts is not enough for this item in logic
-										if (Total_Count < amount) {
-											Have_All = false;
-										}
-									}
-								}
-							}
-							//we need a number of another item
-							else {
-								Item_Sources = Get_Sources(item);
-								Item_Sources = Remove_Not_Giving(Item_Sources);
-								Item_Sources = Remove_Not_Obtainable(Item_Sources);
-								Total_Count = Get_Total_Count(Item_Sources);
+	return counts;
+}
 
-								//if the player cannot get enough of the needed item for this location. 0 means infnite, so 0 means the player can get this item
-								if (Total_Count > 0 && Total_Count < amount) {
-									Have_All = false;
-								}
-							}
-						}
-					}
+bool Resettable_Item(string item) {
+	vector<string> Reset_Sot = {	//items that go away on song of time
+	"Moon's Tear",
+	"Land Title Deed",
+	"Swamp Title Deed",
+	"Mountain Title Deed",
+	"Ocean Title Deed",
+	"Room Key",
+	"Pendant of Memories",
+	"Letter to Kafei",
+	"Express Letter to Mama",
+	"Red Potion",
+	"Blue Potion",
+	"Green Potion",
+	"Bugs",
+	"Fish",
+	"Milk",
+	"Poe",
+	"Big Poe",
+	"Spring Water",
+	"Hot Spring Water",
+	"Fairy",
+	"Deku Princess",
+	"Zora Egg",
+	"Gold Dust",
+	"Mushroom",
+	"Seahorse",
+	"Chateau Romani"
+	};
+	//items that matter with an item count
+	vector<string> Countable_Items = {
+		"Bombchus",
+		"Bombchus (5)",
+		"Bombchus (10)",
+		"Deku Nuts",
+		"Deku Nuts (10)",
+		"Deku Sticks",
+		"Magic Beans",
+		"Powder Keg"
+	};
+
+	//return true if the item is an item that goes away on SoT or an item that has counts
+	if (IndexOf(Reset_Sot, item) != -1 || IndexOf(Countable_Items, item) != -1) {
+		return true;
+	}
+	//return false if a generic item like All-Night Mask
+	else {
+		return false;
+	}
+}
+
+int Get_Count(string location, string Item_Given) {
+	int count = 0;
+	int mult = 1;
+	int index = Item_Given.find('(');
+
+	//if this item has (X) (like deku nuts (10))
+	if (index != -1) {
+		mult = string_to_dec(Item_Given.substr(Item_Given.find('(') + 1, Item_Given.find(')') - Item_Given.find('(') - 1));
+	}
+
+	count = Items[location].Count;
+
+	return count * mult;
+}
+
+void Give_Item(string location, map<string, int> &Cycle_Items, map<string, int> &Item_Counts, vector<string> &Items_Aval, vector<string> &Remove_Locations, map<string, int> &Items_Gotten, map<string, bool> &Resettable_Items, bool &Got_Item, bool &Got_Cycle_Item, map<string, bool> &Locations_Checked) {
+	string Item_Given = Items[location].Name;
+	int count;
+	int index;
+	int mult;
+	string Shorter_Item;
+
+	Logger("Give_Item(" + location + ")");
+
+	//add the item to the list of locations available if it's not in the list
+	if (IndexOf(Items_Aval, location) == -1) {
+		Items_Aval.push_back(location);
+		Logger("Adding " + location + " to the list of items available");
+	}
+
+	//add the location to the list of locations that are now able to be obtainable
+	Remove_Locations.push_back(location);
+
+	//if the location gives an item (an item has been randomized here or manually placed here)
+	if (Items[location].gives_item) {
+		Logger("Giving Item at " + location + " (" + Item_Given + ")");
+
+		//gotten what this location gives this cycle
+		Locations_Checked[location] = true;
+
+		//if the item gotten from this location is not already obtained in cycle items
+		if (Cycle_Items[Item_Given] == -1) {
+			//add the item to the list of items gotten if it's not already in it
+			//-1 means it's not in the list, 0 means the item can be gotten infinitely per cycle
+			if (Items_Gotten[Item_Given] == -1) {
+				Items_Gotten[Item_Given] = Get_Count(location, Item_Given);
+				Got_Item = true;	//got a new item which might open new paths
+				Got_Cycle_Item = true;
+			}
+
+			//get item in this cycle
+			Cycle_Items[Item_Given] = Get_Count(location, Item_Given);
+
+			//add stuff like deku nuts (10) to deku nuts
+			index = Item_Given.find('(');
+			if (index != -1) {
+				Shorter_Item = Item_Given.substr(0, index - 1);	//gets Deku Nuts from Deku Nuts (10)
+				mult = string_to_dec(Item_Given.substr(index + 1, Item_Given.find(')') - index - 1));	//get 10 from Deku Nuts (10)
+				count = Items[location].Count;
+				
+				//the player can get infinite this cycle
+				if (count == 0) {
+					Cycle_Items[Shorter_Item] = 0;
 				}
-				else {
-					//check if the player has gotten any bombchu source
-					if (item_needed == "Bombchus") {
-						if (IndexOf(Items_Gotten, "Bombchu") != -1 && IndexOf(Items_Gotten, "Bombchus (5)") != -1 && IndexOf(Items_Gotten, "Bombchus (10)") != -1) {
-							Have_All = false;
-						}
-					}
-					//check if the player has gotten any deku nut source
-					else if (item_needed == "Deku Nuts") {
-						if (IndexOf(Items_Gotten, "Deku Nuts") != -1 && IndexOf(Items_Gotten, "Deku Nuts (10)")) {
-							Have_All = false;
-						}
-					}
-					else {
-
-						// if an item is not obtained, then that means the player cannot get the
-						// item with the current list we're checking
-						if (IndexOf(Items_Gotten, item_needed) == -1)
-						{
-							Have_All = false;
-						}
-					}
+				//if the player hasn't gotten deku nuts
+				else if (Cycle_Items[Shorter_Item] == -1) {
+					//set it to whatever this gives per cycle times 10
+					Cycle_Items[Shorter_Item] = count * mult;
 				}
-            }
+				//if the player already has a count of this item (neither of them gives infnite)
+				else if (Cycle_Items[Shorter_Item] > 0) {
+					//add count * mult to whatever the count of the item already is
+					Cycle_Items[Shorter_Item] += count * mult;
+				}
+			}
+		}
+	}
+}
 
-            // if the player has all items for a row of needed items, then the player can
-            // get this item and skip checking the other rows
-            if (Have_All)
-            {
-                Can_Get_Item = true;
-                isn = Items_Needed[Cur_Item].size();
-            }
-        }
+///returns a vector of strings of all the items that go away or go to zero on SoT
+vector<string> Get_Resettable_Items() {
+	vector<string> Reset_Items = {
+			"Moon's Tear",
+			"Land Title Deed",
+			"Swamp Title Deed",
+			"Mountain Title Deed",
+			"Ocean Title Deed",
+			"Room Key",
+			"Pendant of Memories",
+			"Letter to Kafei",
+			"Express Letter to Mama",
+			"Red Potion",
+			"Blue Potion",
+			"Green Potion",
+			"Bugs",
+			"Fish",
+			"Milk",
+			"Poe",
+			"Big Poe",
+			"Spring Water",
+			"Hot Spring Water",
+			"Fairy",
+			"Deku Princess",
+			"Zora Egg",
+			"Gold Dust",
+			"Mushroom",
+			"Seahorse",
+			"Chateau Romani",
+			"Bombchus",
+			"Bombchus (5)",
+			"Bombchus (10)",
+			"Deku Nuts",
+			"Deku Nuts (10)",
+			"Deku Sticks",
+			"Magic Beans",
+			"Powder Keg"
+	};
 
-        // if the player can get this item, then add the location to the items available
-        // vector
-        if (Can_Get_Item || Items_Needed[Cur_Item].size() == 0)
-        {
-            Items_Aval.push_back(Cur_Item);
-        }
-    }
+	return Reset_Items;
+}
 
-    return Items_Aval;
+bool Player_Has_Item(map<string, int> &Items_Gotten, map<string, int> &Cycle_Items, map<string, int> &Item_Counts, string &Item_Needed, int &Count_Needed) {
+	int Wallet_Size;
+	int count;
+
+	//Logger("Player_Has_Item()");
+
+	//if the player needs a certain rupee count
+	if (Item_Needed == "Rupees") {
+		//Logger("Player needs rupees");
+		Wallet_Size = Get_Wallet_Max(Items_Gotten);
+		//if the wallet can hold enough rupees
+		if (Wallet_Size >= Count_Needed) {
+			//Logger("Player has enough rupees");
+			return true;
+		}
+	}
+	//does the player have this item?
+	else if (Cycle_Items[Item_Needed] != -1) {
+		count = Cycle_Items[Item_Needed];	//gets the number of times the needed item can be gotten per cycle
+		//Logger("Count: " + to_string(count) + " / " + to_string(Count_Needed));
+
+		//if the player has the count needed, or if the item can be gotten infinitely
+		if (count >= Count_Needed || count == 0) {
+			//Logger("Player has " + to_string(Count_Needed) + " " + Item_Needed);
+			return true;
+		}
+		else {
+			//Logger("Player does not have " + to_string(Count_Needed) + " " + Item_Needed);
+		}
+	}
+	else {
+		//Logger("Player does not have " + Item_Needed);
+	}
+
+	//Logger("Returning from Player_Has_Item()");
+
+	return false;
+}
+
+///returns a copy of Items_Gotten where each item that resests on song of time is set back to -1
+void Reset_SoT_Items(map<string, int> &Cycle_Items) {
+	vector<string> Reset_SoT = Get_Resettable_Items();
+
+	for (int i = 0; i < Reset_SoT.size(); i++) {
+		Cycle_Items[Reset_SoT[i]] = -1;
+	}
 }
 
 //Returns a vector of strings of the items that are left in a given pool
 vector<string> Get_Items_Left_Pool(string pool)
 {
-    vector<string> Items_Pool;
-    vector<string> items;
+	vector<string> Items_Pool;
+	vector<string> items;
 
-    items = Get_Keys(Items);
+	items = Get_Keys(Items);
 
-    for (int i = 0; i < items.size(); i++)
-    {
-        string item = items[i];
+	for (int i = 0; i < items.size(); i++)
+	{
+		string item = items[i];
 
-        if (Items[item].Pool == pool)
-        {
-            if (!Items[item].can_get)
-            {
-                Items_Pool.push_back(item);
-            }
-        }
-    }
+		if (Items[item].Pool == pool)
+		{
+			if (!Items[item].can_get)
+			{
+				Items_Pool.push_back(item);
+			}
+		}
+	}
 
-    return Items_Pool;
+	return Items_Pool;
+}
+
+//Returns a vector of strings of the items that the player can get with the current equipment according to the logic
+void Get_Items_Aval(map<string, Item> &Items,
+                              map<string, vector<vector<string>>> Items_Needed,
+                              map<string, int> &Items_Gotten,
+                              map<string, string> wallets,
+							map<string, int> &Locations_Item_Set, //which item set for each location that the logic thinks the player can use to reach the location
+	vector<string> &Locations,	//locations left that haven't been obtainable
+	vector<string> &Locations_Reset,	//locations that give items that reset on song of time (bow if bow gives a deed, for example)
+	vector<string> &Items_Aval,	//locations that are available
+	map<string, int> &Item_Counts,
+	map<string, bool> &Resettable_Items,
+	map<string, int> &Cycle_Items)
+{
+	vector<string> Locations_Ready = {};	//vector of locations where they are ready to give their items when the day arrives
+	vector<int> Locations_Ready_Set = {};	//vector of which item set the logic thinks the player can use to get the item
+	vector<string> Cur_List;
+	//map<string, int> Cycle_Items = Copy(Items_Gotten);
+	int day;
+	int count;
+	int Count_Needed;
+	int Last_Runthrough;
+	int Item_Index;
+	int Set_Index;
+	int Last_Cycle;
+	int Location_Set;
+	int Wallet_Size;
+	string time;
+	string Item_Needed;
+	string location;
+	string Item_Given;
+	string Item_Location;
+	string Location_Ready;
+	vector<string> Item_Vec;
+	map<string,	//location
+		vector	//item sets
+			<vector	//item index
+				<bool>>> Items_Setup;
+	map<string,	//location
+		map<string,	//day or night
+			vector<	// day 1, 2, or 3 (0, 1, or 2 index)
+				bool>>> Days_Given;	//days an obtainable item is given
+	//map<string, int> Item_Counts;	//the count of each item
+	vector<string> Remove_Locations;	//locations that the logic determines is obtainable, so will remove it from the list of locations to check in the future
+	bool Got_Item;
+	bool Got_Cycle_Item;
+	map<string, bool> Locations_Checked;
+	
+	int cycle = 1;
+
+	//for each cycle
+	do {
+		Last_Cycle = Items_Aval.size();
+		Got_Cycle_Item = false;
+
+		Logger("Cycle " + to_string(cycle));
+
+		//clear the previous cycle's setups for the items that were ready to get that could never be gotten
+		Locations_Ready.clear();
+		Locations_Ready_Set.clear();
+
+		//reset the items that reset on song of time
+		Reset_SoT_Items(Cycle_Items);
+
+		//clear the flags for each cycle of setting up to get items
+		Items_Setup = Setup_Items_Setup(Item_Keys, Items_Needed);
+
+		Locations_Checked = Set_Map(Item_Keys, false);
+	
+		//for each day/night in this cycle
+		for (int t = 0; t < 6; t++) {
+			day = t / 2;	//0, 1, or 2
+
+			if (t % 2 == 0) {
+				time = "day";
+			}
+			else {
+				time = "night";
+			}
+
+			Logger("Dawn of " + time + " " + to_string(day + 1));
+
+			//if there are items ready to be given
+			if (Locations_Ready.size() > 0) {
+				for (int r = 0; r < Locations_Ready.size(); r++) {
+					Location_Ready = Locations_Ready[r];
+					Location_Set = Locations_Ready_Set[r];
+
+					//if the item can be gotten today, then give it to the player
+					if (Days_Given[Location_Ready][time][day]) {
+						//get the item/add it to the list of items available
+						Give_Item(Location_Ready, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
+
+						//Get the item set index the logic used to determine the item was obtainable
+						Locations_Item_Set[Location_Ready] = Location_Set;
+
+						Locations_Ready = Remove_Index(Locations_Ready, r);
+						Locations_Ready_Set = Remove_Index(Locations_Ready_Set, r);
+						r--;	//because the total size is now one less
+					}
+				}
+			}
+
+			do {
+				Got_Item = false;
+				Last_Runthrough = Cycle_Items.size();
+
+				//for each resettable item location
+				for (int l = 0; l < Locations_Reset.size(); l++) {
+					location = Locations_Reset[l];
+
+					//if already got the item in this cycle, then there is no need to check again, skip to the next one
+					if (Locations_Checked[location]) {
+						continue;
+					}
+
+					//if this location needs no items, then check to see what day/night can be used to setup getting the item
+					if (Items_Needed[location].size() == 0) {
+						//Logger(location + " doesn't need any items");
+						//if "nothing" can be used on this day
+						if (Day_Data[location][0][1][time][day]) {
+							Set_Index = 0;
+							//if the item at the location can be gotten on the same day
+							if (Day_Data[location][0][0][time][day]) {
+								//get the item/add it to the list of items available
+								Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
+
+								//Get the item set index the logic used to determine the item was obtainable
+								Locations_Item_Set[location] = Set_Index;
+							}
+							//store the location for future days
+							else {
+								Locations_Ready.push_back(location);
+								Locations_Ready_Set.push_back(Set_Index);
+							}
+						}
+					}
+
+					//for each item set in the logic for this item
+					for (int s = 0; s < Items_Needed[location].size(); s++) {
+						Cur_List = Items_Needed[location][s];
+
+						//for each item in this set
+						for (int i = 0; i < Cur_List.size(); i++) {
+							Item_Index = i;
+							Item_Needed = Cur_List[Item_Index];
+
+							Item_Vec = Split(Item_Needed, " ");
+
+							//if the first word is a number, then the player needs this amount per cycle
+							if (isNumber(Item_Vec[0])) {
+								Count_Needed = string_to_dec(Item_Vec[0]);
+								Item_Needed = Item_Needed.substr(Item_Needed.find(' ') + 1);	//removes the count from the beginning to just get the item name
+							}
+							//the player only needs 1 per cycle, or just to have the item
+							else {
+								Count_Needed = 1;
+							}
+
+							//does the player have the item and the count needed?
+							if (Player_Has_Item(Items_Gotten, Cycle_Items, Item_Counts, Item_Needed, Count_Needed)) {
+								//can the item that is needed be used on this day?
+								//+1 because the day day index 0 is for when the item at the location is given, 1 is the actual first item in the list
+								if (Day_Data[location][s][Item_Index + 1][time][day]) {
+									Items_Setup[location][s][Item_Index] = true;	//"use" the item
+								}
+							}
+						}
+
+						//check if all the items have been used for this item set
+						if (All_True(Items_Setup[location][s])) {
+							Set_Index = s;
+
+							Days_Given[location] = Day_Data[location][Set_Index][0];	//get the day data for when this location gives it's item
+
+							//if this item has already been determined that it was obtainble before, then do not change the item set
+							if (IndexOf(Get_Keys(Locations_Item_Set), location) == -1) {
+								Set_Index = Locations_Item_Set[location];
+							}
+
+							//if the day data includes this day
+							if (Days_Given[location][time][day]) {
+								//get the item/add it to the list of items available
+								Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
+
+								//Get the item set index the logic used to determine the item was obtainable
+								Locations_Item_Set[location] = Set_Index;
+
+								//skip to the next location
+								s = Day_Data[location].size();
+							}
+							//the item at the location cannot be gotten today, need to check back on a future day
+							else {
+								Locations_Ready.push_back(location);
+								Locations_Ready_Set.push_back(Set_Index);
+							}
+						}
+					}
+				}
+
+				//for each item location that the logic hasn't determined the player can get or an item that gives a resettable item (land deed, deku sticks, etc.)
+				for (int l = 0; l < Locations.size(); l++) {
+					location = Locations[l];
+					//Logger("Can the player get " + location + "?");
+
+					//if this location needs no items, then check to see what day/night can be used to setup getting the item
+					if (Items_Needed[location].size() == 0) {
+						//Logger(location + " doesn't need any items");
+						//if "nothing" can be used on this day
+						if (Day_Data[location][0][1][time][day]) {
+							Set_Index = 0;
+							//if the item at the location can be gotten on the same day
+							if (Day_Data[location][0][0][time][day]) {
+								//get the item/add it to the list of items available
+								Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
+
+								//Get the item set index the logic used to determine the item was obtainable
+								Locations_Item_Set[location] = Set_Index;
+							}
+							//store the location for future days
+							else {
+								Locations_Ready.push_back(location);
+								Locations_Ready_Set.push_back(Set_Index);
+							}
+						}
+					}
+
+					//for each item set in the logic for this item
+					for (int s = 0; s < Items_Needed[location].size(); s++) {
+						Cur_List = Items_Needed[location][s];
+
+						//for each item in this set
+						for (int i = 0; i < Cur_List.size(); i++) {
+							Item_Index = i;
+							Item_Needed = Cur_List[Item_Index];
+
+							Item_Vec = Split(Item_Needed, " ");
+
+							//if the first word is a number, then the player needs this amount per cycle
+							if (isNumber(Item_Vec[0])) {
+								Count_Needed = string_to_dec(Item_Vec[0]);
+								Item_Needed = Item_Needed.substr(Item_Needed.find(' ') + 1);	//removes the count from the beginning to just get the item name
+							}
+							//the player only needs 1 per cycle, or just to have the item
+							else {
+								Count_Needed = 1;
+							}
+
+							//does the player have the item and the count needed?
+							if (Player_Has_Item(Items_Gotten, Cycle_Items, Item_Counts, Item_Needed, Count_Needed)) {
+								//can the item that is needed be used on this day?
+								//+1 because the day day index 0 is for when the item at the location is given, 1 is the actual first item in the list
+								if (Day_Data[location][s][Item_Index + 1][time][day]) {
+									Items_Setup[location][s][Item_Index] = true;	//"use" the item
+								}
+							}
+						}
+
+						//check if all the items have been used for this item set
+						if (All_True(Items_Setup[location][s])) {
+							Set_Index = s;
+
+							Days_Given[location] = Day_Data[location][Set_Index][0];	//get the day data for when this location gives it's item
+
+							//if this item has already been determined that it was obtainble before, then do not change the item set
+							if (IndexOf(Get_Keys(Locations_Item_Set), location) == -1) {
+								Set_Index = Locations_Item_Set[location];
+							}
+
+							//if the day data includes this day
+							if (Days_Given[location][time][day]) {
+								//get the item/add it to the list of items available
+								Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
+
+								//Get the item set index the logic used to determine the item was obtainable
+								Locations_Item_Set[location] = Set_Index;
+
+								//skip to the next location
+								s = Day_Data[location].size();
+							}
+							//the item at the location cannot be gotten today, need to check back on a future day
+							else {
+								Locations_Ready.push_back(location);
+								Locations_Ready_Set.push_back(Set_Index);
+							}
+						}
+					}
+				}
+
+			} while (Got_Item);	//repeat checking if got new items in the last runthrough, something might have unlocked that is on the same day
+
+			//remove the obtainable items from the list of locations so we don't have to check them again
+			//this also makes it where the logic doesnt have to check the same items again on a different day if it already knows those items are good
+			Locations = Remove_Values(Locations, Remove_Locations);
+			Remove_Locations.clear();
+		}
+
+		//check items that can only be used on the moon
+		for (int l = 0; l < Locations.size(); l++) {
+			location = Locations[l];
+			for (int s = 0; s < Items_Needed[location].size(); s++) {
+				Cur_List = Items_Needed[location][s];
+				for (int i = 0; i < Cur_List.size(); i++) {
+					Item_Index = i;
+					Item_Needed = Cur_List[Item_Index];
+
+					Item_Vec = Split(Item_Needed, " ");
+
+					//if the first word is a number, then the player needs this amount per cycle
+					if (isNumber(Item_Vec[0])) {
+						Count_Needed = string_to_dec(Item_Vec[0]);
+						Item_Needed = Item_Needed.substr(Item_Needed.find(' ') + 1);	//removes the count from the beginning to just get the item name
+					}
+					//the player only needs 1 per cycle, or just to have the item
+					else {
+						Count_Needed = 1;
+					}
+
+					//does the player have the item and the count needed?
+					if (Player_Has_Item(Items_Gotten, Cycle_Items, Item_Counts, Item_Needed, Count_Needed)) {
+						//can the item that is needed be used on this day?
+						//+1 because the day day index 0 is for when the item at the location is given, 1 is the actual first item in the list
+						if (Day_Data[location][s][Item_Index + 1]["moon"][0]) {
+							Items_Setup[location][s][Item_Index] = true;	//"use" the item
+						}
+					}
+				}
+
+				//check if all the items have been used for this item set
+				if (All_True(Items_Setup[location][s])) {
+					Set_Index = s;
+
+					Days_Given[location] = Day_Data[location][Set_Index][0];	//get the day data for when this location gives it's item
+
+					//if this item has already been determined that it was obtainble before, then do not change the item set
+					if (IndexOf(Get_Keys(Locations_Item_Set), location) == -1) {
+						Set_Index = Locations_Item_Set[location];
+					}
+
+					//if the day data includes the moon
+					if (Days_Given[location]["moon"][0]) {
+						//get the item/add it to the list of items available
+						Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
+
+						//Get the item set index the logic used to determine the item was obtainable
+						Locations_Item_Set[location] = Set_Index;
+
+						//skip to the next location
+						s = Day_Data[location].size();
+					}
+					//the item at the location cannot be gotten today - item can never be gotten so far (another item set might make it obtainable)
+					else {
+
+					}
+				}
+			}
+		}
+
+		//remove the obtainable items from the list of locations so we don't have to check them again
+		//this also makes it where the logic doesnt have to check the same items again on a different day if it already knows those items are good
+		Locations = Remove_Values(Locations, Remove_Locations);
+		Remove_Locations.clear();
+
+		cycle++;
+	}
+	while (Got_Cycle_Item);	//repeat because could have gotten a deed that lead to an item or gotten an new item later on that leads to a new location earlier in the cycle
+
+	Logger("Got Items Available - total count available: " + to_string(Items_Aval.size()));
+
+	Logger("Total Items Gotten: " + to_string(Items_Gotten.size()));
+
+	Logger("Locations size: " + to_string(Locations.size()));
+
+	Logger("-Locations Left-");
+	Log_Vector(Locations);
+	Logger("---------------");
+
+	Logger("-Items left in Pool Everything-");
+	Log_Vector(Get_Items_Left_Pool("Everything"));
+	Logger("------------------------------");
 }
 
 //Returns a vector of strings of items the player has that was needed for an item
@@ -1388,6 +1992,11 @@ vector<string> Sort_Value(vector<string> Items_Pool)
     string item;
     int value;
 
+	//return an empty list if the vector given was empty
+	if (Items_Pool.size() == 0) {
+		return Sorted_List;
+	}
+
     for (int i = 0; i < Items_Pool.size(); i++)
     {
         item = Items_Pool[i];
@@ -1416,8 +2025,15 @@ vector<string> Sort_Value(vector<string> Items_Pool)
 
         Sorted_List.push_back(Highest_Item); // store the current highest value
 
-        Items_Pool.erase(Items_Pool.begin() +
-                         Highest_Index); // remove the current highest value from pool
+		//only if there is a highest
+		if (Highest_Index != -1) {
+			Items_Pool.erase(Items_Pool.begin() +
+				Highest_Index); // remove the current highest value from pool
+		}
+		else {
+			//remove the first element
+			Items_Pool.erase(Items_Pool.begin());
+		}
     }
 
     return Sorted_List;
@@ -1559,42 +2175,172 @@ bool Check_Curiosity_Items(string Cur_Item)
 	return true;
 }
 
+vector<string> Sort_Points(vector<string> Items_To_Sort) {
+	vector<string> Sorted_Items;
+	string item;
+	string sorted;
+	bool Item_Sorted;
+
+	for (int i = 0; i < Items_To_Sort.size(); i++) {
+		item = Items_To_Sort[i];
+		Item_Sorted = false;
+
+		if (Sorted_Items.size() == 0) {
+			Sorted_Items.push_back(item);
+		}
+		else {
+			for (int s = 0; s < Sorted_Items.size(); s++) {
+				sorted = Sorted_Items[s];
+
+				if (Points[sorted] >= Points[item]) {
+					Sorted_Items.insert(Sorted_Items.begin() + s, item);
+					Item_Sorted = true;
+					break; //found where to place the item
+				}
+			}
+
+			//add the item to the end of the list because it's the one with the most points so far
+			if (!Item_Sorted) {
+				Sorted_Items.push_back(item);
+			}
+		}
+	}
+
+	return Sorted_Items;
+}
+
+void Print_Placed_Items(string sep) {
+	string location;
+	
+	for (int l = 0; l < Item_Keys.size(); l++) {
+		location = Item_Keys[l];
+		if (Items[location].gives_item) {
+			cout << location << " > " << Items[location].Name;
+
+			if (l < Item_Keys.size() - 1) {
+				cout << sep;
+			}
+		}
+	}
+}
+
+///get a vector of the items that have the gives_item as false meaning these are locations that don't give an item yet
+vector<string> Get_Items_Give_Nothing() {
+	vector<string> nothing;
+	string location;
+
+	for (int l = 0; l < Item_Keys.size(); l++) {
+		location = Item_Keys[l];
+
+		if (!Items[location].gives_item) {
+			nothing.push_back(location);
+		}
+	}
+
+	return nothing;
+}
+
+map<string, bool> Reset_Item_Flags() {
+	map<string, bool> Item_Resets;
+	vector<string> Reset_Sot = Get_Resettable_Items();
+	string item;
+
+	for (int i = 0; i < Item_Keys.size(); i++) {
+		item = Item_Keys[i];
+		if (IndexOf(Reset_Sot, item) != -1) {
+			Item_Resets[item] = true;	//resets or losses it on SoT
+		}
+		else {
+			Item_Resets[item] = false;	//keeps it through SoT
+		}
+	}
+
+	return Item_Resets;
+}
+
+vector<vector<string>> Setup_Starting_Items_Available() {
+	vector<vector<string>> items;
+
+	for (int i = 0; i < Item_Keys.size(); i++) {
+		items.push_back({});
+	}
+
+	return items;
+}
+
 //Randomize the items
 bool Randomize(string Log,
                map<string, Item> &Items,
-               string Seed,
+               string &Seed,
                map<string, vector<vector<string>>> &Items_Needed,
-               vector<string> &Items_Gotten,
-               map<string, string> wallets,
+               map<string, int> Items_Gotten,
+               map<string, int> Cycle_Items,
+               map<string, string> wallets, double long &seed,
                map<string, vector<string>> Invalid_Items,
-               vector<string> Items_Last = {})
+		map<string, bool> &Resettable_Items,
+			   vector<string> Items_Last = {},
+			   map<string, int> Location_Sets = {},
+	vector<string> Items_Aval = {}, // item locations that the player is able to get to currently according to logic
+	vector<string> Locations = {},	//locations that the player cannot get to (or havent checked yet)
+	vector<string> Locations_Reset = {},	//the locations that gives resettable items
+	map<string, int> Item_Counts = {},
+	int Placed_Items = 0)
 {
-    vector<string> items;
-    vector<string> Items_Aval; // item locations that the player is able to get to
-                               // currently according to logic
     vector<string> Items_This;
     string Invalid_Item;
     bool Has_All = true;
     bool Placed_All = true;
+	int index;
+	int points;
 
-    items = Get_Keys(Items);
+	int Cur_Perc = Percentage(Item_Keys.size() - Locations.size(), Item_Keys.size());
 
-    Items_Aval = Get_Items_Aval(Items, Items_Needed, Items_Gotten, wallets);
+	if (Items_Gotten.size() == 0) {
+		Locations = Item_Keys;
+		Item_Counts = Set_Counts(Item_Keys, 0);
+		Resettable_Items = Reset_Item_Flags();
+		Items_Gotten = Set_Counts(Item_Keys, -1);
+		Cycle_Items = Copy(Items_Gotten);
+		cout << "0%";
+	}
+	else if (Cur_Perc > Max_Percentage) {
+		Max_Percentage = Cur_Perc;
+		cout << "\r" << Cur_Perc << "%";
+		
+		if (Max_Percentage == 100) {
+			cout << endl;
+		}
+	}
 
+	//only set this to no item sets if it's the first call of this function
+	if (Location_Sets.size() == 0) {
+		Location_Sets = Set_Map(Item_Keys, -1);	//set the default item set index to -1 for each item
+	}
+
+    Get_Items_Aval(Items, Items_Needed, Items_Gotten, wallets, Location_Sets, Locations, Locations_Reset, Items_Aval, Item_Counts, Resettable_Items, Cycle_Items);
+	
     // place an item at each available spot
     for (int ia = 0; ia < Items_Aval.size(); ia++)
     {
         string Cur_Item = Items_Aval[ia];
         int New_Item_Index;
         string New_Item;
+		points = -1;
+
+		//Logger("Checking item " + Cur_Item);
 
         // if this item doesn't give anything yet, then make it give an item
         if (!Items[Cur_Item].gives_item)
         {
-            string pool = Items[Cur_Item].Pool;
-            vector<string> Items_Pool = Get_Items_Left_Pool(pool);
+			Logger(Cur_Item + " doesn't give an item");
+            string pool = Items[Cur_Item].Pool;	//gets the item's pool
+            vector<string> Items_Pool = Get_Items_Left_Pool(pool);	//get the items in the same pool that haven't been placed
 
-            random_shuffle(Items_Pool.begin(), Items_Pool.end());
+            //random_shuffle(Items_Pool.begin(), Items_Pool.end());
+			shuffle(Items_Pool.begin(), Items_Pool.end(), std::default_random_engine(seed));
+
+			//get the items in the pool from lowest worth to highest
+			//Items_Pool = Sort_Points(Items_Pool);
 
             // if ran out of items in the pool
             if (Items_Pool.size() == 0)
@@ -1615,20 +2361,19 @@ bool Randomize(string Log,
                 }
             }
 
+			//get a random index to use to start checking
+			//index = Random(0, Items_Pool.size() - 1);
+			index = 0;
+
+			//for each item in the pool
             for (int ip = 0; ip < Items_Pool.size(); ip++)
             {
                 string New_Log = Log;
                 bool invalid = false;
+				//start at a random index, and wrap around until it comes to the starting item it tried
+				int p = (index + ip) % Items_Pool.size();
 
-                New_Item = Items_Pool[ip];
-
-                Items[Cur_Item].Name = New_Item;
-                Items[Cur_Item].gives_item = true;
-                Items[New_Item].can_get = true;
-
-                // make the player acquire the item that is now placed here
-                Items_Gotten.push_back(New_Item);
-				Items[Cur_Item].Obtainable = true;
+                New_Item = Items_Pool[p];
 
                 // check whether or not this item is in the invalid list
                 if (Invalid_Items[Cur_Item].size() > 0)
@@ -1641,64 +2386,84 @@ bool Randomize(string Log,
                         // this item cannot be placed here
                         if (Invalid_Item == New_Item)
                         {
-                            // cout << New_Item << " cannot be on " << Cur_Item << endl;
                             invalid = true;
-
-                            // remove placed item
-                            Items[Cur_Item].Name = Cur_Item;
-                            Items[Cur_Item].gives_item = false;
-                            Items[New_Item].can_get = false;
 
                             break; // no need to check rest of loop
                         }
                     }
 
+					//if this item is in the invalid list, then it cannot be placed here
                     if (invalid)
                     {
                         continue; // try the next item in the list
                     }
                 }
 
-                if (Items_Needed.size() > 0)
-                {
-                    vector<string> IN =
-                      Get_First_Items_List(Cur_Item, Items_Needed, Items_Gotten);
-                    Items[Cur_Item].Items_Needed = IN;
-                }
+				Items[Cur_Item].Name = New_Item;
+				Items[Cur_Item].gives_item = true;
+				Items[New_Item].can_get = true;
 
+				// make the player acquire the item that is now placed here
+				Items_Gotten[New_Item] = Items[Cur_Item].Count;
+				Cycle_Items[New_Item] = Items[Cur_Item].Count;
+				Items[Cur_Item].Obtainable = true;
+
+				//if the item being placed here resets on sot
+				if (Resettable_Items[New_Item]) {
+					Locations_Reset.push_back(Cur_Item);	//add the location to the list of locations that reset
+				}
+
+				//only check curiosity if there are needed items for this item
                 if (Items_Needed.size() > 0)
                 {
+					//check if a item overwrites an item in curiosity shop, and check/randomize the rest of the items
                     if (Check_Curiosity_Items(Cur_Item) && Randomize(New_Log,
                                                                      Items,
                                                                      Seed,
                                                                      Items_Needed,
                                                                      Items_Gotten,
-                                                                     wallets,
+						Cycle_Items,
+                                                                     wallets, seed,
                                                                      Invalid_Items,
-                                                                     Items_This))
+						Resettable_Items,
+                                                                     Items_This,
+																	Location_Sets,
+						Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1))
                     {
                         return true;
                     }
+					//this item would not work, so remove it and try the next one in the pool list
                     else
                     {
-                        int IG_Index = IndexOf(Items_Gotten, New_Item);
-                        Items_Gotten.erase(Items_Gotten.begin() + IG_Index);
+						Logger(Cur_Item + " giving " + New_Item + " did not work, removing it and trying a different item");
+						Items_Gotten[New_Item] = -1;
+						Cycle_Items[New_Item] = -1;
 						Items[Cur_Item].Obtainable = false;
                         Items[Cur_Item].Name = Cur_Item;
                         Items[Cur_Item].gives_item = false;
                         Items[New_Item].can_get = false;
+						// if the item being placed here resets on sot
+						if (Resettable_Items[New_Item]) {
+							Locations_Reset.pop_back();	//remove location for reset list
+						}
                     }
                 }
+				//no logic
                 else
                 {
+					Logger("No Logic");
                     return Randomize(New_Log,
                                      Items,
                                      Seed,
                                      Items_Needed,
                                      Items_Gotten,
-                                     wallets,
+						Cycle_Items,
+                                     wallets, seed,
                                      Invalid_Items,
-                                     Items_This);
+						Resettable_Items,
+                                     Items_This,
+									Location_Sets,
+						Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
                 }
             }
 
@@ -1709,85 +2474,121 @@ bool Randomize(string Log,
                 return false;
             }
         }
+		else {
+
+		}
 
         // if this item hasn't been gotten yet, and it's been placed
-        if (IndexOf(Items_Gotten, Items[Cur_Item].Name) == -1)
+        if (Items[Cur_Item].gives_item && Items_Gotten[Items[Cur_Item].Name] == -1)
         {
-            string Item_Name = Items[Cur_Item].Name;
+			Logger(Cur_Item + " has an item placed here, but the player hasn't gotten it yet (" + Items[Cur_Item].Name + ")");
+			New_Item = Items[Cur_Item].Name;
 
-            // make the player acquire the item that is now placed here
-            Items_Gotten.push_back(Item_Name);
-			Items[Cur_Item].Obtainable = true;
+			//if this is not a resettable item
+			if (!Resettable_Items[New_Item]) {
+				//remove the item from the list of items being checked if they are obtainable (it already is)
+				Locations = Remove_Values(Locations, { Cur_Item });
+			}
 
-            // Log += Cur_Item + " => " + Item_Name + "\n";
-
-            if (Items_Needed.size() > 0)
-            {
-                if (Get_First_Items_List(Cur_Item, Items_Needed, Items_Gotten).size() > 0)
-                {
-                    // Log += Get_First_Items_List(Cur_Item, Items_Needed, Items_Gotten) +
-                    // "\n";
-                    vector<string> IN =
-                      Get_First_Items_List(Cur_Item, Items_Needed, Items_Gotten);
-                    Items[Cur_Item].Items_Needed = IN;
-                }
-            }
-
-            return Randomize(Log,
-                             Items,
-                             Seed,
-                             Items_Needed,
-                             Items_Gotten,
-                             wallets,
-                             Invalid_Items,
-                             Items_This);
+			//update the items gotten
+			Items_Gotten[New_Item] = Items[Cur_Item].Count;
+			Cycle_Items[New_Item] = Items[Cur_Item].Count;
         }
+		else {
+			//Logger(Cur_Item + " has an item, and the player already has it");
+		}
     }
 
-    for (int i = 0; i < items.size(); i++)
+	Logger("Checking if all items have been gotten and placed");
+    for (int i = 0; i < Item_Keys.size(); i++)
     {
-        // check if every item is obtainable
-        if (IndexOf(Items_Gotten, items[i]) == -1)
+        // check if every item has been gotten
+        if (Items_Gotten[Item_Keys[i]] == -1)
         {
+			//Logger(items[i] + " hasn't been placed");
             Has_All = false;
         }
 
         // check if all items have been placed
-        if (!Items[items[i]].gives_item)
+        if (!Items[Item_Keys[i]].gives_item)
         {
+			//Logger(items[i] + " doesn't give an item");
             Placed_All = false;
         }
     }
-    // can get all items, or no logic
-    if (Has_All || Items_Needed.size() == 0)
-    {
-        // keep going if haven't placed all items, and using no logic
-        if (!Placed_All && Items_Needed.size() == 0)
-        {
-            return Randomize(Log,
-                             Items,
-                             Seed,
-                             Items_Needed,
-                             Items_Gotten,
-                             wallets,
-                             Invalid_Items,
-                             Items_This);
-        }
-        // cannot get all items somehow?
-        else if (!Placed_All)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-    // all items are placed, but cannot get all items
-    else
-    {
-        return false;
-    }
+
+	// keep going if haven't placed all items, and using no logic
+	if (Items_Needed.size() == 0) {
+		if (Has_All) {
+			return Randomize(Log,
+				Items,
+				Seed,
+				Items_Needed,
+				Items_Gotten,
+				Cycle_Items,
+				wallets, seed,
+				Invalid_Items,
+				Resettable_Items,
+				Items_This,
+				Location_Sets, Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
+		}
+	}
+	else {
+		//all items have been obtained
+		if (Has_All) {
+			//all items have been placed
+			if (Placed_All) {
+				Logger("Everything has been placed, returning true");
+				//log remove locations to see if manually placed resettable items are there
+				return true;
+			}
+		}
+	}
+
+	Logger("Got to end of the randomize function, returning false");
+	return false;
+}
+
+///setup default points of the items to "def"
+map<string, int> Default_Points(int def) {
+	map<string, int> points;
+
+	for (int l = 0; l < Item_Keys.size(); l++) {
+		points[Item_Keys[l]] = def;
+	}
+
+	return points;
+}
+
+void Setup_Points(map<string, vector<vector<string>>> &Items_Needed) {
+	string location;
+	string item;
+	vector<string> Item_Vec;
+
+	Logger("Setup_Points() - Start");
+
+	Points = Default_Points(0);
+
+	for (int l = 0; l < Item_Keys.size(); l++) {
+		location = Item_Keys[l];
+
+		for (int s = 0; s < Items_Needed[location].size(); s++) {
+			for (int i = 0; i < Items_Needed[location][s].size(); i++) {
+				item = Items_Needed[location][s][i];
+
+				Item_Vec = Split(item, " ");
+				//if the first word is a number
+				if (isNumber(Item_Vec[0])) {
+					item = item.substr(item.find(' ') + 1);	//removes the count from the beginning to just get the item name
+				}
+
+				//increment the usefullness of this item
+				Points[item] += 1;
+			}
+		}
+	}
+
+	Logger("Setup_Points() - End");
 }
 
 ///Sets up the non randomized items
@@ -1858,18 +2659,24 @@ void Setup_Item_Values(map<string, vector<vector<string>>> Items_Needed)
 }
 
 ///Sets things up before randomizing items
-void Randomize_Setup(map<string, Item> &Items,
+bool Randomize_Setup(map<string, Item> &Items,
                map<string, map<string, string>> *Custom_Settings)
 {
     map<string, vector<vector<string>>> Items_Needed;
     map<string, vector<string>>
       Invalid_Items; // items that cannot be placed in a certain spot, ex: "Fierce Deity
                      // Mask" => {"Red Potion", "Green Potion", etc}
-    vector<string> Items_Gotten;
+    map<string, int> Items_Gotten;
+    map<string, int> Cycle_Items;
     string Log = "";
-
+	vector<vector<vector<string>>> Location_Gives_Sets;
     string &Seed = (*Custom_Settings)["settings"]["Seed"];
     string Logic_File = (*Custom_Settings)["settings"]["Logic"];
+	bool randomized;
+	map<string, bool> Resettable_Items;
+	double long Seed_Num;
+
+	Logger("Randomize_Setup() - Start");
 
     if (Logic_File != "" && Logic_File != "None")
     {
@@ -1885,18 +2692,31 @@ void Randomize_Setup(map<string, Item> &Items,
     {
         Seed = dec_to_string(time(0));
         (*Custom_Settings)["settings"]["Seed"] = Seed;
+		Seed_Num = string_to_dec(Seed);
     }
-    srand(atoll(Seed.c_str()));
+	else if (isNumber(Seed)) {
+		Seed_Num = string_to_dec(Seed);
+	}
+	else {
+		Seed_Num = to_ascii(Seed);
+	}
+    srand(Seed_Num);
 
-    Randomize(Log,
-              Items,
-              Seed,
-              Items_Needed,
-              Items_Gotten,
-              (*Custom_Settings)["wallets"],
-              Invalid_Items);
+	//setup the "points" that determine how good items are
+	Setup_Points(Items_Needed);
 
-    return;
+	randomized = Randomize(Log,
+		Items,
+		Seed,
+		Items_Needed,
+		Items_Gotten,
+		Cycle_Items,
+		(*Custom_Settings)["wallets"], Seed_Num,
+		Invalid_Items, Resettable_Items);
+
+	Logger("Randomize_Setup() - End");
+
+	return randomized;
 }
 
 ///Change FD tunic color
@@ -5610,7 +6430,10 @@ int main()
 	string file_ext;
 	bool Songs_Same_Pool;
 
+	Max_Percentage = 0;
+
     err_file.open("Error.txt");
+	log_file.open("Log.txt");
 
 	// get the settings from the settings file
 	Settings = OpenAsIni("./settings.ini");
@@ -5628,13 +6451,21 @@ int main()
 	//setup the item objects
 	Setup_Items();
 
+	//get the list of items
+	Item_Keys = Get_Keys(Items);
+
     // update the item pools according to the settings
     Update_Pools(Items);
 
     // randomize items according to logic, if any logic was chosen
     cout << "Randomizing Items...\n";
-    Randomize_Setup(Items, &Settings);
-	
+	if (!Randomize_Setup(Items, &Settings)) {
+		//if the items were not able to be randomized according to the logic
+		Error("Could not randomize the items with the logic selected");
+	}
+
+	Logger("Randomized Items");
+
     // write spoiler log
     Write_Log(Settings["settings"]["Seed"]);
 
@@ -5706,8 +6537,11 @@ int main()
     // Delete decompressed rom since it is no longer needed
     // system(("del " + Rom_Location).c_str());
 
+	Success();
+
     outFile.close();
     err_file.close();
+	log_file.close();
 
     return 0;
 }

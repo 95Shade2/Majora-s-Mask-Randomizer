@@ -1,9 +1,14 @@
 #ifndef RANDO_UTILS_HPP
 #define RANDO_UTILS_HPP
 
+#include "rando/logging.hpp"
+
 #include <map>
 #include <string>
 #include <vector>
+#include <list>
+
+extern void Logger(string);
 
 // bad shade!
 using namespace std;
@@ -120,5 +125,56 @@ string Char_To_String(char chr[], int size);
 string Vector_To_String(vector<string> data, string separator);
 
 int IndexOf_Last(string text, char chr);
+
+vector<bool> Binary_Str_To_Vec(string Binary_String);
+
+template<typename type>
+vector<type> Sub_Vec(vector<type> vec, int start, int length = -1) {
+	vector<type> sub;
+	int end;
+	//if no length is given, then get from start to the end
+	if (length == -1) {
+		end = vec.size();
+	}
+	else {
+		end = start + length;
+		//don't go outside the bounds of the vector
+		if (end > vec.size()) {
+			end = vec.size();
+		}
+	}
+
+	for (int v = start; v < end; v++) {
+		sub.push_back(vec[v]);
+	}
+
+	return sub;
+}
+
+vector<string> Remove_Index(vector<string> data, int index);
+
+vector<string> Remove_Values(vector<string>, vector<string>);
+
+vector<int> Remove_Index(vector<int> data, int index);
+
+vector<int> Remove_Values(vector<int>, vector<int>);
+
+vector<string> Copy(vector<string> source);
+
+vector<vector<string>> Copy(vector<vector<string>> source);
+
+map<string, int> Set_Map(vector<string> keys, int value);
+
+map<string, bool> Set_Map(vector<string> keys, bool value);
+
+vector<string> Append(vector<string> data, vector<string> More_Data);
+
+int Percentage(int, int);
+
+bool isBinary(string binary_string);
+
+map<string, int> Copy(map<string, int> source);
+
+double long to_ascii(string text);
 
 #endif

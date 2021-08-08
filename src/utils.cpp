@@ -7,6 +7,10 @@
 #include <stdexcept>
 #include <iomanip>
 #include <iostream>
+#include <list>
+#include <iterator>
+#include <map>
+#include <string>
 
 string hex_to_binary(const string& hex)
 {
@@ -611,4 +615,212 @@ int IndexOf_Last(string text, char chr) {
 	}
 
 	return -1;
+}
+
+vector<bool> Binary_Str_To_Vec(string Binary_String) {
+	vector<bool> binary;
+
+	for (int c = 0; c < Binary_String.size(); c++) {
+		if (Binary_String[c] == '1') {
+			binary.push_back(true);
+		}
+		else {
+			binary.push_back(false);
+		}
+	}
+
+	return binary;
+}
+
+vector<string> Copy(vector<string> source) {
+	vector<string> copied;
+
+	for (int i = 0; i < source.size(); i++) {
+		copied.push_back(source[i]);
+	}
+
+	return copied;
+}
+
+vector<vector<string>> Copy(vector<vector<string>> source) {
+	vector<vector<string>> copied;
+
+	for (int i = 0; i < source.size(); i++) {
+		copied.push_back(Copy(source[i]));
+	}
+
+	return copied;
+}
+
+vector<string> Remove_Index(vector<string> data, int index) {
+	vector<string> removed;
+
+	for (int i = 0; i < data.size(); i++) {
+		if (i != index) {
+			removed.push_back(data[i]);
+		}
+	}
+
+	return removed;
+}
+
+vector<int> Remove_Index(vector<int> data, int index) {
+	vector<int> removed;
+
+	for (int i = 0; i < data.size(); i++) {
+		if (i != index) {
+			removed.push_back(data[i]);
+		}
+	}
+
+	return removed;
+}
+
+vector<string> Remove_Values(vector<string> data, vector<string> Values_To_Remove) {
+	int k = 0;
+	bool match = false;
+
+	while (k < data.size()) {
+		match = false;
+
+		for (int v = 0; v < Values_To_Remove.size(); v++) {
+			if (data[k] == Values_To_Remove[v]) {
+				data = Remove_Index(data, k);
+				match = true;
+				break;	//break out of the loop
+			}
+		}
+
+		//only increment k if there were no matches
+		if (!match) {
+			k++;
+		}
+	}
+
+	return data;
+}
+
+vector<int> Remove_Values(vector<int> data, vector<int> Values_To_Remove) {
+	int k = 0;
+	bool match = false;
+
+	while (k < data.size()) {
+		match = false;
+
+		for (int v = 0; v < Values_To_Remove.size(); v++) {
+			if (data[k] == Values_To_Remove[v]) {
+				data = Remove_Index(data, k);
+				match = true;
+				break;	//break out of the loop
+			}
+		}
+
+		//only increment k if there were no matches
+		if (!match) {
+			k++;
+		}
+	}
+
+	return data;
+}
+
+map<string, int> Set_Map(vector<string> keys, int value) {
+	map<string, int> data;
+	string key;
+
+	for (int k = 0; k < keys.size(); k++) {
+		key = keys[k];
+		data[key] = value;
+	}
+
+	return data;
+}
+
+map<string, bool> Set_Map(vector<string> keys, bool value) {
+	map<string, bool> data;
+	string key;
+
+	for (int k = 0; k < keys.size(); k++) {
+		key = keys[k];
+		data[key] = value;
+	}
+
+	return data;
+}
+
+vector<string> Append(vector<string> data, vector<string> More_Data) {
+	vector<string> Combined_Data;
+
+	for (int i = 0; i < data.size(); i++) {
+		Combined_Data.push_back(data[i]);
+	}
+
+	for (int i = 0; i < More_Data.size(); i++) {
+		Combined_Data.push_back(More_Data[i]);
+	}
+
+	return Combined_Data;
+}
+
+int Percentage(int num, int den) {
+	double pro;
+	int pro_int;
+	
+	if (den != 0) {
+		pro = num / double(den);
+	}
+	else {
+		pro = -1;
+	}
+
+	pro_int = pro * 100;
+
+	return pro_int;
+}
+
+bool isBinary(string binary_string) {
+	for (int b = 0; b < binary_string.size(); b++) {
+		if (binary_string[b] != '0' && binary_string[b] != '1') {
+			return false;	//not all the characters in this text is a 0 or 1
+		}
+	}
+
+	//every character is a 0 or 1
+	return true;
+}
+
+map<string, int> Copy(map<string, int> source) {
+	map<string, int> copied;
+	Logger("Copy(map<string, int>)");
+	Logger("source.size(): " + to_string(source.size()));
+	for (map<string, int>::iterator it = source.begin(); it != source.end(); ++it) {
+		copied[it->first] = it->second;
+	}
+	Logger("copied.size(): " + to_string(copied.size()));
+	Logger("returning from Copy(map<string, int>)");
+	return copied;
+}
+
+double long to_ascii(string text) {
+	double ascii = 0;
+	int mult = 1;
+	int chr;
+
+	for (int c = 0; c < text.size(); c++) {
+		chr = int(text[c]);
+
+		if (chr < 10) {
+			ascii *= 10;
+		}
+		else if (chr < 100) {
+			ascii *= 100;
+		}
+		else {
+			ascii *= 1000;
+		}
+
+		ascii += chr;
+	}
+
+	return ascii;
 }

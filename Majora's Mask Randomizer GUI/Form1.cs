@@ -706,7 +706,12 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             if (err_file == "")
             {
-                MessageBox.Show("All Done");
+                MessageBox.Show("Error - Randomizor closed unexpectedly");
+                Enable_Rando_Button();
+            }
+            else if (err_file == "Success")
+            {
+                MessageBox.Show("All Done!");
                 Enable_Rando_Button();
             }
             else

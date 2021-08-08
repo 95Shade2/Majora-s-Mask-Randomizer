@@ -59,6 +59,22 @@
             this.SaveLogic_Button = new System.Windows.Forms.Button();
             this.CancelLogic_Button = new System.Windows.Forms.Button();
             this.Duplicate_ItemSet_Button = new System.Windows.Forms.Button();
+            this.DayNight_ItemNeeded_Label = new System.Windows.Forms.Label();
+            this.DayNight_Item_Label = new System.Windows.Forms.Label();
+            this.Day1_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Day2_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Day3_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Night1_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Night2_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Night3_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Night3_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Night2_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Night1_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Day3_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Day2_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Day1_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Moon_Needed_Checkbox = new System.Windows.Forms.CheckBox();
+            this.Moon_ItemGiven_Checkbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.EditItem_Number)).BeginInit();
             this.SuspendLayout();
             // 
@@ -362,11 +378,199 @@
             this.Duplicate_ItemSet_Button.UseVisualStyleBackColor = true;
             this.Duplicate_ItemSet_Button.Click += new System.EventHandler(this.Duplicate_ItemSet_Button_Click);
             // 
+            // DayNight_ItemNeeded_Label
+            // 
+            this.DayNight_ItemNeeded_Label.AutoSize = true;
+            this.DayNight_ItemNeeded_Label.Location = new System.Drawing.Point(762, 27);
+            this.DayNight_ItemNeeded_Label.Name = "DayNight_ItemNeeded_Label";
+            this.DayNight_ItemNeeded_Label.Size = new System.Drawing.Size(185, 13);
+            this.DayNight_ItemNeeded_Label.TabIndex = 33;
+            this.DayNight_ItemNeeded_Label.Text = "When the item can be used in this set";
+            // 
+            // DayNight_Item_Label
+            // 
+            this.DayNight_Item_Label.AutoSize = true;
+            this.DayNight_Item_Label.Location = new System.Drawing.Point(762, 111);
+            this.DayNight_Item_Label.Name = "DayNight_Item_Label";
+            this.DayNight_Item_Label.Size = new System.Drawing.Size(186, 13);
+            this.DayNight_Item_Label.TabIndex = 34;
+            this.DayNight_Item_Label.Text = "When the item at this location is given";
+            // 
+            // Day1_Needed_Checkbox
+            // 
+            this.Day1_Needed_Checkbox.AutoSize = true;
+            this.Day1_Needed_Checkbox.Location = new System.Drawing.Point(765, 43);
+            this.Day1_Needed_Checkbox.Name = "Day1_Needed_Checkbox";
+            this.Day1_Needed_Checkbox.Size = new System.Drawing.Size(54, 17);
+            this.Day1_Needed_Checkbox.TabIndex = 35;
+            this.Day1_Needed_Checkbox.Text = "Day 1";
+            this.Day1_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Day1_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Day2_Needed_Checkbox
+            // 
+            this.Day2_Needed_Checkbox.AutoSize = true;
+            this.Day2_Needed_Checkbox.Location = new System.Drawing.Point(831, 43);
+            this.Day2_Needed_Checkbox.Name = "Day2_Needed_Checkbox";
+            this.Day2_Needed_Checkbox.Size = new System.Drawing.Size(54, 17);
+            this.Day2_Needed_Checkbox.TabIndex = 36;
+            this.Day2_Needed_Checkbox.Text = "Day 2";
+            this.Day2_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Day2_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Day3_Needed_Checkbox
+            // 
+            this.Day3_Needed_Checkbox.AutoSize = true;
+            this.Day3_Needed_Checkbox.Location = new System.Drawing.Point(897, 43);
+            this.Day3_Needed_Checkbox.Name = "Day3_Needed_Checkbox";
+            this.Day3_Needed_Checkbox.Size = new System.Drawing.Size(54, 17);
+            this.Day3_Needed_Checkbox.TabIndex = 37;
+            this.Day3_Needed_Checkbox.Text = "Day 3";
+            this.Day3_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Day3_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Night1_Needed_Checkbox
+            // 
+            this.Night1_Needed_Checkbox.AutoSize = true;
+            this.Night1_Needed_Checkbox.Location = new System.Drawing.Point(765, 66);
+            this.Night1_Needed_Checkbox.Name = "Night1_Needed_Checkbox";
+            this.Night1_Needed_Checkbox.Size = new System.Drawing.Size(60, 17);
+            this.Night1_Needed_Checkbox.TabIndex = 38;
+            this.Night1_Needed_Checkbox.Text = "Night 1";
+            this.Night1_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Night1_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Night2_Needed_Checkbox
+            // 
+            this.Night2_Needed_Checkbox.AutoSize = true;
+            this.Night2_Needed_Checkbox.Location = new System.Drawing.Point(831, 66);
+            this.Night2_Needed_Checkbox.Name = "Night2_Needed_Checkbox";
+            this.Night2_Needed_Checkbox.Size = new System.Drawing.Size(60, 17);
+            this.Night2_Needed_Checkbox.TabIndex = 39;
+            this.Night2_Needed_Checkbox.Text = "Night 2";
+            this.Night2_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Night2_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Night3_Needed_Checkbox
+            // 
+            this.Night3_Needed_Checkbox.AutoSize = true;
+            this.Night3_Needed_Checkbox.Location = new System.Drawing.Point(897, 66);
+            this.Night3_Needed_Checkbox.Name = "Night3_Needed_Checkbox";
+            this.Night3_Needed_Checkbox.Size = new System.Drawing.Size(60, 17);
+            this.Night3_Needed_Checkbox.TabIndex = 40;
+            this.Night3_Needed_Checkbox.Text = "Night 3";
+            this.Night3_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Night3_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Night3_ItemGiven_Checkbox
+            // 
+            this.Night3_ItemGiven_Checkbox.AutoSize = true;
+            this.Night3_ItemGiven_Checkbox.Location = new System.Drawing.Point(894, 150);
+            this.Night3_ItemGiven_Checkbox.Name = "Night3_ItemGiven_Checkbox";
+            this.Night3_ItemGiven_Checkbox.Size = new System.Drawing.Size(60, 17);
+            this.Night3_ItemGiven_Checkbox.TabIndex = 46;
+            this.Night3_ItemGiven_Checkbox.Text = "Night 3";
+            this.Night3_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Night3_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Night2_ItemGiven_Checkbox
+            // 
+            this.Night2_ItemGiven_Checkbox.AutoSize = true;
+            this.Night2_ItemGiven_Checkbox.Location = new System.Drawing.Point(828, 150);
+            this.Night2_ItemGiven_Checkbox.Name = "Night2_ItemGiven_Checkbox";
+            this.Night2_ItemGiven_Checkbox.Size = new System.Drawing.Size(60, 17);
+            this.Night2_ItemGiven_Checkbox.TabIndex = 45;
+            this.Night2_ItemGiven_Checkbox.Text = "Night 2";
+            this.Night2_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Night2_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Night1_ItemGiven_Checkbox
+            // 
+            this.Night1_ItemGiven_Checkbox.AutoSize = true;
+            this.Night1_ItemGiven_Checkbox.Location = new System.Drawing.Point(762, 150);
+            this.Night1_ItemGiven_Checkbox.Name = "Night1_ItemGiven_Checkbox";
+            this.Night1_ItemGiven_Checkbox.Size = new System.Drawing.Size(60, 17);
+            this.Night1_ItemGiven_Checkbox.TabIndex = 44;
+            this.Night1_ItemGiven_Checkbox.Text = "Night 1";
+            this.Night1_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Night1_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Day3_ItemGiven_Checkbox
+            // 
+            this.Day3_ItemGiven_Checkbox.AutoSize = true;
+            this.Day3_ItemGiven_Checkbox.Location = new System.Drawing.Point(894, 127);
+            this.Day3_ItemGiven_Checkbox.Name = "Day3_ItemGiven_Checkbox";
+            this.Day3_ItemGiven_Checkbox.Size = new System.Drawing.Size(54, 17);
+            this.Day3_ItemGiven_Checkbox.TabIndex = 43;
+            this.Day3_ItemGiven_Checkbox.Text = "Day 3";
+            this.Day3_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Day3_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Day2_ItemGiven_Checkbox
+            // 
+            this.Day2_ItemGiven_Checkbox.AutoSize = true;
+            this.Day2_ItemGiven_Checkbox.Location = new System.Drawing.Point(828, 127);
+            this.Day2_ItemGiven_Checkbox.Name = "Day2_ItemGiven_Checkbox";
+            this.Day2_ItemGiven_Checkbox.Size = new System.Drawing.Size(54, 17);
+            this.Day2_ItemGiven_Checkbox.TabIndex = 42;
+            this.Day2_ItemGiven_Checkbox.Text = "Day 2";
+            this.Day2_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Day2_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Day1_ItemGiven_Checkbox
+            // 
+            this.Day1_ItemGiven_Checkbox.AutoSize = true;
+            this.Day1_ItemGiven_Checkbox.Location = new System.Drawing.Point(762, 127);
+            this.Day1_ItemGiven_Checkbox.Name = "Day1_ItemGiven_Checkbox";
+            this.Day1_ItemGiven_Checkbox.Size = new System.Drawing.Size(54, 17);
+            this.Day1_ItemGiven_Checkbox.TabIndex = 41;
+            this.Day1_ItemGiven_Checkbox.Text = "Day 1";
+            this.Day1_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Day1_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Moon_Needed_Checkbox
+            // 
+            this.Moon_Needed_Checkbox.AutoSize = true;
+            this.Moon_Needed_Checkbox.Location = new System.Drawing.Point(831, 91);
+            this.Moon_Needed_Checkbox.Name = "Moon_Needed_Checkbox";
+            this.Moon_Needed_Checkbox.Size = new System.Drawing.Size(53, 17);
+            this.Moon_Needed_Checkbox.TabIndex = 47;
+            this.Moon_Needed_Checkbox.Text = "Moon";
+            this.Moon_Needed_Checkbox.UseVisualStyleBackColor = true;
+            this.Moon_Needed_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
+            // Moon_ItemGiven_Checkbox
+            // 
+            this.Moon_ItemGiven_Checkbox.AutoSize = true;
+            this.Moon_ItemGiven_Checkbox.Location = new System.Drawing.Point(828, 173);
+            this.Moon_ItemGiven_Checkbox.Name = "Moon_ItemGiven_Checkbox";
+            this.Moon_ItemGiven_Checkbox.Size = new System.Drawing.Size(53, 17);
+            this.Moon_ItemGiven_Checkbox.TabIndex = 48;
+            this.Moon_ItemGiven_Checkbox.Text = "Moon";
+            this.Moon_ItemGiven_Checkbox.UseVisualStyleBackColor = true;
+            this.Moon_ItemGiven_Checkbox.CheckStateChanged += new System.EventHandler(this.Day1_Needed_Checkbox_CheckedChanged);
+            // 
             // LogicEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 376);
+            this.ClientSize = new System.Drawing.Size(961, 376);
+            this.Controls.Add(this.Moon_ItemGiven_Checkbox);
+            this.Controls.Add(this.Moon_Needed_Checkbox);
+            this.Controls.Add(this.Night3_ItemGiven_Checkbox);
+            this.Controls.Add(this.Night2_ItemGiven_Checkbox);
+            this.Controls.Add(this.Night1_ItemGiven_Checkbox);
+            this.Controls.Add(this.Day3_ItemGiven_Checkbox);
+            this.Controls.Add(this.Day2_ItemGiven_Checkbox);
+            this.Controls.Add(this.Day1_ItemGiven_Checkbox);
+            this.Controls.Add(this.Night3_Needed_Checkbox);
+            this.Controls.Add(this.Night2_Needed_Checkbox);
+            this.Controls.Add(this.Night1_Needed_Checkbox);
+            this.Controls.Add(this.Day3_Needed_Checkbox);
+            this.Controls.Add(this.Day2_Needed_Checkbox);
+            this.Controls.Add(this.Day1_Needed_Checkbox);
+            this.Controls.Add(this.DayNight_Item_Label);
+            this.Controls.Add(this.DayNight_ItemNeeded_Label);
             this.Controls.Add(this.Duplicate_ItemSet_Button);
             this.Controls.Add(this.CancelLogic_Button);
             this.Controls.Add(this.SaveLogic_Button);
@@ -399,7 +603,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "LogicEditor";
-            this.Text = "LogicEditor";
+            this.Text = "Logic Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogicEditor_FormClosing);
             this.Load += new System.EventHandler(this.LogicEditor_Load);
             this.Shown += new System.EventHandler(this.LogicEditor_Shown);
@@ -442,5 +646,21 @@
         private System.Windows.Forms.Button SaveLogic_Button;
         private System.Windows.Forms.Button CancelLogic_Button;
         private System.Windows.Forms.Button Duplicate_ItemSet_Button;
+        private System.Windows.Forms.Label DayNight_ItemNeeded_Label;
+        private System.Windows.Forms.Label DayNight_Item_Label;
+        private System.Windows.Forms.CheckBox Day1_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Day2_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Day3_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Night1_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Night2_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Night3_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Night3_ItemGiven_Checkbox;
+        private System.Windows.Forms.CheckBox Night2_ItemGiven_Checkbox;
+        private System.Windows.Forms.CheckBox Night1_ItemGiven_Checkbox;
+        private System.Windows.Forms.CheckBox Day3_ItemGiven_Checkbox;
+        private System.Windows.Forms.CheckBox Day2_ItemGiven_Checkbox;
+        private System.Windows.Forms.CheckBox Day1_ItemGiven_Checkbox;
+        private System.Windows.Forms.CheckBox Moon_Needed_Checkbox;
+        private System.Windows.Forms.CheckBox Moon_ItemGiven_Checkbox;
     }
 }
