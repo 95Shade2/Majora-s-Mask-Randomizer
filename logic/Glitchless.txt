@@ -1,294 +1,549 @@
-//	Item Name {
-//		each line is an array of items needed to get the item
-//		item 1 item 2 etc
-//	}
-
 Adult Wallet {
 	
+	@1111110 1111110
 }
 
 All-Night Mask {
 	Adult Wallet
+	@1111110 1111110
 	Giant Wallet
+	@1111110 1111110
 }
 
 Big Bomb Bag {
 	
+	@1111110 1111110
 }
 
 Big Poe {
 	Captain's Hat, Goron Mask, Powder Keg, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Biggest Bomb Bag {
 	Goron Mask
+	@1111110 1111110
 }
 
 Blast Mask {
 	
+	@1111110 1111110
 }
 
 Blue Potion {
 	
+	@1111110 1111110
+}
+
+Blue Rupee {
+	
+	@1111110 1111110
 }
 
 Bomb Bag {
 	
+	@1111110 1111110
+}
+
+Bombchu {
+	
+	@1111110 1111110
+}
+
+Bombchus (10) {
+	
+	@1111110 1111110
+}
+
+Bombchus (5) {
+	
+	@1111110 1111110
 }
 
 Bomber's Notebook {
 	Zora Mask
+	@1111110 1111110
 	Deku Mask
+	@1111110 1111110
 	Hookshot
+	@1111110 1111110
 }
 
 Bow {
 	Deku Mask, Hookshot
+	@1111110 1111110 1111110
 	Deku Mask, Deku Stick
+	@1111110 1111110 1111110
 }
 
 Bremen Mask {
-
+	
+	@1111110 1111110
 }
 
 Bugs {
-
+	
+	@1111110 1111110
 }
 
 Bunny Hood {
 	Bremen Mask
+	@1111110 1111110
 }
 
 Captain's Hat {
-
+	
+	@1111110 1111110
 }
 
 Chateau Romani {
 	Romani's Mask
+	@1111110 1111110
 }
 
 Circus Leader's Mask {
 	Goron Mask, Zora Mask, Deku Mask, Romani's Mask
+	@1111110 1111110 1111110 1111110 1111110
+}
+
+Clocktown Map {
+	
+	@1111110 1111110
 }
 
 Couple's Mask {
 	Pendant of Memories, Letter to Kafei, Goron Mask, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Deku Mask {
 	
+	@1111110 1111110
 }
 
 Deku Nuts {
 	
+	@1111110 1111110
 }
 
 Deku Nuts (10) {
 	
+	@1111110 1111110
 }
 
 Deku Princess {
-
+	
+	@1111110 1111110
 }
 
 Deku Stick {
 	
+	@1111110 1111110
 }
 
 Don Gero's Mask {
-
-}
-
-Fairy {
 	
+	@1111110 1111110
 }
 
-Fierce Deity Mask {
-
-}
-
-Fire Arrow {
-
-}
-
-Fish {
+Elegy of Emptiness {
 	
+	@1111110 1111110
+}
+
+Epona's Song {
+	
+	@1111110 1111110
 }
 
 Express Letter to Mama {
 	Letter to Kafei
+	@1111110 1111110
+}
+
+Fairy {
+	
+	@1111110 1111110
+}
+
+Fierce Deity Mask {
+	
+	@1111110 1111110
+}
+
+Fire Arrow {
+	
+	@1111110 1111110
+}
+
+Fish {
+	
+	@1111110 1111110
 }
 
 Garo Mask {
 	Goron Mask, Powder Keg
+	@1111110 1111110 1111110
 }
 
 Giant Wallet {
-
+	
+	@1111110 1111110
 }
 
 Giant's Mask {
-
+	
+	@1111110 1111110
 }
 
 Gibdo Mask {
-
+	
+	@1111110 1111110
 }
 
 Gilded Sword {
 	Gilded Sword
+	@1111110 1111110
 	Gold Dust
+	@1111110 1111110
+}
+
+Goht's Remains {
+	
+	@1111110 1111110
 }
 
 Gold Dust {
+	
+	@1111110 1111110
+}
 
+Gold Rupee {
+	
+	@1111110 1111110
+}
+
+Goron Lullaby {
+	
+	@1111110 1111110
 }
 
 Goron Mask {
+	
+	@1111110 1111110
+}
 
+Great Bay Map {
+	
+	@1111110 1111110
 }
 
 Great Fairy's Mask {
 	Deku Mask
+	@1111110 1111110
 }
 
 Great Fairy's Sword {
-
+	
+	@1111110 1111110
 }
 
 Green Potion {
 	
+	@1111110 1111110
+}
+
+Green Rupee {
+	
+	@1111110 1111110
+}
+
+Gyorg's Remains {
+	
+	@1111110 1111110
+}
+
+Heart Container {
+	
+	@1111110 1111110
+}
+
+Heart Piece {
+	
+	@1111110 1111110
 }
 
 Hero's Shield {
-
+	
+	@1111110 1111110
 }
 
 Hookshot {
 	Zora Mask, Hookshot, Deku Mask
+	@1111110 1111110 1111110 1111110
 	Zora Mask, Goron Mask, Deku Mask
+	@1111110 1111110 1111110 1111110
 }
 
 Hot Spring Water {
-
+	
+	@1111110 1111110
 }
 
 Ice Arrow {
 	Zora Mask, Zora Egg
+	@1111110 1111110 1111110
 }
 
 Kafei's Mask {
 	
+	@1111110 1111110
 }
 
 Kamaro's Mask {
 	
+	@1111110 1111110
 }
 
 Keaton Mask {
-
+	
+	@1111110 1111110
 }
 
 Kokiri Sword {
 	Kokiri Sword
+	@1111110 1111110
 }
 
 Land Title Deed {
 	Moon's Tear
+	@1111110 1111110
+}
+
+Large Quiver {
+	
+	@1111110 1111110
+}
+
+Largest Quiver {
+	
+	@1111110 1111110
 }
 
 Lens of Truth {
 	Goron Mask
+	@1111110 1111110
 }
 
 Letter to Kafei {
 	Kafei's Mask
+	@1111110 1111110
 }
 
 Light Arrow {
-
+	
+	@1111110 1111110
 }
 
 Magic Beans {
 	
+	@1111110 1111110
 }
 
 Mask of Scents {
+	
+	@1111110 1111110
+}
 
+Mask of Truth {
+	
+	@1111110 1111110
 }
 
 Milk {
 	
+	@1111110 1111110
+}
+
+Mirror Shield {
+	
+	@1111110 1111110
+}
+
+Moon's Tear {
+	
+	@1111110 1111110
 }
 
 Mountain Title Deed {
 	Swamp Title Deed, Deku Mask
+	@1111110 1111110 1111110
 }
 
 Mushroom {
 	Mask of Scents
+	@1111110 1111110
+}
+
+New Wave Bossa Nova {
+	
+	@1111110 1111110
+}
+
+Oath to Order {
+	
+	@1111110 1111110
 }
 
 Ocean Title Deed {
 	Mountain Title Deed, Goron Mask
+	@1111110 1111110 1111110
+}
+
+Odolwa's Remains {
+	
+	@1111110 1111110
 }
 
 Pendant of Memories {
 	Letter to Kafei
+	@1111110 1111110
 }
 
 Pictograph Box {
 	Red Potion
+	@1111110 1111110
 	Blue Potion
+	@1111110 1111110
+}
+
+Poe {
+	
+	@1111110 1111110
 }
 
 Postman's Hat {
 	Express Letter to Mama
+	@1111110 1111110
 }
 
 Powder Keg {
+	
+	@1111110 1111110
+}
 
+Purple Rupee {
+	
+	@1111110 1111110
 }
 
 Razor Sword {
 	Razor Sword
+	@1111110 1111110
 	Goron Mask
+	@1111110 1111110
 }
 
 Red Potion {
 	
+	@1111110 1111110
+}
+
+Red Rupee {
+	
+	@1111110 1111110
+}
+
+Romani Ranch Map {
+	
+	@1111110 1111110
 }
 
 Romani's Mask {
-
+	
+	@1111110 1111110
 }
 
 Room Key {
 	
+	@1111110 1111110
 }
 
 Seahorse {
 	Pictograph Box
+	@1111110 1111110
+}
+
+Silver Rupee {
+	
+	@1111110 1111110
+}
+
+Snowhead Map {
+	
+	@1111110 1111110
+}
+
+Sonata of Awakening {
+	
+	@1111110 1111110
+}
+
+Song of Healing {
+	
+	@1111110 1111110
+}
+
+Song of Soaring {
+	
+	@1111110 1111110
+}
+
+Song of Storms {
+	
+	@1111110 1111110
 }
 
 Spring Water {
 	
+	@1111110 1111110
 }
 
 Stone Mask {
 	Lens of Truth, Red Potion
+	@1111110 1111110 1111110
 	Lens of Truth, Blue Potion
+	@1111110 1111110 1111110
+}
+
+Stone Tower Map {
+	
+	@1111110 1111110
 }
 
 Swamp Title Deed {
 	Land Title Deed
+	@1111110 1111110
+}
+
+Twinmold's Remains {
+	
+	@1111110 1111110
+}
+
+Woodfall Map {
+	
+	@1111110 1111110
 }
 
 Zora Egg {
 	Zora Mask
+	@1111110 1111110
 }
 
 Zora Mask {
 	Fierce Deity Mask
+	@1111110 1111110
 	Blast Mask
+	@1111110 1111110
 }
