@@ -37,6 +37,7 @@ vector<string> Bottle_Keys;
 vector<string> TMask_Names;
 vector<string> TMask_Keys;
 map<string, int> Points;
+map<string, int> Logic_Item_Sets;	//which item sets that the logic used to determine the items were obtainable
 string Rom_Location = "mm2.z64"; // location of the decompressed rom
 map<string, map<string, string>> Settings;
 map < string,	//location
@@ -1489,7 +1490,7 @@ vector<string> Get_Resettable_Items() {
 			"Bombchus (10)",
 			"Deku Nuts",
 			"Deku Nuts (10)",
-			"Deku Sticks",
+			"Deku Stick",
 			"Magic Beans",
 			"Powder Keg"
 	};
@@ -2278,8 +2279,8 @@ bool Randomize(string Log,
                map<string, string> wallets, double long &seed,
                map<string, vector<string>> Invalid_Items,
 		map<string, bool> &Resettable_Items,
+	map<string, int> &Location_Sets,
 			   vector<string> Items_Last = {},
-			   map<string, int> Location_Sets = {},
 	vector<string> Items_Aval = {}, // item locations that the player is able to get to currently according to logic
 	vector<string> Locations = {},	//locations that the player cannot get to (or havent checked yet)
 	vector<string> Locations_Reset = {},	//the locations that gives resettable items
@@ -2426,8 +2427,8 @@ bool Randomize(string Log,
                                                                      wallets, seed,
                                                                      Invalid_Items,
 						Resettable_Items,
+						Location_Sets,
                                                                      Items_This,
-																	Location_Sets,
 						Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1))
                     {
                         return true;
@@ -2461,8 +2462,8 @@ bool Randomize(string Log,
                                      wallets, seed,
                                      Invalid_Items,
 						Resettable_Items,
+						Location_Sets,
                                      Items_This,
-									Location_Sets,
 						Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
                 }
             }
@@ -2529,8 +2530,8 @@ bool Randomize(string Log,
 				wallets, seed,
 				Invalid_Items,
 				Resettable_Items,
-				Items_This,
-				Location_Sets, Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
+				Location_Sets,
+				Items_This,  Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
 		}
 	}
 	else {
@@ -2538,8 +2539,8 @@ bool Randomize(string Log,
 		if (Has_All) {
 			//all items have been placed
 			if (Placed_All) {
+				Logic_Item_Sets = Copy(Location_Sets);
 				Logger("Everything has been placed, returning true");
-				//log remove locations to see if manually placed resettable items are there
 				return true;
 			}
 		}
@@ -2660,16 +2661,14 @@ void Setup_Item_Values(map<string, vector<vector<string>>> Items_Needed)
 
 ///Sets things up before randomizing items
 bool Randomize_Setup(map<string, Item> &Items,
-               map<string, map<string, string>> *Custom_Settings)
+               map<string, map<string, string>> *Custom_Settings, map<string, vector<vector<string>>> &Items_Needed, map<string, int> &Location_Sets)
 {
-    map<string, vector<vector<string>>> Items_Needed;
     map<string, vector<string>>
       Invalid_Items; // items that cannot be placed in a certain spot, ex: "Fierce Deity
                      // Mask" => {"Red Potion", "Green Potion", etc}
     map<string, int> Items_Gotten;
     map<string, int> Cycle_Items;
     string Log = "";
-	vector<vector<vector<string>>> Location_Gives_Sets;
     string &Seed = (*Custom_Settings)["settings"]["Seed"];
     string Logic_File = (*Custom_Settings)["settings"]["Logic"];
 	bool randomized;
@@ -2712,7 +2711,7 @@ bool Randomize_Setup(map<string, Item> &Items,
 		Items_Gotten,
 		Cycle_Items,
 		(*Custom_Settings)["wallets"], Seed_Num,
-		Invalid_Items, Resettable_Items);
+		Invalid_Items, Resettable_Items, Location_Sets);
 
 	Logger("Randomize_Setup() - End");
 
@@ -4432,47 +4431,47 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 ///Writes data from a file to the rom
 void Write_File_To_Rom(string filename, string rom_offset)
 {
-    constexpr int limit = 2;
-    char data[limit + 1];
-    string String_Data = "";
-    ifstream file;
-    int cur = 0;
-    int address = hex_to_decimal(rom_offset);
+	constexpr int limit = 2;
+	char data[limit + 1];
+	string String_Data = "";
+	ifstream file;
+	int cur = 0;
+	int address = hex_to_decimal(rom_offset);
 
-    file.open(filename, fstream::binary | fstream::out | fstream::in);
+	file.open(filename, fstream::binary | fstream::out | fstream::in);
 
-    while (file.good())
-    {
-        file.seekg(cur);
-        file.read(data, limit);
-        String_Data += Char_To_String(data, limit);
-        cur += limit;
-    }
+	while (file.good())
+	{
+		file.seekg(cur);
+		file.read(data, limit);
+		String_Data += Char_To_String(data, limit);
+		cur += limit;
+	}
 
-    file.close();
+	file.close();
 
-    Write_To_Rom(address, string_to_hex(String_Data));
+	Write_To_Rom(address, string_to_hex(String_Data));
 }
 
 ///Activate the GC HUD
 void Gamecube_Hud()
 {
-    // A Button
-    Write_To_Rom(12251938, "64FF"); // red/green
-    Write_To_Rom(12251958, "78");   // blue
+	// A Button
+	Write_To_Rom(12251938, "64FF"); // red/green
+	Write_To_Rom(12251958, "78");   // blue
 
-    // B
-    Write_To_Rom(12244714, "00FF"); // red
-    Write_To_Rom(12244718, "0064"); // green
-    Write_To_Rom(12244706, "0064"); // blue
+	// B
+	Write_To_Rom(12244714, "00FF"); // red
+	Write_To_Rom(12244718, "0064"); // green
+	Write_To_Rom(12244706, "0064"); // blue
 
-    // Start
-    Write_To_Rom(12245214, "0078"); // red
-    Write_To_Rom(12245202, "0078"); // green
-    Write_To_Rom(12245206, "0078"); // blue
+	// Start
+	Write_To_Rom(12245214, "0078"); // red
+	Write_To_Rom(12245202, "0078"); // green
+	Write_To_Rom(12245206, "0078"); // blue
 
-    // Change Z button in pause screen to L
-    Write_File_To_Rom(".\\files\\l.yaz0", "A7B7CC");
+	// Change Z button in pause screen to L
+	Write_File_To_Rom(".\\files\\l.yaz0", "A7B7CC");
 }
 
 string Get_Log_Start(string seed) {
@@ -4514,12 +4513,16 @@ string Get_Log_End() {
 }
 
 //writes the spoiler log as html file
-void Write_HTML_Log(string seed) {
+void Write_HTML_Log(string seed, map<string, vector<vector<string>>> &Items_Needed, map<string, int> &Location_Sets) {
 	vector<string> items = Get_Keys(Items);
 	string item;
 	string new_item;
 	string html = "";
+	vector<string> Needed_Items;
 	ofstream html_log;
+	vector<string> classes = { "even", "odd" };
+	int class_index;
+	string row_class;
 
 	html += Get_Log_Start(seed);
 
@@ -4527,22 +4530,52 @@ void Write_HTML_Log(string seed) {
 	{
 		item = items[i];
 		new_item = Items[item].Name;
+		class_index = i % 2;
+		row_class = classes[class_index];
 
-		html += "		<div class = \"item\" id = \"item_";
+		if (Items_Needed[item].size() > 0) {
+			Needed_Items = Items_Needed[item][Location_Sets[item]];
+		}
+		else {
+			Needed_Items = {""};
+		}
+
+		html += "		<div class = \"item " + row_class + "\" id = \"item_";
 		html += to_string(i);
 		html += "\">\n";
-		html += "			<div class = \"item_source\" id = \"item_source_" + to_string(i);
+		html += "			<div class = \"item_source\" id = \"item_source_";
+		html += to_string(i);
 		html += "\">\n";
 		html += "					" + item + "\n";
 		html += "			</div>\n";
-		html += "			<div class = \"button item_button\" id = \"button_" + to_string(i);;
-		html += "\" onclick = \"Cover(" + to_string(i);;
-		html += ");\"> \n";
-		html += "				>\n";
-		html += "			</div>\n";
-		html += "			<div class = \"item_give cover\" id = \"item_give_" + to_string(i);;
+		html += "			<div class = \"item_gives\">\n";
+		html += "				<div>\n";
+		html += "					<div class=\"items_gives_header\">\n";
+		html += "						<div class=\"gives_text\">\n";
+		html += "							Item Gives\n";
+		html += "						</div>\n";
+		html += "						<div class=\"down_arrow item_button\" onclick = \"Cover(";
+		html += to_string(i);
+		html += "); \">\n";
+		html += "							^\n";
+		html += "						</div>\n";
+		html += "					</div>\n";
+		html += "				</div>\n";
+		html += "				<div class = \"item_give cover\" id = \"item_give_";
+		html += to_string(i);
 		html += "\">\n";
-		html += "				" + new_item + "\n";
+		html += "					" + new_item + "\n";
+		html += "				</div>\n";
+		html += "			</div>\n";
+		html += "			<div class = \"items_needed\" id = \"items_needed_";
+		html += to_string(i);
+		html += "\">\n";
+		html += "				<div class=\"items_needed_header\">";
+		html += "					Items Needed\n";
+		html += "				</div>\n";
+		html += "				<div class = \"items_needed_items\">\n";
+		html += "				" + Vector_To_String(Needed_Items, ", "); +"\n";
+		html += "				</div>\n";
 		html += "			</div>\n";
 		html += "		</div>\n";
 	}
@@ -4565,11 +4598,15 @@ void Write_HTML_Log(string seed) {
 }
 
 //Writes the spoiler log as txt file
-void Write_Log(string seed)
+void Write_Log(string seed, map<string, vector<vector<string>>> &Items_Needed, map<string, int> &Location_Sets)
 {
     vector<string> items = Get_Keys(Items);
     string item;
     string new_item;
+	vector<string> Item_Set;
+	int Set_Index;
+
+	Logger("Write_Log() - start");
 
     outFile << "Seed: " << seed << "\n\n";
 
@@ -4582,17 +4619,29 @@ void Write_Log(string seed)
         new_item = Items[item].Name;
 
         outFile << item << " => " << new_item << "\n";
+		Logger(item + " gives " + new_item);
 
+		Set_Index = Location_Sets[item];
+		Logger("Set index = " + dec_to_string(Set_Index));
         // if items were needed to obtain this item
-        if (Items[item].Items_Needed.size() > 0)
+        if (Set_Index >= 0)
         {
-            outFile << "\t" << Vector_To_String(Items[item].Items_Needed, ", ") << "\n";
+			if (Items_Needed[item].size() > 0) {
+				Item_Set = Items_Needed[item][Set_Index];
+				Logger("Item Set: " + Vector_To_String(Item_Set, ", "));
+				outFile << "\t" << Vector_To_String(Item_Set, ", ") << "\n";
+			}
+			else {
+				Logger("No items needed to check " + item);
+			}
         }
 
         outFile << endl;
     }
 
-	Write_HTML_Log(seed);
+	Write_HTML_Log(seed, Items_Needed, Location_Sets);
+
+	Logger("Write_Log() - end");
 }
 
 ///Change all the references of spring water to bingo water
@@ -6429,6 +6478,8 @@ int main()
 	string error_message;
 	string file_ext;
 	bool Songs_Same_Pool;
+	map<string, vector<vector<string>>> Items_Needed;
+	map<string, int> Location_Sets;
 
 	Max_Percentage = 0;
 
@@ -6459,7 +6510,7 @@ int main()
 
     // randomize items according to logic, if any logic was chosen
     cout << "Randomizing Items...\n";
-	if (!Randomize_Setup(Items, &Settings)) {
+	if (!Randomize_Setup(Items, &Settings, Items_Needed, Location_Sets)) {
 		//if the items were not able to be randomized according to the logic
 		Error("Could not randomize the items with the logic selected");
 	}
@@ -6467,7 +6518,7 @@ int main()
 	Logger("Randomized Items");
 
     // write spoiler log
-    Write_Log(Settings["settings"]["Seed"]);
+    Write_Log(Settings["settings"]["Seed"], Items_Needed, Location_Sets);
 
 	Songs_Same_Pool = All_Songs_Same_Pool();
 

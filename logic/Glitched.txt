@@ -335,20 +335,26 @@ Deku Nuts (10) {
 }
 
 Deku Princess {
-	Deku Mask, Bow
-	@1111110 1111110 1111110
-	Deku Mask, Large Quiver
-	@1111110 1111110 1111110
-	Deku Mask, Largest Quiver
-	@1111110 1111110 1111110
-	Deku Mask, Deku Stick
-	@1111110 1111110 1111110
+	//Woodfall Temple
+	Deku Mask, Bow, Sonata of Awakening
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, Sonata of Awakening
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, Sonata of Awakening
+	@1111110 1111110 1111110 1111110
+	//Woodfall Temple
+	Deku Mask, Deku Stick, Sonata of Awakening
+	@1111110 1111110 1111110 1111110
+	//Woodfall Temple
 	Deku Mask, Zora Mask, Bomb Bag
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Zora Mask, Big Bomb Bag
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Zora Mask, Biggest Bomb Bag
 	@1111110 1111110 1111110 1111110
+	//Song of Time Storage
+	Deku Mask, Deku Princess
+	@1111110 1111110 1111110
 }
 
 Deku Stick {
@@ -804,24 +810,26 @@ Great Fairy's Mask {
 }
 
 Great Fairy's Sword {
-	Bow, Light Arrow, Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Bow, Light Arrow, Big Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Bow, Light Arrow, Biggest Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Large Quiver, Light Arrow, Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Large Quiver, Light Arrow, Big Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Large Quiver, Light Arrow, Biggest Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Largest Quiver, Light Arrow, Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Largest Quiver, Light Arrow, Big Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
-	Largest Quiver, Light Arrow, Biggest Bomb Bag, Fire Arrow
-	@1111110 1111110 1111110 1111110 1111110
+	//Fairy Fountain
+	Bow, Light Arrow, Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Bow, Light Arrow, Big Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Bow, Light Arrow, Biggest Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Large Quiver, Light Arrow, Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Large Quiver, Light Arrow, Big Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Large Quiver, Light Arrow, Biggest Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Largest Quiver, Light Arrow, Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Largest Quiver, Light Arrow, Big Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Largest Quiver, Light Arrow, Biggest Bomb Bag, Fire Arrow, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	//Curiosity Shop
 	Great Fairy's Sword, Bow, 100 Rupees
 	@0001110 0001110 0001110 0001110
 	Great Fairy's Sword, Large Quiver, 100 Rupees
@@ -1449,18 +1457,21 @@ New Wave Bossa Nova {
 }
 
 Oath to Order {
+	//Odolwa
 	Deku Mask, Sonata of Awakening, Bow
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Sonata of Awakening, Large Quiver
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Sonata of Awakening, Largest Quiver
 	@1111110 1111110 1111110 1111110
+	//Goht
 	Bow, Fire Arrow, Goron Lullaby, Goron Mask
 	@1111110 1111110 1111110 1111110 1111110
 	Large Quiver, Fire Arrow, Goron Lullaby, Goron Mask
 	@1111110 1111110 1111110 1111110 1111110
 	Largest Quiver, Fire Arrow, Goron Lullaby, Goron Mask
 	@1111110 1111110 1111110 1111110 1111110
+	//Goht
 	Bow, Fire Arrow, Bomb Bag
 	@1111110 1111110 1111110 1111110
 	Bow, Fire Arrow, Big Bomb Bag
@@ -1479,14 +1490,31 @@ Oath to Order {
 	@1111110 1111110 1111110 1111110
 	Largest Quiver, Fire Arrow, Biggest Bomb Bag
 	@1111110 1111110 1111110 1111110
-	Zora Mask, Zora Egg
-	@1111110 1111110 1111110
+	//Gyorg
+	Zora Mask, New Wave Bossa Nova, Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Big Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110
+	//Gyorg
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Gyorg
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	//Twinmold
 	Bow, Light Arrow, Song of Soaring, Deku Stick, Hookshot
 	@1111110 1111110 1111110 1111110 1111110 1111110
 	Large Quiver, Light Arrow, Song of Soaring, Deku Stick, Hookshot
 	@1111110 1111110 1111110 1111110 1111110 1111110
 	Largest Quiver, Light Arrow, Song of Soaring, Deku Stick, Hookshot
 	@1111110 1111110 1111110 1111110 1111110 1111110
+	//Twinmold
 	Bow, Light Arrow, Bomb Bag
 	@1111110 1111110 1111110 1111110
 	Bow, Light Arrow, Big Bomb Bag
@@ -1894,27 +1922,13 @@ Song of Soaring {
 }
 
 Song of Storms {
-	Song of Soaring, Bomb Bag, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Big Bomb Bag, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Biggest Bomb Bag, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Blast Mask, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Bow, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Large Quiver, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Largest Quiver, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Fire Arrow, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Ice Arrow, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Song of Soaring, Light Arrow, Deku Stick
-	@1111110 1111110 1111110 1111110
-	Goron Mask, Deku Stick
+	Deku Stick
+	@1111110 1111110
+	Bow, Fire Arrow
+	@1111110 1111110 1111110
+	Large Quiver, Fire Arrow
+	@1111110 1111110 1111110
+	Largest Quiver, Fire Arrow
 	@1111110 1111110 1111110
 }
 

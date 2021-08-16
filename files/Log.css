@@ -11,37 +11,31 @@ body {
 .item_source {
 	display: table-cell;
 	padding: 5px;
-	border-bottom: 1px solid #232323;
-	border-top: solid 1px #232323;
-	border-left: solid 1px #232323;
+	vertical-align: middle;
+	border-right: solid 1px #232323;
+	font-weight: bold;
 }
 
 .item_give {
-	display: inline-block;
-	width: 100%;
-	padding-bottom: 5px;
-	padding-top: 5px;
-	border-bottom: 1px solid #232323;
-	border-top: 1px solid #232323;
-	border-right: 1px solid #232323;
+	padding: 5px;
+	text-align: center;
+	border-right: solid 1px #232323;
+	font-weight: bold;
 }
 
 .item {
 	background: #151515;
+	display: table-row;
+	text-align: left;
 	border-top: solid 1px #232323;
 	border-left: solid 1px #232323;
 	border-bottom: solid 1px #232323;
-	display: table-row;
-	text-align: left;
 }
 
 .cover {
 	color: #000000;
 	background: #000000;
 	user-select: none;
-	border-bottom: 1px solid #000000;
-	border-top: 1px solid #000000;
-	border-right: 1px solid #000000;
 }
 
 #search_items {
@@ -58,15 +52,9 @@ body {
 	border-top: 1px solid #232323;
 }
 
-.item_button {
-	border-left: 1px solid #232323;
-	border-right: 1px solid #232323;
-	text-align: right;
-	display: table-cell;
-}
-
 .item_button:hover {
 	background: #202020;
+	cursor: pointer;
 }
 
 .header_button {
@@ -93,4 +81,61 @@ body {
 
 .item_container {
 	padding-top: 10px;
+	display: table;
+	border-collapse: collapse;
+}
+
+.items_needed {
+	display: table-cell;
+	border: solid 1px #232323;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.items_needed_button {
+	text-align: center;
+}
+
+.t_row {
+	display: table-cell;
+}
+
+.items_needed_header {
+	text-align: center;
+	font-style: italic;
+	border-bottom: 1px solid #232323;
+	padding-bottom: 5px;
+}
+
+.items_gives_header {
+	text-align: center;
+	font-style: italic;
+	border-bottom: 1px solid #232323;
+}
+
+.items_needed_items {
+	padding: 5px;
+}
+
+.down_arrow {
+	transform: rotate(180deg);
+	display: inline-block;
+	height: 100%;
+	padding: 5px;
+	border-left: solid 1px #232323;
+	border-right: solid 1px #232323;
+}
+
+.gives_text {
+	display: inline-block;
+}
+
+.item_gives {
+	display: table-cell;
+}
+
+.odd {
+	background: #191919;
 }
