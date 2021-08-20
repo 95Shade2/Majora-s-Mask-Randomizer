@@ -2376,6 +2376,11 @@ bool Randomize(string Log,
 
                 New_Item = Items_Pool[p];
 
+				//if the first item didn't work, and the current item doesn't help open any more locations, then just skip it.
+				if (ip > 0 && Points[New_Item] == 0) {
+					continue;
+				}
+
                 // check whether or not this item is in the invalid list
                 if (Invalid_Items[Cur_Item].size() > 0)
                 {
