@@ -1179,7 +1179,11 @@ Light Arrow {
 }
 
 Magic Beans {
-	
+	Deku Mask
+	@1111110 1111110
+	Goron Mask
+	@1111110 1111110
+	Zora Mask
 	@1111110 1111110
 }
 
