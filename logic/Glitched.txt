@@ -435,17 +435,17 @@ Epona's Song {
 
 Express Letter to Mama {
 	Letter to Kafei
-	@0010010 0010010
+	@0000010 0000010
 	Bomb Bag
-	@0010010 0010010
+	@0000010 0000010
 	Big Bomb Bag
-	@0010010 0010010
+	@0000010 0000010
 	Biggest Bomb Bag
-	@0010010 0010010
+	@0000010 0000010
 	Zora Mask
-	@0010010 0010010
+	@0000010 0000010
 	Fierce Deity Mask
-	@0010010 0010010
+	@0000010 0000010
 	#Gold Dust, Letter to Kafei
 }
 
@@ -1079,17 +1079,17 @@ Kamaro's Mask {
 
 Keaton Mask {
 	Letter to Kafei
-	@0010010 0010010
+	@0000010 0000010
 	Bomb Bag
-	@0010010 0010010
+	@0000010 0000010
 	Big Bomb Bag
-	@0010010 0010010
+	@0000010 0000010
 	Biggest Bomb Bag
-	@0010010 0010010
+	@0000010 0000010
 	Zora Mask
-	@0010010 0010010
+	@0000010 0000010
 	Fierce Deity Mask
-	@0010010 0010010
+	@0000010 0000010
 	#Letter to Kafei
 }
 
