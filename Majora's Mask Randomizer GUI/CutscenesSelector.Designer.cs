@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ClockTown_CircusLeadersMask = new System.Windows.Forms.CheckBox();
             this.ClockTown_SkullKidIntro = new System.Windows.Forms.CheckBox();
             this.ClockTown_ClockTowerOpening = new System.Windows.Forms.CheckBox();
             this.ClockTown_DekuMask = new System.Windows.Forms.CheckBox();
@@ -36,6 +37,7 @@
             this.ClockTown_GreatFairy = new System.Windows.Forms.CheckBox();
             this.ClockTown_CouplesMask = new System.Windows.Forms.CheckBox();
             this.ClockTown_GiantsStoppingMoon = new System.Windows.Forms.CheckBox();
+            this.ClockTown_HappyMaskSalesman = new System.Windows.Forms.CheckBox();
             this.ClockTown_WestClockTownIntro = new System.Windows.Forms.CheckBox();
             this.ClockTown_EastClockTownIntro = new System.Windows.Forms.CheckBox();
             this.ClockTown_NorthClockTownIntro = new System.Windows.Forms.CheckBox();
@@ -48,7 +50,11 @@
             this.Termina_KartRide = new System.Windows.Forms.CheckBox();
             this.Termina_EponaSong = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Termina_PlayingSongOfTime = new System.Windows.Forms.CheckBox();
+            this.Termina_OathToOrder = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Swamp_SwampClearing = new System.Windows.Forms.CheckBox();
+            this.Swamp_SongOfSoaringOwl = new System.Windows.Forms.CheckBox();
             this.Swamp_FreeingDekuPrincess = new System.Windows.Forms.CheckBox();
             this.Swamp_ReturningTheDekuPrincess = new System.Windows.Forms.CheckBox();
             this.Swamp_SonataOfAwakening = new System.Windows.Forms.CheckBox();
@@ -60,6 +66,8 @@
             this.Swamp_DekuPalaceIntro = new System.Windows.Forms.CheckBox();
             this.Swamp_SouthernSwampIntro = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.Mountain_GohtIntro = new System.Windows.Forms.CheckBox();
+            this.Mountain_SnowheadTempleMainRoom = new System.Windows.Forms.CheckBox();
             this.Mountain_SnowMelting = new System.Windows.Forms.CheckBox();
             this.Mountain_GoronMask = new System.Windows.Forms.CheckBox();
             this.Mountain_GiantGoronFallingAsleep = new System.Windows.Forms.CheckBox();
@@ -71,6 +79,7 @@
             this.Mountain_GoronShrineIntro = new System.Windows.Forms.CheckBox();
             this.Mountain_MountainVillageIntro = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.GreatBay_EvanHP = new System.Windows.Forms.CheckBox();
             this.GreatBay_GyorgIntro = new System.Windows.Forms.CheckBox();
             this.GreatBay_BeeEnteringBeehive = new System.Windows.Forms.CheckBox();
             this.GreatBay_MikauWalking = new System.Windows.Forms.CheckBox();
@@ -87,6 +96,7 @@
             this.GreatBay_PiratesFortressIntro = new System.Windows.Forms.CheckBox();
             this.GreatBay_GreatBayCoastIntro = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.Ikana_InvertedStoneTowerIntro = new System.Windows.Forms.CheckBox();
             this.Ikana_SakonsHideout = new System.Windows.Forms.CheckBox();
             this.Ikana_Igos = new System.Windows.Forms.CheckBox();
             this.Ikana_ElegyOfEmptiness = new System.Windows.Forms.CheckBox();
@@ -102,16 +112,7 @@
             this.Ikana_IkanaCastleIntro = new System.Windows.Forms.CheckBox();
             this.Ikana_IkanaGraveyardIntro = new System.Windows.Forms.CheckBox();
             this.Ikana_IkanaCanyonIntro = new System.Windows.Forms.CheckBox();
-            this.Termina_OathToOrder = new System.Windows.Forms.CheckBox();
-            this.Swamp_SongOfSoaringOwl = new System.Windows.Forms.CheckBox();
-            this.Swamp_SwampClearing = new System.Windows.Forms.CheckBox();
-            this.ClockTown_HappyMaskSalesman = new System.Windows.Forms.CheckBox();
-            this.Termina_PlayingSongOfTime = new System.Windows.Forms.CheckBox();
-            this.ClockTown_CircusLeadersMask = new System.Windows.Forms.CheckBox();
-            this.Mountain_SnowheadTempleMainRoom = new System.Windows.Forms.CheckBox();
-            this.Mountain_GohtIntro = new System.Windows.Forms.CheckBox();
-            this.GreatBay_EvanHP = new System.Windows.Forms.CheckBox();
-            this.Ikana_InvertedStoneTowerIntro = new System.Windows.Forms.CheckBox();
+            this.GreatBay_WaterfallRapidsIntro = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -141,6 +142,17 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clock Town";
+            // 
+            // ClockTown_CircusLeadersMask
+            // 
+            this.ClockTown_CircusLeadersMask.AutoSize = true;
+            this.ClockTown_CircusLeadersMask.Location = new System.Drawing.Point(6, 272);
+            this.ClockTown_CircusLeadersMask.Name = "ClockTown_CircusLeadersMask";
+            this.ClockTown_CircusLeadersMask.Size = new System.Drawing.Size(127, 17);
+            this.ClockTown_CircusLeadersMask.TabIndex = 16;
+            this.ClockTown_CircusLeadersMask.Text = "Circus Leader\'s Mask";
+            this.ClockTown_CircusLeadersMask.UseVisualStyleBackColor = true;
+            this.ClockTown_CircusLeadersMask.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
             // ClockTown_SkullKidIntro
             // 
@@ -218,6 +230,17 @@
             this.ClockTown_GiantsStoppingMoon.Text = "Giants Stopping Moon";
             this.ClockTown_GiantsStoppingMoon.UseVisualStyleBackColor = true;
             this.ClockTown_GiantsStoppingMoon.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
+            // ClockTown_HappyMaskSalesman
+            // 
+            this.ClockTown_HappyMaskSalesman.AutoSize = true;
+            this.ClockTown_HappyMaskSalesman.Location = new System.Drawing.Point(6, 88);
+            this.ClockTown_HappyMaskSalesman.Name = "ClockTown_HappyMaskSalesman";
+            this.ClockTown_HappyMaskSalesman.Size = new System.Drawing.Size(135, 17);
+            this.ClockTown_HappyMaskSalesman.TabIndex = 8;
+            this.ClockTown_HappyMaskSalesman.Text = "Happy Mask Salesman";
+            this.ClockTown_HappyMaskSalesman.UseVisualStyleBackColor = true;
+            this.ClockTown_HappyMaskSalesman.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
             // ClockTown_WestClockTownIntro
             // 
@@ -360,6 +383,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Termina";
             // 
+            // Termina_PlayingSongOfTime
+            // 
+            this.Termina_PlayingSongOfTime.AutoSize = true;
+            this.Termina_PlayingSongOfTime.Location = new System.Drawing.Point(6, 226);
+            this.Termina_PlayingSongOfTime.Name = "Termina_PlayingSongOfTime";
+            this.Termina_PlayingSongOfTime.Size = new System.Drawing.Size(126, 17);
+            this.Termina_PlayingSongOfTime.TabIndex = 17;
+            this.Termina_PlayingSongOfTime.Text = "Playing Song of Time";
+            this.Termina_PlayingSongOfTime.UseVisualStyleBackColor = true;
+            this.Termina_PlayingSongOfTime.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
+            // Termina_OathToOrder
+            // 
+            this.Termina_OathToOrder.AutoSize = true;
+            this.Termina_OathToOrder.Location = new System.Drawing.Point(6, 203);
+            this.Termina_OathToOrder.Name = "Termina_OathToOrder";
+            this.Termina_OathToOrder.Size = new System.Drawing.Size(90, 17);
+            this.Termina_OathToOrder.TabIndex = 16;
+            this.Termina_OathToOrder.Text = "Oath to Order";
+            this.Termina_OathToOrder.UseVisualStyleBackColor = true;
+            this.Termina_OathToOrder.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
@@ -381,6 +426,28 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Swamp";
+            // 
+            // Swamp_SwampClearing
+            // 
+            this.Swamp_SwampClearing.AutoSize = true;
+            this.Swamp_SwampClearing.Location = new System.Drawing.Point(6, 272);
+            this.Swamp_SwampClearing.Name = "Swamp_SwampClearing";
+            this.Swamp_SwampClearing.Size = new System.Drawing.Size(102, 17);
+            this.Swamp_SwampClearing.TabIndex = 16;
+            this.Swamp_SwampClearing.Text = "Swamp Clearing";
+            this.Swamp_SwampClearing.UseVisualStyleBackColor = true;
+            this.Swamp_SwampClearing.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
+            // Swamp_SongOfSoaringOwl
+            // 
+            this.Swamp_SongOfSoaringOwl.AutoSize = true;
+            this.Swamp_SongOfSoaringOwl.Location = new System.Drawing.Point(6, 249);
+            this.Swamp_SongOfSoaringOwl.Name = "Swamp_SongOfSoaringOwl";
+            this.Swamp_SongOfSoaringOwl.Size = new System.Drawing.Size(123, 17);
+            this.Swamp_SongOfSoaringOwl.TabIndex = 15;
+            this.Swamp_SongOfSoaringOwl.Text = "Song of Soaring Owl";
+            this.Swamp_SongOfSoaringOwl.UseVisualStyleBackColor = true;
+            this.Swamp_SongOfSoaringOwl.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
             // Swamp_FreeingDekuPrincess
             // 
@@ -514,6 +581,28 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Mountain";
             // 
+            // Mountain_GohtIntro
+            // 
+            this.Mountain_GohtIntro.AutoSize = true;
+            this.Mountain_GohtIntro.Location = new System.Drawing.Point(6, 272);
+            this.Mountain_GohtIntro.Name = "Mountain_GohtIntro";
+            this.Mountain_GohtIntro.Size = new System.Drawing.Size(73, 17);
+            this.Mountain_GohtIntro.TabIndex = 16;
+            this.Mountain_GohtIntro.Text = "Goht Intro";
+            this.Mountain_GohtIntro.UseVisualStyleBackColor = true;
+            this.Mountain_GohtIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
+            // Mountain_SnowheadTempleMainRoom
+            // 
+            this.Mountain_SnowheadTempleMainRoom.AutoSize = true;
+            this.Mountain_SnowheadTempleMainRoom.Location = new System.Drawing.Point(6, 249);
+            this.Mountain_SnowheadTempleMainRoom.Name = "Mountain_SnowheadTempleMainRoom";
+            this.Mountain_SnowheadTempleMainRoom.Size = new System.Drawing.Size(172, 17);
+            this.Mountain_SnowheadTempleMainRoom.TabIndex = 15;
+            this.Mountain_SnowheadTempleMainRoom.Text = "Snowhead Temple Main Room";
+            this.Mountain_SnowheadTempleMainRoom.UseVisualStyleBackColor = true;
+            this.Mountain_SnowheadTempleMainRoom.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
             // Mountain_SnowMelting
             // 
             this.Mountain_SnowMelting.AutoSize = true;
@@ -627,6 +716,7 @@
             // groupBox5
             // 
             this.groupBox5.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox5.Controls.Add(this.GreatBay_WaterfallRapidsIntro);
             this.groupBox5.Controls.Add(this.GreatBay_EvanHP);
             this.groupBox5.Controls.Add(this.GreatBay_GyorgIntro);
             this.groupBox5.Controls.Add(this.GreatBay_BeeEnteringBeehive);
@@ -645,15 +735,26 @@
             this.groupBox5.Controls.Add(this.GreatBay_GreatBayCoastIntro);
             this.groupBox5.Location = new System.Drawing.Point(202, 314);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(184, 390);
+            this.groupBox5.Size = new System.Drawing.Size(184, 412);
             this.groupBox5.TabIndex = 16;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Great Bay";
             // 
+            // GreatBay_EvanHP
+            // 
+            this.GreatBay_EvanHP.AutoSize = true;
+            this.GreatBay_EvanHP.Location = new System.Drawing.Point(6, 387);
+            this.GreatBay_EvanHP.Name = "GreatBay_EvanHP";
+            this.GreatBay_EvanHP.Size = new System.Drawing.Size(69, 17);
+            this.GreatBay_EvanHP.TabIndex = 20;
+            this.GreatBay_EvanHP.Text = "Evan HP";
+            this.GreatBay_EvanHP.UseVisualStyleBackColor = true;
+            this.GreatBay_EvanHP.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
             // GreatBay_GyorgIntro
             // 
             this.GreatBay_GyorgIntro.AutoSize = true;
-            this.GreatBay_GyorgIntro.Location = new System.Drawing.Point(6, 157);
+            this.GreatBay_GyorgIntro.Location = new System.Drawing.Point(6, 180);
             this.GreatBay_GyorgIntro.Name = "GreatBay_GyorgIntro";
             this.GreatBay_GyorgIntro.Size = new System.Drawing.Size(78, 17);
             this.GreatBay_GyorgIntro.TabIndex = 19;
@@ -664,7 +765,7 @@
             // GreatBay_BeeEnteringBeehive
             // 
             this.GreatBay_BeeEnteringBeehive.AutoSize = true;
-            this.GreatBay_BeeEnteringBeehive.Location = new System.Drawing.Point(6, 341);
+            this.GreatBay_BeeEnteringBeehive.Location = new System.Drawing.Point(6, 364);
             this.GreatBay_BeeEnteringBeehive.Name = "GreatBay_BeeEnteringBeehive";
             this.GreatBay_BeeEnteringBeehive.Size = new System.Drawing.Size(129, 17);
             this.GreatBay_BeeEnteringBeehive.TabIndex = 18;
@@ -675,7 +776,7 @@
             // GreatBay_MikauWalking
             // 
             this.GreatBay_MikauWalking.AutoSize = true;
-            this.GreatBay_MikauWalking.Location = new System.Drawing.Point(6, 318);
+            this.GreatBay_MikauWalking.Location = new System.Drawing.Point(6, 341);
             this.GreatBay_MikauWalking.Name = "GreatBay_MikauWalking";
             this.GreatBay_MikauWalking.Size = new System.Drawing.Size(97, 17);
             this.GreatBay_MikauWalking.TabIndex = 17;
@@ -686,7 +787,7 @@
             // GreatBay_MikauTextInWater
             // 
             this.GreatBay_MikauTextInWater.AutoSize = true;
-            this.GreatBay_MikauTextInWater.Location = new System.Drawing.Point(6, 295);
+            this.GreatBay_MikauTextInWater.Location = new System.Drawing.Point(6, 318);
             this.GreatBay_MikauTextInWater.Name = "GreatBay_MikauTextInWater";
             this.GreatBay_MikauTextInWater.Size = new System.Drawing.Size(122, 17);
             this.GreatBay_MikauTextInWater.TabIndex = 16;
@@ -697,7 +798,7 @@
             // GreatBay_NewWaveBossaNova
             // 
             this.GreatBay_NewWaveBossaNova.AutoSize = true;
-            this.GreatBay_NewWaveBossaNova.Location = new System.Drawing.Point(6, 272);
+            this.GreatBay_NewWaveBossaNova.Location = new System.Drawing.Point(6, 295);
             this.GreatBay_NewWaveBossaNova.Name = "GreatBay_NewWaveBossaNova";
             this.GreatBay_NewWaveBossaNova.Size = new System.Drawing.Size(141, 17);
             this.GreatBay_NewWaveBossaNova.TabIndex = 15;
@@ -708,7 +809,7 @@
             // GreatBay_ZoraMask
             // 
             this.GreatBay_ZoraMask.AutoSize = true;
-            this.GreatBay_ZoraMask.Location = new System.Drawing.Point(6, 249);
+            this.GreatBay_ZoraMask.Location = new System.Drawing.Point(6, 272);
             this.GreatBay_ZoraMask.Name = "GreatBay_ZoraMask";
             this.GreatBay_ZoraMask.Size = new System.Drawing.Size(77, 17);
             this.GreatBay_ZoraMask.TabIndex = 14;
@@ -719,7 +820,7 @@
             // GreatBay_EnteringGBT
             // 
             this.GreatBay_EnteringGBT.AutoSize = true;
-            this.GreatBay_EnteringGBT.Location = new System.Drawing.Point(6, 226);
+            this.GreatBay_EnteringGBT.Location = new System.Drawing.Point(6, 249);
             this.GreatBay_EnteringGBT.Name = "GreatBay_EnteringGBT";
             this.GreatBay_EnteringGBT.Size = new System.Drawing.Size(90, 17);
             this.GreatBay_EnteringGBT.TabIndex = 13;
@@ -730,7 +831,7 @@
             // GreatBay_PiratesWhenEnteringGBT
             // 
             this.GreatBay_PiratesWhenEnteringGBT.AutoSize = true;
-            this.GreatBay_PiratesWhenEnteringGBT.Location = new System.Drawing.Point(6, 203);
+            this.GreatBay_PiratesWhenEnteringGBT.Location = new System.Drawing.Point(6, 226);
             this.GreatBay_PiratesWhenEnteringGBT.Name = "GreatBay_PiratesWhenEnteringGBT";
             this.GreatBay_PiratesWhenEnteringGBT.Size = new System.Drawing.Size(157, 17);
             this.GreatBay_PiratesWhenEnteringGBT.TabIndex = 12;
@@ -741,7 +842,7 @@
             // GreatBay_TurtleRising
             // 
             this.GreatBay_TurtleRising.AutoSize = true;
-            this.GreatBay_TurtleRising.Location = new System.Drawing.Point(6, 180);
+            this.GreatBay_TurtleRising.Location = new System.Drawing.Point(6, 203);
             this.GreatBay_TurtleRising.Name = "GreatBay_TurtleRising";
             this.GreatBay_TurtleRising.Size = new System.Drawing.Size(85, 17);
             this.GreatBay_TurtleRising.TabIndex = 11;
@@ -840,6 +941,17 @@
             this.groupBox6.TabIndex = 19;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Ikana";
+            // 
+            // Ikana_InvertedStoneTowerIntro
+            // 
+            this.Ikana_InvertedStoneTowerIntro.AutoSize = true;
+            this.Ikana_InvertedStoneTowerIntro.Location = new System.Drawing.Point(6, 157);
+            this.Ikana_InvertedStoneTowerIntro.Name = "Ikana_InvertedStoneTowerIntro";
+            this.Ikana_InvertedStoneTowerIntro.Size = new System.Drawing.Size(153, 17);
+            this.Ikana_InvertedStoneTowerIntro.TabIndex = 20;
+            this.Ikana_InvertedStoneTowerIntro.Text = "Inverted Stone Tower Intro";
+            this.Ikana_InvertedStoneTowerIntro.UseVisualStyleBackColor = true;
+            this.Ikana_InvertedStoneTowerIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
             // Ikana_SakonsHideout
             // 
@@ -1006,121 +1118,22 @@
             this.Ikana_IkanaCanyonIntro.UseVisualStyleBackColor = true;
             this.Ikana_IkanaCanyonIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
-            // Termina_OathToOrder
+            // GreatBay_WaterfallRapidsIntro
             // 
-            this.Termina_OathToOrder.AutoSize = true;
-            this.Termina_OathToOrder.Location = new System.Drawing.Point(6, 203);
-            this.Termina_OathToOrder.Name = "Termina_OathToOrder";
-            this.Termina_OathToOrder.Size = new System.Drawing.Size(90, 17);
-            this.Termina_OathToOrder.TabIndex = 16;
-            this.Termina_OathToOrder.Text = "Oath to Order";
-            this.Termina_OathToOrder.UseVisualStyleBackColor = true;
-            this.Termina_OathToOrder.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // Swamp_SongOfSoaringOwl
-            // 
-            this.Swamp_SongOfSoaringOwl.AutoSize = true;
-            this.Swamp_SongOfSoaringOwl.Location = new System.Drawing.Point(6, 249);
-            this.Swamp_SongOfSoaringOwl.Name = "Swamp_SongOfSoaringOwl";
-            this.Swamp_SongOfSoaringOwl.Size = new System.Drawing.Size(123, 17);
-            this.Swamp_SongOfSoaringOwl.TabIndex = 15;
-            this.Swamp_SongOfSoaringOwl.Text = "Song of Soaring Owl";
-            this.Swamp_SongOfSoaringOwl.UseVisualStyleBackColor = true;
-            this.Swamp_SongOfSoaringOwl.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // Swamp_SwampClearing
-            // 
-            this.Swamp_SwampClearing.AutoSize = true;
-            this.Swamp_SwampClearing.Location = new System.Drawing.Point(6, 272);
-            this.Swamp_SwampClearing.Name = "Swamp_SwampClearing";
-            this.Swamp_SwampClearing.Size = new System.Drawing.Size(102, 17);
-            this.Swamp_SwampClearing.TabIndex = 16;
-            this.Swamp_SwampClearing.Text = "Swamp Clearing";
-            this.Swamp_SwampClearing.UseVisualStyleBackColor = true;
-            this.Swamp_SwampClearing.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // ClockTown_HappyMaskSalesman
-            // 
-            this.ClockTown_HappyMaskSalesman.AutoSize = true;
-            this.ClockTown_HappyMaskSalesman.Location = new System.Drawing.Point(6, 88);
-            this.ClockTown_HappyMaskSalesman.Name = "ClockTown_HappyMaskSalesman";
-            this.ClockTown_HappyMaskSalesman.Size = new System.Drawing.Size(135, 17);
-            this.ClockTown_HappyMaskSalesman.TabIndex = 8;
-            this.ClockTown_HappyMaskSalesman.Text = "Happy Mask Salesman";
-            this.ClockTown_HappyMaskSalesman.UseVisualStyleBackColor = true;
-            this.ClockTown_HappyMaskSalesman.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // Termina_PlayingSongOfTime
-            // 
-            this.Termina_PlayingSongOfTime.AutoSize = true;
-            this.Termina_PlayingSongOfTime.Location = new System.Drawing.Point(6, 226);
-            this.Termina_PlayingSongOfTime.Name = "Termina_PlayingSongOfTime";
-            this.Termina_PlayingSongOfTime.Size = new System.Drawing.Size(126, 17);
-            this.Termina_PlayingSongOfTime.TabIndex = 17;
-            this.Termina_PlayingSongOfTime.Text = "Playing Song of Time";
-            this.Termina_PlayingSongOfTime.UseVisualStyleBackColor = true;
-            this.Termina_PlayingSongOfTime.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // ClockTown_CircusLeadersMask
-            // 
-            this.ClockTown_CircusLeadersMask.AutoSize = true;
-            this.ClockTown_CircusLeadersMask.Location = new System.Drawing.Point(6, 272);
-            this.ClockTown_CircusLeadersMask.Name = "ClockTown_CircusLeadersMask";
-            this.ClockTown_CircusLeadersMask.Size = new System.Drawing.Size(127, 17);
-            this.ClockTown_CircusLeadersMask.TabIndex = 16;
-            this.ClockTown_CircusLeadersMask.Text = "Circus Leader\'s Mask";
-            this.ClockTown_CircusLeadersMask.UseVisualStyleBackColor = true;
-            this.ClockTown_CircusLeadersMask.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // Mountain_SnowheadTempleMainRoom
-            // 
-            this.Mountain_SnowheadTempleMainRoom.AutoSize = true;
-            this.Mountain_SnowheadTempleMainRoom.Location = new System.Drawing.Point(6, 249);
-            this.Mountain_SnowheadTempleMainRoom.Name = "Mountain_SnowheadTempleMainRoom";
-            this.Mountain_SnowheadTempleMainRoom.Size = new System.Drawing.Size(172, 17);
-            this.Mountain_SnowheadTempleMainRoom.TabIndex = 15;
-            this.Mountain_SnowheadTempleMainRoom.Text = "Snowhead Temple Main Room";
-            this.Mountain_SnowheadTempleMainRoom.UseVisualStyleBackColor = true;
-            this.Mountain_SnowheadTempleMainRoom.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // Mountain_GohtIntro
-            // 
-            this.Mountain_GohtIntro.AutoSize = true;
-            this.Mountain_GohtIntro.Location = new System.Drawing.Point(6, 272);
-            this.Mountain_GohtIntro.Name = "Mountain_GohtIntro";
-            this.Mountain_GohtIntro.Size = new System.Drawing.Size(73, 17);
-            this.Mountain_GohtIntro.TabIndex = 16;
-            this.Mountain_GohtIntro.Text = "Goht Intro";
-            this.Mountain_GohtIntro.UseVisualStyleBackColor = true;
-            this.Mountain_GohtIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // GreatBay_EvanHP
-            // 
-            this.GreatBay_EvanHP.AutoSize = true;
-            this.GreatBay_EvanHP.Location = new System.Drawing.Point(6, 364);
-            this.GreatBay_EvanHP.Name = "GreatBay_EvanHP";
-            this.GreatBay_EvanHP.Size = new System.Drawing.Size(69, 17);
-            this.GreatBay_EvanHP.TabIndex = 20;
-            this.GreatBay_EvanHP.Text = "Evan HP";
-            this.GreatBay_EvanHP.UseVisualStyleBackColor = true;
-            this.GreatBay_EvanHP.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
-            // Ikana_InvertedStoneTowerIntro
-            // 
-            this.Ikana_InvertedStoneTowerIntro.AutoSize = true;
-            this.Ikana_InvertedStoneTowerIntro.Location = new System.Drawing.Point(6, 157);
-            this.Ikana_InvertedStoneTowerIntro.Name = "Ikana_InvertedStoneTowerIntro";
-            this.Ikana_InvertedStoneTowerIntro.Size = new System.Drawing.Size(153, 17);
-            this.Ikana_InvertedStoneTowerIntro.TabIndex = 20;
-            this.Ikana_InvertedStoneTowerIntro.Text = "Inverted Stone Tower Intro";
-            this.Ikana_InvertedStoneTowerIntro.UseVisualStyleBackColor = true;
-            this.Ikana_InvertedStoneTowerIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            this.GreatBay_WaterfallRapidsIntro.AutoSize = true;
+            this.GreatBay_WaterfallRapidsIntro.Location = new System.Drawing.Point(6, 157);
+            this.GreatBay_WaterfallRapidsIntro.Name = "GreatBay_WaterfallRapidsIntro";
+            this.GreatBay_WaterfallRapidsIntro.Size = new System.Drawing.Size(128, 17);
+            this.GreatBay_WaterfallRapidsIntro.TabIndex = 21;
+            this.GreatBay_WaterfallRapidsIntro.Text = "Waterfall Rapids Intro";
+            this.GreatBay_WaterfallRapidsIntro.UseVisualStyleBackColor = true;
+            this.GreatBay_WaterfallRapidsIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
             // CutscenesSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 712);
+            this.ClientSize = new System.Drawing.Size(596, 736);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -1232,5 +1245,6 @@
         private System.Windows.Forms.CheckBox Mountain_GohtIntro;
         private System.Windows.Forms.CheckBox GreatBay_EvanHP;
         private System.Windows.Forms.CheckBox Ikana_InvertedStoneTowerIntro;
+        private System.Windows.Forms.CheckBox GreatBay_WaterfallRapidsIntro;
     }
 }

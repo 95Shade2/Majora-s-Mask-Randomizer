@@ -4484,12 +4484,6 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 		Write_To_Rom(40446482, "FF");
 	}
 
-	// make link go fast in isnt that your horse cs
-	if (Setting_True("cutscenes", "Termina_IsntThatYourHorse")) {
-		Write_Cutscene_Rom(40444324,
-			"your_horse"); 
-	}
-
     // Kart Ride
 	if (Setting_True("cutscenes", "Termina_KartRide")) {
 		Write_To_Rom(16639926, "CE40"); // load gorman track when starting kart ride
@@ -4639,6 +4633,27 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
 	//remove clock tower opening cs
 	if (Setting_True("cutscenes", "ClockTown_ClockTowerOpening")) {
 		Remove_Clock_Tower_CS();
+	}
+
+	//remove waterfall rapids intro cs
+	if (Setting_True("cutscenes", "GreatBay_WaterfallRapidsIntro")) {
+		Write_To_Rom(43430098, "FF");
+	}
+
+	//remove Stone Tower intro cs
+	if (Setting_True("cutscenes", "Ikana_StoneTowerIntro")) {
+		Write_To_Rom(45696914, "FF");
+	}
+
+	// make link go fast in isnt that your horse cs
+	/*if (Setting_True("cutscenes", "Termina_IsntThatYourHorse")) {
+		Write_Cutscene_Rom(40444324,
+			"your_horse");
+	}*/
+
+	//remove isn't that your horse cutscene
+	if (Setting_True("cutscenes", "Termina_IsntThatYourHorse")) {
+		Remove_Actor("26AD000", 1);
 	}
 }
 
