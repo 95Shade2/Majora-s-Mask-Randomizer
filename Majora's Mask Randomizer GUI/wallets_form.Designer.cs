@@ -160,6 +160,7 @@
             this.Controls.Add(this.SmallWallet_NumBox);
             this.Name = "wallets_form";
             this.Text = "Wallets";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.wallets_form_FormClosing);
             this.Load += new System.EventHandler(this.wallets_form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SmallWallet_NumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MediumWallet_NumBox)).EndInit();

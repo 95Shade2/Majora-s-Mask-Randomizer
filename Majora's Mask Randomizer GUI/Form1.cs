@@ -40,6 +40,8 @@ namespace Majora_s_Mask_Randomizer_GUI
         public LogicEditor logic_editor;
         public Dictionary<string, bool> Cutscenes; //whether or not to remove/shorten specific cutscenes
         public CutscenesSelector cs;   //the cutscene form that allows the player to choose which cutscenes to shorten/remove
+        public pmc color_menu_form;
+        public wallets_form Wallet_Form;
 
         public Main_Window()
         {
@@ -64,7 +66,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             Cutscenes = new Dictionary<string, bool>();
             Game_Colors = Default_Pause();
             Wallet_Sizes = Default_Wallets();
+
             cs = new CutscenesSelector();
+            color_menu_form = new pmc();
+            Wallet_Form = new wallets_form();
 
             BlastMaskFrames_Num.Value = 310;
             TARGETING = "";
@@ -1840,18 +1845,20 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void pauseMenuColorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pmc pause_menu_form = new pmc();
-
-            pause_menu_form.parent = this;
-            pause_menu_form.Show();
+            if (!color_menu_form.showing)
+            {
+                color_menu_form.parent = this;
+                color_menu_form.Show();
+            }
         }
 
         private void walletToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            wallets_form WalletForm = new wallets_form();
-
-            WalletForm.parent = this;
-            WalletForm.Show();
+            if (!Wallet_Form.showing)
+            {
+                Wallet_Form.parent = this;
+                Wallet_Form.Show();
+            }
         }
 
         private int Num_Digits(double number)
