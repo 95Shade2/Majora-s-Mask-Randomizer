@@ -47,7 +47,6 @@ map < string,	//location
 	vector<bool>>>>>	//day or night 1, 2, and 3
 	Day_Data;
 
-
 int Random(int min, int max)
 {
     int number = rand();
@@ -4089,6 +4088,27 @@ void Remove_Clock_Tower_CS() {
 	Write_To_Rom(15386940, "24050000");
 }
 
+///whether or not a setting is true
+bool Setting_True(string section, string setting) {
+	map<string, string> Section;
+
+	//if the section exist
+	if (Settings.find(section) != Settings.end()) {
+		Section = Settings[section];
+
+		//if the setting exist
+		if (Section.find(setting) != Section.end()) {
+			//if the setting is true
+			if (Section[setting] == "True") {
+				return true;	//return true
+			}
+		}
+	}
+
+	//could not find the setting, or the setting was false
+	return false;
+}
+
 ///Shortens and remove cutscenes
 void Remove_Cutscenes(bool Songs_Same_Pool)
 {
@@ -4106,331 +4126,520 @@ void Remove_Cutscenes(bool Songs_Same_Pool)
     string Elegy = Items["Elegy of Emptiness"].Name;
 
     // remove the east clock town into cs from the entrances
-    Write_To_Rom(47996414, "FF");
-    Write_To_Rom(47996422, "FF");
-    Write_To_Rom(47996430, "FF");
+	if (Setting_True("cutscenes", "ClockTown_EastClockTownIntro")) {
+		Write_To_Rom(47996414, "FF");
+		Write_To_Rom(47996422, "FF");
+		Write_To_Rom(47996430, "FF");
+	}
 
     // remove the north clock town into cs from the entrances
-    Write_To_Rom(48354914, "FF");
-    Write_To_Rom(48354922, "FF");
+	if (Setting_True("cutscenes", "ClockTown_NorthClockTownIntro")) {
+		Write_To_Rom(48354914, "FF");
+		Write_To_Rom(48354922, "FF");
+	}
 
     // remove the west clock town into cs from the entrances
-    Write_To_Rom(48224334, "FF");
-    Write_To_Rom(48224342, "FF");
+	if (Setting_True("cutscenes", "ClockTown_WestClockTownIntro")) {
+		Write_To_Rom(48224334, "FF");
+		Write_To_Rom(48224342, "FF");
+	}
 
     // remove the termina field intro cs from the entrances
-    Write_To_Rom(39390886, "FF");
-    Write_To_Rom(39390894, "FF");
-    Write_To_Rom(39390902, "FF");
-    Write_To_Rom(39390910, "FF");
+	if (Setting_True("cutscenes", "Termina_TerminaFieldIntro")) {
+		Write_To_Rom(39390886, "FF");
+		Write_To_Rom(39390894, "FF");
+		Write_To_Rom(39390902, "FF");
+		Write_To_Rom(39390910, "FF");
+	}
 
     // remove actor that spawns the skull kid cs
-    Remove_Actor("025C5000", 103);
+	if (Setting_True("cutscenes", "Termina_SkullKidTree")) {
+		Remove_Actor("025C5000", 103);
+	}
 
     // remove southern swamp intro cs from the entrance
-    Write_To_Rom(42098938, "FF");
+	if (Setting_True("cutscenes", "Swamp_SouthernSwampIntro")) {
+		Write_To_Rom(42098938, "FF");
+	}
 
     // remove the daku palace intro cs from the entrance
-    Write_To_Rom(39012318, "FF");
+	if (Setting_True("cutscenes", "Swamp_DekuPalaceIntro")) {
+		Write_To_Rom(39012318, "FF");
+	}
 
     // sonata
-    Write_To_Rom(41386310, "0000");         // make the first part of sonata cs 0 frames
-    Write_Cutscene_Rom(41389520, "sonata"); // shorten sonata cutscene
-    Write_To_Rom(41393633, Items[Sonata].Text_ID); // fix sonata text
-    if (Songs_Same_Pool)
-    {
-        Write_To_Rom(
-          41393585,
-          Items[Sonata].Song1_ID); // fix monkey singing right song, if randomizing the
-                                   // songs that are actually played
-        Write_To_Rom(41393609,
-                     Items[Sonata].Song2_ID); // fix what the player plays, if randomizing
-                                              // the songs that are actually played
-    }
+	if (Setting_True("cutscenes", "Swamp_SonataOfAwakening")) {
+		Write_To_Rom(41386310, "0000");         // make the first part of sonata cs 0 frames
+		Write_Cutscene_Rom(41389520, "sonata"); // shorten sonata cutscene
+		Write_To_Rom(41393633, Items[Sonata].Text_ID); // fix sonata text
+		if (Songs_Same_Pool)
+		{
+			Write_To_Rom(
+				41393585,
+				Items[Sonata].Song1_ID); // fix monkey singing right song, if randomizing the
+										 // songs that are actually played
+			Write_To_Rom(41393609,
+				Items[Sonata].Song2_ID); // fix what the player plays, if randomizing
+										 // the songs that are actually played
+		}
+	}
 
-    // hms
-    Write_Cutscene_Rom(46985680, "hms_1"); // shorten first part of the happy mask
-                                           // cutscene
-    Write_Cutscene_Rom(46988304,
-                       "hms_2");    // shorten second part of the happy mask cutscene
-    Write_To_Rom(47001596, "C002"); // make first cs jump to 2nd cs
-    Write_To_Rom(47001604, "FFFF"); // make 2nd cs not jump to another
-    Write_To_Rom(46991505, Items[Deku_Mask].Text_ID); // fix deku mask text
+    // hms deku mask cs
+	if (Setting_True("cutscenes", "ClockTown_DekuMask")) {
+		Write_Cutscene_Rom(46985680, "hms_1"); // shorten first part of the happy mask
+											   // cutscene
+		Write_Cutscene_Rom(46988304,
+			"hms_2");    // shorten second part of the happy mask cutscene
+		Write_To_Rom(47001596, "C002"); // make first cs jump to 2nd cs
+		Write_To_Rom(47001604, "FFFF"); // make 2nd cs not jump to another
+		Write_To_Rom(46991505, Items[Deku_Mask].Text_ID); // fix deku mask text
+	}
 
     // remove woodfall intro cs from the entrance
-    Write_To_Rom(42440514, "FF");
+	if (Setting_True("cutscenes", "Swamp_WoodfallIntro")) {
+		Write_To_Rom(42440514, "FF");
+	}
 
-    Write_Cutscene_Rom(42439444, "woodfall_rising"); // shorten the woodfall rising cs
+	// shorten the woodfall rising cs
+	if (Setting_True("cutscenes", "Swamp_WoodfallTempleRising")) {
+		Write_Cutscene_Rom(42439444, "woodfall_rising"); 
+	}
 
     // remove the woodfall temple intro cs
-    Write_To_Rom(35504954, "FF");
+	if (Setting_True("cutscenes", "Swamp_WoodfallTempleIntro")) {
+		Write_To_Rom(35504954, "FF");
+	}
 
     // remove the woodfall intro cs from back room
-    Write_To_Rom(35504946, "FF");
+	if (Setting_True("cutscenes", "Swamp_WoodfallTempleBackIntro")) {
+		Write_To_Rom(35504946, "FF");
+	}
 
     // moon's tear
-    Write_Cutscene_Rom(39375352, "tear_falling"); // shorten the tear falling cs
-    Write_Cutscene_Rom(39381640,
-                       "tear_falling"); // shorten the tear falling cs for 3rd day
-    Write_Cutscene_Rom(39383720,
-                       "tear_falling"); // shorten the tear falling for final hours
+	if (Setting_True("cutscenes", "Termina_MoonsTear")) {
+		Write_Cutscene_Rom(39375352, "tear_falling"); // shorten the tear falling cs
+		Write_Cutscene_Rom(39381640,
+			"tear_falling"); // shorten the tear falling cs for 3rd day
+		Write_Cutscene_Rom(39383720,
+			"tear_falling"); // shorten the tear falling for final hours
+	}
 
     // prevent the skull kid cs from playing on the clock tower roof
-    Write_To_Rom(15758392, "00000000"); // removes the cs
-    Write_To_Rom(35246095, "38");       // fixes the background music
-    Write_To_Rom(35356789, "95");       // fixes skull kid's y position
+	if (Setting_True("cutscenes", "ClockTown_SkullKidIntro")) {
+		Write_To_Rom(15758392, "00000000"); // removes the cs
+		Write_To_Rom(35246095, "38");       // fixes the background music
+		Write_To_Rom(35356789, "95");       // fixes skull kid's y position
+	}
 
     // moon
-    Write_Short_Giant(); // remove the giants moon cs
+	if (Setting_True("cutscenes", "ClockTown_GiantsStoppingMoon")) {
+		Write_Short_Giant(); // remove the giants moon cs
 
-    // remove the cucco shack 1AB actor to prevent a crash that occurs because of the
-    // giant's cs skip
-    Remove_Actor("27EB000", 20);
+		// remove the cucco shack 1AB actor to prevent a crash that occurs because of the
+		// giant's cs skip
+		Remove_Actor("27EB000", 20);
+	}
 
-    Write_To_Rom(11478999,
-                 "4E6F7420796F7520616761696E21BF"); // make owl's textbox for SoS short
+	// make owl's textbox for SoS short
+	if (Setting_True("cutscenes", "Swamp_SongOfSoaringOwl")) {
+		Write_To_Rom(11478999,
+			"4E6F7420796F7520616761696E21BF"); 
+	}
 
     // oath
-    Write_Cutscene_Rom(47718668, "oath_cs");     // make the oath cs shorter
-    Write_To_Rom(47724913, Items[Oath].Text_ID); // fix oath's text id
-    if (Songs_Same_Pool)
-    {
-        Write_To_Rom(47724865,
-                     Items[Oath].Song1_ID); // fix oath right song, if randomizing the
-                                            // songs that are actually played
-        Write_To_Rom(47724889,
-                     Items[Oath].Song2_ID); // fix what the player plays, if randomizing
-                                            // the songs that are actually played
-    }
+	if (Setting_True("cutscenes", "Termina_OathToOrder")) {
+		Write_Cutscene_Rom(47718668, "oath_cs");     // make the oath cs shorter
+		Write_To_Rom(47724913, Items[Oath].Text_ID); // fix oath's text id
+		if (Songs_Same_Pool)
+		{
+			Write_To_Rom(47724865,
+				Items[Oath].Song1_ID); // fix oath right song, if randomizing the
+									   // songs that are actually played
+			Write_To_Rom(47724889,
+				Items[Oath].Song2_ID); // fix what the player plays, if randomizing
+									   // the songs that are actually played
+		}
+	}
 
-    Write_To_Rom(35492834, "0000"); // remove the deku princess cs after beating woodfall
-    Write_Cutscene_Rom(
-      42455024,
-      "woodfall_cleaning"); // shorten the woodfall cleaning cs after beating woodfall
+	// remove the deku princess cs after beating woodfall
+	if (Setting_True("cutscenes", "Swamp_FreeingDekuPrincess")) {
+		Write_To_Rom(35492834, "0000"); 
+	}
+
+	// shorten the woodfall cleaning cs after beating woodfall
+	if (Setting_True("cutscenes", "Swamp_SwampClearing")) {
+		Write_Cutscene_Rom(
+			42455024,
+			"woodfall_cleaning"); 
+	}
 
     // couples mask
-    Write_Cutscene_Rom(46642260, "couples");        // shorten the couple's mask cs
-    Write_To_Rom(46644305, Items[Couples].Text_ID); // fix the text for the shorter
-                                                    // couples
+	if (Setting_True("cutscenes", "ClockTown_CouplesMask")) {
+		Write_Cutscene_Rom(46642260, "couples");        // shorten the couple's mask cs
+		Write_To_Rom(46644305, Items[Couples].Text_ID); // fix the text for the shorter
+														// couples
+	}
 
     // Returning Deku Princess
-    Write_To_Rom(
-      41399030,
-      "0000"); // make the cs terminator at 0 frames in returning the deku princess cs
-    Write_To_Rom(41399254, "0000"); // make the 2nd phase of the princess cs 0 frames
+	if (Setting_True("cutscenes", "Swamp_ReturningTheDekuPrincess")) {
+		Write_To_Rom(
+			41399030,
+			"0000"); // make the cs terminator at 0 frames in returning the deku princess cs
+		Write_To_Rom(41399254, "0000"); // make the 2nd phase of the princess cs 0 frames
+	}
 
     // Lullaby Intro
-    Write_Cutscene_Rom(44660088, "lullaby_intro");  // day 3
-    Write_Cutscene_Rom(46240568, "lullaby_intro");  // other days
-    Write_Cutscene_Rom(44664824, "lullaby_intro2"); // day 3 opposite angle
-    Write_Cutscene_Rom(46245304, "lullaby_intro2"); // other days opposite angle
+	if (Setting_True("cutscenes", "Mountain_LullabyIntro")) {
+		Write_Cutscene_Rom(44660088, "lullaby_intro");  // day 3
+		Write_Cutscene_Rom(46240568, "lullaby_intro");  // other days
+		Write_Cutscene_Rom(44664824, "lullaby_intro2"); // day 3 opposite angle
+		Write_Cutscene_Rom(46245304, "lullaby_intro2"); // other days opposite angle
+	}
 
     // Great Fairy in Clock Town
-    Write_Cutscene_Rom(38001628,
-                       "great_fairy_magic_mask"); // Shorten Great Fairy Mask + Magic CS
-    Write_To_Rom(38005181, Items[GFM].Text_ID);   // fix the text id
-    Write_Cutscene_Rom(38011356,
-                       "great_fairy_mask");     // shorten Great Fairy Mask on same cycle
-    Write_To_Rom(38014181, Items[GFM].Text_ID); // fix the text id
-    Write_Cutscene_Rom(37946092, "great_fairy_magic_1"); // shorten Magic CS
-    Write_Cutscene_Rom(38007244, "great_fairy_magic_2"); // shorten phase 2 of the magic
-                                                         // cs
-    Remove_Actor("2454000", 4); // remove the tatl text trigger in the fountain
+	if (Setting_True("cutscenes", "ClockTown_GreatFairy")) {
+		Write_Cutscene_Rom(38001628,
+			"great_fairy_magic_mask"); // Shorten Great Fairy Mask + Magic CS
+		Write_To_Rom(38005181, Items[GFM].Text_ID);   // fix the text id
+		Write_Cutscene_Rom(38011356,
+			"great_fairy_mask");     // shorten Great Fairy Mask on same cycle
+		Write_To_Rom(38014181, Items[GFM].Text_ID); // fix the text id
+		Write_Cutscene_Rom(37946092, "great_fairy_magic_1"); // shorten Magic CS
+		Write_Cutscene_Rom(38007244, "great_fairy_magic_2"); // shorten phase 2 of the magic
+															 // cs
+	}
+
+	// remove the tatl text trigger in the fountain
+	if (Setting_True("cutscenes", "ClockTown_GreatFairyTatlTrigger")) {
+		Remove_Actor("2454000", 4); 
+	}
 
     // remove the mountain village intro cs from the entrance
-    Write_To_Rom(44669566, "FF");
+	if (Setting_True("cutscenes", "Mountain_MountainVillageIntro")) {
+		Write_To_Rom(44669566, "FF");
+	}
 
     // remove the goron shrine into cs from the entrance
-    Write_To_Rom(40091518, "FF");
+	if (Setting_True("cutscenes", "Mountain_GoronShrineIntro")) {
+		Write_To_Rom(40091518, "FF");
+	}
 
     // remove the snowhead intro cs from the entrance
-    Write_To_Rom(46178166, "FF");
+	if (Setting_True("cutscenes", "Mountain_SnowheadIntro")) {
+		Write_To_Rom(46178166, "FF");
+	}
 
     // remove the snowhead temple intro cs from the entrance
-    Write_To_Rom(36496622, "FF");
+	if (Setting_True("cutscenes", "Mountain_SnowheadTempleIntro")) {
+		Write_To_Rom(36496622, "FF");
+	}
 
-    Write_Cutscene_Rom(46175216,
-                       "goron_sleep"); // make the giant goron in snowhead sleep faster
+	// make the giant goron in snowhead sleep faster
+	if (Setting_True("cutscenes", "Mountain_GiantGoronFallingAsleep")) {
+		Write_Cutscene_Rom(46175216,
+			"goron_sleep"); 
+	}
 
     // remove the great bay coast into cs from the entrance
-    Write_To_Rom(40639162, "FF");
+	if (Setting_True("cutscenes", "GreatBay_GreatBayCoastIntro")) {
+		Write_To_Rom(40639162, "FF");
+	}
 
     // remove the zora hall intro cs from the entrances
-    Write_To_Rom(40232106, "FF");
-    Write_To_Rom(40232114, "FF");
+	if (Setting_True("cutscenes", "GreatBay_ZoraHallIntro")) {
+		Write_To_Rom(40232106, "FF");
+		Write_To_Rom(40232114, "FF");
+	}
 
-    Write_Cutscene_Rom(40879224, "turtle"); // shorten the turtle rising cs
-    Write_To_Rom(40892756, "8C10");         // skip pirate cs altogether when entering gbt
+	// shorten the turtle rising cs
+	if (Setting_True("cutscenes", "GreatBay_TurtleRising")) {
+		Write_Cutscene_Rom(40879224, "turtle"); 
+	}
+
+	// skip pirate cs altogether when entering gbt
+	if (Setting_True("cutscenes", "GreatBay_PiratesWhenEnteringGBT")) {
+		Write_To_Rom(40892756, "8C10");
+	}
     
     // remove the great bay temple intro cs from the entrances
-    Write_To_Rom(42838550, "FF");
-    Write_To_Rom(42838542, "FF");
+	if (Setting_True("cutscenes", "GreatBay_GreatBayTempleIntro")) {
+		Write_To_Rom(42838550, "FF");
+		Write_To_Rom(42838542, "FF");
+	}
 
-    Write_To_Rom(40887446, "0001"); // make riding the turtle into gbt 1 frame
-    Write_To_Rom(40887983, "01");   // shorten the 2nd time entering gbt with turtle
+	//shorten entering great bay temple
+	if (Setting_True("cutscenes", "GreatBay_EnteringGBT")) {
+		Write_To_Rom(40887446, "0001"); // make riding the turtle intro gbt 1 frame
+		Write_To_Rom(40887983, "01");   // shorten the 2nd time entering gbt with turtle
+	}
 
     // Goron Mask
-    Write_Cutscene_Rom(44479080, "goron_mask");   // shorten the goron mask cs
-    Write_To_Rom(44480645, Items[Goron].Text_ID); // fix the goron mask text
+	if (Setting_True("cutscenes", "Mountain_GoronMask")) {
+		Write_Cutscene_Rom(44479080, "goron_mask");   // shorten the goron mask cs
+		Write_To_Rom(44480645, Items[Goron].Text_ID); // fix the goron mask text
+	}
 
     // Zora Mask
-    Write_Cutscene_Rom(40631980, "zora_mask");   // shorten zora mask cs
-    Write_To_Rom(40633689, Items[Zora].Text_ID); // Fix zora mask text
+	if (Setting_True("cutscenes", "GreatBay_ZoraMask")) {
+		Write_Cutscene_Rom(40631980, "zora_mask");   // shorten zora mask cs
+		Write_To_Rom(40633689, Items[Zora].Text_ID); // Fix zora mask text
+	}
 
     // Goron Lullaby
-    Write_Cutscene_Rom(40087880, "goron_lullaby");  // shorten goron lullaby cs
-    Write_To_Rom(40091500, "5E20");                 // skip phase 2 of the cs
-    Write_Cutscene_Rom(40088936, "goron_lullaby2"); // shorten goron lullaby cs phase 3
-    Write_To_Rom(16480271,
-                 "68"); // make zfg stay asleep on frame 0x68 in the phase 3 cutscene
-    Write_To_Rom(40090225, Items[Lullaby].Text_ID); // fix lullaby text
-    if (Songs_Same_Pool)
-    {
-        Write_To_Rom(40088625, Items[Lullaby].Song1_ID); // fix lullaby display song
-        Write_To_Rom(40088649, Items[Lullaby].Song2_ID); // fix lullaby play song
-    }
+	if (Setting_True("cutscenes", "Mountain_GoronLullaby")) {
+		Write_Cutscene_Rom(40087880, "goron_lullaby");  // shorten goron lullaby cs
+		Write_To_Rom(40091500, "5E20");                 // skip phase 2 of the cs
+		Write_Cutscene_Rom(40088936, "goron_lullaby2"); // shorten goron lullaby cs phase 3
+		Write_To_Rom(16480271,
+			"68"); // make zfg stay asleep on frame 0x68 in the phase 3 cutscene
+		Write_To_Rom(40090225, Items[Lullaby].Text_ID); // fix lullaby text
+		if (Songs_Same_Pool)
+		{
+			Write_To_Rom(40088625, Items[Lullaby].Song1_ID); // fix lullaby display song
+			Write_To_Rom(40088649, Items[Lullaby].Song2_ID); // fix lullaby play song
+		}
+	}
 
     // shorten Mikau walking cs
-    Write_To_Rom(16751692, "3C014120"); // make right leg faster
-    Write_To_Rom(16751668, "3C014120"); // make left leg faster
+	if (Setting_True("cutscenes", "GreatBay_MikauWalking")) {
+		Write_To_Rom(16751692, "3C014120"); // make right leg faster
+		Write_To_Rom(16751668, "3C014120"); // make left leg faster
+	}
 
     // remove cs before pushing mikau
-    Write_To_Rom(16746330, "4E34"); // remove the text before pushing Mikau
-    Write_To_Rom(16746872,
-                 "00000000"); // remove the flag that makes mikau in always talking mode
+	if (Setting_True("cutscenes", "GreatBay_MikauTextInWater")) {
+		Write_To_Rom(16746330, "4E34"); // remove the text before pushing Mikau
+		Write_To_Rom(16746872,
+			"00000000"); // remove the flag that makes mikau in always talking mode
+	}
 
     // shorten NWBN cs
-    Write_Cutscene_Rom(39850256, "nwbn"); // shorter cs
-    if (Songs_Same_Pool)
-    {
-        Write_To_Rom(39852449,
-                     Items[NW].Song2_ID); // fix what the player plays, if randomizing the
-                                          // songs that are actually played
-    }
-    Write_To_Rom(39852473, Items[NW].Text_ID); // fix the text id for what NW gives
+	if (Setting_True("cutscenes", "GreatBay_NewWaveBossaNova")) {
+		Write_Cutscene_Rom(39850256, "nwbn"); // shorter cs
+		if (Songs_Same_Pool)
+		{
+			Write_To_Rom(39852449,
+				Items[NW].Song2_ID); // fix what the player plays, if randomizing the
+									 // songs that are actually played
+		}
+		Write_To_Rom(39852473, Items[NW].Text_ID); // fix the text id for what NW gives
+	}
 
-    Write_To_Rom(13421880, "00000000"); // skip SoT cs
+	// skip SoT cs
+	if (Setting_True("cutscenes", "Termina_PlayingSongOfTime")) {
+		Write_To_Rom(13421880, "00000000"); 
+	}
 
     // gfs
-    Write_Cutscene_Rom(37958316, "gfs");        // shorten the great fairy sword cs
-    Write_To_Rom(37960501, Items[GFS].Text_ID); // fix the shorter gfs text
+	if (Setting_True("cutscenes", "Ikana_GreatFairySword")) {
+		Write_Cutscene_Rom(37958316, "gfs");        // shorten the great fairy sword cs
+		Write_To_Rom(37960501, Items[GFS].Text_ID); // fix the shorter gfs text
+	}
 
     // remove the actor that plays the tatl text cs inside the 2nd room in woodfall temple
-    Remove_Actor("21FB000", 8);
+    //Remove_Actor("21FB000", 8);
 
-    Write_Cutscene_Rom(
-      35501876,
-      "woodfall_temple_ye_holds"); // shorten the boss warp cs in woodfall temple
-    Write_Cutscene_Rom(45984796, "snowhead_beaten"); // shorten beating snowhead temple cs
-    Write_Cutscene_Rom(
-      36492872,
-      "snowhead_temple_ye_holds"); // shorten the boss warp cs in snowhead temple
+	// shorten the boss warp cs in woodfall temple
+	if (Setting_True("cutscenes", "Swamp_WoodfallBossWarpPad")) {
+		Write_Cutscene_Rom(
+			35501876,
+			"woodfall_temple_ye_holds"); 
+	}
+
+	// shorten beating snowhead temple cs
+	if (Setting_True("cutscenes", "Mountain_SnowMelting")) {
+		Write_Cutscene_Rom(45984796, "snowhead_beaten");
+	}
+
+	// shorten the boss warp cs in snowhead temple
+	if (Setting_True("cutscenes", "Mountain_SnowheadBossWarpPad")) {
+		Write_Cutscene_Rom(
+			36492872,
+			"snowhead_temple_ye_holds");
+	}
  
     // remove the actor that plays the intro cs in pirate's fortress exterior
-    Remove_Actor("02740000", 23);
+	if (Setting_True("cutscenes", "GreatBay_PiratesFortressExteriorIntro")) {
+		Remove_Actor("02740000", 23);
+	}
 
     // remove the intro cs for pirate's fortress from the entrance
-    Write_To_Rom(34146526, "FF");
+	if (Setting_True("cutscenes", "GreatBay_PiratesFortressIntro")) {
+		Write_To_Rom(34146526, "FF");
+	}
 
     // remove the actor that plays the bee entering the beehive cs
-    Remove_Actor("238B000", 20);
+	if (Setting_True("cutscenes", "GreatBay_BeeEnteringBeehive")) {
+		Remove_Actor("238B000", 20);
+	}
 
     // remove the gorman racetrack intro cs from the entrances
-    Write_To_Rom(47792614, "FF");
-    Write_To_Rom(47792622, "FF");
+	if (Setting_True("cutscenes", "Termina_GormanRacetrackIntro")) {
+		Write_To_Rom(47792614, "FF");
+		Write_To_Rom(47792622, "FF");
+	}
 
     // remove the ranch intro cs from the entrance
-    Write_To_Rom(40446482, "FF");
+	if (Setting_True("cutscenes", "Termina_RomaniRanchIntro")) {
+		Write_To_Rom(40446482, "FF");
+	}
 
-    Write_Cutscene_Rom(40444324,
-                       "your_horse"); // make link go fast in isnt that your horse cs
+	// make link go fast in isnt that your horse cs
+	if (Setting_True("cutscenes", "Termina_IsntThatYourHorse")) {
+		Write_Cutscene_Rom(40444324,
+			"your_horse"); 
+	}
 
     // Kart Ride
-    Write_To_Rom(16639926, "CE40"); // load gorman track when starting kart ride
-    Write_Cutscene_Rom(
-      47789736, "kart_ride"); // remove the text for kart ride to speed it up a little
+	if (Setting_True("cutscenes", "Termina_KartRide")) {
+		Write_To_Rom(16639926, "CE40"); // load gorman track when starting kart ride
+		Write_Cutscene_Rom(
+			47789736, "kart_ride"); // remove the text for kart ride to speed it up a little
+	}
 
     // remove the ikana graveyard intro cs from the entrance
-    Write_To_Rom(41889786, "FF");
+	if (Setting_True("cutscenes", "Ikana_IkanaGraveyardIntro")) {
+		Write_To_Rom(41889786, "FF");
+	}
 
     // sharp sos cs
-    Write_Cutscene_Rom(
-      33777340,
-      "sharp_spawning"); // shorten sharp spawning cs inside the water grave thing
-    Write_Cutscene_Rom(33781724, "sharp_sos"); // shorten the sharp sos cutscene phase 1
-    Write_To_Rom(33797616, "20A0");            // skip the music box cs
-    Write_To_Rom(33794114, "0000");            // make the final cs 0 frames
+	if (Setting_True("cutscenes", "Ikana_Sharp")) {
+		Write_Cutscene_Rom(
+			33777340,
+			"sharp_spawning"); // shorten sharp spawning cs inside the water grave thing
+		Write_Cutscene_Rom(33781724, "sharp_sos"); // shorten the sharp sos cutscene phase 1
+		Write_To_Rom(33797616, "20A0");            // skip the music box cs
+		Write_To_Rom(33794114, "0000");            // make the final cs 0 frames
+	}
 
     // gibdo mask
-    Write_Cutscene_Rom(45389024, "gibdo"); // shorten the gibdo mask cs
-    Write_To_Rom(45391773,
-                 Items[Gibdo].Text_ID); // update the shortened cs's gibdo mask text
+	if (Setting_True("cutscenes", "Ikana_GibdoMask")) {
+		Write_Cutscene_Rom(45389024, "gibdo"); // shorten the gibdo mask cs
+		Write_To_Rom(45391773,
+			Items[Gibdo].Text_ID); // update the shortened cs's gibdo mask text
+	}
 
     // remove the ikana canyon intro cs from the entrance
-    Write_To_Rom(33797642, "FF");
+	if (Setting_True("cutscenes", "Ikana_IkanaCanyonIntro")) {
+		Write_To_Rom(33797642, "FF");
+	}
 
     // shorten circus leader's mask cs
-    Write_To_Rom(34301875, "00"); // make the first 3 cutscenes 0 frames long (it plays
-                                  // the same one three times)
-    Write_Cutscene_Rom(34300444, "clm"); // shorten the circus leader's mask cs
+	if (Setting_True("cutscenes", "ClockTown_CircusLeadersMask")) {
+		Write_To_Rom(34301875, "00"); // make the first 3 cutscenes 0 frames long (it plays
+									  // the same one three times)
+		Write_Cutscene_Rom(34300444, "clm"); // shorten the circus leader's mask cs
+	}
 
-    // remove the actor that starts the cs in the main room in snowhead temple
-    Remove_Actor("230C000", 70);
+	// remove the actor that starts the cs in the main room in snowhead temple
+	if (Setting_True("cutscenes", "Mountain_SnowheadTempleMainRoom")) {
+		Remove_Actor("230C000", 70);
+	}
 
-    Write_Cutscene_Rom(41882900, "cap"); // shorten captain's hat cs
+	// shorten captain's hat cs
+	if (Setting_True("cutscenes", "Ikana_CaptainsHat")) {
+		Write_Cutscene_Rom(41882900, "cap"); 
+	}
 
     // shorten the cs before epona archery
-    Write_To_Rom(15880699,
-                 "A0"); // play the ranch cs instead of the alien, skipping the alien cs
-    Write_To_Rom(15880712,
-                 "00000000"); // prevent the game from freezing when loading the cs
+	if (Setting_True("cutscenes", "Termina_EponaSong")) {
+		Write_To_Rom(15880699,
+			"A0"); // play the ranch cs instead of the alien, skipping the alien cs
+		Write_To_Rom(15880712,
+			"00000000"); // prevent the game from freezing when loading the cs
+	}
 
-    Write_Cutscene_Rom(33034640, "flat_spawning"); // shorten flat spawning cs
-    Write_To_Rom(15011312, "00000000");            // remove gyorg cs
+	// shorten flat spawning cs
+	if (Setting_True("cutscenes", "Ikana_Flat")) {
+		Write_Cutscene_Rom(33034640, "flat_spawning"); 
+	}
+
+	// remove gyorg cs
+	if (Setting_True("cutscenes", "GreatBay_GyorgIntro")) {
+		Write_To_Rom(15011312, "00000000");
+	}
 
     // remove the ikana castle cutscene actors
-    Remove_Actor("2266000", 45);
-    Remove_Actor("2266000", 46);
-    Remove_Actor("2266000", 28); // remove actor that prevented the bg music from playing
+	if (Setting_True("cutscenes", "Ikana_IkanaCastleIntro")) {
+		Remove_Actor("2266000", 45);
+		Remove_Actor("2266000", 46);
+		Remove_Actor("2266000", 28); // remove actor that prevented the bg music from playing
+	}
 
     // Shorten Elegy cs
-    Write_Cutscene_Rom(45543908, "elegy");        // import shorter cs
-    Write_To_Rom(45546381, Items[Elegy].Text_ID); // update the elegy text
-    if (Songs_Same_Pool)
-    {
-        Write_To_Rom(45546333, Items[Elegy].Song1_ID); // fix elegy display song
-        Write_To_Rom(45546357, Items[Elegy].Song2_ID); // fix elegy play song
-    }
+	if (Setting_True("cutscenes", "Ikana_ElegyOfEmptiness")) {
+		Write_Cutscene_Rom(45543908, "elegy");        // import shorter cs
+		Write_To_Rom(45546381, Items[Elegy].Text_ID); // update the elegy text
+		if (Songs_Same_Pool)
+		{
+			Write_To_Rom(45546333, Items[Elegy].Song1_ID); // fix elegy display song
+			Write_To_Rom(45546357, Items[Elegy].Song2_ID); // fix elegy play song
+		}
+	}
 
-    Shorten_Igos_CS(); // shorten the Igos cs
+	// shorten the Igos cs
+	if (Setting_True("cutscenes", "Ikana_Igos")) {
+		Shorten_Igos_CS(); 
+	}
 
     // shorten sakon hideout cutscene
-    Write_Cutscene_Rom(44548416, "sakon_hideout"); // shorten the starting cs
-    Write_To_Rom(44552390, "003C");                // shorten the doorway cs
-    Write_To_Rom(44553062, "003C");                // shorten the switch cs
-	Write_To_Rom(12482972, "24011471");			   // make the notebook kafei entry look for the 2nd text after saving sun mask
+	if (Setting_True("cutscenes", "Ikana_SakonsHideout")) {
+		Write_Cutscene_Rom(44548416, "sakon_hideout"); // shorten the starting cs
+		Write_To_Rom(44552390, "003C");                // shorten the doorway cs
+		Write_To_Rom(44553062, "003C");                // shorten the switch cs
+		Write_To_Rom(12482972, "24011471");			   // make the notebook kafei entry look for the 2nd text after saving sun mask
+		Write_To_Rom(15374732, "1000001C24020002");	   //remove kafei running cs after saving sun's mask
+	}
 
-    Write_Cutscene_Rom(
-      42835544, "great_bay_temple_ye_holds"); // shorten ye who holds remains cs in gbt
-    Write_To_Rom(16165132, "00000000");       // skip the goht room entrance cs
-    Write_Cutscene_Rom(
-      34878820, "stone_tower_temple_ye_holds"); // shorten ye who hold remains cs in stt
-    Write_To_Rom(44042848, "9260");             // shorten evan hp cs
-    Write_To_Rom(34403946, "FF");               // remove stt intro cs
-    Write_To_Rom(34881666, "FF");               // remove istt intro cs
-    Write_To_Rom(45831950, "FF");               // remove ist ontro cs
+	// shorten ye who holds remains cs in gbt
+	if (Setting_True("cutscenes", "GreatBay_GreatBayBossWarpPad")) {
+		Write_Cutscene_Rom(
+			42835544, "great_bay_temple_ye_holds"); 
+	}
+
+	// skip the goht room entrance cs
+	if (Setting_True("cutscenes", "Mountain_GohtIntro")) {
+		Write_To_Rom(16165132, "00000000");
+	}
+
+	// shorten ye who hold remains cs in stt
+	if (Setting_True("cutscenes", "Ikana_StoneTowerBossWarpPad")) {
+		Write_Cutscene_Rom(
+			34878820, "stone_tower_temple_ye_holds");
+	}
+
+	// shorten evan hp cs
+	if (Setting_True("cutscenes", "GreatBay_EvanHP")) {
+		Write_To_Rom(44042848, "9260");
+	}
+
+	// remove stt intro cs
+	if (Setting_True("cutscenes", "Ikana_StoneTowerTempleIntro")) {
+		Write_To_Rom(34403946, "FF");
+	}
+
+	// remove istt intro cs
+	if (Setting_True("cutscenes", "Ikana_InvertedSTTIntro")) {
+		Write_To_Rom(34881666, "FF");
+	}
+
+	// remove ist intro cs
+	if (Setting_True("cutscenes", "Ikana_InvertedStoneTowerIntro")) {
+		Write_To_Rom(45831950, "FF");
+	}
 
     // remove the actor that plays the hms cs inside the clock tower
     // make hms think you already watched the cs
-    Remove_Actor("2CD6000", 11);
-    Write_To_Rom(15953540, "24020001");
-    Write_To_Rom(15955712, "24020001");
-
-	//remove kafei running cs after saving sun's mask
-	Write_To_Rom(15374732, "1000001C24020002");
+	if (Setting_True("cutscenes", "ClockTown_HappyMaskSalesman")) {
+		Remove_Actor("2CD6000", 11);
+		Write_To_Rom(15953540, "24020001");
+		Write_To_Rom(15955712, "24020001");
+	}
 
 	//remove clock tower opening cs
-	Remove_Clock_Tower_CS();
+	if (Setting_True("cutscenes", "ClockTown_ClockTowerOpening")) {
+		Remove_Clock_Tower_CS();
+	}
 }
 
 ///Writes data from a file to the rom
@@ -6344,11 +6553,11 @@ void Apply_Settings(bool Songs_Same_Pool) {
 	}
 
 	// remove the cutscenes
-	if (Settings["settings"]["Remove_Cutscenes"] == "True")
-	{
-		cout << "\nRemoving Cutscenes\n";
-		Remove_Cutscenes(Songs_Same_Pool);
-	}
+	//if (Settings["settings"]["Remove_Cutscenes"] == "True")
+	//{
+	cout << "\nRemoving Cutscenes (if any were selected)\n";
+	Remove_Cutscenes(Songs_Same_Pool);
+	//}
 
 	// change tunic colors
 	cout << "\nChanging tunic colors\n";
@@ -6465,8 +6674,10 @@ void Fix_Things(bool Songs_Same_Pool) {
 	//don't let song of soaring give item twice
 	Write_To_Rom(15924108, "00000000");
 
-	//Make couple's mask only give once in the normal cutscene
-	Write_Cutscene_Rom(46642260, "couples_long");
+	//Make couple's mask only give once in the normal cutscene if the cutscene is not shorter
+	if (!Setting_True("cutscenes", "ClockTown_CouplesMask")) {
+		Write_Cutscene_Rom(46642260, "couples_long");
+	}
 
 	//Don't get more than one item from a boss remains
 	Write_To_Rom(13844604, "00000000");

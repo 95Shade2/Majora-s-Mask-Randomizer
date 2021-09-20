@@ -38,6 +38,8 @@ namespace Majora_s_Mask_Randomizer_GUI
         int> Wallet_Sizes;
         public string[] Item_Names;
         public LogicEditor logic_editor;
+        public Dictionary<string, bool> Cutscenes; //whether or not to remove/shorten specific cutscenes
+        public CutscenesSelector cs;   //the cutscene form that allows the player to choose which cutscenes to shorten/remove
 
         public Main_Window()
         {
@@ -59,8 +61,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             string>>>();
             Preset_Keys = new Dictionary<int,
             string>();
+            Cutscenes = new Dictionary<string, bool>();
             Game_Colors = Default_Pause();
             Wallet_Sizes = Default_Wallets();
+            cs = new CutscenesSelector();
 
             BlastMaskFrames_Num.Value = 310;
             TARGETING = "";
@@ -758,7 +762,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void Randomize_Button_Click(object sender, EventArgs e)
         {
-            if (Open_Base_Rom_Dialog.FileName != "openFileDialog1")
+            if (Open_Base_Rom_Dialog.FileName != "openFileDialog1" && Open_Base_Rom_Dialog.FileName != "")
             {
                 Randomize_Button.Enabled = false;
                 SaveSettingsAsIni("./settings.ini");
@@ -770,14 +774,16 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
-        private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true)
+        private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true, bool cutscenes = true)
         {
             string Text = "";
             string Item_Pool = "";
             string Item_Name = "";
+            string name;
             CheckBox check;
             ComboBox pool;
             ComboBox gives;
+            Dictionary<string, bool>.KeyCollection Cutscene_Keys = Cutscenes.Keys;
 
             if (items)
             {
@@ -832,7 +838,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                 //Text += "Tunic=" + Get_Color_Tunic() + "\n";     //color of the tunics
 
-                Text += "Remove_Cutscenes=" + removeCutscenesToolStripMenuItem.Checked + "\n"; //whether or not to remove the cutscenes
+                //Text += "Remove_Cutscenes=" + removeCutscenesToolStripMenuItem.Checked + "\n"; //whether or not to remove the cutscenes
 
                 Text += "GC_Hud=" + gCHudToolStripMenuItem.Checked + "\n"; //use or not use the GC Hud
 
@@ -887,6 +893,19 @@ namespace Majora_s_Mask_Randomizer_GUI
                 for (int i = 0; i < Item_Pools_Keys.Count; i++)
                 {
                     Text += i + "=" + Item_Pools_Keys[i] + "\n";
+                }
+            }
+
+            if (cutscenes)
+            {
+                Text += "[cutscenes]\n";
+
+                //each cutscene name and whether or not to shorten/remove the cutscene
+                //if a cutscene isn't present, then that means false
+                for (int k = 0; k < Cutscene_Keys.Count; k++)
+                {
+                    name = Cutscene_Keys.ElementAt(k);
+                    Text += name + "=" + Cutscenes[name] + "\n";
                 }
             }
 
@@ -1017,6 +1036,31 @@ namespace Majora_s_Mask_Randomizer_GUI
             Load_Presets(); //update the presets
         }
 
+        private void Update_Cutscenes(Dictionary<string, string> Cutscene_Data)
+        {
+            string name;
+            bool boolean;
+            Dictionary<string, string>.KeyCollection keys;
+
+            keys = Cutscene_Data.Keys;
+
+            for (int k = 0; k < keys.Count; k++)
+            {
+                name = keys.ElementAt(k);
+
+                if (Cutscene_Data[name] == "True")
+                {
+                    boolean = true;
+                }
+                else
+                {
+                    boolean = false;
+                }
+
+                Cutscenes[name] = boolean;
+            }
+        }
+
         private void Load_Preset(string Preset)
         {
             Dictionary<string,
@@ -1033,6 +1077,12 @@ namespace Majora_s_Mask_Randomizer_GUI
             Update_Pool_List();
             Update_Items(Selected_Preset["items"]);
             Update_Settings(Selected_Preset["settings"]);
+
+            //update the cutscenes if there is cutscene data
+            Cutscenes = new Dictionary<string, bool>(); //clear the cutscene data
+            if (Selected_Preset.ContainsKey("cutscenes")) {
+                Update_Cutscenes(Selected_Preset["cutscenes"]);
+            }
 
             if (Selected_Preset.ContainsKey("colors"))
             {
@@ -1181,14 +1231,14 @@ namespace Majora_s_Mask_Randomizer_GUI
                 swampScrubSalesBeansToolStripMenuItem.Checked = false;
             }
 
-            if (settings.ContainsKey("Remove_Cutscenes") && settings["Remove_Cutscenes"] == "True")
-            {
-                removeCutscenesToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                removeCutscenesToolStripMenuItem.Checked = false;
-            }
+            //if (settings.ContainsKey("Remove_Cutscenes") && settings["Remove_Cutscenes"] == "True")
+            //{
+                //removeCutscenesToolStripMenuItem.Checked = true;
+            //}
+            //else
+            //{
+                //removeCutscenesToolStripMenuItem.Checked = false;
+            //}
 
             if (settings.ContainsKey("GC_Hud") && settings["GC_Hud"] == "True")
             {
@@ -2009,6 +2059,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 logic_editor.form = this;
                 logic_editor.Show();
+            }
+        }
+
+        private void cutscenesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!cs.showing)
+            {
+                cs.father = this;
+                cs.Show();
             }
         }
     }

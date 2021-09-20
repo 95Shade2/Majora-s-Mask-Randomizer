@@ -171,6 +171,10 @@ add_executable(mm_rando_gui
 	
 	"Majora's Mask Randomizer GUI/Item.cs"
 	
+	"Majora's Mask Randomizer GUI/CutscenesSelector.cs"
+	"Majora's Mask Randomizer GUI/CutscenesSelector.Designer.cs"
+	"Majora's Mask Randomizer GUI/CutscenesSelector.resx"
+	
 	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
 	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
 	"Majora's Mask Randomizer GUI/Properties/Resources.resx"
@@ -196,6 +200,10 @@ csharp_set_windows_forms_properties(
 	"Majora's Mask Randomizer GUI/wallets_form.resx"
 	
 	"Majora's Mask Randomizer GUI/Item.cs"
+	
+	"Majora's Mask Randomizer GUI/CutscenesSelector.cs"
+	"Majora's Mask Randomizer GUI/CutscenesSelector.Designer.cs"
+	"Majora's Mask Randomizer GUI/CutscenesSelector.resx"
 	
 	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
 	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
