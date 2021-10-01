@@ -31,6 +31,8 @@ namespace Majora_s_Mask_Randomizer_GUI
         Dictionary<string,
         Item> Item_Objects;
         string TARGETING;
+        bool DEBUG;
+        string debug_path;
 
         public Dictionary<string,
         Color> Game_Colors;
@@ -74,6 +76,14 @@ namespace Majora_s_Mask_Randomizer_GUI
             BlastMaskFrames_Num.Value = 310;
             TARGETING = "";
             logic_editor = new LogicEditor();
+
+            DEBUG = true;
+            debug_path = "./Log_gui.txt";
+
+            if (DEBUG)
+            {
+                File.WriteAllText(debug_path, "Starting GUI\n");
+            }
 
             Create_Item_Names();
 
@@ -2075,6 +2085,14 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 cs.father = this;
                 cs.Show();
+            }
+        }
+
+        public void Log(string Log_Text)
+        {
+            if (DEBUG)
+            {
+                File.AppendAllText(debug_path, Log_Text + "\n");
             }
         }
     }

@@ -51,6 +51,8 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void LogicEditor_Load(object sender, EventArgs e)
         {
+            form.Log("Starting Logic Editor");
+
             showing = true;
             items = form.Item_Names;    //get a list of every item that can be randomized
             logics = new Dictionary<int, string>(); //create an empty dictionary to store logic names
@@ -1298,6 +1300,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             Dictionary<int, Dictionary<int, string>> Updated_Dictionary = new Dictionary<int, Dictionary<int, string>>();
             int it = 0;
+            bool added = false;
 
             for (int e = 0; e < dictionary.Count + 1; e++)
             {
@@ -1311,8 +1314,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                 else
                 {
                     Updated_Dictionary[Updated_Dictionary.Count] = new_array;
+                    added = true;
                 }
 
+            }
+
+            //if the new item wasn't added, then add it at the end
+            if (!added)
+            {
+                Updated_Dictionary[Updated_Dictionary.Count] = new_array;
             }
 
             return Updated_Dictionary;
@@ -1322,6 +1332,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             Dictionary<int, Dictionary<int, Dictionary<string, bool[]>>> Updated_Dictionary = new Dictionary<int, Dictionary<int, Dictionary<string, bool[]>>>();
             int it = 0;
+            bool added = false;
 
             for (int e = 0; e < dictionary.Count + 1; e++)
             {
@@ -1335,8 +1346,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                 else
                 {
                     Updated_Dictionary[Updated_Dictionary.Count] = new_array;
+                    added = true;
                 }
 
+            }
+
+            //if the new item wasn't added, then add it at the end
+            if (!added)
+            {
+                Updated_Dictionary[Updated_Dictionary.Count] = new_array;
             }
 
             return Updated_Dictionary;
@@ -1346,6 +1364,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             Dictionary<int, Dictionary<int, int>> Updated_Dictionary = new Dictionary<int, Dictionary<int, int>>();
             int it = 0;
+            bool added = false;
 
             for (int e = 0; e < dictionary.Count + 1; e++)
             {
@@ -1359,8 +1378,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                 else
                 {
                     Updated_Dictionary[Updated_Dictionary.Count] = new_array;
+                    added = true;
                 }
 
+            }
+
+            //if the new item wasn't added, then add it at the end
+            if (!added)
+            {
+                Updated_Dictionary[Updated_Dictionary.Count] = new_array;
             }
 
             return Updated_Dictionary;
@@ -1370,6 +1396,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             Dictionary<int, string> Updated_Dictionary = new Dictionary<int, string>();
             int it = 0;
+            bool added = false;
 
             for (int e = 0; e < dictionary.Count + 1; e++)
             {
@@ -1383,8 +1410,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                 else
                 {
                     Updated_Dictionary[Updated_Dictionary.Count] = new_text;
+                    added = true;
                 }
 
+            }
+
+            //if the new item wasn't added, then add it at the end
+            if (!added)
+            {
+                Updated_Dictionary[Updated_Dictionary.Count] = new_text;
             }
 
             return Updated_Dictionary;
@@ -1687,8 +1721,26 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
+        private string Dict_To_String(Dictionary<int, string> dict, string sep)
+        {
+            string str = "";
+
+            for (int d = 0; d < dict.Count; d++)
+            {
+                if (d > 0)
+                {
+                    str += sep;
+                }
+                str += dict[d];
+            }
+
+            return str;
+        }
+
         private void Save_Logic(string logic)
         {
+            form.Log("Saving logic for " + logic);
+
             string File_Path = "./logic\\" + logic + ".txt";
             StreamWriter file;
             string item;    //each item location
@@ -1716,6 +1768,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             for (int i = 0; i < items.Length; i++)
             {
                 item = items[i];
+
+                form.Log("Writing data for location " + item);
+
                 comments = Comment_Data[logic][item];
                 Invalid_Items = Logic_Invalid[logic][item];
 
@@ -1728,11 +1783,15 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                 for (int s = 0; s < Item_Sets.Count; s++)
                 {
+                    form.Log("Writing Item Set Index " + s);
+
                     Item_Set = Item_Sets[s];
                     Count_Set = Count_Sets[s];
                     comment = comments[s];
                     line = "\t";
 
+                    form.Log("\t" + Dict_To_String(Item_Set, ", "));
+                        
                     //write the comment for this set if any
                     if (comment != "")
                     {
@@ -1893,6 +1952,8 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void SaveLogic_Button_Click(object sender, EventArgs e)
         {
+            form.Log("Saving logic");
+
             //Save each logic
             Save_Logics();
 

@@ -6715,7 +6715,9 @@ int main()
 	Max_Percentage = 0;
 
     err_file.open("Error.txt");
-	log_file.open("Log.txt");
+	if (DEBUG) {
+		log_file.open("Log.txt");
+	}
 
 	// get the settings from the settings file
 	Settings = OpenAsIni("./settings.ini");
@@ -6823,7 +6825,9 @@ int main()
 
     outFile.close();
     err_file.close();
-	log_file.close();
+	if (DEBUG) {
+		log_file.close();
+	}
 
     return 0;
 }
