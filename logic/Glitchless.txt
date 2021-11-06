@@ -1,38 +1,133 @@
 Adult Wallet {
-	
+	1 Rupees
 	@1111110 1111110
 }
 
 All-Night Mask {
-	Adult Wallet
-	@1111110 1111110
-	Giant Wallet
-	@1111110 1111110
+	500 Rupees
+	@0000010 0000010
 }
 
 Big Bomb Bag {
-	
-	@1111110 1111110
+	90 Rupees
+	@0110110 0110110
 }
 
 Big Poe {
-	Captain's Hat, Goron Mask, Powder Keg, Hookshot
-	@1111110 1111110 1111110 1111110 1111110
+	//Dampe Big Poe
+	Epona's Song, Captain's Hat, Bow
+	@0000010 0000010 0000010 0000010
+	Epona's Song, Captain's Hat, Large Quiver
+	@0000010 0000010 0000010 0000010
+	Epona's Song, Captain's Hat, Largest Quiver
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Goron Mask, Captain's Hat, Bow
+	@0000010 0000010 0000010 0000010
+	Goron Mask, Captain's Hat, Large Quiver
+	@0000010 0000010 0000010 0000010
+	Goron Mask, Captain's Hat, Largest Quiver
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Epona's Song, Captain's Hat, Bomb Bag
+	@0000010 0000010 0000010 0000010
+	Epona's Song, Captain's Hat, Big Bomb Bag
+	@0000010 0000010 0000010 0000010
+	Epona's Song, Captain's Hat, Biggest Bomb Bag
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Goron Mask, Captain's Hat, Bomb Bag
+	@0000010 0000010 0000010 0000010
+	Goron Mask, Captain's Hat, Big Bomb Bag
+	@0000010 0000010 0000010 0000010
+	Goron Mask, Captain's Hat, Biggest Bomb Bag
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Epona's Song, Captain's Hat, Zora Mask
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Goron Mask, Captain's Hat, Zora Mask
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Epona's Song, Captain's Hat, Fierce Deity Mask
+	@0000010 0000010 0000010 0000010
+	//Dampe Big Poe
+	Goron Mask, Captain's Hat, Fierce Deity Mask
+	@0000010 0000010 0000010 0000010
+	//Well Big Poe
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Well Big Poe
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Well Big Poe
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Bow, Light Arrow, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Bow, Light Arrow, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Bow, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Large Quiver, Light Arrow, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Large Quiver, Light Arrow, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Large Quiver, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Well Big Poe
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Bow, Light Arrow, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Bow, Light Arrow, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Bow, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Large Quiver, Light Arrow, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Large Quiver, Light Arrow, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Large Quiver, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Biggest Bomb Bag {
-	Goron Mask
-	@1111110 1111110
+	Goron Mask, 200 Rupees
+	@1111110 1111110 1111110
 }
 
 Blast Mask {
 	
-	@1111110 1111110
+	@0001000 0001000
 }
 
 Blue Potion {
-	
-	@1111110 1111110
+	//Ffrom the witch
+	Mushroom, 60 Rupees
+	@1111110 1111110 1111110
+	//From the scrub in Ikana
+	Epona's Song, Garo Mask, Hookshot, 100 Rupees
+	@1111110 1111110 1111110 1111110 1111110
+	//From the scrub in Ikana
+	Goron Mask, Garo Mask, Hookshot, 100 Rupees
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Blue Rupee {
@@ -41,7 +136,7 @@ Blue Rupee {
 }
 
 Bomb Bag {
-	
+	50 Rupees
 	@1111110 1111110
 }
 
@@ -51,13 +146,64 @@ Bombchu {
 }
 
 Bombchus (10) {
-	
-	@1111110 1111110
+	//Shop
+	Bomb Bag, 40 Rupees
+	@1111110 1111110 1111110
+	Big Bomb Bag, 40 Rupees
+	@1111110 1111110 1111110
+	Biggest Bomb Bag, 40 Rupees
+	@1111110 1111110 1111110
+	//Bombchu chest in Inverted Stone Tower
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow, Magic Beans, Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow, Magic Beans, Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow, Magic Beans, Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Bombchu chest in Inverted Stone Tower
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow, Magic Beans, Spring Water, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow, Magic Beans, Spring Water, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow, Magic Beans, Spring Water, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Bombchu chest in Inverted Stone Tower
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow, Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow, Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow, Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Bombchu chest in Inverted Stone Tower
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow, Magic Beans, Song of Storms, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow, Magic Beans, Song of Storms, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow, Magic Beans, Song of Storms, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Bombchus (5) {
-	
-	@1111110 1111110
+	//Bombchu chest from Ikana Graveyard
+	Epona's Song, Bomb Bag
+	@1111110 1111110 1111110
+	Epona's Song, Big Bomb Bag
+	@1111110 1111110 1111110
+	Epona's Song, Biggest Bomb Bag
+	@1111110 1111110 1111110
+	//Bombchu chest from Ikana Graveyard
+	Goron Mask, Bomb Bag
+	@1111110 1111110 1111110
+	Goron Mask, Big Bomb Bag
+	@1111110 1111110 1111110
+	Goron Mask, Biggest Bomb Bag
+	@1111110 1111110 1111110
+	//Bombchu chest from Ikana Graveyard
+	Epona's Song, Blast Mask
+	@1111110 1111110 1111110
+	//Bombchu chest from Ikana Graveyard
+	Goron Mask, Blast Mask
+	@1111110 1111110 1111110
 }
 
 Bomber's Notebook {
@@ -67,18 +213,30 @@ Bomber's Notebook {
 	@1111110 1111110
 	Hookshot
 	@1111110 1111110
+	Bow
+	@1111110 1111110
+	Large Quiver
+	@1111110 1111110
+	Largest Quiver
+	@1111110 1111110
 }
 
 Bow {
-	Deku Mask, Hookshot
-	@1111110 1111110 1111110
-	Deku Mask, Deku Stick
-	@1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Red Potion, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Red Potion, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Red Potion, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Red Potion, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Red Potion, Deku Stick
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Bremen Mask {
 	
-	@1111110 1111110
+	@0001110 0001110
 }
 
 Bugs {
@@ -87,33 +245,54 @@ Bugs {
 }
 
 Bunny Hood {
+	//The guy destroys the boulder for you
 	Bremen Mask
-	@1111110 1111110
+	@0010000 0010000
+	Bremen Mask, Goron Mask, Powder Keg
+	@1110000 1110000 1110000 1110000
 }
 
 Captain's Hat {
-	
-	@1111110 1111110
+	Epona's Song, Sonata of Awakening
+	@1111110 1111110 1111110
+	Goron Mask, Sonata of Awakening
+	@1111110 1111110 1111110
 }
 
 Chateau Romani {
-	Romani's Mask
-	@1111110 1111110
+	//Buying
+	Romani's Mask, 200 Rupees
+	@0001110 0001110 0001110
+	//Delivering Letter
+	Romani's Mask, 200 Express Letter to Mama, Kafei's Mask
+	@0000010 0000010 0000010 0000010
 }
 
 Circus Leader's Mask {
 	Goron Mask, Zora Mask, Deku Mask, Romani's Mask
-	@1111110 1111110 1111110 1111110 1111110
+	@0001110 0001110 0001110 0001110 0001110
 }
 
 Clocktown Map {
-	
-	@1111110 1111110
+	5 Rupees, Bow
+	@1111110 1111110 1111110
+	5 Rupees, Large Quiver
+	@1111110 1111110 1111110
+	5 Rupees, Largest Quiver
+	@1111110 1111110 1111110
+	5 Rupees, Hookshot
+	@1111110 1111110 1111110
+	5 Rupees, Zora Mask
+	@1111110 1111110 1111110
+	5 Rupees, Deku Mask
+	@1111110 1111110 1111110
 }
 
 Couple's Mask {
-	Pendant of Memories, Letter to Kafei, Goron Mask, Powder Keg
-	@1111110 1111110 1111110 1111110 1111110
+	Kafei's Mask, Pendant of Memories, Epona's Song, Garo Mask, Hookshot, Letter to Kafei
+	@0000010 1000000 0100000 0000010 0000010 0000010 1001000
+	Kafei's Mask, Pendant of Memories, Goron Mask, Garo Mask, Hookshot, Letter to Kafei
+	@0000010 1000000 0100000 0000010 0000010 0000010 1001000
 }
 
 Deku Mask {
@@ -132,8 +311,16 @@ Deku Nuts (10) {
 }
 
 Deku Princess {
-	
-	@1111110 1111110
+	//Warp to the boss
+	Deku Mask, Sonata of Awakening, Odolwa's Remains
+	@1111110 1111110 1111110 1111110
+	//Warp to the boss
+	Deku Mask, Sonata of Awakening, Bow
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Large Quiver
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Largest Quiver
+	@1111110 1111110 1111110 1111110
 }
 
 Deku Stick {
@@ -142,23 +329,113 @@ Deku Stick {
 }
 
 Don Gero's Mask {
-	
-	@1111110 1111110
+	Goron Mask, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Deku Stick, Hot Spring Water, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Deku Stick, Hot Spring Water, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Deku Stick, Hot Spring Water, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Elegy of Emptiness {
-	
-	@1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Zora Mask, Powder Keg, Mirror Shield
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Zora Mask, Powder Keg, Mirror Shield
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Zora Mask, Powder Keg, Mirror Shield
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Deku Mask, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Deku Mask, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Deku Mask, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Deku Mask, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Deku Mask, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Deku Mask, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Big Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Biggest Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Big Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Biggest Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Big Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Biggest Bomb Bag, Powder Keg, Mirror Shield, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Big Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Bow, Fire Arrow, Biggest Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Big Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Fire Arrow, Biggest Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Big Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Fire Arrow, Biggest Bomb Bag, Powder Keg, Mirror Shield, Fierce Deity Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Going through the well
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Bow, Fire Arrow, Mirror Shield, Deku Mask, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Large Quiver, Fire Arrow, Mirror Shield, Deku Mask, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow, Mirror Shield, Deku Mask, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Going through the well
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Bow, Fire Arrow, Mirror Shield, Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Bow, Fire Arrow, Mirror Shield, Big Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Bow, Fire Arrow, Mirror Shield, Biggest Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Large Quiver, Fire Arrow, Mirror Shield, Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Large Quiver, Fire Arrow, Mirror Shield, Big Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Large Quiver, Fire Arrow, Mirror Shield, Biggest Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow, Mirror Shield, Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow, Mirror Shield, Big Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow, Mirror Shield, Biggest Bomb Bag, Powder Keg
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Epona's Song {
-	
-	@1111110 1111110
+	Goron Mask, Powder Keg
+	@1000000 1000000 1000000
+	Fierce Deity Mask
+	@1000000 1000000
 }
 
 Express Letter to Mama {
 	Letter to Kafei
-	@1111110 1111110
+	@0000010 1001000
 }
 
 Fairy {
@@ -167,13 +444,27 @@ Fairy {
 }
 
 Fierce Deity Mask {
-	
-	@1111110 1111110
+	Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Oath to Order
+	@0000001 0000001 0000001 0000001 0000001 0000001
 }
 
 Fire Arrow {
-	
-	@1111110 1111110
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Big Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Powder Keg
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Blast Mask
+	@1111110 1111110 1111110 1111110
 }
 
 Fish {
@@ -182,60 +473,187 @@ Fish {
 }
 
 Garo Mask {
-	Goron Mask, Powder Keg
-	@1111110 1111110 1111110
+	Epona's Song, 10 Rupees
+	@1110000 1110000 1110000
 }
 
 Giant Wallet {
-	
-	@1111110 1111110
+	Epona's Song, Bomb Bag, Hookshot, Deku Stick
+	@1001000 1001000 1111110 1111110 1111110
+	Epona's Song, Big Bomb Bag, Hookshot, Deku Stick
+	@1001000 1001000 1111110 1111110 1111110
+	Epona's Song, Biggest Bomb Bag, Hookshot, Deku Stick
+	@1001000 1001000 1111110 1111110 1111110
+	Epona's Song, Blast Mask, Hookshot, Deku Stick
+	@1001000 1001000 1111110 1111110 1111110
+	Epona's Song, Bomb Bag, Hookshot, Fire Arrow, Bow
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Bomb Bag, Hookshot, Fire Arrow, Large Quiver
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Bomb Bag, Hookshot, Fire Arrow, Largest Quiver
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Big Bomb Bag, Hookshot, Fire Arrow, Bow
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Biggest Bomb Bag, Hookshot, Fire Arrow, Bow
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Blast Mask, Hookshot, Fire Arrow, Bow
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Blast Mask, Hookshot, Fire Arrow, Large Quiver
+	@1001000 1001000 1111110 1111110 1111110 1111110
+	Epona's Song, Blast Mask, Hookshot, Fire Arrow, Largest Quiver
+	@1001000 1001000 1111110 1111110 1111110 1111110
 }
 
 Giant's Mask {
-	
-	@1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Gibdo Mask {
-	
-	@1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Song of Storms, Song of Healing
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Song of Storms, Song of Healing
+	@1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Gilded Sword {
-	Gilded Sword
-	@1111110 1111110
-	Gold Dust
-	@1111110 1111110
+	//Curiosity Shop
+	Gilded Sword, Bow
+	@0001110 0001110 0001110
+	Gilded Sword, Large Quiver
+	@0001110 0001110 0001110
+	Gilded Sword, Largest Quiver
+	@0001110 0001110 0001110
+	//Upgrading Day 1
+	Razor Sword, Gold Dust, Goron Mask
+	@0100000 1000000 1000000 1000000
+	//Upgrading Day 1
+	Razor Sword, Gold Dust, Bomb Bag
+	@0100000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Big Bomb Bag
+	@0100000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Biggest Bomb Bag
+	@0100000 1000000 1000000 1000000
+	//Upgrading Day 1
+	Razor Sword, Gold Dust, Blast Mask
+	@0100000 1000000 1000000 1000000
+	//Upgrading Day 2
+	Razor Sword, Gold Dust, Goron Mask
+	@0010000 0100000 0100000 0100000
+	//Upgrading Day 2
+	Razor Sword, Gold Dust, Bomb Bag
+	@0010000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Big Bomb Bag
+	@0010000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Biggest Bomb Bag
+	@0010000 0100000 0100000 0100000
+	//Upgrading Day 2
+	Razor Sword, Gold Dust, Blast Mask
+	@0010000 0100000 0100000 0100000
 }
 
 Goht's Remains {
-	
-	@1111110 1111110
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Gold Dust {
-	
-	@1111110 1111110
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Gold Rupee {
-	
-	@1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Ocean Title Deed, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Ocean Title Deed, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Big Poe
+	@0001110 0001110
+	Gold Dust
+	@0001110 0001110
+	Chateau Romani
+	@0001110 0001110
 }
 
 Goron Lullaby {
-	
-	@1111110 1111110
+	Goron Mask, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Hot Spring Water
+	@1111110 1111110 1111110
 }
 
 Goron Mask {
-	
-	@1111110 1111110
+	Goron Mask, Lens of Truth, Song of Healing
+	@1111110 1111110 1111110 1111110
+	Bomb Bag, Lens of Truth, Song of Healing
+	@1111110 1111110 1111110 1111110
+	Big Bomb Bag, Lens of Truth, Song of Healing
+	@1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Lens of Truth, Song of Healing
+	@1111110 1111110 1111110 1111110
+	Blast Mask, Lens of Truth, Song of Healing
+	@1111110 1111110 1111110 1111110
 }
 
 Great Bay Map {
-	
-	@1111110 1111110
+	//Great Bay Tingle
+	20 Rupees, Epona's Song, Bow
+	@1111110 1111110 1111110 1111110
+	20 Rupees, Epona's Song, Large Quiver
+	@1111110 1111110 1111110 1111110
+	20 Rupees, Epona's Song, Largest Quiver
+	@1111110 1111110 1111110 1111110
+	//Great Bay Tingle
+	20 Rupees, Goron Mask, Bow
+	@1111110 1111110 1111110 1111110
+	20 Rupees, Goron Mask, Large Quiver
+	@1111110 1111110 1111110 1111110
+	20 Rupees, Goron Mask, Largest Quiver
+	@1111110 1111110 1111110 1111110
+	//Great Bay Tingle
+	20 Rupees, Epona's Song, Hookshot
+	@1111110 1111110 1111110 1111110
+	//Great Bay Tingle
+	20 Rupees, Goron Mask, Hookshot
+	@1111110 1111110 1111110 1111110
+	//Milk Road Tingle
+	40 Rupees, Bow
+	@1111110 1111110 1111110
+	40 Rupees, Large Quiver
+	@1111110 1111110 1111110
+	40 Rupees, Largest Quiver
+	@1111110 1111110 1111110
+	//Milk Road Tingle
+	40 Rupees, Hookshot
+	@1111110 1111110 1111110
+	//Milk Road Tingle
+	40 Rupees, Zora Mask
+	@1111110 1111110 1111110
+	//Milk Road Tingle
+	40 Rupees, Deku Mask
+	@1111110 1111110 1111110
 }
 
 Great Fairy's Mask {
@@ -244,28 +662,123 @@ Great Fairy's Mask {
 }
 
 Great Fairy's Sword {
-	
-	@1111110 1111110
+	//Buying back from Curiosity Shop
+	Bow, Great Fairy's Sword, 100 Rupees
+	@0001110 0001110 0001110 0001110
+	Large Quiver, Great Fairy's Sword, 100 Rupees
+	@0001110 0001110 0001110 0001110
+	Largest Quiver, Great Fairy's Sword, 100 Rupees
+	@0001110 0001110 0001110 0001110
+	//Great Fairy
+	Goron Mask, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Bow, Light Arrow, Fire Arrow, Deku Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Large Quiver, Light Arrow, Fire Arrow, Deku Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Largest Quiver, Light Arrow, Fire Arrow, Deku Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Green Potion {
-	
+	10 Rupees
+	@1111110 1111110
+	10 Rupees, Red Potion
+	@1111110 1111110 1111110
+	10 Rupees, Blue Potion
+	@1111110 1111110 1111110
+	//Trading Post
+	30 Rupees
 	@1111110 1111110
 }
 
 Green Rupee {
-	
+	Postman's Hat
 	@1111110 1111110
 }
 
 Gyorg's Remains {
-	
-	@1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Heart Container {
-	
-	@1111110 1111110
+	//Woodfall
+	Deku Mask, Sonata of Awakening, Bow
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Large Quiver
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Largest Quiver
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	//Gyorg
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Gyorg
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Gyorg
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Gyorg
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, New Wave Bossa Nova, Fierce Deity Mask, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Stone Tower
+	Epona's Song, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Stone Tower
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Heart Piece {
@@ -274,44 +787,97 @@ Heart Piece {
 }
 
 Hero's Shield {
-	
+	80 Rupees
 	@1111110 1111110
 }
 
 Hookshot {
-	Zora Mask, Hookshot, Deku Mask
+	Goron Mask, Zora Mask, Deku Mask
 	@1111110 1111110 1111110 1111110
-	Zora Mask, Goron Mask, Deku Mask
+	Epona's Song, Zora Mask, Deku Mask, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, Bow
 	@1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, Large Quiver
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, Largest Quiver
+	@1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, Bow, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, Large Quiver, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, Largest Quiver, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Hot Spring Water {
-	
-	@1111110 1111110
+	Goron Mask, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Bomb Bag, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Bomb Bag, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Bomb Bag, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Big Bomb Bag, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Blast Mask, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Blast Mask, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Blast Mask, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth
+	@1111110 1111110 1111110
+	Goron Mask, Hot Spring Water
+	@1111110 1111110 1111110
+	Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110
+	Big Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110
+	Biggest Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110
+	Blast Mask, Hot Spring Water
+	@1111110 1111110 1111110
 }
 
 Ice Arrow {
-	Zora Mask, Zora Egg
-	@1111110 1111110 1111110
+	Epona's Song, Zora Mask, Hookshot, New Wave Bossa Nova
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, Hookshot, New Wave Bossa Nova
+	@1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Zora Mask, Fierce Deity Mask, New Wave Bossa Nova
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, Fierce Deity Mask, New Wave Bossa Nova
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Kafei's Mask {
 	
-	@1111110 1111110
+	@1100000 1100000
 }
 
 Kamaro's Mask {
-	
-	@1111110 1111110
+	Song of Healing
+	@0001110 0001110
 }
 
 Keaton Mask {
-	
-	@1111110 1111110
+	Letter to Kafei
+	@0010000 1001000
 }
 
 Kokiri Sword {
-	Kokiri Sword
+	//Curiosity Shop
+	50 Rupees
+	@0001110 0001110
+	Razor Sword
 	@1111110 1111110
 }
 
@@ -321,53 +887,254 @@ Land Title Deed {
 }
 
 Large Quiver {
-	
-	@1111110 1111110
+	Bow, 20 Rupees
+	@1110000 1110000 1111110
+	Large Quiver, 20 Rupees
+	@1110000 1110000 1111110
+	Largest Quiver, 20 Rupees
+	@1110000 1110000 1111110
 }
 
 Largest Quiver {
-	
-	@1111110 1111110
+	Bow, 20 Rupees
+	@1110000 1110000 1111110
+	Large Quiver, 20 Rupees
+	@1110000 1110000 1111110
+	Largest Quiver, 20 Rupees
+	@1110000 1110000 1111110
 }
 
 Lens of Truth {
 	Goron Mask
 	@1111110 1111110
+	Bomb Bag
+	@1111110 1111110
+	Big Bomb Bag
+	@1111110 1111110
+	Biggest Bomb Bag
+	@1111110 1111110
+	Blast Mask
+	@1111110 1111110
 }
 
 Letter to Kafei {
 	Kafei's Mask
-	@1111110 1111110
+	@0001000 1000000
 }
 
 Light Arrow {
-	
-	@1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Mirror Shield, Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Mirror Shield, Big Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Mirror Shield, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Mirror Shield, Blast Mask
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Magic Beans {
-	
+	Red Potion
+	@1111110 1111110
+	Bow, Deku Mask
+	@1111110 1111110 1111110
+	Large Quiver, Deku Mask
+	@1111110 1111110 1111110
+	Largest Quiver, Deku Mask
+	@1111110 1111110 1111110
+	Bow, Fierce Deity Mask
+	@1111110 1111110 1111110
+	Large Quiver, Fierce Deity Mask
+	@1111110 1111110 1111110
+	Largest Quiver, Fierce Deity Mask
+	@1111110 1111110 1111110
+	Hookshot, Deku Mask
+	@1111110 1111110 1111110
+	Hookshot, Fierce Deity Mask
+	@1111110 1111110 1111110
+	Zora Mask
 	@1111110 1111110
 }
 
 Mask of Scents {
-	
-	@1111110 1111110
+	Red Potion, Deku Mask, Deku Princess, Odolwa's Remains, Sonata of Awakening
+	@1111110 1111110 1111110 1111110 1111110 1111110
+	Hookshot, Deku Mask, Deku Princess
+	@1111110 1111110 1111110 1111110
+	Zora Mask, Deku Mask, Deku Princess
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Bow, Deku Princess
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, Deku Princess
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, Deku Princess
+	@1111110 1111110 1111110 1111110
 }
 
 Mask of Truth {
-	
-	@1111110 1111110
+	Deku Mask, Deku Stick, Hookshot, 3 Bugs
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Deku Stick, Zora Mask, 3 Bugs
+	@1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Big Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Big Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Big Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Big Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Big Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Big Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Big Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Big Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Biggest Bomb Bag, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Blast Mask, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Red Potion, Deku Mask, Deku Stick, 3 Bugs, Blast Mask, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Blast Mask, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Blast Mask, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Blast Mask, 3 Magic Beans, 3 Spring Water
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Bow, 3 Bugs, Blast Mask, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Large Quiver, 3 Bugs, Blast Mask, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Largest Quiver, 3 Bugs, Blast Mask, 3 Magic Beans, Song of Storms
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Milk {
-	
-	@1111110 1111110
+	//Aliens
+	Bow, Goron Mask, Powder Keg
+	@0001000 0001000 1001000 1001000
+	Large Quiver, Goron Mask, Powder Keg
+	@0001000 0001000 1001000 1001000
+	Largest Quiver, Goron Mask, Powder Keg
+	@0001000 0001000 1001000 1001000
+	//Gorman Brothers
+	50 Rupees
+	@1110000 1110000
+	//Milk Bar
+	20 Rupees
+	@0001110 0001110
+	//Milk from cows in barn
+	Epona's Song, Goron Mask, Powder Keg
+	@0001000 0001000 1001000 1001000
+	//Milk form cows in bombable grotto
+	Epona's Song, Bomb Bag
+	@1111110 1111110 1111110
+	Epona's Song, Big Bomb Bag
+	@1111110 1111110 1111110
+	Epona's Song, Biggest Bomb Bag
+	@1111110 1111110 1111110
+	//Milk form cows in bombable grotto
+	Epona's Song, Blast Mask
+	@1111110 1111110 1111110
+	//Milk from cow in Great Bay grotto
+	Epona's Song, Hookshot
+	@1111110 1111110 1111110
 }
 
 Mirror Shield {
-	
-	@1111110 1111110
+	//Back side of well
+	Epona's Song, Garo Mask, Hookshot, Bow, Light Arrow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Large Quiver, Light Arrow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Largest Quiver, Light Arrow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Back side of well
+	Goron Mask, Garo Mask, Hookshot, Bow, Light Arrow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Light Arrow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Light Arrow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Back side of well
+	Epona's Song, Garo Mask, Hookshot, Bow, Light Arrow, Deku Stick, Gibdo Mask, Milk, Big Poe
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Large Quiver, Light Arrow, Deku Stick, Gibdo Mask, Milk, Big Poe
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Largest Quiver, Light Arrow, Deku Stick, Gibdo Mask, Milk, Big Poe
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Back side of well
+	Goron Mask, Garo Mask, Hookshot, Bow, Light Arrow, Deku Stick, Gibdo Mask, Milk, Big Poe
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Large Quiver, Light Arrow, Deku Stick, Gibdo Mask, Milk, Big Poe
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Largest Quiver, Light Arrow, Deku Stick, Gibdo Mask, Milk, Big Poe
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Front side of well
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Front side of well
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Front side of well
+	Epona's Song, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Deku Stick
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//Front side of well
+	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Deku Stick
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Moon's Tear {
@@ -376,8 +1143,16 @@ Moon's Tear {
 }
 
 Mountain Title Deed {
-	Swamp Title Deed, Deku Mask
-	@1111110 1111110 1111110
+	Deku Mask, Land Title Deed, Goron Mask
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Land Title Deed, Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Land Title Deed, Big Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Land Title Deed, Biggest Bomb Bag
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Land Title Deed, Blast Mask
+	@1111110 1111110 1111110 1111110
 }
 
 Mushroom {
@@ -386,28 +1161,105 @@ Mushroom {
 }
 
 New Wave Bossa Nova {
-	
-	@1111110 1111110
+	Zora Mask, 7 Zora Egg, Epona's Song
+	@1111110 1111110 1111110 1111110
+	Zora Mask, 7 Zora Egg, Goron Mask
+	@1111110 1111110 1111110 1111110
 }
 
 Oath to Order {
-	
-	@1111110 1111110
+	//woodfall
+	Deku Mask, Sonata of Awakening, Bow
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Large Quiver
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Largest Quiver
+	@1111110 1111110 1111110 1111110
+	//woodfall
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Red Potion
+	@1111110 1111110 1111110 1111110 1111110
+	//woodfall
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
+	//woodfall
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110
+	//snowhead
+	Goron Mask, Goron Lullaby, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110 1111110
+	//great bay
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//great bay
+	Zora Mask, New Wave Bossa Nova, Goron Mask, Hookshot, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Goron Mask, Hookshot, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Goron Mask, Hookshot, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//great bay
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Fierce Deity Mask, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Fierce Deity Mask, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Epona's Song, Fierce Deity Mask, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//great bay
+	Zora Mask, New Wave Bossa Nova, Goron Mask, Fierce Deity Mask, Bow, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Goron Mask, Fierce Deity Mask, Large Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Zora Mask, New Wave Bossa Nova, Goron Mask, Fierce Deity Mask, Largest Quiver, Ice Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//stone tower
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	//stone tower
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Ocean Title Deed {
-	Mountain Title Deed, Goron Mask
-	@1111110 1111110 1111110
+	Goron Mask, Zora Mask, Mountain Title Deed
+	@1111110 1111110 1111110 1111110
 }
 
 Odolwa's Remains {
-	
-	@1111110 1111110
+	Deku Mask, Sonata of Awakening, Bow
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Large Quiver
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Largest Quiver
+	@1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Red Potion
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Blue Potion
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Hookshot
+	@1111110 1111110 1111110 1111110 1111110
+	Deku Mask, Sonata of Awakening, Odolwa's Remains, Zora Mask
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Pendant of Memories {
 	Letter to Kafei
-	@1111110 1111110
+	@0100100 1001000
 }
 
 Pictograph Box {
@@ -418,18 +1270,36 @@ Pictograph Box {
 }
 
 Poe {
-	
-	@1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Postman's Hat {
 	Express Letter to Mama
-	@1111110 1111110
+	@0000010 0000010
 }
 
 Powder Keg {
-	
-	@1111110 1111110
+	//Clock Town Shop
+	Goron Mask, Powder Keg, 50 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead Goron
+	Goron Mask, Bow, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Large Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Largest Quiver, Fire Arrow
+	@1111110 1111110 1111110 1111110
 }
 
 Purple Rupee {
@@ -438,14 +1308,94 @@ Purple Rupee {
 }
 
 Razor Sword {
-	Razor Sword
-	@1111110 1111110
-	Goron Mask
-	@1111110 1111110
+	//1st Day upgrade
+	Goron Mask, Bow, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Goron Mask, Large Quiver, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Goron Mask, Largest Quiver, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	//2nd Day upgrade
+	Goron Mask, Bow, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Goron Mask, Large Quiver, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Goron Mask, Largest Quiver, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	//1st Day upgrade
+	Bomb Bag, Bow, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Bomb Bag, Large Quiver, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Bomb Bag, Largest Quiver, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Big Bomb Bag, Bow, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Biggest Bomb Bag, Bow, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	//2nd Day upgrade
+	Bomb Bag, Bow, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Bomb Bag, Large Quiver, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Bomb Bag, Largest Quiver, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Big Bomb Bag, Bow, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Biggest Bomb Bag, Bow, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	//1st Day upgrade
+	Blast Mask, Bow, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Blast Mask, Large Quiver, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	Blast Mask, Largest Quiver, Fire Arrow, 100 Rupees
+	@0100000 1000000 1000000 1000000 1000000
+	//2nd Day upgrade
+	Blast Mask, Bow, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Blast Mask, Large Quiver, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	Blast Mask, Largest Quiver, Fire Arrow, 100 Rupees
+	@0010000 0100000 0100000 0100000 0100000
+	//1st Day upgrade
+	Goron Mask, Hot Spring Water, 100 Rupees
+	@0100000 1000000 1000000 1000000
+	//2nd Day upgrade
+	Goron Mask, Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	//1st Day upgrade
+	Bomb Bag, Hot Spring Water, 100 Rupees
+	@0100000 1000000 1000000 1000000
+	Big Bomb Bag, Hot Spring Water, 100 Rupees
+	@0100000 1000000 1000000 1000000
+	Biggest Bomb Bag, Hot Spring Water, 100 Rupees
+	@0100000 1000000 1000000 1000000
+	//1st Day upgrade
+	Bomb Bag, Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	Big Bomb Bag, Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	Biggest Bomb Bag, Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	//1st Day upgrade
+	Blast Mask, Hot Spring Water, 100 Rupees
+	@0100000 1000000 1000000 1000000
+	//1st Day upgrade
+	Blast Mask, Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	//Curiosity Shop
+	Razor Sword, 100 Rupees, Bow
+	@0001110 0001110 0001110 0001110
+	Razor Sword, 100 Rupees, Large Quiver
+	@0001110 0001110 0001110 0001110
+	Razor Sword, 100 Rupees, Largest Quiver
+	@0001110 0001110 0001110 0001110
 }
 
 Red Potion {
-	
+	//Witch Shop
+	20 Rupees
 	@1111110 1111110
 }
 
@@ -455,23 +1405,43 @@ Red Rupee {
 }
 
 Romani Ranch Map {
-	
-	@1111110 1111110
+	//Milk Road
+	Bow, 20 Rupees
+	@1111110 1111110 1111110
+	Large Quiver, 20 Rupees
+	@1111110 1111110 1111110
+	Largest Quiver, 20 Rupees
+	@1111110 1111110 1111110
+	//Milk Road
+	Deku Mask, 20 Rupees
+	@1111110 1111110 1111110
+	//Milk Road
+	Zora Mask, 20 Rupees
+	@1111110 1111110 1111110
+	//Milk Road
+	Hookshot, 20 Rupees
+	@1111110 1111110 1111110
 }
 
 Romani's Mask {
-	
-	@1111110 1111110
+	Bow
+	@0000100 0001000
+	Large Quiver
+	@0000100 0001000
+	Largest Quiver
+	@0000100 0001000
 }
 
 Room Key {
 	
-	@1111110 1111110
+	@1000000 1000000
 }
 
 Seahorse {
-	Pictograph Box
-	@1111110 1111110
+	Epona's Song, Zora Mask, Pictograph Box
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Zora Mask, Pictograph Box
+	@1111110 1111110 1111110 1111110
 }
 
 Silver Rupee {
@@ -480,13 +1450,103 @@ Silver Rupee {
 }
 
 Snowhead Map {
-	
-	@1111110 1111110
+	//Snowhead
+	Goron Mask, Bow, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Large Quiver, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Largest Quiver, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Bomb Bag, Bow, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Bomb Bag, Large Quiver, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Bomb Bag, Largest Quiver, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Big Bomb Bag, Bow, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Bow, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Blast Mask, Bow, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Blast Mask, Large Quiver, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Blast Mask, Largest Quiver, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Goron Mask, Deku Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Bomb Bag, Deku Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Big Bomb Bag, Deku Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Deku Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Blast Mask, Deku Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Goron Mask, Zora Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Bomb Bag, Zora Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Big Bomb Bag, Zora Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Zora Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Blast Mask, Zora Mask, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Goron Mask, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Bomb Bag, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Big Bomb Bag, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Snowhead
+	Blast Mask, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110
+	//Swamp
+	Bow, 40 Rupees
+	@1111110 1111110 1111110
+	Large Quiver, 40 Rupees
+	@1111110 1111110 1111110
+	Largest Quiver, 40 Rupees
+	@1111110 1111110 1111110
+	//Swamp
+	Hookshot, 40 Rupees
+	@1111110 1111110 1111110
+	//Swamp
+	Goron Mask, 40 Rupees
+	@1111110 1111110 1111110
+	//Swamp
+	Zora Mask, 40 Rupees
+	@1111110 1111110 1111110
 }
 
 Sonata of Awakening {
-	
-	@1111110 1111110
+	Deku Mask, Red Potion
+	@1111110 1111110 1111110
+	Deku Mask, Blue Potion
+	@1111110 1111110 1111110
+	Deku Mask, Bow
+	@1111110 1111110 1111110
+	Deku Mask, Large Quiver
+	@1111110 1111110 1111110
+	Deku Mask, Largest Quiver
+	@1111110 1111110 1111110
+	Deku Mask, Hookshot
+	@1111110 1111110 1111110
+	Deku Mask, Zora Mask
+	@1111110 1111110 1111110
 }
 
 Song of Healing {
@@ -495,13 +1555,53 @@ Song of Healing {
 }
 
 Song of Soaring {
-	
-	@1111110 1111110
+	Deku Mask, Red Potion
+	@1111110 1111110 1111110
+	Deku Mask, Blue Potion
+	@1111110 1111110 1111110
+	Deku Mask, Zora Mask
+	@1111110 1111110 1111110
+	Deku Mask, Bow
+	@1111110 1111110 1111110
+	Deku Mask, Large Quiver
+	@1111110 1111110 1111110
+	Deku Mask, Largest Quiver
+	@1111110 1111110 1111110
+	Deku Mask, Hookshot
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Bow
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Large Quiver
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Largest Quiver
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Hookshot
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Zora Mask
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Red Potion
+	@1111110 1111110 1111110
+	Fierce Deity Mask, Blue Potion
+	@1111110 1111110 1111110
 }
 
 Song of Storms {
-	
-	@1111110 1111110
+	Epona's Song, Captain's Hat, Deku Stick
+	@0001000 0001000 0001000 0001000
+	Goron Mask, Captain's Hat, Deku Stick
+	@0001000 0001000 0001000 0001000
+	Epona's Song, Captain's Hat, Bow, Fire Arrow
+	@0001000 0001000 0001000 0001000 0001000
+	Epona's Song, Captain's Hat, Large Quiver, Fire Arrow
+	@0001000 0001000 0001000 0001000 0001000
+	Epona's Song, Captain's Hat, Largest Quiver, Fire Arrow
+	@0001000 0001000 0001000 0001000 0001000
+	Goron Mask, Captain's Hat, Bow, Fire Arrow
+	@0001000 0001000 0001000 0001000 0001000
+	Goron Mask, Captain's Hat, Large Quiver, Fire Arrow
+	@0001000 0001000 0001000 0001000 0001000
+	Goron Mask, Captain's Hat, Largest Quiver, Fire Arrow
+	@0001000 0001000 0001000 0001000 0001000
 }
 
 Spring Water {
@@ -510,15 +1610,43 @@ Spring Water {
 }
 
 Stone Mask {
-	Lens of Truth, Red Potion
-	@1111110 1111110 1111110
-	Lens of Truth, Blue Potion
-	@1111110 1111110 1111110
+	Epona's Song, Lens of Truth, Red Potion
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth, Red Potion
+	@1111110 1111110 1111110 1111110
+	Epona's Song, Lens of Truth, Blue Potion
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth, Blue Potion
+	@1111110 1111110 1111110 1111110
 }
 
 Stone Tower Map {
-	
-	@1111110 1111110
+	//Ikana
+	Epona's Song, Garo Mask, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110 1111110
+	//Ikana
+	Goron Mask, Garo Mask, Hookshot, 20 Rupees
+	@1111110 1111110 1111110 1111110 1111110
+	//Great Bay
+	Epona's Song, Bow, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	Epona's Song, Large Quiver, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	Epona's Song, Largest Quiver, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	//Great Bay
+	Goron Mask, Bow, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Large Quiver, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	Goron Mask, Largest Quiver, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	//Great Bay
+	Epona's Song, Hookshot, 40 Rupees
+	@1111110 1111110 1111110 1111110
+	//Great Bay
+	Goron Mask, Hookshot, 40 Rupees
+	@1111110 1111110 1111110 1111110
 }
 
 Swamp Title Deed {
@@ -527,23 +1655,52 @@ Swamp Title Deed {
 }
 
 Twinmold's Remains {
-	
-	@1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Epona's Song, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Bow, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Large Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
+	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 }
 
 Woodfall Map {
-	
-	@1111110 1111110
+	//Swamp
+	Bow, 20 Rupees
+	@1111110 1111110 1111110
+	Large Quiver, 20 Rupees
+	@1111110 1111110 1111110
+	Largest Quiver, 20 Rupees
+	@1111110 1111110 1111110
+	//Swamp
+	Hookshot, 20 Rupees
+	@1111110 1111110 1111110
+	//Swamp
+	Deku Mask, 20 Rupees
+	@1111110 1111110 1111110
+	//Swamp
+	Zora Mask, 20 Rupees
+	@1111110 1111110 1111110
+	//Clock Town
+	Great Fairy's Sword, 40 Rupees
+	@1110000 1110000 1110000
 }
 
 Zora Egg {
-	Zora Mask
-	@1111110 1111110
+	Epona's Song, Zora Mask
+	@1111110 1111110 1111110
+	Goron Mask, Zora Mask
+	@1111110 1111110 1111110
 }
 
 Zora Mask {
-	Fierce Deity Mask
-	@1111110 1111110
-	Blast Mask
-	@1111110 1111110
+	Epona's Song, Song of Healing
+	@1111110 1111110 1111110
+	Goron Mask, Song of Healing
+	@1111110 1111110 1111110
 }
