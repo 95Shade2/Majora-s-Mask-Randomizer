@@ -270,6 +270,7 @@ double Get_Hue(vector<double> Prime)
     else if (C_Max == 0)
     {
         temp = Prime[1] - Prime[2];
+		temp = abs(temp);
         temp = temp / Difference;
         temp = fmod(temp, 6);
         Hue = 60 * temp;
@@ -277,6 +278,7 @@ double Get_Hue(vector<double> Prime)
     else if (C_Max == 1)
     {
         temp = Prime[2] - Prime[0];
+		temp = abs(temp);
         temp = temp / Difference;
         temp = temp + 2;
         Hue = 60 * temp;
@@ -284,6 +286,7 @@ double Get_Hue(vector<double> Prime)
     else
     {
         temp = Prime[0] - Prime[1];
+		temp = abs(temp);
         temp = temp / Difference;
         temp = temp + 4;
         Hue = 60 * temp;
