@@ -870,6 +870,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Text += "RespawnHCs=" + respawnHCsToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
 
                 Text += "Targeting=" + TARGETING + "\n"; //Save the custom default targeting
+
+                Text += "TradeQuest=" + removeScrubSalesmanAfterTradingToolStripMenuItem.Checked + "\n";
             }
 
             if (colors)

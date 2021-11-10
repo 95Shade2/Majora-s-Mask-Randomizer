@@ -770,12 +770,8 @@ void Remove_Item_Checks()
 
     Write_To_Rom(16000100,
                  "10000003"); // make clock town scrub ignore if you've traded in swamp
-    Write_To_Rom(48611460, "0007"); // remove woodfall scrub from clocktown
-    Write_To_Rom(42168432, "0007"); // remove snowhead scrub from swamp
-    Write_To_Rom(32628840, "0007"); // remove snowhead scrub from cleared swamp
-    Write_To_Rom(42725596, "0007"); // remove ocean scrub from spring snowhead
-    Write_To_Rom(44384392, "0007"); // remove ocean scrub from snowhead
-    Write_To_Rom(44212312, "0007"); // remove ikana scrub from ocean
+
+	Write_To_Rom(16000388, "00000000");	//make the clock town scrub always spawn (skip the cs of him coming in)
 
     Write_To_Rom(12233316,
                  "240400FF"); // Make the game always give GFS from a randomized item
@@ -6624,6 +6620,16 @@ void Apply_Settings(bool Songs_Same_Pool) {
 	//change default targeting to hold
 	if (Settings["settings"]["Targeting"] == "Hold") {
 		Write_To_Rom(12438076, "A20D3F45");
+	}
+
+	//
+	if (Settings["settings"]["TradeQuest"] == "True") {
+		Write_To_Rom(48611460, "0007"); // remove woodfall scrub from clocktown
+		Write_To_Rom(42168432, "0007"); // remove snowhead scrub from swamp
+		Write_To_Rom(32628840, "0007"); // remove snowhead scrub from cleared swamp
+		Write_To_Rom(42725596, "0007"); // remove ocean scrub from spring snowhead
+		Write_To_Rom(44384392, "0007"); // remove ocean scrub from snowhead
+		Write_To_Rom(44212312, "0007"); // remove ikana scrub from ocean
 	}
 }
 

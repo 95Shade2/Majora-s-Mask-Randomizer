@@ -445,6 +445,7 @@
             this.keepRazorSwordOnSoTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oceanSpiderHouseAnyDayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respawnHCsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeScrubSalesmanAfterTradingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.walletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -4919,7 +4920,8 @@
             this.edibleMirrorShieldToolStripMenuItem,
             this.keepRazorSwordOnSoTToolStripMenuItem,
             this.oceanSpiderHouseAnyDayToolStripMenuItem,
-            this.respawnHCsToolStripMenuItem});
+            this.respawnHCsToolStripMenuItem,
+            this.removeScrubSalesmanAfterTradingToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -4928,28 +4930,28 @@
             // createWadToolStripMenuItem
             // 
             this.createWadToolStripMenuItem.Name = "createWadToolStripMenuItem";
-            this.createWadToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.createWadToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.createWadToolStripMenuItem.Text = "Create Wad";
             this.createWadToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // swampScrubSalesBeansToolStripMenuItem
             // 
             this.swampScrubSalesBeansToolStripMenuItem.Name = "swampScrubSalesBeansToolStripMenuItem";
-            this.swampScrubSalesBeansToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.swampScrubSalesBeansToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.swampScrubSalesBeansToolStripMenuItem.Text = "Swamp Scrub Sales Beans";
             this.swampScrubSalesBeansToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // playAsKafeiToolStripMenuItem
             // 
             this.playAsKafeiToolStripMenuItem.Name = "playAsKafeiToolStripMenuItem";
-            this.playAsKafeiToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.playAsKafeiToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.playAsKafeiToolStripMenuItem.Text = "Play as Kafei";
             this.playAsKafeiToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // removeCutscenesToolStripMenuItem
             // 
             this.removeCutscenesToolStripMenuItem.Name = "removeCutscenesToolStripMenuItem";
-            this.removeCutscenesToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.removeCutscenesToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.removeCutscenesToolStripMenuItem.Text = "Remove Cutscenes";
             this.removeCutscenesToolStripMenuItem.Visible = false;
             this.removeCutscenesToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
@@ -4957,44 +4959,51 @@
             // gCHudToolStripMenuItem
             // 
             this.gCHudToolStripMenuItem.Name = "gCHudToolStripMenuItem";
-            this.gCHudToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.gCHudToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.gCHudToolStripMenuItem.Text = "GC Hud";
             this.gCHudToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // respawnHPsToolStripMenuItem
             // 
             this.respawnHPsToolStripMenuItem.Name = "respawnHPsToolStripMenuItem";
-            this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.respawnHPsToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.respawnHPsToolStripMenuItem.Text = "Respawn HPs";
             this.respawnHPsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // edibleMirrorShieldToolStripMenuItem
             // 
             this.edibleMirrorShieldToolStripMenuItem.Name = "edibleMirrorShieldToolStripMenuItem";
-            this.edibleMirrorShieldToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.edibleMirrorShieldToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.edibleMirrorShieldToolStripMenuItem.Text = "Edible Mirror Shield";
             this.edibleMirrorShieldToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // keepRazorSwordOnSoTToolStripMenuItem
             // 
             this.keepRazorSwordOnSoTToolStripMenuItem.Name = "keepRazorSwordOnSoTToolStripMenuItem";
-            this.keepRazorSwordOnSoTToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.keepRazorSwordOnSoTToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.keepRazorSwordOnSoTToolStripMenuItem.Text = "Keep Razor Sword on SoT";
             this.keepRazorSwordOnSoTToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // oceanSpiderHouseAnyDayToolStripMenuItem
             // 
             this.oceanSpiderHouseAnyDayToolStripMenuItem.Name = "oceanSpiderHouseAnyDayToolStripMenuItem";
-            this.oceanSpiderHouseAnyDayToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.oceanSpiderHouseAnyDayToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.oceanSpiderHouseAnyDayToolStripMenuItem.Text = "Ocean Spider House Any Day";
             this.oceanSpiderHouseAnyDayToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // respawnHCsToolStripMenuItem
             // 
             this.respawnHCsToolStripMenuItem.Name = "respawnHCsToolStripMenuItem";
-            this.respawnHCsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.respawnHCsToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.respawnHCsToolStripMenuItem.Text = "Respawn HCs";
             this.respawnHCsToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
+            // 
+            // removeScrubSalesmanAfterTradingToolStripMenuItem
+            // 
+            this.removeScrubSalesmanAfterTradingToolStripMenuItem.Name = "removeScrubSalesmanAfterTradingToolStripMenuItem";
+            this.removeScrubSalesmanAfterTradingToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.removeScrubSalesmanAfterTradingToolStripMenuItem.Text = "Remove Scrub Salesmen after trading";
+            this.removeScrubSalesmanAfterTradingToolStripMenuItem.Click += new System.EventHandler(this.createWadToolStripMenuItem_Click);
             // 
             // pauseMenuColorsToolStripMenuItem
             // 
@@ -5602,6 +5611,7 @@
         private System.Windows.Forms.RadioButton Targeting_Hold;
         private System.Windows.Forms.ToolStripMenuItem logicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutscenesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeScrubSalesmanAfterTradingToolStripMenuItem;
     }
 }
 
