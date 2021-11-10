@@ -1190,8 +1190,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             if (ItemsNeeded_ListBox.Items.Count > 1)
             {
                 //update the data
-                Logic_Data[logic][item][List_Index] = Remove(Logic_Data[logic][item][List_Index], index);
-                Day_Data[logic][item][List_Index] = Remove(Day_Data[logic][item][List_Index], Item_Needed_Index);
+                Logic_Data[logic][item][List_Index] = Remove(Logic_Data[logic][item][List_Index], index);   //remove the item
+                Count_Data[logic][item][List_Index] = Remove(Count_Data[logic][item][List_Index], index);   //remove the count for the item
+                Day_Data[logic][item][List_Index] = Remove(Day_Data[logic][item][List_Index], Item_Needed_Index);   //remove the day data for the item
 
                 //update the gui
                 ItemsNeeded_ListBox.Items.RemoveAt(index);
