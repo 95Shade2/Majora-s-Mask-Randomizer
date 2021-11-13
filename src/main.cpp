@@ -6723,6 +6723,9 @@ void Fix_Things(bool Songs_Same_Pool) {
 
 	//make clock town guard treat fd like link
 	Write_To_Rom(16044964, "00000000");
+
+	//write the randomizer text on the title screen
+	Write_File_To_Rom("./files/Randomizer", "014E7F40");
 }
 
 int main()
@@ -6788,7 +6791,6 @@ int main()
         exit(0);
     }
 
-    cout << "\nPlacing Items\n";
     Place_Items(Items, Songs_Same_Pool);
 
 	//Apply custom settings from the user
@@ -6798,11 +6800,9 @@ int main()
 	Fix_Things(Songs_Same_Pool);
 
     // Remove Item Checks
-    cout << "\nRemoving Item Checks\n";
     Remove_Item_Checks();
 
     // Give the player the starting items
-    cout << "\nGiving Starting Items\n";
     Give_Starting_Items();
 
     // compress rom and create wad
