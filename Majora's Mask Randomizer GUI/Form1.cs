@@ -1247,16 +1247,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 swampScrubSalesBeansToolStripMenuItem.Checked = false;
             }
-
-            //if (settings.ContainsKey("Remove_Cutscenes") && settings["Remove_Cutscenes"] == "True")
-            //{
-                //removeCutscenesToolStripMenuItem.Checked = true;
-            //}
-            //else
-            //{
-                //removeCutscenesToolStripMenuItem.Checked = false;
-            //}
-
+            
             if (settings.ContainsKey("GC_Hud") && settings["GC_Hud"] == "True")
             {
                 gCHudToolStripMenuItem.Checked = true;
@@ -1318,6 +1309,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 Targeting_Switch.Select();  //default targeting is switch
+            }
+
+            if (settings.ContainsKey("TradeQuest") && settings["TradeQuest"] == "True")
+            {
+                removeScrubSalesmanAfterTradingToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                removeScrubSalesmanAfterTradingToolStripMenuItem.Checked = false;
             }
         }
 
