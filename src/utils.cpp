@@ -748,6 +748,18 @@ map<string, bool> Set_Map(vector<string> keys, bool value) {
 	return data;
 }
 
+map<string, vector<vector<string>>> Set_Map(vector<string> keys, vector<vector<string>> value) {
+	map<string, vector<vector<string>>> data;
+	string key;
+
+	for (int k = 0; k < keys.size(); k++) {
+		key = keys[k];
+		data[key] = value;
+	}
+
+	return data;
+}
+
 vector<string> Append(vector<string> data, vector<string> More_Data) {
 	vector<string> Combined_Data;
 

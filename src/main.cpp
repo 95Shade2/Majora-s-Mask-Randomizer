@@ -1611,7 +1611,7 @@ void Get_Items_Aval(map<string, Item> &Items,
 	bool Got_Item;
 	bool Got_Cycle_Item;
 	map<string, bool> Locations_Checked;
-	
+
 	int cycle = 1;
 
 	//for each cycle
@@ -1675,19 +1675,22 @@ void Get_Items_Aval(map<string, Item> &Items,
 				for (int l = 0; l < Locations_Reset.size(); l++) {
 					location = Locations_Reset[l];
 
+					Logger("Checking " + location);
+
 					//if already got the item in this cycle, then there is no need to check again, skip to the next one
 					if (Locations_Checked[location]) {
+						Logger(location + " already checked");
 						continue;
 					}
 
 					//if this location needs no items, then check to see what day/night can be used to setup getting the item
-					if (Items_Needed[location].size() == 0) {
-						//Logger(location + " doesn't need any items");
+					if (Items_Needed[location].size() == 0 || Items_Needed[location][0].size() == 0) {
+						Logger(location + " doesn't need any items");
 						//if "nothing" can be used on this day
-						if (Day_Data[location][0][1][time][day]) {
+						if (Day_Data[location].size() == 0 || Day_Data[location][0][1][time][day]) {
 							Set_Index = 0;
 							//if the item at the location can be gotten on the same day
-							if (Day_Data[location][0][0][time][day]) {
+							if (Day_Data[location].size() == 0 || Day_Data[location][0][0][time][day]) {
 								//get the item/add it to the list of items available
 								Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
 
@@ -1767,16 +1770,19 @@ void Get_Items_Aval(map<string, Item> &Items,
 				//for each item location that the logic hasn't determined the player can get or an item that gives a resettable item (land deed, deku sticks, etc.)
 				for (int l = 0; l < Locations.size(); l++) {
 					location = Locations[l];
+
+					Logger("Checking " + location);
+
 					//Logger("Can the player get " + location + "?");
 
 					//if this location needs no items, then check to see what day/night can be used to setup getting the item
-					if (Items_Needed[location].size() == 0) {
-						//Logger(location + " doesn't need any items");
+					if (Items_Needed[location].size() == 0 || Items_Needed[location][0].size() == 0) {
+						Logger(location + " doesn't need any items");
 						//if "nothing" can be used on this day
-						if (Day_Data[location][0][1][time][day]) {
+						if (Day_Data[location].size() == 0 || Day_Data[location][0][1][time][day]) {
 							Set_Index = 0;
 							//if the item at the location can be gotten on the same day
-							if (Day_Data[location][0][0][time][day]) {
+							if (Day_Data[location].size() == 0 || Day_Data[location][0][0][time][day]) {
 								//get the item/add it to the list of items available
 								Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
 
@@ -1827,7 +1833,7 @@ void Get_Items_Aval(map<string, Item> &Items,
 							Set_Index = s;
 
 							Days_Given[location] = Day_Data[location][Set_Index][0];	//get the day data for when this location gives it's item
-
+							
 							//if this item has already been determined that it was obtainble before, then do not change the item set
 							if (IndexOf(Get_Keys(Locations_Item_Set), location) == -1) {
 								Set_Index = Locations_Item_Set[location];
@@ -1896,7 +1902,12 @@ void Get_Items_Aval(map<string, Item> &Items,
 				if (All_True(Items_Setup[location][s])) {
 					Set_Index = s;
 
-					Days_Given[location] = Day_Data[location][Set_Index][0];	//get the day data for when this location gives it's item
+					if (Day_Data[location].size() == 0) {
+						Days_Given[location] = {};
+					}
+					else {
+						Days_Given[location] = Day_Data[location][Set_Index][0];	//get the day data for when this location gives it's item
+					}
 
 					//if this item has already been determined that it was obtainble before, then do not change the item set
 					if (IndexOf(Get_Keys(Locations_Item_Set), location) == -1) {
@@ -1904,7 +1915,7 @@ void Get_Items_Aval(map<string, Item> &Items,
 					}
 
 					//if the day data includes the moon
-					if (Days_Given[location]["moon"][0]) {
+					if (Day_Data[location].size() == 0 || Days_Given[location]["moon"][0]) {
 						//get the item/add it to the list of items available
 						Give_Item(location, Cycle_Items, Item_Counts, Items_Aval, Remove_Locations, Items_Gotten, Resettable_Items, Got_Item, Got_Cycle_Item, Locations_Checked);
 
@@ -2682,6 +2693,10 @@ bool Randomize_Setup(map<string, Item> &Items,
         Items_Needed = Get_Logic(Logic_File, &Invalid_Items);
         Setup_Item_Values(Items_Needed);
     }
+	//no logic
+	else {
+		Items_Needed = Set_Map(Get_Keys(Items), { {} });
+	}
 
     // sets up vanilla and placed items
     Setup_NonRandom_Items(Items, &Log);

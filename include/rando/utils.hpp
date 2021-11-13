@@ -167,6 +167,8 @@ map<string, int> Set_Map(vector<string> keys, int value);
 
 map<string, bool> Set_Map(vector<string> keys, bool value);
 
+map<string, vector<vector<string>>> Set_Map(vector<string> keys, vector<vector<string>> value);
+
 vector<string> Append(vector<string> data, vector<string> More_Data);
 
 int Percentage(int, int);
