@@ -6726,6 +6726,9 @@ void Fix_Things(bool Songs_Same_Pool) {
 
 	//write the randomizer text on the title screen
 	Write_File_To_Rom("./files/Randomizer", "014E7F40");
+
+	//move the randomizer text on the title screen
+	Write_To_Rom(14552815, "95");
 }
 
 int main()
