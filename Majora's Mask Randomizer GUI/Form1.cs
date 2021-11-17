@@ -77,7 +77,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             TARGETING = "";
             logic_editor = new LogicEditor();
 
-            DEBUG = true;
+            DEBUG = false;
             debug_path = "./Log_gui.txt";
 
             if (DEBUG)

@@ -6,6 +6,7 @@ Adult Wallet {
 All-Night Mask {
 	500 Rupees
 	@0000010 0000010
+	#Letter to Kafei, Pendant of Memories
 }
 
 Big Bomb Bag {
@@ -116,6 +117,7 @@ Biggest Bomb Bag {
 Blast Mask {
 	
 	@0001000 0001000
+	#Letter to Kafei, Pendant of Memories
 }
 
 Blue Potion {
@@ -293,6 +295,7 @@ Couple's Mask {
 	@0000010 1000000 0100000 0000010 0000010 0000010 1001000
 	Kafei's Mask, Pendant of Memories, Goron Mask, Garo Mask, Hookshot, Letter to Kafei
 	@0000010 1000000 0100000 0000010 0000010 0000010 1001000
+	#Letter to Kafei, Pendant of Memories
 }
 
 Deku Mask {
@@ -436,6 +439,7 @@ Epona's Song {
 Express Letter to Mama {
 	Letter to Kafei
 	@0000010 1001000
+	#Letter to Kafei, Pendant of Memories
 }
 
 Fairy {
@@ -446,6 +450,7 @@ Fairy {
 Fierce Deity Mask {
 	Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Oath to Order
 	@0000001 0000001 0000001 0000001 0000001 0000001
+	#Red Potion, Blue Potion, Gold Dust, Letter to Kafei, Pendant of Memories, Express Letter to Mama, Moon's Tear, Land Title Deed, Mountain Title Deed, Swamp Title Deed, Oath to Order, Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Powder Keg, Zora Egg
 }
 
 Fire Arrow {
@@ -871,6 +876,7 @@ Kamaro's Mask {
 Keaton Mask {
 	Letter to Kafei
 	@0010000 1001000
+	#Letter to Kafei, Pendant of Memories
 }
 
 Kokiri Sword {
@@ -1260,6 +1266,7 @@ Odolwa's Remains {
 Pendant of Memories {
 	Letter to Kafei
 	@0100100 1001000
+	#Letter to Kafei
 }
 
 Pictograph Box {
@@ -1287,6 +1294,7 @@ Poe {
 Postman's Hat {
 	Express Letter to Mama
 	@0000010 0000010
+	#Letter to Kafei, Pendant of Memories, Express Letter to Mama
 }
 
 Powder Keg {
@@ -1430,6 +1438,7 @@ Romani's Mask {
 	@0000100 0001000
 	Largest Quiver
 	@0000100 0001000
+	#Letter to Kafei
 }
 
 Room Key {
