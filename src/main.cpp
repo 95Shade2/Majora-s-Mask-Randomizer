@@ -354,8 +354,6 @@ int Get_Wallet_Max(map<string, int> Items_Gotten = {}) {
 	int max;
 	string wallet;
 
-	Logger("Get_Wallet_Max()");
-
 	//get the wallet
 	wallet = Get_Wallet(Items_Gotten);
 	
@@ -372,8 +370,6 @@ int Get_Wallet_Max(map<string, int> Items_Gotten = {}) {
 
 	//get the wallet's max rupee count
 	max = wallets[Wal_Index];
-
-	Logger("Returning from Get_Wallet_Max()");
 
 	return max;
 }
