@@ -2,6 +2,7 @@
 #include "rando/utils.hpp"
 
 #include <cmath>
+#include <iostream>
 
 double round(double num, int places);
 int Min(vector<double> numbers);
@@ -93,6 +94,8 @@ map<string, double> RGB_To_HSL(int red, int green, int blue)
     int C_Max;
     int C_Min;
     double Difference;
+
+	Logger("RGB_To_HSL();");
 
     Prime.push_back(red / 255.0);
     Prime.push_back(green / 255.0);
@@ -332,10 +335,8 @@ double Get_Saturation(vector<double> Prime)
     return Sat * 100;
 }
 
-// only positive numbers
 // returns the index of the max number
 // if there are more than one numbers, then it returns the index of the first one
-// returns -1 if vector is empty or no values are greater or equal to 0
 int Min(vector<double> numbers)
 {
     double Min_Number = -1;
@@ -343,20 +344,18 @@ int Min(vector<double> numbers)
 
     for (int i = 0; i < numbers.size(); i++)
     {
-        if (numbers[i] < Min_Number || Min_Number == -1)
+        if (i == 0 || numbers[i] < Min_Number)
         {
             Min_Number = numbers[i];
             Min_Index = i;
         }
     }
-
+	
     return Min_Index;
 }
 
-// only positive numbers
 // returns the index of the max number
 // if there are more than one numbers, then it returns the index of the first one
-// returns -1 if vector is empty or no values are greater or equal to 0
 int Max(vector<double> numbers)
 {
     double Max_Number = -1;
@@ -364,7 +363,7 @@ int Max(vector<double> numbers)
 
     for (int i = 0; i < numbers.size(); i++)
     {
-        if (numbers[i] > Max_Number)
+        if (i == 0 || numbers[i] > Max_Number)
         {
             Max_Number = numbers[i];
             Max_Index = i;

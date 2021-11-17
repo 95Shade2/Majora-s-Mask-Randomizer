@@ -6555,7 +6555,6 @@ void RespawnHCs() {
 void Apply_Settings(bool Songs_Same_Pool) {
 
 	// Change max rupee amounts
-	cout << "\nChanging Rupees\n";
 	Change_Rupees(Settings["wallets"]);
 
 	// make scrub salesman always sell beans
@@ -6570,27 +6569,20 @@ void Apply_Settings(bool Songs_Same_Pool) {
 	// Use Gamecube HUD
 	if (Settings["settings"]["GC_Hud"] == "True")
 	{
-		cout << "\nApplying GC Hud\n";
 		Gamecube_Hud();
 	}
 
 	// remove the cutscenes
-	//if (Settings["settings"]["Remove_Cutscenes"] == "True")
-	//{
-	cout << "\nRemoving Cutscenes (if any were selected)\n";
 	Remove_Cutscenes(Songs_Same_Pool);
-	//}
 
 	// change tunic colors
-	cout << "\nChanging tunic colors\n";
 	Change_Colors(Settings["colors"]);
 
 	// making link kafei
 	if (Settings["settings"]["Kafei"] == "True")
 	{
-		cout << "\nMaking link Kafei @Purpletissuebox\n";
 		Change_Link_Kafei();
-		Change_Kafei_Color(Settings["settings"]["Tunic"]);
+		Change_Kafei_Color(Settings["colors"]["Link"]);
 	}
 
 	// change water to bingo water if secret is active
@@ -6633,7 +6625,7 @@ void Apply_Settings(bool Songs_Same_Pool) {
 		Write_To_Rom(12438076, "A20D3F45");
 	}
 
-	//
+	//make scrub salesman not show up after trading
 	if (Settings["settings"]["TradeQuest"] == "True") {
 		Write_To_Rom(48611460, "0007"); // remove woodfall scrub from clocktown
 		Write_To_Rom(42168432, "0007"); // remove snowhead scrub from swamp
@@ -6808,6 +6800,7 @@ int main()
     if (Settings["settings"]["Wad"] == "True")
     {
         // create rom and wad
+		Logger("Creating Rom and Wad");
         cout << "\nCompressing rom and creating wad\n\n";
         if (system("_create-roms.bat") != 0)
         {

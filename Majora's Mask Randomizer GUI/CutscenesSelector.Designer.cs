@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CutscenesSelector));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ClockTown_CircusLeadersMask = new System.Windows.Forms.CheckBox();
             this.ClockTown_SkullKidIntro = new System.Windows.Forms.CheckBox();
@@ -79,6 +80,7 @@
             this.Mountain_GoronShrineIntro = new System.Windows.Forms.CheckBox();
             this.Mountain_MountainVillageIntro = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.GreatBay_WaterfallRapidsIntro = new System.Windows.Forms.CheckBox();
             this.GreatBay_EvanHP = new System.Windows.Forms.CheckBox();
             this.GreatBay_GyorgIntro = new System.Windows.Forms.CheckBox();
             this.GreatBay_BeeEnteringBeehive = new System.Windows.Forms.CheckBox();
@@ -112,7 +114,6 @@
             this.Ikana_IkanaCastleIntro = new System.Windows.Forms.CheckBox();
             this.Ikana_IkanaGraveyardIntro = new System.Windows.Forms.CheckBox();
             this.Ikana_IkanaCanyonIntro = new System.Windows.Forms.CheckBox();
-            this.GreatBay_WaterfallRapidsIntro = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -740,6 +741,17 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Great Bay";
             // 
+            // GreatBay_WaterfallRapidsIntro
+            // 
+            this.GreatBay_WaterfallRapidsIntro.AutoSize = true;
+            this.GreatBay_WaterfallRapidsIntro.Location = new System.Drawing.Point(6, 157);
+            this.GreatBay_WaterfallRapidsIntro.Name = "GreatBay_WaterfallRapidsIntro";
+            this.GreatBay_WaterfallRapidsIntro.Size = new System.Drawing.Size(128, 17);
+            this.GreatBay_WaterfallRapidsIntro.TabIndex = 21;
+            this.GreatBay_WaterfallRapidsIntro.Text = "Waterfall Rapids Intro";
+            this.GreatBay_WaterfallRapidsIntro.UseVisualStyleBackColor = true;
+            this.GreatBay_WaterfallRapidsIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
+            // 
             // GreatBay_EvanHP
             // 
             this.GreatBay_EvanHP.AutoSize = true;
@@ -1118,17 +1130,6 @@
             this.Ikana_IkanaCanyonIntro.UseVisualStyleBackColor = true;
             this.Ikana_IkanaCanyonIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
             // 
-            // GreatBay_WaterfallRapidsIntro
-            // 
-            this.GreatBay_WaterfallRapidsIntro.AutoSize = true;
-            this.GreatBay_WaterfallRapidsIntro.Location = new System.Drawing.Point(6, 157);
-            this.GreatBay_WaterfallRapidsIntro.Name = "GreatBay_WaterfallRapidsIntro";
-            this.GreatBay_WaterfallRapidsIntro.Size = new System.Drawing.Size(128, 17);
-            this.GreatBay_WaterfallRapidsIntro.TabIndex = 21;
-            this.GreatBay_WaterfallRapidsIntro.Text = "Waterfall Rapids Intro";
-            this.GreatBay_WaterfallRapidsIntro.UseVisualStyleBackColor = true;
-            this.GreatBay_WaterfallRapidsIntro.CheckedChanged += new System.EventHandler(this.ClockTown_NorthClockTownIntro_CheckedChanged);
-            // 
             // CutscenesSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1140,6 +1141,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CutscenesSelector";
             this.Text = "Select Cutscenes to Remove/Shorten";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CutscenesSelector_FormClosing);

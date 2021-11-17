@@ -28,6 +28,7 @@
                 /// </summary>
                 private void InitializeComponent()
                 {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(wallets_form));
             this.SmallWallet_NumBox = new System.Windows.Forms.NumericUpDown();
             this.MediumWallet_NumBox = new System.Windows.Forms.NumericUpDown();
             this.LargeWallet_NumBox = new System.Windows.Forms.NumericUpDown();
@@ -158,6 +159,7 @@
             this.Controls.Add(this.LargeWallet_NumBox);
             this.Controls.Add(this.MediumWallet_NumBox);
             this.Controls.Add(this.SmallWallet_NumBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "wallets_form";
             this.Text = "Wallets";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.wallets_form_FormClosing);

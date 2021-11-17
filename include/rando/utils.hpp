@@ -31,6 +31,8 @@ int string_to_dec( string text);
 
 string dec_to_string(int dec, int depth = 0);
 
+string double_to_string(double dec, int depth = 0);
+
 string binary_to_hex(string binary);
 
 string decimal_to_hex(int dec);

@@ -143,24 +143,45 @@ int string_to_dec(string text)
 
 string dec_to_string(int dec, int depth)
 {
-    char digit;
+	char digit;
 
-    if (dec == 0)
-    {
-        if (depth == 0)
-        {
-            return "0";
-        }
-        else
-        {
-            return "";
-        }
-    }
-    else
-    {
-        digit = (dec % 10) + '0';
-        return dec_to_string(dec / 10, ++depth) + digit;
-    }
+	if (dec == 0)
+	{
+		if (depth == 0)
+		{
+			return "0";
+		}
+		else
+		{
+			return "";
+		}
+	}
+	else
+	{
+		digit = (dec % 10) + '0';
+		return dec_to_string(dec / 10, ++depth) + digit;
+	}
+}
+
+string double_to_string(double dec, int depth)
+{
+	int dec2 = dec;
+	int decimal_places = 0;
+	string raw_numbers;
+
+	while (dec2 != dec) {
+		dec *= 10;
+		dec2 = dec;
+		decimal_places++;
+	}
+
+	raw_numbers = dec_to_string(dec2);
+
+	if (decimal_places > 0) {
+		raw_numbers.insert(raw_numbers.begin() + decimal_places, '.');
+	}
+
+	return raw_numbers;
 }
 
 bool isNumber(string text)

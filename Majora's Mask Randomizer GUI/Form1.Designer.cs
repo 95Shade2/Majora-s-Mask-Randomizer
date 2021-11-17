@@ -5143,7 +5143,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main_Window";
-            this.Text = "Majora\'s Mask Randomizer";
+            this.Text = "Majora\'s Mask Randomizer v1.0";
             this.Load += new System.EventHandler(this.Main_Window_Load);
             this.Items_Tab.ResumeLayout(false);
             this.Items_Items_Tab.ResumeLayout(false);

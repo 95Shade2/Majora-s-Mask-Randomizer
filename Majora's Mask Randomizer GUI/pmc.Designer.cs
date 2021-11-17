@@ -28,6 +28,7 @@
                 /// </summary>
                 private void InitializeComponent()
                 {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(pmc));
             this.ItemSelect_ColorBox = new System.Windows.Forms.ColorDialog();
             this.ItemSelect_Button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -432,6 +433,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Confirm_Button);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "pmc";
             this.Text = "Colors";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.pmc_FormClosing);
