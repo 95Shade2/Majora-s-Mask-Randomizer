@@ -6755,15 +6755,16 @@ int main()
 	//get the list of items
 	Item_Keys = Get_Keys(Items);
 
-    // update the item pools according to the settings
-    Update_Pools(Items);
+	// update the item pools according to the settings
+	Update_Pools(Items);
 
-    // randomize items according to logic, if any logic was chosen
-    cout << "Randomizing Items...\n";
+	// randomize items according to logic, if any logic was chosen
+	cout << "Randomizing Items...\n";
 	if (!Randomize_Setup(Items, &Settings, Items_Needed, Location_Sets)) {
 		//if the items were not able to be randomized according to the logic
 		Error("Could not randomize the items with the logic selected");
 	}
+	cout << endl;
 
 	Logger("Randomized Items");
 

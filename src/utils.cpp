@@ -857,3 +857,14 @@ double long to_ascii(string text) {
 
 	return ascii;
 }
+
+double average(vector<double> numbers) {
+	double sum = 0;
+	int size = numbers.size();
+
+	for (int n = 0; n < size; n++) {
+		sum += numbers[n];
+	}
+
+	return sum / size;
+}

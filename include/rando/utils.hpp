@@ -181,4 +181,6 @@ map<string, int> Copy(map<string, int> source);
 
 double long to_ascii(string text);
 
+double average(vector<double> numbers);
+
 #endif
