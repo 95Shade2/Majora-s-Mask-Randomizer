@@ -1,13 +1,13 @@
 Adult Wallet {
 	1 Rupees
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 All-Night Mask {
 	500 Rupees
 	@0000010 0000010
-	#Letter to Kafei, Pendant of Memories, Bugs
+	#Letter to Kafei, Pendant of Memories, Bugs, Zora Egg
 }
 
 Big Bomb Bag {
@@ -108,7 +108,7 @@ Big Poe {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, Largest Quiver, Light Arrow, 10 Deku Nuts, Biggest Bomb Bag
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Biggest Bomb Bag {
@@ -119,7 +119,7 @@ Biggest Bomb Bag {
 Blast Mask {
 	
 	@0001000 0001000
-	#Letter to Kafei, Pendant of Memories, Bugs
+	#Letter to Kafei, Pendant of Memories, Bugs, Zora Egg
 }
 
 Blue Potion {
@@ -147,7 +147,7 @@ Bomb Bag {
 Bombchu {
 	
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Bombchus (10) {
@@ -209,7 +209,7 @@ Bombchus (5) {
 	//Bombchu chest from Ikana Graveyard
 	Goron Mask, Blast Mask
 	@1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Bomber's Notebook {
@@ -238,13 +238,13 @@ Bow {
 	@1111110 1111110 1111110 1111110 1111110
 	Deku Mask, Sonata of Awakening, Red Potion, Deku Stick
 	@1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Bremen Mask {
 	
 	@0001110 0001110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Bugs {
@@ -258,7 +258,7 @@ Bunny Hood {
 	@0010000 0010000
 	Bremen Mask, Goron Mask, Powder Keg
 	@1110000 1110000 1110000 1110000
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Captain's Hat {
@@ -266,7 +266,7 @@ Captain's Hat {
 	@1111110 1111110 1111110
 	Goron Mask, Sonata of Awakening
 	@1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Chateau Romani {
@@ -276,12 +276,13 @@ Chateau Romani {
 	//Delivering Letter
 	Romani's Mask, 200 Express Letter to Mama, Kafei's Mask
 	@0000010 0000010 0000010 0000010
+	#Zora Egg
 }
 
 Circus Leader's Mask {
 	Goron Mask, Zora Mask, Deku Mask, Romani's Mask
 	@0001110 0001110 0001110 0001110 0001110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Clocktown Map {
@@ -304,7 +305,7 @@ Couple's Mask {
 	@0000010 1000000 0100000 0000010 0000010 0000010 1001000
 	Kafei's Mask, Pendant of Memories, Goron Mask, Garo Mask, Hookshot, Letter to Kafei
 	@0000010 1000000 0100000 0000010 0000010 0000010 1001000
-	#Letter to Kafei, Pendant of Memories, Bugs
+	#Letter to Kafei, Pendant of Memories, Bugs, Zora Egg
 }
 
 Deku Mask {
@@ -333,7 +334,7 @@ Deku Princess {
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Sonata of Awakening, Largest Quiver
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Deku Stick {
@@ -354,7 +355,7 @@ Don Gero's Mask {
 	@1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Deku Stick, Hot Spring Water, Largest Quiver
 	@1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Elegy of Emptiness {
@@ -438,7 +439,7 @@ Elegy of Emptiness {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Largest Quiver, Fire Arrow, Mirror Shield, Biggest Bomb Bag, Powder Keg
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Epona's Song {
@@ -451,7 +452,7 @@ Epona's Song {
 Express Letter to Mama {
 	Letter to Kafei
 	@0000010 1001000
-	#Letter to Kafei, Pendant of Memories, Bugs
+	#Letter to Kafei, Pendant of Memories, Bugs, Zora Egg
 }
 
 Fairy {
@@ -462,7 +463,7 @@ Fairy {
 Fierce Deity Mask {
 	Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Oath to Order
 	@0000001 0000001 0000001 0000001 0000001 0000001
-	#Red Potion, Blue Potion, Gold Dust, Letter to Kafei, Pendant of Memories, Express Letter to Mama, Moon's Tear, Land Title Deed, Mountain Title Deed, Swamp Title Deed, Oath to Order, Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Powder Keg, Zora Egg, Bugs
+	#Red Potion, Blue Potion, Gold Dust, Letter to Kafei, Pendant of Memories, Express Letter to Mama, Moon's Tear, Land Title Deed, Mountain Title Deed, Swamp Title Deed, Oath to Order, Odolwa's Remains, Goht's Remains, Gyorg's Remains, Twinmold's Remains, Powder Keg, Zora Egg, Bugs, Zora Egg
 }
 
 Fire Arrow {
@@ -482,7 +483,7 @@ Fire Arrow {
 	@1111110 1111110 1111110 1111110
 	Goron Mask, Goron Lullaby, Blast Mask
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Fish {
@@ -493,7 +494,7 @@ Fish {
 Garo Mask {
 	Epona's Song, 10 Rupees
 	@1110000 1110000 1110000
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Giant Wallet {
@@ -521,7 +522,7 @@ Giant Wallet {
 	@1001000 1001000 1111110 1111110 1111110 1111110
 	Epona's Song, Blast Mask, Hookshot, Fire Arrow, Largest Quiver
 	@1001000 1001000 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Giant's Mask {
@@ -537,7 +538,7 @@ Giant's Mask {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Gibdo Mask {
@@ -545,7 +546,7 @@ Gibdo Mask {
 	@1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Song of Storms, Song of Healing
 	@1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Gilded Sword {
@@ -582,7 +583,7 @@ Gilded Sword {
 	//Upgrading Day 2
 	Razor Sword, Gold Dust, Blast Mask
 	@0010000 0100000 0100000 0100000
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Goht's Remains {
@@ -592,7 +593,6 @@ Goht's Remains {
 	@1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
 	@1111110 1111110 1111110 1111110 1111110
-	#Bugs
 }
 
 Gold Dust {
@@ -626,7 +626,7 @@ Goron Lullaby {
 	@1111110 1111110 1111110 1111110
 	Goron Mask, Hot Spring Water
 	@1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Goron Mask {
@@ -684,7 +684,7 @@ Great Bay Map {
 Great Fairy's Mask {
 	Deku Mask
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Great Fairy's Sword {
@@ -702,7 +702,7 @@ Great Fairy's Sword {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Zora Mask, Elegy of Emptiness, Largest Quiver, Light Arrow, Fire Arrow, Deku Mask
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Green Potion {
@@ -720,7 +720,7 @@ Green Potion {
 Green Rupee {
 	Postman's Hat
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Gyorg's Remains {
@@ -807,6 +807,7 @@ Heart Container {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Largest Quiver, Light Arrow
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
+	#Zora Egg
 }
 
 Heart Piece {
@@ -836,7 +837,7 @@ Hookshot {
 	@1111110 1111110 1111110 1111110 1111110
 	Epona's Song, Zora Mask, Largest Quiver, Hookshot
 	@1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Hot Spring Water {
@@ -885,7 +886,7 @@ Ice Arrow {
 	@1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Zora Mask, Fierce Deity Mask, New Wave Bossa Nova
 	@1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Kafei's Mask {
@@ -896,13 +897,13 @@ Kafei's Mask {
 Kamaro's Mask {
 	Song of Healing
 	@0001110 0001110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Keaton Mask {
 	Letter to Kafei
 	@0010000 1001000
-	#Letter to Kafei, Pendant of Memories, Bugs
+	#Letter to Kafei, Pendant of Memories, Bugs, Zora Egg
 }
 
 Kokiri Sword {
@@ -911,13 +912,13 @@ Kokiri Sword {
 	@0001110 0001110
 	Razor Sword
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Land Title Deed {
 	Moon's Tear
 	@1111110 1111110
-	#Bugs
+	#Bugs, , 
 }
 
 Large Quiver {
@@ -927,7 +928,7 @@ Large Quiver {
 	@1110000 1110000 1111110
 	Largest Quiver, 20 Rupees
 	@1110000 1110000 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Largest Quiver {
@@ -937,7 +938,7 @@ Largest Quiver {
 	@1110000 1110000 1111110
 	Largest Quiver, 20 Rupees
 	@1110000 1110000 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Lens of Truth {
@@ -951,13 +952,13 @@ Lens of Truth {
 	@1111110 1111110
 	Blast Mask
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Letter to Kafei {
 	Kafei's Mask
 	@0001000 1000000
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Light Arrow {
@@ -981,7 +982,7 @@ Light Arrow {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Garo Mask, Hookshot, Elegy of Emptiness, Zora Mask, Largest Quiver, Light Arrow
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Magic Beans {
@@ -1020,7 +1021,7 @@ Mask of Scents {
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Largest Quiver, Deku Princess
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Mask of Truth {
@@ -1092,7 +1093,7 @@ Mask of Truth {
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
 	Deku Mask, Largest Quiver, 3 Bugs, Blast Mask, 3 Magic Beans, Song of Storms
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Milk {
@@ -1176,13 +1177,13 @@ Mirror Shield {
 	//Front side of well
 	Goron Mask, Garo Mask, Hookshot, Gibdo Mask, 5 Magic Beans, Fish, Big Poe, Milk, Deku Stick
 	@1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Moon's Tear {
 	
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Mountain Title Deed {
@@ -1196,7 +1197,7 @@ Mountain Title Deed {
 	@1111110 1111110 1111110 1111110
 	Deku Mask, Land Title Deed, Blast Mask
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Mushroom {
@@ -1283,7 +1284,7 @@ Oath to Order {
 Ocean Title Deed {
 	Goron Mask, Zora Mask, Mountain Title Deed
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Odolwa's Remains {
@@ -1306,7 +1307,7 @@ Odolwa's Remains {
 Pendant of Memories {
 	Letter to Kafei
 	@0100100 1001000
-	#Letter to Kafei, Bugs
+	#Letter to Kafei, Bugs, Zora Egg
 }
 
 Pictograph Box {
@@ -1314,7 +1315,7 @@ Pictograph Box {
 	@1111110 1111110
 	Blue Potion
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Poe {
@@ -1335,7 +1336,7 @@ Poe {
 Postman's Hat {
 	Express Letter to Mama
 	@0000010 0000010
-	#Letter to Kafei, Pendant of Memories, Express Letter to Mama, Bugs
+	#Letter to Kafei, Pendant of Memories, Express Letter to Mama, Bugs, Zora Egg
 }
 
 Powder Keg {
@@ -1440,7 +1441,7 @@ Razor Sword {
 	@0001110 0001110 0001110 0001110
 	Razor Sword, 100 Rupees, Largest Quiver
 	@0001110 0001110 0001110 0001110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Red Potion {
@@ -1480,13 +1481,13 @@ Romani's Mask {
 	@0000100 0001000
 	Largest Quiver
 	@0000100 0001000
-	#Letter to Kafei, Bugs
+	#Letter to Kafei, Bugs, Zora Egg
 }
 
 Room Key {
 	
 	@1000000 1000000
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Seahorse {
@@ -1494,7 +1495,7 @@ Seahorse {
 	@1111110 1111110 1111110 1111110
 	Goron Mask, Zora Mask, Pictograph Box
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Silver Rupee {
@@ -1600,7 +1601,7 @@ Sonata of Awakening {
 	@1111110 1111110 1111110
 	Deku Mask, Zora Mask
 	@1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Song of Healing {
@@ -1672,7 +1673,7 @@ Stone Mask {
 	@1111110 1111110 1111110 1111110
 	Goron Mask, Lens of Truth, Blue Potion
 	@1111110 1111110 1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Stone Tower Map {
@@ -1707,7 +1708,7 @@ Stone Tower Map {
 Swamp Title Deed {
 	Land Title Deed
 	@1111110 1111110
-	#Bugs
+	#Bugs, Zora Egg
 }
 
 Twinmold's Remains {
