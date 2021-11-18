@@ -24,7 +24,7 @@ using namespace std;
 ofstream err_file;
 ofstream log_file;
 
-bool DEBUG = false;
+bool DEBUG = true;
 
 fstream inFile;
 ofstream outFile;
@@ -2410,6 +2410,8 @@ bool Randomize(string Log,
 				Items[Cur_Item].Name = New_Item;
 				Items[Cur_Item].gives_item = true;
 				Items[New_Item].can_get = true;
+
+				Logger("Placing Item " + New_Item + " at location " + Cur_Item);
 
 				// make the player acquire the item that is now placed here
 				Items_Gotten[New_Item] = Items[Cur_Item].Count;
