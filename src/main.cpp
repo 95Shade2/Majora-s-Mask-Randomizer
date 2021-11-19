@@ -24,7 +24,7 @@ using namespace std;
 ofstream err_file;
 ofstream log_file;
 
-bool DEBUG = true;
+bool DEBUG = false;
 
 fstream inFile;
 ofstream outFile;

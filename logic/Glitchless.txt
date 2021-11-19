@@ -445,8 +445,9 @@ Elegy of Emptiness {
 Epona's Song {
 	Goron Mask, Powder Keg
 	@1000000 1000000 1000000
-	Fierce Deity Mask
-	@1000000 1000000
+	//Song of soaring to be able to leave
+	Fierce Deity Mask, Song of Soaring
+	@1000000 1000000 1111110
 }
 
 Express Letter to Mama {
