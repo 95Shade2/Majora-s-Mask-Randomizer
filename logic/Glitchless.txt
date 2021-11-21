@@ -112,8 +112,14 @@ Big Poe {
 }
 
 Biggest Bomb Bag {
-	Goron Mask, 200 Rupees
-	@1111110 1111110 1111110
+	Goron Mask, 200 Rupees, Hot Spring Water
+	@1111110 1111110 1111110 1111110
+	Goron Mask, 200 Rupees, Bow
+	@1111110 1111110 1111110 1111110
+	Goron Mask, 200 Rupees, Large Quiver
+	@1111110 1111110 1111110 1111110
+	Goron Mask, 200 Rupees, Largest Quiver
+	@1111110 1111110 1111110 1111110
 }
 
 Blast Mask {
@@ -474,16 +480,38 @@ Fire Arrow {
 	@1111110 1111110 1111110 1111110 1111110
 	Goron Mask, Goron Lullaby, Largest Quiver, Fire Arrow
 	@1111110 1111110 1111110 1111110 1111110
-	Goron Mask, Goron Lullaby, Bomb Bag
-	@1111110 1111110 1111110 1111110
-	Goron Mask, Goron Lullaby, Big Bomb Bag
-	@1111110 1111110 1111110 1111110
-	Goron Mask, Goron Lullaby, Biggest Bomb Bag
-	@1111110 1111110 1111110 1111110
-	Goron Mask, Goron Lullaby, Powder Keg
-	@1111110 1111110 1111110 1111110
-	Goron Mask, Goron Lullaby, Blast Mask
-	@1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Big Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Biggest Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Bomb Bag, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Bomb Bag, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Bomb Bag, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Big Bomb Bag, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Biggest Bomb Bag, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Powder Keg, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Powder Keg, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Powder Keg, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Powder Keg, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Blast Mask, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Blast Mask, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Blast Mask, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Goron Lullaby, Blast Mask, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
 	#Bugs, Zora Egg
 }
 
@@ -559,31 +587,45 @@ Gilded Sword {
 	Gilded Sword, Largest Quiver
 	@0001110 0001110 0001110
 	//Upgrading Day 1
-	Razor Sword, Gold Dust, Goron Mask
-	@0100000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Goron Mask, 2 Hot Spring Water
+	@0100000 1000000 1000000 1000000 1000000
 	//Upgrading Day 1
-	Razor Sword, Gold Dust, Bomb Bag
-	@0100000 1000000 1000000 1000000
-	Razor Sword, Gold Dust, Big Bomb Bag
-	@0100000 1000000 1000000 1000000
-	Razor Sword, Gold Dust, Biggest Bomb Bag
-	@0100000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Bomb Bag, 2 Hot Spring Water
+	@0100000 1000000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Big Bomb Bag, 2 Hot Spring Water
+	@0100000 1000000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Biggest Bomb Bag, 2 Hot Spring Water
+	@0100000 1000000 1000000 1000000 1000000
 	//Upgrading Day 1
-	Razor Sword, Gold Dust, Blast Mask
-	@0100000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Blast Mask, 2 Hot Spring Water
+	@0100000 1000000 1000000 1000000 1000000
+	//Upgrading Day 1
+	Razor Sword, Gold Dust, Bow, Fire Arrow
+	@0100000 1000000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Large Quiver, Fire Arrow
+	@0100000 1000000 1000000 1000000 1000000
+	Razor Sword, Gold Dust, Largest Quiver, Fire Arrow
+	@0100000 1000000 1000000 1000000 1000000
 	//Upgrading Day 2
-	Razor Sword, Gold Dust, Goron Mask
-	@0010000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Goron Mask, 2 Hot Spring Water
+	@0010000 0100000 0100000 0100000 0100000
 	//Upgrading Day 2
-	Razor Sword, Gold Dust, Bomb Bag
-	@0010000 0100000 0100000 0100000
-	Razor Sword, Gold Dust, Big Bomb Bag
-	@0010000 0100000 0100000 0100000
-	Razor Sword, Gold Dust, Biggest Bomb Bag
-	@0010000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Bomb Bag, 2 Hot Spring Water
+	@0010000 0100000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Big Bomb Bag, 2 Hot Spring Water
+	@0010000 0100000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Biggest Bomb Bag, 2 Hot Spring Water
+	@0010000 0100000 0100000 0100000 0100000
 	//Upgrading Day 2
-	Razor Sword, Gold Dust, Blast Mask
-	@0010000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Blast Mask, 2 Hot Spring Water
+	@0010000 0100000 0100000 0100000 0100000
+	//Upgrading Day 2
+	Razor Sword, Gold Dust, Bow, Fire Arrow
+	@0010000 0100000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Large Quiver, Fire Arrow
+	@0010000 0100000 0100000 0100000 0100000
+	Razor Sword, Gold Dust, Largest Quiver, Fire Arrow
+	@0010000 0100000 0100000 0100000 0100000
 	#Bugs, Zora Egg
 }
 
@@ -625,22 +667,50 @@ Goron Lullaby {
 	@1111110 1111110 1111110 1111110
 	Goron Mask, Largest Quiver, Fire Arrow
 	@1111110 1111110 1111110 1111110
-	Goron Mask, Hot Spring Water
+	Goron Mask, 2 Hot Spring Water
 	@1111110 1111110 1111110
 	#Bugs, Zora Egg
 }
 
 Goron Mask {
-	Goron Mask, Lens of Truth, Song of Healing
-	@1111110 1111110 1111110 1111110
-	Bomb Bag, Lens of Truth, Song of Healing
-	@1111110 1111110 1111110 1111110
-	Big Bomb Bag, Lens of Truth, Song of Healing
-	@1111110 1111110 1111110 1111110
-	Biggest Bomb Bag, Lens of Truth, Song of Healing
-	@1111110 1111110 1111110 1111110
-	Blast Mask, Lens of Truth, Song of Healing
-	@1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth, Song of Healing, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth, Song of Healing, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth, Song of Healing, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Goron Mask, Lens of Truth, Song of Healing, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Bomb Bag, Lens of Truth, Song of Healing, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Big Bomb Bag, Lens of Truth, Song of Healing, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Lens of Truth, Song of Healing, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Bomb Bag, Lens of Truth, Song of Healing, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Bomb Bag, Lens of Truth, Song of Healing, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Bomb Bag, Lens of Truth, Song of Healing, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Big Bomb Bag, Lens of Truth, Song of Healing, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Biggest Bomb Bag, Lens of Truth, Song of Healing, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Blast Mask, Lens of Truth, Song of Healing, Hot Spring Water
+	@1111110 1111110 1111110 1111110 1111110
+	Blast Mask, Lens of Truth, Song of Healing, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Blast Mask, Lens of Truth, Song of Healing, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Blast Mask, Lens of Truth, Song of Healing, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Fire Arrow, Lens of Truth, Song of Healing, Bow
+	@1111110 1111110 1111110 1111110 1111110
+	Fire Arrow, Lens of Truth, Song of Healing, Large Quiver
+	@1111110 1111110 1111110 1111110 1111110
+	Fire Arrow, Lens of Truth, Song of Healing, Largest Quiver
+	@1111110 1111110 1111110 1111110 1111110
 }
 
 Great Bay Map {
@@ -943,16 +1013,38 @@ Largest Quiver {
 }
 
 Lens of Truth {
-	Goron Mask
-	@1111110 1111110
-	Bomb Bag
-	@1111110 1111110
-	Big Bomb Bag
-	@1111110 1111110
-	Biggest Bomb Bag
-	@1111110 1111110
-	Blast Mask
-	@1111110 1111110
+	Goron Mask, Hot Spring Water
+	@1111110 1111110 1111110
+	Goron Mask, Bow
+	@1111110 1111110 1111110
+	Goron Mask, Large Quiver
+	@1111110 1111110 1111110
+	Goron Mask, Largest Quiver
+	@1111110 1111110 1111110
+	Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110
+	Big Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110
+	Biggest Bomb Bag, Hot Spring Water
+	@1111110 1111110 1111110
+	Bomb Bag, Bow
+	@1111110 1111110 1111110
+	Bomb Bag, Large Quiver
+	@1111110 1111110 1111110
+	Bomb Bag, Largest Quiver
+	@1111110 1111110 1111110
+	Big Bomb Bag, Bow
+	@1111110 1111110 1111110
+	Biggest Bomb Bag, Bow
+	@1111110 1111110 1111110
+	Blast Mask, Hot Spring Water
+	@1111110 1111110 1111110
+	Blast Mask, Bow
+	@1111110 1111110 1111110
+	Blast Mask, Large Quiver
+	@1111110 1111110 1111110
+	Blast Mask, Largest Quiver
+	@1111110 1111110 1111110
 	#Bugs, Zora Egg
 }
 
@@ -1410,30 +1502,30 @@ Razor Sword {
 	Blast Mask, Largest Quiver, Fire Arrow, 100 Rupees
 	@0010000 0100000 0100000 0100000 0100000
 	//1st Day upgrade
-	Goron Mask, Hot Spring Water, 100 Rupees
+	Goron Mask, 2 Hot Spring Water, 100 Rupees
 	@0100000 1000000 1000000 1000000
 	//2nd Day upgrade
-	Goron Mask, Hot Spring Water, 100 Rupees
+	Goron Mask, 2 Hot Spring Water, 100 Rupees
 	@0010000 0100000 0100000 0100000
 	//1st Day upgrade
-	Bomb Bag, Hot Spring Water, 100 Rupees
+	Bomb Bag, 2 Hot Spring Water, 100 Rupees
 	@0100000 1000000 1000000 1000000
-	Big Bomb Bag, Hot Spring Water, 100 Rupees
+	Big Bomb Bag, 2 Hot Spring Water, 100 Rupees
 	@0100000 1000000 1000000 1000000
-	Biggest Bomb Bag, Hot Spring Water, 100 Rupees
-	@0100000 1000000 1000000 1000000
-	//1st Day upgrade
-	Bomb Bag, Hot Spring Water, 100 Rupees
-	@0010000 0100000 0100000 0100000
-	Big Bomb Bag, Hot Spring Water, 100 Rupees
-	@0010000 0100000 0100000 0100000
-	Biggest Bomb Bag, Hot Spring Water, 100 Rupees
-	@0010000 0100000 0100000 0100000
-	//1st Day upgrade
-	Blast Mask, Hot Spring Water, 100 Rupees
+	Biggest Bomb Bag, 2 Hot Spring Water, 100 Rupees
 	@0100000 1000000 1000000 1000000
 	//1st Day upgrade
-	Blast Mask, Hot Spring Water, 100 Rupees
+	Bomb Bag, 2 Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	Big Bomb Bag, 2 Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	Biggest Bomb Bag, 2 Hot Spring Water, 100 Rupees
+	@0010000 0100000 0100000 0100000
+	//1st Day upgrade
+	Blast Mask, 2 Hot Spring Water, 100 Rupees
+	@0100000 1000000 1000000 1000000
+	//1st Day upgrade
+	Blast Mask, 2 Hot Spring Water, 100 Rupees
 	@0010000 0100000 0100000 0100000
 	//Curiosity Shop
 	Razor Sword, 100 Rupees, Bow
