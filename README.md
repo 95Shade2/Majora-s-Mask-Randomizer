@@ -1,2 +1,173 @@
-# Majora-s-Mask-Randomizer
-A randomizer for The Legend of Zelda: Majora's Mask
+# Majora's Mask Randomizer
+This is a Majora's Mask Randomzier created by 95Shade.
+This Randomizer is based of off [DeathBasket](https://www.twitch.tv/deathbasket)'s old Randomizer where each item (not item location) is randomized; For example, red potion from two different shops will give the same thing.
+If rupees are randomized. then they will give the new item from any place where it plays the Get Item animation; Otherwise, it will give itself (a green rupee from a bush will give a green rupee).
+The first Red Potion gotten from the witch will always be a Bottle of Red Potion, the rest will be what Red Potion gives.
+Some bottle items give an  extra bottle with them if the Get Item animation plays (Milk, Poe, Chateau Romani, and Gold Dust)
+## Changes from Vanilla
+- Skips the intro, starts in South Clock Town
+- Start with the items Deku Mask and Song of Healing give
+- Start with Song of Time and Ocarina
+- Can always get the item from Fierce Deity Mask on the moon (does not check if completed the trials)
+- Fierce Deity can be worn almost anywhere
+- Don't need big bomb bag to check Biggest Bomb Bag (just need Goron Mask and 200 Rupees)
+- Hot Spring Water never cools
+- Clock Town scrub salesman starts in the flower which skips the cutscene
+## Settings
+- Create Wad
+- Swamp Scrub Sales Beans
+	- Swamp scrub salesman will always sales beans instead of what beans give
+	- Still have to have beans slot in inventory to be able to buy them
+- Play as Kafei
+	- Play as Kafei instead of Link
+- GC Hud
+	- Replace the colors on the buttons with the colors used in the GameCube version of the game
+- Respawn HPs
+	- Respawn every HP each cycle
+- Edible Mirror Shield
+	- Makes the like likes able to eat the mirror shield (Still spits out Hero's Shield)
+	- This was added for the Bingo goal "No Shield"
+- Keep Razor Sword on SoT
+- Ocean Spider House Any Day
+	- Makes the Giant Wallet from Ocean Spider House obtainable any day
+- Respawn HCs
+	- Respawn the four Heart Containers every cycle
+- Remove scrub salesman after trading
+	- Makes it where there are not two scrubs at the same flower
+	- When trading with one, he will not move into the previous flower, he will instead not be anywhere until the next cycle
+## Other Features
+- Color selector for each transformation form and for Link
+	- If "Play as Kafei" is selected, then Kafei will use the color selected for Link
+- Color selector for the pause menu screens
+- Custom wallet sizes
+- Remove Cutscenes
+- Which targeting is on by default (switch or hold)
+- Custom time for Blast Mask cooldown
+- Logic Editor
+## Randomizable Items
+- Adult Wallet
+- All-Night Mask
+- Big Bomb Bag
+- Big Poe
+- Biggest Bomb Bag
+- Blast Mask
+- Blue Potion
+- Blue Rupee
+- Bomb Bag
+- Bombchu
+- Bombchus (10)
+- Bombchus (5)
+- Bomber's Notebook
+- Bow
+- Bremen Mask
+- Bugs
+- Bunny Hood
+- Captain's Hat
+- Chateau Romani
+- Circus Leader's Mask
+- Clocktown Map
+- Couple's Mask
+- Deku Mask
+- Deku Nuts
+- Deku Nuts (10)
+- Deku Princess
+- Deku Stick
+- Don Gero's Mask
+- Elegy of Emptiness
+- Epona's Song
+- Express Letter to Mama
+- Fairy
+- Fierce Deity Mask
+- Fire Arrow
+- Fish
+- Garo Mask
+- Giant Wallet
+- Giant's Mask
+- Gibdo Mask
+- Gilded Sword
+- Goht's Remains
+- Gold Dust
+- Gold Rupee
+- Goron Lullaby
+- Goron Mask
+- Great Bay Map
+- Great Fairy's Mask
+- Great Fairy's Sword
+- Green Potion
+- Green Rupee
+- Gyorg's Remains
+- Heart Container
+- Heart Piece
+- Hero's Shield
+- Hookshot
+- Hot Spring Water
+- Ice Arrow
+- Kafei's Mask
+- Kamaro's Mask
+- Keaton Mask
+- Kokiri Sword
+- Land Title Deed
+- Large Quiver
+- Largest Quiver
+- Lens of Truth
+- Letter to Kafei
+- Light Arrow
+- Magic Beans
+- Mask of Scents
+- Mask of Truth
+- Milk
+- Mirror Shield
+- Moon's Tear
+- Mountain Title Deed
+- Mushroom
+- New Wave Bossa Nova
+- Oath to Order
+- Ocean Title Deed
+- Odolwa's Remains
+- Pendant of Memories
+- Pictograph Box
+- Poe
+- Postman's Hat
+- Powder Keg
+- Purple Rupee
+- Razor Sword
+- Red Potion
+- Red Rupee
+- Romani Ranch Map
+- Romani's Mask
+- Room Key
+- Seahorse
+- Silver Rupee
+- Snowhead Map
+- Sonata of Awakening
+- Song of Healing
+- Song of Soaring
+- Song of Storms
+- Spring Water
+- Stone Mask
+- Stone Tower Map
+- Swamp Title Deed
+- Twinmold's Remains
+- Woodfall Map
+- Zora Egg
+- Zora Mask
+## Credits
+- Developer
+	- [95Shade](https://www.twitch.tv/95shade)
+- People who helped with coding and/or understanding of Majora's Mask
+	- [Jimmie1717](https://www.twitch.tv/jimmie1717)
+	- [ProbablyButter](https://www.twitch.tv/probablybutter)
+	- [Ostrealava02](https://www.twitch.tv/ostrealava02)
+- Beta Testers
+	- [Draconif](https://www.twitch.tv/draconif)
+	- [Eumeus14](https://www.twitch.tv/eumeus14)
+	- [Jess57329](https://www.twitch.tv/jess57329)
+	- [Jimmie1717](https://www.twitch.tv/jimmie1717)
+	- [ProbablyButter](https://www.twitch.tv/probablybutter)
+	- [PurpleTissueBox](https://www.twitch.tv/purpletissuebox)
+	- [TrevPerson](https://www.twitch.tv/trevperson)
+	- [Tinper_](https://www.twitch.tv/tinper_)
+	- [Uniburst](https://www.twitch.tv/uniburst)
+- Resources
+	- https://wiki.cloudmodding.com/mm/Main_Page
+	- https://github.com/ZoeyZolotova/mm-rando
