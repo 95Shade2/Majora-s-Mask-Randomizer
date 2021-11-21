@@ -967,7 +967,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             logic = LogicFiles_ListBox.SelectedItem.ToString();
             item = Items_ListBox.SelectedItem.ToString();
             Item_Set = ItemGroups_ListBox.SelectedIndex;
-            Item_Index = ItemsNeeded_ListBox.SelectedIndex + 2; //plus 2 because it's 1 based, not 0. (0 is used for when the item at the loc is given)
+            Item_Index = ItemsNeeded_ListBox.Items.Count + 1; //plus 1 because it's 1 based, not 0. (0 is used for when the item at the loc is given)
 
             //add a new item needed to the data
             Logic_Data[logic][item][Item_Set].Add(Logic_Data[logic][item][Item_Set].Count, "");
