@@ -3555,7 +3555,7 @@ void Make_Bottles_Work()
     }
 
 
-    Write_To_Rom(12231952, "0C02CCB330020000");
+    Write_To_Rom(12231952, "0C02CCD230020000");
     for (int i = 0; i < Max_Bottles.size(); i++)
     {
 	    Write_To_Rom(11835404 + (i * 4), Max_Bottles[i]);
