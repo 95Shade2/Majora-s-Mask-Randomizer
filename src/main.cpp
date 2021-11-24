@@ -6827,15 +6827,24 @@ int main()
     }
 
     // rename the rom to include the seed
-    /*if (system(("rename \"Legend of Zelda, The - Majora's Mask - Randomizer (U).z64\" \"Legend of Zelda, The - Majora's Mask - Randomizer (U)_"
+    if (system(("rename \"Legend of Zelda, The - Majora's Mask - Randomizer (U).z64\" \"Legend of Zelda, The - Majora's Mask - Randomizer (U) - "
 	    + Settings["settings"]["Seed"] + ".z64\"").c_str()) != 0) {
         //couldn't find the compressed rom
         err_file << "Renaming the rom failed";
 	err_file.close(); exit(0);
-    }*/
+    }
+	// rename the wad to include the seed (if the wad was created)
+	if (Settings["settings"]["Wad"] == "True") {
+		if (system(("rename \"Legend of Zelda, The - Majora's Mask - Randomizer (U).wad\" \"Legend of Zelda, The - Majora's Mask - Randomizer (U) - "
+			+ Settings["settings"]["Seed"] + ".wad\"").c_str()) != 0) {
+			//couldn't find the compressed rom
+			err_file << "Renaming the wad failed";
+			err_file.close(); exit(0);
+		}
+	}
 
     // Delete decompressed rom since it is no longer needed
-    // system(("del " + Rom_Location).c_str());
+    system(("del " + Rom_Location).c_str());
 
 	Success();
 
