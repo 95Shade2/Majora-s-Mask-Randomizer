@@ -2273,26 +2273,26 @@ vector<vector<string>> Setup_Starting_Items_Available() {
 
 //Randomize the items
 bool Randomize(string Log,
-               map<string, Item> &Items,
-               string &Seed,
-               map<string, vector<vector<string>>> &Items_Needed,
-               map<string, int> Items_Gotten,
-               map<string, int> Cycle_Items,
-               map<string, string> wallets, double long &seed,
-               map<string, vector<string>> Invalid_Items,
-		map<string, bool> &Resettable_Items,
+	map<string, Item> &Items,
+	string &Seed,
+	map<string, vector<vector<string>>> &Items_Needed,
+	map<string, int> Items_Gotten,
+	map<string, int> Cycle_Items,
+	map<string, string> wallets, double long &seed,
+	map<string, vector<string>> Invalid_Items,
+	map<string, bool> &Resettable_Items,
 	map<string, int> &Location_Sets,
-			   vector<string> Items_Last = {},
+	vector<string> Items_Last = {},
 	vector<string> Items_Aval = {}, // item locations that the player is able to get to currently according to logic
 	vector<string> Locations = {},	//locations that the player cannot get to (or havent checked yet)
 	vector<string> Locations_Reset = {},	//the locations that gives resettable items
 	map<string, int> Item_Counts = {},
 	int Placed_Items = 0)
 {
-    vector<string> Items_This;
-    string Invalid_Item;
-    bool Has_All = true;
-    bool Placed_All = true;
+	vector<string> Items_This;
+	string Invalid_Item;
+	bool Has_All = true;
+	bool Placed_All = true;
 	int index;
 	int points;
 
@@ -2309,7 +2309,7 @@ bool Randomize(string Log,
 	else if (Cur_Perc > Max_Percentage) {
 		Max_Percentage = Cur_Perc;
 		cout << "\r" << Cur_Perc << "%";
-		
+
 		if (Max_Percentage == 100) {
 			cout << endl;
 		}
@@ -2320,92 +2320,92 @@ bool Randomize(string Log,
 		Location_Sets = Set_Map(Item_Keys, -1);	//set the default item set index to -1 for each item
 	}
 
-    Get_Items_Aval(Items, Items_Needed, Items_Gotten, wallets, Location_Sets, Locations, Locations_Reset, Items_Aval, Item_Counts, Resettable_Items, Cycle_Items);
-	
-    // place an item at each available spot
-    for (int ia = 0; ia < Items_Aval.size(); ia++)
-    {
-        string Cur_Item = Items_Aval[ia];
-        int New_Item_Index;
-        string New_Item;
+	Get_Items_Aval(Items, Items_Needed, Items_Gotten, wallets, Location_Sets, Locations, Locations_Reset, Items_Aval, Item_Counts, Resettable_Items, Cycle_Items);
+
+	// place an item at each available spot
+	for (int ia = 0; ia < Items_Aval.size(); ia++)
+	{
+		string Cur_Item = Items_Aval[ia];
+		int New_Item_Index;
+		string New_Item;
 		points = -1;
 
 		//Logger("Checking item " + Cur_Item);
 
-        // if this item doesn't give anything yet, then make it give an item
-        if (!Items[Cur_Item].gives_item)
-        {
+		// if this item doesn't give anything yet, then make it give an item
+		if (!Items[Cur_Item].gives_item)
+		{
 			Logger(Cur_Item + " doesn't give an item");
-            string pool = Items[Cur_Item].Pool;	//gets the item's pool
-            vector<string> Items_Pool = Get_Items_Left_Pool(pool);	//get the items in the same pool that haven't been placed
+			string pool = Items[Cur_Item].Pool;	//gets the item's pool
+			vector<string> Items_Pool = Get_Items_Left_Pool(pool);	//get the items in the same pool that haven't been placed
 
-            //random_shuffle(Items_Pool.begin(), Items_Pool.end());
+			//random_shuffle(Items_Pool.begin(), Items_Pool.end());
 			shuffle(Items_Pool.begin(), Items_Pool.end(), std::default_random_engine(seed));
 
 			//get the items in the pool from lowest worth to highest
 			//Items_Pool = Sort_Points(Items_Pool);
 
-            // if ran out of items in the pool
-            if (Items_Pool.size() == 0)
-            {
-                // if not using logic, then it doesn't matter
-                if (Items_Needed.size() == 0)
-                {
-                    // make it where the item gives itself
-                    Items[Cur_Item].gives_item = true;
-                    Items[Cur_Item].can_get = true;
-                    // go to start of the for loop
-                    continue;
-                }
-                else
-                {
-                    Error(Cur_Item + " could not be placed - pool was empty - probably "
-                                     "because of some manual placements?");
-                }
-            }
+			// if ran out of items in the pool
+			if (Items_Pool.size() == 0)
+			{
+				// if not using logic, then it doesn't matter
+				if (Settings["settings"]["Logic"] == "None" || Settings["settings"]["Logic"] == "")
+				{
+					// make it where the item gives itself
+					Items[Cur_Item].gives_item = true;
+					Items[Cur_Item].can_get = true;
+					// go to start of the for loop
+					continue;
+				}
+				else
+				{
+					Error(Cur_Item + " could not be placed - pool was empty - probably "
+						"because of some manual placements?");
+				}
+			}
 
 			//get a random index to use to start checking
 			//index = Random(0, Items_Pool.size() - 1);
 			index = 0;
 
 			//for each item in the pool
-            for (int ip = 0; ip < Items_Pool.size(); ip++)
-            {
-                string New_Log = Log;
-                bool invalid = false;
+			for (int ip = 0; ip < Items_Pool.size(); ip++)
+			{
+				string New_Log = Log;
+				bool invalid = false;
 				//start at a random index, and wrap around until it comes to the starting item it tried
 				int p = (index + ip) % Items_Pool.size();
 
-                New_Item = Items_Pool[p];
+				New_Item = Items_Pool[p];
 
 				//if the first item didn't work, and the current item doesn't help open any more locations, then just skip it.
 				if (ip > 0 && Points[New_Item] == 0) {
 					continue;
 				}
 
-                // check whether or not this item is in the invalid list
-                if (Invalid_Items[Cur_Item].size() > 0)
-                {
-                    // check each item in the invalid list if it is the item that was just
-                    // placed here
-                    for (int ii = 0; ii < Invalid_Items[Cur_Item].size(); ii++)
-                    {
-                        Invalid_Item = Invalid_Items[Cur_Item][ii];
-                        // this item cannot be placed here
-                        if (Invalid_Item == New_Item)
-                        {
-                            invalid = true;
+				// check whether or not this item is in the invalid list
+				if (Invalid_Items[Cur_Item].size() > 0)
+				{
+					// check each item in the invalid list if it is the item that was just
+					// placed here
+					for (int ii = 0; ii < Invalid_Items[Cur_Item].size(); ii++)
+					{
+						Invalid_Item = Invalid_Items[Cur_Item][ii];
+						// this item cannot be placed here
+						if (Invalid_Item == New_Item)
+						{
+							invalid = true;
 
-                            break; // no need to check rest of loop
-                        }
-                    }
+							break; // no need to check rest of loop
+						}
+					}
 
 					//if this item is in the invalid list, then it cannot be placed here
-                    if (invalid)
-                    {
-                        continue; // try the next item in the list
-                    }
-                }
+					if (invalid)
+					{
+						continue; // try the next item in the list
+					}
+				}
 
 				Items[Cur_Item].Name = New_Item;
 				Items[Cur_Item].gives_item = true;
@@ -2424,73 +2424,73 @@ bool Randomize(string Log,
 				}
 
 				//only check curiosity if there are needed items for this item
-                if (Items_Needed.size() > 0)
-                {
+				if (Items_Needed.size() > 0)
+				{
 					//check if a item overwrites an item in curiosity shop, and check/randomize the rest of the items
-                    if (Check_Curiosity_Items(Cur_Item) && Randomize(New_Log,
-                                                                     Items,
-                                                                     Seed,
-                                                                     Items_Needed,
-                                                                     Items_Gotten,
+					if (Check_Curiosity_Items(Cur_Item) && Randomize(New_Log,
+						Items,
+						Seed,
+						Items_Needed,
+						Items_Gotten,
 						Cycle_Items,
-                                                                     wallets, seed,
-                                                                     Invalid_Items,
+						wallets, seed,
+						Invalid_Items,
 						Resettable_Items,
 						Location_Sets,
-                                                                     Items_This,
+						Items_This,
 						Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1))
-                    {
-                        return true;
-                    }
+					{
+						return true;
+					}
 					//this item would not work, so remove it and try the next one in the pool list
-                    else
-                    {
+					else
+					{
 						Logger(Cur_Item + " giving " + New_Item + " did not work, removing it and trying a different item");
 						Items_Gotten[New_Item] = -1;
 						Cycle_Items[New_Item] = -1;
 						Items[Cur_Item].Obtainable = false;
-                        Items[Cur_Item].Name = Cur_Item;
-                        Items[Cur_Item].gives_item = false;
-                        Items[New_Item].can_get = false;
+						Items[Cur_Item].Name = Cur_Item;
+						Items[Cur_Item].gives_item = false;
+						Items[New_Item].can_get = false;
 						// if the item being placed here resets on sot
 						if (Resettable_Items[New_Item]) {
 							Locations_Reset.pop_back();	//remove location for reset list
 						}
-                    }
-                }
+					}
+				}
 				//no logic
-                else
-                {
+				else
+				{
 					Logger("No Logic");
-                    return Randomize(New_Log,
-                                     Items,
-                                     Seed,
-                                     Items_Needed,
-                                     Items_Gotten,
+					return Randomize(New_Log,
+						Items,
+						Seed,
+						Items_Needed,
+						Items_Gotten,
 						Cycle_Items,
-                                     wallets, seed,
-                                     Invalid_Items,
+						wallets, seed,
+						Invalid_Items,
 						Resettable_Items,
 						Location_Sets,
-                                     Items_This,
+						Items_This,
 						Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
-                }
-            }
+				}
+			}
 
-            // if an item wasn't placed, then have to back track because there are no
-            // valid items left that can go here
-            if (!Items[Cur_Item].gives_item)
-            {
-                return false;
-            }
-        }
+			// if an item wasn't placed, then have to back track because there are no
+			// valid items left that can go here
+			if (!Items[Cur_Item].gives_item)
+			{
+				return false;
+			}
+		}
 		else {
 
 		}
 
-        // if this item hasn't been gotten yet, and it's been placed
-        if (Items[Cur_Item].gives_item && Items_Gotten[Items[Cur_Item].Name] == -1)
-        {
+		// if this item hasn't been gotten yet, and it's been placed
+		if (Items[Cur_Item].gives_item && Items_Gotten[Items[Cur_Item].Name] == -1)
+		{
 			Logger(Cur_Item + " has an item placed here, but the player hasn't gotten it yet (" + Items[Cur_Item].Name + ")");
 			New_Item = Items[Cur_Item].Name;
 
@@ -2503,29 +2503,29 @@ bool Randomize(string Log,
 			//update the items gotten
 			Items_Gotten[New_Item] = Items[Cur_Item].Count;
 			Cycle_Items[New_Item] = Items[Cur_Item].Count;
-        }
+		}
 		else {
 			//Logger(Cur_Item + " has an item, and the player already has it");
 		}
-    }
+	}
 
 	Logger("Checking if all items have been gotten and placed");
-    for (int i = 0; i < Item_Keys.size(); i++)
-    {
-        // check if every item has been gotten
-        if (Items_Gotten[Item_Keys[i]] == -1)
-        {
+	for (int i = 0; i < Item_Keys.size(); i++)
+	{
+		// check if every item has been gotten
+		if (Items_Gotten[Item_Keys[i]] == -1)
+		{
 			//Logger(items[i] + " hasn't been placed");
-            Has_All = false;
-        }
+			Has_All = false;
+		}
 
-        // check if all items have been placed
-        if (!Items[Item_Keys[i]].gives_item)
-        {
+		// check if all items have been placed
+		if (!Items[Item_Keys[i]].gives_item)
+		{
 			//Logger(items[i] + " doesn't give an item");
-            Placed_All = false;
-        }
-    }
+			Placed_All = false;
+		}
+	}
 
 	// keep going if haven't placed all items, and using no logic
 	if (Items_Needed.size() == 0) {
@@ -2540,7 +2540,7 @@ bool Randomize(string Log,
 				Invalid_Items,
 				Resettable_Items,
 				Location_Sets,
-				Items_This,  Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
+				Items_This, Items_Aval, Locations, Locations_Reset, Item_Counts, Placed_Items + 1);
 		}
 	}
 	else {
@@ -2555,8 +2555,14 @@ bool Randomize(string Log,
 		}
 	}
 
-	Logger("Got to end of the randomize function, returning false");
-	return false;
+	if (Settings["settings"]["Logic"] == "None" || Settings["settings"]["Logic"] == "") {
+		Logger("Got to end of the randomize function, using no logic, so returning true");
+		return true;
+	}
+	else {
+		Logger("Got to end of the randomize function, returning false");
+		return false;
+	}
 }
 
 ///setup default points of the items to "def"
@@ -6826,7 +6832,7 @@ int main()
 	}
 
     // Delete decompressed rom since it is no longer needed
-    //system(("del " + Rom_Location).c_str());
+    system(("del " + Rom_Location).c_str());
 
 	Success();
 
