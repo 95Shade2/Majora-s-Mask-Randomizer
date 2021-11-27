@@ -3515,37 +3515,21 @@ void Make_Bottles_Work()
       "03E00008"  // JR	RA              Return
     };
     vector<string> Max_Bottles = {
-	    "27BDFFE0",
-	    "AFBF0000",
-	    "AFA40004",
-	    "AFA20008",
-	    "AFB9000C",
-	    "AFA50010",
-	    "AFA60014",
-	    "34050000",
-	    "34060012",
-	    "00821821",
-	    "90790070",
-	    "240200FF",
-	    "54D90004",
-	    "24A50001",
-	    "10000007",
-	    "00000000",
-	    "24A50001",
-	    "30A500FF",
-	    "28A10006",
-	    "1420FFF5",
-	    "00A01025",
-	    "34830000",
-	    "8FBF0000",
-	    "8FA40004",
-	    "8FA20008",
-	    "8FB9000C",
-	    "8FA50010",
-	    "8FA60014",
-	    "27FFFFDC",
-	    "03E00008",
-	    "27BD0020"
+		"340A00FF",	//ori t2, r0, 0x00FF
+		"340D0006",	//ori t5, r0, 0x0006
+		"340E0012",	//ori t6, r0, 0x0012
+		"34090000",	//ori t1, r0, 0x0000
+		"00891821",	//addu v1, a0, t1
+		"112D0005",	//beq t1, t5, 0x0005
+		"906B0070",	//lbu t3, 0x0070, v1
+		"554BFFFC",	//bnel t2, t3, 0xFFFC
+		"25290001",	//addiu t1, t1, 0x0001
+		"100000FE",	//beq r0, r0 0x00FE
+		"A06C0070",	//sb t4, 0x0070 v1
+		"514EFFFD",	//beql t2, t6, 0xFFFD
+		"34830000",	//ori v1, a0, 0x0000
+		"1000FFF5",	//beq r0, r0 0xFFF5
+		"340A0012"	//ori t2, r0, 0x0012
     };
 
     Write_To_Rom(12296876, Jump_Function);
@@ -3554,11 +3538,9 @@ void Make_Bottles_Work()
         Write_To_Rom(12700040 + (i * 4), New_Function[i]);
     }
 
-
-    Write_To_Rom(12231952, "0C02CCB330020000");
     for (int i = 0; i < Max_Bottles.size(); i++)
     {
-	    Write_To_Rom(11835404 + (i * 4), Max_Bottles[i]);
+	    Write_To_Rom(12231900 + (i * 4), Max_Bottles[i]);
     }
 }
 
@@ -6844,7 +6826,7 @@ int main()
 	}
 
     // Delete decompressed rom since it is no longer needed
-    system(("del " + Rom_Location).c_str());
+    //system(("del " + Rom_Location).c_str());
 
 	Success();
 
