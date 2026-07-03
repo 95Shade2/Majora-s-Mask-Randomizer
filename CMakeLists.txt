@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-if(CMAKE_GENERATOR MATCHES "Visual Studio")
-  # so MSVC will compile and link correctly
-  cmake_policy(SET CMP0091 NEW)
-else()
-  cmake_minimum_required(VERSION 3.15)
-endif()
+cmake_policy(SET CMP0091 NEW)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
@@ -12,7 +7,9 @@ include(CMakeDependentOption)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
-project(mm_rando VERSION "1.0.0" LANGUAGES C CXX)
+project(mm_rando VERSION "1.0.0" LANGUAGES C CXX CSharp)
+
+include(CSharpUtilities)
 
 include(GNUInstallDirs)
 
@@ -143,78 +140,119 @@ configure_files("cutscenes")
 configure_files("files")
 configure_files("logic")
 configure_files("presets")
+configure_files("MMR_GUI/item_tabs.json")
 
-project(mm_rando_gui VERSION "1.0.0" LANGUAGES CSharp)
+foreach(_gui_config debug release minsizerel relwithdebinfo)
+	configure_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/item_tabs.json"
+		"${PROJECT_BINARY_DIR}/${_gui_config}/item_tabs.json"
+		COPYONLY)
+endforeach()
 
-include(CSharpUtilities)
+file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/MMR_GUI")
+configure_file(
+	"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/app.manifest"
+	"${PROJECT_BINARY_DIR}/MMR_GUI/app.manifest"
+	COPYONLY)
 
 add_executable(mm_rando_gui
-	"Majora's Mask Randomizer GUI/App.config"
+	"MMR_GUI/App.config"
 
-	"Majora's Mask Randomizer GUI/Program.cs"
+	"MMR_GUI/Program.cs"
 
-	"Majora's Mask Randomizer GUI/Form1.cs"
-	"Majora's Mask Randomizer GUI/Form1.Designer.cs"
-	"Majora's Mask Randomizer GUI/Form1.resx"
+	"MMR_GUI/Form1.cs"
+	"MMR_GUI/Form1.Designer.cs"
+	"MMR_GUI/Form1.resx"
 	
-	"Majora's Mask Randomizer GUI/LogicEditor.cs"
-	"Majora's Mask Randomizer GUI/LogicEditor.Designer.cs"
-	"Majora's Mask Randomizer GUI/LogicEditor.resx"
+	"MMR_GUI/LogicEditor.cs"
+	"MMR_GUI/LogicEditor.Designer.cs"
+	"MMR_GUI/LogicEditor.resx"
 	
-	"Majora's Mask Randomizer GUI/pmc.cs"
-	"Majora's Mask Randomizer GUI/pmc.Designer.cs"
-	"Majora's Mask Randomizer GUI/pmc.resx"
+	"MMR_GUI/pmc.cs"
+	"MMR_GUI/pmc.Designer.cs"
+	"MMR_GUI/pmc.resx"
 
-	"Majora's Mask Randomizer GUI/wallets_form.cs"
-	"Majora's Mask Randomizer GUI/wallets_form.Designer.cs"
-	"Majora's Mask Randomizer GUI/wallets_form.resx"
+	"MMR_GUI/wallets_form.cs"
+	"MMR_GUI/wallets_form.Designer.cs"
+	"MMR_GUI/wallets_form.resx"
 	
-	"Majora's Mask Randomizer GUI/Item.cs"
+	"MMR_GUI/Item.cs"
+
+	"MMR_GUI/UiTheme.cs"
+	"MMR_GUI/MainWindowLayout.cs"
+	"MMR_GUI/ItemTabBuilder.cs"
+	"MMR_GUI/TabCategoryIcons.cs"
+	"MMR_GUI/PoolListView.cs"
+	"MMR_GUI/LogicEditorLayout.cs"
+	"MMR_GUI/CutscenesSelectorLayout.cs"
+	"MMR_GUI/wallets_formLayout.cs"
+	"MMR_GUI/pmcLayout.cs"
 	
-	"Majora's Mask Randomizer GUI/CutscenesSelector.cs"
-	"Majora's Mask Randomizer GUI/CutscenesSelector.Designer.cs"
-	"Majora's Mask Randomizer GUI/CutscenesSelector.resx"
+	"MMR_GUI/CutscenesSelector.cs"
+	"MMR_GUI/CutscenesSelector.Designer.cs"
+	"MMR_GUI/CutscenesSelector.resx"
 	
-	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
-	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
-	"Majora's Mask Randomizer GUI/Properties/Resources.resx"
-	"Majora's Mask Randomizer GUI/Properties/Settings.Designer.cs"
-	"Majora's Mask Randomizer GUI/Properties/Settings.settings"
+	"MMR_GUI/Properties/AssemblyInfo.cs"
+	"MMR_GUI/Properties/Resources.Designer.cs"
+	"MMR_GUI/Properties/Resources.resx"
+	"MMR_GUI/Properties/Settings.Designer.cs"
+	"MMR_GUI/Properties/Settings.settings"
 )
 
 csharp_set_windows_forms_properties(
-	"Majora's Mask Randomizer GUI/Form1.cs"
-	"Majora's Mask Randomizer GUI/Form1.Designer.cs"
-	"Majora's Mask Randomizer GUI/Form1.resx"
+	"MMR_GUI/Form1.cs"
+	"MMR_GUI/Form1.Designer.cs"
+	"MMR_GUI/Form1.resx"
 	
-	"Majora's Mask Randomizer GUI/LogicEditor.cs"
-	"Majora's Mask Randomizer GUI/LogicEditor.Designer.cs"
-	"Majora's Mask Randomizer GUI/LogicEditor.resx"
+	"MMR_GUI/LogicEditor.cs"
+	"MMR_GUI/LogicEditor.Designer.cs"
+	"MMR_GUI/LogicEditor.resx"
 	
-	"Majora's Mask Randomizer GUI/pmc.cs"
-	"Majora's Mask Randomizer GUI/pmc.Designer.cs"
-	"Majora's Mask Randomizer GUI/pmc.resx"
+	"MMR_GUI/pmc.cs"
+	"MMR_GUI/pmc.Designer.cs"
+	"MMR_GUI/pmc.resx"
 
-	"Majora's Mask Randomizer GUI/wallets_form.cs"
-	"Majora's Mask Randomizer GUI/wallets_form.Designer.cs"
-	"Majora's Mask Randomizer GUI/wallets_form.resx"
+	"MMR_GUI/wallets_form.cs"
+	"MMR_GUI/wallets_form.Designer.cs"
+	"MMR_GUI/wallets_form.resx"
 	
-	"Majora's Mask Randomizer GUI/Item.cs"
+	"MMR_GUI/Item.cs"
+
+	"MMR_GUI/UiTheme.cs"
+	"MMR_GUI/MainWindowLayout.cs"
+	"MMR_GUI/ItemTabBuilder.cs"
+	"MMR_GUI/TabCategoryIcons.cs"
+	"MMR_GUI/PoolListView.cs"
+	"MMR_GUI/LogicEditorLayout.cs"
+	"MMR_GUI/CutscenesSelectorLayout.cs"
+	"MMR_GUI/wallets_formLayout.cs"
+	"MMR_GUI/pmcLayout.cs"
 	
-	"Majora's Mask Randomizer GUI/CutscenesSelector.cs"
-	"Majora's Mask Randomizer GUI/CutscenesSelector.Designer.cs"
-	"Majora's Mask Randomizer GUI/CutscenesSelector.resx"
+	"MMR_GUI/CutscenesSelector.cs"
+	"MMR_GUI/CutscenesSelector.Designer.cs"
+	"MMR_GUI/CutscenesSelector.resx"
 	
-	"Majora's Mask Randomizer GUI/Properties/AssemblyInfo.cs"
-	"Majora's Mask Randomizer GUI/Properties/Resources.Designer.cs"
-	"Majora's Mask Randomizer GUI/Properties/Resources.resx"
-	"Majora's Mask Randomizer GUI/Properties/Settings.Designer.cs"
-	"Majora's Mask Randomizer GUI/Properties/Settings.settings"
+	"MMR_GUI/Properties/AssemblyInfo.cs"
+	"MMR_GUI/Properties/Resources.Designer.cs"
+	"MMR_GUI/Properties/Resources.resx"
+	"MMR_GUI/Properties/Settings.Designer.cs"
+	"MMR_GUI/Properties/Settings.settings"
 )
 
 set_target_properties(mm_rando_gui PROPERTIES WIN32_EXECUTABLE TRUE)
 
 SETUP_EXECUTABLE(mm_rando_gui)
+
+add_dependencies(mm_rando_gui randomizer)
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT mm_rando_gui)
+
+set_target_properties(mm_rando_gui PROPERTIES
+  VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:mm_rando_gui>")
+
+set_property(TARGET mm_rando_gui PROPERTY VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.6.1")
+
+set_property(TARGET mm_rando_gui PROPERTY VS_GLOBAL_ApplicationManifest "MMR_GUI/app.manifest")
 
 set_property(TARGET mm_rando_gui PROPERTY VS_DOTNET_REFERENCES
 	"System"
@@ -228,4 +266,5 @@ set_property(TARGET mm_rando_gui PROPERTY VS_DOTNET_REFERENCES
 	"System.Net.Http"
 	"System.Windows.Forms"
 	"System.Xml"
+	"System.Web.Extensions"
 	)

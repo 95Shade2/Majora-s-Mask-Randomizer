@@ -23,6 +23,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         public pmc()
         {
             InitializeComponent();
+            ApplyModernLayout();
         }
 
         private void pmc_Load(object sender, EventArgs e)

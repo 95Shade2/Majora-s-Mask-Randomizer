@@ -20,7 +20,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         Dictionary<int,
         string>> Item_Pools;
         Dictionary<string,
-        RichTextBox> Pool_Tables;
+        ListView> Pool_Tables;
         Dictionary<string,
         Dictionary<string,
         Dictionary<string,
@@ -48,6 +48,16 @@ namespace Majora_s_Mask_Randomizer_GUI
         public Main_Window()
         {
             InitializeComponent();
+
+            Item_Objects = ItemTabBuilder.Build(
+                Items_Tab,
+                checkBox1_CheckedChanged,
+                All_Night_Mask_Pool_SelectedIndexChanged,
+                Adult_Wallet_Gives_SelectedIndexChanged);
+
+            ApplyShellLayout();
+            UiTheme.ApplyToForm(this);
+            ItemTabBuilder.ScheduleHandleWarmup(Items_Tab);
         }
 
         private void Main_Window_Load(object sender, EventArgs e)
@@ -58,7 +68,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Dictionary<int,
             string>>();
             Pool_Tables = new Dictionary<string,
-            RichTextBox>();
+            ListView>();
             Presets = new Dictionary<string,
             Dictionary<string,
             Dictionary<string,
@@ -86,8 +96,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             Create_Item_Names();
-
-            Item_Objects = Get_Item_Objects();
+            ItemTabBuilder.ValidateItemNames(Item_Names, Item_Objects);
 
             Create_Item_Gives();
 
@@ -101,14 +110,10 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Add_Pools(Item_Pools_Keys[i]);
 
                 TabPage New_Tab = new TabPage(Item_Pools_Keys[i]);
-                RichTextBox Pool_Textbox = new RichTextBox();
+                ListView Pool_List = PoolListView.Create();
+                Pool_Tables.Add(Item_Pools_Keys[i], Pool_List);
 
-                Pool_Textbox.Width = Pool_Tabs.Width - 8;
-                Pool_Textbox.ReadOnly = true;
-                Pool_Textbox.Height = Pool_Tabs.Height - 8;
-                Pool_Tables.Add(Item_Pools_Keys[i], Pool_Textbox);
-
-                New_Tab.Controls.Add(Pool_Textbox);
+                New_Tab.Controls.Add(Pool_List);
 
                 Pool_Tabs.TabPages.Add(New_Tab);
             }
@@ -123,94 +128,6 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             //default targeting
             Targeting_Switch.Select();
-        }
-
-        private Dictionary<string,
-        Item> Get_Item_Objects()
-        {
-            Dictionary<string,
-            Item> The_Items = new Dictionary<string,
-            Item>();
-
-            Form gui = this;
-
-            Dictionary<int,
-            TabPage> pages = new Dictionary<int,
-            TabPage>();
-
-            TabControl Outer_Tab = (TabControl)gui.Controls["Items_Tab"];
-
-            TabPage Item_Tab = (TabPage)(Outer_Tab.Controls["Items_Items_Tab"]);
-            TabControl Item_Sub_Tab = (TabControl)Item_Tab.Controls["Items_Sub_Tab"];
-            TabPage Tab_Page = (TabPage)Item_Sub_Tab.Controls["Items_Sub_Tab_1"];
-            pages.Add(0, Tab_Page);
-            Tab_Page = (TabPage)Item_Sub_Tab.Controls["Items_Sub_Tab_2"];
-            pages.Add(1, Tab_Page);
-            Tab_Page = (TabPage)Item_Sub_Tab.Controls["Items_Sub_Tab_3"];
-            pages.Add(2, Tab_Page);
-            Tab_Page = (TabPage)Item_Sub_Tab.Controls["Items_Sub_Tab_4"];
-            pages.Add(3, Tab_Page);
-
-            TabPage Mask_Tab = (TabPage)(Outer_Tab.Controls["Mask_Page"]);
-            TabControl Mask_Sub_Tab = (TabControl)Mask_Tab.Controls["Mask_Sub_Tab"];
-            Tab_Page = (TabPage)Mask_Sub_Tab.Controls["Mask_Page_1"];
-            pages.Add(4, Tab_Page);
-            Tab_Page = (TabPage)Mask_Sub_Tab.Controls["Mask_Page_2"];
-            pages.Add(5, Tab_Page);
-            Tab_Page = (TabPage)Mask_Sub_Tab.Controls["Mask_Page_3"];
-            pages.Add(6, Tab_Page);
-
-            TabPage Bottle_Page = (TabPage)(Outer_Tab.Controls["Bottle_Page"]);
-            TabControl Bottle_Sub_Tab = (TabControl)Bottle_Page.Controls["Bottle_Tab"];
-            Tab_Page = (TabPage)Bottle_Sub_Tab.Controls["Bottle_Page_1"];
-            pages.Add(7, Tab_Page);
-            Tab_Page = (TabPage)Bottle_Sub_Tab.Controls["Bottle_Page_2"];
-            pages.Add(8, Tab_Page);
-
-            TabPage Song_Page = (TabPage)(Outer_Tab.Controls["Song_Page"]);
-            pages.Add(9, Song_Page);
-
-            TabPage Rupee_Page = (TabPage)(Outer_Tab.Controls["Rupee_Page"]);
-            pages.Add(10, Rupee_Page);
-
-            TabPage Other_Page = (TabPage)(Outer_Tab.Controls["Other_Page"]);
-            pages.Add(11, Other_Page);
-
-            int i;
-
-            for (i = 0; i < Item_Names.Length; i++)
-            {
-                string item = Item_Names[i];
-                bool found = false;
-
-                item = Text_To_Checkbox(item);
-
-                for (int p = 0; p < pages.Count; p++)
-                {
-                    TabPage page = pages[p];
-
-                    //this tab page as the checkbox item
-                    if (page.Controls[item] != null)
-                    {
-                        found = true;
-                        p = pages.Count;
-
-                        CheckBox check = (CheckBox)page.Controls[item];
-                        ComboBox pool = (ComboBox)page.Controls[item + "_Pool"];
-                        ComboBox gives = (ComboBox)page.Controls[item + "_Gives"];
-
-                        The_Items.Add(Item_Names[i], new Item(check, pool, gives));
-                    }
-                }
-
-                if (!found)
-                {
-                    MessageBox.Show("Could not find " + item);
-                    return The_Items;
-                }
-            }
-
-            return The_Items;
         }
 
         private string Text_To_Checkbox(string text)
@@ -669,15 +586,14 @@ namespace Majora_s_Mask_Randomizer_GUI
             for (int p = 0; p < Item_Pools_Keys.Count; p++)
             {
                 string Pool = Item_Pools_Keys[p];
-                RichTextBox Pool_Box = Pool_Tables[Pool];
-                string New_List = "";
-
+                ListView poolList = Pool_Tables[Pool];
+                string[] items = new string[Item_Pools[Pool].Count];
                 for (int i = 0; i < Item_Pools[Pool].Count; i++)
                 {
-                    New_List += Item_Pools[Pool][i] + Environment.NewLine;
+                    items[i] = Item_Pools[Pool][i];
                 }
 
-                Pool_Box.Text = New_List;
+                PoolListView.SetItems(poolList, items);
             }
         }
 
@@ -1483,7 +1399,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         private void Clear_Pool_List()
         {
             Pool_Tables = new Dictionary<string,
-            RichTextBox>();
+            ListView>();
             Pool_Tabs.TabPages.Clear();
         }
 
@@ -1579,14 +1495,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             Add_Pools(New_Pool);
 
             TabPage New_Tab = new TabPage(New_Pool);
-            RichTextBox Pool_Textbox = new RichTextBox();
+            ListView poolList = PoolListView.Create();
+            Pool_Tables.Add(New_Pool, poolList);
 
-            Pool_Textbox.Width = Pool_Tabs.Width - 8;
-            Pool_Textbox.ReadOnly = true;
-            Pool_Textbox.Height = Pool_Tabs.Height - 8;
-            Pool_Tables.Add(New_Pool, Pool_Textbox);
-
-            New_Tab.Controls.Add(Pool_Textbox);
+            New_Tab.Controls.Add(poolList);
 
             Pool_Tabs.TabPages.Add(New_Tab);
         }

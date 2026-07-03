@@ -20,6 +20,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         public wallets_form()
         {
             InitializeComponent();
+            ApplyModernLayout();
         }
 
         private void wallets_form_Load(object sender, EventArgs e)

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>MM Randomizer Feature Roadmap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    :root {
+        --bg: #0E1218;
+        --surface-1: #161B23;
+        --surface-2: #1D232D;
+        --surface-3: #242C38;
+        --border: #2E3744;
+        --text: #E6EAF2;
+        --text-muted: #8A93A4;
+        --accent: #C9A227;
+        --accent-dim: #A8841A;
+        --success: #4ADE80;
+        --danger: #F87171;
+        --skip: #6B7280;
+    }
+    * { box-sizing: border-box; }
+    html {
+        scroll-behavior: smooth;
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--surface-1);
+        border-bottom: 1px solid var(--border);
+        padding: 14px 24px 12px;
+    }
+    header h1 {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .header-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        align-items: center;
+        font-size: 13px;
+    }
+    .status-pill {
+        padding: 3px 10px;
+        border-radius: 99px;
+        background: var(--surface-3);
+        color: var(--text-muted);
+        font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+        font-size: 12px;
+    }
+    .status-pill.saved { color: var(--success); }
+    .status-pill.dirty { color: var(--accent); }
+    .status-pill.warn  { color: var(--danger); }
+    .status-pill .file-path {
+        max-width: 320px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: bottom;
+    }
+    button {
+        background: var(--surface-3);
+        color: var(--text);
+        border: 1px solid var(--border);
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        transition: background 80ms, border-color 80ms;
+    }
+    button:hover { background: var(--surface-2); border-color: var(--accent-dim); }
+    button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    button.primary {
+        background: var(--accent-dim);
+        border-color: var(--accent-dim);
+        color: #fff;
+        font-weight: 600;
+    }
+    button.primary:hover { background: var(--accent); }
+    .filter-bar {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .filter-bar button {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+    .filter-bar button[aria-pressed="true"] {
+        background: var(--accent-dim);
+        border-color: var(--accent-dim);
+        color: #fff;
+        font-weight: 600;
+    }
+    .counts {
+        margin-left: auto;
+        color: var(--text-muted);
+        font-size: 12px;
+        font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+    }
+    main {
+        padding: 20px 24px 80px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .section-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+    }
+    .section-nav a {
+        display: inline-block;
+        padding: 5px 11px;
+        border-radius: 99px;
+        background: var(--surface-3);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 500;
+        transition: background 80ms, border-color 80ms, color 80ms;
+        white-space: nowrap;
+    }
+    .section-nav a:hover {
+        background: var(--surface-2);
+        border-color: var(--accent-dim);
+        color: var(--text);
+    }
+    .section-nav a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+    .section-nav a .nav-count {
+        margin-left: 5px;
+        font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+        font-size: 10px;
+        opacity: 0.75;
+    }
+    .category {
+        margin-top: 28px;
+        scroll-margin-top: 180px;
+    }
+    .category:first-child { margin-top: 8px; }
+    .category h2 {
+        margin: 0 0 10px 0;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 6px;
+    }
+    .item {
+        background: var(--surface-1);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        transition: opacity 120ms;
+    }
+    .item.skipped {
+        opacity: 0.45;
+    }
+    .item.skipped .title-text,
+    .item.skipped .description {
+        text-decoration: line-through;
+        text-decoration-thickness: 1.5px;
+        text-decoration-color: var(--skip);
+    }
+    .item.added {
+        border-color: rgba(74, 222, 128, 0.35);
+        background: linear-gradient(180deg, rgba(74, 222, 128, 0.05), var(--surface-1));
+    }
+    .item.in-progress {
+        border-color: rgba(201, 162, 39, 0.45);
+        background: linear-gradient(180deg, rgba(201, 162, 39, 0.06), var(--surface-1));
+    }
+    .item.in-progress.added {
+        border-color: rgba(74, 222, 128, 0.35);
+        background: linear-gradient(180deg, rgba(74, 222, 128, 0.05), var(--surface-1));
+    }
+    .item-row {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .checks {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex-shrink: 0;
+        padding-top: 2px;
+        min-width: 96px;
+    }
+    .check-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text-muted);
+        cursor: pointer;
+        user-select: none;
+    }
+    .check-label input { margin: 0; cursor: pointer; }
+    .check-label.added-label input:checked ~ .check-text { color: var(--success); font-weight: 600; }
+    .check-label.progress-label input:checked ~ .check-text { color: var(--accent); font-weight: 600; }
+    .check-label.skip-label input:checked ~ .check-text { color: var(--skip); font-weight: 600; }
+    .body {
+        flex: 1;
+        min-width: 0;
+    }
+    .title-text {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--text);
+        margin-right: 8px;
+    }
+    .id-pill {
+        display: inline-block;
+        padding: 1px 7px;
+        border-radius: 4px;
+        background: var(--surface-3);
+        color: var(--text-muted);
+        font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+        font-size: 11px;
+        vertical-align: middle;
+    }
+    .description {
+        margin-top: 4px;
+        color: var(--text-muted);
+        font-size: 13px;
+    }
+    .comment-wrap {
+        margin-top: 10px;
+    }
+    .comment-wrap label {
+        display: block;
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 4px;
+    }
+    textarea.comment {
+        width: 100%;
+        min-height: 32px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 7px 9px;
+        color: var(--text);
+        font: inherit;
+        font-size: 13px;
+        resize: vertical;
+        line-height: 1.4;
+    }
+    textarea.comment:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+    .hidden { display: none !important; }
+    .intro {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        color: var(--text-muted);
+        font-size: 13px;
+    }
+    .intro p { margin: 0 0 6px 0; }
+    .intro p:last-child { margin-bottom: 0; }
+    .intro kbd {
+        display: inline-block;
+        padding: 1px 6px;
+        background: var(--surface-3);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-family: ui-monospace, Consolas, "Cascadia Mono", monospace;
+        font-size: 11px;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Majora's Mask Randomizer — Feature Roadmap</h1>
+    <div class="header-row">
+        <button id="btn-open"   title="Open existing mmr-roadmap.json">Open…</button>
+        <button id="btn-new" class="primary" title="Create new mmr-roadmap.json">New file…</button>
+        <button id="btn-export" title="Download current state as JSON">Export</button>
+        <button id="btn-import" title="Replace state from a JSON file">Import…</button>
+        <input id="import-file-input" type="file" accept="application/json,.json" class="hidden" />
+        <span id="status" class="status-pill">No file — using browser storage</span>
+        <div class="filter-bar" role="group" aria-label="Filter items">
+            <button data-filter="all"         aria-pressed="true">All</button>
+            <button data-filter="pending"     aria-pressed="false">Pending</button>
+            <button data-filter="in-progress" aria-pressed="false">In progress</button>
+            <button data-filter="added"       aria-pressed="false">Added</button>
+            <button data-filter="skipped"     aria-pressed="false">Skipped</button>
+        </div>
+        <span id="counts" class="counts">0 added · 0 in progress · 0 pending · 0 skipped</span>
+    </div>
+    <nav id="section-nav" class="section-nav" aria-label="Jump to section"></nav>
+</header>
+
+<main>
+    <div class="intro">
+        <p>Feature ideas for <strong>Majora's Mask Randomizer</strong> — DeathBasket-style item-slot randomization with logic solving, presets, and bingo support. Items already in the codebase are pre-ticked as <strong>Added</strong>. Tick <strong>In progress</strong> while building, <strong>Skip</strong> when you decide not to ship, and use comments for notes or links.</p>
+        <p>Changes autosave to disk if you picked a file with <strong>New file…</strong> or <strong>Open…</strong> (Edge / Chrome / any Chromium browser). Otherwise they autosave to browser <em>localStorage</em>. Use <strong>Export</strong> to back up or move between machines.</p>
+    </div>
+    <div id="items"></div>
+</main>
+
+<script>
+/* =========================================================================
+   MM Randomizer roadmap tracker — single-file, no dependencies.
+   ========================================================================= */
+
+const STORAGE_KEY = 'mmr-roadmap-v1';
+const IDB_NAME   = 'mmr-roadmap';
+const IDB_STORE  = 'handles';
+const IDB_KEY    = 'currentFile';
+
+const CATEGORIES = [
+    { id: 'shipped',        label: 'Already shipped',                    shortLabel: 'Shipped' },
+    { id: 'core-gen',       label: 'Generator & placement',              shortLabel: 'Generator' },
+    { id: 'logic',          label: 'Logic system',                       shortLabel: 'Logic' },
+    { id: 'gui',            label: 'GUI & workflow',                     shortLabel: 'GUI' },
+    { id: 'qol',            label: 'Gameplay QoL & patches',             shortLabel: 'QoL' },
+    { id: 'bingo',          label: 'Bingo & community',                  shortLabel: 'Bingo' },
+    { id: 'presets',        label: 'Presets & settings sharing',         shortLabel: 'Presets' },
+    { id: 'tracker',        label: 'Spoilers, trackers & exports',       shortLabel: 'Trackers' },
+    { id: 'big-features',   label: 'Major architectural features',     shortLabel: 'Big features' },
+];
+
+const ITEMS = [
+    // ---- Already shipped ----
+    { id: 'item-slot-model', category: 'shipped',
+      title: 'Item-slot randomization model',
+      description: 'Each item type is one slot — all Red Potion sources give the same replacement, not per-location checks.',
+      defaultAdded: true },
+    { id: 'hundred-items', category: 'shipped',
+      title: '~100 randomizable item slots',
+      description: 'Items, masks, bottles, songs, rupees, hearts, boss remains, and more defined in Setup_Items().',
+      defaultAdded: true },
+    { id: 'pool-system', category: 'shipped',
+      title: 'Shuffle pools (Items, Masks, Bottles, Songs, custom, Everything)',
+      description: 'Group items for shuffling; empty pool = vanilla (not randomized).',
+      defaultAdded: true },
+    { id: 'manual-plando', category: 'shipped',
+      title: 'Manual placement (#ItemName)',
+      description: 'Force a slot to give a specific item via pool value #OtherItem in settings.ini.',
+      defaultAdded: true },
+    { id: 'logic-glitchless', category: 'shipped',
+      title: 'Glitchless logic file',
+      description: 'logic/Glitchless.txt — strict reachability with 3-day cycle bitmasks.',
+      defaultAdded: true },
+    { id: 'logic-glitched', category: 'shipped',
+      title: 'Glitched logic file',
+      description: 'logic/Glitched.txt — shorter paths, glitch routes (Zora hover, weirdshot, etc.).',
+      defaultAdded: true },
+    { id: 'logic-none', category: 'shipped',
+      title: 'No logic mode',
+      description: 'Skip reachability verification — pure shuffle.',
+      defaultAdded: true },
+    { id: 'cycle-solver', category: 'shipped',
+      title: '3-day cycle placement solver',
+      description: 'Backtracking search simulating day/night × 3 days + moon to verify all items obtainable.',
+      defaultAdded: true },
+    { id: 'logic-editor', category: 'shipped',
+      title: 'In-app Logic Editor',
+      description: 'WinForms editor for requirement groups, day/night checkboxes, invalid items (#), comments, save/load.',
+      defaultAdded: true },
+    { id: 'presets-fnb', category: 'shipped',
+      title: 'FNB preset (bingo)',
+      description: '4 pools, Glitched logic, many items disabled, tight wallets — Five Nights at Bingo style.',
+      defaultAdded: true },
+    { id: 'presets-low', category: 'shipped',
+      title: 'Low% preset',
+      description: 'Single Everything pool, low wallets, all items enabled.',
+      defaultAdded: true },
+    { id: 'presets-old', category: 'shipped',
+      title: 'Old Rando preset',
+      description: 'Minimal DeathBasket-era item subset (~73 items, 3 pools).',
+      defaultAdded: true },
+    { id: 'spoiler-txt', category: 'shipped',
+      title: 'Spoiler Log.txt',
+      description: 'Plain-text spoiler output after generation.',
+      defaultAdded: true },
+    { id: 'spoiler-html', category: 'shipped',
+      title: 'Spoiler Log.html (interactive)',
+      description: 'Searchable HTML log with cover/reveal and item source listing.',
+      defaultAdded: true },
+    { id: 'winforms-gui', category: 'shipped',
+      title: 'WinForms GUI (mm_rando_gui)',
+      description: 'Item tabs, pool management, preset save/load, randomize button launches randomizer.exe.',
+      defaultAdded: true },
+    { id: 'wad-output', category: 'shipped',
+      title: 'Wii VC WAD output',
+      description: 'Optional .wad creation via _create-roms tooling.',
+      defaultAdded: true },
+    { id: 'play-as-kafei', category: 'shipped',
+      title: 'Play as Kafei',
+      description: 'Replace Link with Kafei; uses Link color slot for Kafei tint.',
+      defaultAdded: true },
+    { id: 'form-colors', category: 'shipped',
+      title: 'Transformation & Link color picker',
+      description: 'Custom tunics for Link, Deku, Goron, Zora, and Fierce Deity.',
+      defaultAdded: true },
+    { id: 'pause-colors', category: 'shipped',
+      title: 'Pause menu color picker',
+      description: 'Item, Map, Quest, Mask, and Name screen colors.',
+      defaultAdded: true },
+    { id: 'custom-wallets', category: 'shipped',
+      title: 'Custom wallet sizes',
+      description: 'Configurable small / medium / large rupee caps in settings.',
+      defaultAdded: true },
+    { id: 'cutscene-selector', category: 'shipped',
+      title: 'Per-cutscene shorten/remove (~78 cutscenes)',
+      description: 'Cutscene Selector grouped by region; toggles written to [cutscenes] in settings.ini.',
+      defaultAdded: true },
+    { id: 'skip-intro', category: 'shipped',
+      title: 'Skip intro → South Clock Town',
+      description: 'Always-on QoL patch in Fix_Things().',
+      defaultAdded: true },
+    { id: 'fd-anywhere', category: 'shipped',
+      title: 'Fierce Deity wearable almost anywhere',
+      description: 'FD mask restrictions relaxed; can use transform masks as FD.',
+      defaultAdded: true },
+    { id: 'fd-moon', category: 'shipped',
+      title: 'FD on moon without completing trials',
+      description: 'Kid ignores trial completion and FD mask check.',
+      defaultAdded: true },
+    { id: 'hs-water', category: 'shipped',
+      title: 'Hot Spring Water never cools',
+      description: 'Spring water stays hot indefinitely.',
+      defaultAdded: true },
+    { id: 'biggest-bomb-bag', category: 'shipped',
+      title: 'Relaxed Biggest Bomb Bag check',
+      description: 'Goron Mask + 200 rupees — no big bomb bag prerequisite.',
+      defaultAdded: true },
+    { id: 'boss-remains', category: 'shipped',
+      title: 'Boss Remains randomization (MIPS hook)',
+      description: 'Obj byte set to 00; custom MIPS handles randomized remains spawning and oath flow.',
+      defaultAdded: true },
+    { id: 'bottle-mips', category: 'shipped',
+      title: 'Bottle item randomization (MIPS hook)',
+      description: 'Make_Bottles_Work() — non-bottle items route to normal give-item; fixes 6-bottle cap.',
+      defaultAdded: true },
+    { id: 'tingle-maps', category: 'shipped',
+      title: 'Tingle maps get-item fix',
+      description: 'Fix_Tingle_Maps() — maps obtainable via get-item ID with custom MIPS.',
+      defaultAdded: true },
+    { id: 'scrub-beans', category: 'shipped',
+      title: 'Swamp scrub always sells beans',
+      description: 'ScrubBeans setting — beans slot still required in inventory to buy.',
+      defaultAdded: true },
+    { id: 'gc-hud', category: 'shipped',
+      title: 'GameCube button colors HUD',
+      description: 'GC_Hud setting replaces N64 button colors with GC palette.',
+      defaultAdded: true },
+    { id: 'respawn-hps', category: 'shipped',
+      title: 'Respawn heart pieces each cycle',
+      description: 'RespawnHPs setting.',
+      defaultAdded: true },
+    { id: 'respawn-hcs', category: 'shipped',
+      title: 'Respawn heart containers each cycle',
+      description: 'RespawnHCs setting.',
+      defaultAdded: true },
+    { id: 'likelike-mirror', category: 'shipped',
+      title: 'Like-likes eat Mirror Shield',
+      description: 'LikeLikeMirror — bingo "No Shield" goal; spits out Hero\'s Shield.',
+      defaultAdded: true },
+    { id: 'keep-razor', category: 'shipped',
+      title: 'Keep Razor Sword on Song of Time',
+      description: 'KeepRazor setting.',
+      defaultAdded: true },
+    { id: 'ocean-wallet-anyday', category: 'shipped',
+      title: 'Ocean Spider House wallet any day',
+      description: 'OceanAnyDay setting removes day restriction on Giant Wallet.',
+      defaultAdded: true },
+    { id: 'trade-scrub', category: 'shipped',
+      title: 'Remove scrub salesman after trading',
+      description: 'TradeQuest setting — no two scrubs at same flower across cycles.',
+      defaultAdded: true },
+    { id: 'blast-mask-cooldown', category: 'shipped',
+      title: 'Configurable Blast Mask cooldown',
+      description: 'BlastMask_Cooldown in frames (default 310).',
+      defaultAdded: true },
+    { id: 'targeting-default', category: 'shipped',
+      title: 'Default targeting mode (Hold / Switch)',
+      description: 'Targeting setting patches default Z-targeting behavior.',
+      defaultAdded: true },
+    { id: 'remove-item-checks', category: 'shipped',
+      title: 'Hundreds of "already have item" checks removed',
+      description: 'Remove_Item_Checks() — shops, chests, NPCs always give randomized items.',
+      defaultAdded: true },
+    { id: 'quick-text', category: 'shipped',
+      title: 'Quick text',
+      description: 'Faster text advance — always-on patch.',
+      defaultAdded: true },
+    { id: 'starting-items', category: 'shipped',
+      title: 'Starting items (Deku Mask + SoH slots, SoT, Ocarina)',
+      description: 'Give_Starting_Items() plus hardcoded Song of Time and Ocarina.',
+      defaultAdded: true },
+    { id: 'rupee-randomization', category: 'shipped',
+      title: 'Rupees randomize on get-item animation',
+      description: 'Non-animation rupee sources stay vanilla; animated sources follow rupee slot.',
+      defaultAdded: true },
+    { id: 'red-potion-first', category: 'shipped',
+      title: 'First witch Red Potion always a bottle',
+      description: 'First Red Potion is Bottle of Red Potion; later sources follow randomized slot.',
+      defaultAdded: true },
+    { id: 'bottle-extra', category: 'shipped',
+      title: 'Bottle items grant extra bottle on get-item',
+      description: 'Milk, Poe, Chateau Romani, Gold Dust can add a bottle when animation plays.',
+      defaultAdded: true },
+    { id: 'oath-remains-conflict', category: 'shipped',
+      title: 'Oath / Remains slot conflict handling',
+      description: 'Placement solver prevents remains and Oath to Order from overwriting each other.',
+      defaultAdded: true },
+    { id: 'rom-pipeline', category: 'shipped',
+      title: 'ROM decompress → patch → compress pipeline',
+      description: 'ndec.exe + randomizer.exe + optional _create-roms.bat for .z64 / .wad output.',
+      defaultAdded: true },
+
+    // ---- Generator & placement ----
+    { id: 'plando-multi', category: 'core-gen',
+      title: 'Multi-item plando',
+      description: 'Force several slots to specific items in one seed without hand-editing every pool entry.' },
+    { id: 'plando-exclude', category: 'core-gen',
+      title: 'Item exclusion lists',
+      description: '"Never place Fire Arrow in Songs pool" — per-pool or global banned placements.' },
+    { id: 'plando-guaranteed-early', category: 'core-gen',
+      title: 'Guaranteed early items',
+      description: 'e.g. always a transformation mask in Masks pool for seed viability.' },
+    { id: 'gen-feedback', category: 'core-gen',
+      title: 'Generation failure feedback',
+      description: 'Report which item failed logic placement, attempt count, and suggested relaxations.' },
+    { id: 'gen-retry-relaxed', category: 'core-gen',
+      title: 'Retry with relaxed logic',
+      description: 'One-click retry dropping to Glitched or None when Glitchless fails.' },
+    { id: 'rupee-per-denom', category: 'core-gen',
+      title: 'Per-denomination rupee toggles',
+      description: 'Enable/disable randomization per rupee color independently.' },
+    { id: 'dead-code-cleanup', category: 'core-gen',
+      title: 'Audit dead code (Other_Locations, rupee-value patch)',
+      description: 'Comments say these paths may be unused — verify and remove or document.' },
+    { id: 'stale-comments', category: 'core-gen',
+      title: 'Update stale code comments',
+      description: 'e.g. Boss Remains comment should document MIPS hook approach, not "need to figure out".' },
+
+    // ---- Logic system ----
+    { id: 'logic-easy-hard', category: 'logic',
+      title: 'Easy / Medium / Hard logic modes',
+      description: 'Additional logic files between Glitchless and Glitched strictness.' },
+    { id: 'logic-per-preset', category: 'logic',
+      title: 'Custom logic bundled with presets',
+      description: 'Preset ships its own .txt logic file; Logic Editor becomes the authoring tool.' },
+    { id: 'logic-validation', category: 'logic',
+      title: 'Logic validation in GUI',
+      description: 'Pre-generate check: unreachable items, bad # lists, missing day/night bitmasks.' },
+    { id: 'logic-item-sources', category: 'logic',
+      title: 'Item-source reference in GUI',
+      description: '"Where does Big Poe come from?" — surface logic comments as a browsable panel.' },
+    { id: 'logic-diff', category: 'logic',
+      title: 'Logic file diff / compare',
+      description: 'Side-by-side Glitchless vs Glitched for a selected item in Logic Editor.' },
+
+    // ---- GUI & workflow ----
+    { id: 'gui-bingowater', category: 'gui',
+      title: 'Expose BingoWater setting in GUI',
+      description: 'Hidden in C++ only — renames water to "Bingo Water".' },
+    { id: 'gui-hidden-audit', category: 'gui',
+      title: 'Audit all code-only settings for GUI exposure',
+      description: 'Find settings in main.cpp not surfaced in WinForms / MMR_GUI.' },
+    { id: 'gui-cli', category: 'gui',
+      title: 'CLI / headless generation',
+      description: 'randomizer.exe --seed X --preset FNB --rom path --output dir (no GUI required).' },
+    { id: 'gui-output-picker', category: 'gui',
+      title: 'Output folder & ROM naming',
+      description: 'MMR_<seed>.z64 naming, don\'t overwrite last ROM, custom output path.' },
+    { id: 'gui-progress', category: 'gui',
+      title: 'Generation progress UI',
+      description: 'Show decompress / randomize / patch / compress stages with cancel support.' },
+    { id: 'gui-mmr-unify', category: 'gui',
+      title: 'Unify WinForms GUI and MMR_GUI',
+      description: 'Two GUI codebases exist — consolidate or document which is canonical.' },
+    { id: 'gui-dark-theme', category: 'gui',
+      title: 'Consistent dark theme across all forms',
+      description: 'UiTheme.cs exists in MMR_GUI — extend to all dialogs if not already.' },
+
+    // ---- Gameplay QoL ----
+    { id: 'qol-fast-clock', category: 'qol',
+      title: 'Fast / slow clock multiplier',
+      description: 'Bingo races care about cycle time — configurable day/night speed.' },
+    { id: 'qol-starting-picker', category: 'qol',
+      title: 'Starting items picker',
+      description: 'Beyond Deku Mask + SoH slots — choose extra starting gear.' },
+    { id: 'qol-skip-sot-learn', category: 'qol',
+      title: 'Skip Song of Time learning cutscene',
+      description: 'Faster race starts — start with SoT already known.' },
+    { id: 'qol-unlimited-magic', category: 'qol',
+      title: 'Permanent magic / unlimited arrows toggle',
+      description: 'Accessibility and bingo variant support.' },
+    { id: 'qol-powder-keg', category: 'qol',
+      title: 'Permanent Powder Keg',
+      description: 'Popular MM QoL — keg doesn\'t reset on Song of Time.' },
+    { id: 'qol-scarecrow-owl', category: 'qol',
+      title: 'Free scarecrow / fast owl warps',
+      description: 'Reduce backtracking for glitchless runs.' },
+    { id: 'qol-open-moon', category: 'qol',
+      title: 'Open moon / early moon access',
+      description: 'Expand beyond current FD-on-moon relaxations.' },
+    { id: 'qol-random-start-region', category: 'qol',
+      title: 'Random starting region',
+      description: 'Light entrance-adjacent feature without full entrance rando.' },
+    { id: 'qol-damage-mode', category: 'qol',
+      title: 'Damage multiplier / OHKO mode',
+      description: 'Challenge seeds for experienced players.' },
+    { id: 'qol-clock-shuffle', category: 'qol',
+      title: 'Clock shuffle (own timer items)',
+      description: 'Major MM identity feature — progressive clock ownership.' },
+    { id: 'qol-remains-order', category: 'qol',
+      title: 'Shuffle boss remains order requirement',
+      description: 'Randomize which remain unlocks which transformation path.' },
+
+    // ---- Bingo & community ----
+    { id: 'bingo-card-gen', category: 'bingo',
+      title: 'Bingo card generator',
+      description: 'Auto-generate cards from enabled item pools with line / blackout win conditions.' },
+    { id: 'bingo-goal-random', category: 'bingo',
+      title: 'Goal randomizer',
+      description: 'Random race goals: No Sword, Glitched only, All Songs, Kafei% — map to existing settings.' },
+    { id: 'bingo-async', category: 'bingo',
+      title: 'Async race support',
+      description: 'Same seed + settings hash + standardized preset = fair async races.' },
+    { id: 'bingo-full-preset', category: 'bingo',
+      title: 'Full random preset (all items enabled)',
+      description: 'FNB disables many items — add a bingo-friendly preset that includes remains, hearts, bombs.' },
+    { id: 'bingo-glitchless', category: 'bingo',
+      title: 'Glitchless bingo preset',
+      description: 'FNB item set + Glitchless logic for non-glitch bingo races.' },
+    { id: 'bingo-overlay', category: 'bingo',
+      title: 'OBS overlay from spoiler log',
+      description: 'Seed, settings summary, and item checklist for stream layouts.' },
+
+    // ---- Presets & settings sharing ----
+    { id: 'settings-hash', category: 'presets',
+      title: 'Shareable settings / seed hash',
+      description: 'Compact string encoding pools, toggles, logic, colors — paste to share exact config.' },
+    { id: 'settings-import-url', category: 'presets',
+      title: 'Import settings from hash or URL',
+      description: 'Decode hash back into GUI / settings.ini.' },
+    { id: 'preset-more', category: 'presets',
+      title: 'More community presets',
+      description: 'Beginner, Challenge, All Songs, Hearts Only, etc.' },
+    { id: 'preset-export-share', category: 'presets',
+      title: 'One-click preset export for Discord / GitHub',
+      description: 'Share .ini with metadata (author, description, logic mode).' },
+
+    // ---- Spoilers, trackers & exports ----
+    { id: 'export-json', category: 'tracker',
+      title: 'JSON spoiler export',
+      description: 'Machine-readable format for custom tools and overlays.' },
+    { id: 'tracker-poptracker', category: 'tracker',
+      title: 'PopTracker pack (item-slot model)',
+      description: 'Tracker keyed on item slots, not locations — matches this randomizer\'s model.' },
+    { id: 'tracker-emotracker', category: 'tracker',
+      title: 'EmoTracker integration',
+      description: 'If feasible with item-slot abstraction and emulator memory.' },
+    { id: 'spoiler-checksum', category: 'tracker',
+      title: 'ROM checksum in spoiler log',
+      description: 'Verify patched ROM matches expected output.' },
+    { id: 'spoiler-logic-path', category: 'tracker',
+      title: 'Show logic path per item in spoiler',
+      description: 'Which requirement set was used to place each item (debug / race review).' },
+
+    // ---- Major architectural features ----
+    { id: 'arch-location-rando', category: 'big-features',
+      title: 'Location-based randomization',
+      description: 'Fundamental shift: "this chest" independent of "that chest" — essentially a different randomizer.' },
+    { id: 'arch-entrance-rando', category: 'big-features',
+      title: 'Entrance randomization',
+      description: 'Dungeons, regions, or owl warps shuffled — no groundwork yet.' },
+    { id: 'arch-multiworld', category: 'big-features',
+      title: 'Multiworld',
+      description: 'Items distributed across players — very complex with 3-day logic solver.' },
+    { id: 'arch-hints', category: 'big-features',
+      title: 'Hint system',
+      description: 'Item-slot hints: "Red Potion gives something needed for Snowhead" without location checks.' },
+    { id: 'arch-docs', category: 'big-features',
+      title: 'Logic file format & item-source documentation',
+      description: 'Authoring guide for logic/*.txt and mapping slots to in-game sources.' },
+    { id: 'arch-cutscenes-repo', category: 'big-features',
+      title: 'Ship cutscenes/ in repo root',
+      description: 'Ensure cutscene assets aren\'t build-output-only so fresh clones work.' },
+];
+
+/* -------------------------------------------------------------------------
+   State + persistence
+   ------------------------------------------------------------------------- */
+
+function defaultState() {
+    const items = {};
+    for (const it of ITEMS) {
+        items[it.id] = {
+            added: !!it.defaultAdded,
+            inProgress: false,
+            skipped: false,
+            comment: '',
+        };
+    }
+    return { version: 1, items, lastSavedAt: null };
+}
+
+let state = defaultState();
+let fileHandle = null;
+let saveTimer = null;
+let currentFilter = 'all';
+
+function openIdb() {
+    return new Promise((resolve, reject) => {
+        const req = indexedDB.open(IDB_NAME, 1);
+        req.onupgradeneeded = () => req.result.createObjectStore(IDB_STORE);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function idbPutHandle(handle) {
+    const db = await openIdb();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put(handle, IDB_KEY);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+    });
+}
+
+async function idbGetHandle() {
+    const db = await openIdb();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(IDB_STORE, 'readonly');
+        const req = tx.objectStore(IDB_STORE).get(IDB_KEY);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+const fileApiSupported = typeof window.showSaveFilePicker === 'function'
+                      && typeof window.showOpenFilePicker === 'function';
+
+async function ensureHandlePermission(handle, mode) {
+    const opts = { mode };
+    if ((await handle.queryPermission(opts)) === 'granted') return true;
+    return (await handle.requestPermission(opts)) === 'granted';
+}
+
+async function writeHandle(handle, text) {
+    const writable = await handle.createWritable();
+    await writable.write(text);
+    await writable.close();
+}
+
+async function readHandle(handle) {
+    const file = await handle.getFile();
+    return await file.text();
+}
+
+function mergeLoadedPayload(parsed) {
+    const merged = defaultState();
+    if (parsed && parsed.items && typeof parsed.items === 'object') {
+        for (const id of Object.keys(parsed.items)) {
+            const src = parsed.items[id];
+            merged.items[id] = {
+                added:      !!src.added,
+                inProgress: !!src.inProgress,
+                skipped:    !!src.skipped,
+                comment: typeof src.comment === 'string' ? src.comment : '',
+            };
+        }
+    }
+    merged.lastSavedAt = parsed?.lastSavedAt || null;
+    state = merged;
+}
+
+function lsSave() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* quota? */ }
+}
+
+function lsLoad() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        mergeLoadedPayload(JSON.parse(raw));
+        return true;
+    } catch { return false; }
+}
+
+let saveStatus = 'idle';
+
+function setStatus(s, detail) {
+    saveStatus = s;
+    const el = document.getElementById('status');
+    el.classList.remove('saved', 'dirty', 'warn');
+    let label = '';
+    let cls = '';
+    if (fileHandle) {
+        const path = fileHandle.name || 'file';
+        if (s === 'saving') { label = `Saving… <span class="file-path" title="${path}">${path}</span>`; cls = 'dirty'; }
+        else if (s === 'dirty') { label = `Unsaved — <span class="file-path" title="${path}">${path}</span>`; cls = 'dirty'; }
+        else if (s === 'saved') { label = `Saved · <span class="file-path" title="${path}">${path}</span>`; cls = 'saved'; }
+        else if (s === 'error') { label = `Save failed — ${detail || ''} <span class="file-path" title="${path}">${path}</span>`; cls = 'warn'; }
+        else                    { label = `<span class="file-path" title="${path}">${path}</span>`; cls = 'saved'; }
+    } else {
+        if (s === 'error') { label = `Storage error: ${detail || ''}`; cls = 'warn'; }
+        else               { label = 'Browser storage only — pick a file to save to disk'; cls = ''; }
+    }
+    el.innerHTML = label;
+    if (cls) el.classList.add(cls);
+}
+
+function scheduleSave() {
+    lsSave();
+    if (!fileHandle) { setStatus('idle'); return; }
+    if (saveTimer) clearTimeout(saveTimer);
+    setStatus('dirty');
+    saveTimer = setTimeout(async () => {
+        saveTimer = null;
+        setStatus('saving');
+        try {
+            state.lastSavedAt = new Date().toISOString();
+            await writeHandle(fileHandle, JSON.stringify(state, null, 2));
+            setStatus('saved');
+        } catch (err) {
+            console.error(err);
+            setStatus('error', err.message || String(err));
+        }
+    }, 350);
+}
+
+async function actionNewFile() {
+    if (!fileApiSupported) {
+        alert('Your browser doesn\'t support saving to disk directly. Use Export to download a JSON file, then Import to load it again later. Edge / Chrome / Brave / Opera all support direct save.');
+        return;
+    }
+    try {
+        const handle = await window.showSaveFilePicker({
+            suggestedName: 'mmr-roadmap.json',
+            types: [{ description: 'JSON roadmap', accept: { 'application/json': ['.json'] } }],
+        });
+        fileHandle = handle;
+        await idbPutHandle(handle);
+        state.lastSavedAt = new Date().toISOString();
+        await writeHandle(fileHandle, JSON.stringify(state, null, 2));
+        setStatus('saved');
+    } catch (err) {
+        if (err.name !== 'AbortError') {
+            console.error(err);
+            setStatus('error', err.message || String(err));
+        }
+    }
+}
+
+async function actionOpenFile() {
+    if (!fileApiSupported) {
+        document.getElementById('import-file-input').click();
+        return;
+    }
+    try {
+        const [handle] = await window.showOpenFilePicker({
+            multiple: false,
+            types: [{ description: 'JSON roadmap', accept: { 'application/json': ['.json'] } }],
+        });
+        fileHandle = handle;
+        await idbPutHandle(handle);
+        const text = await readHandle(handle);
+        try { mergeLoadedPayload(JSON.parse(text)); }
+        catch { mergeLoadedPayload({}); }
+        render();
+        setStatus('saved');
+    } catch (err) {
+        if (err.name !== 'AbortError') {
+            console.error(err);
+            setStatus('error', err.message || String(err));
+        }
+    }
+}
+
+function actionExport() {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (fileHandle && fileHandle.name) || 'mmr-roadmap.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+}
+
+function actionImport() {
+    document.getElementById('import-file-input').click();
+}
+
+async function handleImportSelected(event) {
+    const file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    try {
+        const text = await file.text();
+        mergeLoadedPayload(JSON.parse(text));
+        render();
+        scheduleSave();
+    } catch (err) {
+        alert(`Couldn't read that file as roadmap JSON: ${err.message}`);
+    }
+}
+
+async function tryRestoreHandle() {
+    if (!fileApiSupported) return;
+    try {
+        const handle = await idbGetHandle();
+        if (!handle) return;
+        const perm = await handle.queryPermission({ mode: 'readwrite' });
+        if (perm === 'granted') {
+            fileHandle = handle;
+            try {
+                const text = await readHandle(handle);
+                mergeLoadedPayload(JSON.parse(text));
+            } catch { /* fall back to localStorage */ }
+        } else {
+            const path = handle.name || 'previous file';
+            const el = document.getElementById('status');
+            el.classList.remove('saved','dirty','warn');
+            el.innerHTML = `Click <strong>Open…</strong> to reconnect <span class="file-path" title="${path}">${path}</span>`;
+        }
+    } catch { /* ignore */ }
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    }[c]));
+}
+
+function applyFilter(item) {
+    const st = state.items[item.id];
+    switch (currentFilter) {
+        case 'added':       return st.added && !st.skipped;
+        case 'in-progress': return st.inProgress && !st.added && !st.skipped;
+        case 'skipped':     return st.skipped;
+        case 'pending':     return !st.added && !st.inProgress && !st.skipped;
+        default:            return true;
+    }
+}
+
+function visibleItemsForCategory(catId) {
+    return ITEMS.filter(i => i.category === catId && applyFilter(i));
+}
+
+function scrollToSection(catId) {
+    const el = document.getElementById('section-' + catId);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', '#section-' + catId);
+}
+
+function renderSectionNav() {
+    const nav = document.getElementById('section-nav');
+    const links = [];
+
+    for (const cat of CATEGORIES) {
+        const count = visibleItemsForCategory(cat.id).length;
+        if (count === 0) continue;
+        const label = cat.shortLabel || cat.label;
+        links.push(
+            `<a href="#section-${cat.id}" data-section="${cat.id}" title="${escapeHtml(cat.label)}">` +
+            `${escapeHtml(label)}<span class="nav-count">${count}</span></a>`
+        );
+    }
+
+    nav.innerHTML = links.join('');
+}
+
+function render() {
+    const root = document.getElementById('items');
+    const html = [];
+
+    for (const cat of CATEGORIES) {
+        const items = visibleItemsForCategory(cat.id);
+        if (items.length === 0) continue;
+        html.push(`<section class="category" id="section-${cat.id}" data-cat="${cat.id}">`);
+        html.push(`<h2>${escapeHtml(cat.label)}</h2>`);
+        for (const item of items) html.push(renderItem(item));
+        html.push(`</section>`);
+    }
+
+    root.innerHTML = html.join('');
+    renderSectionNav();
+    updateCounts();
+}
+
+function renderItem(item) {
+    const st = state.items[item.id];
+    const classes = ['item'];
+    if (st.added)      classes.push('added');
+    if (st.inProgress) classes.push('in-progress');
+    if (st.skipped)    classes.push('skipped');
+
+    const desc = item.description
+        ? `<div class="description">${escapeHtml(item.description)}</div>`
+        : '';
+
+    return `
+        <article class="${classes.join(' ')}" data-id="${item.id}">
+            <div class="item-row">
+                <div class="checks">
+                    <label class="check-label added-label">
+                        <input type="checkbox" data-field="added" ${st.added ? 'checked' : ''} />
+                        <span class="check-text">Added</span>
+                    </label>
+                    <label class="check-label progress-label">
+                        <input type="checkbox" data-field="inProgress" ${st.inProgress ? 'checked' : ''} />
+                        <span class="check-text">In progress</span>
+                    </label>
+                    <label class="check-label skip-label">
+                        <input type="checkbox" data-field="skipped" ${st.skipped ? 'checked' : ''} />
+                        <span class="check-text">Skip</span>
+                    </label>
+                </div>
+                <div class="body">
+                    <span class="title-text">${escapeHtml(item.title)}</span>
+                    <span class="id-pill" title="Stable persistence id">${escapeHtml(item.id)}</span>
+                    ${desc}
+                    <div class="comment-wrap">
+                        <label for="comment-${item.id}">Comment</label>
+                        <textarea id="comment-${item.id}" class="comment" data-field="comment"
+                                  placeholder="Notes, decisions, links…">${escapeHtml(st.comment)}</textarea>
+                    </div>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function updateCounts() {
+    let added = 0, inProgress = 0, skipped = 0, pending = 0;
+    for (const it of ITEMS) {
+        const st = state.items[it.id];
+        if (st.skipped)         skipped++;
+        else if (st.added)      added++;
+        else if (st.inProgress) inProgress++;
+        else                    pending++;
+    }
+    document.getElementById('counts').textContent =
+        `${added} added · ${inProgress} in progress · ${pending} pending · ${skipped} skipped`;
+}
+
+function findItemEl(target) {
+    return target.closest('.item');
+}
+
+document.addEventListener('change', e => {
+    const t = e.target;
+    if (!(t.matches('input[data-field], textarea[data-field]'))) return;
+    const itemEl = findItemEl(t);
+    if (!itemEl) return;
+    const id = itemEl.dataset.id;
+    const field = t.dataset.field;
+    const st = state.items[id];
+    if (!st) return;
+
+    if (field === 'comment') {
+        st.comment = t.value;
+    } else {
+        st[field] = !!t.checked;
+        itemEl.classList.toggle('added', st.added);
+        itemEl.classList.toggle('in-progress', st.inProgress);
+        itemEl.classList.toggle('skipped', st.skipped);
+    }
+    updateCounts();
+    scheduleSave();
+});
+
+document.addEventListener('input', e => {
+    if (!e.target.matches('textarea[data-field="comment"]')) return;
+    const itemEl = findItemEl(e.target);
+    if (!itemEl) return;
+    const id = itemEl.dataset.id;
+    state.items[id].comment = e.target.value;
+    scheduleSave();
+});
+
+document.addEventListener('change', e => {
+    if (!e.target.matches('input[data-field="added"], input[data-field="inProgress"], input[data-field="skipped"]')) return;
+    if (currentFilter !== 'all') render();
+});
+
+document.querySelectorAll('.filter-bar button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        currentFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-bar button').forEach(b => {
+            b.setAttribute('aria-pressed', String(b === btn));
+        });
+        render();
+    });
+});
+
+document.getElementById('btn-new').addEventListener('click', actionNewFile);
+document.getElementById('btn-open').addEventListener('click', actionOpenFile);
+document.getElementById('btn-export').addEventListener('click', actionExport);
+document.getElementById('btn-import').addEventListener('click', actionImport);
+document.getElementById('import-file-input').addEventListener('change', handleImportSelected);
+
+document.getElementById('section-nav').addEventListener('click', e => {
+    const link = e.target.closest('a[data-section]');
+    if (!link) return;
+    e.preventDefault();
+    scrollToSection(link.dataset.section);
+});
+
+(async function init() {
+    lsLoad();
+    render();
+    setStatus('idle');
+    await tryRestoreHandle();
+    if (fileHandle) { render(); setStatus('saved'); }
+
+    const hash = location.hash.replace(/^#/, '');
+    if (hash.startsWith('section-')) {
+        requestAnimationFrame(() => scrollToSection(hash.slice('section-'.length)));
+    }
+})();
+
+</script>
+</body>
+</html>

@@ -11,14 +11,13 @@ namespace Majora_s_Mask_Randomizer_GUI
 {
     public partial class CutscenesSelector : Form
     {
-        private Dictionary<int, CheckBox> checkboxes;
-
         public Main_Window father;
         public bool showing;
 
         public CutscenesSelector()
         {
             InitializeComponent();
+            ApplyModernLayout();
         }
 
         private void Update_Checkboxes(Control.ControlCollection controls)

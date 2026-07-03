@@ -1,0 +1,138 @@
+{
+  "Items": {
+    "Page 1": [
+      "Bombchus (10)",
+      "Bombchus (5)",
+      "Bombchu",
+      "Bomb Bag",
+      "Adult Wallet",
+      "Big Bomb Bag",
+      "Biggest Bomb Bag",
+      "Deku Nuts",
+      "Bomber's Notebook",
+      "Bow"
+    ],
+    "Page 2": [
+      "Fire Arrow",
+      "Express Letter to Mama",
+      "Giant Wallet",
+      "Gilded Sword",
+      "Deku Stick",
+      "Great Fairy's Sword",
+      "Hero's Shield",
+      "Ice Arrow",
+      "Hookshot",
+      "Deku Nuts (10)"
+    ],
+    "Page 3": [
+      "Moon's Tear",
+      "Lens of Truth",
+      "Mirror Shield",
+      "Largest Quiver",
+      "Letter to Kafei",
+      "Kokiri Sword",
+      "Light Arrow",
+      "Large Quiver",
+      "Magic Beans",
+      "Land Title Deed"
+    ],
+    "Page 4": [
+      "Swamp Title Deed",
+      "Room Key",
+      "Pictograph Box",
+      "Razor Sword",
+      "Powder Keg",
+      "Pendant of Memories",
+      "Mountain Title Deed",
+      "Ocean Title Deed"
+    ]
+  },
+  "Masks": {
+    "Page 1": [
+      "Fierce Deity Mask",
+      "Deku Mask",
+      "All-Night Mask",
+      "Don Gero's Mask",
+      "Blast Mask",
+      "Bremen Mask",
+      "Bunny Hood",
+      "Couple's Mask",
+      "Circus Leader's Mask",
+      "Captain's Hat"
+    ],
+    "Page 2": [
+      "Keaton Mask",
+      "Mask of Truth",
+      "Goron Mask",
+      "Mask of Scents",
+      "Garo Mask",
+      "Kamaro's Mask",
+      "Kafei's Mask",
+      "Gibdo Mask",
+      "Giant's Mask",
+      "Great Fairy's Mask"
+    ],
+    "Page 3": [
+      "Zora Mask",
+      "Postman's Hat",
+      "Stone Mask",
+      "Romani's Mask"
+    ]
+  },
+  "Bottles": {
+    "Page 1": [
+      "Big Poe",
+      "Hot Spring Water",
+      "Blue Potion",
+      "Chateau Romani",
+      "Green Potion",
+      "Bugs",
+      "Fish",
+      "Deku Princess",
+      "Fairy",
+      "Gold Dust"
+    ],
+    "Page 2": [
+      "Milk",
+      "Zora Egg",
+      "Spring Water",
+      "Poe",
+      "Mushroom",
+      "Red Potion",
+      "Seahorse"
+    ]
+  },
+  "Songs": [
+    "Oath to Order",
+    "Elegy of Emptiness",
+    "New Wave Bossa Nova",
+    "Goron Lullaby",
+    "Sonata of Awakening",
+    "Song of Healing",
+    "Song of Storms",
+    "Epona's Song",
+    "Song of Soaring"
+  ],
+  "Rupees": [
+    "Gold Rupee",
+    "Purple Rupee",
+    "Silver Rupee",
+    "Red Rupee",
+    "Blue Rupee",
+    "Green Rupee"
+  ],
+  "Maps/Others": [
+    "Gyorg's Remains",
+    "Twinmold's Remains",
+    "Goht's Remains",
+    "Odolwa's Remains",
+    "Heart Container",
+    "Snowhead Map",
+    "Woodfall Map",
+    "Heart Piece",
+    "Romani Ranch Map",
+    "Clocktown Map",
+    "Stone Tower Map",
+    "Great Bay Map"
+  ]
+}
