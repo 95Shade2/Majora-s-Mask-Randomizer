@@ -13,8 +13,8 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             SuspendLayout();
 
-            MinimumSize = new Size(420, 520);
-            ClientSize = new Size(440, 540);
+            MinimumSize = new Size(420, 560);
+            ClientSize = new Size(440, 580);
             StartPosition = FormStartPosition.CenterParent;
             AutoScaleMode = AutoScaleMode.Dpi;
             FormBorderStyle = FormBorderStyle.Sizable;
@@ -38,10 +38,11 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 1,
-                RowCount = 4,
+                RowCount = 5,
                 Dock = DockStyle.Top,
                 Padding = new Padding(12)
             };
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -52,6 +53,21 @@ namespace Majora_s_Mask_Randomizer_GUI
             label6.ForeColor = SystemColors.GrayText;
             label6.Font = UiTheme.Current.HintFont;
             label6.Text = "Check a box to use a random color instead of the picker.";
+
+            FlowLayoutPanel toggleBar = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                Dock = DockStyle.Top,
+                Margin = new Padding(0, 0, 0, 8)
+            };
+            Button checkAllButton = CreateToggleButton("Check All");
+            Button uncheckAllButton = CreateToggleButton("Uncheck All");
+            checkAllButton.Click += (sender, args) => SetRandomColorChecks(true);
+            uncheckAllButton.Click += (sender, args) => SetRandomColorChecks(false);
+            toggleBar.Controls.Add(checkAllButton);
+            toggleBar.Controls.Add(uncheckAllButton);
 
             RebuildPauseGroup();
             RebuildTunicGroup();
@@ -75,9 +91,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             buttonBar.Controls.Add(Confirm_Button);
 
             root.Controls.Add(label6, 0, 0);
-            root.Controls.Add(groupBox1, 0, 1);
-            root.Controls.Add(groupBox2, 0, 2);
-            root.Controls.Add(buttonBar, 0, 3);
+            root.Controls.Add(toggleBar, 0, 1);
+            root.Controls.Add(groupBox1, 0, 2);
+            root.Controls.Add(groupBox2, 0, 3);
+            root.Controls.Add(buttonBar, 0, 4);
 
             scrollPanel.Controls.Add(root);
             Controls.Add(scrollPanel);
@@ -202,6 +219,40 @@ namespace Majora_s_Mask_Randomizer_GUI
             table.Controls.Add(label, 0, row);
             table.Controls.Add(checkBox, 1, row);
             table.Controls.Add(colorButton, 2, row);
+        }
+
+        private static Button CreateToggleButton(string text)
+        {
+            return new Button
+            {
+                Text = text,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Margin = new Padding(0, 0, 6, 0),
+                MinimumSize = new Size(0, UiTheme.Current.ButtonMinHeight)
+            };
+        }
+
+        private void SetRandomColorChecks(bool value)
+        {
+            CheckBox[] checks =
+            {
+                ItemScreen_Checkbox,
+                MapScreen_Checkbox,
+                QuestScreen_Checkbox,
+                MaskScreen_Checkbox,
+                NamePlate_Checkbox,
+                LinkColor_Checkbox,
+                DekuColor_Checkbox,
+                GoronColor_Checkbox,
+                ZoraColor_Checkbox,
+                FDColor_Checkbox
+            };
+
+            foreach (CheckBox check in checks)
+            {
+                check.Checked = value;
+            }
         }
 
         private void RestoreColorSwatchButtonLayout()

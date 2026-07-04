@@ -33,9 +33,30 @@ namespace Majora_s_Mask_Randomizer_GUI
         string TARGETING;
         bool DEBUG;
         string debug_path;
+        private readonly Random _colorRandom = new Random();
+
+        private const string SettingRom = "Rom";
+        private const string SettingSeed = "Seed";
+        private const string SettingWad = "Wad";
+        private const string SettingLogic = "Logic";
+        private const string SettingKafei = "Kafei";
+        private const string SettingScrubBeans = "ScrubBeans";
+        private const string SettingRemoveCutscenes = "Remove_Cutscenes";
+        private const string SettingGCHud = "GC_Hud";
+        private const string SettingBlastMaskCooldown = "BlastMask_Cooldown";
+        private const string SettingRespawnHPs = "RespawnHPs";
+        private const string SettingLikeLikeMirror = "LikeLikeMirror";
+        private const string SettingKeepRazor = "KeepRazor";
+        private const string SettingOceanAnyDay = "OceanAnyDay";
+        private const string SettingRespawnHCs = "RespawnHCs";
+        private const string SettingTargeting = "Targeting";
+        private const string SettingTradeQuest = "TradeQuest";
+        private const string ColorRandomizeValue = "Randomize";
 
         public Dictionary<string,
         Color> Game_Colors;
+        public Dictionary<string,
+        bool> Game_Color_Randomized;
         public Dictionary<string,
         int> Wallet_Sizes;
         public string[] Item_Names;
@@ -77,6 +98,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             string>();
             Cutscenes = new Dictionary<string, bool>();
             Game_Colors = Default_Pause();
+            Game_Color_Randomized = Default_Color_Randomized();
             Wallet_Sizes = Default_Wallets();
 
             cs = new CutscenesSelector();
@@ -328,6 +350,21 @@ namespace Majora_s_Mask_Randomizer_GUI
             default_colors.Add("FD", def_FD);
 
             return default_colors;
+        }
+
+        private Dictionary<string,
+        bool> Default_Color_Randomized()
+        {
+            Dictionary<string,
+            bool> randomized = new Dictionary<string,
+            bool>();
+
+            foreach (string key in Default_Pause().Keys)
+            {
+                randomized.Add(key, false);
+            }
+
+            return randomized;
         }
 
         public void Load_Logic()
@@ -696,7 +733,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             if (Open_Base_Rom_Dialog.FileName != "openFileDialog1" && Open_Base_Rom_Dialog.FileName != "")
             {
                 Randomize_Button.Enabled = false;
-                SaveSettingsAsIni("./settings.ini");
+                SaveSettingsAsIni("./settings.ini", resolveRandomColors: true);
                 RunRandomizer();
             }
             else
@@ -705,7 +742,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
-        private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true, bool cutscenes = true)
+        private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true, bool cutscenes = true, bool resolveRandomColors = false)
         {
             string Text = "";
             string Item_Pool = "";
@@ -750,44 +787,31 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Text += "[settings]\n";
 
-                Text += "Rom=" + Open_Base_Rom_Dialog.FileName + "\n"; //rom location
-                Text += "Seed=" + Seed_Textbox.Text + "\n"; //seed
-                Text += "Wad=" + createWadToolStripMenuItem.Checked + "\n"; //true or false to create wad as well
+                AppendSetting(ref Text, SettingRom, Open_Base_Rom_Dialog.FileName); //rom location
+                AppendSetting(ref Text, SettingSeed, Seed_Textbox.Text); //seed
+                AppendSetting(ref Text, SettingWad, createWadToolStripMenuItem.Checked); //true or false to create wad as well
 
                 if (Logic_Combobox.SelectedIndex != -1)
                 {
-                    Text += "Logic=" + Logic_Combobox.Items[Logic_Combobox.SelectedIndex] + "\n"; //which logic to use
+                    AppendSetting(ref Text, SettingLogic, Logic_Combobox.Items[Logic_Combobox.SelectedIndex]); //which logic to use
                 }
                 else
                 {
-                    Text += "Logic=\n"; //no logic
+                    AppendSetting(ref Text, SettingLogic, ""); //no logic
                 }
 
-                Text += "Kafei=" + playAsKafeiToolStripMenuItem.Checked + "\n"; //whether or not to play as Kafei instead of Link
-
-                Text += "ScrubBeans=" + swampScrubSalesBeansToolStripMenuItem.Checked + "\n"; //whether or not the scrub in swamp sells magic beans or what they're randomized to
-
-                //Text += "Tunic=" + Get_Color_Tunic() + "\n";     //color of the tunics
-
-                //Text += "Remove_Cutscenes=" + removeCutscenesToolStripMenuItem.Checked + "\n"; //whether or not to remove the cutscenes
-
-                Text += "GC_Hud=" + gCHudToolStripMenuItem.Checked + "\n"; //use or not use the GC Hud
-
-                Text += "BlastMask_Cooldown=" + BlastMaskFrames_Num.Value + "\n"; //the blast mask cooldown
-
-                Text += "RespawnHPs=" + respawnHPsToolStripMenuItem.Checked + "\n"; //whether or not to respawn the hps every cycle
-
-                Text += "LikeLikeMirror=" + edibleMirrorShieldToolStripMenuItem.Checked + "\n"; //whether or not a likelike can eat the mirror shield
-
-                Text += "KeepRazor=" + keepRazorSwordOnSoTToolStripMenuItem.Checked + "\n"; //whether or not the player keeps razor sword on Song of Time
-
-                Text += "OceanAnyDay=" + oceanSpiderHouseAnyDayToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
-
-                Text += "RespawnHCs=" + respawnHCsToolStripMenuItem.Checked + "\n"; //whether or not to make ocean spider house item available any day
-
-                Text += "Targeting=" + TARGETING + "\n"; //Save the custom default targeting
-
-                Text += "TradeQuest=" + removeScrubSalesmanAfterTradingToolStripMenuItem.Checked + "\n";
+                AppendSetting(ref Text, SettingKafei, playAsKafeiToolStripMenuItem.Checked); //whether or not to play as Kafei instead of Link
+                AppendSetting(ref Text, SettingScrubBeans, swampScrubSalesBeansToolStripMenuItem.Checked); //whether or not the scrub in swamp sells magic beans or what they're randomized to
+                AppendSetting(ref Text, SettingRemoveCutscenes, removeCutscenesToolStripMenuItem.Checked); //legacy hidden cutscene toggle
+                AppendSetting(ref Text, SettingGCHud, gCHudToolStripMenuItem.Checked); //use or not use the GC Hud
+                AppendSetting(ref Text, SettingBlastMaskCooldown, BlastMaskFrames_Num.Value); //the blast mask cooldown
+                AppendSetting(ref Text, SettingRespawnHPs, respawnHPsToolStripMenuItem.Checked); //whether or not to respawn the hps every cycle
+                AppendSetting(ref Text, SettingLikeLikeMirror, edibleMirrorShieldToolStripMenuItem.Checked); //whether or not a likelike can eat the mirror shield
+                AppendSetting(ref Text, SettingKeepRazor, keepRazorSwordOnSoTToolStripMenuItem.Checked); //whether or not the player keeps razor sword on Song of Time
+                AppendSetting(ref Text, SettingOceanAnyDay, oceanSpiderHouseAnyDayToolStripMenuItem.Checked); //whether or not to make ocean spider house item available any day
+                AppendSetting(ref Text, SettingRespawnHCs, respawnHCsToolStripMenuItem.Checked); //whether or not to respawn heart containers every cycle
+                AppendSetting(ref Text, SettingTargeting, TARGETING); //Save the custom default targeting
+                AppendSetting(ref Text, SettingTradeQuest, removeScrubSalesmanAfterTradingToolStripMenuItem.Checked);
             }
 
             if (colors)
@@ -795,18 +819,18 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Text += "[colors]\n";
 
                 //tunic colors
-                Text += "Link=" + Color_To_String(Game_Colors["Link"]) + "\n";
-                Text += "Deku=" + Color_To_String(Game_Colors["Deku"]) + "\n";
-                Text += "Goron=" + Color_To_String(Game_Colors["Goron"]) + "\n";
-                Text += "Zora=" + Color_To_String(Game_Colors["Zora"]) + "\n";
-                Text += "FD=" + Color_To_String(Game_Colors["FD"]) + "\n";
+                AppendColorSetting(ref Text, "Link", resolveRandomColors);
+                AppendColorSetting(ref Text, "Deku", resolveRandomColors);
+                AppendColorSetting(ref Text, "Goron", resolveRandomColors);
+                AppendColorSetting(ref Text, "Zora", resolveRandomColors);
+                AppendColorSetting(ref Text, "FD", resolveRandomColors);
 
                 //pause menu colors
-                Text += "Item=" + Color_To_String(Game_Colors["Item"]) + "\n";
-                Text += "Map=" + Color_To_String(Game_Colors["Map"]) + "\n";
-                Text += "Quest=" + Color_To_String(Game_Colors["Quest"]) + "\n";
-                Text += "Mask=" + Color_To_String(Game_Colors["Mask"]) + "\n";
-                Text += "Name=" + Color_To_String(Game_Colors["Name"]) + "\n";
+                AppendColorSetting(ref Text, "Item", resolveRandomColors);
+                AppendColorSetting(ref Text, "Map", resolveRandomColors);
+                AppendColorSetting(ref Text, "Quest", resolveRandomColors);
+                AppendColorSetting(ref Text, "Mask", resolveRandomColors);
+                AppendColorSetting(ref Text, "Name", resolveRandomColors);
             }
 
             if (wallets)
@@ -868,6 +892,49 @@ namespace Majora_s_Mask_Randomizer_GUI
             color = "[R=" + red.ToString() + ", G=" + green.ToString() + ", B=" + blue.ToString() + "]";
 
             return color;
+        }
+
+        private Color Random_Color()
+        {
+            int red = _colorRandom.Next(1, 256);
+            int blue = _colorRandom.Next(1, 256);
+            int green = _colorRandom.Next(1, 256);
+
+            return Rgb_Color(red, green, blue);
+        }
+
+        private void AppendColorSetting(ref string text, string key, bool resolveRandomColors)
+        {
+            text += key + "=" + Color_Setting_Value(key, resolveRandomColors) + "\n";
+        }
+
+        private string Color_Setting_Value(string key, bool resolveRandomColors)
+        {
+            if (Game_Color_Randomized != null &&
+                Game_Color_Randomized.ContainsKey(key) &&
+                Game_Color_Randomized[key])
+            {
+                return resolveRandomColors
+                    ? Color_To_String(Random_Color())
+                    : ColorRandomizeValue;
+            }
+
+            return Color_To_String(Game_Colors[key]);
+        }
+
+        private static void AppendSetting(ref string text, string key, object value)
+        {
+            text += key + "=" + value + "\n";
+        }
+
+        private static bool SettingsBool(Dictionary<string, string> settings, string key)
+        {
+            return settings.ContainsKey(key) && settings[key] == "True";
+        }
+
+        private static void ApplyMenuSetting(Dictionary<string, string> settings, string key, ToolStripMenuItem item)
+        {
+            item.Checked = SettingsBool(settings, key);
         }
 
         private void WriteFile(string FileLocation, string Data)
@@ -1024,6 +1091,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             else
             {
                 Game_Colors = Default_Pause();
+                Game_Color_Randomized = Default_Color_Randomized();
             }
 
             if (Selected_Preset.ContainsKey("wallets"))
@@ -1059,56 +1127,47 @@ namespace Majora_s_Mask_Randomizer_GUI
                 return;
             }
 
+            Game_Color_Randomized = Default_Color_Randomized();
+
             //get the tunic colors
-            if (colors.ContainsKey("Link"))
-            {
-                Game_Colors["Link"] = String_To_Color(colors["Link"]);
-            }
-            if (colors.ContainsKey("Deku"))
-            {
-                Game_Colors["Deku"] = String_To_Color(colors["Deku"]);
-            }
-            if (colors.ContainsKey("Goron"))
-            {
-                Game_Colors["Goron"] = String_To_Color(colors["Goron"]);
-            }
-            if (colors.ContainsKey("Zora"))
-            {
-                Game_Colors["Zora"] = String_To_Color(colors["Zora"]);
-            }
-            if (colors.ContainsKey("FD"))
-            {
-                Game_Colors["FD"] = String_To_Color(colors["FD"]);
-            }
+            Update_Color(colors, "Link");
+            Update_Color(colors, "Deku");
+            Update_Color(colors, "Goron");
+            Update_Color(colors, "Zora");
+            Update_Color(colors, "FD");
 
             //get the pause menu colors
-            if (colors.ContainsKey("Item"))
+            Update_Color(colors, "Item");
+            Update_Color(colors, "Mask");
+            Update_Color(colors, "Status");
+            Update_Color(colors, "Map");
+            Update_Color(colors, "Name");
+        }
+
+        private void Update_Color(Dictionary<string, string> colors, string key)
+        {
+            if (!colors.ContainsKey(key))
             {
-                Game_Colors["Item"] = String_To_Color(colors["Item"]);
+                return;
             }
-            if (colors.ContainsKey("Mask"))
+
+            string colorKey = key == "Status" ? "Quest" : key;
+            if (string.Equals(colors[key], ColorRandomizeValue, StringComparison.OrdinalIgnoreCase))
             {
-                Game_Colors["Mask"] = String_To_Color(colors["Mask"]);
+                Game_Color_Randomized[colorKey] = true;
             }
-            if (colors.ContainsKey("Status"))
+            else
             {
-                Game_Colors["Status"] = String_To_Color(colors["Status"]);
-            }
-            if (colors.ContainsKey("Map"))
-            {
-                Game_Colors["Map"] = String_To_Color(colors["Map"]);
-            }
-            if (colors.ContainsKey("Name"))
-            {
-                Game_Colors["Name"] = String_To_Color(colors["Name"]);
+                Game_Color_Randomized[colorKey] = false;
+                Game_Colors[colorKey] = String_To_Color(colors[key]);
             }
         }
 
         private void Update_Settings(Dictionary<string, string> settings)
         {
-            if (settings.ContainsKey("Rom") && settings["Rom"] != "" && settings["Rom"] != "openFileDialog1")
+            if (settings.ContainsKey(SettingRom) && settings[SettingRom] != "" && settings[SettingRom] != "openFileDialog1")
             {
-                Open_Base_Rom_Dialog.FileName = settings["Rom"];
+                Open_Base_Rom_Dialog.FileName = settings[SettingRom];
                 Update_Rom_Text();
             }
             else
@@ -1117,28 +1176,21 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Update_Rom_Text();
             }
 
-            if (settings.ContainsKey("Seed") && settings["Seed"] != "")
+            if (settings.ContainsKey(SettingSeed) && settings[SettingSeed] != "")
             {
-                Seed_Textbox.Text = settings["Seed"];
+                Seed_Textbox.Text = settings[SettingSeed];
             }
             else
             {
                 Seed_Textbox.Text = "";
             }
 
-            if (settings.ContainsKey("Wad") && settings["Wad"] == "True")
-            {
-                createWadToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                createWadToolStripMenuItem.Checked = false;
-            }
+            ApplyMenuSetting(settings, SettingWad, createWadToolStripMenuItem);
 
-            if (settings.ContainsKey("Logic") && settings["Logic"] != "")
+            if (settings.ContainsKey(SettingLogic) && settings[SettingLogic] != "")
             {
                 int log_index;
-                log_index = Logic_Combobox.Items.IndexOf(settings["Logic"]);
+                log_index = Logic_Combobox.Items.IndexOf(settings[SettingLogic]);
                 Logic_Combobox.SelectedIndex = log_index;
             }
             else
@@ -1146,79 +1198,27 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Logic_Combobox.SelectedIndex = -1;
             }
 
-            if (settings.ContainsKey("Kafei") && settings["Kafei"] == "True")
-            {
-                playAsKafeiToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                playAsKafeiToolStripMenuItem.Checked = false;
-            }
+            ApplyMenuSetting(settings, SettingKafei, playAsKafeiToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingScrubBeans, swampScrubSalesBeansToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingRemoveCutscenes, removeCutscenesToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingGCHud, gCHudToolStripMenuItem);
 
-            if (settings.ContainsKey("ScrubBeans") && settings["ScrubBeans"] == "True")
+            if (settings.ContainsKey(SettingBlastMaskCooldown))
             {
-                swampScrubSalesBeansToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                swampScrubSalesBeansToolStripMenuItem.Checked = false;
-            }
-            
-            if (settings.ContainsKey("GC_Hud") && settings["GC_Hud"] == "True")
-            {
-                gCHudToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                gCHudToolStripMenuItem.Checked = false;
-            }
-
-            if (settings.ContainsKey("BlastMask_Cooldown"))
-            {
-                BlastMaskFrames_Num.Value = String_To_Int(settings["BlastMask_Cooldown"]);
+                BlastMaskFrames_Num.Value = String_To_Int(settings[SettingBlastMaskCooldown]);
             }
             else
             {
                 BlastMaskFrames_Num.Value = 310;
             }
 
-            if (settings.ContainsKey("LikeLikeMirror") && settings["LikeLikeMirror"] == "True")
-            {
-                edibleMirrorShieldToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                edibleMirrorShieldToolStripMenuItem.Checked = false;
-            }
+            ApplyMenuSetting(settings, SettingRespawnHPs, respawnHPsToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingLikeLikeMirror, edibleMirrorShieldToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingKeepRazor, keepRazorSwordOnSoTToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingOceanAnyDay, oceanSpiderHouseAnyDayToolStripMenuItem);
+            ApplyMenuSetting(settings, SettingRespawnHCs, respawnHCsToolStripMenuItem);
 
-            if (settings.ContainsKey("KeepRazor") && settings["KeepRazor"] == "True")
-            {
-                keepRazorSwordOnSoTToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                keepRazorSwordOnSoTToolStripMenuItem.Checked = false;
-            }
-
-            if (settings.ContainsKey("OceanAnyDay") && settings["OceanAnyDay"] == "True")
-            {
-                oceanSpiderHouseAnyDayToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                oceanSpiderHouseAnyDayToolStripMenuItem.Checked = false;
-            }
-
-            if (settings.ContainsKey("RespawnHCs") && settings["RespawnHCs"] == "True")
-            {
-                respawnHCsToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                respawnHCsToolStripMenuItem.Checked = false;
-            }
-
-            if (settings.ContainsKey("Targeting") && settings["Targeting"] == "Hold")
+            if (settings.ContainsKey(SettingTargeting) && settings[SettingTargeting] == "Hold")
             {
                 Targeting_Hold.Select();
             }
@@ -1227,14 +1227,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Targeting_Switch.Select();  //default targeting is switch
             }
 
-            if (settings.ContainsKey("TradeQuest") && settings["TradeQuest"] == "True")
-            {
-                removeScrubSalesmanAfterTradingToolStripMenuItem.Checked = true;
-            }
-            else
-            {
-                removeScrubSalesmanAfterTradingToolStripMenuItem.Checked = false;
-            }
+            ApplyMenuSetting(settings, SettingTradeQuest, removeScrubSalesmanAfterTradingToolStripMenuItem);
         }
 
         private Color String_To_Color(string color)
@@ -1462,7 +1455,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void Save_Presets_Dialog_FileOk(object sender, CancelEventArgs e)
         {
-            SaveSettingsAsIni(Save_Presets_Dialog.FileName, true, false);
+            SaveSettingsAsIni(Save_Presets_Dialog.FileName);
         }
 
         private void Load_Preset_Button_Click(object sender, EventArgs e)

@@ -71,6 +71,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Controls.Add(menuStrip1);
             _mainSplit.Dock = DockStyle.Fill;
             menuStrip1.Dock = DockStyle.Top;
+            settingsToolStripMenuItem.Visible = false;
 
             TabCategoryIcons.ConfigureCategoryTabs(Items_Tab);
             UiTheme.EnableDoubleBuffer(Items_Tab);
@@ -107,9 +108,10 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 1,
-                RowCount = 3,
+                RowCount = 4,
                 Padding = Padding.Empty
             };
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -117,6 +119,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.Controls.Add(BuildPoolManagementGroup(), 0, 0);
             root.Controls.Add(BuildTargetingPresetsRow(), 0, 1);
             root.Controls.Add(BuildRandomizerOptionsGroup(), 0, 2);
+            root.Controls.Add(BuildPatchOptionsGroup(), 0, 3);
 
             return root;
         }
@@ -175,6 +178,72 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             group.Controls.Add(table);
             return group;
+        }
+
+        private GroupBox BuildPatchOptionsGroup()
+        {
+            GroupBox group = CreateConfigGroupBox("Patch Options");
+
+            TableLayoutPanel table = new TableLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                ColumnCount = 2,
+                RowCount = 5,
+                Padding = new Padding(0, 2, 0, 0)
+            };
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 245F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 245F));
+
+            for (int i = 0; i < 5; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            }
+
+            AddPatchOption(table, 0, 0, "Create WAD", createWadToolStripMenuItem);
+            AddPatchOption(table, 1, 0, "Swamp Scrub Sales Beans", swampScrubSalesBeansToolStripMenuItem);
+            AddPatchOption(table, 0, 1, "Play as Kafei", playAsKafeiToolStripMenuItem);
+            AddPatchOption(table, 1, 1, "GC HUD", gCHudToolStripMenuItem);
+            AddPatchOption(table, 0, 2, "Respawn HPs", respawnHPsToolStripMenuItem);
+            AddPatchOption(table, 1, 2, "Edible Mirror Shield", edibleMirrorShieldToolStripMenuItem);
+            AddPatchOption(table, 0, 3, "Keep Razor Sword on SoT", keepRazorSwordOnSoTToolStripMenuItem);
+            AddPatchOption(table, 1, 3, "Ocean Spider House Any Day", oceanSpiderHouseAnyDayToolStripMenuItem);
+            AddPatchOption(table, 0, 4, "Respawn HCs", respawnHCsToolStripMenuItem);
+            AddPatchOption(table, 1, 4, "Remove Scrub Salesmen after trading", removeScrubSalesmanAfterTradingToolStripMenuItem);
+
+            group.Controls.Add(table);
+            return group;
+        }
+
+        private CheckBox AddPatchOption(TableLayoutPanel table, int column, int row, string text, ToolStripMenuItem menuItem)
+        {
+            CheckBox checkBox = new CheckBox
+            {
+                Text = text,
+                AutoSize = true,
+                Checked = menuItem.Checked,
+                Anchor = AnchorStyles.Left,
+                Margin = new Padding(4, 4, 12, 4)
+            };
+
+            checkBox.CheckedChanged += (sender, args) =>
+            {
+                if (menuItem.Checked != checkBox.Checked)
+                {
+                    menuItem.Checked = checkBox.Checked;
+                }
+            };
+            menuItem.CheckedChanged += (sender, args) =>
+            {
+                if (checkBox.Checked != menuItem.Checked)
+                {
+                    checkBox.Checked = menuItem.Checked;
+                }
+            };
+
+            table.Controls.Add(checkBox, column, row);
+            return checkBox;
         }
 
         private static void PrepareReparentedControl(Control control)

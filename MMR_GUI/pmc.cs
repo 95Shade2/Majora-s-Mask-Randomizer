@@ -18,7 +18,6 @@ namespace Majora_s_Mask_Randomizer_GUI
         private Dictionary<CheckBox, Button> Check_To_Button;
         private Dictionary<CheckBox, ColorDialog> Check_To_Color;
         private Dictionary<CheckBox, string> Check_To_ID;
-        Random rnd;
 
         public pmc()
         {
@@ -31,7 +30,6 @@ namespace Majora_s_Mask_Randomizer_GUI
             Check_To_Button = new Dictionary<CheckBox, Button>();
             Check_To_Color = new Dictionary<CheckBox, ColorDialog>();
             Check_To_ID = new Dictionary<CheckBox, string>();
-            rnd = new Random();
             showing = true;
 
             //checkbox to buttons
@@ -95,6 +93,13 @@ namespace Majora_s_Mask_Randomizer_GUI
             GoronColor_ColorBox.Color = parent.Game_Colors["Goron"];
             ZoraColor_ColorBox.Color = parent.Game_Colors["Zora"];
             FDColor_ColorBox.Color = parent.Game_Colors["FD"];
+
+            foreach (CheckBox checkBox in Check_To_ID.Keys)
+            {
+                string id = Check_To_ID[checkBox];
+                checkBox.Checked = parent.Game_Color_Randomized.ContainsKey(id) &&
+                    parent.Game_Color_Randomized[id];
+            }
         }
 
         private void ItemSelect_Button_Click(object sender, EventArgs e)
@@ -121,15 +126,6 @@ namespace Majora_s_Mask_Randomizer_GUI
             MaskScreen_Button.BackColor = MaskScreen_ColorBox.Color;
         }
 
-        private Color Random_Color()
-        {
-            int red = rnd.Next(1, 256);  // creates a number between 1 and 255
-            int blue = rnd.Next(1, 256);
-            int green = rnd.Next(1, 256);
-
-            return parent.Rgb_Color(red, green, blue);
-        }
-
         private void Confirm_Button_Click(object sender, EventArgs e)
         {
             Dictionary<CheckBox, Button>.KeyCollection keys = Check_To_Button.Keys;
@@ -138,20 +134,18 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 CheckBox key = keys.ElementAt(k);
                 string id = Check_To_ID[key];
-                Color clr;
 
                 //random color
                 if (key.Checked)
                 {
-                    clr = Random_Color();
+                    parent.Game_Color_Randomized[id] = true;
                 }
                 //user specified color
                 else
                 {
-                    clr = Check_To_Button[key].BackColor;
+                    parent.Game_Color_Randomized[id] = false;
+                    parent.Game_Colors[id] = Check_To_Button[key].BackColor;
                 }
-
-                parent.Game_Colors[id] = clr;
             }
 
             //parent.Game_Colors["Item"] = ItemSelect_Button.BackColor;
