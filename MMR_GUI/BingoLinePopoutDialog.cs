@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Majora_s_Mask_Randomizer_GUI
 {
-    internal sealed class BingoLinePopoutDialog : Form
+    internal partial class BingoLinePopoutDialog : Form
     {
         private readonly BingoCard _card;
         private readonly int[] _indices;
@@ -23,29 +23,24 @@ namespace Majora_s_Mask_Randomizer_GUI
             _onStateChanged = onStateChanged;
             _cells = new Button[indices.Length];
 
+            InitializeComponent();
             Text = title;
-            StartPosition = FormStartPosition.CenterParent;
-            Font = UiTheme.Current.BaseFont;
             MinimumSize = horizontal ? new Size(720, 120) : new Size(280, 420);
-            FormBorderStyle = FormBorderStyle.SizableToolWindow;
 
-            TableLayoutPanel layout = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                Padding = new Padding(8),
-                ColumnCount = horizontal ? indices.Length : 1,
-                RowCount = horizontal ? 1 : indices.Length
-            };
+            _layout.ColumnCount = horizontal ? indices.Length : 1;
+            _layout.RowCount = horizontal ? 1 : indices.Length;
+            _layout.ColumnStyles.Clear();
+            _layout.RowStyles.Clear();
 
             for (int i = 0; i < indices.Length; i++)
             {
                 if (horizontal)
                 {
-                    layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / indices.Length));
+                    _layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / indices.Length));
                 }
                 else
                 {
-                    layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F / indices.Length));
+                    _layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F / indices.Length));
                 }
             }
 
@@ -68,15 +63,14 @@ namespace Majora_s_Mask_Randomizer_GUI
 
                 if (horizontal)
                 {
-                    layout.Controls.Add(cell, i, 0);
+                    _layout.Controls.Add(cell, i, 0);
                 }
                 else
                 {
-                    layout.Controls.Add(cell, 0, i);
+                    _layout.Controls.Add(cell, 0, i);
                 }
             }
 
-            Controls.Add(layout);
             UiTheme.ApplyToForm(this);
             RefreshCells();
         }

@@ -32,6 +32,9 @@ namespace Majora_s_Mask_Randomizer_GUI
         Dictionary<string,
         Item> Item_Objects;
         Dictionary<string, string> Plando_Items;
+        private SplitContainer _mainSplit;
+        private ThemeToggleSlider _themeToggle;
+        private Panel _itemsTabHost;
         ComboBox Plando_Location_Combobox;
         ComboBox Plando_Item_Combobox;
         Button Plando_Add_Button;
@@ -92,9 +95,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                 checkBox1_CheckedChanged,
                 All_Night_Mask_Pool_SelectedIndexChanged,
                 Adult_Wallet_Gives_SelectedIndexChanged);
-            Initialize_Plando_Controls();
-
-            ApplyShellLayout();
+            AddSettingsTab();
+            TabCategoryIcons.ConfigureCategoryTabs(Items_Tab);
+            AttachThemeToggleToTabStrip();
             UiTheme.ApplyToForm(this);
             ItemTabBuilder.ScheduleHandleWarmup(Items_Tab);
 
@@ -209,41 +212,108 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
-        private void Initialize_Plando_Controls()
+        private void AttachThemeToggleToTabStrip()
         {
-            Plando_Location_Combobox = new ComboBox
+            if (_itemsTabHost == null)
             {
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            Plando_Item_Combobox = new ComboBox
-            {
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            Plando_Add_Button = new Button
-            {
-                Text = "Add"
-            };
-            Plando_Remove_Button = new Button
-            {
-                Text = "Remove"
-            };
-            Plando_List = new ListView
-            {
-                View = View.Details,
-                FullRowSelect = true,
-                MultiSelect = false,
-                HideSelection = false,
-                Height = 140
-            };
+                return;
+            }
 
-            Plando_List.Columns.Add("Location", 220);
-            Plando_List.Columns.Add("Item", 220);
-            PoolListView.ConfigureDetailsList(Plando_List, showHeaders: true);
-            Plando_Add_Button.Click += Plando_Add_Button_Click;
-            Plando_Remove_Button.Click += Plando_Remove_Button_Click;
-            Plando_List.SelectedIndexChanged += Plando_List_SelectedIndexChanged;
-            Plando_List.DoubleClick += Plando_List_DoubleClick;
-            Plando_List.Resize += (sender, args) => Resize_Plando_List();
+            if (_themeToggle == null)
+            {
+                _themeToggle = new ThemeToggleSlider
+                {
+                    Checked = Settings.Default.UseLightTheme
+                };
+                _themeToggle.CheckedChanged += Theme_Toggle_CheckedChanged;
+                _itemsTabHost.Controls.Add(_themeToggle);
+            }
+
+            _themeToggle.ApplyTheme();
+            PositionThemeToggle();
+
+            Items_Tab.Layout -= Items_Tab_TabStripLayoutChanged;
+            Items_Tab.Layout += Items_Tab_TabStripLayoutChanged;
+            Items_Tab.Resize -= Items_Tab_TabStripLayoutChanged;
+            Items_Tab.Resize += Items_Tab_TabStripLayoutChanged;
+            Items_Tab.SelectedIndexChanged -= Items_Tab_TabStripLayoutChanged;
+            Items_Tab.SelectedIndexChanged += Items_Tab_TabStripLayoutChanged;
+            _itemsTabHost.Resize -= Items_Tab_TabStripLayoutChanged;
+            _itemsTabHost.Resize += Items_Tab_TabStripLayoutChanged;
+        }
+
+        private void Items_Tab_TabStripLayoutChanged(object sender, EventArgs e)
+        {
+            PositionThemeToggle();
+        }
+
+        private void PositionThemeToggle()
+        {
+            if (_themeToggle == null || Items_Tab.TabCount == 0)
+            {
+                return;
+            }
+
+            Rectangle lastTab = Items_Tab.GetTabRect(Items_Tab.TabCount - 1);
+            int stripHeight = lastTab.Bottom;
+            int x = Items_Tab.Left + lastTab.Right + 8;
+            int y = Items_Tab.Top + Math.Max(0, (stripHeight - _themeToggle.Height) / 2);
+            _themeToggle.Location = new Point(x, y);
+            _themeToggle.BringToFront();
+        }
+
+        private void Theme_Toggle_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.UseLightTheme = _themeToggle.Checked;
+            Settings.Default.Save();
+            UiTheme.SetDarkMode(!_themeToggle.Checked);
+            RefreshTheme();
+        }
+
+        private void RefreshTheme()
+        {
+            UiTheme.ApplyToForm(this);
+            UiTheme.StylePrimaryButton(Randomize_Button);
+            TabCategoryIcons.ConfigureCategoryTabs(Items_Tab);
+            TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
+            _themeToggle?.ApplyTheme();
+            PositionThemeToggle();
+
+            if (color_menu_form != null)
+            {
+                UiTheme.ApplyToForm(color_menu_form);
+                color_menu_form.FitCompactLayout();
+            }
+
+            if (Wallet_Form != null)
+            {
+                UiTheme.ApplyToForm(Wallet_Form);
+                Wallet_Form.FitCompactLayout();
+            }
+
+            if (logic_editor != null)
+            {
+                UiTheme.ApplyToForm(logic_editor);
+            }
+
+            if (cs != null)
+            {
+                UiTheme.ApplyToForm(cs);
+            }
+
+            Items_Tab.Invalidate();
+
+            if (Pool_Tables != null)
+            {
+                foreach (ListView list in Pool_Tables.Values)
+                {
+                    PoolListView.ApplyTheme(list);
+                }
+            }
+
+            PoolListView.ApplyTheme(Plando_List);
+            PoolListView.ApplyTheme(Pool_Issues_List);
+            RefreshPlandoUi();
         }
 
         private void Create_Plando_Items()

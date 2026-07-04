@@ -17,7 +17,6 @@ namespace Majora_s_Mask_Randomizer_GUI
         public CutscenesSelector()
         {
             InitializeComponent();
-            ApplyModernLayout();
         }
 
         private void Update_Checkboxes(Control.ControlCollection controls)

@@ -5,19 +5,19 @@ using System.Windows.Forms;
 
 namespace Majora_s_Mask_Randomizer_GUI
 {
-    internal sealed class BingoCardDialog : Form
+    internal partial class BingoCardDialog : Form
     {
         private readonly Main_Window _owner;
-        private readonly TextBox _romSeedBox;
-        private readonly Label _effectiveSeedLabel;
-        private readonly Label _poolHashLabel;
-        private readonly Label _rerollLabel;
-        private readonly Button _viewRerollLogButton;
-        private readonly Label _warningLabel;
-        private readonly Label _statusLabel;
-        private readonly RadioButton _lineMode;
-        private readonly RadioButton _blackoutMode;
-        private readonly TableLayoutPanel _grid;
+        private TextBox _romSeedBox;
+        private Label _effectiveSeedLabel;
+        private Label _poolHashLabel;
+        private Label _rerollLabel;
+        private Button _viewRerollLogButton;
+        private Label _warningLabel;
+        private Label _statusLabel;
+        private RadioButton _lineMode;
+        private RadioButton _blackoutMode;
+        private TableLayoutPanel _grid;
         private readonly Button[,] _cells = new Button[5, 5];
 
         private BingoCard _card;
@@ -26,57 +26,8 @@ namespace Majora_s_Mask_Randomizer_GUI
         public BingoCardDialog(Main_Window owner)
         {
             _owner = owner;
-            Text = "Bingo Card";
-            ClientSize = new Size(980, 720);
-            MinimumSize = new Size(900, 640);
-            StartPosition = FormStartPosition.CenterParent;
-            Font = UiTheme.Current.BaseFont;
-            AutoScroll = true;
-
-            TableLayoutPanel root = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 1,
-                RowCount = 4,
-                Padding = new Padding(12)
-            };
-            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            root.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-
-            Panel metaPanel = BuildMetaPanel(
-                out _romSeedBox,
-                out _effectiveSeedLabel,
-                out _poolHashLabel,
-                out _rerollLabel,
-                out _viewRerollLogButton,
-                out _warningLabel);
-            Panel controlsPanel = BuildControlsPanel(out _lineMode, out _blackoutMode);
-            _grid = BuildGrid();
-            Panel gridHost = new Panel
-            {
-                Dock = DockStyle.Fill,
-                AutoScroll = true,
-                MinimumSize = new Size(860, 420)
-            };
-            gridHost.Controls.Add(_grid);
-            gridHost.Resize += (s, e) => CenterGridInHost(gridHost);
-            CenterGridInHost(gridHost);
-            _statusLabel = new Label
-            {
-                AutoSize = true,
-                Dock = DockStyle.Fill,
-                Padding = new Padding(0, 8, 0, 0)
-            };
-
-            root.Controls.Add(metaPanel, 0, 0);
-            root.Controls.Add(controlsPanel, 0, 1);
-            root.Controls.Add(gridHost, 0, 2);
-            root.Controls.Add(_statusLabel, 0, 3);
-            Controls.Add(root);
-            FormClosed += (s, e) => ClosePopouts();
-            UiTheme.ApplyToForm(this);
+            InitializeComponent();
+            RegenerateCard();
         }
 
         public void RefreshFromMainWindow()

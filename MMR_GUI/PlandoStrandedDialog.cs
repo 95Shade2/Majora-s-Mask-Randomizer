@@ -1,42 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace Majora_s_Mask_Randomizer_GUI
 {
-    internal sealed class PlandoStrandedDialog : Form
+    internal partial class PlandoStrandedDialog : Form
     {
-        private readonly ComboBox _locationCombo;
         public string SelectedLocation { get; private set; }
 
         private PlandoStrandedDialog(string item, IEnumerable<string> locations)
         {
-            Text = "Place Stranded Item";
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
-            MinimizeBox = false;
-            StartPosition = FormStartPosition.CenterParent;
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            Padding = new Padding(12);
-            Font = UiTheme.Current.BaseFont;
-
-            Label prompt = new Label
-            {
-                AutoSize = true,
-                MaximumSize = new Size(360, 0),
-                Text = item + " is plando'd away from its own location and is not placed elsewhere. Choose a location that should give it:",
-                Margin = new Padding(0, 0, 0, 8)
-            };
-
-            _locationCombo = new ComboBox
-            {
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Width = 320,
-                Margin = new Padding(0, 0, 0, 12)
-            };
+            InitializeComponent();
+            promptLabel.Text = item + " is plando'd away from its own location and is not placed elsewhere. Choose a location that should give it:";
 
             foreach (string location in locations)
             {
@@ -48,46 +24,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                 _locationCombo.SelectedIndex = 0;
             }
 
-            FlowLayoutPanel buttons = new FlowLayoutPanel
-            {
-                AutoSize = true,
-                FlowDirection = FlowDirection.RightToLeft,
-                WrapContents = false,
-                Dock = DockStyle.Fill
-            };
-
-            Button okButton = new Button
-            {
-                Text = "Add Plando",
-                DialogResult = DialogResult.OK,
-                AutoSize = true,
-                Margin = new Padding(8, 0, 0, 0)
-            };
-            Button cancelButton = new Button
-            {
-                Text = "Cancel",
-                DialogResult = DialogResult.Cancel,
-                AutoSize = true
-            };
-
-            buttons.Controls.Add(okButton);
-            buttons.Controls.Add(cancelButton);
-
-            TableLayoutPanel layout = new TableLayoutPanel
-            {
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                ColumnCount = 1,
-                RowCount = 3,
-                Dock = DockStyle.Fill
-            };
-            layout.Controls.Add(prompt, 0, 0);
-            layout.Controls.Add(_locationCombo, 0, 1);
-            layout.Controls.Add(buttons, 0, 2);
-
-            Controls.Add(layout);
-            AcceptButton = okButton;
-            CancelButton = cancelButton;
             UiTheme.ApplyToForm(this);
         }
 

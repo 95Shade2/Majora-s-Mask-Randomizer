@@ -47,7 +47,6 @@ namespace Majora_s_Mask_Randomizer_GUI
         public LogicEditor()
         {
             InitializeComponent();
-            ApplyModernLayout();
         }
 
         private void LogicEditor_Load(object sender, EventArgs e)

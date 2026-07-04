@@ -22,11 +22,72 @@ namespace Majora_s_Mask_Randomizer_GUI
         public pmc()
         {
             InitializeComponent();
-            ApplyModernLayout();
+            FitCompactLayout();
+        }
+
+        private const int ColorDialogContentWidth = 396;
+        private const int ColorGroupHeight = 204;
+        private const int ColorRowHeight = 32;
+
+        public void FitCompactLayout()
+        {
+            AutoScaleMode = AutoScaleMode.None;
+            AutoSize = false;
+            MinimumSize = new Size(420, 560);
+            ClientSize = new Size(440, 580);
+
+            scrollPanel.Dock = DockStyle.Fill;
+
+            rootTable.AutoSize = true;
+            rootTable.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            rootTable.Dock = DockStyle.Top;
+            rootTable.MaximumSize = new Size(ColorDialogContentWidth + 44, 0);
+
+            toggleBar.AutoSize = true;
+            toggleBar.Dock = DockStyle.None;
+            toggleBar.MaximumSize = new Size(ColorDialogContentWidth, 0);
+
+            ApplyColorGroupLayout(groupBox1, pauseMenuTable, bottomMargin: true);
+            ApplyColorGroupLayout(groupBox2, tunicsTable, bottomMargin: false);
+
+            buttonBar.AutoSize = true;
+            buttonBar.Dock = DockStyle.None;
+            Confirm_Button.AutoSize = true;
+            Confirm_Button.Anchor = AnchorStyles.Right;
+            Confirm_Button.MinimumSize = new Size(100, 30);
+
+            RestoreColorSwatchButtonLayout();
+            PerformLayout();
+        }
+
+        private static void ApplyColorGroupLayout(GroupBox groupBox, TableLayoutPanel table, bool bottomMargin)
+        {
+            groupBox.AutoSize = false;
+            groupBox.Dock = DockStyle.Top;
+            groupBox.Width = ColorDialogContentWidth;
+            groupBox.Height = ColorGroupHeight;
+            groupBox.Padding = new Padding(8, 4, 8, 8);
+            groupBox.Margin = bottomMargin ? new Padding(0, 0, 0, 8) : Padding.Empty;
+
+            table.AutoSize = false;
+            table.Dock = DockStyle.Fill;
+            table.Width = ColorDialogContentWidth - 24;
+            table.Height = ColorRowHeight * 5 + 8;
+            table.ColumnStyles.Clear();
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36F));
+            table.RowStyles.Clear();
+            for (int i = 0; i < 5; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.Absolute, ColorRowHeight));
+            }
         }
 
         private void pmc_Load(object sender, EventArgs e)
         {
+            UiTheme.ApplyToForm(this);
+            FitCompactLayout();
             Check_To_Button = new Dictionary<CheckBox, Button>();
             Check_To_Color = new Dictionary<CheckBox, ColorDialog>();
             Check_To_ID = new Dictionary<CheckBox, string>();
@@ -220,6 +281,71 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             parent.color_menu_form = new pmc();
             showing = false;
+        }
+
+        private void checkAllButton_Click(object sender, EventArgs e)
+        {
+            SetRandomColorChecks(true);
+        }
+
+        private void uncheckAllButton_Click(object sender, EventArgs e)
+        {
+            SetRandomColorChecks(false);
+        }
+
+        private void SetRandomColorChecks(bool value)
+        {
+            CheckBox[] checks =
+            {
+                ItemScreen_Checkbox,
+                MapScreen_Checkbox,
+                QuestScreen_Checkbox,
+                MaskScreen_Checkbox,
+                NamePlate_Checkbox,
+                LinkColor_Checkbox,
+                DekuColor_Checkbox,
+                GoronColor_Checkbox,
+                ZoraColor_Checkbox,
+                FDColor_Checkbox
+            };
+
+            foreach (CheckBox check in checks)
+            {
+                check.Checked = value;
+            }
+        }
+
+        private void RestoreColorSwatchButtonLayout()
+        {
+            Button[] colorButtons =
+            {
+                ItemSelect_Button,
+                MapScreen_Button,
+                Quest_Button,
+                MaskScreen_Button,
+                NamePlate_Button,
+                LinkColor_Button,
+                DekuColor_Button,
+                GoronColor_Button,
+                ZoraColor_Button,
+                FDColor_Button
+            };
+
+            foreach (Button button in colorButtons)
+            {
+                StyleColorSwatchButton(button);
+            }
+        }
+
+        private static void StyleColorSwatchButton(Button colorButton)
+        {
+            colorButton.Tag = "ColorSwatch";
+            colorButton.AutoSize = false;
+            colorButton.MinimumSize = Size.Empty;
+            colorButton.Size = new Size(28, 30);
+            colorButton.Margin = Padding.Empty;
+            colorButton.Anchor = AnchorStyles.None;
+            colorButton.UseVisualStyleBackColor = false;
         }
     }
 }
