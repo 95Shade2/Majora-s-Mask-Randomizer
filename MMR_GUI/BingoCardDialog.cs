@@ -76,6 +76,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.Controls.Add(_statusLabel, 0, 3);
             Controls.Add(root);
             FormClosed += (s, e) => ClosePopouts();
+            UiTheme.ApplyToForm(this);
         }
 
         public void RefreshFromMainWindow()
@@ -124,7 +125,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             bool seedRerolled = _card.RerollCount > 0;
             _effectiveSeedLabel.Text = "Generation seed: " + _card.EffectiveSeed
                 + (seedRerolled ? " (rerolled)" : "");
-            _effectiveSeedLabel.ForeColor = seedRerolled ? Color.DarkOrange : SystemColors.ControlText;
+            _effectiveSeedLabel.ForeColor = seedRerolled ? UiTheme.Current.WarningForeColor : UiTheme.Current.ForeColor;
             _poolHashLabel.Text = "Pool hash (" + BingoGoalValidator.PoolHashVersion + "): " + _card.PoolHash;
             _rerollLabel.Text = _card.RerollCount > 0
                 ? "Rerolls: " + _card.RerollCount
@@ -369,7 +370,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             rerollLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
             viewRerollLogButton = new Button { Text = "View reroll log", AutoSize = true, Enabled = false };
             viewRerollLogButton.Click += ViewRerollLogClicked;
-            warningLabel = new Label { AutoSize = true, ForeColor = Color.DarkRed, Anchor = AnchorStyles.Left };
+            warningLabel = new Label { AutoSize = true, ForeColor = UiTheme.Current.WarningForeColor, Anchor = AnchorStyles.Left };
 
             table.Controls.Add(new Label { Text = "ROM seed", AutoSize = true }, 0, 0);
             table.Controls.Add(romSeedBox, 1, 0);
@@ -441,7 +442,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Text = "L-click forward / R-click backward on goals. L-click row/col headers for vertical popout, R-click for horizontal.",
                 AutoSize = true,
-                ForeColor = SystemColors.GrayText,
+                ForeColor = UiTheme.Current.HintForeColor,
                 Padding = new Padding(0, 4, 0, 0),
                 MaximumSize = new Size(940, 0)
             };
@@ -520,7 +521,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                         MinimumSize = Size.Empty,
                         TextAlign = ContentAlignment.MiddleCenter,
                         FlatStyle = FlatStyle.Standard,
-                        Font = new Font(Font.FontFamily, 8F)
+                        Font = new Font(Font.FontFamily, 8F),
+                        Tag = row * 5 + col,
+                        UseVisualStyleBackColor = false
                     };
                     cell.MouseDown += (s, e) => CellMouseDown(rowIndex, colIndex, e);
                     _cells[row, col] = cell;

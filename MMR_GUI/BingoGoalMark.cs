@@ -23,21 +23,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public static Color GetBackColor(int state)
         {
-            switch (state)
-            {
-                case 1:
-                    return Color.FromArgb(200, 230, 201);
-                case 2:
-                    return Color.FromArgb(255, 205, 210);
-                case 3:
-                    return Color.FromArgb(255, 224, 178);
-                case 4:
-                    return Color.FromArgb(187, 222, 251);
-                case 5:
-                    return Color.FromArgb(225, 190, 231);
-                default:
-                    return SystemColors.Control;
-            }
+            return UiTheme.Current.GetMarkColor(state);
         }
 
         public static string GetHtmlClass(int state)

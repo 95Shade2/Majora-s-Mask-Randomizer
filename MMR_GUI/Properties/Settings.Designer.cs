@@ -26,5 +26,20 @@ namespace Majora_s_Mask_Randomizer_GUI.Properties
                                 return defaultInstance;
                         }
                 }
+
+                [global::System.Configuration.UserScopedSettingAttribute()]
+                [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+                [global::System.Configuration.DefaultSettingValueAttribute("False")]
+                public bool UseLightTheme
+                {
+                        get
+                        {
+                                return ((bool)(this["UseLightTheme"]));
+                        }
+                        set
+                        {
+                                this["UseLightTheme"] = value;
+                        }
+                }
         }
 }

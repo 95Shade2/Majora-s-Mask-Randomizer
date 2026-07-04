@@ -61,6 +61,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Icon = ownerForm.Icon;
             }
+
+            UiTheme.ApplyToForm(this);
         }
 
         public static void ShowForCard(BingoCard card, IWin32Window owner)

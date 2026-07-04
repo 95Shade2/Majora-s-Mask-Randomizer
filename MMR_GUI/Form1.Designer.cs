@@ -27,7 +27,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Window));
             this.Pools_Label = new System.Windows.Forms.Label();
-            this.Pool_Tabs = new System.Windows.Forms.TabControl();
+            this.Pool_Tabs = new Majora_s_Mask_Randomizer_GUI.ThemedTabControl();
             this.Create_Pool_Textbox = new System.Windows.Forms.TextBox();
             this.Create_Pool_Label = new System.Windows.Forms.Label();
             this.Create_Pool_Button = new System.Windows.Forms.Button();
@@ -56,7 +56,7 @@
             this.Tunic_Label = new System.Windows.Forms.Label();
             this.Tunic_ColorDialog = new System.Windows.Forms.ColorDialog();
             this.Tunic_Button = new System.Windows.Forms.Button();
-            this.Items_Tab = new System.Windows.Forms.TabControl();
+            this.Items_Tab = new Majora_s_Mask_Randomizer_GUI.ThemedTabControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createWadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1028,7 +1028,7 @@
                 #endregion
 
                 private System.Windows.Forms.Label Pools_Label;
-                private System.Windows.Forms.TabControl Pool_Tabs;
+                private Majora_s_Mask_Randomizer_GUI.ThemedTabControl Pool_Tabs;
                 private System.Windows.Forms.TextBox Create_Pool_Textbox;
                 private System.Windows.Forms.Label Create_Pool_Label;
                 private System.Windows.Forms.Button Create_Pool_Button;
@@ -1057,7 +1057,7 @@
                 private System.Windows.Forms.Label Tunic_Label;
                 private System.Windows.Forms.ColorDialog Tunic_ColorDialog;
                 private System.Windows.Forms.Button Tunic_Button;
-                private System.Windows.Forms.TabControl Items_Tab;
+                private Majora_s_Mask_Randomizer_GUI.ThemedTabControl Items_Tab;
                 private System.Windows.Forms.MenuStrip menuStrip1;
                 private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem createWadToolStripMenuItem;

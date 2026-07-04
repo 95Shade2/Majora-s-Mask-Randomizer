@@ -88,6 +88,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Controls.Add(layout);
             AcceptButton = okButton;
             CancelButton = cancelButton;
+            UiTheme.ApplyToForm(this);
         }
 
         public static bool TryResolve(

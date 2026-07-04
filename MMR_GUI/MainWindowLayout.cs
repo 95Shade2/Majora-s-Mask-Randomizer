@@ -1,12 +1,16 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using Majora_s_Mask_Randomizer_GUI.Properties;
 
 namespace Majora_s_Mask_Randomizer_GUI
 {
     public partial class Main_Window
     {
         private SplitContainer _mainSplit;
+        private ThemeToggleSlider _themeToggle;
+        private Panel _itemsTabHost;
         private const int SettingsLabelWidth = 132;
         private const int SettingsFieldWidth = 220;
         private const int SettingsButtonWidth = 80;
@@ -34,6 +38,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             Panel leftPanel = new Panel { Dock = DockStyle.Fill };
             leftPanel.Controls.Add(Items_Tab);
+            _itemsTabHost = leftPanel;
 
             TableLayoutPanel rightPanel = new TableLayoutPanel
             {
@@ -74,7 +79,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             settingsToolStripMenuItem.Visible = false;
 
             TabCategoryIcons.ConfigureCategoryTabs(Items_Tab);
+            TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
             UiTheme.EnableDoubleBuffer(Items_Tab);
+            AttachThemeToggleToTabStrip();
             Items_Tab.SelectedIndex = 0;
 
             ResumeLayout(true);
@@ -127,6 +134,108 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.Controls.Add(BuildBingoGroup(), 0, 5);
 
             return root;
+        }
+
+        private void AttachThemeToggleToTabStrip()
+        {
+            if (_itemsTabHost == null)
+            {
+                return;
+            }
+
+            if (_themeToggle == null)
+            {
+                _themeToggle = new ThemeToggleSlider
+                {
+                    Checked = Settings.Default.UseLightTheme
+                };
+                _themeToggle.CheckedChanged += Theme_Toggle_CheckedChanged;
+                _itemsTabHost.Controls.Add(_themeToggle);
+            }
+
+            _themeToggle.ApplyTheme();
+            PositionThemeToggle();
+
+            Items_Tab.Layout -= Items_Tab_TabStripLayoutChanged;
+            Items_Tab.Layout += Items_Tab_TabStripLayoutChanged;
+            Items_Tab.Resize -= Items_Tab_TabStripLayoutChanged;
+            Items_Tab.Resize += Items_Tab_TabStripLayoutChanged;
+            Items_Tab.SelectedIndexChanged -= Items_Tab_TabStripLayoutChanged;
+            Items_Tab.SelectedIndexChanged += Items_Tab_TabStripLayoutChanged;
+            _itemsTabHost.Resize -= Items_Tab_TabStripLayoutChanged;
+            _itemsTabHost.Resize += Items_Tab_TabStripLayoutChanged;
+        }
+
+        private void Items_Tab_TabStripLayoutChanged(object sender, EventArgs e)
+        {
+            PositionThemeToggle();
+        }
+
+        private void PositionThemeToggle()
+        {
+            if (_themeToggle == null || Items_Tab.TabCount == 0)
+            {
+                return;
+            }
+
+            Rectangle lastTab = Items_Tab.GetTabRect(Items_Tab.TabCount - 1);
+            int stripHeight = lastTab.Bottom;
+            int x = Items_Tab.Left + lastTab.Right + 8;
+            int y = Items_Tab.Top + Math.Max(0, (stripHeight - _themeToggle.Height) / 2);
+            _themeToggle.Location = new Point(x, y);
+            _themeToggle.BringToFront();
+        }
+
+        private void Theme_Toggle_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.UseLightTheme = _themeToggle.Checked;
+            Settings.Default.Save();
+            UiTheme.SetDarkMode(!_themeToggle.Checked);
+            RefreshTheme();
+        }
+
+        private void RefreshTheme()
+        {
+            UiTheme.ApplyToForm(this);
+            UiTheme.StylePrimaryButton(Randomize_Button);
+            TabCategoryIcons.ConfigureCategoryTabs(Items_Tab);
+            TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
+            _themeToggle?.ApplyTheme();
+            PositionThemeToggle();
+
+            if (color_menu_form != null)
+            {
+                UiTheme.ApplyToForm(color_menu_form);
+            }
+
+            if (Wallet_Form != null)
+            {
+                UiTheme.ApplyToForm(Wallet_Form);
+            }
+
+            if (logic_editor != null)
+            {
+                UiTheme.ApplyToForm(logic_editor);
+            }
+
+            if (cs != null)
+            {
+                UiTheme.ApplyToForm(cs);
+            }
+
+            Items_Tab.Invalidate();
+
+            if (Pool_Tables != null)
+            {
+                foreach (ListView list in Pool_Tables.Values)
+                {
+                    PoolListView.ApplyTheme(list);
+                }
+            }
+
+            PoolListView.ApplyTheme(Plando_List);
+            PoolListView.ApplyTheme(Pool_Issues_List);
+            RefreshPlandoUi();
         }
 
         private GroupBox BuildBingoGroup()
@@ -266,19 +375,11 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             Pool_Issues_List = new ListView
             {
-                View = View.Details,
-                FullRowSelect = true,
-                MultiSelect = false,
-                HideSelection = false,
                 Height = 96,
-                Width = plandoListWidth,
-                HeaderStyle = ColumnHeaderStyle.Nonclickable,
-                OwnerDraw = true
+                Width = plandoListWidth
             };
             Pool_Issues_List.Columns.Add("Issue", plandoListWidth - 8);
-            Pool_Issues_List.DrawColumnHeader += Pool_Issues_DrawColumnHeader;
-            Pool_Issues_List.DrawItem += Pool_Issues_DrawItem;
-            Pool_Issues_List.DrawSubItem += Pool_Issues_DrawSubItem;
+            PoolListView.ConfigureIssueList(Pool_Issues_List);
             PrepareReparentedControl(Pool_Issues_List);
             Pool_Issues_List.Margin = new Padding(0, 0, 0, 4);
             table.Controls.Add(Pool_Issues_List, 0, 5);
@@ -508,7 +609,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Open_Base_Rom_Button.Margin = new Padding(0, 0, 0, 4);
             Base_Rom_Label.AutoSize = true;
             Base_Rom_Label.MaximumSize = new Size(SettingsFieldWidth, 0);
-            Base_Rom_Label.ForeColor = SystemColors.GrayText;
+            Base_Rom_Label.ForeColor = UiTheme.Current.HintForeColor;
             Base_Rom_Label.Font = UiTheme.Current.HintFont;
             Base_Rom_Label.Margin = Padding.Empty;
             Base_Rom_Label.Anchor = AnchorStyles.Left | AnchorStyles.Top;
@@ -547,7 +648,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             PrepareReparentedControl(label20);
             label20.AutoSize = true;
             label20.Font = UiTheme.Current.HintFont;
-            label20.ForeColor = SystemColors.GrayText;
+            label20.ForeColor = UiTheme.Current.HintForeColor;
             label20.MaximumSize = new Size(SettingsFieldWidth, 0);
             label20.Margin = new Padding(0, 0, 0, 2);
             table.Controls.Add(label20, 1, 4);
@@ -589,40 +690,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Padding = new Padding(10, 6, 12, 10),
                 Margin = new Padding(0, 0, 0, 8)
             };
-        }
-
-        private static void Pool_Issues_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
-        {
-            e.DrawDefault = true;
-        }
-
-        private static void Pool_Issues_DrawItem(object sender, DrawListViewItemEventArgs e)
-        {
-            e.DrawDefault = false;
-        }
-
-        private static void Pool_Issues_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
-        {
-            ListView list = e.Item.ListView;
-            Color back = e.Item.Selected
-                ? SystemColors.Highlight
-                : (e.ItemIndex % 2 == 0 ? Color.White : Color.FromArgb(242, 245, 250));
-            Color fore = e.Item.Selected
-                ? SystemColors.HighlightText
-                : Color.FromArgb(180, 40, 40);
-
-            using (SolidBrush brush = new SolidBrush(back))
-            {
-                e.Graphics.FillRectangle(brush, e.Bounds);
-            }
-
-            TextRenderer.DrawText(
-                e.Graphics,
-                e.SubItem.Text,
-                list.Font,
-                e.Bounds,
-                fore,
-                TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
         }
     }
 }

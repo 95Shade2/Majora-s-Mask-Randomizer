@@ -7,10 +7,6 @@ namespace Majora_s_Mask_Randomizer_GUI
 {
     internal static class TabCategoryIcons
     {
-        private static readonly Color IconColor = Color.FromArgb(55, 55, 60);
-        private static readonly Color SelectedIconColor = Color.FromArgb(98, 0, 234);
-        private static readonly Color SelectedTextColor = Color.FromArgb(98, 0, 234);
-
         private static ImageList _imageList;
         private static Font _selectedTabFont;
 
@@ -27,6 +23,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public static void ConfigureCategoryTabs(TabControl tabControl)
         {
+            UiTheme.ApplyTabControlTheme(tabControl);
             _imageList = BuildImageList();
 
             tabControl.ImageList = _imageList;
@@ -36,6 +33,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             tabControl.Padding = new Point(12, 4);
             tabControl.DrawItem -= DrawCategoryTab;
             tabControl.DrawItem += DrawCategoryTab;
+            tabControl.SelectedIndexChanged -= TabControl_SelectedIndexChanged;
+            tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
 
             foreach (TabPage page in tabControl.TabPages)
             {
@@ -47,19 +46,150 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
-        private static void DrawCategoryTab(object sender, DrawItemEventArgs e)
+        public static void ConfigureTextTabs(TabControl tabControl)
         {
+            UiTheme.ApplyTabControlTheme(tabControl);
+            tabControl.ImageList = null;
+            tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tabControl.SizeMode = TabSizeMode.Fixed;
+            tabControl.ItemSize = MeasureTextTabItemSize(tabControl);
+            tabControl.Padding = new Point(10, 4);
+            tabControl.DrawItem -= DrawCategoryTab;
+            tabControl.DrawItem -= DrawTextTab;
+            tabControl.DrawItem += DrawTextTab;
+            tabControl.SelectedIndexChanged -= TabControl_SelectedIndexChanged;
+            tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
+
+            foreach (TabPage page in tabControl.TabPages)
+            {
+                page.ImageIndex = -1;
+                page.ImageKey = null;
+            }
+
+            if (tabControl.TabCount > 0)
+            {
+                tabControl.Invalidate(new Rectangle(0, 0, tabControl.Width, tabControl.GetTabRect(0).Bottom));
+            }
+        }
+
+        private static Size MeasureTextTabItemSize(TabControl tabControl)
+        {
+            const int horizontalPadding = 24;
+            const int tabHeight = 30;
+            int maxWidth = 52;
+
+            if (tabControl.TabCount == 0)
+            {
+                return new Size(maxWidth, tabHeight);
+            }
+
+            using (Font selectedFont = new Font(tabControl.Font, FontStyle.Bold))
+            {
+                foreach (TabPage page in tabControl.TabPages)
+                {
+                    Size normalSize = TextRenderer.MeasureText(
+                        page.Text,
+                        tabControl.Font,
+                        Size.Empty,
+                        TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                    Size selectedSize = TextRenderer.MeasureText(
+                        page.Text,
+                        selectedFont,
+                        Size.Empty,
+                        TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                    maxWidth = Math.Max(maxWidth, Math.Max(normalSize.Width, selectedSize.Width) + horizontalPadding);
+                }
+            }
+
+            return new Size(maxWidth, tabHeight);
+        }
+
+        private static void DrawTextTab(object sender, DrawItemEventArgs e)
+        {
+            ThemePalette theme = UiTheme.Current;
             TabControl tabs = (TabControl)sender;
             TabPage page = tabs.TabPages[e.Index];
             bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+            bool isLastTab = e.Index == tabs.TabCount - 1;
 
-            Color backColor = selected ? SystemColors.Window : tabs.BackColor;
-            Color textColor = selected ? SelectedTextColor : SystemColors.ControlText;
-            Color iconColor = selected ? SelectedIconColor : IconColor;
+            Color backColor = selected ? theme.TabSelectedBackColor : theme.TabUnselectedBackColor;
+            Color textColor = selected ? theme.TabSelectedAccentColor : theme.TabForeColor;
 
             using (SolidBrush backBrush = new SolidBrush(backColor))
             {
                 e.Graphics.FillRectangle(backBrush, e.Bounds);
+            }
+
+            if (!selected)
+            {
+                using (Pen borderPen = new Pen(theme.BorderColor))
+                {
+                    Rectangle border = e.Bounds;
+                    border.Width -= 1;
+                    border.Height -= 1;
+                    e.Graphics.DrawRectangle(borderPen, border);
+                }
+            }
+
+            Font drawFont = selected ? GetSelectedTabFont(tabs.Font) : tabs.Font;
+            TextRenderer.DrawText(
+                e.Graphics,
+                page.Text,
+                drawFont,
+                new Rectangle(e.Bounds.X + 10, e.Bounds.Y, e.Bounds.Width - 14, e.Bounds.Height),
+                textColor,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
+
+            if (isLastTab)
+            {
+                int stripHeight = tabs.GetTabRect(0).Bottom;
+                int gapLeft = e.Bounds.Right;
+                int gapWidth = tabs.ClientSize.Width - gapLeft;
+                if (gapWidth > 0)
+                {
+                    using (SolidBrush stripBrush = new SolidBrush(theme.TabStripBackColor))
+                    {
+                        e.Graphics.FillRectangle(stripBrush, gapLeft, 0, gapWidth, stripHeight);
+                    }
+                }
+            }
+        }
+
+        private static void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl tabs = (TabControl)sender;
+            if (tabs.TabCount > 0)
+            {
+                tabs.Invalidate(new Rectangle(0, 0, tabs.Width, tabs.GetTabRect(0).Bottom));
+            }
+        }
+
+        private static void DrawCategoryTab(object sender, DrawItemEventArgs e)
+        {
+            ThemePalette theme = UiTheme.Current;
+            TabControl tabs = (TabControl)sender;
+            TabPage page = tabs.TabPages[e.Index];
+            bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+            bool isLastTab = e.Index == tabs.TabCount - 1;
+
+            Color backColor = selected ? theme.TabSelectedBackColor : theme.TabUnselectedBackColor;
+            Color textColor = selected ? theme.TabSelectedAccentColor : theme.TabForeColor;
+            Color iconColor = selected ? theme.TabSelectedAccentColor : theme.TabIconColor;
+
+            using (SolidBrush backBrush = new SolidBrush(backColor))
+            {
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
+            }
+
+            if (!selected)
+            {
+                using (Pen borderPen = new Pen(theme.BorderColor))
+                {
+                    Rectangle border = e.Bounds;
+                    border.Width -= 1;
+                    border.Height -= 1;
+                    e.Graphics.DrawRectangle(borderPen, border);
+                }
             }
 
             int iconSize = 16;
@@ -75,6 +205,20 @@ namespace Majora_s_Mask_Randomizer_GUI
                 new Rectangle(iconX + iconSize + 6, e.Bounds.Y, e.Bounds.Width - iconSize - 14, e.Bounds.Height),
                 textColor,
                 TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+
+            if (isLastTab)
+            {
+                int stripHeight = tabs.GetTabRect(0).Bottom;
+                int gapLeft = e.Bounds.Right;
+                int gapWidth = tabs.ClientSize.Width - gapLeft;
+                if (gapWidth > 0)
+                {
+                    using (SolidBrush stripBrush = new SolidBrush(theme.TabStripBackColor))
+                    {
+                        e.Graphics.FillRectangle(stripBrush, gapLeft, 0, gapWidth, stripHeight);
+                    }
+                }
+            }
         }
 
         private static Font GetSelectedTabFont(Font baseFont)
@@ -90,19 +234,20 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private static ImageList BuildImageList()
         {
+            ThemePalette theme = UiTheme.Current;
             ImageList list = new ImageList
             {
                 ImageSize = new Size(16, 16),
                 ColorDepth = ColorDepth.Depth32Bit
             };
 
-            list.Images.Add(DrawIconBitmap("Settings", IconColor));
-            list.Images.Add(DrawIconBitmap("Items", IconColor));
-            list.Images.Add(DrawIconBitmap("Masks", IconColor));
-            list.Images.Add(DrawIconBitmap("Bottles", IconColor));
-            list.Images.Add(DrawIconBitmap("Songs", IconColor));
-            list.Images.Add(DrawIconBitmap("Rupees", IconColor));
-            list.Images.Add(DrawIconBitmap("Maps/Others", IconColor));
+            list.Images.Add(DrawIconBitmap("Settings", theme.TabIconColor));
+            list.Images.Add(DrawIconBitmap("Items", theme.TabIconColor));
+            list.Images.Add(DrawIconBitmap("Masks", theme.TabIconColor));
+            list.Images.Add(DrawIconBitmap("Bottles", theme.TabIconColor));
+            list.Images.Add(DrawIconBitmap("Songs", theme.TabIconColor));
+            list.Images.Add(DrawIconBitmap("Rupees", theme.TabIconColor));
+            list.Images.Add(DrawIconBitmap("Maps/Others", theme.TabIconColor));
 
             return list;
         }

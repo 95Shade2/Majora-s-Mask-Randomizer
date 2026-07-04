@@ -59,7 +59,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                     Margin = new Padding(3),
                     TextAlign = ContentAlignment.MiddleCenter,
                     Font = new Font(Font.FontFamily, 8F),
-                    Tag = index
+                    Tag = index,
+                    UseVisualStyleBackColor = false
                 };
                 ApplyCellStyle(cell, index);
                 cell.MouseDown += Cell_MouseDown;
@@ -76,6 +77,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             Controls.Add(layout);
+            UiTheme.ApplyToForm(this);
+            RefreshCells();
         }
 
         private void Cell_MouseDown(object sender, MouseEventArgs e)

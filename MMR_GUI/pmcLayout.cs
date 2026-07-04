@@ -49,9 +49,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             label6.AutoSize = true;
+            label6.Tag = "Hint";
             label6.Margin = new Padding(0, 0, 0, 8);
-            label6.ForeColor = SystemColors.GrayText;
-            label6.Font = UiTheme.Current.HintFont;
             label6.Text = "Check a box to use a random color instead of the picker.";
 
             FlowLayoutPanel toggleBar = new FlowLayoutPanel
@@ -130,7 +129,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Height = ColorRowHeight * 5 + 8
             };
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36F));
             for (int i = 0; i < 5; i++)
             {
@@ -177,7 +176,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Height = ColorRowHeight * 5 + 8
             };
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36F));
             for (int i = 0; i < 5; i++)
             {
@@ -210,9 +209,12 @@ namespace Majora_s_Mask_Randomizer_GUI
             label.Anchor = AnchorStyles.Left;
             label.Margin = new Padding(0, 6, 4, 0);
 
-            checkBox.AutoSize = true;
+            checkBox.AutoSize = false;
+            checkBox.Text = string.Empty;
+            checkBox.Size = new Size(22, 22);
+            checkBox.MinimumSize = new Size(18, 18);
             checkBox.Anchor = AnchorStyles.None;
-            checkBox.Margin = new Padding(0);
+            checkBox.Margin = Padding.Empty;
 
             StyleColorSwatchButton(colorButton);
 
@@ -279,6 +281,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private static void StyleColorSwatchButton(Button colorButton)
         {
+            colorButton.Tag = "ColorSwatch";
             colorButton.AutoSize = false;
             colorButton.MinimumSize = Size.Empty;
             colorButton.Size = new Size(28, 30);

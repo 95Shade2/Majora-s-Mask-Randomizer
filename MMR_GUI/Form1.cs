@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using Majora_s_Mask_Randomizer_GUI.Properties;
 
 namespace Majora_s_Mask_Randomizer_GUI
 {
@@ -43,7 +44,6 @@ namespace Majora_s_Mask_Randomizer_GUI
         Button Pool_Issue_Ignore_Button;
         HashSet<string> Ignored_Pool_Issues;
         bool _suppressPlandoRefresh;
-        private static readonly Color PlandoRowBackColor = Color.FromArgb(245, 248, 252);
         string TARGETING;
         bool DEBUG;
         string debug_path;
@@ -84,6 +84,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public Main_Window()
         {
+            UiTheme.SetDarkMode(!Settings.Default.UseLightTheme);
             InitializeComponent();
 
             Item_Objects = ItemTabBuilder.Build(
@@ -176,6 +177,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Targeting_Switch.Select();
 
             Items_Tab.SelectedIndex = 0;
+            TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
             RefreshPlandoUi();
         }
 
@@ -236,6 +238,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             Plando_List.Columns.Add("Location", 220);
             Plando_List.Columns.Add("Item", 220);
+            PoolListView.ConfigureDetailsList(Plando_List, showHeaders: true);
             Plando_Add_Button.Click += Plando_Add_Button_Click;
             Plando_Remove_Button.Click += Plando_Remove_Button_Click;
             Plando_List.SelectedIndexChanged += Plando_List_SelectedIndexChanged;
@@ -1648,6 +1651,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             New_Tab.Controls.Add(poolList);
 
             Pool_Tabs.TabPages.Add(New_Tab);
+            TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
         }
 
         private void Create_Pool_Button_Click(object sender, EventArgs e)
@@ -1878,10 +1882,12 @@ namespace Majora_s_Mask_Randomizer_GUI
             ComboBox gives = Item_Objects[location].Get_Gives();
 
             check.Text = location;
-            check.ForeColor = SystemColors.ControlText;
-            check.BackColor = SystemColors.Control;
-            pool.BackColor = SystemColors.Window;
-            gives.BackColor = SystemColors.Window;
+            check.ForeColor = UiTheme.Current.ForeColor;
+            check.BackColor = UiTheme.Current.PanelBackColor;
+            pool.BackColor = UiTheme.Current.ControlBackColor;
+            pool.ForeColor = UiTheme.Current.ControlForeColor;
+            gives.BackColor = UiTheme.Current.ControlBackColor;
+            gives.ForeColor = UiTheme.Current.ControlForeColor;
             pool.Enabled = check.Checked;
             gives.Enabled = check.Checked;
         }
@@ -1911,20 +1917,22 @@ namespace Majora_s_Mask_Randomizer_GUI
                 {
                     string reward = Plando_Items[itemName];
                     check.Text = itemName + " \u2192 " + reward;
-                    check.ForeColor = SystemColors.GrayText;
-                    check.BackColor = PlandoRowBackColor;
-                    pool.BackColor = PlandoRowBackColor;
-                    gives.BackColor = PlandoRowBackColor;
+                    check.ForeColor = UiTheme.Current.HintForeColor;
+                    check.BackColor = UiTheme.Current.PlandoRowBackColor;
+                    pool.BackColor = UiTheme.Current.PlandoRowBackColor;
+                    gives.BackColor = UiTheme.Current.PlandoRowBackColor;
                     pool.Enabled = false;
                     gives.Enabled = false;
                 }
                 else
                 {
                     check.Text = itemName;
-                    check.ForeColor = SystemColors.ControlText;
-                    check.BackColor = SystemColors.Control;
-                    pool.BackColor = SystemColors.Window;
-                    gives.BackColor = SystemColors.Window;
+                    check.ForeColor = UiTheme.Current.ForeColor;
+                    check.BackColor = UiTheme.Current.PanelBackColor;
+                    pool.BackColor = UiTheme.Current.ControlBackColor;
+                    pool.ForeColor = UiTheme.Current.ControlForeColor;
+                    gives.BackColor = UiTheme.Current.ControlBackColor;
+                    gives.ForeColor = UiTheme.Current.ControlForeColor;
                     pool.Enabled = check.Checked;
                     gives.Enabled = check.Checked;
                 }
@@ -2183,6 +2191,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             //change the tab name to the new pool name
             Pool_Tabs.TabPages[index].Text = New;
+            TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
 
             Change_Pool_Name_Textbox.Text = "";
         }
@@ -2273,6 +2282,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Item_Pools_Keys = Fix_Keys(Item_Pools_Keys);
 
                 Pool_Tabs.TabPages.Remove(Pool_Tabs.TabPages[index]);
+                TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
                 
                 for (int i = 0; i < Item_Names.Length; i++)
                 {

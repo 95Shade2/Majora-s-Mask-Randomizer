@@ -310,9 +310,11 @@ namespace Majora_s_Mask_Randomizer_GUI
                 checkBox.Parent.Controls.Remove(checkBox);
             }
 
-            checkBox.AutoSize = true;
+            checkBox.AutoSize = false;
             checkBox.Visible = true;
             checkBox.Text = string.Empty;
+            checkBox.Size = new Size(22, 22);
+            checkBox.MinimumSize = new Size(18, 18);
             checkBox.Margin = Padding.Empty;
 
             Panel cell = new Panel
@@ -331,6 +333,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             cell.Resize += (sender, args) => CenterCheckBox();
             cell.Layout += (sender, args) => CenterCheckBox();
+            CenterCheckBox();
             return cell;
         }
     }
