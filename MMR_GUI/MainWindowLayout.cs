@@ -109,9 +109,10 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 1,
-                RowCount = 5,
+                RowCount = 6,
                 Padding = Padding.Empty
             };
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -123,8 +124,43 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.Controls.Add(BuildPlandoGroup(), 0, 2);
             root.Controls.Add(BuildRandomizerOptionsGroup(), 0, 3);
             root.Controls.Add(BuildPatchOptionsGroup(), 0, 4);
+            root.Controls.Add(BuildBingoGroup(), 0, 5);
 
             return root;
+        }
+
+        private GroupBox BuildBingoGroup()
+        {
+            GroupBox group = CreateConfigGroupBox("Bingo Card");
+
+            FlowLayoutPanel flow = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = true,
+                Padding = new Padding(0, 2, 0, 0)
+            };
+
+            Label hint = new Label
+            {
+                AutoSize = true,
+                Text = "Generate an SRL-style bingo card from enabled item pools.",
+                Margin = new Padding(0, 6, 12, 0)
+            };
+
+            Button generateButton = new Button
+            {
+                Text = "Generate Bingo Card",
+                AutoSize = true
+            };
+            StyleSettingsAction(generateButton);
+            generateButton.Click += (sender, args) => OpenBingoCardDialog();
+
+            flow.Controls.Add(hint);
+            flow.Controls.Add(generateButton);
+            group.Controls.Add(flow);
+            return group;
         }
 
         private GroupBox BuildPoolManagementGroup()

@@ -80,6 +80,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         public CutscenesSelector cs;   //the cutscene form that allows the player to choose which cutscenes to shorten/remove
         public pmc color_menu_form;
         public wallets_form Wallet_Form;
+        private BingoCardDialog _bingoDialog;
 
         public Main_Window()
         {
@@ -2603,6 +2604,48 @@ namespace Majora_s_Mask_Randomizer_GUI
                 cs.father = this;
                 cs.Show();
             }
+        }
+
+        internal Dictionary<string, Item> ItemObjectsForBingo
+        {
+            get { return Item_Objects; }
+        }
+
+        internal Dictionary<string, string> PlandoItemsForBingo
+        {
+            get { return Plando_Items; }
+        }
+
+        internal Dictionary<string, Dictionary<int, string>> ItemPoolsForBingo
+        {
+            get { return Item_Pools; }
+        }
+
+        internal bool IsPlandoLocationForBingo(string itemName)
+        {
+            return IsPlandoLocation(itemName);
+        }
+
+        internal string GetRomSeedText()
+        {
+            if (Seed_Textbox == null)
+            {
+                return "";
+            }
+
+            return Seed_Textbox.Text;
+        }
+
+        internal void OpenBingoCardDialog()
+        {
+            if (_bingoDialog == null || _bingoDialog.IsDisposed)
+            {
+                _bingoDialog = new BingoCardDialog(this);
+            }
+
+            _bingoDialog.RefreshFromMainWindow();
+            _bingoDialog.Show();
+            _bingoDialog.BringToFront();
         }
 
         public void Log(string Log_Text)

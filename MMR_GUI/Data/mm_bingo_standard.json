@@ -1,0 +1,1370 @@
+{
+  "version": "standard-v5",
+  "goals": [
+    {
+      "name": "Open Clock Town Chest",
+      "difficulty": 1,
+      "types": [
+        "clocktown"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Deku Mask",
+      "difficulty": 1,
+      "types": [
+        "mask",
+        "deku"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Bomber's Notebook",
+      "difficulty": 1,
+      "types": [
+        "clocktown"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Song of Healing",
+      "difficulty": 1,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Hero's Shield",
+      "difficulty": 1,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Kokiri Sword",
+      "difficulty": 2,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Deku Stick",
+      "difficulty": 2,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Deku Nuts",
+      "difficulty": 2,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Clocktown Map",
+      "difficulty": 2,
+      "types": [
+        "map"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Unlock Odolwa's Door",
+      "difficulty": 2,
+      "types": [
+        "wft",
+        "action"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Sonata of Awakening",
+      "difficulty": 3,
+      "types": [
+        "song",
+        "wft"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Woodfall Map",
+      "difficulty": 3,
+      "types": [
+        "map",
+        "wft"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Woodfall Compass",
+      "difficulty": 3,
+      "types": [
+        "wft"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Woodfall Boss Key",
+      "difficulty": 3,
+      "types": [
+        "wft"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 3 Bottom Row Songs",
+      "difficulty": 3,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Bow",
+      "difficulty": 4,
+      "types": [
+        "item",
+        "wft"
+      ],
+      "requiredItems": [
+        "Bow"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Deku Princess",
+      "difficulty": 4,
+      "types": [
+        "bottle",
+        "wft"
+      ],
+      "requiredItems": [
+        "Deku Princess"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Room Key",
+      "difficulty": 4,
+      "types": [
+        "item",
+        "clocktown"
+      ],
+      "requiredItems": [
+        "Room Key"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Postman's Hat",
+      "difficulty": 4,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Postman's Hat"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Keaton Mask",
+      "difficulty": 4,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Keaton Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Goron Mask",
+      "difficulty": 5,
+      "types": [
+        "mask",
+        "goron"
+      ],
+      "requiredItems": [
+        "Goron Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Powder Keg",
+      "difficulty": 5,
+      "types": [
+        "item",
+        "goron"
+      ],
+      "requiredItems": [
+        "Powder Keg"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Goron Lullaby",
+      "difficulty": 5,
+      "types": [
+        "song",
+        "goron"
+      ],
+      "requiredItems": [
+        "Goron Lullaby"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Lullaby Intro",
+      "difficulty": 5,
+      "types": [
+        "song",
+        "goron"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Snowhead Map",
+      "difficulty": 5,
+      "types": [
+        "map",
+        "sht"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Zora Mask",
+      "difficulty": 6,
+      "types": [
+        "mask",
+        "zora"
+      ],
+      "requiredItems": [
+        "Zora Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Hookshot",
+      "difficulty": 6,
+      "types": [
+        "item",
+        "gbt"
+      ],
+      "requiredItems": [
+        "Hookshot"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get New Wave Bossa Nova",
+      "difficulty": 6,
+      "types": [
+        "song",
+        "zora"
+      ],
+      "requiredItems": [
+        "New Wave Bossa Nova"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Great Bay Map",
+      "difficulty": 6,
+      "types": [
+        "map",
+        "gbt"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Pictograph Box",
+      "difficulty": 6,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Pictograph Box"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Gibdo Mask",
+      "difficulty": 7,
+      "types": [
+        "mask",
+        "ikana"
+      ],
+      "requiredItems": [
+        "Gibdo Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Garo Mask",
+      "difficulty": 7,
+      "types": [
+        "mask",
+        "ikana"
+      ],
+      "requiredItems": [
+        "Garo Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Captain's Hat",
+      "difficulty": 7,
+      "types": [
+        "mask",
+        "ikana"
+      ],
+      "requiredItems": [
+        "Captain's Hat"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Mirror Shield",
+      "difficulty": 7,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Mirror Shield"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Lens of Truth",
+      "difficulty": 7,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Lens of Truth"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Mask of Truth",
+      "difficulty": 8,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Mask of Truth"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Mask of Scents",
+      "difficulty": 8,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Mask of Scents"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Kamaro's Mask",
+      "difficulty": 8,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Kamaro's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Stone Mask",
+      "difficulty": 8,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Stone Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All-Night Mask",
+      "difficulty": 8,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "All-Night Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Romani's Mask",
+      "difficulty": 9,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Romani's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Kafei's Mask",
+      "difficulty": 9,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Kafei's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Couple's Mask",
+      "difficulty": 9,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Couple's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Bunny Hood",
+      "difficulty": 9,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Bunny Hood"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Bremen Mask",
+      "difficulty": 9,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Bremen Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Don Gero's Mask",
+      "difficulty": 10,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Don Gero's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Circus Leader's Mask",
+      "difficulty": 10,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [
+        "Circus Leader's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 5 East Clock Town HPs",
+      "difficulty": 10,
+      "types": [
+        "hp",
+        "clocktown"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 5 Termina Grotto HPs",
+      "difficulty": 10,
+      "types": [
+        "hp",
+        "field"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Postman's Hat HP",
+      "difficulty": 10,
+      "types": [
+        "hp",
+        "clocktown"
+      ],
+      "requiredItems": [
+        "Postman's Hat"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Fire Arrow",
+      "difficulty": 11,
+      "types": [
+        "item",
+        "arrow"
+      ],
+      "requiredItems": [
+        "Fire Arrow"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Ice Arrow",
+      "difficulty": 11,
+      "types": [
+        "item",
+        "arrow"
+      ],
+      "requiredItems": [
+        "Ice Arrow"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Light Arrow",
+      "difficulty": 11,
+      "types": [
+        "item",
+        "arrow"
+      ],
+      "requiredItems": [
+        "Light Arrow"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 7 songs",
+      "difficulty": 11,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Elegy of Emptiness",
+      "difficulty": 11,
+      "types": [
+        "song",
+        "ikana"
+      ],
+      "requiredItems": [
+        "Elegy of Emptiness"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Oath to Order",
+      "difficulty": 12,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [
+        "Oath to Order"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Song of Storms",
+      "difficulty": 12,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [
+        "Song of Storms"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Epona's Song",
+      "difficulty": 12,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [
+        "Epona's Song"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Song of Soaring",
+      "difficulty": 12,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [
+        "Song of Soaring"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 3 Temple Maps and Compasses",
+      "difficulty": 12,
+      "types": [
+        "dungeon"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Fierce Deity Mask",
+      "difficulty": 13,
+      "types": [
+        "mask",
+        "moon"
+      ],
+      "requiredItems": [
+        "Fierce Deity Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Giant's Mask",
+      "difficulty": 13,
+      "types": [
+        "mask",
+        "stt"
+      ],
+      "requiredItems": [
+        "Giant's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Great Fairy's Sword",
+      "difficulty": 13,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Great Fairy's Sword"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Gilded Sword",
+      "difficulty": 13,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Gilded Sword"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Razor Sword",
+      "difficulty": 13,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Razor Sword"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Kill 3 Dinolfos",
+      "difficulty": 14,
+      "types": [
+        "combat"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Open 2 Graves",
+      "difficulty": 14,
+      "types": [
+        "ikana",
+        "action"
+      ],
+      "requiredItems": [
+        "Captain's Hat"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Ghost Hut HP",
+      "difficulty": 14,
+      "types": [
+        "hp",
+        "ikana"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 2 Great Fairy Rewards",
+      "difficulty": 14,
+      "types": [
+        "fairy"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Unbar 5 doors in the Well",
+      "difficulty": 15,
+      "types": [
+        "ikana",
+        "well"
+      ],
+      "requiredItems": [
+        "Gibdo Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Save Sun Mask",
+      "difficulty": 15,
+      "types": [
+        "ikana",
+        "kafei"
+      ],
+      "requiredItems": [
+        "Kafei's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All 4 Business Scrub HPs",
+      "difficulty": 15,
+      "types": [
+        "hp",
+        "scrub"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 20 Total Stray Fairies",
+      "difficulty": 15,
+      "types": [
+        "fairy"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Open 11 Pirates' Fortress area Chests",
+      "difficulty": 16,
+      "types": [
+        "pirates",
+        "gbt"
+      ],
+      "requiredItems": [
+        "Hookshot"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Destroy 15 SHT Ice Blocks",
+      "difficulty": 16,
+      "types": [
+        "sht",
+        "action"
+      ],
+      "requiredItems": [
+        "Goron Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Remove All Blocks from SHT Pillar",
+      "difficulty": 16,
+      "types": [
+        "sht",
+        "action"
+      ],
+      "requiredItems": [
+        "Goron Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 2 Temple Maps, Compasses, and Boss Keys",
+      "difficulty": 16,
+      "types": [
+        "dungeon"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Cremia's Reward (hug or 200 rupees)",
+      "difficulty": 17,
+      "types": [
+        "ranch"
+      ],
+      "requiredItems": [
+        "Romani's Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All Notebook Pictures",
+      "difficulty": 17,
+      "types": [
+        "notebook"
+      ],
+      "requiredItems": [
+        "Bomber's Notebook"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 3 Happiness Seals",
+      "difficulty": 17,
+      "types": [
+        "notebook"
+      ],
+      "requiredItems": [
+        "Bomber's Notebook"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 5 Happiness Seals",
+      "difficulty": 17,
+      "types": [
+        "notebook"
+      ],
+      "requiredItems": [
+        "Bomber's Notebook"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Pictograph of Dancing Redead",
+      "difficulty": 17,
+      "types": [
+        "pictograph"
+      ],
+      "requiredItems": [
+        "Pictograph Box"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 10 Unique Bottle Contents",
+      "difficulty": 18,
+      "types": [
+        "bottle"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Chateau Romani",
+      "difficulty": 18,
+      "types": [
+        "bottle",
+        "ranch"
+      ],
+      "requiredItems": [
+        "Chateau Romani"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Big Poe",
+      "difficulty": 18,
+      "types": [
+        "bottle"
+      ],
+      "requiredItems": [
+        "Big Poe"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Gold Dust",
+      "difficulty": 18,
+      "types": [
+        "bottle",
+        "smithy"
+      ],
+      "requiredItems": [
+        "Gold Dust"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Rock Sirloin Above Head",
+      "difficulty": 18,
+      "types": [
+        "goron",
+        "item"
+      ],
+      "requiredItems": [
+        "Goron Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Clear All Chest Icons on Woodfall Map",
+      "difficulty": 19,
+      "types": [
+        "map",
+        "wft"
+      ],
+      "requiredItems": [
+        "Woodfall Map"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Clear All Chest Icons on Snowhead Map",
+      "difficulty": 19,
+      "types": [
+        "map",
+        "sht"
+      ],
+      "requiredItems": [
+        "Snowhead Map"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Clear All Chest Icons on Great Bay Map",
+      "difficulty": 19,
+      "types": [
+        "map",
+        "gbt"
+      ],
+      "requiredItems": [
+        "Great Bay Map"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Clear All Chest Icons on Stone Tower Map",
+      "difficulty": 19,
+      "types": [
+        "map",
+        "stt"
+      ],
+      "requiredItems": [
+        "Stone Tower Map"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Open chest of Magic Beans",
+      "difficulty": 19,
+      "types": [
+        "stt"
+      ],
+      "requiredItems": [
+        "Magic Beans"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Giant Wallet",
+      "difficulty": 20,
+      "types": [
+        "wallet"
+      ],
+      "requiredItems": [
+        "Giant Wallet"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Adult Wallet",
+      "difficulty": 20,
+      "types": [
+        "wallet"
+      ],
+      "requiredItems": [
+        "Adult Wallet"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Big Bomb Bag",
+      "difficulty": 20,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Big Bomb Bag"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Largest Quiver",
+      "difficulty": 20,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Largest Quiver"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Diagonal of 4 Item Slots",
+      "difficulty": 20,
+      "types": [
+        "inventory"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "No Hidden Owl Statue",
+      "difficulty": 21,
+      "types": [
+        "clocktown",
+        "action"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Moon's Tear",
+      "difficulty": 21,
+      "types": [
+        "item",
+        "clocktown"
+      ],
+      "requiredItems": [
+        "Moon's Tear"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Pendant of Memories",
+      "difficulty": 21,
+      "types": [
+        "item",
+        "kafei"
+      ],
+      "requiredItems": [
+        "Pendant of Memories"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Letter to Kafei",
+      "difficulty": 21,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Letter to Kafei"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Express Letter to Mama",
+      "difficulty": 21,
+      "types": [
+        "item"
+      ],
+      "requiredItems": [
+        "Express Letter to Mama"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Odolwa's Remains",
+      "difficulty": 22,
+      "types": [
+        "remain",
+        "wft"
+      ],
+      "requiredItems": [
+        "Odolwa's Remains"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Goht's Remains",
+      "difficulty": 22,
+      "types": [
+        "remain",
+        "sht"
+      ],
+      "requiredItems": [
+        "Goht's Remains"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Gyorg's Remains",
+      "difficulty": 22,
+      "types": [
+        "remain",
+        "gbt"
+      ],
+      "requiredItems": [
+        "Gyorg's Remains"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get Twinmold's Remains",
+      "difficulty": 22,
+      "types": [
+        "remain",
+        "stt"
+      ],
+      "requiredItems": [
+        "Twinmold's Remains"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get 4 Remains",
+      "difficulty": 22,
+      "types": [
+        "remain"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Beat Woodfall Temple",
+      "difficulty": 23,
+      "types": [
+        "wft",
+        "boss"
+      ],
+      "requiredItems": [
+        "Deku Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Beat Snowhead Temple",
+      "difficulty": 23,
+      "types": [
+        "sht",
+        "boss"
+      ],
+      "requiredItems": [
+        "Goron Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Beat Great Bay Temple",
+      "difficulty": 23,
+      "types": [
+        "gbt",
+        "boss"
+      ],
+      "requiredItems": [
+        "Zora Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Beat Stone Tower Temple",
+      "difficulty": 23,
+      "types": [
+        "stt",
+        "boss"
+      ],
+      "requiredItems": [
+        "Gibdo Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Beat 2 Temples",
+      "difficulty": 23,
+      "types": [
+        "dungeon"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Reach Moon",
+      "difficulty": 24,
+      "types": [
+        "moon"
+      ],
+      "requiredItems": [
+        "Oath to Order"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All Masks",
+      "difficulty": 24,
+      "types": [
+        "mask"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All Songs",
+      "difficulty": 24,
+      "types": [
+        "song"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All Heart Containers",
+      "difficulty": 24,
+      "types": [
+        "hp"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "100% Bombers Notebook",
+      "difficulty": 25,
+      "types": [
+        "notebook"
+      ],
+      "requiredItems": [
+        "Bomber's Notebook"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Blackout All Dungeons",
+      "difficulty": 25,
+      "types": [
+        "dungeon"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Get All Stray Fairies",
+      "difficulty": 25,
+      "types": [
+        "fairy"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Complete Title Deed Quest",
+      "difficulty": 25,
+      "types": [
+        "scrub",
+        "quest"
+      ],
+      "requiredItems": [
+        "Land Title Deed"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Full Inventory",
+      "difficulty": 25,
+      "types": [
+        "inventory"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Defeat Garo Ninja",
+      "difficulty": 14,
+      "types": [
+        "combat",
+        "ikana"
+      ],
+      "requiredItems": [],
+      "requiredAnyOf": [
+        [
+          "Garo Mask"
+        ],
+        [
+          "Light Arrow"
+        ]
+      ]
+    },
+    {
+      "name": "Change GBT Water Direction",
+      "difficulty": 16,
+      "types": [
+        "gbt",
+        "action"
+      ],
+      "requiredItems": [
+        "Hookshot",
+        "Zora Mask"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Gold Rupee from Ikana Business Scrub",
+      "difficulty": 15,
+      "types": [
+        "scrub",
+        "ikana"
+      ],
+      "requiredItems": [
+        "Mountain Title Deed",
+        "Swamp Title Deed",
+        "Land Title Deed",
+        "Ocean Title Deed"
+      ],
+      "requiredAnyOf": []
+    },
+    {
+      "name": "Beat Majora",
+      "difficulty": 24,
+      "types": [
+        "moon",
+        "boss"
+      ],
+      "requiredItems": [
+        "Fierce Deity Mask"
+      ],
+      "requiredAnyOf": []
+    }
+  ]
+}

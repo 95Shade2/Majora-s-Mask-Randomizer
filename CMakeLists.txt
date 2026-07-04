@@ -141,11 +141,16 @@ configure_files("files")
 configure_files("logic")
 configure_files("presets")
 configure_files("MMR_GUI/item_tabs.json")
+configure_files("MMR_GUI/Data/mm_bingo_standard.json")
 
 foreach(_gui_config debug release minsizerel relwithdebinfo)
 	configure_file(
 		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/item_tabs.json"
 		"${PROJECT_BINARY_DIR}/${_gui_config}/item_tabs.json"
+		COPYONLY)
+	configure_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/mm_bingo_standard.json"
+		"${PROJECT_BINARY_DIR}/${_gui_config}/mm_bingo_standard.json"
 		COPYONLY)
 endforeach()
 
@@ -185,6 +190,18 @@ add_executable(mm_rando_gui
 	"MMR_GUI/PoolListView.cs"
 	"MMR_GUI/PlandoUx.cs"
 	"MMR_GUI/PlandoStrandedDialog.cs"
+	"MMR_GUI/BingoTypes.cs"
+	"MMR_GUI/BingoGoalList.cs"
+	"MMR_GUI/BingoGoalValidator.cs"
+	"MMR_GUI/BingoSrlGenerator.cs"
+	"MMR_GUI/BingoCardGenerator.cs"
+	"MMR_GUI/BingoCardExport.cs"
+	"MMR_GUI/BingoCardDialog.cs"
+	"MMR_GUI/BingoGoalMark.cs"
+	"MMR_GUI/BingoLinePopoutDialog.cs"
+	"MMR_GUI/BingoRerollLog.cs"
+	"MMR_GUI/BingoRerollLogDialog.cs"
+	"MMR_GUI/BingoParityHarness.cs"
 	"MMR_GUI/LogicEditorLayout.cs"
 	"MMR_GUI/CutscenesSelectorLayout.cs"
 	"MMR_GUI/wallets_formLayout.cs"
@@ -227,6 +244,18 @@ csharp_set_windows_forms_properties(
 	"MMR_GUI/PoolListView.cs"
 	"MMR_GUI/PlandoUx.cs"
 	"MMR_GUI/PlandoStrandedDialog.cs"
+	"MMR_GUI/BingoTypes.cs"
+	"MMR_GUI/BingoGoalList.cs"
+	"MMR_GUI/BingoGoalValidator.cs"
+	"MMR_GUI/BingoSrlGenerator.cs"
+	"MMR_GUI/BingoCardGenerator.cs"
+	"MMR_GUI/BingoCardExport.cs"
+	"MMR_GUI/BingoCardDialog.cs"
+	"MMR_GUI/BingoGoalMark.cs"
+	"MMR_GUI/BingoLinePopoutDialog.cs"
+	"MMR_GUI/BingoRerollLog.cs"
+	"MMR_GUI/BingoRerollLogDialog.cs"
+	"MMR_GUI/BingoParityHarness.cs"
 	"MMR_GUI/LogicEditorLayout.cs"
 	"MMR_GUI/CutscenesSelectorLayout.cs"
 	"MMR_GUI/wallets_formLayout.cs"
