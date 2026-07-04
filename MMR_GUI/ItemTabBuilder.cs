@@ -418,27 +418,49 @@ namespace Majora_s_Mask_Randomizer_GUI
                     "Items",
                     new Dictionary<string, string>
                     {
-                        { "Page 1", "Explosives, Wallets & Basics" },
-                        { "Page 2", "Weapons & Upgrades" },
-                        { "Page 3", "Quest Items & Deeds" },
-                        { "Page 4", "Trade Items & Deeds" }
+                        { "Page 1", "Equipment" },
+                        { "Page 2", "Consumables & Ammo" },
+                        { "Page 3", "Capacity Upgrades" },
+                        { "Page 4", "Quest & Progression Items" },
+                        { "Page 5", "Trading Quest Line" }
                     }
                 },
                 {
                     "Masks",
                     new Dictionary<string, string>
                     {
-                        { "Page 1", "Transformation & Early Masks" },
-                        { "Page 2", "Utility Masks" },
-                        { "Page 3", "Remaining Masks" }
+                        { "Page 1", "Core Transformations" },
+                        { "Page 2", "Dungeon & Major Reward Masks" },
+                        { "Page 3", "Story & Questline Masks" },
+                        { "Page 4", "Movement & Combat Utility" },
+                        { "Page 5", "Exploration & Knowledge" }
+                    }
+                },
+                {
+                    "Songs",
+                    new Dictionary<string, string>
+                    {
+                        { "Page 1", "Top Row Songs" },
+                        { "Page 2", "Bottom Row Songs" }
                     }
                 },
                 {
                     "Bottles",
                     new Dictionary<string, string>
                     {
-                        { "Page 1", "Bottle Contents" },
-                        { "Page 2", "More Bottle Contents" }
+                        { "Page 1", "Potions & Consumables" },
+                        { "Page 2", "Captured Creatures" },
+                        { "Page 3", "Spirits & Poes" },
+                        { "Page 4", "Quest Bottle Items" }
+                    }
+                },
+                {
+                    "Maps/Others",
+                    new Dictionary<string, string>
+                    {
+                        { "Page 1", "Boss Remains" },
+                        { "Page 2", "Tingle Maps" },
+                        { "Page 3", "Heart Rewards" }
                     }
                 }
             };
