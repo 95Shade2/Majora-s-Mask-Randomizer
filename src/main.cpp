@@ -840,6 +840,95 @@ void Update_Pools(map<string, Item> &Items)
 	}
 }
 
+string Normalize_Plando_Item(string item)
+{
+	if (item.size() > 0 && item[0] == '#')
+	{
+		return item.substr(1);
+	}
+
+	return item;
+}
+
+bool Is_Manual_Placement(string pool)
+{
+	return pool.size() > 0 && pool[0] == '#';
+}
+
+void Apply_Plando(map<string, Item> &Items)
+{
+	if (Settings.find("plando") == Settings.end())
+	{
+		return;
+	}
+
+	map<string, string> manual_locations;
+	map<string, string> planned_locations;
+
+	// Existing manual placements still work. Track them so a plando entry cannot
+	// place the same reward somewhere else.
+	for (const auto &kv : Items)
+	{
+		if (Is_Manual_Placement(kv.second.Pool))
+		{
+			string manual_item = Normalize_Plando_Item(kv.second.Pool);
+			if (manual_locations.find(manual_item) == manual_locations.end())
+			{
+				manual_locations[manual_item] = kv.first;
+			}
+		}
+	}
+
+	for (const auto &kv : Settings["plando"])
+	{
+		string location = kv.first;
+		string planned_item = Normalize_Plando_Item(kv.second);
+
+		if (planned_item == "")
+		{
+			Error("Plando entry for " + location + " does not specify an item");
+		}
+
+		if (Items.find(location) == Items.end())
+		{
+			Error("Plando location not found: " + location);
+		}
+
+		if (Items.find(planned_item) == Items.end())
+		{
+			Error("Plando item not found: " + planned_item);
+		}
+
+		if (planned_locations.find(planned_item) != planned_locations.end() &&
+			planned_locations[planned_item] != location)
+		{
+			Error("Plando item " + planned_item + " is assigned to both " +
+				planned_locations[planned_item] + " and " + location);
+		}
+
+		if (manual_locations.find(planned_item) != manual_locations.end() &&
+			manual_locations[planned_item] != location)
+		{
+			Error("Plando item " + planned_item + " is already manually placed at " +
+				manual_locations[planned_item]);
+		}
+
+		if (Is_Manual_Placement(Items[location].Pool))
+		{
+			string manual_item = Normalize_Plando_Item(Items[location].Pool);
+			if (manual_item != planned_item)
+			{
+				Error("Plando location " + location + " conflicts with manual placement " +
+					manual_item);
+			}
+		}
+
+		planned_locations[planned_item] = location;
+		Items[location].Pool = "#" + planned_item;
+		Logger("Plando placing " + planned_item + " at " + location);
+	}
+}
+
 vector<vector<string>> Get_Items_Needed(ifstream &Logic_File,
 	map<string, vector<string>> *Invalid_Items,
 	string Item_Name)
@@ -6745,6 +6834,7 @@ int main()
 
 	// update the item pools according to the settings
 	Update_Pools(Items);
+	Apply_Plando(Items);
 
 	// randomize items according to logic, if any logic was chosen
 	cout << "Randomizing Items...\n";

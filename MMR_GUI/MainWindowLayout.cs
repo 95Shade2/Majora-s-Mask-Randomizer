@@ -75,6 +75,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             TabCategoryIcons.ConfigureCategoryTabs(Items_Tab);
             UiTheme.EnableDoubleBuffer(Items_Tab);
+            Items_Tab.SelectedIndex = 0;
 
             ResumeLayout(true);
 
@@ -108,9 +109,10 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 1,
-                RowCount = 4,
+                RowCount = 5,
                 Padding = Padding.Empty
             };
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -118,8 +120,9 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             root.Controls.Add(BuildPoolManagementGroup(), 0, 0);
             root.Controls.Add(BuildTargetingPresetsRow(), 0, 1);
-            root.Controls.Add(BuildRandomizerOptionsGroup(), 0, 2);
-            root.Controls.Add(BuildPatchOptionsGroup(), 0, 3);
+            root.Controls.Add(BuildPlandoGroup(), 0, 2);
+            root.Controls.Add(BuildRandomizerOptionsGroup(), 0, 3);
+            root.Controls.Add(BuildPatchOptionsGroup(), 0, 4);
 
             return root;
         }
@@ -178,6 +181,92 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             group.Controls.Add(table);
             return group;
+        }
+
+        private GroupBox BuildPlandoGroup()
+        {
+            Plando_Group = CreateConfigGroupBox("Plando");
+
+            TableLayoutPanel table = new TableLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                ColumnCount = 3,
+                RowCount = 7,
+                Padding = new Padding(0, 2, 0, 0)
+            };
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, SettingsLabelWidth));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, SettingsFieldWidth));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, SettingsButtonWidth));
+
+            for (int i = 0; i < 7; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            }
+
+            AddSettingsFieldRow(table, 0, "Location", Plando_Location_Combobox, Plando_Add_Button);
+            AddSettingsFieldRow(table, 1, "Item", Plando_Item_Combobox, Plando_Remove_Button);
+
+            int plandoListWidth = SettingsLabelWidth + SettingsFieldWidth + SettingsButtonWidth;
+            PrepareReparentedControl(Plando_List);
+            Plando_List.Width = plandoListWidth;
+            Plando_List.Margin = new Padding(0, 6, 0, 0);
+            table.Controls.Add(Plando_List, 0, 2);
+            table.SetColumnSpan(Plando_List, 3);
+
+            WarnPoolBalance_Checkbox = new CheckBox
+            {
+                Text = "Warn before randomize when pool issues remain",
+                AutoSize = true,
+                Margin = new Padding(0, 8, 0, 4)
+            };
+            table.Controls.Add(WarnPoolBalance_Checkbox, 0, 3);
+            table.SetColumnSpan(WarnPoolBalance_Checkbox, 3);
+
+            Label issuesLabel = CreateFieldLabel("Pool issues");
+            issuesLabel.Margin = new Padding(0, 4, 8, 4);
+            table.Controls.Add(issuesLabel, 0, 4);
+
+            Pool_Issues_List = new ListView
+            {
+                View = View.Details,
+                FullRowSelect = true,
+                MultiSelect = false,
+                HideSelection = false,
+                Height = 96,
+                Width = plandoListWidth,
+                HeaderStyle = ColumnHeaderStyle.Nonclickable,
+                OwnerDraw = true
+            };
+            Pool_Issues_List.Columns.Add("Issue", plandoListWidth - 8);
+            Pool_Issues_List.DrawColumnHeader += Pool_Issues_DrawColumnHeader;
+            Pool_Issues_List.DrawItem += Pool_Issues_DrawItem;
+            Pool_Issues_List.DrawSubItem += Pool_Issues_DrawSubItem;
+            PrepareReparentedControl(Pool_Issues_List);
+            Pool_Issues_List.Margin = new Padding(0, 0, 0, 4);
+            table.Controls.Add(Pool_Issues_List, 0, 5);
+            table.SetColumnSpan(Pool_Issues_List, 3);
+
+            FlowLayoutPanel issueActions = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = false,
+                Margin = new Padding(0, 0, 0, 0)
+            };
+            Pool_Issue_Fix_Button = new Button { Text = "Resolve" };
+            Pool_Issue_Ignore_Button = new Button { Text = "Ignore" };
+            StyleSettingsAction(Pool_Issue_Fix_Button);
+            StyleSettingsAction(Pool_Issue_Ignore_Button);
+            Pool_Issue_Fix_Button.Margin = new Padding(0, 0, 8, 0);
+            issueActions.Controls.Add(Pool_Issue_Fix_Button);
+            issueActions.Controls.Add(Pool_Issue_Ignore_Button);
+            table.Controls.Add(issueActions, 0, 6);
+            table.SetColumnSpan(issueActions, 3);
+
+            Plando_Group.Controls.Add(table);
+            return Plando_Group;
         }
 
         private GroupBox BuildPatchOptionsGroup()
@@ -464,6 +553,40 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Padding = new Padding(10, 6, 12, 10),
                 Margin = new Padding(0, 0, 0, 8)
             };
+        }
+
+        private static void Pool_Issues_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        private static void Pool_Issues_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = false;
+        }
+
+        private static void Pool_Issues_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            ListView list = e.Item.ListView;
+            Color back = e.Item.Selected
+                ? SystemColors.Highlight
+                : (e.ItemIndex % 2 == 0 ? Color.White : Color.FromArgb(242, 245, 250));
+            Color fore = e.Item.Selected
+                ? SystemColors.HighlightText
+                : Color.FromArgb(180, 40, 40);
+
+            using (SolidBrush brush = new SolidBrush(back))
+            {
+                e.Graphics.FillRectangle(brush, e.Bounds);
+            }
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                e.SubItem.Text,
+                list.Font,
+                e.Bounds,
+                fore,
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
         }
     }
 }

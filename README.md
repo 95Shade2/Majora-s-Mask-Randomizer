@@ -44,6 +44,19 @@ Some bottle items give an  extra bottle with them if the Get Item animation play
 - Which targeting is on by default (switch or hold)
 - Custom time for Blast Mask cooldown
 - Logic Editor
+## Plando
+Presets can force several locations to specific rewards with an optional `[plando]` section:
+
+```ini
+[plando]
+Bow=Hookshot
+All-Night Mask=#Bunny Hood
+```
+
+Each key is the location slot to override, and each value is the item placed there. The `#` prefix is optional in `[plando]`; it is accepted for compatibility with manual `[items]` entries. Plando entries are applied after normal pool settings are loaded and before randomization, so existing `[items]` pool entries do not need to be hand-edited. The randomizer rejects unknown locations, unknown items, duplicate planned rewards, and conflicts with an existing manual placement for the same location or item.
+
+The GUI marks plando-controlled item rows, removes those locations from the pool sidebar, and can warn about stranded or consumed items before randomizing.
+
 ## Randomizable Items
 - Adult Wallet
 - All-Night Mask

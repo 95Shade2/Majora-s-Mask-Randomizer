@@ -30,6 +30,20 @@ namespace Majora_s_Mask_Randomizer_GUI
         Process Rando;
         Dictionary<string,
         Item> Item_Objects;
+        Dictionary<string, string> Plando_Items;
+        ComboBox Plando_Location_Combobox;
+        ComboBox Plando_Item_Combobox;
+        Button Plando_Add_Button;
+        Button Plando_Remove_Button;
+        ListView Plando_List;
+        GroupBox Plando_Group;
+        ListView Pool_Issues_List;
+        CheckBox WarnPoolBalance_Checkbox;
+        Button Pool_Issue_Fix_Button;
+        Button Pool_Issue_Ignore_Button;
+        HashSet<string> Ignored_Pool_Issues;
+        bool _suppressPlandoRefresh;
+        private static readonly Color PlandoRowBackColor = Color.FromArgb(245, 248, 252);
         string TARGETING;
         bool DEBUG;
         string debug_path;
@@ -51,6 +65,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         private const string SettingRespawnHCs = "RespawnHCs";
         private const string SettingTargeting = "Targeting";
         private const string SettingTradeQuest = "TradeQuest";
+        private const string SettingWarnPoolBalance = "WarnPoolBalance";
         private const string ColorRandomizeValue = "Randomize";
 
         public Dictionary<string,
@@ -75,10 +90,15 @@ namespace Majora_s_Mask_Randomizer_GUI
                 checkBox1_CheckedChanged,
                 All_Night_Mask_Pool_SelectedIndexChanged,
                 Adult_Wallet_Gives_SelectedIndexChanged);
+            Initialize_Plando_Controls();
 
             ApplyShellLayout();
             UiTheme.ApplyToForm(this);
             ItemTabBuilder.ScheduleHandleWarmup(Items_Tab);
+
+            Pool_Issue_Fix_Button.Click += Pool_Issue_Fix_Button_Click;
+            Pool_Issue_Ignore_Button.Click += Pool_Issue_Ignore_Button_Click;
+            WarnPoolBalance_Checkbox.CheckedChanged += (sender, args) => RefreshPlandoUi();
         }
 
         private void Main_Window_Load(object sender, EventArgs e)
@@ -96,6 +116,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             string>>>();
             Preset_Keys = new Dictionary<int,
             string>();
+            Plando_Items = new Dictionary<string, string>();
+            Ignored_Pool_Issues = new HashSet<string>();
             Cutscenes = new Dictionary<string, bool>();
             Game_Colors = Default_Pause();
             Game_Color_Randomized = Default_Color_Randomized();
@@ -121,6 +143,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             ItemTabBuilder.ValidateItemNames(Item_Names, Item_Objects);
 
             Create_Item_Gives();
+            Create_Plando_Items();
 
             Item_Pools_Keys.Add(0, "Items");
 
@@ -150,6 +173,9 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             //default targeting
             Targeting_Switch.Select();
+
+            Items_Tab.SelectedIndex = 0;
+            RefreshPlandoUi();
         }
 
         private string Text_To_Checkbox(string text)
@@ -178,6 +204,56 @@ namespace Majora_s_Mask_Randomizer_GUI
                     gives.Items.Add(Item_Names[s]);
                 }
             }
+        }
+
+        private void Initialize_Plando_Controls()
+        {
+            Plando_Location_Combobox = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            Plando_Item_Combobox = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            Plando_Add_Button = new Button
+            {
+                Text = "Add"
+            };
+            Plando_Remove_Button = new Button
+            {
+                Text = "Remove"
+            };
+            Plando_List = new ListView
+            {
+                View = View.Details,
+                FullRowSelect = true,
+                MultiSelect = false,
+                HideSelection = false,
+                Height = 140
+            };
+
+            Plando_List.Columns.Add("Location", 220);
+            Plando_List.Columns.Add("Item", 220);
+            Plando_Add_Button.Click += Plando_Add_Button_Click;
+            Plando_Remove_Button.Click += Plando_Remove_Button_Click;
+            Plando_List.SelectedIndexChanged += Plando_List_SelectedIndexChanged;
+            Plando_List.DoubleClick += Plando_List_DoubleClick;
+            Plando_List.Resize += (sender, args) => Resize_Plando_List();
+        }
+
+        private void Create_Plando_Items()
+        {
+            Plando_Location_Combobox.Items.Clear();
+            Plando_Item_Combobox.Items.Clear();
+
+            for (int i = 0; i < Item_Names.Length; i++)
+            {
+                Plando_Location_Combobox.Items.Add(Item_Names[i]);
+                Plando_Item_Combobox.Items.Add(Item_Names[i]);
+            }
+
+            Update_Plando_List();
         }
 
         private void Create_Item_Names()
@@ -468,10 +544,24 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             CheckBox check = (sender as CheckBox);
             string checkbox_text = check.Text;
-            ComboBox pool = Item_Objects[checkbox_text].Get_Pool();
-            ComboBox gives = Item_Objects[checkbox_text].Get_Gives();
+            string itemName = Get_Item_Name_From_Checkbox(check);
 
-            bool Is_Checked = (sender as CheckBox).Checked;
+            if (IsPlandoLocation(itemName))
+            {
+                if (check.Checked)
+                {
+                    _suppressPlandoRefresh = true;
+                    check.Checked = false;
+                    _suppressPlandoRefresh = false;
+                }
+
+                return;
+            }
+
+            ComboBox pool = Item_Objects[itemName].Get_Pool();
+            ComboBox gives = Item_Objects[itemName].Get_Gives();
+
+            bool Is_Checked = check.Checked;
             
             pool.Enabled = Is_Checked;
             gives.Enabled = Is_Checked;
@@ -493,6 +583,20 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             Update_Pools();
+            RefreshPlandoUi();
+        }
+
+        private string Get_Item_Name_From_Checkbox(CheckBox check)
+        {
+            for (int i = 0; i < Item_Names.Length; i++)
+            {
+                if (Item_Objects[Item_Names[i]].Get_Checkbox() == check)
+                {
+                    return Item_Names[i];
+                }
+            }
+
+            return check.Text;
         }
 
         private string Get_Item_Name(string pool_or_gives_name)
@@ -531,6 +635,12 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             ComboBox pool = (ComboBox)sender;
             string Item_Name = Get_Item_Name(pool.Name);
+
+            if (IsPlandoLocation(Item_Name))
+            {
+                return;
+            }
+
             ComboBox gives = Item_Objects[Item_Name].Get_Gives();
             CheckBox checkbox = Item_Objects[Item_Name].Get_Checkbox();
             
@@ -550,6 +660,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             Update_Pools();
+            RefreshPlandoUi();
         }
 
         private void Add_Item_Pool(Dictionary<int, string> Pool, string item)
@@ -624,13 +735,18 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 string Pool = Item_Pools_Keys[p];
                 ListView poolList = Pool_Tables[Pool];
-                string[] items = new string[Item_Pools[Pool].Count];
+                List<string> visibleItems = new List<string>();
+
                 for (int i = 0; i < Item_Pools[Pool].Count; i++)
                 {
-                    items[i] = Item_Pools[Pool][i];
+                    string poolItem = Item_Pools[Pool][i];
+                    if (Plando_Items == null || !Plando_Items.ContainsKey(poolItem))
+                    {
+                        visibleItems.Add(poolItem);
+                    }
                 }
 
-                PoolListView.SetItems(poolList, items);
+                PoolListView.SetItems(poolList, visibleItems.ToArray());
             }
         }
 
@@ -638,6 +754,12 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             ComboBox gives = (ComboBox)sender;
             string Item_Name = Get_Item_Name(gives.Name);
+
+            if (IsPlandoLocation(Item_Name))
+            {
+                return;
+            }
+
             ComboBox pool = Item_Objects[Item_Name].Get_Pool();
             
             //if the item manually gives another item, then make sure that a pool isn't selected
@@ -647,6 +769,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             Update_Pools();
+            RefreshPlandoUi();
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
@@ -732,6 +855,11 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             if (Open_Base_Rom_Dialog.FileName != "openFileDialog1" && Open_Base_Rom_Dialog.FileName != "")
             {
+                if (!ConfirmPoolIssuesBeforeRandomize())
+                {
+                    return;
+                }
+
                 Randomize_Button.Enabled = false;
                 SaveSettingsAsIni("./settings.ini", resolveRandomColors: true);
                 RunRandomizer();
@@ -742,7 +870,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
-        private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true, bool cutscenes = true, bool resolveRandomColors = false)
+        private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true, bool cutscenes = true, bool plando = true, bool resolveRandomColors = false)
         {
             string Text = "";
             string Item_Pool = "";
@@ -783,6 +911,16 @@ namespace Majora_s_Mask_Randomizer_GUI
                 }
             }
 
+            if (plando && Plando_Items != null && Plando_Items.Count > 0)
+            {
+                Text += "[plando]\n";
+
+                foreach (KeyValuePair<string, string> entry in Plando_Items.OrderBy(p => p.Key))
+                {
+                    Text += entry.Key + "=" + entry.Value + "\n";
+                }
+            }
+
             if (settings)
             {
                 Text += "[settings]\n";
@@ -812,6 +950,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AppendSetting(ref Text, SettingRespawnHCs, respawnHCsToolStripMenuItem.Checked); //whether or not to respawn heart containers every cycle
                 AppendSetting(ref Text, SettingTargeting, TARGETING); //Save the custom default targeting
                 AppendSetting(ref Text, SettingTradeQuest, removeScrubSalesmanAfterTradingToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingWarnPoolBalance, WarnPoolBalance_Checkbox != null && WarnPoolBalance_Checkbox.Checked);
             }
 
             if (colors)
@@ -1072,10 +1211,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             Clear_Items(); //make all items not checked
             Clear_Pools(); //make no pools
             Clear_Pool_List(); //clear the pool list on the right side
+            Update_Plando(null); //clear planned placements
 
             Create_Pools(Selected_Preset["pools"]);
             Update_Pool_List();
             Update_Items(Selected_Preset["items"]);
+            if (Selected_Preset.ContainsKey("plando"))
+            {
+                Update_Plando(Selected_Preset["plando"]);
+            }
             Update_Settings(Selected_Preset["settings"]);
 
             //update the cutscenes if there is cutscene data
@@ -1108,6 +1252,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             //make sure the change and remove combobox are blank now
             Change_Pool_Name_Combobox.Text = "";
             Remove_Pool_Combobox.Text = "";
+
+            RefreshPlandoUi();
         }
 
         private void Update_Wallets(Dictionary<string, string> wallet_sizes)
@@ -1228,6 +1374,13 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             ApplyMenuSetting(settings, SettingTradeQuest, removeScrubSalesmanAfterTradingToolStripMenuItem);
+
+            if (WarnPoolBalance_Checkbox != null)
+            {
+                WarnPoolBalance_Checkbox.Checked = SettingsBool(settings, SettingWarnPoolBalance);
+            }
+
+            RefreshPlandoUi();
         }
 
         private Color String_To_Color(string color)
@@ -1524,6 +1677,463 @@ namespace Majora_s_Mask_Randomizer_GUI
         private void Error(string Error_Message)
         {
             MessageBox.Show(Error_Message, "Error");
+        }
+
+        private void Plando_Add_Button_Click(object sender, EventArgs e)
+        {
+            string location = Plando_Location_Combobox.Text;
+            string item = Plando_Item_Combobox.Text;
+
+            if (location == "" || item == "")
+            {
+                Error("Choose both a plando location and item");
+                return;
+            }
+
+            foreach (KeyValuePair<string, string> entry in Plando_Items)
+            {
+                if (entry.Key != location && entry.Value == item)
+                {
+                    Error(item + " is already planned at " + entry.Key);
+                    return;
+                }
+            }
+
+            Plando_Items[location] = item;
+            ApplyPlandoLocationEffects(location);
+            Update_Plando_List();
+        }
+
+        private void Plando_Remove_Button_Click(object sender, EventArgs e)
+        {
+            string location = "";
+
+            if (Plando_List.SelectedItems.Count > 0)
+            {
+                location = Plando_List.SelectedItems[0].Text;
+            }
+            else
+            {
+                location = Plando_Location_Combobox.Text;
+            }
+
+            if (location != "" && Plando_Items.ContainsKey(location))
+            {
+                Plando_Items.Remove(location);
+                ClearPlandoLocationEffects(location);
+                Update_Plando_List();
+            }
+        }
+
+        private void Plando_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Plando_List.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            string location = Plando_List.SelectedItems[0].Text;
+            string item = Plando_List.SelectedItems[0].SubItems[1].Text;
+
+            Plando_Location_Combobox.SelectedIndex = Plando_Location_Combobox.Items.IndexOf(location);
+            Plando_Item_Combobox.SelectedIndex = Plando_Item_Combobox.Items.IndexOf(item);
+        }
+
+        private void Plando_List_DoubleClick(object sender, EventArgs e)
+        {
+            if (Plando_List.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            FocusItemRow(Plando_List.SelectedItems[0].Text);
+        }
+
+        private void Update_Plando_List()
+        {
+            if (Plando_List == null)
+            {
+                return;
+            }
+
+            Plando_List.BeginUpdate();
+            Plando_List.Items.Clear();
+
+            if (Plando_Items != null)
+            {
+                foreach (KeyValuePair<string, string> entry in Plando_Items.OrderBy(p => p.Key))
+                {
+                    ListViewItem listItem = new ListViewItem(entry.Key);
+                    listItem.SubItems.Add(entry.Value);
+                    Plando_List.Items.Add(listItem);
+                }
+            }
+
+            Plando_List.EndUpdate();
+            Resize_Plando_List();
+            RefreshPlandoUi();
+        }
+
+        private void Resize_Plando_List()
+        {
+            if (Plando_List == null || Plando_List.Columns.Count < 2 || Plando_List.ClientSize.Width <= 0)
+            {
+                return;
+            }
+
+            int width = Math.Max(120, (Plando_List.ClientSize.Width - 8) / 2);
+            Plando_List.Columns[0].Width = width;
+            Plando_List.Columns[1].Width = width;
+        }
+
+        private void Update_Plando(Dictionary<string, string> plando)
+        {
+            Plando_Items = new Dictionary<string, string>();
+
+            if (plando != null)
+            {
+                foreach (KeyValuePair<string, string> entry in plando)
+                {
+                    Plando_Items[entry.Key] = Normalize_Plando_Item(entry.Value);
+                }
+            }
+
+            Ignored_Pool_Issues = new HashSet<string>();
+            SyncAllPlandoLocationEffects();
+            Update_Plando_List();
+        }
+
+        private string Normalize_Plando_Item(string item)
+        {
+            if (item != null && item.StartsWith("#"))
+            {
+                return item.Substring(1);
+            }
+
+            return item;
+        }
+
+        private bool IsPlandoLocation(string itemName)
+        {
+            return Plando_Items != null && Plando_Items.ContainsKey(itemName);
+        }
+
+        private void SyncAllPlandoLocationEffects()
+        {
+            if (Item_Objects == null || Item_Names == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < Item_Names.Length; i++)
+            {
+                ClearPlandoLocationEffects(Item_Names[i]);
+            }
+
+            if (Plando_Items == null)
+            {
+                return;
+            }
+
+            foreach (string location in Plando_Items.Keys.ToArray())
+            {
+                ApplyPlandoLocationEffects(location);
+            }
+        }
+
+        private void ApplyPlandoLocationEffects(string location)
+        {
+            if (!Item_Objects.ContainsKey(location))
+            {
+                return;
+            }
+
+            CheckBox check = Item_Objects[location].Get_Checkbox();
+            ComboBox pool = Item_Objects[location].Get_Pool();
+            ComboBox gives = Item_Objects[location].Get_Gives();
+
+            Remove_Item_Pool(location);
+
+            _suppressPlandoRefresh = true;
+            if (check.Checked)
+            {
+                check.Checked = false;
+            }
+
+            pool.SelectedIndex = -1;
+            gives.SelectedIndex = -1;
+            _suppressPlandoRefresh = false;
+        }
+
+        private void ClearPlandoLocationEffects(string location)
+        {
+            if (!Item_Objects.ContainsKey(location))
+            {
+                return;
+            }
+
+            CheckBox check = Item_Objects[location].Get_Checkbox();
+            ComboBox pool = Item_Objects[location].Get_Pool();
+            ComboBox gives = Item_Objects[location].Get_Gives();
+
+            check.Text = location;
+            check.ForeColor = SystemColors.ControlText;
+            check.BackColor = SystemColors.Control;
+            pool.BackColor = SystemColors.Window;
+            gives.BackColor = SystemColors.Window;
+            pool.Enabled = check.Checked;
+            gives.Enabled = check.Checked;
+        }
+
+        private void RefreshPlandoUi()
+        {
+            if (_suppressPlandoRefresh || Item_Objects == null || Item_Names == null)
+            {
+                return;
+            }
+
+            RefreshPlandoRowStyles();
+            Update_Pools();
+            Update_Pool_Issues();
+        }
+
+        private void RefreshPlandoRowStyles()
+        {
+            for (int i = 0; i < Item_Names.Length; i++)
+            {
+                string itemName = Item_Names[i];
+                CheckBox check = Item_Objects[itemName].Get_Checkbox();
+                ComboBox pool = Item_Objects[itemName].Get_Pool();
+                ComboBox gives = Item_Objects[itemName].Get_Gives();
+
+                if (IsPlandoLocation(itemName))
+                {
+                    string reward = Plando_Items[itemName];
+                    check.Text = itemName + " \u2192 " + reward;
+                    check.ForeColor = SystemColors.GrayText;
+                    check.BackColor = PlandoRowBackColor;
+                    pool.BackColor = PlandoRowBackColor;
+                    gives.BackColor = PlandoRowBackColor;
+                    pool.Enabled = false;
+                    gives.Enabled = false;
+                }
+                else
+                {
+                    check.Text = itemName;
+                    check.ForeColor = SystemColors.ControlText;
+                    check.BackColor = SystemColors.Control;
+                    pool.BackColor = SystemColors.Window;
+                    gives.BackColor = SystemColors.Window;
+                    pool.Enabled = check.Checked;
+                    gives.Enabled = check.Checked;
+                }
+            }
+        }
+
+        private List<PoolIssue> GetActivePoolIssues()
+        {
+            if (Plando_Items == null || Plando_Items.Count == 0)
+            {
+                return new List<PoolIssue>();
+            }
+
+            return PlandoUx.DetectIssues(
+                Plando_Items,
+                Item_Objects,
+                Item_Pools,
+                Item_Names,
+                Ignored_Pool_Issues);
+        }
+
+        private void Update_Pool_Issues()
+        {
+            List<PoolIssue> issues = GetActivePoolIssues();
+
+            if (Plando_Group != null)
+            {
+                Plando_Group.Text = issues.Count > 0
+                    ? "Plando (" + issues.Count + " issue" + (issues.Count == 1 ? "" : "s") + ")"
+                    : "Plando";
+            }
+
+            if (Pool_Issues_List == null)
+            {
+                return;
+            }
+
+            Pool_Issues_List.BeginUpdate();
+            Pool_Issues_List.Items.Clear();
+
+            foreach (PoolIssue issue in issues)
+            {
+                ListViewItem row = new ListViewItem(issue.Message);
+                row.Tag = issue;
+                Pool_Issues_List.Items.Add(row);
+            }
+
+            if (Pool_Issues_List.Columns.Count > 0 && Pool_Issues_List.ClientSize.Width > 0)
+            {
+                Pool_Issues_List.Columns[0].Width = Pool_Issues_List.ClientSize.Width - 4;
+            }
+
+            Pool_Issues_List.EndUpdate();
+
+            bool hasIssues = issues.Count > 0;
+            if (Pool_Issue_Fix_Button != null)
+            {
+                Pool_Issue_Fix_Button.Enabled = hasIssues;
+            }
+
+            if (Pool_Issue_Ignore_Button != null)
+            {
+                Pool_Issue_Ignore_Button.Enabled = hasIssues;
+            }
+        }
+
+        private PoolIssue GetSelectedPoolIssue()
+        {
+            if (Pool_Issues_List == null || Pool_Issues_List.SelectedItems.Count == 0)
+            {
+                return null;
+            }
+
+            return Pool_Issues_List.SelectedItems[0].Tag as PoolIssue;
+        }
+
+        private void Pool_Issue_Fix_Button_Click(object sender, EventArgs e)
+        {
+            PoolIssue issue = GetSelectedPoolIssue();
+            if (issue == null)
+            {
+                Error("Select a pool issue to resolve");
+                return;
+            }
+
+            ResolvePoolIssue(issue);
+        }
+
+        private void Pool_Issue_Ignore_Button_Click(object sender, EventArgs e)
+        {
+            PoolIssue issue = GetSelectedPoolIssue();
+            if (issue == null)
+            {
+                Error("Select a pool issue to ignore");
+                return;
+            }
+
+            Ignored_Pool_Issues.Add(issue.Key);
+            RefreshPlandoUi();
+        }
+
+        private void ResolvePoolIssue(PoolIssue issue)
+        {
+            switch (issue.Type)
+            {
+                case PoolIssueType.StrandedItem:
+                    string placementLocation;
+                    if (PlandoStrandedDialog.TryResolve(this, issue.Item, Item_Names, Plando_Items, out placementLocation))
+                    {
+                        foreach (KeyValuePair<string, string> entry in Plando_Items)
+                        {
+                            if (entry.Key != placementLocation && entry.Value == issue.Item)
+                            {
+                                Error(issue.Item + " is already planned at " + entry.Key);
+                                return;
+                            }
+                        }
+
+                        Plando_Items[placementLocation] = issue.Item;
+                        ApplyPlandoLocationEffects(placementLocation);
+                        Update_Plando_List();
+                    }
+                    break;
+
+                case PoolIssueType.ConsumedReward:
+                case PoolIssueType.StalePoolLocation:
+                    RemoveItemFromPools(issue.Item);
+                    CheckBox check = Item_Objects[issue.Item].Get_Checkbox();
+                    _suppressPlandoRefresh = true;
+                    check.Checked = false;
+                    Item_Objects[issue.Item].Get_Pool().SelectedIndex = -1;
+                    Item_Objects[issue.Item].Get_Gives().SelectedIndex = -1;
+                    _suppressPlandoRefresh = false;
+                    RefreshPlandoUi();
+                    break;
+            }
+        }
+
+        private void RemoveItemFromPools(string item)
+        {
+            Remove_Item_Pool(item);
+        }
+
+        private bool ConfirmPoolIssuesBeforeRandomize()
+        {
+            if (WarnPoolBalance_Checkbox == null || !WarnPoolBalance_Checkbox.Checked)
+            {
+                return true;
+            }
+
+            List<PoolIssue> issues = GetActivePoolIssues();
+            if (issues.Count == 0)
+            {
+                return true;
+            }
+
+            DialogResult result = MessageBox.Show(
+                issues.Count + " pool issue(s) remain. Randomizing anyway may strand items or unbalance pools.\n\nContinue?",
+                "Pool Issues",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            return result == DialogResult.Yes;
+        }
+
+        private void FocusItemRow(string itemName)
+        {
+            if (Items_Tab == null || itemName == "")
+            {
+                return;
+            }
+
+            foreach (TabPage page in Items_Tab.TabPages)
+            {
+                if (ContainsItemRow(page, itemName))
+                {
+                    Items_Tab.SelectedTab = page;
+                    Item_Objects[itemName].Get_Checkbox().Focus();
+                    return;
+                }
+            }
+        }
+
+        private bool ContainsItemRow(Control root, string itemName)
+        {
+            if (!Item_Objects.ContainsKey(itemName))
+            {
+                return false;
+            }
+
+            CheckBox target = Item_Objects[itemName].Get_Checkbox();
+            return FindControl(root, target);
+        }
+
+        private bool FindControl(Control root, Control target)
+        {
+            if (root == target)
+            {
+                return true;
+            }
+
+            foreach (Control child in root.Controls)
+            {
+                if (FindControl(child, target))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void Change_Pool_Name(string Old, string New)
