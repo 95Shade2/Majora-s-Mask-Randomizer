@@ -56,6 +56,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.label20 = new System.Windows.Forms.Label();
             this.Logic_Combobox = new System.Windows.Forms.ComboBox();
             this.Logic_Label = new System.Windows.Forms.Label();
+            this.Difficulty_Combobox = new System.Windows.Forms.ComboBox();
             this.Scrub_Sells_Beans_Tooltip = new System.Windows.Forms.ToolTip();
             this.Tunic_Label = new System.Windows.Forms.Label();
             this.Tunic_ColorDialog = new System.Windows.Forms.ColorDialog();
@@ -77,6 +78,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.pauseMenuColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.walletToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemUsefulnessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logicGraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cutscenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -496,6 +499,21 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.Logic_Combobox.TabIndex = 67;
 
             //
+            // Difficulty_Combobox
+            //
+
+            this.Difficulty_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Difficulty_Combobox.FormattingEnabled = true;
+            this.Difficulty_Combobox.Items.AddRange(new object[] {
+            "Easy",
+            "Medium",
+            "Hard"});
+            this.Difficulty_Combobox.Location = new System.Drawing.Point(414, 232);
+            this.Difficulty_Combobox.Name = "Difficulty_Combobox";
+            this.Difficulty_Combobox.Size = new System.Drawing.Size(112, 21);
+            this.Difficulty_Combobox.TabIndex = 68;
+
+            //
             // Logic_Label
 
             // 
@@ -601,6 +619,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.walletToolStripMenuItem,
 
             this.logicToolStripMenuItem,
+
+            this.itemUsefulnessToolStripMenuItem,
+
+            this.logicGraphToolStripMenuItem,
 
             this.cutscenesToolStripMenuItem});
 
@@ -836,6 +858,25 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.logicToolStripMenuItem.Click += new System.EventHandler(this.logicToolStripMenuItem_Click);
 
             //
+            // itemUsefulnessToolStripMenuItem
+            //
+
+            this.itemUsefulnessToolStripMenuItem.Name = "itemUsefulnessToolStripMenuItem";
+            this.itemUsefulnessToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.itemUsefulnessToolStripMenuItem.Text = "Item Usefulness";
+            this.itemUsefulnessToolStripMenuItem.Click += new System.EventHandler(this.itemUsefulnessToolStripMenuItem_Click);
+
+            //
+            // logicGraphToolStripMenuItem
+            //
+
+            this.logicGraphToolStripMenuItem.Enabled = false;
+            this.logicGraphToolStripMenuItem.Name = "logicGraphToolStripMenuItem";
+            this.logicGraphToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.logicGraphToolStripMenuItem.Text = "Logic Graph";
+            this.logicGraphToolStripMenuItem.Click += new System.EventHandler(this.logicGraphToolStripMenuItem_Click);
+
+            //
             // cutscenesToolStripMenuItem
 
             // 
@@ -1020,6 +1061,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 private System.Windows.Forms.Label label20;
                 private System.Windows.Forms.ComboBox Logic_Combobox;
                 private System.Windows.Forms.Label Logic_Label;
+                private System.Windows.Forms.ComboBox Difficulty_Combobox;
                 private System.Windows.Forms.ToolTip Scrub_Sells_Beans_Tooltip;
                 private System.Windows.Forms.Label Tunic_Label;
                 private System.Windows.Forms.ColorDialog Tunic_ColorDialog;
@@ -1041,6 +1083,8 @@ namespace Majora_s_Mask_Randomizer_GUI
                 private System.Windows.Forms.ToolStripMenuItem pauseMenuColorsToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem walletToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem logicToolStripMenuItem;
+                private System.Windows.Forms.ToolStripMenuItem itemUsefulnessToolStripMenuItem;
+                private System.Windows.Forms.ToolStripMenuItem logicGraphToolStripMenuItem;
                 private System.Windows.Forms.ToolStripMenuItem cutscenesToolStripMenuItem;
                 private System.Windows.Forms.Label label5;
                 private System.Windows.Forms.Label label6;
@@ -1556,12 +1600,12 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 2,
-                RowCount = 5,
+                RowCount = 6,
                 Padding = new Padding(0, 2, 0, 0)
             };
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, SettingsLabelWidth));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             }
@@ -1624,13 +1668,23 @@ namespace Majora_s_Mask_Randomizer_GUI
             Seed_Textbox.Margin = new Padding(0, 2, 0, 2);
             table.Controls.Add(Seed_Textbox, 1, 3);
 
+            table.Controls.Add(CreateFieldLabel("Difficulty"), 0, 4);
+            PrepareReparentedControl(Difficulty_Combobox);
+            StyleSettingsInput(Difficulty_Combobox);
+            Difficulty_Combobox.Margin = new Padding(0, 2, 0, 6);
+            if (Difficulty_Combobox.SelectedIndex < 0)
+            {
+                Difficulty_Combobox.SelectedIndex = 1;
+            }
+            table.Controls.Add(Difficulty_Combobox, 1, 4);
+
             PrepareReparentedControl(label20);
             label20.AutoSize = true;
             label20.Font = UiTheme.Current.HintFont;
             label20.ForeColor = UiTheme.Current.HintForeColor;
             label20.MaximumSize = new Size(SettingsFieldWidth, 0);
             label20.Margin = new Padding(0, 0, 0, 2);
-            table.Controls.Add(label20, 1, 4);
+            table.Controls.Add(label20, 1, 5);
 
             group.Controls.Add(table);
             return group;

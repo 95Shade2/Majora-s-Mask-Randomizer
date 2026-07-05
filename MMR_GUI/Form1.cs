@@ -56,6 +56,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         private const string SettingSeed = "Seed";
         private const string SettingWad = "Wad";
         private const string SettingLogic = "Logic";
+        private const string SettingDifficulty = "Difficulty";
         private const string SettingKafei = "Kafei";
         private const string SettingScrubBeans = "ScrubBeans";
         private const string SettingRemoveCutscenes = "Remove_Cutscenes";
@@ -79,6 +80,11 @@ namespace Majora_s_Mask_Randomizer_GUI
         int> Wallet_Sizes;
         public string[] Item_Names;
         public LogicEditor logic_editor;
+        public ItemUsefulnessDialog item_usefulness_dialog;
+        public LogicGraphDialog logic_graph_dialog;
+        private LogicUsefulnessResult _lastLogicGraphData;
+        private Dictionary<string, string> _lastSpoilerPlacements;
+        private string _lastGraphLogicName;
         public Dictionary<string, bool> Cutscenes; //whether or not to remove/shorten specific cutscenes
         public CutscenesSelector cs;   //the cutscene form that allows the player to choose which cutscenes to shorten/remove
         public pmc color_menu_form;
@@ -135,6 +141,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             BlastMaskFrames_Num.Value = 310;
             TARGETING = "";
             logic_editor = new LogicEditor();
+            item_usefulness_dialog = new ItemUsefulnessDialog();
+            logic_graph_dialog = new LogicGraphDialog();
+            _lastSpoilerPlacements = new Dictionary<string, string>();
 
             DEBUG = false;
             debug_path = "./Log_gui.txt";
@@ -871,6 +880,12 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void Rando_Process_Exited(object sender, EventArgs e)
         {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new EventHandler(Rando_Process_Exited), sender, e);
+                return;
+            }
+
             string err_file = Open(".\\Error.txt");
 
             if (err_file == "")
@@ -880,6 +895,11 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
             else if (err_file == "Success")
             {
+                LoadLastSpoilerGraphData();
+                if (logicGraphToolStripMenuItem != null)
+                {
+                    logicGraphToolStripMenuItem.Enabled = CanOpenLogicGraph();
+                }
                 MessageBox.Show("All Done!");
                 Enable_Rando_Button();
             }
@@ -1025,6 +1045,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AppendSetting(ref Text, SettingTargeting, TARGETING); //Save the custom default targeting
                 AppendSetting(ref Text, SettingTradeQuest, removeScrubSalesmanAfterTradingToolStripMenuItem.Checked);
                 AppendSetting(ref Text, SettingWarnPoolBalance, WarnPoolBalance_Checkbox != null && WarnPoolBalance_Checkbox.Checked);
+                AppendSetting(ref Text, SettingDifficulty, GetSelectedDifficulty());
             }
 
             if (colors)
@@ -1454,7 +1475,36 @@ namespace Majora_s_Mask_Randomizer_GUI
                 WarnPoolBalance_Checkbox.Checked = SettingsBool(settings, SettingWarnPoolBalance);
             }
 
+            ApplyDifficultySetting(settings);
+
             RefreshPlandoUi();
+        }
+
+        private string GetSelectedDifficulty()
+        {
+            if (Difficulty_Combobox == null || Difficulty_Combobox.SelectedIndex < 0)
+            {
+                return "Medium";
+            }
+
+            return Difficulty_Combobox.SelectedItem.ToString();
+        }
+
+        private void ApplyDifficultySetting(Dictionary<string, string> settings)
+        {
+            if (Difficulty_Combobox == null)
+            {
+                return;
+            }
+
+            string difficulty = "Medium";
+            if (settings.ContainsKey(SettingDifficulty) && settings[SettingDifficulty] != "")
+            {
+                difficulty = settings[SettingDifficulty];
+            }
+
+            int index = Difficulty_Combobox.Items.IndexOf(difficulty);
+            Difficulty_Combobox.SelectedIndex = index >= 0 ? index : 1;
         }
 
         private Color String_To_Color(string color)
@@ -2675,6 +2725,76 @@ namespace Majora_s_Mask_Randomizer_GUI
                 logic_editor.form = this;
                 logic_editor.Show();
             }
+        }
+
+        private void itemUsefulnessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!item_usefulness_dialog.showing)
+            {
+                item_usefulness_dialog.form = this;
+                item_usefulness_dialog.Show();
+            }
+            else
+            {
+                item_usefulness_dialog.ReloadData();
+            }
+        }
+
+        private void logicGraphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!CanOpenLogicGraph())
+            {
+                MessageBox.Show(
+                    "Randomize with logic enabled first to view the logic graph.",
+                    "Logic Graph",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!logic_graph_dialog.showing)
+            {
+                logic_graph_dialog.form = this;
+                logic_graph_dialog.LoadGraphData(
+                    _lastLogicGraphData,
+                    _lastSpoilerPlacements,
+                    _lastGraphLogicName);
+                logic_graph_dialog.Show();
+            }
+        }
+
+        internal string GetSelectedLogicName()
+        {
+            if (Logic_Combobox == null || Logic_Combobox.SelectedIndex < 0)
+            {
+                return "";
+            }
+
+            return Logic_Combobox.SelectedItem.ToString();
+        }
+
+        private bool CanOpenLogicGraph()
+        {
+            return _lastLogicGraphData != null
+                && _lastSpoilerPlacements != null
+                && _lastSpoilerPlacements.Count > 0
+                && !string.IsNullOrWhiteSpace(_lastGraphLogicName);
+        }
+
+        private void LoadLastSpoilerGraphData()
+        {
+            string logicName = GetSelectedLogicName();
+            if (string.IsNullOrWhiteSpace(logicName))
+            {
+                _lastLogicGraphData = null;
+                _lastSpoilerPlacements = new Dictionary<string, string>();
+                _lastGraphLogicName = "";
+                return;
+            }
+
+            _lastGraphLogicName = logicName;
+            _lastLogicGraphData = LogicUsefulness.Compute(logicName, Item_Names);
+            _lastSpoilerPlacements = LogicUsefulness.ParseSpoilerLog("./Spoiler Log.txt");
         }
 
         private void cutscenesToolStripMenuItem_Click(object sender, EventArgs e)

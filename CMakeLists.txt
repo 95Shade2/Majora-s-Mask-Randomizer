@@ -127,6 +127,10 @@ target_include_directories(randomizer PUBLIC
 
 SETUP_EXECUTABLE(randomizer)
 
+if(MSVC)
+  target_link_options(randomizer PRIVATE "/STACK:16777216")
+endif()
+
 add_executable(ndec
   ndec/ndec.c
   )
@@ -143,6 +147,8 @@ configure_files("presets")
 configure_files("MMR_GUI/item_tabs.json")
 configure_files("MMR_GUI/Data/mm_bingo_standard.json")
 
+configure_files("MMR_GUI/Data/item_slot_counts.json")
+
 foreach(_gui_config debug release minsizerel relwithdebinfo)
 	configure_file(
 		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/item_tabs.json"
@@ -151,6 +157,10 @@ foreach(_gui_config debug release minsizerel relwithdebinfo)
 	configure_file(
 		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/mm_bingo_standard.json"
 		"${PROJECT_BINARY_DIR}/${_gui_config}/mm_bingo_standard.json"
+		COPYONLY)
+	configure_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/item_slot_counts.json"
+		"${PROJECT_BINARY_DIR}/${_gui_config}/Data/item_slot_counts.json"
 		COPYONLY)
 endforeach()
 
@@ -199,6 +209,14 @@ add_executable(mm_rando_gui
 	"MMR_GUI/BingoCardExport.cs"
 	"MMR_GUI/BingoCardDialog.cs"
 	"MMR_GUI/BingoCardDialog.Designer.cs"
+	"MMR_GUI/LogicUsefulness.cs"
+	"MMR_GUI/ItemGrantCounts.cs"
+	"MMR_GUI/LogicGraphInventoryPanel.cs"
+	"MMR_GUI/ItemUsefulnessDialog.cs"
+	"MMR_GUI/ItemUsefulnessDialog.Designer.cs"
+	"MMR_GUI/LogicGraphDialog.cs"
+	"MMR_GUI/LogicGraphCanvas.cs"
+	"MMR_GUI/LogicGraphDialog.Designer.cs"
 	"MMR_GUI/BingoGoalMark.cs"
 	"MMR_GUI/BingoLinePopoutDialog.cs"
 	"MMR_GUI/BingoLinePopoutDialog.Designer.cs"
@@ -254,6 +272,14 @@ csharp_set_windows_forms_properties(
 	"MMR_GUI/BingoCardExport.cs"
 	"MMR_GUI/BingoCardDialog.cs"
 	"MMR_GUI/BingoCardDialog.Designer.cs"
+	"MMR_GUI/LogicUsefulness.cs"
+	"MMR_GUI/ItemGrantCounts.cs"
+	"MMR_GUI/LogicGraphInventoryPanel.cs"
+	"MMR_GUI/ItemUsefulnessDialog.cs"
+	"MMR_GUI/ItemUsefulnessDialog.Designer.cs"
+	"MMR_GUI/LogicGraphDialog.cs"
+	"MMR_GUI/LogicGraphCanvas.cs"
+	"MMR_GUI/LogicGraphDialog.Designer.cs"
 	"MMR_GUI/BingoGoalMark.cs"
 	"MMR_GUI/BingoLinePopoutDialog.cs"
 	"MMR_GUI/BingoLinePopoutDialog.Designer.cs"

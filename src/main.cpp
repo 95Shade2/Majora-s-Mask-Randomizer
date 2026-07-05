@@ -2301,6 +2301,81 @@ vector<string> Sort_Points(vector<string> Items_To_Sort) {
 	return Sorted_Items;
 }
 
+string Strip_Prereq_Count(string item)
+{
+	vector<string> Item_Vec = Split(item, " ");
+
+	if (Item_Vec.size() > 1 && isNumber(Item_Vec[0]))
+	{
+		return item.substr(item.find(' ') + 1);
+	}
+
+	return item;
+}
+
+void Weighted_Shuffle_Pool(vector<string> &Items_Pool, string difficulty, std::default_random_engine &rng)
+{
+	if (Items_Pool.size() <= 1)
+	{
+		return;
+	}
+
+	if (difficulty != "Easy" && difficulty != "Hard")
+	{
+		shuffle(Items_Pool.begin(), Items_Pool.end(), rng);
+		return;
+	}
+
+	vector<double> weights;
+	double total = 0.0;
+	string item;
+	double weight;
+
+	for (int i = 0; i < Items_Pool.size(); i++)
+	{
+		item = Items_Pool[i];
+		int unlock_count = Items[item].value;
+
+		if (difficulty == "Easy")
+		{
+			weight = 1.0 + (double)unlock_count * (double)unlock_count;
+		}
+		else
+		{
+			weight = 1.0 / (1.0 + unlock_count);
+		}
+
+		weights.push_back(weight);
+		total += weight;
+	}
+
+	if (total <= 0.0)
+	{
+		shuffle(Items_Pool.begin(), Items_Pool.end(), rng);
+		return;
+	}
+
+	std::uniform_real_distribution<double> dist(0.0, 1.0);
+	double pick = dist(rng) * total;
+	int chosen = (int)Items_Pool.size() - 1;
+
+	for (int i = 0; i < Items_Pool.size(); i++)
+	{
+		pick -= weights[i];
+
+		if (pick <= 0.0)
+		{
+			chosen = i;
+			break;
+		}
+	}
+
+	string first_item = Items_Pool[chosen];
+	Items_Pool.erase(Items_Pool.begin() + chosen);
+	shuffle(Items_Pool.begin(), Items_Pool.end(), rng);
+	Items_Pool.insert(Items_Pool.begin(), first_item);
+}
+
 void Print_Placed_Items(string sep) {
 	string location;
 	
@@ -2428,8 +2503,18 @@ bool Randomize(string Log,
 			string pool = Items[Cur_Item].Pool;	//gets the item's pool
 			vector<string> Items_Pool = Get_Items_Left_Pool(pool);	//get the items in the same pool that haven't been placed
 
-			//random_shuffle(Items_Pool.begin(), Items_Pool.end());
-			shuffle(Items_Pool.begin(), Items_Pool.end(), std::default_random_engine(seed));
+			{
+				string difficulty = Settings["settings"]["Difficulty"];
+				string logic = Settings["settings"]["Logic"];
+
+				if (logic == "" || logic == "None")
+				{
+					difficulty = "Medium";
+				}
+
+				std::default_random_engine pool_rng(static_cast<std::default_random_engine::result_type>(seed));
+				Weighted_Shuffle_Pool(Items_Pool, difficulty, pool_rng);
+			}
 
 			//get the items in the pool from lowest worth to highest
 			//Items_Pool = Sort_Points(Items_Pool);
@@ -2730,36 +2815,44 @@ void Setup_NonRandom_Items(map<string, Item> &Items, string *Log)
     return;
 }
 
-///Sets up how useful an item is according to how many other item checks it could open up
-void Setup_Item_Values(map<string, vector<vector<string>>> Items_Needed)
+///Sets up how useful an item is according to how many distinct checks it can help unlock
+void Setup_Item_Unlock_Count(map<string, vector<vector<string>>> &Items_Needed)
 {
+    map<string, vector<string>> unlock_locations;
     vector<string> items;
     string item;
-    int item_count = 0; // how many times the item is needed for another item
+    string location;
+    string prereq;
 
     items = Get_Keys(Items);
 
     for (int i = 0; i < items.size(); i++)
     {
-        item = items[i];
-        item_count = 0;
+        Items[items[i]].value = 0;
+    }
 
-        for (int oi = 0; oi < items.size(); oi++)
+    for (int l = 0; l < Item_Keys.size(); l++)
+    {
+        location = Item_Keys[l];
+
+        for (int s = 0; s < Items_Needed[location].size(); s++)
         {
-            string Other_Item = items[oi];
-
-            for (int in = 0; in < Items_Needed[Other_Item].size(); in++)
+            for (int p = 0; p < Items_Needed[location][s].size(); p++)
             {
-                // if the current item is needed for this list of the other item, then
-                // increment item_count
-                if (IndexOf(Items_Needed[Other_Item][in], item) != -1)
+                prereq = Strip_Prereq_Count(Items_Needed[location][s][p]);
+
+                if (IndexOf(unlock_locations[prereq], location) == -1)
                 {
-                    item_count++;
+                    unlock_locations[prereq].push_back(location);
                 }
             }
         }
+    }
 
-        Items[item].value = item_count;
+    for (int i = 0; i < items.size(); i++)
+    {
+        item = items[i];
+        Items[item].value = unlock_locations[item].size();
     }
 }
 
@@ -2784,7 +2877,7 @@ bool Randomize_Setup(map<string, Item> &Items,
     if (Logic_File != "" && Logic_File != "None")
     {
         Items_Needed = Get_Logic(Logic_File, &Invalid_Items);
-        Setup_Item_Values(Items_Needed);
+        Setup_Item_Unlock_Count(Items_Needed);
     }
 	//no logic
 	else {

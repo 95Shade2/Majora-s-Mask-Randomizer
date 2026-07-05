@@ -188,6 +188,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 ApplyListViewTheme(listView, theme);
             }
+            else if (root is DataGridView dataGridView)
+            {
+                ApplyDataGridViewTheme(dataGridView, theme);
+            }
             else if (root is Button button)
             {
                 ApplyButtonTheme(button, theme);
@@ -274,6 +278,40 @@ namespace Majora_s_Mask_Randomizer_GUI
             listView.ForeColor = theme.ForeColor;
             listView.Font = theme.BaseFont;
             ApplyNativeControlTheme(listView);
+        }
+
+        public static void ApplyDataGridViewTheme(DataGridView grid)
+        {
+            ApplyDataGridViewTheme(grid, Current);
+        }
+
+        private static void ApplyDataGridViewTheme(DataGridView grid, ThemePalette theme)
+        {
+            grid.Font = theme.BaseFont;
+            grid.EnableHeadersVisualStyles = false;
+            grid.BackgroundColor = theme.PanelBackColor;
+            grid.GridColor = theme.BorderColor;
+            grid.BorderStyle = BorderStyle.None;
+
+            grid.DefaultCellStyle.BackColor = theme.ListEvenRowColor;
+            grid.DefaultCellStyle.ForeColor = theme.ForeColor;
+            grid.DefaultCellStyle.SelectionBackColor = theme.ListSelectedBackColor;
+            grid.DefaultCellStyle.SelectionForeColor = theme.ListSelectedForeColor;
+
+            grid.AlternatingRowsDefaultCellStyle.BackColor = theme.ListOddRowColor;
+            grid.AlternatingRowsDefaultCellStyle.ForeColor = theme.ForeColor;
+            grid.AlternatingRowsDefaultCellStyle.SelectionBackColor = theme.ListSelectedBackColor;
+            grid.AlternatingRowsDefaultCellStyle.SelectionForeColor = theme.ListSelectedForeColor;
+
+            grid.ColumnHeadersDefaultCellStyle.BackColor = theme.ListHeaderBackColor;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = theme.ListHeaderForeColor;
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = theme.ListHeaderBackColor;
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = theme.ListHeaderForeColor;
+
+            grid.RowHeadersDefaultCellStyle.BackColor = theme.ListHeaderBackColor;
+            grid.RowHeadersDefaultCellStyle.ForeColor = theme.ListHeaderForeColor;
+
+            ApplyNativeControlTheme(grid);
         }
 
         private static void ApplyCheckBoxTheme(CheckBox checkBox, ThemePalette theme)
