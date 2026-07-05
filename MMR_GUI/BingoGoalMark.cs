@@ -1,4 +1,6 @@
+using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Majora_s_Mask_Randomizer_GUI
 {
@@ -24,6 +26,11 @@ namespace Majora_s_Mask_Randomizer_GUI
         public static Color GetBackColor(int state)
         {
             return UiTheme.Current.GetMarkColor(state);
+        }
+
+        public static void ApplyCellStyle(BingoGoalButton cell, int state)
+        {
+            cell.ApplyMarkState(state);
         }
 
         public static string GetHtmlClass(int state)
@@ -62,6 +69,11 @@ namespace Majora_s_Mask_Randomizer_GUI
                 default:
                     return "None";
             }
+        }
+
+        public static void ShowMarkContextMenu(Control anchor, Point clientLocation, Action<int> setState)
+        {
+            new BingoMarkMenuForm(anchor, clientLocation, setState);
         }
     }
 }

@@ -640,6 +640,30 @@ namespace Majora_s_Mask_Randomizer_GUI
             return placements;
         }
 
+        public static string ParseSpoilerSeed(string path)
+        {
+            if (!File.Exists(path))
+            {
+                return "";
+            }
+
+            foreach (string rawLine in File.ReadAllLines(path))
+            {
+                string line = rawLine.Trim();
+                if (line.StartsWith("Seed:", StringComparison.OrdinalIgnoreCase))
+                {
+                    return line.Substring("Seed:".Length).Trim();
+                }
+
+                if (line.Length > 0)
+                {
+                    break;
+                }
+            }
+
+            return "";
+        }
+
         private static Dictionary<string, List<List<string>>> ParseLogicFile(string logicPath)
         {
             Dictionary<string, List<List<string>>> locationPrereqs =

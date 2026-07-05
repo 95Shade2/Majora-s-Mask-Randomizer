@@ -30,20 +30,20 @@ namespace Majora_s_Mask_Randomizer_GUI
             html.AppendLine("<html><head><meta charset=\"utf-8\"/>");
             html.AppendLine("<title>MMR Bingo Card</title>");
             html.AppendLine("<style>");
-            html.Append(UiTheme.BuildExportCss());
+            html.Append(UiTheme.BuildBingoExportCss());
             html.AppendLine("</style></head><body>");
             html.AppendLine("<h1>Majora's Mask Randomizer — Bingo Card</h1>");
             html.AppendLine("<div class=\"meta\">");
             AppendMetadataHtml(html, card);
             html.AppendLine("</div>");
             html.AppendLine("<table id=\"bingo-grid\">");
-            html.AppendLine("<tr><th class=\"line-header\" data-line=\"card\">CARD</th>");
+            html.AppendLine("<tr><th class=\"line-header\" data-line=\"tlbr\">TLBR</th>");
             for (int col = 0; col < 5; col++)
             {
                 html.AppendLine("<th class=\"line-header\" data-line=\"col\" data-index=\"" + col + "\">COL-" + (col + 1) + "</th>");
             }
 
-            html.AppendLine("<th></th></tr>");
+            html.AppendLine("<th class=\"grid-pad\"></th></tr>");
 
             for (int row = 0; row < 5; row++)
             {
@@ -59,24 +59,25 @@ namespace Majora_s_Mask_Randomizer_GUI
                     html.Append("</td>");
                 }
 
-                html.AppendLine("<th></th></tr>");
+                html.AppendLine("<th class=\"grid-pad\"></th></tr>");
             }
 
-            html.AppendLine("<tr><th class=\"line-header\" data-line=\"tlbr\">TL-BR</th><th colspan=\"5\"></th><th class=\"line-header\" data-line=\"bltr\">BL-TR</th></tr>");
+            html.AppendLine("<tr><th class=\"line-header\" data-line=\"bltr\">BLTR</th><th class=\"grid-pad\" colspan=\"5\"></th><th class=\"grid-pad\"></th></tr>");
             html.AppendLine("</table>");
             html.AppendLine("<p id=\"status\"></p>");
             html.AppendLine("<p>" + HtmlEncode(GetWinRuleText(card.WinMode)) + "</p>");
             html.AppendLine("<p><em>Standard SRL MM bingo rules apply. Action goals can be completed anytime; item goals must be true at bingo end.</em></p>");
-            html.AppendLine("<p><em>Left-click goals to cycle forward; right-click to cycle backward. Left-click row/col headers for vertical popout; right-click for horizontal.</em></p>");
+            html.AppendLine("<p><em>Left-click goals to cycle forward; right-click to cycle backward; middle-click for color menu. Left-click row/col headers for vertical popout; right-click for horizontal.</em></p>");
             if (card.RerollTrace != null && card.RerollTrace.Count > 0)
             {
                 html.AppendLine("<h2>Reroll Log</h2>");
-                html.AppendLine("<pre style=\"white-space:pre-wrap;font-family:Consolas,monospace;font-size:12px;\">");
+                html.AppendLine("<pre class=\"reroll-log\">");
                 html.Append(HtmlEncode(BingoRerollLog.Format(card)));
                 html.AppendLine("</pre>");
             }
             html.AppendLine("<div id=\"popout-overlay\"><div id=\"popout-panel\">");
             html.AppendLine("<div id=\"popout-title\"></div><div id=\"popout-grid\"></div></div></div>");
+            html.AppendLine("<div id=\"mark-menu\" role=\"menu\" aria-hidden=\"true\"></div>");
             AppendInteractiveScript(html, card);
             html.AppendLine("</body></html>");
             return html.ToString();
@@ -102,6 +103,26 @@ namespace Majora_s_Mask_Randomizer_GUI
             html.AppendLine(HtmlEncode("ROM Seed: " + (card.RomSeed ?? "")) + "<br/>");
             html.AppendLine(HtmlEncode("Generation Seed: " + card.EffectiveSeed) + "<br/>");
             html.AppendLine(HtmlEncode("Pool Hash (" + BingoGoalValidator.PoolHashVersion + "): " + (card.PoolHash ?? "")) + "<br/>");
+            if (!string.IsNullOrEmpty(card.SettingsHash))
+            {
+                html.AppendLine(HtmlEncode("Settings Hash (" + SettingsHash.Version + "): " + card.SettingsHash) + "<br/>");
+            }
+
+            if (!string.IsNullOrEmpty(card.LogicName))
+            {
+                html.AppendLine(HtmlEncode("Logic: " + card.LogicName) + "<br/>");
+            }
+
+            if (!string.IsNullOrEmpty(card.PlacementsHash))
+            {
+                html.AppendLine(HtmlEncode("Placements Hash (" + BingoPlacementMap.Version + "): " + card.PlacementsHash) + "<br/>");
+            }
+
+            if (!string.IsNullOrEmpty(card.AsyncRaceCode))
+            {
+                html.AppendLine(HtmlEncode("Async Race Code: " + card.AsyncRaceCode) + "<br/>");
+            }
+
             html.AppendLine(HtmlEncode("Rerolls: " + card.RerollCount + " | Goals Substituted: " + card.GoalsSubstituted) + "<br/>");
             html.AppendLine(HtmlEncode("Win: " + card.WinMode));
         }
@@ -112,6 +133,26 @@ namespace Majora_s_Mask_Randomizer_GUI
             text.AppendLine("ROM Seed: " + (card.RomSeed ?? ""));
             text.AppendLine("Generation Seed: " + card.EffectiveSeed);
             text.AppendLine("Pool Hash (" + BingoGoalValidator.PoolHashVersion + "): " + (card.PoolHash ?? ""));
+            if (!string.IsNullOrEmpty(card.SettingsHash))
+            {
+                text.AppendLine("Settings Hash (" + SettingsHash.Version + "): " + card.SettingsHash);
+            }
+
+            if (!string.IsNullOrEmpty(card.LogicName))
+            {
+                text.AppendLine("Logic: " + card.LogicName);
+            }
+
+            if (!string.IsNullOrEmpty(card.PlacementsHash))
+            {
+                text.AppendLine("Placements Hash (" + BingoPlacementMap.Version + "): " + card.PlacementsHash);
+            }
+
+            if (!string.IsNullOrEmpty(card.AsyncRaceCode))
+            {
+                text.AppendLine("Async Race Code: " + card.AsyncRaceCode);
+            }
+
             text.AppendLine("Rerolls: " + card.RerollCount + " | Goals Substituted: " + card.GoalsSubstituted);
             text.AppendLine("Win: " + card.WinMode);
             return text.ToString().TrimEnd();
@@ -202,9 +243,17 @@ namespace Majora_s_Mask_Randomizer_GUI
             html.AppendLine("cell.setAttribute(\"data-state\",state);");
             html.AppendLine("for(var i=0;i<markClasses.length;i++){if(markClasses[i])cell.classList.remove(markClasses[i]);}");
             html.AppendLine("if(markClasses[state])cell.classList.add(markClasses[state]);}");
-            html.AppendLine("function cycle(cell,delta){");
-            html.AppendLine("var state=(parseInt(cell.getAttribute(\"data-state\"),10)||0)+delta;");
-            html.AppendLine("state=(state+6)%6;applyState(cell,state);updateStatus();}");
+            html.AppendLine("function setGoalState(index,state){");
+            html.AppendLine("state=((state%6)+6)%6;");
+            html.AppendLine("var main=mainCell(index);");
+            html.AppendLine("if(main)applyState(main,state);");
+            html.AppendLine("var pop=document.querySelector('#popout-grid .popout-cell[data-index=\"'+index+'\"]');");
+            html.AppendLine("if(pop)applyState(pop,state);");
+            html.AppendLine("updateStatus();}");
+            html.AppendLine("function cycleIndex(index,delta){");
+            html.AppendLine("var main=mainCell(index);");
+            html.AppendLine("var current=main?(parseInt(main.getAttribute(\"data-state\"),10)||0):0;");
+            html.AppendLine("setGoalState(index,current+delta);}");
             html.AppendLine("function mainCell(index){return document.querySelector('#bingo-grid td.goal-cell[data-index=\"'+index+'\"]');}");
             html.AppendLine("function isMarked(state){return state>0;}");
             html.AppendLine("function lineComplete(indices){");
@@ -220,15 +269,51 @@ namespace Majora_s_Mask_Randomizer_GUI
             html.AppendLine("if(winMode==='blackout'){status.textContent='Goals: '+marked+' / 25'+(marked>=25?' | Blackout complete!':'');return;}");
             html.AppendLine("var lines=[['ROW-1',[0,1,2,3,4]],['ROW-2',[5,6,7,8,9]],['ROW-3',[10,11,12,13,14]],['ROW-4',[15,16,17,18,19]],['ROW-5',[20,21,22,23,24]],");
             html.AppendLine("['COL-1',[0,5,10,15,20]],['COL-2',[1,6,11,16,21]],['COL-3',[2,7,12,17,22]],['COL-4',[3,8,13,18,23]],['COL-5',[4,9,14,19,24]],");
-            html.AppendLine("['TL-BR',[0,6,12,18,24]],['BL-TR',[4,8,12,16,20]]];");
+            html.AppendLine("['TLBR',[0,6,12,18,24]],['BLTR',[4,8,12,16,20]]];");
             html.AppendLine("var win='';for(var i=0;i<lines.length;i++){if(lineComplete(lines[i][1])){win=' | Line complete: '+lines[i][0];break;}}");
             html.AppendLine("status.textContent='Goals: '+marked+' / 5 needed'+win;}");
-            html.AppendLine("function bindGoalCell(cell){");
+            html.AppendLine("var markMenu=document.getElementById('mark-menu');");
+            html.AppendLine("var menuIndex=-1;");
+            html.AppendLine("var markOptions=[{state:0,label:'Clear',cls:'mark-menu-clear'},{state:1,label:'Green',cls:'mark-green'},{state:2,label:'Red',cls:'mark-red'},{state:3,label:'Orange',cls:'mark-orange'},{state:4,label:'Blue',cls:'mark-blue'},{state:5,label:'Purple',cls:'mark-purple'}];");
+            html.AppendLine("function hideMarkMenu(){menuIndex=-1;markMenu.classList.remove('open');markMenu.setAttribute('aria-hidden','true');markMenu.style.visibility='';}");
+            html.AppendLine("function showMarkMenu(index,x,y){");
+            html.AppendLine("menuIndex=index;");
+            html.AppendLine("markMenu.classList.add('open');");
+            html.AppendLine("markMenu.setAttribute('aria-hidden','false');");
+            html.AppendLine("markMenu.style.visibility='hidden';");
+            html.AppendLine("markMenu.style.left='0';");
+            html.AppendLine("markMenu.style.top='0';");
+            html.AppendLine("var w=markMenu.offsetWidth;");
+            html.AppendLine("var h=markMenu.offsetHeight;");
+            html.AppendLine("markMenu.style.left=Math.max(8,Math.min(x,window.innerWidth-w-8))+'px';");
+            html.AppendLine("markMenu.style.top=Math.max(8,Math.min(y,window.innerHeight-h-8))+'px';");
+            html.AppendLine("markMenu.style.visibility='visible';}");
+            html.AppendLine("markOptions.forEach(function(opt){");
+            html.AppendLine("var btn=document.createElement('button');");
+            html.AppendLine("btn.type='button';");
+            html.AppendLine("btn.className='mark-menu-item '+opt.cls;");
+            html.AppendLine("btn.setAttribute('role','menuitem');");
+            html.AppendLine("btn.innerHTML='<span class=\"mark-menu-swatch\"></span><span class=\"mark-menu-label\">'+opt.label+'</span>';");
+            html.AppendLine("btn.addEventListener('mousedown',function(e){");
+            html.AppendLine("e.preventDefault();e.stopPropagation();");
+            html.AppendLine("if(menuIndex>=0)setGoalState(menuIndex,opt.state);");
+            html.AppendLine("hideMarkMenu();});");
+            html.AppendLine("markMenu.appendChild(btn);});");
+            html.AppendLine("document.addEventListener('mousedown',function(e){");
+            html.AppendLine("if(markMenu.classList.contains('open')&&!markMenu.contains(e.target))hideMarkMenu();});");
+            html.AppendLine("document.addEventListener('keydown',function(e){if(e.key==='Escape')hideMarkMenu();});");
+            html.AppendLine("function bindGoalInteraction(cell,index){");
+            html.AppendLine("function openMarkMenu(e){e.preventDefault();e.stopPropagation();showMarkMenu(index,e.clientX,e.clientY);}");
             html.AppendLine("cell.addEventListener('mousedown',function(e){");
-            html.AppendLine("if(e.button===0){e.preventDefault();cycle(cell,1);}");
-            html.AppendLine("else if(e.button===2){e.preventDefault();cycle(cell,-1);}");
+            html.AppendLine("if(e.button===0){e.preventDefault();cycleIndex(index,1);}");
+            html.AppendLine("else if(e.button===1){openMarkMenu(e);}");
+            html.AppendLine("else if(e.button===2){e.preventDefault();cycleIndex(index,-1);}");
             html.AppendLine("});");
+            html.AppendLine("cell.addEventListener('auxclick',function(e){if(e.button===1)openMarkMenu(e);});");
             html.AppendLine("cell.addEventListener('contextmenu',function(e){e.preventDefault();});}");
+            html.AppendLine("function bindGoalCell(cell){");
+            html.AppendLine("var index=parseInt(cell.getAttribute(\"data-index\"),10);");
+            html.AppendLine("bindGoalInteraction(cell,index);}");
             html.AppendLine("document.querySelectorAll('#bingo-grid td.goal-cell[data-index]').forEach(bindGoalCell);");
             html.AppendLine("var overlay=document.getElementById('popout-overlay');");
             html.AppendLine("var popoutGrid=document.getElementById('popout-grid');");
@@ -245,11 +330,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             html.AppendLine("cell.innerHTML=main?main.innerHTML:goals[index];");
             html.AppendLine("cell.setAttribute('data-state',main?main.getAttribute('data-state'):'0');");
             html.AppendLine("applyState(cell,parseInt(cell.getAttribute('data-state'),10)||0);");
-            html.AppendLine("cell.addEventListener('mousedown',function(e){");
-            html.AppendLine("if(e.button===0){e.preventDefault();cycle(cell,1);if(main)applyState(main,parseInt(cell.getAttribute('data-state'),10)||0);updateStatus();}");
-            html.AppendLine("else if(e.button===2){e.preventDefault();cycle(cell,-1);if(main)applyState(main,parseInt(cell.getAttribute('data-state'),10)||0);updateStatus();}");
-            html.AppendLine("});");
-            html.AppendLine("cell.addEventListener('contextmenu',function(e){e.preventDefault();});");
+            html.AppendLine("bindGoalInteraction(cell,index);");
             html.AppendLine("popoutGrid.appendChild(cell);});");
             html.AppendLine("overlay.classList.add('open');}");
             html.AppendLine("function lineIndices(kind,index){");

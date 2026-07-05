@@ -6,7 +6,9 @@ namespace Majora_s_Mask_Randomizer_GUI
     internal static class BingoSrlGenerator
     {
         private const double BorrowedTierWeight = 0.85;
-        private const int MaxTypeConflictRetries = 256;
+        private const int MaxPickSearchSteps = 250000;
+
+        private static int _pickStepsRemaining;
 
         private static readonly int[,] MagicSquare = new int[,]
         {
@@ -16,6 +18,22 @@ namespace Majora_s_Mask_Randomizer_GUI
             {  3,  4, 25, 12, 21 },
             { 10,  9, 18,  6,  2 }
         };
+
+        private static readonly int[] TierToRow = BuildTierToRow();
+
+        private static int[] BuildTierToRow()
+        {
+            int[] map = new int[26];
+            for (int row = 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    map[MagicSquare[row, col]] = row;
+                }
+            }
+
+            return map;
+        }
 
         public static Dictionary<int, List<BingoGoal>> DeepClone(Dictionary<int, List<BingoGoal>> tiers)
         {
@@ -62,17 +80,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public static string DescribeDryRunFailure(Dictionary<int, List<BingoGoal>> tiers, int seed)
         {
-            Dictionary<int, List<BingoGoal>> safeTiers = DeepClone(tiers);
-            Random rng = new Random(seed);
-            Dictionary<int, BingoGoal> picks = PickGoalsForTiers(safeTiers, rng);
-            if (picks.Count < 25)
-            {
-                return "Could only pick " + picks.Count + " of 25 unique tier goals for this seed.";
-            }
-
-            return "Could not satisfy SRL row type diversity within "
-                + MaxTypeConflictRetries
-                + " attempts for this seed.";
+            return "Could not assign 25 unique obtainable goals for this seed.";
         }
 
         public static string DescribeTypeConflicts(BingoGoal[] goals)
@@ -151,41 +159,38 @@ namespace Majora_s_Mask_Randomizer_GUI
             Random rng = new Random(seed);
             bool enforceRowTypes = profile != SrlProfile.Relaxed;
 
-            for (int attempt = 0; attempt < MaxTypeConflictRetries; attempt++)
+            Dictionary<int, BingoGoal> picks = PickGoalsForTiers(filteredTiers, rng, enforceRowTypes);
+            if (picks.Count < 25)
             {
-                Dictionary<int, BingoGoal> picks = PickGoalsForTiers(filteredTiers, rng);
-                if (picks.Count < 25)
-                {
-                    continue;
-                }
+                return null;
+            }
 
-                string[] grid = new string[25];
-                BingoGoal[] goalObjects = new BingoGoal[25];
-                for (int row = 0; row < 5; row++)
+            string[] grid = new string[25];
+            BingoGoal[] goalObjects = new BingoGoal[25];
+            for (int row = 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
                 {
-                    for (int col = 0; col < 5; col++)
-                    {
-                        int tier = MagicSquare[row, col];
-                        BingoGoal goal = picks[tier];
-                        int index = row * 5 + col;
-                        grid[index] = goal.Name;
-                        goalObjects[index] = goal;
-                    }
-                }
-
-                if (!enforceRowTypes || !HasRowTypeConflicts(goalObjects))
-                {
-                    return new BingoCard
-                    {
-                        Goals = grid,
-                        GoalObjects = goalObjects,
-                        GoalStates = new int[25],
-                        RerollTrace = new List<RerollTraceEntry>()
-                    };
+                    int tier = MagicSquare[row, col];
+                    BingoGoal goal = picks[tier];
+                    int index = row * 5 + col;
+                    grid[index] = goal.Name;
+                    goalObjects[index] = goal;
                 }
             }
 
-            return null;
+            if (enforceRowTypes && HasRowTypeConflicts(goalObjects))
+            {
+                return null;
+            }
+
+            return new BingoCard
+            {
+                Goals = grid,
+                GoalObjects = goalObjects,
+                GoalStates = new int[25],
+                RerollTrace = new List<RerollTraceEntry>()
+            };
         }
 
         public static bool ValidateTypeConstraints(BingoCard card)
@@ -315,11 +320,15 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private static Dictionary<int, BingoGoal> PickGoalsForTiers(
             Dictionary<int, List<BingoGoal>> tiers,
-            Random rng)
+            Random rng,
+            bool enforceRowTypes = false)
         {
             Dictionary<int, BingoGoal> picks = new Dictionary<int, BingoGoal>();
             HashSet<string> usedNames = new HashSet<string>();
-            if (TryPickGoalsRecursive(tiers, 1, usedNames, picks, rng))
+            HashSet<string>[] rowTypes = enforceRowTypes ? CreateRowTypeSets() : null;
+            int[] tierOrder = BuildTierPickOrder(tiers);
+            _pickStepsRemaining = MaxPickSearchSteps;
+            if (TryPickGoalsRecursive(tiers, 0, tierOrder, usedNames, picks, rng, enforceRowTypes, rowTypes))
             {
                 return picks;
             }
@@ -327,18 +336,45 @@ namespace Majora_s_Mask_Randomizer_GUI
             return picks;
         }
 
+        private static int[] BuildTierPickOrder(Dictionary<int, List<BingoGoal>> tiers)
+        {
+            int[] order = new int[25];
+            for (int i = 0; i < 25; i++)
+            {
+                order[i] = i + 1;
+            }
+
+            Array.Sort(order, (a, b) =>
+            {
+                int countA = ResolveTier(tiers, a).Count;
+                int countB = ResolveTier(tiers, b).Count;
+                return countA.CompareTo(countB);
+            });
+
+            return order;
+        }
+
         private static bool TryPickGoalsRecursive(
             Dictionary<int, List<BingoGoal>> tiers,
-            int tier,
+            int orderIndex,
+            int[] tierOrder,
             HashSet<string> usedNames,
             Dictionary<int, BingoGoal> picks,
-            Random rng)
+            Random rng,
+            bool enforceRowTypes,
+            HashSet<string>[] rowTypes)
         {
-            if (tier > 25)
+            if (--_pickStepsRemaining <= 0)
+            {
+                return false;
+            }
+
+            if (orderIndex >= tierOrder.Length)
             {
                 return picks.Count == 25;
             }
 
+            int tier = tierOrder[orderIndex];
             List<BingoGoal> candidates = ResolveTier(tiers, tier);
             if (candidates.Count == 0)
             {
@@ -346,6 +382,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             List<BingoGoal> shuffled = ShuffleCandidates(candidates, rng);
+            int row = enforceRowTypes ? TierToRow[tier] : 0;
             for (int i = 0; i < shuffled.Count; i++)
             {
                 BingoGoal candidate = shuffled[i];
@@ -354,11 +391,34 @@ namespace Majora_s_Mask_Randomizer_GUI
                     continue;
                 }
 
+                if (enforceRowTypes && GoalConflictsRowTypes(candidate, rowTypes[row]))
+                {
+                    continue;
+                }
+
                 picks[tier] = candidate;
                 usedNames.Add(candidate.Name);
-                if (TryPickGoalsRecursive(tiers, tier + 1, usedNames, picks, rng))
+                if (enforceRowTypes)
+                {
+                    AddGoalTypesToRow(candidate, rowTypes[row]);
+                }
+
+                if (TryPickGoalsRecursive(
+                    tiers,
+                    orderIndex + 1,
+                    tierOrder,
+                    usedNames,
+                    picks,
+                    rng,
+                    enforceRowTypes,
+                    rowTypes))
                 {
                     return true;
+                }
+
+                if (enforceRowTypes)
+                {
+                    RemoveGoalTypesFromRow(candidate, rowTypes[row]);
                 }
 
                 picks.Remove(tier);
@@ -366,6 +426,75 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             return false;
+        }
+
+        private static HashSet<string>[] CreateRowTypeSets()
+        {
+            HashSet<string>[] rowTypes = new HashSet<string>[5];
+            for (int i = 0; i < 5; i++)
+            {
+                rowTypes[i] = new HashSet<string>();
+            }
+
+            return rowTypes;
+        }
+
+        private static bool GoalConflictsRowTypes(BingoGoal goal, HashSet<string> rowTypes)
+        {
+            if (goal == null || goal.Types == null)
+            {
+                return false;
+            }
+
+            for (int t = 0; t < goal.Types.Length; t++)
+            {
+                string type = goal.Types[t];
+                if (type == "borrowed_tier")
+                {
+                    continue;
+                }
+
+                if (rowTypes.Contains(type))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static void AddGoalTypesToRow(BingoGoal goal, HashSet<string> rowTypes)
+        {
+            if (goal == null || goal.Types == null)
+            {
+                return;
+            }
+
+            for (int t = 0; t < goal.Types.Length; t++)
+            {
+                string type = goal.Types[t];
+                if (type != "borrowed_tier")
+                {
+                    rowTypes.Add(type);
+                }
+            }
+        }
+
+        private static void RemoveGoalTypesFromRow(BingoGoal goal, HashSet<string> rowTypes)
+        {
+            if (goal == null || goal.Types == null)
+            {
+                return;
+            }
+
+            for (int t = 0; t < goal.Types.Length; t++)
+            {
+                string type = goal.Types[t];
+                if (type != "borrowed_tier")
+                {
+                    rowTypes.Remove(type);
+                }
+            }
         }
 
         private static List<BingoGoal> ShuffleCandidates(List<BingoGoal> candidates, Random rng)

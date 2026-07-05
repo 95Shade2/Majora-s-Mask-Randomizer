@@ -6,6 +6,8 @@ namespace Majora_s_Mask_Randomizer_GUI
     {
         public const string HeuristicFail = "HEURISTIC_FAIL";
         public const string DryRunFail = "DRY_RUN_FAIL";
+        public const string ItemInfeasible = "ITEM_INFEASIBLE";
+        public const string PoolExhausted = "POOL_EXHAUSTED";
         public const string SrlFail = "SRL_FAIL";
         public const string Success = "SUCCESS";
         public const string Exhausted = "EXHAUSTED";
@@ -21,7 +23,27 @@ namespace Majora_s_Mask_Randomizer_GUI
             text.AppendLine("ROM seed: " + (card.RomSeed ?? ""));
             text.AppendLine("Generation seed: " + card.EffectiveSeed);
             text.AppendLine("Pool hash (" + BingoGoalValidator.PoolHashVersion + "): " + (card.PoolHash ?? ""));
+            if (!string.IsNullOrEmpty(card.SettingsHash))
+            {
+                text.AppendLine("Settings hash (" + SettingsHash.Version + "): " + card.SettingsHash);
+            }
+
+            if (!string.IsNullOrEmpty(card.AsyncRaceCode))
+            {
+                text.AppendLine("Async race code: " + card.AsyncRaceCode);
+            }
+
             text.AppendLine("Win mode: " + card.WinMode);
+            if (!string.IsNullOrEmpty(card.LogicName))
+            {
+                text.AppendLine("Logic: " + card.LogicName);
+            }
+
+            if (!string.IsNullOrEmpty(card.PlacementsHash))
+            {
+                text.AppendLine("Placements hash (" + BingoPlacementMap.Version + "): " + card.PlacementsHash);
+            }
+
             text.AppendLine("Rerolls: " + card.RerollCount + " | Goals substituted: " + card.GoalsSubstituted);
             text.AppendLine();
 
@@ -52,6 +74,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             text.AppendLine("Reason key");
             text.AppendLine("----------");
             text.AppendLine(DescribeReason(HeuristicFail));
+            text.AppendLine(DescribeReason(ItemInfeasible));
+            text.AppendLine(DescribeReason(PoolExhausted));
             text.AppendLine(DescribeReason(DryRunFail));
             text.AppendLine(DescribeReason(SrlFail));
             text.AppendLine(DescribeReason(Success));
@@ -69,10 +93,14 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 case HeuristicFail:
                     return "Tier pool pre-check failed (duplicate goals or empty tier).";
+                case ItemInfeasible:
+                    return "Board contains goals not obtainable with current item placements and logic.";
+                case PoolExhausted:
+                    return "Could not assign 25 unique obtainable goals for this seed.";
                 case DryRunFail:
-                    return "SRL dry-run could not build a valid board with this seed.";
+                    return "SRL dry-run could not build a valid board with this seed. (legacy)";
                 case SrlFail:
-                    return "SRL board failed validation for this seed.";
+                    return "SRL board failed validation for this seed. (legacy)";
                 case Success:
                     return "Valid card generated.";
                 case Exhausted:

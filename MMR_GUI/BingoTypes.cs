@@ -60,6 +60,11 @@ namespace Majora_s_Mask_Randomizer_GUI
         public string RomSeed;
         public int EffectiveSeed;
         public string PoolHash;
+        public string SettingsHash;
+        public string AsyncRaceCode;
+        public string LogicName;
+        public string PlacementsPayloadBase64;
+        public string PlacementsHash;
         public int RerollCount;
         public bool GoalsSubstituted;
         public List<RerollTraceEntry> RerollTrace;

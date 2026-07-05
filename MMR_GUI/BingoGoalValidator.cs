@@ -14,9 +14,29 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public static HashSet<string> GetObtainableItems(Main_Window window)
         {
-            HashSet<string> items = new HashSet<string>();
-            AddSlotObtainableItems(items, window);
-            AddPlandoRewards(items, window);
+            return BingoObtainabilityContext.Build(window).Obtainable;
+        }
+
+        internal static HashSet<string> BuildObtainableSet(
+            Main_Window window,
+            BingoObtainabilityContext context)
+        {
+            HashSet<string> items = new HashSet<string>(StringComparer.Ordinal);
+
+            if (LogicObtainability.IsLogicEnabled(context.LogicName))
+            {
+                context.LogicData = LogicUsefulness.Compute(context.LogicName, window.Item_Names);
+                foreach (string item in LogicObtainability.Compute(context.LogicData, context.Placements))
+                {
+                    items.Add(item);
+                }
+            }
+            else
+            {
+                AddSlotObtainableItems(items, window);
+                AddPlandoRewards(items, window);
+            }
+
             ExpandDerivedAccess(items);
             return items;
         }

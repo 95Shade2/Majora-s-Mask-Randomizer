@@ -25,6 +25,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         public Color BorderColor { get; set; }
         public Color MenuBackColor { get; set; }
         public Color MenuForeColor { get; set; }
+        public Color MenuHoverBackColor { get; set; }
         public Color TabSelectedBackColor { get; set; }
         public Color TabForeColor { get; set; }
         public Color TabIconColor { get; set; }
@@ -81,6 +82,17 @@ namespace Majora_s_Mask_Randomizer_GUI
         private static bool _isDark = true;
         private const int CheckBoxGlyphSize = 18;
         private const int CheckBoxTextGap = 8;
+
+        private const string BingoMarkGreenHex = "#005511";
+        private const string BingoMarkRedHex = "#550011";
+        private const string BingoMarkOrangeHex = "#553300";
+        private const string BingoMarkBlueHex = "#001155";
+        private const string BingoMarkPurpleHex = "#220055";
+        private static readonly Color BingoMarkGreenColor = Color.FromArgb(0, 85, 17);
+        private static readonly Color BingoMarkRedColor = Color.FromArgb(85, 0, 17);
+        private static readonly Color BingoMarkOrangeColor = Color.FromArgb(85, 51, 0);
+        private static readonly Color BingoMarkBlueColor = Color.FromArgb(0, 17, 85);
+        private static readonly Color BingoMarkPurpleColor = Color.FromArgb(34, 0, 85);
 
         [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
         private static extern int SetWindowTheme(IntPtr hWnd, string pszSubAppName, string pszSubIdList);
@@ -171,13 +183,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
             else if (root is MenuStrip || root is ToolStrip || root is StatusStrip)
             {
-                root.BackColor = theme.MenuBackColor;
-                root.ForeColor = theme.MenuForeColor;
-                root.Font = theme.BaseFont;
                 if (root is ToolStrip strip)
                 {
-                    strip.RenderMode = ToolStripRenderMode.System;
-                    ApplyToolStripItems(strip.Items, theme);
+                    ApplyToolStripTheme(strip, theme);
+                }
+                else
+                {
+                    root.BackColor = theme.MenuBackColor;
+                    root.ForeColor = theme.MenuForeColor;
+                    root.Font = theme.BaseFont;
                 }
             }
             else if (root is TabControl tabs)
@@ -674,13 +688,127 @@ namespace Majora_s_Mask_Randomizer_GUI
         {
             foreach (ToolStripItem item in items)
             {
-                item.BackColor = theme.MenuBackColor;
-                item.ForeColor = theme.MenuForeColor;
+                item.ForeColor = item.Enabled ? theme.MenuForeColor : theme.DisabledForeColor;
                 if (item is ToolStripDropDownItem dropDown)
                 {
                     ApplyToolStripItems(dropDown.DropDownItems, theme);
                 }
             }
+        }
+
+        private static void ApplyToolStripTheme(ToolStrip strip, ThemePalette theme)
+        {
+            strip.BackColor = theme.MenuBackColor;
+            strip.ForeColor = theme.MenuForeColor;
+            strip.Font = theme.BaseFont;
+            strip.RenderMode = ToolStripRenderMode.Professional;
+            strip.Renderer = new ThemedToolStripRenderer(theme);
+            ApplyToolStripItems(strip.Items, theme);
+        }
+
+        public static void ApplyContextMenuStrip(ContextMenuStrip menu)
+        {
+            ApplyToolStripTheme(menu, Current);
+        }
+
+        public static void SyncToolStripItemColors(ToolStripItem item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            ThemePalette theme = Current;
+            item.ForeColor = item.Enabled ? theme.MenuForeColor : theme.DisabledForeColor;
+            item.Invalidate();
+        }
+
+        private sealed class ThemedToolStripRenderer : ToolStripProfessionalRenderer
+        {
+            private readonly ThemePalette _theme;
+
+            public ThemedToolStripRenderer(ThemePalette theme)
+                : base(new ThemedMenuColorTable(theme))
+            {
+                _theme = theme;
+            }
+
+            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+            {
+                ToolStripItem item = e.Item;
+                Rectangle bounds = new Rectangle(Point.Empty, item.Size);
+                bool highlight = item.Selected || item.Pressed;
+                Color back = highlight ? _theme.MenuHoverBackColor : _theme.MenuBackColor;
+
+                using (SolidBrush brush = new SolidBrush(back))
+                {
+                    e.Graphics.FillRectangle(brush, bounds);
+                }
+            }
+
+            protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+            {
+                e.TextColor = e.Item.Enabled ? _theme.MenuForeColor : _theme.DisabledForeColor;
+                base.OnRenderItemText(e);
+            }
+
+            protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
+            {
+                using (SolidBrush brush = new SolidBrush(_theme.MenuBackColor))
+                {
+                    e.Graphics.FillRectangle(brush, e.AffectedBounds);
+                }
+            }
+
+            protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+            {
+                if (e.ToolStrip is ToolStripDropDown)
+                {
+                    using (Pen pen = new Pen(_theme.BorderColor))
+                    {
+                        Rectangle bounds = e.AffectedBounds;
+                        bounds.Width -= 1;
+                        bounds.Height -= 1;
+                        e.Graphics.DrawRectangle(pen, bounds);
+                    }
+                }
+            }
+        }
+
+        private sealed class ThemedMenuColorTable : ProfessionalColorTable
+        {
+            private readonly ThemePalette _theme;
+
+            public ThemedMenuColorTable(ThemePalette theme)
+            {
+                _theme = theme;
+            }
+
+            public override Color MenuBorder => _theme.BorderColor;
+
+            public override Color ToolStripDropDownBackground => _theme.MenuBackColor;
+
+            public override Color ImageMarginGradientBegin => _theme.MenuBackColor;
+
+            public override Color ImageMarginGradientMiddle => _theme.MenuBackColor;
+
+            public override Color ImageMarginGradientEnd => _theme.MenuBackColor;
+
+            public override Color MenuItemBorder => _theme.MenuHoverBackColor;
+
+            public override Color MenuItemSelected => _theme.MenuHoverBackColor;
+
+            public override Color MenuItemSelectedGradientBegin => _theme.MenuHoverBackColor;
+
+            public override Color MenuItemSelectedGradientEnd => _theme.MenuHoverBackColor;
+
+            public override Color MenuItemPressedGradientBegin => _theme.MenuHoverBackColor;
+
+            public override Color MenuItemPressedGradientEnd => _theme.MenuHoverBackColor;
+
+            public override Color MenuStripGradientBegin => _theme.MenuBackColor;
+
+            public override Color MenuStripGradientEnd => _theme.MenuBackColor;
         }
 
         private static void ApplyLabelTheme(Label label, ThemePalette theme, bool isHint)
@@ -708,7 +836,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 return;
             }
 
-            if (button.Tag as string == "ColorSwatch" || button.Tag is int)
+            if (button.Tag as string == "ColorSwatch" || button.Tag as string == "BingoGoalCell" || button.Tag is int || button is BingoGoalButton)
             {
                 return;
             }
@@ -777,6 +905,120 @@ namespace Majora_s_Mask_Randomizer_GUI
             return css.ToString();
         }
 
+        /// <summary>
+        /// Standalone bingo card HTML styling (Jimmie1717-style layout/contrast).
+        /// </summary>
+        public static string BuildBingoExportCss()
+        {
+            if (_isDark)
+            {
+                return BuildBingoExportCssDark();
+            }
+
+            return BuildBingoExportCssLight();
+        }
+
+        private static string BuildBingoExportCssDark()
+        {
+            StringBuilder css = new StringBuilder();
+            css.AppendLine("*{box-sizing:border-box;}");
+            css.AppendLine("body{font-family:Segoe UI,Helvetica,Arial,sans-serif;margin:24px;background:#101010;color:#b8b8b8;line-height:1.45;}");
+            css.AppendLine("h1{font-size:1.6rem;font-weight:600;color:#ffffff;margin:0 0 12px;}");
+            css.AppendLine("h2{font-size:1.15rem;font-weight:600;color:#e8e8e8;margin:24px 0 8px;}");
+            css.AppendLine("p{color:#b8b8b8;margin:8px 0;}");
+            css.AppendLine("em{color:#909090;font-style:italic;}");
+            css.AppendLine(".meta{margin-bottom:16px;line-height:1.6;font-size:14px;color:#a8a8a8;}");
+            css.AppendLine("#status{font-weight:600;color:#ffffff;margin-top:8px;}");
+            css.AppendLine(".reroll-log{white-space:pre-wrap;font-family:Consolas,Monaco,monospace;font-size:12px;background:#141414;color:#d8d8d8;border:1px solid #333333;padding:12px;border-radius:4px;}");
+            css.AppendLine("#bingo-grid{border-collapse:collapse;margin:16px 0;table-layout:fixed;}");
+            css.AppendLine("#bingo-grid td,#bingo-grid th{border:1px solid #333333;padding:8px 6px;vertical-align:middle;text-align:center;}");
+            css.AppendLine("#bingo-grid th.line-header{width:68px;min-width:68px;max-width:72px;height:auto;min-height:32px;padding:6px 4px;font-size:11px;line-height:1.2;background:#101010;color:#c8c8c8;font-weight:600;}");
+            css.AppendLine("#bingo-grid th.grid-pad{width:8px;min-width:8px;max-width:8px;padding:0;border:none;background:transparent;}");
+            css.AppendLine("#bingo-grid td.goal-cell{width:148px;min-width:130px;height:84px;font-size:13px;line-height:1.35;cursor:pointer;user-select:none;background:#000000;color:#ffffff;}");
+            css.AppendLine(".line-header{cursor:pointer;text-decoration:underline;color:#c8c8c8;}");
+            css.AppendLine("#bingo-grid td.goal-cell:hover{background:#0a0a0a;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-green,.popout-cell.mark-green{background:" + BingoMarkGreenHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-red,.popout-cell.mark-red{background:" + BingoMarkRedHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-orange,.popout-cell.mark-orange{background:" + BingoMarkOrangeHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-blue,.popout-cell.mark-blue{background:" + BingoMarkBlueHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-purple,.popout-cell.mark-purple{background:" + BingoMarkPurpleHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-green:hover,.popout-cell.mark-green:hover{background:" + BingoMarkGreenHex + ";}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-red:hover,.popout-cell.mark-red:hover{background:" + BingoMarkRedHex + ";}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-orange:hover,.popout-cell.mark-orange:hover{background:" + BingoMarkOrangeHex + ";}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-blue:hover,.popout-cell.mark-blue:hover{background:" + BingoMarkBlueHex + ";}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-purple:hover,.popout-cell.mark-purple:hover{background:" + BingoMarkPurpleHex + ";}");
+            css.AppendLine("#popout-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;}");
+            css.AppendLine("#popout-overlay.open{display:flex;}");
+            css.AppendLine("#popout-panel{background:#141414;border:1px solid #333333;padding:12px;max-width:95vw;max-height:90vh;overflow:auto;color:#ffffff;}");
+            css.AppendLine("#popout-title{font-weight:600;margin-bottom:8px;color:#ffffff;}");
+            css.AppendLine("#popout-grid{display:flex;gap:8px;}");
+            css.AppendLine("#popout-grid.vertical{flex-direction:column;}");
+            css.AppendLine("#popout-grid.horizontal{flex-direction:row;flex-wrap:wrap;}");
+            css.AppendLine(".popout-cell{border:1px solid #333333;background:#000000;color:#ffffff;padding:12px;min-width:120px;min-height:72px;cursor:pointer;user-select:none;text-align:center;font-size:13px;line-height:1.35;}");
+            css.AppendLine("#mark-menu{display:none;position:fixed;z-index:1100;background:#141414;border:1px solid #333333;border-radius:4px;padding:4px;box-shadow:0 6px 18px rgba(0,0,0,.65);min-width:132px;}");
+            css.AppendLine("#mark-menu.open{display:flex;flex-direction:column;gap:2px;}");
+            css.AppendLine(".mark-menu-item{display:flex;align-items:center;gap:8px;border:none;background:transparent;color:#ffffff;padding:7px 10px;cursor:pointer;text-align:left;font-size:13px;border-radius:3px;width:100%;}");
+            css.AppendLine(".mark-menu-item:hover{background:#1f1f1f;}");
+            css.AppendLine(".mark-menu-swatch{width:14px;height:14px;border-radius:2px;flex-shrink:0;border:1px solid rgba(255,255,255,.15);}");
+            css.AppendLine(".mark-menu-item.mark-menu-clear .mark-menu-swatch{background:#000000;}");
+            css.AppendLine(".mark-menu-item.mark-green .mark-menu-swatch{background:" + BingoMarkGreenHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-red .mark-menu-swatch{background:" + BingoMarkRedHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-orange .mark-menu-swatch{background:" + BingoMarkOrangeHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-blue .mark-menu-swatch{background:" + BingoMarkBlueHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-purple .mark-menu-swatch{background:" + BingoMarkPurpleHex + ";}");
+            css.AppendLine(".mark-menu-label{flex:1;}");
+            css.AppendLine("html{color-scheme:dark;}");
+            return css.ToString();
+        }
+
+        private static string BuildBingoExportCssLight()
+        {
+            StringBuilder css = new StringBuilder();
+            css.AppendLine("*{box-sizing:border-box;}");
+            css.AppendLine("body{font-family:Segoe UI,Helvetica,Arial,sans-serif;margin:24px;background:#f4f4f4;color:#222;line-height:1.45;}");
+            css.AppendLine("h1{font-size:1.6rem;font-weight:600;color:#111;margin:0 0 12px;}");
+            css.AppendLine("h2{font-size:1.15rem;font-weight:600;color:#222;margin:24px 0 8px;}");
+            css.AppendLine("p{color:#333;margin:8px 0;}");
+            css.AppendLine("em{color:#666;font-style:italic;}");
+            css.AppendLine(".meta{margin-bottom:16px;line-height:1.6;font-size:14px;color:#444;}");
+            css.AppendLine("#status{font-weight:600;color:#111;margin-top:8px;}");
+            css.AppendLine(".reroll-log{white-space:pre-wrap;font-family:Consolas,Monaco,monospace;font-size:12px;background:#fff;color:#222;border:1px solid #ccc;padding:12px;border-radius:4px;}");
+            css.AppendLine("#bingo-grid{border-collapse:collapse;margin:16px 0;table-layout:fixed;}");
+            css.AppendLine("#bingo-grid td,#bingo-grid th{border:1px solid #888;padding:8px 6px;vertical-align:middle;text-align:center;}");
+            css.AppendLine("#bingo-grid th.line-header{width:68px;min-width:68px;max-width:72px;height:auto;min-height:32px;padding:6px 4px;font-size:11px;line-height:1.2;background:#e8e8e8;color:#111;font-weight:600;}");
+            css.AppendLine("#bingo-grid th.grid-pad{width:8px;min-width:8px;max-width:8px;padding:0;border:none;background:transparent;}");
+            css.AppendLine("#bingo-grid td.goal-cell{width:148px;min-width:130px;height:84px;font-size:13px;line-height:1.35;cursor:pointer;user-select:none;background:#fff;color:#111;}");
+            css.AppendLine(".line-header{cursor:pointer;text-decoration:underline;color:#005a9e;}");
+            css.AppendLine("#bingo-grid td.goal-cell:hover{background:#f9f9f9;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-green,.popout-cell.mark-green{background:" + BingoMarkGreenHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-red,.popout-cell.mark-red{background:" + BingoMarkRedHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-orange,.popout-cell.mark-orange{background:" + BingoMarkOrangeHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-blue,.popout-cell.mark-blue{background:" + BingoMarkBlueHex + ";color:#ffffff;}");
+            css.AppendLine("#bingo-grid td.goal-cell.mark-purple,.popout-cell.mark-purple{background:" + BingoMarkPurpleHex + ";color:#ffffff;}");
+            css.AppendLine("#popout-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1000;align-items:center;justify-content:center;}");
+            css.AppendLine("#popout-overlay.open{display:flex;}");
+            css.AppendLine("#popout-panel{background:#fff;border:1px solid #888;padding:12px;max-width:95vw;max-height:90vh;overflow:auto;color:#222;}");
+            css.AppendLine("#popout-title{font-weight:600;margin-bottom:8px;}");
+            css.AppendLine("#popout-grid{display:flex;gap:8px;}");
+            css.AppendLine("#popout-grid.vertical{flex-direction:column;}");
+            css.AppendLine("#popout-grid.horizontal{flex-direction:row;flex-wrap:wrap;}");
+            css.AppendLine(".popout-cell{border:1px solid #888;background:#fff;color:#111;padding:12px;min-width:120px;min-height:72px;cursor:pointer;user-select:none;text-align:center;}");
+            css.AppendLine("#mark-menu{display:none;position:fixed;z-index:1100;background:#fff;border:1px solid #888;border-radius:4px;padding:4px;box-shadow:0 6px 18px rgba(0,0,0,.2);min-width:132px;}");
+            css.AppendLine("#mark-menu.open{display:flex;flex-direction:column;gap:2px;}");
+            css.AppendLine(".mark-menu-item{display:flex;align-items:center;gap:8px;border:none;background:transparent;color:#222;padding:7px 10px;cursor:pointer;text-align:left;font-size:13px;border-radius:3px;width:100%;}");
+            css.AppendLine(".mark-menu-item:hover{background:#f0f0f0;}");
+            css.AppendLine(".mark-menu-swatch{width:14px;height:14px;border-radius:2px;flex-shrink:0;border:1px solid rgba(0,0,0,.2);}");
+            css.AppendLine(".mark-menu-item.mark-menu-clear .mark-menu-swatch{background:#fff;}");
+            css.AppendLine(".mark-menu-item.mark-green .mark-menu-swatch{background:" + BingoMarkGreenHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-red .mark-menu-swatch{background:" + BingoMarkRedHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-orange .mark-menu-swatch{background:" + BingoMarkOrangeHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-blue .mark-menu-swatch{background:" + BingoMarkBlueHex + ";}");
+            css.AppendLine(".mark-menu-item.mark-purple .mark-menu-swatch{background:" + BingoMarkPurpleHex + ";}");
+            css.AppendLine(".mark-menu-label{flex:1;}");
+            css.AppendLine("html{color-scheme:light;}");
+            return css.ToString();
+        }
+
         private static string ToHex(Color color)
         {
             return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
@@ -801,6 +1043,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 BorderColor = Color.FromArgb(200, 200, 200),
                 MenuBackColor = Color.FromArgb(245, 245, 247),
                 MenuForeColor = SystemColors.ControlText,
+                MenuHoverBackColor = Color.FromArgb(220, 220, 228),
                 TabSelectedBackColor = Color.White,
                 TabForeColor = SystemColors.ControlText,
                 TabIconColor = Color.FromArgb(55, 55, 60),
@@ -823,11 +1066,11 @@ namespace Majora_s_Mask_Randomizer_GUI
                 CheckBoxBorderColor = Color.FromArgb(130, 130, 130),
                 CheckBoxCheckedBackColor = Color.FromArgb(98, 0, 234),
                 CheckBoxCheckMarkColor = Color.White,
-                MarkGreen = Color.FromArgb(200, 230, 201),
-                MarkRed = Color.FromArgb(255, 205, 210),
-                MarkOrange = Color.FromArgb(255, 224, 178),
-                MarkBlue = Color.FromArgb(187, 222, 251),
-                MarkPurple = Color.FromArgb(225, 190, 231),
+                MarkGreen = BingoMarkGreenColor,
+                MarkRed = BingoMarkRedColor,
+                MarkOrange = BingoMarkOrangeColor,
+                MarkBlue = BingoMarkBlueColor,
+                MarkPurple = BingoMarkPurpleColor,
                 ButtonMinHeight = 30,
                 ControlMargin = new Padding(4),
                 GroupPadding = new Padding(8, 4, 8, 8)
@@ -853,6 +1096,7 @@ namespace Majora_s_Mask_Randomizer_GUI
                 BorderColor = Color.FromArgb(35, 35, 35),
                 MenuBackColor = Color.FromArgb(37, 37, 38),
                 MenuForeColor = Color.FromArgb(220, 220, 220),
+                MenuHoverBackColor = Color.FromArgb(62, 62, 66),
                 TabSelectedBackColor = Color.FromArgb(37, 37, 38),
                 TabForeColor = Color.FromArgb(200, 200, 200),
                 TabIconColor = Color.FromArgb(180, 180, 185),
@@ -875,11 +1119,11 @@ namespace Majora_s_Mask_Randomizer_GUI
                 CheckBoxBorderColor = Color.FromArgb(130, 130, 138),
                 CheckBoxCheckedBackColor = Color.FromArgb(88, 58, 128),
                 CheckBoxCheckMarkColor = Color.White,
-                MarkGreen = Color.FromArgb(56, 100, 58),
-                MarkRed = Color.FromArgb(120, 55, 58),
-                MarkOrange = Color.FromArgb(120, 85, 40),
-                MarkBlue = Color.FromArgb(45, 80, 110),
-                MarkPurple = Color.FromArgb(90, 60, 100),
+                MarkGreen = BingoMarkGreenColor,
+                MarkRed = BingoMarkRedColor,
+                MarkOrange = BingoMarkOrangeColor,
+                MarkBlue = BingoMarkBlueColor,
+                MarkPurple = BingoMarkPurpleColor,
                 ButtonMinHeight = 30,
                 ControlMargin = new Padding(4),
                 GroupPadding = new Padding(8, 4, 8, 8)

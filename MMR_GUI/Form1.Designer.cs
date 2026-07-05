@@ -48,6 +48,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.Open_Base_Rom_Button = new System.Windows.Forms.Button();
             this.Base_Rom_Label = new System.Windows.Forms.Label();
             this.Open_Base_Rom_Dialog = new System.Windows.Forms.OpenFileDialog();
+            this.Open_Run_Hash_Dialog = new System.Windows.Forms.OpenFileDialog();
             this.Save_Presets_Dialog = new System.Windows.Forms.SaveFileDialog();
             this.Presets_Combobox = new System.Windows.Forms.ComboBox();
             this.Presets_Label = new System.Windows.Forms.Label();
@@ -63,6 +64,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.Tunic_Button = new System.Windows.Forms.Button();
             this.Items_Tab = new Majora_s_Mask_Randomizer_GUI.ThemedTabControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFromHashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createWadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.swampScrubSalesBeansToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -612,6 +615,8 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 
+            this.fileToolStripMenuItem,
+
             this.settingsToolStripMenuItem,
 
             this.pauseMenuColorsToolStripMenuItem,
@@ -635,6 +640,43 @@ namespace Majora_s_Mask_Randomizer_GUI
             this.menuStrip1.TabIndex = 93;
 
             this.menuStrip1.Text = "menuStrip1";
+
+            //
+            // fileToolStripMenuItem
+
+            //
+
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+
+            this.loadFromHashToolStripMenuItem});
+
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+
+            this.fileToolStripMenuItem.Text = "File";
+
+            //
+            // loadFromHashToolStripMenuItem
+
+            //
+
+            this.loadFromHashToolStripMenuItem.Name = "loadFromHashToolStripMenuItem";
+
+            this.loadFromHashToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+
+            this.loadFromHashToolStripMenuItem.Text = "Load from hash...";
+
+            this.loadFromHashToolStripMenuItem.Click += new System.EventHandler(this.loadFromHashToolStripMenuItem_Click);
+
+            //
+            // Open_Run_Hash_Dialog
+
+            //
+
+            this.Open_Run_Hash_Dialog.Filter = "Run hash files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            this.Open_Run_Hash_Dialog.Title = "Load run hash file";
 
             //
             // settingsToolStripMenuItem
@@ -1053,12 +1095,17 @@ namespace Majora_s_Mask_Randomizer_GUI
                 private System.Windows.Forms.Button Open_Base_Rom_Button;
                 private System.Windows.Forms.Label Base_Rom_Label;
                 private System.Windows.Forms.OpenFileDialog Open_Base_Rom_Dialog;
+                private System.Windows.Forms.OpenFileDialog Open_Run_Hash_Dialog;
                 private System.Windows.Forms.SaveFileDialog Save_Presets_Dialog;
+                private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+                private System.Windows.Forms.ToolStripMenuItem loadFromHashToolStripMenuItem;
                 private System.Windows.Forms.ComboBox Presets_Combobox;
                 private System.Windows.Forms.Label Presets_Label;
                 private System.Windows.Forms.TextBox Seed_Textbox;
                 private System.Windows.Forms.Label Seed_Label;
                 private System.Windows.Forms.Label label20;
+                private System.Windows.Forms.Label _settingsHashShortLabel;
+                private System.Windows.Forms.TextBox _settingsShareTokenBox;
                 private System.Windows.Forms.ComboBox Logic_Combobox;
                 private System.Windows.Forms.Label Logic_Label;
                 private System.Windows.Forms.ComboBox Difficulty_Combobox;
@@ -1241,9 +1288,10 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 1,
-                RowCount = 6,
+                RowCount = 7,
                 Padding = Padding.Empty
             };
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -1255,10 +1303,80 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.Controls.Add(BuildTargetingPresetsRow(), 0, 1);
             root.Controls.Add(BuildPlandoGroup(), 0, 2);
             root.Controls.Add(BuildRandomizerOptionsGroup(), 0, 3);
-            root.Controls.Add(BuildPatchOptionsGroup(), 0, 4);
-            root.Controls.Add(BuildBingoGroup(), 0, 5);
+            root.Controls.Add(BuildSettingsShareGroup(), 0, 4);
+            root.Controls.Add(BuildPatchOptionsGroup(), 0, 5);
+            root.Controls.Add(BuildBingoGroup(), 0, 6);
 
             return root;
+        }
+
+        private GroupBox BuildSettingsShareGroup()
+        {
+            GroupBox group = CreateConfigGroupBox("Settings Share");
+
+            TableLayoutPanel table = new TableLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                ColumnCount = 2,
+                RowCount = 3,
+                Padding = new Padding(0, 2, 0, 0)
+            };
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, SettingsLabelWidth));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            for (int i = 0; i < 3; i++)
+            {
+                table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            }
+
+            _settingsHashShortLabel = new Label
+            {
+                AutoSize = true,
+                Anchor = AnchorStyles.Left,
+                Margin = new Padding(0, 6, 0, 4)
+            };
+            table.Controls.Add(CreateFieldLabel("Settings"), 0, 0);
+            table.Controls.Add(_settingsHashShortLabel, 1, 0);
+
+            _settingsShareTokenBox = new TextBox
+            {
+                Multiline = true,
+                ReadOnly = true,
+                ScrollBars = ScrollBars.Vertical,
+                Width = SettingsFieldWidth,
+                Height = 72,
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                Margin = new Padding(0, 2, 0, 6)
+            };
+            StyleSettingsInput(_settingsShareTokenBox);
+            table.Controls.Add(CreateFieldLabel("Token"), 0, 1);
+            table.Controls.Add(_settingsShareTokenBox, 1, 1);
+
+            FlowLayoutPanel buttons = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                WrapContents = true,
+                Margin = new Padding(0, 2, 0, 6)
+            };
+            Button copyToken = new Button { Text = "Copy token", AutoSize = true };
+            StyleSettingsAction(copyToken);
+            copyToken.Click += SettingsShareCopyClicked;
+            Button applyToken = new Button { Text = "Paste && apply", AutoSize = true };
+            StyleSettingsAction(applyToken);
+            applyToken.Click += SettingsShareApplyClicked;
+            Button refreshToken = new Button { Text = "Refresh", AutoSize = true };
+            StyleSettingsAction(refreshToken);
+            refreshToken.Click += (sender, args) => RefreshSettingsShareDisplay();
+            buttons.Controls.Add(copyToken);
+            buttons.Controls.Add(applyToken);
+            buttons.Controls.Add(refreshToken);
+            table.Controls.Add(CreateFieldLabel(""), 0, 2);
+            table.Controls.Add(buttons, 1, 2);
+
+            group.Controls.Add(table);
+            return group;
         }
 
         private GroupBox BuildBingoGroup()
@@ -1600,12 +1718,12 @@ namespace Majora_s_Mask_Randomizer_GUI
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 ColumnCount = 2,
-                RowCount = 6,
+                RowCount = 5,
                 Padding = new Padding(0, 2, 0, 0)
             };
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, SettingsLabelWidth));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 5; i++)
             {
                 table.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             }
@@ -1663,10 +1781,28 @@ namespace Majora_s_Mask_Randomizer_GUI
             table.Controls.Add(blastPanel, 1, 2);
 
             table.Controls.Add(CreateFieldLabel("Seed"), 0, 3);
+            FlowLayoutPanel seedPanel = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                FlowDirection = FlowDirection.TopDown,
+                WrapContents = false,
+                Margin = new Padding(0, 2, 0, 6)
+            };
             PrepareReparentedControl(Seed_Textbox);
             StyleSettingsInput(Seed_Textbox);
-            Seed_Textbox.Margin = new Padding(0, 2, 0, 2);
-            table.Controls.Add(Seed_Textbox, 1, 3);
+            Seed_Textbox.Margin = new Padding(0, 0, 0, 2);
+            Seed_Textbox.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            PrepareReparentedControl(label20);
+            label20.AutoSize = true;
+            label20.Font = UiTheme.Current.HintFont;
+            label20.ForeColor = UiTheme.Current.HintForeColor;
+            label20.MaximumSize = new Size(SettingsFieldWidth, 0);
+            label20.Margin = Padding.Empty;
+            label20.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            seedPanel.Controls.Add(Seed_Textbox);
+            seedPanel.Controls.Add(label20);
+            table.Controls.Add(seedPanel, 1, 3);
 
             table.Controls.Add(CreateFieldLabel("Difficulty"), 0, 4);
             PrepareReparentedControl(Difficulty_Combobox);
@@ -1677,14 +1813,6 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Difficulty_Combobox.SelectedIndex = 1;
             }
             table.Controls.Add(Difficulty_Combobox, 1, 4);
-
-            PrepareReparentedControl(label20);
-            label20.AutoSize = true;
-            label20.Font = UiTheme.Current.HintFont;
-            label20.ForeColor = UiTheme.Current.HintForeColor;
-            label20.MaximumSize = new Size(SettingsFieldWidth, 0);
-            label20.Margin = new Padding(0, 0, 0, 2);
-            table.Controls.Add(label20, 1, 5);
 
             group.Controls.Add(table);
             return group;

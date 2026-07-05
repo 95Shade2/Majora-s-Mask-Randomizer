@@ -11,6 +11,11 @@ namespace Majora_s_Mask_Randomizer_GUI
         private TextBox _romSeedBox;
         private Label _effectiveSeedLabel;
         private Label _poolHashLabel;
+        private Label _settingsHashLabel;
+        private Label _logicLabel;
+        private Label _placementsHashLabel;
+        private Label _verificationLabel;
+        private TextBox _raceCodeBox;
         private Label _rerollLabel;
         private Button _viewRerollLogButton;
         private Label _warningLabel;
@@ -18,31 +23,42 @@ namespace Majora_s_Mask_Randomizer_GUI
         private RadioButton _lineMode;
         private RadioButton _blackoutMode;
         private TableLayoutPanel _grid;
-        private readonly Button[,] _cells = new Button[5, 5];
+        private readonly BingoGoalButton[,] _cells = new BingoGoalButton[5, 5];
 
         private BingoCard _card;
         private readonly List<BingoLinePopoutDialog> _openPopouts = new List<BingoLinePopoutDialog>();
+        private bool _suppressRomSeedEvents;
 
         public BingoCardDialog(Main_Window owner)
         {
             _owner = owner;
             InitializeComponent();
+            _romSeedBox.Text = _owner.GetRomSeedText();
             RegenerateCard();
         }
 
         public void RefreshFromMainWindow()
         {
+            _owner.ClearBingoRaceContext();
             _romSeedBox.Text = _owner.GetRomSeedText();
-            RegenerateCard();
+            RegenerateCard(false);
         }
 
-        private void RegenerateCard()
+        private void RegenerateCard(bool clearRaceContext = true)
         {
             try
             {
+                if (clearRaceContext)
+                {
+                    _owner.ClearBingoRaceContext();
+                }
                 ClosePopouts();
                 BingoWinMode mode = _blackoutMode.Checked ? BingoWinMode.Blackout : BingoWinMode.Line;
                 _card = BingoCardGenerator.Generate(_romSeedBox.Text, mode, _owner);
+                _card.SettingsHash = _owner.ComputeSettingsHash();
+                AsyncRaceBuildResult raceCode = AsyncRaceCode.Build(_owner, mode);
+                _card.AsyncRaceCode = raceCode.Success ? raceCode.RaceCode : "";
+                SyncRomSeedFromCard();
                 UpdateMetaLabels();
                 PopulateGrid();
                 UpdateStatus();
@@ -66,6 +82,32 @@ namespace Majora_s_Mask_Randomizer_GUI
             _openPopouts.Clear();
         }
 
+        private void SyncRomSeedFromCard()
+        {
+            if (_card == null || string.IsNullOrEmpty(_card.RomSeed))
+            {
+                return;
+            }
+
+            if (!string.Equals(_romSeedBox.Text?.Trim(), _card.RomSeed, StringComparison.Ordinal))
+            {
+                _suppressRomSeedEvents = true;
+                try
+                {
+                    _romSeedBox.Text = _card.RomSeed;
+                }
+                finally
+                {
+                    _suppressRomSeedEvents = false;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(_owner.GetRomSeedText()))
+            {
+                _owner.SetRomSeedText(_card.RomSeed);
+            }
+        }
+
         private void UpdateMetaLabels()
         {
             if (_card == null)
@@ -78,6 +120,29 @@ namespace Majora_s_Mask_Randomizer_GUI
                 + (seedRerolled ? " (rerolled)" : "");
             _effectiveSeedLabel.ForeColor = seedRerolled ? UiTheme.Current.WarningForeColor : UiTheme.Current.ForeColor;
             _poolHashLabel.Text = "Pool hash (" + BingoGoalValidator.PoolHashVersion + "): " + _card.PoolHash;
+            _settingsHashLabel.Text = "Settings hash (" + SettingsHash.Version + "): " + _card.SettingsHash;
+            _logicLabel.Text = "Logic: " + (string.IsNullOrEmpty(_card.LogicName) ? "None" : _card.LogicName);
+            _placementsHashLabel.Text = "Placements hash (" + BingoPlacementMap.Version + "): "
+                + (string.IsNullOrEmpty(_card.PlacementsHash) ? "(none)" : _card.PlacementsHash);
+
+            string currentHash = _owner.ComputeSettingsHash();
+            if (!string.IsNullOrEmpty(_card.SettingsHash)
+                && string.Equals(currentHash, _card.SettingsHash, StringComparison.OrdinalIgnoreCase))
+            {
+                _verificationLabel.Text = "Race settings verified.";
+                _verificationLabel.ForeColor = UiTheme.Current.MarkGreen;
+            }
+            else
+            {
+                _verificationLabel.Text = "Race settings mismatch — re-apply race code or regenerate from host.";
+                _verificationLabel.ForeColor = UiTheme.Current.ErrorForeColor;
+            }
+
+            if (_raceCodeBox != null && !string.IsNullOrEmpty(_card.AsyncRaceCode))
+            {
+                _raceCodeBox.Text = _card.AsyncRaceCode;
+            }
+
             _rerollLabel.Text = _card.RerollCount > 0
                 ? "Rerolls: " + _card.RerollCount
                 : "Rerolls: 0";
@@ -107,14 +172,14 @@ namespace Majora_s_Mask_Randomizer_GUI
             RefreshOpenPopouts();
         }
 
-        private void ApplyCellStyle(Button cell, int index)
+        private void ApplyCellStyle(BingoGoalButton cell, int index)
         {
             if (_card == null || _card.GoalStates == null)
             {
                 return;
             }
 
-            cell.BackColor = BingoGoalMark.GetBackColor(_card.GoalStates[index]);
+            BingoGoalMark.ApplyCellStyle(cell, _card.GoalStates[index]);
         }
 
         private void RefreshOpenPopouts()
@@ -200,12 +265,12 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             if (IsLineMarked(0, 6, 5))
             {
-                return "TL-BR";
+                return "TLBR";
             }
 
             if (IsLineMarked(4, 4, 5))
             {
-                return "BL-TR";
+                return "BLTR";
             }
 
             return null;
@@ -235,22 +300,39 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             int index = row * 5 + col;
+            BingoGoalButton cell = _cells[row, col];
             if (e.Button == MouseButtons.Left)
             {
                 _card.GoalStates[index] = BingoGoalMark.CycleForward(_card.GoalStates[index]);
+                ApplyCellStyle(cell, index);
+                RefreshOpenPopouts();
+                UpdateStatus();
             }
             else if (e.Button == MouseButtons.Right)
             {
                 _card.GoalStates[index] = BingoGoalMark.CycleBackward(_card.GoalStates[index]);
+                ApplyCellStyle(cell, index);
+                RefreshOpenPopouts();
+                UpdateStatus();
             }
-            else
+        }
+
+        private void CellMouseUp(int row, int col, MouseEventArgs e)
+        {
+            if (_card == null || e.Button != MouseButtons.Middle)
             {
                 return;
             }
 
-            ApplyCellStyle(_cells[row, col], index);
-            RefreshOpenPopouts();
-            UpdateStatus();
+            int index = row * 5 + col;
+            BingoGoalButton cell = _cells[row, col];
+            BingoGoalMark.ShowMarkContextMenu(cell, e.Location, state =>
+            {
+                _card.GoalStates[index] = state;
+                ApplyCellStyle(cell, index);
+                RefreshOpenPopouts();
+                UpdateStatus();
+            });
         }
 
         private void OpenLinePopout(string title, int[] indices, bool horizontal)
@@ -298,6 +380,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             out TextBox romSeedBox,
             out Label effectiveSeedLabel,
             out Label poolHashLabel,
+            out Label settingsHashLabel,
+            out Label verificationLabel,
+            out TextBox raceCodeBox,
             out Label rerollLabel,
             out Button viewRerollLogButton,
             out Label warningLabel)
@@ -309,15 +394,27 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Dock = DockStyle.Top,
                 AutoSize = true,
                 ColumnCount = 3,
-                RowCount = 5
+                RowCount = 10
             };
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 110));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
             romSeedBox = new TextBox { Width = 160, Anchor = AnchorStyles.Left };
+            romSeedBox.TextChanged += (s, e) =>
+            {
+                if (!_suppressRomSeedEvents)
+                {
+                    RegenerateCard();
+                }
+            };
             effectiveSeedLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
             poolHashLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
+            settingsHashLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
+            _logicLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
+            _placementsHashLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
+            verificationLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left, MaximumSize = new Size(760, 0) };
+            raceCodeBox = new TextBox { Anchor = AnchorStyles.Left | AnchorStyles.Right, Width = 420 };
             rerollLabel = new Label { AutoSize = true, Anchor = AnchorStyles.Left };
             viewRerollLogButton = new Button { Text = "View reroll log", AutoSize = true, Enabled = false };
             viewRerollLogButton.Click += ViewRerollLogClicked;
@@ -332,16 +429,50 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             table.Controls.Add(new Label { Text = "", AutoSize = true }, 0, 2);
             table.Controls.Add(poolHashLabel, 1, 2);
-            Button copyHash = new Button { Text = "Copy hash", AutoSize = true };
-            copyHash.Click += CopyHashClicked;
-            table.Controls.Add(copyHash, 2, 2);
+            Button copyPoolHash = new Button { Text = "Copy pool hash", AutoSize = true };
+            copyPoolHash.Click += CopyHashClicked;
+            table.Controls.Add(copyPoolHash, 2, 2);
 
             table.Controls.Add(new Label { Text = "", AutoSize = true }, 0, 3);
-            table.Controls.Add(rerollLabel, 1, 3);
-            table.Controls.Add(viewRerollLogButton, 2, 3);
+            table.Controls.Add(settingsHashLabel, 1, 3);
+            Button copySettingsHash = new Button { Text = "Copy settings hash", AutoSize = true };
+            copySettingsHash.Click += CopySettingsHashClicked;
+            table.Controls.Add(copySettingsHash, 2, 3);
 
             table.Controls.Add(new Label { Text = "", AutoSize = true }, 0, 4);
-            table.Controls.Add(warningLabel, 1, 4);
+            table.Controls.Add(_logicLabel, 1, 4);
+            table.SetColumnSpan(_logicLabel, 2);
+
+            table.Controls.Add(new Label { Text = "", AutoSize = true }, 0, 5);
+            table.Controls.Add(_placementsHashLabel, 1, 5);
+            table.SetColumnSpan(_placementsHashLabel, 2);
+
+            table.Controls.Add(new Label { Text = "Status", AutoSize = true }, 0, 6);
+            table.Controls.Add(verificationLabel, 1, 6);
+            table.SetColumnSpan(verificationLabel, 2);
+
+            table.Controls.Add(new Label { Text = "Race code", AutoSize = true }, 0, 7);
+            table.Controls.Add(raceCodeBox, 1, 7);
+            FlowLayoutPanel raceButtons = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.TopDown,
+                WrapContents = false
+            };
+            Button applyRaceCode = new Button { Text = "Apply race code", AutoSize = true };
+            applyRaceCode.Click += ApplyRaceCodeClicked;
+            Button copyRaceCode = new Button { Text = "Copy race code", AutoSize = true };
+            copyRaceCode.Click += CopyRaceCodeClicked;
+            raceButtons.Controls.Add(applyRaceCode);
+            raceButtons.Controls.Add(copyRaceCode);
+            table.Controls.Add(raceButtons, 2, 7);
+
+            table.Controls.Add(new Label { Text = "", AutoSize = true }, 0, 8);
+            table.Controls.Add(rerollLabel, 1, 8);
+            table.Controls.Add(viewRerollLogButton, 2, 8);
+
+            table.Controls.Add(new Label { Text = "", AutoSize = true }, 0, 9);
+            table.Controls.Add(warningLabel, 1, 9);
             table.SetColumnSpan(warningLabel, 2);
 
             panel.Controls.Add(table);
@@ -372,6 +503,8 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             lineMode = new RadioButton { Text = "Line", Checked = true, AutoSize = true };
             blackoutMode = new RadioButton { Text = "Blackout", AutoSize = true };
+            lineMode.CheckedChanged += WinModeChanged;
+            blackoutMode.CheckedChanged += WinModeChanged;
 
             Button regenerate = new Button { Text = "Regenerate", AutoSize = true };
             regenerate.Click += (s, e) => RegenerateCard();
@@ -406,7 +539,10 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private const int HeaderColWidth = 72;
         private const int GoalColWidth = 156;
+        private const int GoalRowHeight = 88;
+        private const int HeaderRowHeight = 28;
         private static readonly int GridWidth = HeaderColWidth + GoalColWidth * 5;
+        private static readonly int GridHeight = 8 + HeaderRowHeight + (GoalRowHeight * 5) + HeaderRowHeight;
 
         private TableLayoutPanel BuildGrid()
         {
@@ -430,20 +566,13 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             for (int i = 0; i < 7; i++)
             {
-                grid.RowStyles.Add(new RowStyle(SizeType.Absolute, i == 0 ? 28 : (i == 6 ? 28 : 88)));
+                grid.RowStyles.Add(new RowStyle(
+                    SizeType.Absolute,
+                    i == 0 ? HeaderRowHeight : (i == 6 ? HeaderRowHeight : GoalRowHeight)));
             }
 
-            Label corner = CreateLineHeaderLabel("CARD");
-            corner.MouseDown += (s, e) =>
-            {
-                int[] all = new int[25];
-                for (int i = 0; i < 25; i++)
-                {
-                    all[i] = i;
-                }
-
-                LineHeaderMouseDown("CARD", all, e);
-            };
+            Label corner = CreateLineHeaderLabel("TLBR");
+            corner.MouseDown += (s, e) => LineHeaderMouseDown("TLBR", new int[] { 0, 6, 12, 18, 24 }, e);
             grid.Controls.Add(corner, 0, 0);
 
             for (int col = 0; col < 5; col++)
@@ -465,30 +594,25 @@ namespace Majora_s_Mask_Randomizer_GUI
                 {
                     int rowIndex = row;
                     int colIndex = col;
-                    Button cell = new Button
+                    BingoGoalButton cell = new BingoGoalButton
                     {
                         Dock = DockStyle.Fill,
                         Margin = new Padding(2),
                         MinimumSize = Size.Empty,
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        FlatStyle = FlatStyle.Standard,
                         Font = new Font(Font.FontFamily, 8F),
-                        Tag = row * 5 + col,
-                        UseVisualStyleBackColor = false
+                        GoalIndex = row * 5 + col,
+                        Tag = "BingoGoalCell"
                     };
                     cell.MouseDown += (s, e) => CellMouseDown(rowIndex, colIndex, e);
+                    cell.MouseUp += (s, e) => CellMouseUp(rowIndex, colIndex, e);
                     _cells[row, col] = cell;
                     grid.Controls.Add(cell, col + 1, row + 1);
                 }
             }
 
-            Label tlbr = CreateLineHeaderLabel("TL-BR");
-            tlbr.MouseDown += (s, e) => LineHeaderMouseDown("TL-BR", new int[] { 0, 6, 12, 18, 24 }, e);
-            grid.Controls.Add(tlbr, 0, 6);
-
-            Label bltr = CreateLineHeaderLabel("BL-TR");
-            bltr.MouseDown += (s, e) => LineHeaderMouseDown("BL-TR", new int[] { 4, 8, 12, 16, 20 }, e);
-            grid.Controls.Add(bltr, 5, 6);
+            Label bltr = CreateLineHeaderLabel("BLTR");
+            bltr.MouseDown += (s, e) => LineHeaderMouseDown("BLTR", new int[] { 4, 8, 12, 16, 20 }, e);
+            grid.Controls.Add(bltr, 0, 6);
 
             return grid;
         }
@@ -517,6 +641,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             };
         }
 
+        private void WinModeChanged(object sender, EventArgs e)
+        {
+            RadioButton button = sender as RadioButton;
+            if (button != null && button.Checked)
+            {
+                RegenerateCard();
+            }
+        }
+
         private void ViewRerollLogClicked(object sender, EventArgs e)
         {
             if (_card == null)
@@ -533,6 +666,70 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Clipboard.SetText(_card.PoolHash);
             }
+        }
+
+        private void CopySettingsHashClicked(object sender, EventArgs e)
+        {
+            if (_card != null && !string.IsNullOrEmpty(_card.SettingsHash))
+            {
+                Clipboard.SetText(_card.SettingsHash);
+            }
+        }
+
+        private void CopyRaceCodeClicked(object sender, EventArgs e)
+        {
+            BingoWinMode mode = _blackoutMode.Checked ? BingoWinMode.Blackout : BingoWinMode.Line;
+            AsyncRaceBuildResult result = AsyncRaceCode.Build(_owner, mode);
+            if (!result.Success)
+            {
+                MessageBox.Show(this, result.Message, "Async Race", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Clipboard.SetText(result.RaceCode);
+            if (_raceCodeBox != null)
+            {
+                _raceCodeBox.Text = result.RaceCode;
+            }
+        }
+
+        private void ApplyRaceCodeClicked(object sender, EventArgs e)
+        {
+            if (_raceCodeBox == null)
+            {
+                return;
+            }
+
+            AsyncRaceCodeData parsed;
+            string error;
+            if (!AsyncRaceCode.TryParse(_raceCodeBox.Text, out parsed, out error))
+            {
+                MessageBox.Show(this, error, "Async Race", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            AsyncRaceApplyResult applyResult = AsyncRaceCode.Apply(_owner, parsed);
+            if (!applyResult.Success)
+            {
+                MessageBox.Show(this, applyResult.Message, "Async Race", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UpdateMetaLabels();
+                return;
+            }
+
+            if (parsed.WinMode == BingoWinMode.Blackout)
+            {
+                _blackoutMode.Checked = true;
+            }
+            else
+            {
+                _lineMode.Checked = true;
+            }
+
+            _romSeedBox.Text = parsed.RomSeed;
+            _raceCodeBox.Text = AsyncRaceCode.Format(parsed);
+
+            RegenerateCard(false);
+            MessageBox.Show(this, applyResult.Message, "Async Race", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ExportHtmlClicked(object sender, EventArgs e)

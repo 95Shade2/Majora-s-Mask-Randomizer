@@ -10,8 +10,11 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public static BingoCard Generate(string userSeed, BingoWinMode mode, Main_Window state)
         {
+            bool seedWasBlank = string.IsNullOrWhiteSpace(userSeed);
             int baseSeed = ParseSeed(userSeed);
-            HashSet<string> obtainable = BingoGoalValidator.GetObtainableItems(state);
+            string romSeedLabel = seedWasBlank ? baseSeed.ToString() : userSeed.Trim();
+            BingoObtainabilityContext obtainability = BingoObtainabilityContext.Build(state);
+            HashSet<string> obtainable = obtainability.Obtainable;
             string poolHash = BingoGoalValidator.ComputePoolHashV1(obtainable);
             IList<BingoGoal> allGoals = BingoGoalList.LoadStandard();
             List<BingoGoal> validPool = BingoGoalValidator.GetValidGoals(allGoals, obtainable);
@@ -39,21 +42,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             for (int attempt = 0; attempt <= MaxRerolls; attempt++)
             {
                 int trySeed = ExpandSeed(baseSeed, attempt);
-
-                if (!BingoSrlGenerator.SRLDryRunValid(filteredTiers, trySeed))
-                {
-                    trace.Add(new RerollTraceEntry
-                    {
-                        Attempt = attempt,
-                        Seed = trySeed,
-                        Reason = BingoRerollLog.DryRunFail,
-                        Detail = BingoSrlGenerator.DescribeDryRunFailure(filteredTiers, trySeed)
-                    });
-                    continue;
-                }
-
-                Dictionary<int, List<BingoGoal>> safeTiers = BingoSrlGenerator.DeepClone(filteredTiers);
-                BingoCard card = BingoSrlGenerator.GenerateSrlBoard(safeTiers, trySeed, SrlProfile.Normal);
+                BingoCard card = TryGenerateBoard(filteredTiers, trySeed);
 
                 if (card != null && card.AllGoalsFeasible(obtainable))
                 {
@@ -63,26 +52,38 @@ namespace Majora_s_Mask_Randomizer_GUI
                         Seed = trySeed,
                         Reason = BingoRerollLog.Success
                     });
-                    FinalizeCard(card, userSeed, trySeed, poolHash, attempt, false, trace, mode);
+                    FinalizeCard(
+                        card,
+                        romSeedLabel,
+                        trySeed,
+                        poolHash,
+                        attempt,
+                        false,
+                        trace,
+                        mode,
+                        obtainability);
                     return card;
                 }
 
                 string detail;
+                string reason;
                 if (card == null)
                 {
+                    reason = BingoRerollLog.PoolExhausted;
                     detail = BingoSrlGenerator.DescribeDryRunFailure(filteredTiers, trySeed);
                 }
                 else
                 {
+                    reason = BingoRerollLog.ItemInfeasible;
                     detail = BingoGoalValidator.DescribeInfeasibleGoals(card, obtainable)
-                        ?? "Board failed validation for an unknown reason.";
+                        ?? "Board contains goals that are not obtainable with current item placements.";
                 }
 
                 trace.Add(new RerollTraceEntry
                 {
                     Attempt = attempt,
                     Seed = trySeed,
-                    Reason = BingoRerollLog.SrlFail,
+                    Reason = reason,
                     Detail = detail
                 });
             }
@@ -138,14 +139,26 @@ namespace Majora_s_Mask_Randomizer_GUI
 
             FinalizeCard(
                 fallback,
-                userSeed,
+                romSeedLabel,
                 fallback.EffectiveSeed,
                 poolHash,
                 MaxRerolls,
                 substitutions.Count > 0,
                 trace,
-                mode);
+                mode,
+                obtainability);
             return fallback;
+        }
+
+        private static BingoCard TryGenerateBoard(Dictionary<int, List<BingoGoal>> filteredTiers, int seed)
+        {
+            BingoCard card = BingoSrlGenerator.GenerateSrlBoard(filteredTiers, seed, SrlProfile.Normal);
+            if (card != null)
+            {
+                return card;
+            }
+
+            return BingoSrlGenerator.GenerateSrlBoard(filteredTiers, seed, SrlProfile.Relaxed);
         }
 
         private static BingoCard TryGenerateFallbackBoard(
@@ -157,8 +170,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             for (int offset = 0; offset < FallbackSeedAttempts; offset++)
             {
                 int seed = startSeed + offset;
-                Dictionary<int, List<BingoGoal>> safeTiers = BingoSrlGenerator.DeepClone(filteredTiers);
-                BingoCard card = BingoSrlGenerator.GenerateSrlBoard(safeTiers, seed, SrlProfile.Normal);
+                BingoCard card = TryGenerateBoard(filteredTiers, seed);
                 if (card == null)
                 {
                     continue;
@@ -178,18 +190,7 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         public static int ParseSeed(string userSeed)
         {
-            if (string.IsNullOrWhiteSpace(userSeed))
-            {
-                return Environment.TickCount;
-            }
-
-            int parsed;
-            if (int.TryParse(userSeed.Trim(), out parsed))
-            {
-                return parsed;
-            }
-
-            return userSeed.GetHashCode();
+            return RomSeedParser.Parse(userSeed);
         }
 
         internal static int ExpandSeed(int baseSeed, int attempt)
@@ -210,7 +211,8 @@ namespace Majora_s_Mask_Randomizer_GUI
             int rerollCount,
             bool substituted,
             List<RerollTraceEntry> trace,
-            BingoWinMode mode)
+            BingoWinMode mode,
+            BingoObtainabilityContext obtainability)
         {
             card.RomSeed = romSeed;
             card.EffectiveSeed = effectiveSeed;
@@ -219,6 +221,12 @@ namespace Majora_s_Mask_Randomizer_GUI
             card.GoalsSubstituted = substituted;
             card.RerollTrace = trace;
             card.WinMode = mode;
+            if (obtainability != null)
+            {
+                card.LogicName = obtainability.LogicName ?? "";
+                card.PlacementsPayloadBase64 = BingoPlacementMap.EncodeBase64(obtainability.Placements);
+                card.PlacementsHash = BingoPlacementMap.ComputeHash(obtainability.Placements);
+            }
             if (card.GoalStates == null || card.GoalStates.Length != 25)
             {
                 card.GoalStates = new int[25];

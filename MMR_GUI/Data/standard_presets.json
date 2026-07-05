@@ -1,0 +1,17 @@
+{
+  "version": "MMPRESET_V1",
+  "presets": [
+    {
+      "name": "FNB",
+      "settingsHash": "7d2a23b56256f1ac"
+    },
+    {
+      "name": "Low%",
+      "settingsHash": "987556d56220af16"
+    },
+    {
+      "name": "Old Rando",
+      "settingsHash": "9451ef629e551e91"
+    }
+  ]
+}

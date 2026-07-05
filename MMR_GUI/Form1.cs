@@ -90,6 +90,9 @@ namespace Majora_s_Mask_Randomizer_GUI
         public pmc color_menu_form;
         public wallets_form Wallet_Form;
         private BingoCardDialog _bingoDialog;
+        private string _lastLoadedPresetName = "";
+        private string _bingoRaceLogicName;
+        private Dictionary<string, string> _bingoRacePlacements;
 
         public Main_Window()
         {
@@ -191,6 +194,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             Items_Tab.SelectedIndex = 0;
             TabCategoryIcons.ConfigureTextTabs(Pool_Tabs);
             RefreshPlandoUi();
+            RefreshSettingsShareDisplay();
         }
 
         private string Text_To_Checkbox(string text)
@@ -895,12 +899,30 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
             else if (err_file == "Success")
             {
+                SyncRomSeedFromSpoilerLog();
                 LoadLastSpoilerGraphData();
+                SetBingoRaceContext(GetSelectedLogicName(), GetBingoPlacementMap());
+                string runHashPath;
+                string runHashError;
+                bool runHashSaved = RunStateFile.TrySaveDefault(this, out runHashPath, out runHashError);
                 if (logicGraphToolStripMenuItem != null)
                 {
                     logicGraphToolStripMenuItem.Enabled = CanOpenLogicGraph();
+                    UiTheme.SyncToolStripItemColors(logicGraphToolStripMenuItem);
                 }
-                MessageBox.Show("All Done!");
+                if (_bingoDialog != null && !_bingoDialog.IsDisposed)
+                {
+                    _bingoDialog.RefreshFromMainWindow();
+                }
+                if (runHashSaved)
+                {
+                    MessageBox.Show("All Done!\n\nRun hash saved to:\n" + runHashPath);
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "All Done!\n\nCould not save run hash file:\n" + (runHashError ?? "Unknown error."));
+                }
                 Enable_Rando_Button();
             }
             else
@@ -966,18 +988,207 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void SaveSettingsAsIni(string location, bool items = true, bool settings = true, bool pools = true, bool colors = true, bool wallets = true, bool cutscenes = true, bool plando = true, bool resolveRandomColors = false)
         {
+            WriteFile(location, BuildSettingsIniContent(
+                items,
+                settings,
+                pools,
+                colors,
+                wallets,
+                cutscenes,
+                plando,
+                resolveRandomColors,
+                forHash: false));
+        }
+
+        internal string BuildSettingsHashPayload()
+        {
+            return BuildSettingsIniContent(
+                items: true,
+                settings: true,
+                pools: true,
+                colors: false,
+                wallets: true,
+                cutscenes: true,
+                plando: true,
+                resolveRandomColors: false,
+                forHash: true);
+        }
+
+        internal string ComputeSettingsHash()
+        {
+            return SettingsHash.Compute(BuildSettingsHashPayload());
+        }
+
+        internal string BuildSettingsShareToken()
+        {
+            return SettingsShareToken.Format(BuildSettingsHashPayload());
+        }
+
+        internal void RefreshSettingsShareDisplay()
+        {
+            if (_settingsHashShortLabel == null || _settingsShareTokenBox == null)
+            {
+                return;
+            }
+
+            string payload = BuildSettingsHashPayload();
+            _settingsHashShortLabel.Text = "Hash (" + SettingsHash.Version + "): " + SettingsHash.Compute(payload);
+            _settingsShareTokenBox.Text = SettingsShareToken.Format(payload);
+        }
+
+        internal void SetBingoRaceContext(string logicName, Dictionary<string, string> placements)
+        {
+            _bingoRaceLogicName = logicName;
+            if (placements == null)
+            {
+                _bingoRacePlacements = null;
+                return;
+            }
+
+            _bingoRacePlacements = new Dictionary<string, string>(placements, StringComparer.Ordinal);
+        }
+
+        internal void ApplyLoadedRunState(string logicName, Dictionary<string, string> placements, string romSeed)
+        {
+            if (!string.IsNullOrWhiteSpace(romSeed))
+            {
+                SetRomSeedText(romSeed);
+            }
+
+            if (string.IsNullOrWhiteSpace(logicName))
+            {
+                logicName = GetSelectedLogicName();
+            }
+
+            _lastGraphLogicName = logicName ?? "";
+            if (string.IsNullOrWhiteSpace(_lastGraphLogicName))
+            {
+                _lastLogicGraphData = null;
+            }
+            else
+            {
+                _lastLogicGraphData = LogicUsefulness.Compute(_lastGraphLogicName, Item_Names);
+            }
+
+            if (placements == null)
+            {
+                _lastSpoilerPlacements = new Dictionary<string, string>(StringComparer.Ordinal);
+            }
+            else
+            {
+                _lastSpoilerPlacements = new Dictionary<string, string>(placements, StringComparer.Ordinal);
+            }
+
+            SetBingoRaceContext(logicName, placements);
+            RefreshSettingsShareDisplay();
+
+            if (logicGraphToolStripMenuItem != null)
+            {
+                logicGraphToolStripMenuItem.Enabled = CanOpenLogicGraph();
+                UiTheme.SyncToolStripItemColors(logicGraphToolStripMenuItem);
+            }
+
+            if (_bingoDialog != null && !_bingoDialog.IsDisposed)
+            {
+                _bingoDialog.RefreshFromMainWindow();
+            }
+        }
+
+        internal void ClearBingoRaceContext()
+        {
+            _bingoRaceLogicName = null;
+            _bingoRacePlacements = null;
+        }
+
+        internal string GetBingoLogicName()
+        {
+            if (!string.IsNullOrWhiteSpace(_bingoRaceLogicName))
+            {
+                return _bingoRaceLogicName;
+            }
+
+            return GetSelectedLogicName();
+        }
+
+        internal Dictionary<string, string> GetBingoPlacementMap()
+        {
+            if (_bingoRacePlacements != null && _bingoRacePlacements.Count > 0)
+            {
+                return new Dictionary<string, string>(_bingoRacePlacements, StringComparer.Ordinal);
+            }
+
+            return BingoPlacementMap.BuildFromWindow(this);
+        }
+
+        internal string GetActivePresetName()
+        {
+            if (Presets_Combobox != null && !string.IsNullOrWhiteSpace(Presets_Combobox.Text))
+            {
+                return Presets_Combobox.Text.Trim();
+            }
+
+            return _lastLoadedPresetName ?? "";
+        }
+
+        internal bool TryLoadStandardPreset(string presetName)
+        {
+            if (string.IsNullOrWhiteSpace(presetName) || Presets == null || !Presets.ContainsKey(presetName))
+            {
+                return false;
+            }
+
+            ApplyPresetSections(Presets[presetName], presetName);
+            return true;
+        }
+
+        internal bool ApplyRaceSettingsFromPayload(string canonicalPayload)
+        {
+            ClearBingoRaceContext();
+            if (string.IsNullOrWhiteSpace(canonicalPayload))
+            {
+                return false;
+            }
+
+            Dictionary<string, Dictionary<string, string>> sections = SettingsPayload.ParseIni(canonicalPayload);
+            if (sections.Count == 0)
+            {
+                return false;
+            }
+
+            ApplyPresetSections(sections, null);
+            return true;
+        }
+
+        internal void SetRomSeedText(string seed)
+        {
+            if (Seed_Textbox != null)
+            {
+                Seed_Textbox.Text = seed ?? "";
+            }
+        }
+
+        private string BuildSettingsIniContent(
+            bool items,
+            bool settings,
+            bool pools,
+            bool colors,
+            bool wallets,
+            bool cutscenes,
+            bool plando,
+            bool resolveRandomColors,
+            bool forHash)
+        {
             string Text = "";
             string Item_Pool = "";
             string Item_Name = "";
-            string name;
             CheckBox check;
             ComboBox pool;
             ComboBox gives;
-            Dictionary<string, bool>.KeyCollection Cutscene_Keys = Cutscenes.Keys;
 
             if (items)
             {
-                Text = "[items]\n";
+                Text += "[items]\n";
+                List<string> itemLines = new List<string>();
 
                 for (int i = 0; i < Item_Names.Length; i++)
                 {
@@ -985,23 +1196,34 @@ namespace Majora_s_Mask_Randomizer_GUI
                     check = Item_Objects[Item_Name].Get_Checkbox();
                     pool = Item_Objects[Item_Name].Get_Pool();
                     gives = Item_Objects[Item_Name].Get_Gives();
-                
-                    //if item is randomzied (or has a manually inserted item)
+
                     if (check.Checked)
                     {
-                        //if randomized into a pool
                         if (pool.SelectedIndex != -1)
                         {
                             Item_Pool = pool.Items[pool.SelectedIndex].ToString();
                         }
-                        //if manually inserted an item
                         else if (gives.SelectedIndex != -1)
                         {
                             Item_Pool = "#" + gives.Items[gives.SelectedIndex].ToString();
                         }
+                        else
+                        {
+                            continue;
+                        }
 
-                        Text += Item_Name + "=" + Item_Pool + "\n";
+                        itemLines.Add(Item_Name + "=" + Item_Pool);
                     }
+                }
+
+                if (forHash)
+                {
+                    itemLines.Sort(StringComparer.Ordinal);
+                }
+
+                for (int i = 0; i < itemLines.Count; i++)
+                {
+                    Text += itemLines[i] + "\n";
                 }
             }
 
@@ -1019,32 +1241,40 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Text += "[settings]\n";
 
-                AppendSetting(ref Text, SettingRom, Open_Base_Rom_Dialog.FileName); //rom location
-                AppendSetting(ref Text, SettingSeed, Seed_Textbox.Text); //seed
-                AppendSetting(ref Text, SettingWad, createWadToolStripMenuItem.Checked); //true or false to create wad as well
+                if (!forHash)
+                {
+                    AppendSetting(ref Text, SettingRom, Open_Base_Rom_Dialog.FileName);
+                    AppendSetting(ref Text, SettingSeed, Seed_Textbox.Text);
+                    AppendSetting(ref Text, SettingWad, createWadToolStripMenuItem.Checked);
+                }
 
                 if (Logic_Combobox.SelectedIndex != -1)
                 {
-                    AppendSetting(ref Text, SettingLogic, Logic_Combobox.Items[Logic_Combobox.SelectedIndex]); //which logic to use
+                    AppendSetting(ref Text, SettingLogic, Logic_Combobox.Items[Logic_Combobox.SelectedIndex]);
                 }
                 else
                 {
-                    AppendSetting(ref Text, SettingLogic, ""); //no logic
+                    AppendSetting(ref Text, SettingLogic, "");
                 }
 
-                AppendSetting(ref Text, SettingKafei, playAsKafeiToolStripMenuItem.Checked); //whether or not to play as Kafei instead of Link
-                AppendSetting(ref Text, SettingScrubBeans, swampScrubSalesBeansToolStripMenuItem.Checked); //whether or not the scrub in swamp sells magic beans or what they're randomized to
-                AppendSetting(ref Text, SettingRemoveCutscenes, removeCutscenesToolStripMenuItem.Checked); //legacy hidden cutscene toggle
-                AppendSetting(ref Text, SettingGCHud, gCHudToolStripMenuItem.Checked); //use or not use the GC Hud
-                AppendSetting(ref Text, SettingBlastMaskCooldown, BlastMaskFrames_Num.Value); //the blast mask cooldown
-                AppendSetting(ref Text, SettingRespawnHPs, respawnHPsToolStripMenuItem.Checked); //whether or not to respawn the hps every cycle
-                AppendSetting(ref Text, SettingLikeLikeMirror, edibleMirrorShieldToolStripMenuItem.Checked); //whether or not a likelike can eat the mirror shield
-                AppendSetting(ref Text, SettingKeepRazor, keepRazorSwordOnSoTToolStripMenuItem.Checked); //whether or not the player keeps razor sword on Song of Time
-                AppendSetting(ref Text, SettingOceanAnyDay, oceanSpiderHouseAnyDayToolStripMenuItem.Checked); //whether or not to make ocean spider house item available any day
-                AppendSetting(ref Text, SettingRespawnHCs, respawnHCsToolStripMenuItem.Checked); //whether or not to respawn heart containers every cycle
-                AppendSetting(ref Text, SettingTargeting, TARGETING); //Save the custom default targeting
+                AppendSetting(ref Text, SettingKafei, playAsKafeiToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingScrubBeans, swampScrubSalesBeansToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingRemoveCutscenes, removeCutscenesToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingGCHud, gCHudToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingBlastMaskCooldown, BlastMaskFrames_Num.Value);
+                AppendSetting(ref Text, SettingRespawnHPs, respawnHPsToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingLikeLikeMirror, edibleMirrorShieldToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingKeepRazor, keepRazorSwordOnSoTToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingOceanAnyDay, oceanSpiderHouseAnyDayToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingRespawnHCs, respawnHCsToolStripMenuItem.Checked);
+                AppendSetting(ref Text, SettingTargeting, TARGETING);
                 AppendSetting(ref Text, SettingTradeQuest, removeScrubSalesmanAfterTradingToolStripMenuItem.Checked);
-                AppendSetting(ref Text, SettingWarnPoolBalance, WarnPoolBalance_Checkbox != null && WarnPoolBalance_Checkbox.Checked);
+
+                if (!forHash)
+                {
+                    AppendSetting(ref Text, SettingWarnPoolBalance, WarnPoolBalance_Checkbox != null && WarnPoolBalance_Checkbox.Checked);
+                }
+
                 AppendSetting(ref Text, SettingDifficulty, GetSelectedDifficulty());
             }
 
@@ -1052,14 +1282,11 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Text += "[colors]\n";
 
-                //tunic colors
                 AppendColorSetting(ref Text, "Link", resolveRandomColors);
                 AppendColorSetting(ref Text, "Deku", resolveRandomColors);
                 AppendColorSetting(ref Text, "Goron", resolveRandomColors);
                 AppendColorSetting(ref Text, "Zora", resolveRandomColors);
                 AppendColorSetting(ref Text, "FD", resolveRandomColors);
-
-                //pause menu colors
                 AppendColorSetting(ref Text, "Item", resolveRandomColors);
                 AppendColorSetting(ref Text, "Map", resolveRandomColors);
                 AppendColorSetting(ref Text, "Quest", resolveRandomColors);
@@ -1070,8 +1297,6 @@ namespace Majora_s_Mask_Randomizer_GUI
             if (wallets)
             {
                 Text += "[wallets]\n";
-
-                //wallet sizes
                 Text += "Small=" + Wallet_Sizes["small"] + "\n";
                 Text += "Medium=" + Wallet_Sizes["medium"] + "\n";
                 Text += "Large=" + Wallet_Sizes["large"] + "\n";
@@ -1091,16 +1316,19 @@ namespace Majora_s_Mask_Randomizer_GUI
             {
                 Text += "[cutscenes]\n";
 
-                //each cutscene name and whether or not to shorten/remove the cutscene
-                //if a cutscene isn't present, then that means false
-                for (int k = 0; k < Cutscene_Keys.Count; k++)
+                IEnumerable<string> cutsceneNames = Cutscenes.Keys;
+                if (forHash)
                 {
-                    name = Cutscene_Keys.ElementAt(k);
-                    Text += name + "=" + Cutscenes[name] + "\n";
+                    cutsceneNames = Cutscenes.Keys.OrderBy(k => k, StringComparer.Ordinal);
+                }
+
+                foreach (string cutsceneName in cutsceneNames)
+                {
+                    Text += cutsceneName + "=" + Cutscenes[cutsceneName] + "\n";
                 }
             }
 
-            WriteFile(location, Text);
+            return Text;
         }
 
         private string Get_Color_Tunic()
@@ -1265,6 +1493,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             SaveSettingsAsIni("./presets/" + New_Preset + ".ini");
+            _lastLoadedPresetName = New_Preset;
             Presets_Combobox.Text = ""; //clear text
             MessageBox.Show("Preset Saved", "Saved");
             Load_Presets(); //update the presets
@@ -1297,35 +1526,51 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void Load_Preset(string Preset)
         {
-            Dictionary<string,
-            Dictionary<string,
-            string>> Selected_Preset;
+            ApplyPresetSections(Presets[Preset], Preset);
+        }
 
-            Selected_Preset = Presets[Preset];
+        private void ApplyPresetSections(
+            Dictionary<string, Dictionary<string, string>> sections,
+            string presetName)
+        {
+            _lastLoadedPresetName = presetName ?? "";
 
-            Clear_Items(); //make all items not checked
-            Clear_Pools(); //make no pools
-            Clear_Pool_List(); //clear the pool list on the right side
-            Update_Plando(null); //clear planned placements
+            Clear_Items();
+            Clear_Pools();
+            Clear_Pool_List();
+            Update_Plando(null);
 
-            Create_Pools(Selected_Preset["pools"]);
+            if (sections.ContainsKey("pools"))
+            {
+                Create_Pools(sections["pools"]);
+            }
+
             Update_Pool_List();
-            Update_Items(Selected_Preset["items"]);
-            if (Selected_Preset.ContainsKey("plando"))
-            {
-                Update_Plando(Selected_Preset["plando"]);
-            }
-            Update_Settings(Selected_Preset["settings"]);
 
-            //update the cutscenes if there is cutscene data
-            Cutscenes = new Dictionary<string, bool>(); //clear the cutscene data
-            if (Selected_Preset.ContainsKey("cutscenes")) {
-                Update_Cutscenes(Selected_Preset["cutscenes"]);
+            if (sections.ContainsKey("items"))
+            {
+                Update_Items(sections["items"]);
             }
 
-            if (Selected_Preset.ContainsKey("colors"))
+            if (sections.ContainsKey("plando"))
             {
-                Update_Colors(Selected_Preset["colors"]);
+                Update_Plando(sections["plando"]);
+            }
+
+            if (sections.ContainsKey("settings"))
+            {
+                Update_Settings(sections["settings"]);
+            }
+
+            Cutscenes = new Dictionary<string, bool>();
+            if (sections.ContainsKey("cutscenes"))
+            {
+                Update_Cutscenes(sections["cutscenes"]);
+            }
+
+            if (sections.ContainsKey("colors"))
+            {
+                Update_Colors(sections["colors"]);
             }
             else
             {
@@ -1333,9 +1578,9 @@ namespace Majora_s_Mask_Randomizer_GUI
                 Game_Color_Randomized = Default_Color_Randomized();
             }
 
-            if (Selected_Preset.ContainsKey("wallets"))
+            if (sections.ContainsKey("wallets"))
             {
-                Update_Wallets(Selected_Preset["wallets"]);
+                Update_Wallets(sections["wallets"]);
             }
             else
             {
@@ -1343,12 +1588,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             Presets_Combobox.Text = "";
-
-            //make sure the change and remove combobox are blank now
             Change_Pool_Name_Combobox.Text = "";
             Remove_Pool_Combobox.Text = "";
-
             RefreshPlandoUi();
+            RefreshSettingsShareDisplay();
         }
 
         private void Update_Wallets(Dictionary<string, string> wallet_sizes)
@@ -1476,6 +1719,15 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
 
             ApplyDifficultySetting(settings);
+
+            if (Targeting_Hold.Checked)
+            {
+                TARGETING = "Hold";
+            }
+            else if (Targeting_Switch.Checked)
+            {
+                TARGETING = "Switch";
+            }
 
             RefreshPlandoUi();
         }
@@ -2806,6 +3058,31 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
+        private void loadFromHashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Open_Run_Hash_Dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            string error;
+            if (!RunStateFile.TryLoad(this, Open_Run_Hash_Dialog.FileName, out error))
+            {
+                MessageBox.Show(
+                    error ?? "Could not load run hash file.",
+                    "Load from hash",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show(
+                "Settings and item placements loaded from run hash file.\nYou can open the Logic Graph, Bingo Card, and other tools.",
+                "Load from hash",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
         internal Dictionary<string, Item> ItemObjectsForBingo
         {
             get { return Item_Objects; }
@@ -2833,11 +3110,32 @@ namespace Majora_s_Mask_Randomizer_GUI
                 return "";
             }
 
-            return Seed_Textbox.Text;
+            return Seed_Textbox.Text ?? "";
+        }
+
+        internal void EnsureRomSeedForBingo()
+        {
+            if (!string.IsNullOrWhiteSpace(GetRomSeedText()))
+            {
+                return;
+            }
+
+            SetRomSeedText(RomSeedParser.RandomBingoSeed().ToString());
+        }
+
+        private void SyncRomSeedFromSpoilerLog()
+        {
+            string seed = LogicUsefulness.ParseSpoilerSeed("./Spoiler Log.txt");
+            if (!string.IsNullOrWhiteSpace(seed))
+            {
+                SetRomSeedText(seed);
+            }
         }
 
         internal void OpenBingoCardDialog()
         {
+            EnsureRomSeedForBingo();
+
             if (_bingoDialog == null || _bingoDialog.IsDisposed)
             {
                 _bingoDialog = new BingoCardDialog(this);
@@ -2846,6 +3144,33 @@ namespace Majora_s_Mask_Randomizer_GUI
             _bingoDialog.RefreshFromMainWindow();
             _bingoDialog.Show();
             _bingoDialog.BringToFront();
+        }
+
+        private void SettingsShareCopyClicked(object sender, EventArgs e)
+        {
+            RefreshSettingsShareDisplay();
+            if (_settingsShareTokenBox != null && !string.IsNullOrEmpty(_settingsShareTokenBox.Text))
+            {
+                Clipboard.SetText(_settingsShareTokenBox.Text);
+            }
+        }
+
+        private void SettingsShareApplyClicked(object sender, EventArgs e)
+        {
+            if (_settingsShareTokenBox == null)
+            {
+                return;
+            }
+
+            string error;
+            if (!SettingsShareToken.TryApply(this, _settingsShareTokenBox.Text, out error))
+            {
+                MessageBox.Show(this, error, "Settings Share", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            RefreshSettingsShareDisplay();
+            MessageBox.Show(this, "Settings applied from token.", "Settings Share", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void Log(string Log_Text)

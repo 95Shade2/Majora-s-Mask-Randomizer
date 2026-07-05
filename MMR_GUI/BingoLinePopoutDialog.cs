@@ -9,7 +9,7 @@ namespace Majora_s_Mask_Randomizer_GUI
         private readonly BingoCard _card;
         private readonly int[] _indices;
         private readonly Action _onStateChanged;
-        private readonly Button[] _cells;
+        private readonly BingoGoalButton[] _cells;
 
         public BingoLinePopoutDialog(
             BingoCard card,
@@ -21,7 +21,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             _card = card;
             _indices = indices;
             _onStateChanged = onStateChanged;
-            _cells = new Button[indices.Length];
+            _cells = new BingoGoalButton[indices.Length];
 
             InitializeComponent();
             Text = title;
@@ -47,18 +47,18 @@ namespace Majora_s_Mask_Randomizer_GUI
             for (int i = 0; i < indices.Length; i++)
             {
                 int index = _indices[i];
-                Button cell = new Button
+                BingoGoalButton cell = new BingoGoalButton
                 {
                     Text = _card.Goals[index],
                     Dock = DockStyle.Fill,
                     Margin = new Padding(3),
-                    TextAlign = ContentAlignment.MiddleCenter,
                     Font = new Font(Font.FontFamily, 8F),
-                    Tag = index,
-                    UseVisualStyleBackColor = false
+                    GoalIndex = index,
+                    Tag = "BingoGoalCell"
                 };
-                ApplyCellStyle(cell, index);
+                BingoGoalMark.ApplyCellStyle(cell, _card.GoalStates[index]);
                 cell.MouseDown += Cell_MouseDown;
+                cell.MouseUp += Cell_MouseUp;
                 _cells[i] = cell;
 
                 if (horizontal)
@@ -77,27 +77,47 @@ namespace Majora_s_Mask_Randomizer_GUI
 
         private void Cell_MouseDown(object sender, MouseEventArgs e)
         {
-            Button cell = (Button)sender;
-            int index = (int)cell.Tag;
+            BingoGoalButton cell = (BingoGoalButton)sender;
+            int index = cell.GoalIndex;
 
             if (e.Button == MouseButtons.Left)
             {
                 _card.GoalStates[index] = BingoGoalMark.CycleForward(_card.GoalStates[index]);
+                ApplyCellStyle(cell, index);
+                if (_onStateChanged != null)
+                {
+                    _onStateChanged();
+                }
             }
             else if (e.Button == MouseButtons.Right)
             {
                 _card.GoalStates[index] = BingoGoalMark.CycleBackward(_card.GoalStates[index]);
+                ApplyCellStyle(cell, index);
+                if (_onStateChanged != null)
+                {
+                    _onStateChanged();
+                }
             }
-            else
+        }
+
+        private void Cell_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Middle)
             {
                 return;
             }
 
-            ApplyCellStyle(cell, index);
-            if (_onStateChanged != null)
+            BingoGoalButton cell = (BingoGoalButton)sender;
+            int index = cell.GoalIndex;
+            BingoGoalMark.ShowMarkContextMenu(cell, e.Location, state =>
             {
-                _onStateChanged();
-            }
+                _card.GoalStates[index] = state;
+                ApplyCellStyle(cell, index);
+                if (_onStateChanged != null)
+                {
+                    _onStateChanged();
+                }
+            });
         }
 
         public void RefreshCells()
@@ -108,9 +128,9 @@ namespace Majora_s_Mask_Randomizer_GUI
             }
         }
 
-        private void ApplyCellStyle(Button cell, int index)
+        private void ApplyCellStyle(BingoGoalButton cell, int index)
         {
-            cell.BackColor = BingoGoalMark.GetBackColor(_card.GoalStates[index]);
+            BingoGoalMark.ApplyCellStyle(cell, _card.GoalStates[index]);
         }
     }
 }

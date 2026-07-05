@@ -11,11 +11,9 @@ namespace Majora_s_Mask_Randomizer_GUI
         private void InitializeComponent()
         {
             Text = "Bingo Card";
-            ClientSize = new Size(980, 720);
-            MinimumSize = new Size(900, 640);
             StartPosition = FormStartPosition.CenterParent;
             Font = UiTheme.Current.BaseFont;
-            AutoScroll = true;
+            AutoScroll = false;
 
             TableLayoutPanel root = new TableLayoutPanel
             {
@@ -26,13 +24,16 @@ namespace Majora_s_Mask_Randomizer_GUI
             };
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            root.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             Panel metaPanel = BuildMetaPanel(
                 out _romSeedBox,
                 out _effectiveSeedLabel,
                 out _poolHashLabel,
+                out _settingsHashLabel,
+                out _verificationLabel,
+                out _raceCodeBox,
                 out _rerollLabel,
                 out _viewRerollLogButton,
                 out _warningLabel);
@@ -40,9 +41,10 @@ namespace Majora_s_Mask_Randomizer_GUI
             _grid = BuildGrid();
             _gridHost = new Panel
             {
-                Dock = DockStyle.Fill,
-                AutoScroll = true,
-                MinimumSize = new Size(860, 420)
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                AutoScroll = false,
+                Padding = new Padding(0, 4, 0, 4)
             };
             _gridHost.Controls.Add(_grid);
             _gridHost.Resize += (s, e) => CenterGridInHost(_gridHost);
@@ -50,7 +52,7 @@ namespace Majora_s_Mask_Randomizer_GUI
             _statusLabel = new Label
             {
                 AutoSize = true,
-                Dock = DockStyle.Fill,
+                Dock = DockStyle.Top,
                 Padding = new Padding(0, 8, 0, 0)
             };
 
@@ -60,7 +62,19 @@ namespace Majora_s_Mask_Randomizer_GUI
             root.Controls.Add(_statusLabel, 0, 3);
             Controls.Add(root);
             FormClosed += (s, e) => ClosePopouts();
+            Shown += (s, e) => SizeToFitContent(root);
             UiTheme.ApplyToForm(this);
+
+            SizeToFitContent(root);
+        }
+
+        private void SizeToFitContent(TableLayoutPanel root)
+        {
+            root.PerformLayout();
+            int width = Math.Max(980, root.PreferredSize.Width + 8);
+            int height = Math.Max(GridHeight + 360, root.PreferredSize.Height + 8);
+            MinimumSize = new Size(900, height);
+            ClientSize = new Size(width, height);
         }
     }
 }

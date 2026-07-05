@@ -147,6 +147,8 @@ configure_files("presets")
 configure_files("MMR_GUI/item_tabs.json")
 configure_files("MMR_GUI/Data/mm_bingo_standard.json")
 
+configure_files("MMR_GUI/Data/standard_presets.json")
+
 configure_files("MMR_GUI/Data/item_slot_counts.json")
 
 foreach(_gui_config debug release minsizerel relwithdebinfo)
@@ -157,6 +159,14 @@ foreach(_gui_config debug release minsizerel relwithdebinfo)
 	configure_file(
 		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/mm_bingo_standard.json"
 		"${PROJECT_BINARY_DIR}/${_gui_config}/mm_bingo_standard.json"
+		COPYONLY)
+	configure_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/standard_presets.json"
+		"${PROJECT_BINARY_DIR}/${_gui_config}/standard_presets.json"
+		COPYONLY)
+	configure_file(
+		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/standard_presets.json"
+		"${PROJECT_BINARY_DIR}/${_gui_config}/Data/standard_presets.json"
 		COPYONLY)
 	configure_file(
 		"${CMAKE_CURRENT_SOURCE_DIR}/MMR_GUI/Data/item_slot_counts.json"
@@ -218,12 +228,24 @@ add_executable(mm_rando_gui
 	"MMR_GUI/LogicGraphCanvas.cs"
 	"MMR_GUI/LogicGraphDialog.Designer.cs"
 	"MMR_GUI/BingoGoalMark.cs"
+	"MMR_GUI/BingoGoalButton.cs"
+	"MMR_GUI/BingoMarkMenuForm.cs"
 	"MMR_GUI/BingoLinePopoutDialog.cs"
 	"MMR_GUI/BingoLinePopoutDialog.Designer.cs"
 	"MMR_GUI/BingoRerollLog.cs"
 	"MMR_GUI/BingoRerollLogDialog.cs"
 	"MMR_GUI/BingoRerollLogDialog.Designer.cs"
 	"MMR_GUI/BingoParityHarness.cs"
+	"MMR_GUI/SettingsHash.cs"
+	"MMR_GUI/SettingsShareToken.cs"
+	"MMR_GUI/SettingsPayload.cs"
+	"MMR_GUI/BingoPlacementMap.cs"
+	"MMR_GUI/RunStateFile.cs"
+	"MMR_GUI/BingoObtainabilityContext.cs"
+	"MMR_GUI/LogicObtainability.cs"
+	"MMR_GUI/RomSeedParser.cs"
+	"MMR_GUI/StandardPresets.cs"
+	"MMR_GUI/AsyncRaceCode.cs"
 	"MMR_GUI/PlandoStrandedDialog.Designer.cs"
 	
 	"MMR_GUI/CutscenesSelector.cs"
@@ -281,12 +303,24 @@ csharp_set_windows_forms_properties(
 	"MMR_GUI/LogicGraphCanvas.cs"
 	"MMR_GUI/LogicGraphDialog.Designer.cs"
 	"MMR_GUI/BingoGoalMark.cs"
+	"MMR_GUI/BingoGoalButton.cs"
+	"MMR_GUI/BingoMarkMenuForm.cs"
 	"MMR_GUI/BingoLinePopoutDialog.cs"
 	"MMR_GUI/BingoLinePopoutDialog.Designer.cs"
 	"MMR_GUI/BingoRerollLog.cs"
 	"MMR_GUI/BingoRerollLogDialog.cs"
 	"MMR_GUI/BingoRerollLogDialog.Designer.cs"
 	"MMR_GUI/BingoParityHarness.cs"
+	"MMR_GUI/SettingsHash.cs"
+	"MMR_GUI/SettingsShareToken.cs"
+	"MMR_GUI/SettingsPayload.cs"
+	"MMR_GUI/BingoPlacementMap.cs"
+	"MMR_GUI/RunStateFile.cs"
+	"MMR_GUI/BingoObtainabilityContext.cs"
+	"MMR_GUI/LogicObtainability.cs"
+	"MMR_GUI/RomSeedParser.cs"
+	"MMR_GUI/StandardPresets.cs"
+	"MMR_GUI/AsyncRaceCode.cs"
 	"MMR_GUI/PlandoStrandedDialog.Designer.cs"
 	
 	"MMR_GUI/CutscenesSelector.cs"
